@@ -85,6 +85,7 @@ async function main() {
 
   const andi = await prisma.student.create({
     data: {
+      studentId: 'ANDI001',
       name: 'Andi',
       gradeLevel: GradeLevel.SD_5,
       persona: PersonaType.KAK_BUDI,
@@ -101,6 +102,7 @@ async function main() {
 
   const sari = await prisma.student.create({
     data: {
+      studentId: 'SARI001',
       name: 'Sari',
       gradeLevel: GradeLevel.SMP_1,
       persona: PersonaType.KAK_DEWI,
@@ -117,6 +119,7 @@ async function main() {
 
   const budi = await prisma.student.create({
     data: {
+      studentId: 'BUDI001',
       name: 'Budi',
       gradeLevel: GradeLevel.SMA_2,
       persona: PersonaType.KAK_RAKA,

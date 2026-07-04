@@ -1,3 +1,0 @@
-module.exports=[67481,a=>a.a(async(b,c)=>{try{var d=a.i(68547),e=b([d]);[d]=e.then?(await e)():e,a.s([]),c()}catch(a){c(a)}},!1),14299,a=>a.a(async(b,c)=>{try{var d=a.i(67481),e=a.i(68547),f=b([d,e]);[d,e]=f.then?(await f)():f,a.s(["00d372bf137b0afc81c29e5a79829b37b9e0154fa0",()=>e.$$RSC_SERVER_ACTION_0]),c()}catch(a){c(a)}},!1)];
-
-//# sourceMappingURL=17ct_server_app_%28dashboard%29_dashboard_students_%5Bid%5D_page_actions_1jrhpga.js.map

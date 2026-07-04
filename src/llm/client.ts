@@ -20,7 +20,7 @@ function getClient(): OpenAI {
       baseURL,
       apiKey: apiKey || "sk-noop",
       defaultHeaders: {
-        "HTTP-Referer": process.env.APP_URL || "http://localhost:3000",
+        "HTTP-Referer": process.env.APP_URL || "http://localhost:3001",
         "X-Title": "AI Private Tutor",
       },
     });

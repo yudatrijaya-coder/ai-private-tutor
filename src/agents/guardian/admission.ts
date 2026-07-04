@@ -50,6 +50,13 @@ function json(value: unknown): Prisma.InputJsonValue {
   return JSON.parse(JSON.stringify(value ?? {})) as Prisma.InputJsonValue;
 }
 
+/** Generate a studentId from name + grade level. */
+function generateStudentId(name: string, _gradeLevel: string): string {
+  const prefix = name.substring(0, 4).toUpperCase();
+  const num = String(Date.now()).slice(-5);
+  return `${prefix}${num}`;
+}
+
 /* ------------------------------------------------------------------ */
 /*  Admission pipeline                                                 */
 /* ------------------------------------------------------------------ */
@@ -68,6 +75,7 @@ export async function handleAdmission(input: AdmissionInput): Promise<AdmissionR
   // 1. Create student in DB
   const student = await prisma.student.create({
     data: {
+      studentId: (await generateStudentId(name, gradeLevel)),
       name,
       telegramId: telegramId ?? null,
       gradeLevel,

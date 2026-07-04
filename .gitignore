@@ -40,4 +40,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# database
+*.db
+
+# old build artifacts
+.next_old/
+
+# backups
+backups/
+
 /src/generated/prisma

@@ -316,7 +316,7 @@ Replace the default content with:
 
 ```caddy
 your-domain.com {
-    reverse_proxy localhost:3000
+    reverse_proxy localhost:3001
 
     # Security headers
     header {
@@ -618,7 +618,7 @@ chmod +x /opt/ai-tutor/scripts/healthcheck.sh
 |---|---|---|
 | `Error: Cannot find module '...'` | Dependencies not installed | `npm ci --production` |
 | `PrismaClientInitializationError` | Prisma client not generated | `npx prisma generate` |
-| `Port 3000 is already in use` | Another process on that port | `lsof -i :3000` then `kill -9 <PID>` |
+| `Port 3001 is already in use` | Another process on that port | `lsof -i :3001` then `kill -9 <PID>` |
 | `Module not found: Can't resolve` | Build not run | `npm run build` |
 | `NextAuth.js: Can't find secret` | `NEXTAUTH_SECRET` missing | Add to `.env` |
 
@@ -644,11 +644,11 @@ chmod +x /opt/ai-tutor/scripts/healthcheck.sh
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
-| `502 Bad Gateway` | App not running on :3000 | Start the app (PM2/systemd) |
+| `502 Bad Gateway` | App not running on :3001 | Start the app (PM2/systemd) |
 | `Certificate not issued` | Domain not pointing to server | Check A record with `dig your-domain.com` |
 | `HTTP 404 on .well-known/acme-challenge` | Caddy can't reach itself | Ensure port 80 is open in UFW |
 | Caddy won't validate | Syntax error in Caddyfile | `sudo caddy validate --config /etc/caddy/Caddyfile` |
-| `connect: connection refused` | App not running or wrong port | Verify with `curl localhost:3000` |
+| `connect: connection refused` | App not running or wrong port | Verify with `curl localhost:3001` |
 
 ### Caddy validation
 
@@ -660,7 +660,7 @@ sudo caddy fmt --overwrite /etc/caddy/Caddyfile   # Auto-format
 ### Check if the app is listening
 
 ```bash
-curl -I http://localhost:3000
+curl -I http://localhost:3001
 # Should return HTTP/1.1 200 OK (or 308 if redirecting to HTTPS in the app)
 ```
 
@@ -822,7 +822,7 @@ sudo journalctl -u caddy -n 50 --no-pager
 sudo journalctl -u ai-tutor -n 50 --no-pager   # if using systemd
 
 # Health
-curl -I http://localhost:3000
+curl -I http://localhost:3001
 curl -I https://your-domain.com
 ```
 

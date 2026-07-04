@@ -91,6 +91,7 @@ enum JobStatus {
 
 model Student {
   id                  String        @id @default(uuid())
+  studentId           String        @unique // login identifier e.g. "ANDI001"
   name                String
   telegramId          String?       @unique
   gradeLevel          GradeLevel

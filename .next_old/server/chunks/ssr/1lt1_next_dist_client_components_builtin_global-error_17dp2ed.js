@@ -1,3 +1,0 @@
-module.exports=[81510,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(65688);a.n(d("[project]/ai-private-tutor/node_modules/next/dist/client/components/builtin/global-error.js <module evaluation>"))},66620,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(65688);a.n(d("[project]/ai-private-tutor/node_modules/next/dist/client/components/builtin/global-error.js"))},3468,a=>{"use strict";a.i(81510);var b=a.i(66620);a.n(b)},20657,a=>{a.n(a.i(3468))}];
-
-//# sourceMappingURL=1lt1_next_dist_client_components_builtin_global-error_17dp2ed.js.map
