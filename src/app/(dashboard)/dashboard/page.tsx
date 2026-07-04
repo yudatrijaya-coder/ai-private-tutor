@@ -101,6 +101,17 @@ export default function DashboardPage() {
       {/* Quick Links */}
       <div className="flex gap-3 mt-8">
         <a
+          href="/dashboard/curriculum"
+          className="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+          style={{
+            backgroundColor: "var(--su-bg-card)",
+            border: "1px solid var(--su-border)",
+            color: "var(--su-text)",
+          }}
+        >
+          📚 Kurikulum
+        </a>
+        <a
           href="/dashboard/agents"
           className="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
           style={{
@@ -112,7 +123,7 @@ export default function DashboardPage() {
           🤖 Agent Pipeline
         </a>
         <a
-          href="#"
+          href="/dashboard/settings"
           className="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
           style={{
             backgroundColor: "var(--su-bg-card)",
