@@ -1,59 +1,23 @@
 /**
- * Curriculum Service — generate draft curriculum, topic classification.
+ * Curriculum Service — generate draft curriculum using static data banks.
+ *
+ * No LLM calls, no scraping. Uses curriculum-topics, curriculum-content, and
+ * quiz-bank modules for all data.
  *
  * @module @/agents/curriculum/service
  */
 
 import { prisma } from "@/lib/prisma";
-import { getQueue } from "@/queue/runner";
-import { QUEUES } from "@/queue/definitions";
-
-/* ------------------------------------------------------------------ */
-/*  Grade-level topic maps                                             */
-/* ------------------------------------------------------------------ */
-
-interface TopicEntry {
-  subject: string;
-  topic: string;
-  subTopic?: string;
-  weekOrder: number;
-  priority?: number;
-}
-
-const GRADE_TOPICS: Record<string, TopicEntry[]> = {
-  SD_5: [
-    { subject: "Matematika", topic: "Pecahan", subTopic: "Mengenal Pecahan", weekOrder: 1, priority: 10 },
-    { subject: "Matematika", topic: "Penjumlahan", subTopic: "Penjumlahan Pecahan", weekOrder: 2, priority: 8 },
-    { subject: "Bahasa Indonesia", topic: "Membaca Pemahaman", subTopic: "Ide Pokok", weekOrder: 1, priority: 10 },
-    { subject: "IPA", topic: "Sistem Pencernaan", subTopic: "Organ Pencernaan", weekOrder: 2, priority: 7 },
-  ],
-  SMP_1: [
-    { subject: "Matematika", topic: "Aljabar", subTopic: "Bentuk Aljabar", weekOrder: 1, priority: 10 },
-    { subject: "Bahasa Inggris", topic: "Tenses", subTopic: "Simple Present", weekOrder: 1, priority: 10 },
-    { subject: "IPA", topic: "Sistem Pernapasan", subTopic: "Organ Pernapasan", weekOrder: 2, priority: 7 },
-    { subject: "IPS", topic: "Kerajaan Hindu-Buddha", subTopic: "Kerajaan Kutai", weekOrder: 3, priority: 5 },
-  ],
-  SMA_2: [
-    { subject: "Matematika", topic: "Fungsi Komposisi", subTopic: "Definisi Fungsi", weekOrder: 1, priority: 10 },
-    { subject: "Fisika", topic: "Hukum Newton", subTopic: "Hukum I Newton", weekOrder: 1, priority: 10 },
-    { subject: "Kimia", topic: "Ikatan Kimia", subTopic: "Ikatan Ion", weekOrder: 2, priority: 7 },
-    { subject: "Biologi", topic: "Sistem Ekskresi", subTopic: "Ginjal", weekOrder: 2, priority: 7 },
-  ],
-};
+import type { Prisma } from "@/generated/prisma/client";
+import { GradeLevel, DeliveryType, MaterialStatus } from "@/generated/prisma/client";
+import { GRADE_TOPICS } from "@/data/curriculum-topics";
+import { getContent } from "@/data/curriculum-content";
+import QUIZ_MAP from "@/data/quiz-bank";
+import { quizKey } from "@/data/quiz-bank";
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
 /* ------------------------------------------------------------------ */
-
-function getGradeTopics(grade: string): TopicEntry[] {
-  return GRADE_TOPICS[grade] ?? [];
-}
-
-const VIDEO_SUBJECTS = new Set(["IPA", "Fisika", "Biologi", "Kimia"]);
-
-function classifyDelivery(topic: { subject: string }): "TEXT" | "TEXT_AND_VIDEO" {
-  return VIDEO_SUBJECTS.has(topic.subject) ? "TEXT_AND_VIDEO" : "TEXT";
-}
 
 function serializeGradeLevel(grade: string): "SD_5" | "SMP_1" | "SMA_2" {
   if (grade === "SD_5" || grade === "SMP_1" || grade === "SMA_2") return grade;
@@ -69,65 +33,90 @@ function serializeGradeLevel(grade: string): "SD_5" | "SMP_1" | "SMA_2" {
  *
  * Admission trigger — called by Guardian Agent when a new student is enrolled.
  *
- * 1. Looks up hardcoded topic lists per grade level
- * 2. Creates Curriculum + Material records in DRAFT status
- * 3. Queues content scraping for all week_1 materials
+ * 1. Looks up topic lists from @/data/curriculum-topics
+ * 2. Fills content from @/data/curriculum-content (no scraping)
+ * 3. Attaches quizzes from @/data/quiz-bank
+ * 4. Creates Curriculum + Material + Quiz records in READY status
  */
 export async function generateCurriculumDraft(studentId: string): Promise<void> {
   const student = await prisma.student.findUnique({ where: { id: studentId } });
   if (!student) throw new Error("Student not found");
 
-  const topics = getGradeTopics(student.gradeLevel);
+  const topics = GRADE_TOPICS[student.gradeLevel];
 
-  if (topics.length === 0) {
+  if (!topics || topics.length === 0) {
     console.warn(
       `[curriculum/service] No topic mapping for grade=${student.gradeLevel}; skipping curriculum generation`,
     );
     return;
   }
 
-  // 1. Create curriculum + materials in DRAFT status
+  // 1. Create curriculum + materials + quizzes in READY status (content is pre-baked)
   const curriculum = await prisma.curriculum.create({
     data: {
       studentId,
       gradeLevel: serializeGradeLevel(student.gradeLevel),
       version: 1,
-      changelog: "Initial curriculum draft",
-      materials: {
-        create: topics.map((t) => ({
-          topic: t.topic,
-          subTopic: t.subTopic,
-          subject: t.subject,
-          gradeLevel: serializeGradeLevel(student.gradeLevel),
-          weekOrder: t.weekOrder,
-          priority: t.priority ?? 0,
-          delivery: classifyDelivery(t),
-          status: "DRAFT",
-        })),
+      changelog: "Initial curriculum from data bank",
+      metadata: {
+        source: "curriculum-topics + curriculum-content + quiz-bank",
+        totalSubjects: [...new Set(topics.map((t) => t.subject))].length,
+        totalMaterials: topics.length,
       },
     },
     include: { materials: true },
   });
 
-  console.log(
-    `[curriculum/service] Created curriculum=${curriculum.id} with ${curriculum.materials.length} material(s) for student=${studentId}`,
-  );
+  const gradeLevelEnum = serializeGradeLevel(student.gradeLevel);
 
-  // 2. Queue content scraping for week_1 materials
-  const weekOneMaterials = curriculum.materials.filter((m) => m.weekOrder === 1);
-  const queue = getQueue(QUEUES.CONTENT_SCRAPE.name);
+  for (const topic of topics) {
+    const content = getContent(topic.subject, topic.topic, topic.subTopic);
 
-  for (const material of weekOneMaterials) {
-    const jobId = await queue.add("scrape", {
-      materialId: material.id,
-      topic: material.topic,
-      subTopic: material.subTopic ?? undefined,
-      gradeLevel: material.gradeLevel,
-      sources: [],
+    const material = await prisma.material.create({
+      data: {
+        curriculumId: curriculum.id,
+        topic: topic.topic,
+        subTopic: topic.subTopic,
+        subject: topic.subject,
+        gradeLevel: gradeLevelEnum,
+        weekOrder: topic.weekOrder,
+        priority: topic.priority,
+        delivery: "TEXT",
+        // Content is already available — mark READY immediately
+        status: MaterialStatus.READY,
+        processedContent: content,
+        metadata: {
+          source: "curriculum-content",
+          generatedAt: new Date().toISOString(),
+        },
+      },
     });
 
-    console.log(
-      `[curriculum/service] Enqueued content:scrape job=${jobId.id} for material=${material.id}`,
-    );
+    // Attach quiz from bank if available
+    const quizQuestions = QUIZ_MAP[quizKey(topic.subject, topic.topic, topic.subTopic)];
+    if (quizQuestions) {
+      const maxScore = quizQuestions.length * 10;
+
+      await prisma.quiz.create({
+        data: {
+          materialId: material.id,
+          studentId,
+          questions: quizQuestions as unknown as Prisma.InputJsonValue,
+          maxScore: Math.max(maxScore, 10),
+          timeLimit: 5,
+        },
+      });
+    }
   }
+
+  const materialCount = await prisma.material.count({
+    where: { curriculumId: curriculum.id },
+  });
+  const quizCount = await prisma.quiz.count({
+    where: { material: { curriculumId: curriculum.id } },
+  });
+
+  console.log(
+    `[curriculum/service] Created curriculum=${curriculum.id} with ${materialCount} material(s) and ${quizCount} quiz(zes) for student=${studentId} (grade=${student.gradeLevel})`,
+  );
 }

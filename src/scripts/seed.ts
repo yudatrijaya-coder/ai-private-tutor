@@ -11,6 +11,10 @@ import {
   JobStatus,
   Prisma,
 } from '../generated/prisma/client';
+import { GRADE_TOPICS } from '../data/curriculum-topics';
+import { getContent } from '../data/curriculum-content';
+import QUIZ_MAP from '../data/quiz-bank';
+import { quizKey } from '../data/quiz-bank';
 
 async function main() {
   console.log('🌱 Seeding database...\n');
@@ -137,197 +141,94 @@ async function main() {
   console.log(`   ✓ Sari (SMP/1 - Kak Dewi)`);
   console.log(`   ✓ Budi (SMA/2 - Kak Raka)\n`);
 
-  // ── Curricula & Materials ────────────────────────────────
-  console.log('📚 Creating curricula and materials...');
+  // ── Curricula, Materials & Quizzes ────────────────────────
+  console.log('📚 Creating curricula, materials and quizzes from data bank...\n');
 
-  // Helper: create curriculum with materials
-  async function createCurriculumWithMaterials(
+  // Helper: create curriculum + materials + quizzes for a student
+  async function createFromDataBank(
     studentId: string,
     gradeLevel: GradeLevel,
-    subjects: { subject: string; topic: string; subTopic?: string; content: string }[],
-    version = 1
+    version = 1,
   ) {
+    const gradeKey = gradeLevel.toString(); // e.g. "SD_5"
+    const topics = GRADE_TOPICS[gradeKey];
+    if (!topics || topics.length === 0) {
+      console.warn(`   ⚠ No topics found for ${gradeKey}`);
+      return;
+    }
+
     const curriculum = await prisma.curriculum.create({
       data: {
         studentId,
         gradeLevel,
         version,
-        changelog: `Initial curriculum v${version}`,
-        metadata: { createdBy: 'seed-script', totalSubjects: subjects.length },
+        changelog: `Initial curriculum v${version} (from data bank)`,
+        metadata: {
+          createdBy: 'seed-script',
+          source: 'curriculum-topics + curriculum-content + quiz-bank',
+          totalSubjects: [...new Set(topics.map((t) => t.subject))].length,
+          totalMaterials: topics.length,
+        },
       },
     });
 
-    const materials = await Promise.all(
-      subjects.map((s, idx) =>
-        prisma.material.create({
-          data: {
-            curriculumId: curriculum.id,
-            topic: s.topic,
-            subTopic: s.subTopic ?? null,
-            subject: s.subject,
-            gradeLevel,
-            weekOrder: Math.floor(idx / 2) + 1,
-            priority: idx + 1,
-            delivery: DeliveryType.TEXT,
-            status: MaterialStatus.READY,
-            processedContent: s.content,
-            metadata: { source: 'seed', generatedAt: new Date().toISOString() },
-          },
-        })
-      )
-    );
+    for (const topic of topics) {
+      const content = getContent(topic.subject, topic.topic, topic.subTopic);
 
-    return { curriculum, materials };
+      // Create material with content from the bank (READY since no scraping needed)
+      const material = await prisma.material.create({
+        data: {
+          curriculumId: curriculum.id,
+          topic: topic.topic,
+          subTopic: topic.subTopic,
+          subject: topic.subject,
+          gradeLevel,
+          weekOrder: topic.weekOrder,
+          priority: topic.priority,
+          delivery: DeliveryType.TEXT,
+          status: MaterialStatus.READY,
+          processedContent: content,
+          metadata: {
+            source: 'curriculum-content',
+            generatedAt: new Date().toISOString(),
+          },
+        },
+      });
+
+      // Create quiz from bank if available
+      const quizQuestions = QUIZ_MAP[quizKey(topic.subject, topic.topic, topic.subTopic)];
+      if (quizQuestions) {
+        const maxScore = quizQuestions.length * 10;
+
+        await prisma.quiz.create({
+          data: {
+            materialId: material.id,
+            studentId,
+            questions: quizQuestions as unknown as Prisma.InputJsonValue,
+            maxScore: Math.max(maxScore, 10),
+            timeLimit: 5,
+          },
+        });
+      }
+    }
+
+    const materialCount = await prisma.material.count({
+      where: { curriculumId: curriculum.id },
+    });
+    const quizCount = await prisma.quiz.count({
+      where: {
+        material: { curriculumId: curriculum.id },
+      },
+    });
+
+    console.log(`   ✓ ${gradeKey}: ${materialCount} materials, ${quizCount} quizzes`);
+    return curriculum;
   }
 
-  // ── ANDI: SD/5 ──
-  await createCurriculumWithMaterials(andi.id, GradeLevel.SD_5, [
-    {
-      subject: 'Matematika',
-      topic: 'Pecahan',
-      subTopic: 'Pengertian Pecahan',
-      content: `Pecahan adalah bilangan yang menyatakan bagian dari suatu keseluruhan. 
-Pecahan ditulis dalam bentuk a/b, di mana a disebut pembilang dan b disebut penyebut. 
-Pembilang menunjukkan jumlah bagian yang diambil, sedangkan penyebut menunjukkan jumlah total bagian yang sama besar.
-Contoh: jika sebuah pizza dipotong menjadi 8 bagian sama besar dan kita mengambil 3 bagian, maka pecahannya adalah 3/8.
-Kita dapat menjumlahkan pecahan yang memiliki penyebut sama dengan menjumlahkan pembilangnya saja.
-Untuk pecahan dengan penyebut berbeda, kita harus menyamakan penyebut terlebih dahulu dengan mencari KPK dari kedua penyebut.`,
-    },
-    {
-      subject: 'Matematika',
-      topic: 'Penjumlahan',
-      subTopic: 'Penjumlahan Bilangan Bulat',
-      content: `Penjumlahan adalah operasi dasar matematika yang menggabungkan dua atau lebih bilangan menjadi satu bilangan yang disebut jumlah.
-Dalam penjumlahan bilangan bulat, kita dapat menggunakan garis bilangan untuk membantu visualisasi.
-Contoh: 5 + 3 = 8. Mulai dari angka 5, melangkah maju 3 langkah, sampai di angka 8.
-Sifat-sifat penjumlahan meliputi sifat komutatif (a + b = b + a), sifat asosiatif ((a + b) + c = a + (b + c)), dan sifat identitas (a + 0 = a).
-Latihan rutin akan membantu meningkatkan kecepatan dan ketepatan dalam berhitung penjumlahan.`,
-    },
-    {
-      subject: 'Bahasa Indonesia',
-      topic: 'Membaca Pemahaman',
-      subTopic: 'Ide Pokok Paragraf',
-      content: `Membaca pemahaman adalah kemampuan untuk memahami isi dari suatu bacaan. 
-Langkah pertama dalam memahami bacaan adalah menemukan ide pokok setiap paragraf. 
-Ide pokok adalah gagasan utama yang menjadi dasar pengembangan sebuah paragraf.
-Ide pokok biasanya terletak di awal paragraf (deduktif), di akhir paragraf (induktif), atau di tengah paragraf.
-Setelah menemukan ide pokok, kita dapat menemukan ide-ide penjelas yang mendukung ide pokok tersebut.
-Untuk meningkatkan kemampuan membaca pemahaman, biasakan membaca setiap hari dan mencatat hal-hal penting dari bacaan.`,
-    },
-    {
-      subject: 'IPA',
-      topic: 'Sistem Pencernaan',
-      subTopic: 'Organ Pencernaan Manusia',
-      content: `Sistem pencernaan manusia berfungsi untuk memecah makanan menjadi zat-zat gizi yang dapat diserap oleh tubuh.
-Organ-organ pencernaan terdiri dari mulut, kerongkongan, lambung, usus halus, usus besar, dan anus.
-Di dalam mulut, makanan dicerna secara mekanik oleh gigi dan kimiawi oleh enzim amilase dalam air liur.
-Lambung menghasilkan asam lambung dan enzim pepsin yang mencerna protein.
-Usus halus merupakan tempat penyerapan zat gizi utama, di mana vili-vili usus menyerap nutrisi ke dalam aliran darah.
-Usus besar menyerap air dan mineral, serta membentuk feses yang akan dikeluarkan melalui anus.`,
-    },
-  ]);
-  console.log('   ✓ Andi: Matematika (Pecahan, Penjumlahan), Bahasa Indonesia (Membaca Pemahaman), IPA (Sistem Pencernaan)');
-
-  // ── SARI: SMP/1 ──
-  await createCurriculumWithMaterials(sari.id, GradeLevel.SMP_1, [
-    {
-      subject: 'Matematika',
-      topic: 'Aljabar',
-      subTopic: 'Bentuk Aljabar',
-      content: `Aljabar adalah cabang matematika yang menggunakan huruf atau simbol untuk mewakili bilangan yang belum diketahui nilainya.
-Bentuk aljabar terdiri dari koefisien, variabel, dan konstanta. Contoh: 3x + 5, di mana 3 adalah koefisien, x adalah variabel, dan 5 adalah konstanta.
-Operasi pada bentuk aljabar meliputi penjumlahan, pengurangan, perkalian, dan pembagian suku-suku aljabar.
-Suku-suku yang sejenis dapat dijumlahkan atau dikurangkan, yaitu suku-suku yang memiliki variabel dan pangkat yang sama.
-Contoh: 2x + 3x = 5x, tetapi 2x + 3y tidak dapat dijumlahkan karena variabelnya berbeda.
-Persamaan aljabar digunakan untuk menyelesaikan berbagai masalah sehari-hari dengan mencari nilai variabel yang memenuhi persamaan.`,
-    },
-    {
-      subject: 'Bahasa Inggris',
-      topic: 'Tenses',
-      subTopic: 'Simple Present & Present Continuous',
-      content: `Tenses adalah bentuk waktu dalam bahasa Inggris yang menunjukkan kapan suatu kejadian terjadi.
-Simple Present Tense digunakan untuk menyatakan fakta umum, kebiasaan, atau kejadian yang terjadi berulang kali.
-Rumus: Subject + Verb 1 (s/es) + Object. Contoh: "She reads books every day."
-Present Continuous Tense digunakan untuk menyatakan kejadian yang sedang berlangsung saat ini.
-Rumus: Subject + is/am/are + Verb-ing + Object. Contoh: "She is reading a book now."
-Perbedaan utama: Simple Present untuk kebiasaan umum, Present Continuous untuk aksi yang sedang terjadi saat berbicara.
-Kata keterangan waktu seperti "every day", "always", "now", "at the moment" membantu menentukan tense yang tepat.`,
-    },
-    {
-      subject: 'IPA',
-      topic: 'Sistem Pernapasan',
-      subTopic: 'Organ Pernapasan Manusia',
-      content: `Sistem pernapasan manusia berfungsi untuk memasukkan oksigen ke dalam tubuh dan mengeluarkan karbon dioksida.
-Organ pernapasan meliputi hidung, faring, laring, trakea, bronkus, bronkiolus, dan alveolus.
-Udara masuk melalui hidung, di mana rambut-rambut hidung menyaring kotoran dan selaput lendir melembabkan udara.
-Trakea atau batang tenggorokan bercabang menjadi dua bronkus yang menuju ke paru-paru kanan dan kiri.
-Bronkus bercabang lagi menjadi bronkiolus yang ujungnya berupa alveolus, tempat pertukaran gas terjadi.
-Di alveolus, oksigen berdifusi ke dalam kapiler darah dan karbon dioksida berdifusi keluar dari darah untuk dikeluarkan.
-Proses pernapasan terdiri dari inspirasi (menghirup) dan ekspirasi (menghembuskan) yang diatur oleh kontraksi diafragma dan otot antar tulang rusuk.`,
-    },
-    {
-      subject: 'IPS',
-      topic: 'Kerajaan Hindu-Buddha',
-      subTopic: 'Kerajaan-Kerajaan di Indonesia',
-      content: `Kerajaan Hindu-Buddha berkembang pesat di Indonesia sejak abad ke-4 hingga abad ke-15 Masehi.
-Kerajaan Kutai di Kalimantan Timur merupakan kerajaan Hindu tertua di Indonesia, berdiri sekitar abad ke-4 M.
-Kerajaan Sriwijaya di Sumatera Selatan (abad ke-7 hingga ke-13 M) merupakan kerajaan maritim Buddha terkuat yang menguasai jalur perdagangan Selat Malaka.
-Kerajaan Majapahit di Jawa Timur (abad ke-13 hingga ke-15 M) mencapai puncak kejayaan di bawah pemerintahan Hayam Wuruk dengan Patih Gajah Mada.
-Gajah Mada terkenal dengan Sumpah Palapanya yang bertekad menyatukan Nusantara.
-Peninggalan kerajaan Hindu-Buddha meliputi candi-candi megah seperti Candi Borobudur (Buddha) dan Candi Prambanan (Hindu), serta prasasti-prasasti yang menjadi sumber sejarah berharga.`,
-    },
-  ]);
-  console.log('   ✓ Sari: Matematika (Aljabar), Bahasa Inggris (Tenses), IPA (Sistem Pernapasan), IPS (Kerajaan Hindu-Buddha)');
-
-  // ── BUDI: SMA/2 ──
-  await createCurriculumWithMaterials(budi.id, GradeLevel.SMA_2, [
-    {
-      subject: 'Matematika',
-      topic: 'Fungsi Komposisi',
-      subTopic: 'Pengertian dan Operasi Fungsi Komposisi',
-      content: `Fungsi komposisi adalah penggabungan dua fungsi secara berurutan sehingga menghasilkan fungsi baru.
-Jika fungsi f memetakan himpunan A ke himpunan B, dan fungsi g memetakan himpunan B ke himpunan C, maka komposisi fungsi g ∘ f (dibaca "g bundaran f") memetakan A langsung ke C.
-Rumus: (g ∘ f)(x) = g(f(x)). Artinya, fungsi f dikerjakan terlebih dahulu, kemudian hasilnya dimasukkan ke fungsi g.
-Sifat fungsi komposisi: tidak komutatif (g ∘ f ≠ f ∘ g), tetapi bersifat asosiatif (h ∘ (g ∘ f) = (h ∘ g) ∘ f).
-Untuk mencari fungsi komposisi, substitusikan seluruh variabel pada fungsi luar dengan fungsi dalam.
-Domain fungsi komposisi adalah semua x pada domain f sehingga f(x) berada pada domain g.`,
-    },
-    {
-      subject: 'Fisika',
-      topic: 'Hukum Newton',
-      subTopic: 'Hukum I, II, dan III Newton',
-      content: `Hukum Newton tentang gerak merupakan dasar mekanika klasik yang menjelaskan hubungan antara gaya dan gerak benda.
-Hukum I Newton (Hukum Kelembaman): "Setiap benda akan tetap dalam keadaan diam atau bergerak lurus beraturan kecuali ada gaya yang bekerja padanya." Dirumuskan sebagai ΣF = 0.
-Hukum II Newton: "Percepatan suatu benda sebanding dengan resultan gaya yang bekerja padanya dan berbanding terbalik dengan massanya." Dirumuskan sebagai F = m × a.
-Hukum III Newton (Hukum Aksi-Reaksi): "Setiap aksi menimbulkan reaksi yang sama besar tetapi berlawanan arah." Dirumuskan sebagai F_aksi = -F_reaksi.
-Contoh aplikasi: saat kita berjalan, kaki mendorong tanah ke belakang (aksi), dan tanah mendorong kaki ke depan (reaksi).
-Penerapan Hukum Newton ditemukan dalam kehidupan sehari-hari seperti mobil yang direm, roket yang diluncurkan, dan olahraga.`,
-    },
-    {
-      subject: 'Kimia',
-      topic: 'Ikatan Kimia',
-      subTopic: 'Ikatan Ion dan Kovalen',
-      content: `Ikatan kimia adalah gaya yang mengikat atom-atom sehingga membentuk senyawa. Ikatan kimia terjadi karena atom-atom ingin mencapai kestabilan (konfigurasi gas mulia).
-Ikatan ion terbentuk karena serah terima elektron antara atom logam (melepas elektron → kation) dan non-logam (menerima elektron → anion). Contoh: NaCl (Na⁺ dan Cl⁻).
-Ikatan kovalen terbentuk karena pemakaian bersama pasangan elektron antara atom-atom non-logam. Contoh: H₂O, CO₂, CH₄.
-Ikatan kovalen dapat berupa ikatan tunggal (satu pasang elektron), ikatan rangkap dua (dua pasang), atau ikatan rangkap tiga (tiga pasang).
-Perbedaan utama: ikatan ion terjadi antara logam dan non-logam dengan perbedaan keelektronegatifan besar, sedangkan ikatan kovalen terjadi antar non-logam dengan perbedaan keelektronegatifan kecil atau nol.
-Sifat senyawa ion: titik leleh tinggi, larut dalam air, dapat menghantarkan listrik dalam bentuk lelehan atau larutan. Senyawa kovalen: titik leleh rendah, tidak selalu larut dalam air, umumnya tidak menghantarkan listrik.`,
-    },
-    {
-      subject: 'Biologi',
-      topic: 'Sistem Ekskresi',
-      subTopic: 'Organ Ekskresi Manusia',
-      content: `Sistem ekskresi manusia berfungsi untuk mengeluarkan zat-zat sisa metabolisme yang tidak diperlukan tubuh.
-Organ ekskresi meliputi ginjal (menyaring darah dan menghasilkan urine), kulit (mengeluarkan keringat), paru-paru (mengeluarkan CO₂), dan hati (mengeluarkan empedu dan urea).
-Ginjal terdiri dari jutaan nefron yang berfungsi menyaring darah melalui tiga tahap: filtrasi (penyaringan), reabsorpsi (penyerapan kembali), dan augmentasi (pengeluaran zat sisa).
-Kulit mengeluarkan keringat melalui kelenjar keringat yang mengandung air, garam, dan urea, membantu mengatur suhu tubuh.
-Paru-paru mengeluarkan karbon dioksida dan uap air sebagai hasil respirasi seluler.
-Hati mengubah amonia (racun) menjadi urea yang kemudian dikeluarkan ginjal, serta menghasilkan empedu yang membantu pencernaan lemak.
-Gangguan pada sistem ekskresi meliputi batu ginjal, nefritis, diabetes insipidus, dan penyakit kulit.`,
-    },
-  ]);
-  console.log('   ✓ Budi: Matematika (Fungsi Komposisi), Fisika (Hukum Newton), Kimia (Ikatan Kimia), Biologi (Sistem Ekskresi)');
+  // Create from data bank for each student
+  await createFromDataBank(andi.id, GradeLevel.SD_5);
+  await createFromDataBank(sari.id, GradeLevel.SMP_1);
+  await createFromDataBank(budi.id, GradeLevel.SMA_2);
   console.log('');
 
   // ── Schedule Sessions ─────────────────────────────────────
@@ -356,20 +257,11 @@ Gangguan pada sistem ekskresi meliputi batu ginjal, nefritis, diabetes insipidus
   const students = [andi, sari, budi];
   let sessionCount = 0;
 
-  // 2-3 hari kemarin = COMPLETED, sisanya SCHEDULED
-  // Today is the reference point. Sessions in the past 2-3 days should be COMPLETED.
-  // We'll set: day -3 and -2 as COMPLETED, day -1 (yesterday) as COMPLETED too, today onward as SCHEDULED
-
   for (const student of students) {
-    // Generate for 7 days: from 3 days ago to 3 days in the future (covering 7 days total)
     for (let dayOffset = -3; dayOffset <= 3; dayOffset++) {
       const date = addDays(todayStart, dayOffset);
       const dayName = getDayName(date);
-
-      // DAILY session at 06:30 (15 min)
-      const isPast = dayOffset < 0; // yesterday or before -> COMPLETED
-      // Also mark today as SCHEDULED since it hasn't happened yet at seed time
-      const isCompleted = dayOffset < 0; // only past days are completed
+      const isPast = dayOffset < 0;
 
       await prisma.scheduleSession.create({
         data: {
@@ -379,14 +271,13 @@ Gangguan pada sistem ekskresi meliputi batu ginjal, nefritis, diabetes insipidus
           subject: 'General',
           scheduledAt: setTime(date, 6, 30),
           durationMin: 15,
-          status: isCompleted ? SessionStatus.COMPLETED : SessionStatus.SCHEDULED,
-          completedAt: isCompleted ? setTime(date, 6, 45) : null,
+          status: isPast ? SessionStatus.COMPLETED : SessionStatus.SCHEDULED,
+          completedAt: isPast ? setTime(date, 6, 45) : null,
           metadata: { day: dayName, seedGenerated: true },
         },
       });
       sessionCount++;
 
-      // INTENSIVE session on Mon/Wed/Fri at 16:00 (120 min)
       if (['Senin', 'Rabu', 'Jumat'].includes(dayName)) {
         await prisma.scheduleSession.create({
           data: {
@@ -396,8 +287,8 @@ Gangguan pada sistem ekskresi meliputi batu ginjal, nefritis, diabetes insipidus
             subject: 'All Subjects',
             scheduledAt: setTime(date, 16, 0),
             durationMin: 120,
-            status: isCompleted ? SessionStatus.COMPLETED : SessionStatus.SCHEDULED,
-            completedAt: isCompleted ? setTime(date, 18, 0) : null,
+            status: isPast ? SessionStatus.COMPLETED : SessionStatus.SCHEDULED,
+            completedAt: isPast ? setTime(date, 18, 0) : null,
             metadata: { day: dayName, seedGenerated: true },
           },
         });
@@ -501,10 +392,6 @@ Gangguan pada sistem ekskresi meliputi batu ginjal, nefritis, diabetes insipidus
   // ── ProgressSnaps ─────────────────────────────────────────
   console.log('📊 Creating progress snapshots...');
 
-  // Andi: IPA bagus (70-90%), Bahasa jelek (20-40%), Matematika medium (50-70%)
-  // Sari: Matematika (50-70%), Inggris (80-95%)
-  // Budi: Fisika (40-60%), Kimia (30-50%)
-
   function randomBetween(min: number, max: number, decimals = 2): number {
     const val = min + Math.random() * (max - min);
     return parseFloat(val.toFixed(decimals));
@@ -537,11 +424,9 @@ Gangguan pada sistem ekskresi meliputi batu ginjal, nefritis, diabetes insipidus
   ]) {
     const subjects = progressData[studentKey];
     for (const [subject, range] of Object.entries(subjects)) {
-      // 5 daily snapshots (last 5 days)
       for (let day = 4; day >= 0; day--) {
         const snapDate = addDays(todayStart, -day);
-        // Add some progression trend: later dates have slightly higher mastery
-        const trend = (5 - day) / 5; // 0.2, 0.4, 0.6, 0.8, 1.0
+        const trend = (5 - day) / 5;
         const mastery = randomBetween(range.minMastery, range.maxMastery) * (0.8 + 0.2 * trend);
 
         await prisma.progressSnap.create({
@@ -570,6 +455,7 @@ Gangguan pada sistem ekskresi meliputi batu ginjal, nefritis, diabetes insipidus
   const totalStudents = await prisma.student.count();
   const totalCurricula = await prisma.curriculum.count();
   const totalMaterials = await prisma.material.count();
+  const totalQuizzes = await prisma.quiz.count();
   const totalSessions = await prisma.scheduleSession.count();
   const totalAgentLogs = await prisma.agentLog.count();
   const totalProgressSnaps = await prisma.progressSnap.count();
@@ -582,6 +468,7 @@ Gangguan pada sistem ekskresi meliputi batu ginjal, nefritis, diabetes insipidus
   console.log(`   Students:       ${totalStudents}`);
   console.log(`   Curricula:      ${totalCurricula}`);
   console.log(`   Materials:      ${totalMaterials}`);
+  console.log(`   Quizzes:        ${totalQuizzes}`);
   console.log(`   ScheduleSess:   ${totalSessions}`);
   console.log(`   AgentLogs:      ${totalAgentLogs}`);
   console.log(`   ProgressSnaps:  ${totalProgressSnaps}`);
