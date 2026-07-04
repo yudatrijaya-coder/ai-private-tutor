@@ -1,0 +1,326 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum GradeLevel {
+  SD_5
+  SMP_1
+  SMA_2
+}
+
+enum StudentStatus {
+  ACTIVE
+  PAUSED
+  ARCHIVED
+}
+
+enum PersonaType {
+  KAK_BUDI
+  KAK_DEWI
+  KAK_RAKA
+}
+
+enum MaterialStatus {
+  DRAFT
+  RAW
+  PROCESSED
+  VIDEO_READY
+  READY
+  ARCHIVED
+}
+
+enum DeliveryType {
+  VIDEO
+  TEXT
+  TEXT_AND_VIDEO
+}
+
+enum AttemptType {
+  QUIZ
+  EXAM
+}
+
+enum SessionType {
+  DAILY
+  INTENSIVE
+}
+
+enum SessionStatus {
+  SCHEDULED
+  COMPLETED
+  MISSED
+  RESCHEDULED
+}
+
+enum InterventionSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  EMERGENCY
+}
+
+enum InterventionStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  DISMISSED
+}
+
+enum AgentType {
+  CURRICULUM
+  CONTENT
+  MEDIA
+  ASSESSMENT
+  TUTOR
+  GUARDIAN
+  SCHEDULER
+}
+
+enum JobStatus {
+  QUEUED
+  ACTIVE
+  COMPLETED
+  FAILED
+  RETRYING
+}
+
+model Student {
+  id                  String        @id @default(uuid())
+  name                String
+  telegramId          String?       @unique
+  gradeLevel          GradeLevel
+  persona             PersonaType?  @default(KAK_BUDI)
+  characterPreference String?       // "mbappe", "lisa", "kak-budi", etc
+  interests           String?       // hobi & interests student
+  scheduleConfig      Json?         // preferred schedule times
+  status              StudentStatus @default(ACTIVE)
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+
+  curriculums    Curriculum[]
+  quizzes        Quiz[]
+  attempts       Attempt[]
+  progressSnaps  ProgressSnap[]
+  scheduleSessions ScheduleSession[]
+  sessionStates  SessionState[]
+  interventions  Intervention[]
+}
+
+model Curriculum {
+  id            String        @id @default(uuid())
+  studentId     String
+  gradeLevel    GradeLevel
+  version       Int           @default(1)
+  changelog     String?
+  metadata      Json?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  student       Student       @relation(fields: [studentId], references: [id])
+  materials     Material[]
+
+  @@unique([studentId, version])
+}
+
+model Material {
+  id              String         @id @default(uuid())
+  curriculumId    String
+  topic           String
+  subTopic        String?
+  subject         String         // Matematika, Bahasa Indonesia, IPA, etc
+  gradeLevel      GradeLevel
+  weekOrder       Int            // week_1, week_2, etc
+  priority        Int            @default(0)
+  delivery        DeliveryType   @default(TEXT)
+  status          MaterialStatus @default(DRAFT)
+  prerequisiteId  String?
+  sourceUrls      Json?          // array of source URLs
+  rawContent      String?
+  processedContent String?
+  videoUrl        String?        // YouTube URL
+  videoScript     String?
+  characterUsed   String?        // which character was used for video
+  metadata        Json?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  curriculum      Curriculum     @relation(fields: [curriculumId], references: [id])
+  quizzes         Quiz[]
+  prerequisites   Material[]     @relation("MaterialPrerequisites")
+  prereqFor       Material[]     @relation("MaterialPrerequisites")
+}
+
+model Quiz {
+  id          String      @id @default(uuid())
+  materialId  String
+  studentId   String
+  type        AttemptType @default(QUIZ)
+  questions   Json        // array of question objects
+  maxScore    Int
+  timeLimit   Int?        // minutes, null = no limit
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  material    Material    @relation(fields: [materialId], references: [id])
+  student     Student     @relation(fields: [studentId], references: [id])
+  attempts    Attempt[]
+}
+
+model Attempt {
+  id        String      @id @default(uuid())
+  quizId    String
+  studentId String
+  type      AttemptType
+  answers   Json        // [{questionIdx, answer, correct, score, timeSpent}]
+  score     Int
+  maxScore  Int
+  masteryAfter Float?   // mastery level after this attempt
+  timeSpent Int?        // seconds
+  createdAt DateTime    @default(now())
+
+  quiz      Quiz        @relation(fields: [quizId], references: [id])
+  student   Student     @relation(fields: [studentId], references: [id])
+}
+
+model ProgressSnap {
+  id          String   @id @default(uuid())
+  studentId   String
+  subject     String
+  topic       String?
+  mastery     Float    // 0.0 - 1.0
+  quizCount   Int      @default(0)
+  totalScore  Int      @default(0)
+  totalMax    Int      @default(0)
+  studyMinutes Int     @default(0)
+  snapDate    DateTime @default(now())
+
+  student     Student  @relation(fields: [studentId], references: [id])
+
+  @@index([studentId, subject, snapDate])
+}
+
+model ScheduleSession {
+  id          String        @id @default(uuid())
+  studentId   String
+  type        SessionType
+  topic       String?
+  subject     String?
+  scheduledAt DateTime
+  durationMin Int           @default(15)
+  status      SessionStatus @default(SCHEDULED)
+  completedAt DateTime?
+  metadata    Json?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  student     Student       @relation(fields: [studentId], references: [id])
+
+  @@index([studentId, scheduledAt])
+}
+
+model SessionState {
+  id          String   @id @default(uuid())
+  studentId   String   @unique
+  currentMode String   @default("chat") // chat, quiz_active, vision_answer, choosing_topic, waiting_quiz_answer
+  context     Json?    // {lastTopic, lastMaterialId, currentQuizId, currentQuestionIdx, answers[], lastPhotoFileId, lastIntent, adHoc, etc}
+  updatedAt   DateTime @updatedAt
+
+  student     Student  @relation(fields: [studentId], references: [id])
+}
+
+model Persona {
+  id          String      @id @default(uuid())
+  type        PersonaType @unique
+  name        String      // "Kak Budi", "Kak Dewi", "Kak Raka"
+  greeting    String
+  description String
+  toneRules   Json        // linguistic rules for this persona
+  forbiddenTopics Json?   // topics this persona cannot discuss
+  createdAt   DateTime    @default(now())
+}
+
+model Intervention {
+  id          String              @id @default(uuid())
+  studentId   String
+  issueType   String              // missed_sessions, low_score, mastery_stuck, behavior, emergency
+  severity    InterventionSeverity @default(LOW)
+  description String
+  actions     Json?               // [{agent: "scheduler", action: "add_session", status: "done"}]
+  status      InterventionStatus  @default(OPEN)
+  resolvedAt  DateTime?
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  student     Student             @relation(fields: [studentId], references: [id])
+}
+
+model AgentLog {
+  id        String    @id @default(uuid())
+  agentType AgentType
+  jobId     String?
+  studentId String?
+  action    String    // "generate_draft", "scrape", "render", "grade", etc
+  status    JobStatus @default(QUEUED)
+  input     Json?
+  output    Json?
+  error     String?
+  traceId   String?
+  metadata  Json?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([agentType, status])
+  @@index([createdAt])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  role          String    @default("parent") // parent, admin
+
+  accounts Account[]
+  sessions Session[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

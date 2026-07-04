@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+:root {
+  /* ---- Superuser Dashboard palette ---- */
+  --su-bg: #0f1117;
+  --su-bg-card: #181b24;
+  --su-bg-hover: #1e2230;
+  --su-border: #2a2e3a;
+  --su-text: #e8eaed;
+  --su-text-dim: #8b8fa3;
+  --su-accent: #6366f1;
+  --su-success: #22c55e;
+  --su-warning: #f59e0b;
+  --su-danger: #ef4444;
+  --su-info: #3b82f6;
+
+  /* ---- Student palette ---- */
+  --st-bg: #fff7ed;
+  --st-bg-card: #ffffff;
+  --st-primary: #6366f1;
+  --st-secondary: #f97316;
+  --st-success: #22c55e;
+  --st-error: #ef4444;
+  --st-gold: #fbbf24;
+  --st-purple: #a855f7;
+  --st-pink: #ec4899;
+  --st-text: #292524;
+  --st-text-dim: #a8a29e;
+  --st-mascot-bg: #fef3c7;
+
+  --font-body: "Inter", sans-serif;
+  --font-display: "Outfit", sans-serif;
+}
+
+@theme inline {
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+}
