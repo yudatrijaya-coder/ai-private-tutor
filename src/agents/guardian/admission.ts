@@ -36,6 +36,7 @@ export interface AdmissionInput {
 }
 
 export interface AdmissionResult {
+  id: string;
   studentId: string;
   curriculumEnqueued: boolean;
   sessionCount: number;
@@ -75,7 +76,7 @@ export async function handleAdmission(input: AdmissionInput): Promise<AdmissionR
   // 1. Create student in DB
   const student = await prisma.student.create({
     data: {
-      studentId: (await generateStudentId(name, gradeLevel)),
+      studentId: generateStudentId(name, gradeLevel),
       name,
       telegramId: telegramId ?? null,
       gradeLevel,
@@ -118,7 +119,8 @@ export async function handleAdmission(input: AdmissionInput): Promise<AdmissionR
   });
 
   return {
-    studentId: student.id,
+    id: student.id,
+    studentId: student.studentId,
     curriculumEnqueued,
     sessionCount: sessions.length,
   };

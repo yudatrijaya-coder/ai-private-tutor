@@ -27,6 +27,9 @@ async function StudentDetailContent({ id }: { id: string }) {
       curriculums: {
         include: {
           materials: {
+            include: {
+              _count: { select: { quizzes: true } },
+            },
             take: 20,
           },
         },

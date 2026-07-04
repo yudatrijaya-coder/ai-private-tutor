@@ -110,8 +110,12 @@ type StudentData = {
     materials: Array<{
       id: string;
       topic: string;
+      subTopic: string | null;
+      subject: string;
+      weekOrder: number;
       status: string;
       delivery: string;
+      _count: { quizzes: number };
     }>;
   }>;
 };
@@ -250,6 +254,7 @@ function SectionCard({
 export function StudentDetailView({ student }: { student: StudentData }) {
   const latestMastery = getLatestMasteryBySubject(student.progressSnaps);
   const weekSchedule = student.scheduleSessions.slice(0, 7);
+  const [regenerating, setRegenerating] = useState(false);
 
   /* Intervention split */
   const activeInterventions = student.interventions.filter((i) =>
@@ -571,38 +576,106 @@ export function StudentDetailView({ student }: { student: StudentData }) {
       </SectionCard>
 
       {/* ── Curriculum Progress ── */}
-      {student.curriculums.length > 0 && (
-        <SectionCard
-          title={`📋 Kurikulum (v${student.curriculums[0].version})`}
-        >
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm text-left">
-              <thead>
-                <tr style={{ color: "var(--su-text-dim)" }}>
-                  <th className="pb-2 pr-4">Topik</th>
-                  <th className="pb-2 pr-4">Status</th>
-                  <th className="pb-2">Delivery</th>
-                </tr>
-              </thead>
-              <tbody>
-                {student.curriculums[0].materials.map((m) => (
-                  <tr
-                    key={m.id}
-                    className="border-t"
-                    style={{ borderColor: "var(--su-border)" }}
-                  >
-                    <td className="py-2 pr-4">{m.topic}</td>
-                    <td className="py-2 pr-4">
-                      <MaterialStatusBadge status={m.status} />
-                    </td>
-                    <td className="py-2">{m.delivery}</td>
+      {student.curriculums.length > 0 && (() => {
+        const curriculum = student.curriculums[0];
+        const materials = curriculum.materials;
+        const readyCount = materials.filter(m => m.status === "READY" || m.status === "PROCESSED").length;
+        const totalQuizzes = materials.reduce((s, m) => s + m._count.quizzes, 0);
+        const pct = materials.length ? Math.round((readyCount / materials.length) * 100) : 0;
+
+        async function handleRegenerate() {
+          setRegenerating(true);
+          try {
+            const res = await fetch("/api/curriculum/regenerate", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ studentId: student.id }),
+            });
+            if (res.ok) window.location.reload();
+            else alert("Gagal regenerate kurikulum");
+          } catch {
+            alert("Terjadi kesalahan");
+          } finally {
+            setRegenerating(false);
+          }
+        }
+
+        return (
+          <SectionCard title={`📋 Kurikulum (v${curriculum.version})`}>
+            {/* Summary stats */}
+            <div className="grid grid-cols-3 gap-3 mb-4">
+              <div className="p-3 rounded-lg text-center" style={{ backgroundColor: "var(--su-bg-hover)" }}>
+                <div className="text-2xl font-bold">{materials.length}</div>
+                <div className="text-xs" style={{ color: "var(--su-text-dim)" }}>Materi</div>
+              </div>
+              <div className="p-3 rounded-lg text-center" style={{ backgroundColor: "var(--su-bg-hover)" }}>
+                <div className="text-2xl font-bold" style={{ color: "var(--su-success)" }}>{readyCount}</div>
+                <div className="text-xs" style={{ color: "var(--su-text-dim)" }}>Siap</div>
+              </div>
+              <div className="p-3 rounded-lg text-center" style={{ backgroundColor: "var(--su-bg-hover)" }}>
+                <div className="text-2xl font-bold" style={{ color: "var(--su-info)" }}>{totalQuizzes}</div>
+                <div className="text-xs" style={{ color: "var(--su-text-dim)" }}>Kuis</div>
+              </div>
+            </div>
+
+            {/* Progress bar */}
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ backgroundColor: "var(--su-bg-hover)" }}>
+                <div
+                  className="h-full rounded-full transition-all"
+                  style={{ width: `${pct}%`, backgroundColor: "var(--su-success)" }}
+                />
+              </div>
+              <button
+                onClick={handleRegenerate}
+                disabled={regenerating}
+                className="text-xs px-3 py-1.5 rounded-lg font-medium whitespace-nowrap cursor-pointer disabled:opacity-50"
+                style={{
+                  backgroundColor: "rgba(245,158,11,0.12)",
+                  color: "var(--su-warning)",
+                  border: "1px solid rgba(245,158,11,0.3)",
+                }}
+              >
+                {regenerating ? "Memperbarui..." : "🔄 Regenerate"}
+              </button>
+            </div>
+
+            {/* Materials table */}
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm text-left">
+                <thead>
+                  <tr style={{ color: "var(--su-text-dim)" }}>
+                    <th className="pb-2 pr-3">#</th>
+                    <th className="pb-2 pr-3">Minggu</th>
+                    <th className="pb-2 pr-3">Mapel</th>
+                    <th className="pb-2 pr-3">Topik</th>
+                    <th className="pb-2 pr-3">Sub Topik</th>
+                    <th className="pb-2 pr-3">Kuis</th>
+                    <th className="pb-2">Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </SectionCard>
-      )}
+                </thead>
+                <tbody>
+                  {materials.map((m, i) => (
+                    <tr
+                      key={m.id}
+                      className="border-t"
+                      style={{ borderColor: "var(--su-border)" }}
+                    >
+                      <td className="py-1.5 pr-3 text-xs" style={{ color: "var(--su-text-dim)" }}>{i + 1}</td>
+                      <td className="py-1.5 pr-3">{m.weekOrder}</td>
+                      <td className="py-1.5 pr-3">{m.subject}</td>
+                      <td className="py-1.5 pr-3 font-medium">{m.topic}</td>
+                      <td className="py-1.5 pr-3 text-xs" style={{ color: "var(--su-text-dim)" }}>{m.subTopic ?? "—"}</td>
+                      <td className="py-1.5 pr-3">{m._count.quizzes > 0 ? `📝 ${m._count.quizzes}` : "—"}</td>
+                      <td className="py-1.5"><MaterialStatusBadge status={m.status} /></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </SectionCard>
+        );
+      })()}
     </div>
   );
 }

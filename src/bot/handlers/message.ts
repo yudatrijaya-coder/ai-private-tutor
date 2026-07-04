@@ -4,6 +4,7 @@ import { getSession } from "../session";
 import { routeByState } from "../state-machine";
 import { handleMessage } from "../agent/tutor";
 import { handleStart } from "./start";
+import { handleRegister } from "./register";
 import { handleQuizStart } from "./quiz";
 import { handleSchedule } from "./schedule";
 import { handleMaterial } from "./material";
@@ -26,6 +27,17 @@ export async function onMessage(ctx: Context): Promise<void> {
 
   const telegramId = String(ctx.from.id);
 
+  // ── /daftar command — MUST be handled before telegramId lookup ──
+  const msg = ctx.message;
+  if (msg && "text" in msg) {
+    const text = msg.text.trim();
+    const daftarMatch = text.match(/^\/daftar\s+(.+)$/i);
+    if (daftarMatch) {
+      await handleRegister(ctx, daftarMatch[1]);
+      return;
+    }
+  }
+
   // Look up student by telegramId
   const student = await prisma.student.findUnique({
     where: { telegramId },
@@ -35,8 +47,11 @@ export async function onMessage(ctx: Context): Promise<void> {
     // Unknown user — prompt for registration
     await ctx.reply(
       `Halo! 👋 Sepertinya kamu belum terdaftar sebagai siswa.\n\n` +
-        `Minta orang tua / wali kamu untuk mendaftarkan kamu dulu ya. ` +
-        `Atau hubungi admin untuk info lebih lanjut. 🫶`,
+        `Kalau kamu punya ID siswa, ketik:\n` +
+        `/daftar _ID_SISWA_\n\n` +
+        `Contoh: /daftar ANDI001\n\n` +
+        `Atau minta orang tua / admin untuk mendaftarkan kamu. 🫶`,
+      { parse_mode: "Markdown" },
     );
     return;
   }
@@ -64,7 +79,8 @@ export async function onMessage(ctx: Context): Promise<void> {
       await ctx.reply(
         `${persona.emoji} *Bantuan Perintah*\n\n` +
           `/start — Mulai / daftar ulang\n` +
-          `/materi — Lihat materi pelajaran\n` +
+            `/daftar _ID_ — Hubungkan akun Telegram dengan ID siswa\n` +
+            `/materi — Lihat materi pelajaran\n` +
           `/quiz — Kerjakan kuis\n` +
           `/jadwal — Cek jadwal belajar\n` +
           `/nilai — Lihat nilai dan progres\n` +
