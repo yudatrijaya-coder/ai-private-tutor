@@ -1,0 +1,17 @@
+{
+  "/(auth)/login/page": "/login",
+  "/(dashboard)/dashboard/agents/page": "/dashboard/agents",
+  "/(dashboard)/dashboard/page": "/dashboard",
+  "/(dashboard)/dashboard/students/[id]/page": "/dashboard/students/[id]",
+  "/(student)/student/page": "/student",
+  "/(student)/student/profile/page": "/student/profile",
+  "/(student)/student/progress/page": "/student/progress",
+  "/(student)/student/quiz/page": "/student/quiz",
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/auth/[...nextauth]/route": "/api/auth/[...nextauth]",
+  "/api/bot/webhook/route": "/api/bot/webhook",
+  "/api/queues/route": "/api/queues",
+  "/favicon.ico/route": "/favicon.ico",
+  "/page": "/"
+}

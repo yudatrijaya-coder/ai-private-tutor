@@ -3,6 +3,11 @@ import { prisma } from "@/lib/prisma";
 import { getSession } from "../session";
 import { routeByState } from "../state-machine";
 import { handleMessage } from "../agent/tutor";
+import { handleStart } from "./start";
+import { handleQuizStart } from "./quiz";
+import { handleSchedule } from "./schedule";
+import { handleMaterial } from "./material";
+import { handleProgress } from "./progress";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 
@@ -12,8 +17,9 @@ const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
  * Flow:
  * 1. Look up Student by telegramId
  * 2. Get or create DB session
- * 3. Try state-based routing (quiz answer, etc.)
- * 4. Fall through to intent detection → handler dispatch
+ * 3. Try state-based routing (quiz answer, photo, etc.)
+ * 4. Fall through to LLM-powered tutor intent detection
+ * 5. Check LLM response for command brackets [QUIZ], [SCHEDULE], etc.
  */
 export async function onMessage(ctx: Context): Promise<void> {
   if (!ctx.from) return;
@@ -38,11 +44,59 @@ export async function onMessage(ctx: Context): Promise<void> {
   // Get or create session
   const session = await getSession(student.id);
 
-  // Try state-based routing first (quiz_active → answer handler)
+  // Try state-based routing first (quiz_active → answer handler, photo → vision)
   const handled = await routeByState(ctx, session, student);
 
   if (!handled) {
-    // Fall through to intent detection
-    await handleMessage(ctx, session, student);
+    const msg = ctx.message;
+    if (!msg) return;
+
+    // /start command — direct routing, bypass LLM
+    if ("text" in msg && msg.text.trim() === "/start") {
+      await handleStart(ctx, student);
+      return;
+    }
+
+    // /help command — direct routing
+    if ("text" in msg && msg.text.trim() === "/help") {
+      const { getPersona } = await import("../personas");
+      const persona = getPersona(student.persona);
+      await ctx.reply(
+        `${persona.emoji} *Bantuan Perintah*\n\n` +
+          `/start — Mulai / daftar ulang\n` +
+          `/materi — Lihat materi pelajaran\n` +
+          `/quiz — Kerjakan kuis\n` +
+          `/jadwal — Cek jadwal belajar\n` +
+          `/nilai — Lihat nilai dan progres\n` +
+          `/help — Tampilkan bantuan ini\n\n` +
+          `Atau cukup tanya aja langsung! 😊`,
+        { parse_mode: "Markdown" },
+      );
+      return;
+    }
+
+    // Fall through to LLM-powered tutor
+    const response = await handleMessage(ctx, session, student);
+
+    if (response) {
+      // Intent detection from LLM response — check for command brackets
+      const text = response;
+
+      if (/\[QUIZ\]/i.test(text)) {
+        await handleQuizStart(ctx, student);
+        return;
+      }
+      if (/\[SCHEDULE\]/i.test(text)) {
+        await handleSchedule(ctx, student);
+        return;
+      }
+      if (/\[MATERIALS\]/i.test(text)) {
+        await handleMaterial(ctx, student);
+        return;
+      }
+
+      // Send the LLM response
+      await ctx.reply(text);
+    }
   }
 }

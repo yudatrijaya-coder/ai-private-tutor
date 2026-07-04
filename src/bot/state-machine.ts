@@ -2,26 +2,40 @@ import type { Context } from "telegraf";
 import type { Student } from "@/generated/prisma/client";
 import type { BotSession } from "./session";
 import { handleQuizAnswer } from "./handlers/quiz";
-import { handleGeneric } from "./handlers/generic";
+import { handlePhoto } from "./handlers/vision";
 
 /**
  * Route an incoming message based on the current session state.
- * Called ONCE per message, before the tutor's intent detection.
+ * Called ONCE per message, before the main intent detection.
  */
 export async function routeByState(
   ctx: Context,
   session: BotSession,
   student: Student,
 ): Promise<boolean> {
-  // If a quiz is active, the message IS a quiz answer
-  if (session.currentMode === "quiz_active" || session.currentMode === "waiting_quiz_answer") {
+  const msg = ctx.message;
+  if (!msg) return false;
+
+  // Quiz active — message IS a quiz answer
+  if (
+    session.currentMode === "quiz_active" ||
+    session.currentMode === "waiting_quiz_answer"
+  ) {
     await handleQuizAnswer(ctx, session, student);
-    return true; // handled
+    return true;
   }
 
-  // Other state-specific routing can be added here in future:
-  // - choosing_topic -> topic selection handler
-  // - vision_answer -> vision handler
+  // Vision pending — a photo was just sent, handled by vision handler
+  if (session.currentMode === "vision_pending") {
+    // Clear the pending state and let the main handler process
+    return false;
+  }
+
+  // Photo message — route to vision handler
+  if ("photo" in msg) {
+    await handlePhoto(ctx, student);
+    return true;
+  }
 
   return false; // not handled by state machine, fall through to intent detection
 }

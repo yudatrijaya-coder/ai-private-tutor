@@ -1,0 +1,17 @@
+{
+  "node": {
+    "00d372bf137b0afc81c29e5a79829b37b9e0154fa0": {
+      "workers": {
+        "app/(dashboard)/dashboard/agents/page": {
+          "moduleId": 16001,
+          "async": true,
+          "exportedName": "$$RSC_SERVER_ACTION_0",
+          "filename": "ai-private-tutor/src/app/(dashboard)/layout.tsx"
+        }
+      },
+      "exportedName": "$$RSC_SERVER_ACTION_0",
+      "filename": "ai-private-tutor/src/app/(dashboard)/layout.tsx"
+    }
+  },
+  "edge": {}
+}

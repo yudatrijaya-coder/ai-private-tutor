@@ -6,6 +6,7 @@ export type BotSessionState =
   | "quiz_active"
   | "choosing_topic"
   | "vision_answer"
+  | "vision_pending"
   | "waiting_quiz_answer";
 
 export interface BotSession {
@@ -22,6 +23,7 @@ const DB_TO_STATE: Record<string, BotSessionState> = {
   quiz_active: "quiz_active",
   choosing_topic: "choosing_topic",
   vision_answer: "vision_answer",
+  vision_pending: "vision_pending",
   waiting_quiz_answer: "waiting_quiz_answer",
 };
 
@@ -30,6 +32,7 @@ const STATE_TO_DB: Record<BotSessionState, string> = {
   quiz_active: "quiz_active",
   choosing_topic: "choosing_topic",
   vision_answer: "vision_answer",
+  vision_pending: "vision_pending",
   waiting_quiz_answer: "waiting_quiz_answer",
 };
 
