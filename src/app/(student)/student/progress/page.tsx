@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import { prisma } from "@/lib/prisma";
 import { unstable_noStore as noStore } from "next/cache";
+import { SkeletonProgressPage } from "@/components/Skeleton";
 
 function StreakCalendar({ snapDates }: { snapDates: Date[] }) {
   const today = new Date();
@@ -12,7 +14,7 @@ function StreakCalendar({ snapDates }: { snapDates: Date[] }) {
       (sd) =>
         sd.getDate() === d.getDate() &&
         sd.getMonth() === d.getMonth() &&
-        sd.getFullYear() === d.getFullYear()
+        sd.getFullYear() === d.getFullYear(),
     );
     days.push({ date: d, studied });
   }
@@ -33,7 +35,6 @@ function StreakCalendar({ snapDates }: { snapDates: Date[] }) {
           Streak
         </span>
       </div>
-      {/* Day name headers */}
       <div className="grid grid-cols-7 gap-1.5 mb-1.5">
         {dayNames.map((d) => (
           <div
@@ -45,22 +46,17 @@ function StreakCalendar({ snapDates }: { snapDates: Date[] }) {
           </div>
         ))}
       </div>
-      {/* Calendar cells */}
       <div className="grid grid-cols-7 gap-1.5">
         {days.map((day, i) => (
           <div key={i} className="flex flex-col items-center">
             <div
-              className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-colors ${
-                day.studied
-                  ? "text-white"
-                  : "text-xs"
-              }`}
+              className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-colors`}
               style={{
                 backgroundColor: day.studied
                   ? "var(--st-primary)"
                   : day.date.getDay() === 0 || day.date.getDay() === 6
-                  ? "rgba(168,162,158,0.1)"
-                  : "transparent",
+                    ? "rgba(168,162,158,0.1)"
+                    : "transparent",
                 color: day.studied ? "#fff" : "var(--st-text-dim)",
               }}
             >
@@ -98,18 +94,15 @@ function MasteryChart({
             item.mastery >= 80
               ? "var(--st-success)"
               : item.mastery >= 50
-              ? "var(--st-gold)"
-              : "var(--st-secondary)";
+                ? "var(--st-gold)"
+                : "var(--st-secondary)";
           return (
             <div key={item.subject}>
               <div className="flex items-center justify-between mb-1">
                 <span className="text-sm font-medium">
                   {item.emoji} {item.subject}
                 </span>
-                <span
-                  className="text-xs font-bold"
-                  style={{ color: barColor }}
-                >
+                <span className="text-xs font-bold" style={{ color: barColor }}>
                   {Math.round(item.mastery)}%
                 </span>
               </div>
@@ -196,7 +189,9 @@ const EMOJI_MAP: Record<string, string> = {
   PKN: "🤝",
 };
 
-export default async function ProgressPage() {
+/* ── Progress content ── */
+
+async function ProgressContent() {
   noStore();
 
   const student = await prisma.student.findFirst({
@@ -230,20 +225,11 @@ export default async function ProgressPage() {
   }
 
   // Aggregate mastery by subject (latest snap per subject)
-  const latestSnaps = new Map<string, number>();
   const snapDates: Date[] = [];
   for (const snap of student.progressSnaps) {
     snapDates.push(snap.snapDate);
-    if (!latestSnaps.has(snap.subject) || snap.snapDate > student.progressSnaps.find(s => s.subject === snap.subject)!.snapDate) {
-      const existing = latestSnaps.get(snap.subject);
-      const existingSnap = student.progressSnaps.find(s => s.subject === snap.subject && s.snapDate.getTime() === existing);
-      if (!existingSnap || snap.snapDate > existingSnap.snapDate) {
-        latestSnaps.set(snap.subject, snap.mastery);
-      }
-    }
   }
 
-  // Better: get latest per subject
   const subjectLatest = new Map<string, { mastery: number; snapDate: Date }>();
   for (const snap of student.progressSnaps) {
     const existing = subjectLatest.get(snap.subject);
@@ -260,34 +246,39 @@ export default async function ProgressPage() {
 
   // Unique study dates
   const studyDates = Array.from(
-    new Set(snapDates.map((d) => d.toDateString()))
+    new Set(snapDates.map((d) => d.toDateString())),
   ).map((d) => new Date(d));
 
   // Calculate badges
   const totalQuizzes = student.attempts.length;
   const perfectScores = student.attempts.filter((a) => a.score === a.maxScore).length;
-  const maxMastery = Math.max(...Array.from(subjectLatest.values()).map(v => v.mastery * 100), 0);
   const allAbove80 = masteryData.length > 0 && masteryData.every((m) => m.mastery >= 80);
 
   const badges = ALL_BADGES.map((b) => {
     let unlocked = false;
     if (b.minQuiz && totalQuizzes >= b.minQuiz) unlocked = true;
     if (b.minDays && studyDates.length >= b.minDays) unlocked = true;
-    if (b.minMastery && b.subject && (subjectLatest.get(b.subject)?.mastery ?? 0) * 100 >= b.minMastery) unlocked = true;
+    if (
+      b.minMastery &&
+      b.subject &&
+      (subjectLatest.get(b.subject)?.mastery ?? 0) * 100 >= b.minMastery
+    )
+      unlocked = true;
     if (b.minPerfect && perfectScores >= b.minPerfect) unlocked = true;
     if (b.minMasteryAll && allAbove80) unlocked = true;
     return { name: b.name, icon: b.icon, unlocked };
   });
 
+  const maxMastery = Math.max(
+    ...Array.from(subjectLatest.values()).map((v) => v.mastery * 100),
+    0,
+  );
+
   return (
     <div className="space-y-5">
-      {/* Streak Calendar */}
       <StreakCalendar snapDates={studyDates} />
-
-      {/* Mastery Chart */}
       {masteryData.length > 0 && <MasteryChart data={masteryData} />}
 
-      {/* Stats summary */}
       <div className="grid grid-cols-3 gap-3">
         <div
           className="rounded-2xl p-4 text-center"
@@ -336,8 +327,17 @@ export default async function ProgressPage() {
         </div>
       </div>
 
-      {/* Badges */}
       <BadgesSection badges={badges} />
     </div>
+  );
+}
+
+/* ── Page ── */
+
+export default function ProgressPage() {
+  return (
+    <Suspense fallback={<SkeletonProgressPage />}>
+      <ProgressContent />
+    </Suspense>
   );
 }

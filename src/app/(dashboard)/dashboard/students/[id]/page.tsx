@@ -1,15 +1,14 @@
+import { Suspense } from "react";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { StudentDetailView } from "./StudentDetailView";
+import { SkeletonStudentDetail } from "@/components/Skeleton";
 
 export const dynamic = "force-dynamic";
 
-export default async function StudentDetailPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+/* ── Detail content ── */
+
+async function StudentDetailContent({ id }: { id: string }) {
   const student = await prisma.student.findUnique({
     where: { id },
     include: {
@@ -40,4 +39,20 @@ export default async function StudentDetailPage({
   if (!student) notFound();
 
   return <StudentDetailView student={student} />;
+}
+
+/* ── Page ── */
+
+export default async function StudentDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+
+  return (
+    <Suspense fallback={<SkeletonStudentDetail />}>
+      <StudentDetailContent id={id} />
+    </Suspense>
+  );
 }

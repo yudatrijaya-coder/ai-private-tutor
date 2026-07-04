@@ -1,11 +1,14 @@
+import { Suspense } from "react";
 import { prisma } from "@/lib/prisma";
 import { AgentPipelineView } from "./AgentPipelineView";
 import { QueueMonitor } from "./QueueMonitor";
+import { SkeletonAgentGrid, SkeletonQueueMonitor } from "@/components/Skeleton";
 
 export const dynamic = "force-dynamic";
 
-export default async function AgentsPage() {
-  // Group by agentType, count by status
+/* ── Agent summary section ── */
+
+async function AgentSummarySection() {
   const logs = await prisma.agentLog.groupBy({
     by: ["agentType", "status"],
     _count: { id: true },
@@ -63,10 +66,36 @@ export default async function AgentsPage() {
 
   const agents = Array.from(agentMap.values());
 
+  return <AgentPipelineView agents={agents} />;
+}
+
+/* ── Page ── */
+
+export default function AgentsPage() {
   return (
     <div className="space-y-6">
-      <QueueMonitor />
-      <AgentPipelineView agents={agents} />
+      {/* Header */}
+      <div>
+        <h1
+          className="text-2xl font-bold"
+          style={{ fontFamily: "var(--font-display)" }}
+        >
+          🤖 Agent Pipeline
+        </h1>
+        <p className="text-sm mt-1" style={{ color: "var(--su-text-dim)" }}>
+          Status real-time pipeline agent AI
+        </p>
+      </div>
+
+      {/* Queue Monitor — client component with its own fetch */}
+      <Suspense fallback={<SkeletonQueueMonitor />}>
+        <QueueMonitor />
+      </Suspense>
+
+      {/* Agent Summary — server data */}
+      <Suspense fallback={<SkeletonAgentGrid />}>
+        <AgentSummarySection />
+      </Suspense>
     </div>
   );
 }
