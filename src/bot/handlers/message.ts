@@ -66,6 +66,12 @@ export async function onMessage(ctx: Context): Promise<void> {
     const msg = ctx.message;
     if (!msg) return;
 
+    // /quiz command — direct routing
+    if ("text" in msg && /^\/(quiz|kuis)$/i.test(msg.text.trim())) {
+      await handleQuizStart(ctx, student);
+      return;
+    }
+
     // /start command — direct routing, bypass LLM
     if ("text" in msg && msg.text.trim() === "/start") {
       await handleStart(ctx, student);
