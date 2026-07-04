@@ -30,9 +30,29 @@
 
   --font-body: "Inter", sans-serif;
   --font-display: "Outfit", sans-serif;
+  --font-st-display: "Fredoka", sans-serif;
+  --font-st-body: "Nunito", sans-serif;
 }
 
 @theme inline {
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
+  --font-st-display: var(--font-st-display);
+  --font-st-body: var(--font-st-body);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+.safe-area-inset-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0);
 }
