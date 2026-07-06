@@ -5,9 +5,9 @@ import type { AgentRole, ChatMessage, LLMCallOptions, ModelPricing } from "./typ
 // ─── Re-export all types ──────────────────────────────────────
 export * from "./types";
 
-// ─── OpenRouter Client ────────────────────────────────────────
-const baseURL = "https://openrouter.ai/api/v1";
-const apiKey = process.env.OPENROUTER_API_KEY;
+// ─── SumoPod Client ────────────────────────────────────────────
+const baseURL = "https://ai.sumopod.com/v1";
+const apiKey = process.env.SUMOPOD_API_KEY;
 
 /** True if the API key is configured */
 export const isLLMReady = Boolean(apiKey);
@@ -32,12 +32,12 @@ function getClient(): OpenAI {
 
 /** Primary model per agent role */
 export const MODEL_ROUTES: Record<AgentRole, string> = {
-  tutor: "openai/gpt-4o-mini",
-  curriculum: "deepseek/deepseek-chat",
-  content: "google/gemini-1.5-flash",
-  assessment: "openai/gpt-4o-mini",
-  guardian: "deepseek/deepseek-chat",
-  media_script: "openai/gpt-4o-mini",
+  tutor: "gpt-4o-mini",
+  curriculum: "deepseek-v4-flash",
+  content: "gemini/gemini-2.5-flash-lite",
+  assessment: "gpt-4o-mini",
+  guardian: "deepseek-v4-flash",
+  media_script: "gpt-4o-mini",
 };
 
 /**
@@ -46,40 +46,40 @@ export const MODEL_ROUTES: Record<AgentRole, string> = {
  */
 export const FALLBACK_CHAIN: Record<AgentRole, string[]> = {
   tutor: [
-    "openai/gpt-4o-mini",
-    "google/gemini-2.0-flash-001",
-    "mistral/mistral-small-3.1-24b-instruct",
+    "gpt-4o-mini",
+    "gemini/gemini-2.5-flash-lite",
+    "deepseek-v4-flash",
   ],
   curriculum: [
-    "deepseek/deepseek-chat",
-    "google/gemini-2.0-flash-001",
+    "deepseek-v4-flash",
+    "gemini/gemini-2.5-flash-lite",
   ],
   content: [
-    "google/gemini-1.5-flash",
-    "deepseek/deepseek-chat",
+    "gemini/gemini-2.5-flash-lite",
+    "gemini/gemini-2.0-flash",
   ],
   assessment: [
-    "openai/gpt-4o-mini",
-    "google/gemini-2.0-flash-001",
+    "gpt-4o-mini",
+    "deepseek-v4-flash",
   ],
   guardian: [
-    "deepseek/deepseek-chat",
-    "google/gemini-2.0-flash-001",
+    "deepseek-v4-flash",
+    "gemini/gemini-2.5-flash-lite",
   ],
   media_script: [
-    "openai/gpt-4o-mini",
-    "google/gemini-2.0-flash-001",
+    "gpt-4o-mini",
+    "gemini/gemini-2.5-flash-lite",
   ],
 };
 
-// ─── Per‑model pricing (USD per 1K tokens, approx OpenRouter rates) ───
+// ─── Per‑model pricing (USD per 1M tokens — SumoPod rates) ────
 
 const MODEL_PRICING: Record<string, ModelPricing> = {
-  "openai/gpt-4o-mini":               { input: 0.00015, output: 0.00060 },
-  "google/gemini-2.0-flash-001":      { input: 0.00010, output: 0.00040 },
-  "google/gemini-1.5-flash":          { input: 0.000075, output: 0.00030 },
-  "deepseek/deepseek-chat":           { input: 0.00013, output: 0.00050 },
-  "mistral/mistral-small-3.1-24b-instruct": { input: 0.00020, output: 0.00060 },
+  "gpt-4o-mini":                            { input: 0.15, output: 0.60 },
+  "gemini/gemini-2.5-flash-lite":           { input: 0.10, output: 0.40 },
+  "gemini/gemini-2.0-flash":                { input: 0.10, output: 0.40 },
+  "deepseek-v4-flash":                      { input: 0.14, output: 0.28 },
+  "deepseek-v3-2":                          { input: 0.28, output: 0.42 },
 };
 
 // ─── Core: callLLM (non‑streaming, with fallback) ─────────────
@@ -179,23 +179,23 @@ export function estimateCost(
   const rate = MODEL_PRICING[model];
   if (!rate) return 0;
 
-  return (inputTokens / 1000) * rate.input + (outputTokens / 1000) * rate.output;
+  return (inputTokens / 1_000_000) * rate.input + (outputTokens / 1_000_000) * rate.output;
 }
 
 // ─── Safe Init: noop sentinel when key is missing ─────────────
 
-/** Sentinel object returned when OPENROUTER_API_KEY is not set */
+/** Sentinel object returned when SUMOPOD_API_KEY is not set */
 export const LLM_NOT_CONFIGURED = {
   isReady: false as const,
   callLLM: async <T = null>(): Promise<T> => {
     console.warn(
-      "[LLM] OPENROUTER_API_KEY is not set. Set it in .env to use LLM features.",
+      "[LLM] SUMOPOD_API_KEY is not set. Set it in .env to use LLM features.",
     );
     return null as T;
   },
   callLLMStream: async function* (): AsyncGenerator<string> {
     console.warn(
-      "[LLM] OPENROUTER_API_KEY is not set. Set it in .env to use LLM features.",
+      "[LLM] SUMOPOD_API_KEY is not set. Set it in .env to use LLM features.",
     );
     // yield nothing
   },
