@@ -32,12 +32,12 @@ function getClient(): OpenAI {
 
 /** Primary model per agent role */
 export const MODEL_ROUTES: Record<AgentRole, string> = {
-  tutor: "google/gemini-2.0-flash-001",
+  tutor: "openai/gpt-4o-mini",
   curriculum: "deepseek/deepseek-chat",
   content: "google/gemini-1.5-flash",
-  assessment: "anthropic/claude-3-haiku",
+  assessment: "openai/gpt-4o-mini",
   guardian: "deepseek/deepseek-chat",
-  media_script: "anthropic/claude-3-sonnet",
+  media_script: "openai/gpt-4o-mini",
 };
 
 /**
@@ -46,8 +46,8 @@ export const MODEL_ROUTES: Record<AgentRole, string> = {
  */
 export const FALLBACK_CHAIN: Record<AgentRole, string[]> = {
   tutor: [
-    "google/gemini-2.0-flash-001",
     "openai/gpt-4o-mini",
+    "google/gemini-2.0-flash-001",
     "mistral/mistral-small-3.1-24b-instruct",
   ],
   curriculum: [
@@ -59,7 +59,7 @@ export const FALLBACK_CHAIN: Record<AgentRole, string[]> = {
     "deepseek/deepseek-chat",
   ],
   assessment: [
-    "anthropic/claude-3-haiku",
+    "openai/gpt-4o-mini",
     "google/gemini-2.0-flash-001",
   ],
   guardian: [
@@ -67,20 +67,18 @@ export const FALLBACK_CHAIN: Record<AgentRole, string[]> = {
     "google/gemini-2.0-flash-001",
   ],
   media_script: [
-    "anthropic/claude-3-sonnet",
-    "deepseek/deepseek-chat",
+    "openai/gpt-4o-mini",
+    "google/gemini-2.0-flash-001",
   ],
 };
 
 // ─── Per‑model pricing (USD per 1K tokens, approx OpenRouter rates) ───
 
 const MODEL_PRICING: Record<string, ModelPricing> = {
+  "openai/gpt-4o-mini":               { input: 0.00015, output: 0.00060 },
   "google/gemini-2.0-flash-001":      { input: 0.00010, output: 0.00040 },
   "google/gemini-1.5-flash":          { input: 0.000075, output: 0.00030 },
   "deepseek/deepseek-chat":           { input: 0.00013, output: 0.00050 },
-  "anthropic/claude-3-haiku":          { input: 0.00025, output: 0.00125 },
-  "anthropic/claude-3-sonnet":         { input: 0.00300, output: 0.01500 },
-  "openai/gpt-4o-mini":               { input: 0.00015, output: 0.00060 },
   "mistral/mistral-small-3.1-24b-instruct": { input: 0.00020, output: 0.00060 },
 };
 

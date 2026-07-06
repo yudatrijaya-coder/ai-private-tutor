@@ -46,12 +46,16 @@ export async function onMessage(ctx: Context): Promise<void> {
   if (!student) {
     // Unknown user — prompt for registration
     await ctx.reply(
-      `Halo! 👋 Sepertinya kamu belum terdaftar sebagai siswa.\n\n` +
-        `Kalau kamu punya ID siswa, ketik:\n` +
-        `/daftar _ID_SISWA_\n\n` +
-        `Contoh: /daftar ANDI001\n\n` +
-        `Atau minta orang tua / admin untuk mendaftarkan kamu. 🫶`,
-      { parse_mode: "Markdown" },
+      [
+        "Halo! 👋 Sepertinya kamu belum terdaftar sebagai siswa.",
+        "",
+        "Kalau kamu punya ID siswa, ketik:",
+        "/daftar ID_SISWA",
+        "",
+        "Contoh: /daftar ANDI001",
+        "",
+        "Atau minta orang tua / admin untuk mendaftarkan kamu. 🫶",
+      ].join("\n"),
     );
     return;
   }
