@@ -8,6 +8,10 @@
  */
 
 export async function register() {
+  // instrumentation runs in both Node.js and Edge runtimes.
+  // Skip for Edge — BullMQ/ioredis need Node.js APIs.
+  if (process.env.NEXT_RUNTIME === "edge") return;
+
   const { initQueues } = await import("@/queue/runner");
   const { processScrapeJob } = await import("@/agents/content/worker");
   const { processCurriculumReviewJob } = await import(

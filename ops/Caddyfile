@@ -1,0 +1,21 @@
+# AI Private Tutor — Caddy reverse proxy with auto SSL
+# Set A record @ -> 43.133.151.242 at your registrar, then Caddy
+# will auto-provision Let's Encrypt certificates.
+
+senangbelajar.web.id {
+    # Reverse proxy to Next.js app
+    reverse_proxy 127.0.0.1:3000
+
+    # Security headers
+    header {
+        X-Content-Type-Options nosniff
+        X-Frame-Options DENY
+        X-XSS-Protection "1; mode=block"
+        -Server
+    }
+
+    # Logs
+    log {
+        output file /var/log/caddy/senangbelajar.log
+    }
+}
