@@ -46,7 +46,13 @@ export async function handleMessage(
   ];
 
   // Call LLM
-  const response = await callLLM("tutor", messages);
+  let response: string | null;
+  try {
+    response = await callLLM("tutor", messages);
+  } catch (err) {
+    console.warn("[tutor] LLM call failed, using persona fallback:", err instanceof Error ? err.message : String(err));
+    response = persona.greeting;
+  }
 
   if (!response) return persona.greeting;
 
