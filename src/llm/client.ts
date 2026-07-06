@@ -32,12 +32,12 @@ function getClient(): OpenAI {
 
 /** Primary model per agent role */
 export const MODEL_ROUTES: Record<AgentRole, string> = {
-  tutor: "gpt-4o-mini",
+  tutor: "deepseek-v4-flash",
   curriculum: "deepseek-v4-flash",
-  content: "gemini/gemini-2.5-flash-lite",
-  assessment: "gpt-4o-mini",
+  content: "deepseek-v4-flash",
+  assessment: "deepseek-v4-flash",
   guardian: "deepseek-v4-flash",
-  media_script: "gpt-4o-mini",
+  media_script: "deepseek-v4-flash",
 };
 
 /**
@@ -46,27 +46,29 @@ export const MODEL_ROUTES: Record<AgentRole, string> = {
  */
 export const FALLBACK_CHAIN: Record<AgentRole, string[]> = {
   tutor: [
+    "deepseek-v4-flash",
     "gpt-4o-mini",
     "gemini/gemini-2.5-flash-lite",
-    "deepseek-v4-flash",
   ],
   curriculum: [
     "deepseek-v4-flash",
     "gemini/gemini-2.5-flash-lite",
   ],
   content: [
+    "deepseek-v4-flash",
     "gemini/gemini-2.5-flash-lite",
     "gemini/gemini-2.0-flash",
   ],
   assessment: [
-    "gpt-4o-mini",
     "deepseek-v4-flash",
+    "gpt-4o-mini",
   ],
   guardian: [
     "deepseek-v4-flash",
     "gemini/gemini-2.5-flash-lite",
   ],
   media_script: [
+    "deepseek-v4-flash",
     "gpt-4o-mini",
     "gemini/gemini-2.5-flash-lite",
   ],
