@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { prisma } from "@/lib/prisma";
 import { AgentPipelineView } from "./AgentPipelineView";
 import { QueueMonitor } from "./QueueMonitor";
+import { PipelineTrigger } from "./PipelineTrigger";
 import { SkeletonAgentGrid, SkeletonQueueMonitor } from "@/components/Skeleton";
 
 export const dynamic = "force-dynamic";
@@ -83,9 +84,12 @@ export default function AgentsPage() {
           🤖 Agent Pipeline
         </h1>
         <p className="text-sm mt-1" style={{ color: "var(--su-text-dim)" }}>
-          Status real-time pipeline agent AI
+          Status real-time & trigger pipeline agent AI
         </p>
       </div>
+
+      {/* Pipeline Trigger */}
+      <PipelineTrigger />
 
       {/* Queue Monitor — client component with its own fetch */}
       <Suspense fallback={<SkeletonQueueMonitor />}>
