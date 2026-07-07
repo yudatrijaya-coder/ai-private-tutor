@@ -41,8 +41,23 @@ export async function processMediaRender(
     },
   });
 
-  // 2. Render the video (Phase 4: real FFmpeg)
-  await renderVideo(materialId);
+  // 2. Fetch audio & script, then render
+  const material = await prisma.material.findUnique({
+    where: { id: materialId },
+  });
+
+  if (material) {
+    const meta = (material.metadata || {}) as Record<string, any>;
+    const audioUrl = meta.audioUrl;
+    const narrationScript = meta.script || job.data.script;
+    const title = `${material.topic} - ${material.subTopic || ""}`;
+
+    if (audioUrl && narrationScript) {
+      await renderVideo(materialId, audioUrl, narrationScript, title);
+    } else {
+      console.warn(`[media/worker] Missing audio or script for ${materialId}`);
+    }
+  }
 
   // 3. (Phase 4: upload to YouTube)
 

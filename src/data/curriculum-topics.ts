@@ -7,6 +7,8 @@
  * @module @/data/curriculum-topics
  */
 
+import { GRADE_TOPICS_SD5 } from "./curriculum-topics-sd5";
+
 export interface TopicEntry {
   subject: string;
   topic: string;
@@ -16,63 +18,7 @@ export interface TopicEntry {
 }
 
 export const GRADE_TOPICS: Record<string, TopicEntry[]> = {
-  SD_5: [
-    // ── Matematika ──
-    { subject: 'Matematika', topic: 'Pecahan', subTopic: 'Mengenal Pecahan', weekOrder: 1, priority: 10 },
-    { subject: 'Matematika', topic: 'Pecahan', subTopic: 'Penjumlahan Pecahan', weekOrder: 2, priority: 9 },
-    { subject: 'Matematika', topic: 'Pecahan', subTopic: 'Pengurangan Pecahan', weekOrder: 3, priority: 8 },
-    { subject: 'Matematika', topic: 'Pecahan', subTopic: 'Perkalian Pecahan', weekOrder: 4, priority: 7 },
-    { subject: 'Matematika', topic: 'Pecahan', subTopic: 'Pembagian Pecahan', weekOrder: 5, priority: 7 },
-    { subject: 'Matematika', topic: 'Desimal', subTopic: 'Mengenal Desimal', weekOrder: 6, priority: 8 },
-    { subject: 'Matematika', topic: 'Desimal', subTopic: 'Operasi Desimal', weekOrder: 7, priority: 7 },
-    { subject: 'Matematika', topic: 'Bangun Datar', subTopic: 'Luas Bangun Datar', weekOrder: 8, priority: 9 },
-    { subject: 'Matematika', topic: 'Bangun Datar', subTopic: 'Keliling Bangun Datar', weekOrder: 9, priority: 8 },
-    { subject: 'Matematika', topic: 'Bangun Ruang', subTopic: 'Volume Bangun Ruang', weekOrder: 10, priority: 7 },
-    { subject: 'Matematika', topic: 'Statistika', subTopic: 'Membaca Data', weekOrder: 11, priority: 6 },
-    { subject: 'Matematika', topic: 'Statistika', subTopic: 'Diagram', weekOrder: 12, priority: 6 },
-
-    // ── Bahasa Indonesia ──
-    { subject: 'Bahasa Indonesia', topic: 'Membaca Pemahaman', subTopic: 'Ide Pokok', weekOrder: 1, priority: 10 },
-    { subject: 'Bahasa Indonesia', topic: 'Membaca Pemahaman', subTopic: 'Kesimpulan', weekOrder: 2, priority: 9 },
-    { subject: 'Bahasa Indonesia', topic: 'Menulis', subTopic: 'Kalimat Efektif', weekOrder: 3, priority: 8 },
-    { subject: 'Bahasa Indonesia', topic: 'Menulis', subTopic: 'Paragraf', weekOrder: 4, priority: 7 },
-    { subject: 'Bahasa Indonesia', topic: 'Sastra', subTopic: 'Puisi', weekOrder: 5, priority: 6 },
-    { subject: 'Bahasa Indonesia', topic: 'Sastra', subTopic: 'Dongeng', weekOrder: 6, priority: 6 },
-
-    // ── IPA ──
-    { subject: 'IPA', topic: 'Sistem Pencernaan', subTopic: 'Organ Pencernaan', weekOrder: 1, priority: 10 },
-    { subject: 'IPA', topic: 'Sistem Pencernaan', subTopic: 'Proses Pencernaan', weekOrder: 2, priority: 9 },
-    { subject: 'IPA', topic: 'Sistem Pernapasan', subTopic: 'Organ Pernapasan', weekOrder: 3, priority: 8 },
-    { subject: 'IPA', topic: 'Sistem Pernapasan', subTopic: 'Mekanisme Bernapas', weekOrder: 4, priority: 7 },
-    { subject: 'IPA', topic: 'Sistem Peredaran Darah', subTopic: 'Jantung dan Pembuluh Darah', weekOrder: 5, priority: 9 },
-    { subject: 'IPA', topic: 'Sistem Peredaran Darah', subTopic: 'Golongan Darah', weekOrder: 6, priority: 7 },
-    { subject: 'IPA', topic: 'Tumbuhan', subTopic: 'Fotosintesis', weekOrder: 7, priority: 8 },
-    { subject: 'IPA', topic: 'Tumbuhan', subTopic: 'Perkembangbiakan Tumbuhan', weekOrder: 8, priority: 7 },
-
-    // ── IPS ──
-    { subject: 'IPS', topic: 'Kerajaan Nusantara', subTopic: 'Kerajaan Hindu-Buddha', weekOrder: 1, priority: 8 },
-    { subject: 'IPS', topic: 'Kerajaan Nusantara', subTopic: 'Kerajaan Islam', weekOrder: 2, priority: 7 },
-    { subject: 'IPS', topic: 'Pahlawan Nasional', subTopic: 'Pahlawan Kemerdekaan', weekOrder: 3, priority: 6 },
-    { subject: 'IPS', topic: 'Pahlawan Nasional', subTopic: 'Pahlawan Reformasi', weekOrder: 4, priority: 5 },
-
-    // ── PPKn ──
-    { subject: 'PPKn', topic: 'Pancasila', subTopic: 'Nilai-Nilai Pancasila', weekOrder: 1, priority: 9 },
-    { subject: 'PPKn', topic: 'Hak dan Kewajiban', subTopic: 'Hak Anak', weekOrder: 2, priority: 7 },
-    { subject: 'PPKn', topic: 'Hak dan Kewajiban', subTopic: 'Kewajiban di Sekolah', weekOrder: 3, priority: 6 },
-
-    // ── Agama ──
-    { subject: 'Agama', topic: 'Akhlak', subTopic: 'Akhlak Terpuji', weekOrder: 1, priority: 8 },
-    { subject: 'Agama', topic: 'Akhlak', subTopic: 'Akhlak Tercela', weekOrder: 2, priority: 7 },
-    { subject: 'Agama', topic: 'Ibadah', subTopic: 'Shalat', weekOrder: 3, priority: 7 },
-
-    // ── Seni Budaya ──
-    { subject: 'Seni Budaya', topic: 'Seni Rupa', subTopic: 'Menggambar', weekOrder: 1, priority: 5 },
-    { subject: 'Seni Budaya', topic: 'Seni Musik', subTopic: 'Alat Musik Daerah', weekOrder: 2, priority: 5 },
-
-    // ── PJOK ──
-    { subject: 'PJOK', topic: 'Olahraga', subTopic: 'Permainan Bola Besar', weekOrder: 1, priority: 5 },
-    { subject: 'PJOK', topic: 'Kebugaran', subTopic: 'Latihan Kelenturan', weekOrder: 2, priority: 4 },
-  ],
+  SD_5: GRADE_TOPICS_SD5.SD_5,
 
   SMP_1: [
     // ── Matematika ──

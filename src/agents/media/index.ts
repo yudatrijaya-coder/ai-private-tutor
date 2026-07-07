@@ -25,8 +25,6 @@ export {
 
 export {
   renderVideo,
-  validateScriptForRender,
-  type RenderInput,
 } from "./renderer";
 
 export {

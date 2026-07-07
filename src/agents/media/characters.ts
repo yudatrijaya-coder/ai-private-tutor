@@ -57,6 +57,14 @@ export const CHARACTER_CONFIGS = {
     description:
       "Kakak paling kece dengan energi tinggi — gaul, hype, dan seru abis!",
   },
+  ian: {
+    name: "Ian",
+    emoji: "🌟",
+    voiceStyle: "ceria, lembut, k-pop",
+    color: "#ff6b9d",
+    description:
+      "Seperti member Hearts2Hearts — ceria, manis, dan penuh semangat. Gaya bicara ringan dengan sentuhan K-pop yang kekinian.",
+  },
 } as const satisfies Record<string, CharacterConfig>;
 
 /** Union type of all valid character keys */
