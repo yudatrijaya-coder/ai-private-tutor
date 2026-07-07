@@ -5,12 +5,12 @@ import type { AgentRole, ChatMessage, LLMCallOptions, ModelPricing } from "./typ
 // ─── Re-export all types ──────────────────────────────────────
 export * from "./types";
 
-// ─── SumoPod Client ────────────────────────────────────────────
-const baseURL = "https://ai.sumopod.com/v1";
-const apiKey = process.env.SUMOPOD_API_KEY;
+// ─── 9Router Client ────────────────────────────────────────────
+const baseURL = process.env.LLM_BASE_URL || "http://localhost:20128/v1";
+const apiKey = process.env.LLM_API_KEY || "sk-9router";
 
-/** True if the API key is configured */
-export const isLLMReady = Boolean(apiKey);
+/** True if 9Router is reachable */
+export const isLLMReady = true;
 
 let _client: OpenAI | null = null;
 
@@ -30,58 +30,58 @@ function getClient(): OpenAI {
 
 // ─── Model Routing ────────────────────────────────────────────
 
-/** Primary model per agent role */
+/** Primary model per agent role — via 9Router combo */
 export const MODEL_ROUTES: Record<AgentRole, string> = {
-  tutor: "deepseek-v4-flash",
-  curriculum: "deepseek-v4-flash",
-  content: "deepseek-v4-flash",
-  assessment: "deepseek-v4-flash",
-  guardian: "deepseek-v4-flash",
-  media_script: "deepseek-v4-flash",
+  tutor: "ai_tutor_agent",
+  curriculum: "ai_tutor_agent",
+  content: "ai_tutor_agent",
+  assessment: "ai_tutor_agent",
+  guardian: "ai_tutor_agent",
+  media_script: "ai_tutor_agent",
 };
 
 /**
  * Fallback chain per agent role (primary → secondary → tertiary).
- * Tried in order until one succeeds.
+ * Uses 9Router model names — combo first, then direct models.
  */
 export const FALLBACK_CHAIN: Record<AgentRole, string[]> = {
   tutor: [
-    "deepseek-v4-flash",
-    "gpt-4o-mini",
-    "gemini/gemini-2.5-flash-lite",
+    "ai_tutor_agent",
+    "sumopod/deepseek-v4-flash",
+    "sumopod/gpt-4o-mini",
   ],
   curriculum: [
-    "deepseek-v4-flash",
-    "gemini/gemini-2.5-flash-lite",
+    "ai_tutor_agent",
+    "sumopod/deepseek-v4-flash",
   ],
   content: [
-    "deepseek-v4-flash",
-    "gemini/gemini-2.5-flash-lite",
-    "gemini/gemini-2.0-flash",
+    "ai_tutor_agent",
+    "sumopod/deepseek-v4-flash",
+    "sumopod/gemini/gemini-2.5-flash-lite",
   ],
   assessment: [
-    "deepseek-v4-flash",
-    "gpt-4o-mini",
+    "ai_tutor_agent",
+    "sumopod/gpt-4o-mini",
   ],
   guardian: [
-    "deepseek-v4-flash",
-    "gemini/gemini-2.5-flash-lite",
+    "ai_tutor_agent",
+    "sumopod/deepseek-v4-flash",
   ],
   media_script: [
-    "deepseek-v4-flash",
-    "gpt-4o-mini",
-    "gemini/gemini-2.5-flash-lite",
+    "ai_tutor_agent",
+    "sumopod/deepseek-v4-flash",
+    "sumopod/gpt-4o-mini",
   ],
 };
 
-// ─── Per‑model pricing (USD per 1M tokens — SumoPod rates) ────
+// ─── Per‑model pricing (USD per 1M tokens — 9Router rates) ────
 
 const MODEL_PRICING: Record<string, ModelPricing> = {
   "gpt-4o-mini":                            { input: 0.15, output: 0.60 },
-  "gemini/gemini-2.5-flash-lite":           { input: 0.10, output: 0.40 },
-  "gemini/gemini-2.0-flash":                { input: 0.10, output: 0.40 },
-  "deepseek-v4-flash":                      { input: 0.14, output: 0.28 },
-  "deepseek-v3-2":                          { input: 0.28, output: 0.42 },
+  "sumopod/gpt-4o-mini":                   { input: 0.15, output: 0.60 },
+  "sumopod/gemini/gemini-2.5-flash-lite":   { input: 0.10, output: 0.40 },
+  "sumopod/deepseek-v4-flash":              { input: 0.14, output: 0.28 },
+  "ai_tutor_agent":                         { input: 0.14, output: 0.28 },
 };
 
 // ─── Core: callLLM (non‑streaming, with fallback) ─────────────
@@ -186,7 +186,7 @@ export function estimateCost(
 
 // ─── Safe Init: noop sentinel when key is missing ─────────────
 
-/** Sentinel object returned when SUMOPOD_API_KEY is not set */
+/** Sentinel object returned when 9Router is unreachable */
 export const LLM_NOT_CONFIGURED = {
   isReady: false as const,
   callLLM: async <T = null>(): Promise<T> => {

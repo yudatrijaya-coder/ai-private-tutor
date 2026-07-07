@@ -94,6 +94,7 @@ model Student {
   studentId           String        @unique // login identifier e.g. "ANDI001"
   name                String
   telegramId          String?       @unique
+  parentTelegramId    String?       // Telegram ID orang tua / wali
   gradeLevel          GradeLevel
   persona             PersonaType?  @default(KAK_BUDI)
   characterPreference String?       // "mbappe", "lisa", "kak-budi", etc

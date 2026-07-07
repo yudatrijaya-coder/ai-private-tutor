@@ -130,7 +130,7 @@ async function finishQuiz(
 
   for (const a of answers) {
     const q = questions[a.questionIndex];
-    if (q && a.answer.trim().toLowerCase() === q.correctAnswer.trim().toLowerCase()) {
+    if (q && a.answer?.trim().toLowerCase() === q.correctAnswer?.trim().toLowerCase()) {
       score++;
     }
   }
@@ -139,31 +139,43 @@ async function finishQuiz(
   const mastery = maxScore > 0 ? (score / maxScore) * 100 : 0;
 
   // Save attempt to DB
-  await prisma.attempt.create({
-    data: {
-      quizId: quiz.id,
-      studentId: student.id,
-      type: quiz.type,
-      answers,
-      score,
-      maxScore,
-      masteryAfter: mastery,
-    },
-  });
+  try {
+    await prisma.attempt.create({
+      data: {
+        quizId: quiz.id,
+        studentId: student.id,
+        type: quiz.type,
+        answers,
+        score,
+        maxScore,
+        masteryAfter: mastery,
+      },
+    });
+    console.log("[quiz] Attempt saved:", quiz.id, score, "/", maxScore);
+  } catch (dbErr) {
+    console.error("[quiz] Failed to save attempt:", dbErr);
+  }
 
   // Reset session
   await clearSession(student.id);
+  console.log("[quiz] Session cleared");
 
   const gradeEmoji = mastery >= 80 ? "🌟" : mastery >= 60 ? "👍" : "💪";
 
-  await ctx.reply(
+  const resultText =
     `${persona.emoji} *Selesai!* ${gradeEmoji}\n\n` +
-      `Skor kamu: *${score}/${maxScore}* (${Math.round(mastery)}%)\n\n` +
-      (mastery >= 80
-        ? "Keren banget! Kamu udah paham banget! 🎉"
-        : mastery >= 60
-          ? "Lumayan! Ayo belajar lagi biar makin jago!"
-          : "Semangat! Coba ulang lagi biar makin paham! 🔥"),
-    { parse_mode: "Markdown" },
-  );
+    `Skor kamu: *${score}/${maxScore}* (${Math.round(mastery)}%)\n\n` +
+    (mastery >= 80
+      ? "Keren banget! Kamu udah paham banget! 🎉"
+      : mastery >= 60
+        ? "Lumayan! Ayo belajar lagi biar makin jago!"
+        : "Semangat! Coba ulang lagi biar makin paham! 🔥") +
+    "\n\nAda yang mau ditanyakan? 😊";
+
+  try {
+    await ctx.reply(resultText, { parse_mode: "Markdown" });
+    console.log("[quiz] Result sent");
+  } catch (replyErr) {
+    console.error("[quiz] Failed to send result:", replyErr);
+  }
 }

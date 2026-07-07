@@ -18,7 +18,7 @@ export async function handleRegister(
 ): Promise<void> {
   if (!ctx.from) return;
 
-  const studentId = studentIdInput.trim().toUpperCase();
+  const studentId = studentIdInput?.trim().toUpperCase() ?? "";
 
   // 1. Find student by studentId
   const student = await prisma.student.findUnique({

@@ -35,6 +35,7 @@ export async function handleMessage(
   // Build message history — last 10 from session context
   const chatHistory = (session.context?.chatHistory as Array<{ role: string; content: string }>) ?? [];
   const recentHistory = chatHistory.slice(-10);
+  console.log("[tutor] chatHistory length:", chatHistory.length, "session mode:", session.currentMode);
 
   const messages: ChatMessage[] = [
     { role: "system", content: systemMessage },
@@ -48,7 +49,9 @@ export async function handleMessage(
   // Call LLM
   let response: string | null;
   try {
+    console.log("[tutor] Calling LLM...");
     response = await callLLM("tutor", messages);
+    console.log("[tutor] LLM response:", response?.substring(0, 100));
   } catch (err) {
     console.warn("[tutor] LLM call failed, using persona fallback:", err instanceof Error ? err.message : String(err));
     response = persona.greeting;

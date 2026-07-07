@@ -50,13 +50,15 @@ e4228ff VPS setup: Caddy reverse-proxy, pm2 ecosystem, webhook mode, Edge-runtim
 - ✅ `/api/queues` reports BullMQ or local queue status
 - ✅ 24 routes, `npx next build` passes clean
 - ✅ Self-contained curriculum/content/quiz banks in `src/data/`
-- ✅ **LLM client wired** — SumoPod `deepseek-v4-flash` + fallback chain + `getLLM()`
+- ✅ **LLM client via 9Router** — `ai_tutor_agent` combo + fallback chain
 - ✅ **`initQueues()` called** via `instrumentation.ts` — auto-bootstrap 9 queue workers
 - ✅ **Bot session DB-backed** — Prisma `SessionState`, no in-memory Map loss
 - ✅ **State machine** — `routeByState()` → LLM tutor agent intent detection
 - ✅ **Seed script** ready (`src/scripts/seed.ts`) — 3 students, curricula, quizzes, schedule
 - ✅ **Documentation pages** — `/docs/architecture`, `/docs/getting-started`
 - ✅ **9Router subdomain** — `9router.senangbelajar.web.id` (Caddy proxy)
+- ✅ **Parent/Guardian role** — `/parent_daftar`, `/progres`, `/laporan`, `/peringatan`
+- ✅ **Dual role detection** — student vs parent in same bot, auto-routing
 
 ### What's pending / known issues
 - **DB not seeded** — need to run `npx tsx src/scripts/seed.ts`
@@ -90,7 +92,8 @@ NEXTAUTH_URL="http://localhost:3001"
 ### File structure highlights
 | File | Purpose |
 |------|---------|
-| `src/bot/handlers/message.ts` | Main bot entry — command routing, LLM fallback, intent brackets |
+| `src/bot/handlers/message.ts` | Main bot entry — command routing, LLM fallback, role detection (student/parent) |
+| `src/bot/handlers/parent.ts` | Parent/guardian commands — `/progres`, `/laporan`, `/peringatan` |
 | `src/bot/state-machine.ts` | Routes by session state (quiz_active → quiz answer) |
 | `src/bot/handlers/quiz.ts` | Start quiz, send question, record answer, score |
 | `src/bot/session.ts` | **DB-backed** bot session via Prisma SessionState |
