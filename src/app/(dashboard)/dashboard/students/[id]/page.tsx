@@ -30,7 +30,7 @@ async function StudentDetailContent({ id }: { id: string }) {
             include: {
               _count: { select: { quizzes: true } },
             },
-            take: 20,
+            take: 100,
           },
         },
         orderBy: { createdAt: "desc" },

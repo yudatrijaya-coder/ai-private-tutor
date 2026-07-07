@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
+import { PaginatedTable } from "../../curriculum/PaginatedTable";
 
 /* ------------------------------------------------------------------ */
 /*  Labels                                                             */
@@ -641,38 +642,15 @@ export function StudentDetailView({ student }: { student: StudentData }) {
             </div>
 
             {/* Materials table */}
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm text-left">
-                <thead>
-                  <tr style={{ color: "var(--su-text-dim)" }}>
-                    <th className="pb-2 pr-3">#</th>
-                    <th className="pb-2 pr-3">Minggu</th>
-                    <th className="pb-2 pr-3">Mapel</th>
-                    <th className="pb-2 pr-3">Topik</th>
-                    <th className="pb-2 pr-3">Sub Topik</th>
-                    <th className="pb-2 pr-3">Kuis</th>
-                    <th className="pb-2">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {materials.map((m, i) => (
-                    <tr
-                      key={m.id}
-                      className="border-t"
-                      style={{ borderColor: "var(--su-border)" }}
-                    >
-                      <td className="py-1.5 pr-3 text-xs" style={{ color: "var(--su-text-dim)" }}>{i + 1}</td>
-                      <td className="py-1.5 pr-3">{m.weekOrder}</td>
-                      <td className="py-1.5 pr-3">{m.subject}</td>
-                      <td className="py-1.5 pr-3 font-medium">{m.topic}</td>
-                      <td className="py-1.5 pr-3 text-xs" style={{ color: "var(--su-text-dim)" }}>{m.subTopic ?? "—"}</td>
-                      <td className="py-1.5 pr-3">{m._count.quizzes > 0 ? `📝 ${m._count.quizzes}` : "—"}</td>
-                      <td className="py-1.5"><MaterialStatusBadge status={m.status} /></td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <PaginatedTable materials={materials.map(m => ({
+              id: m.id,
+              subject: m.subject,
+              topic: m.topic,
+              subTopic: m.subTopic ?? "",
+              weekOrder: m.weekOrder,
+              status: m.status,
+              delivery: "TEXT",
+            }))} />
           </SectionCard>
         );
       })()}
