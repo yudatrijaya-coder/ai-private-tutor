@@ -50,3 +50,9 @@ next-env.d.ts
 backups/
 
 /src/generated/prisma
+
+# logs
+logs/
+
+# docs site (generated)
+docs-site/

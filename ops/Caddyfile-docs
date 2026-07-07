@@ -1,0 +1,16 @@
+# AI Private Tutor — Docs subdomain
+# Include this in main Caddyfile or use separately
+
+docs.senangbelajar.web.id {
+    reverse_proxy 127.0.0.1:3002
+
+    header {
+        X-Content-Type-Options nosniff
+        X-Frame-Options DENY
+        -Server
+    }
+
+    log {
+        output file /var/log/caddy/docs-senangbelajar.log
+    }
+}

@@ -1,39 +1,38 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Telegraf } from "telegraf";
 
-export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const fresh = searchParams.get("fresh") === "1";
+export async function GET() {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const results: Record<string, any> = {};
 
-  const results: Record<string, any> = {
-    envHasToken: !!process.env.TELEGRAM_BOT_TOKEN,
-    tokenLen: process.env.TELEGRAM_BOT_TOKEN?.length,
-  };
+  // Method 1: Direct HTTPS request
+  try {
+    const https = require("https");
+    const url = `https://api.telegram.org/bot${token}/getMe`;
+    const resp = await new Promise<any>((resolve, reject) => {
+      https.get(url, (res: any) => {
+        let data = "";
+        res.on("data", (chunk: string) => (data += chunk));
+        res.on("end", () => {
+          try {
+            resolve({ status: res.statusCode, body: JSON.parse(data) });
+          } catch {
+            resolve({ status: res.statusCode, body: data.substring(0, 100) });
+          }
+        });
+      }).on("error", reject);
+    });
+    results.https = resp;
+  } catch (e: any) {
+    results.https = { error: e.message };
+  }
 
-  if (fresh) {
-    // Create a FRESH bot instance from process.env within the request
-    const token = process.env.TELEGRAM_BOT_TOKEN;
-    if (token) {
-      try {
-        const bot = new Telegraf(token);
-        const me = await bot.telegram.getMe();
-        results.fresh = { ok: true, username: me.username, id: me.id };
-      } catch (e: any) {
-        results.fresh = { ok: false, error: e.description || e.message, code: e.code };
-      }
-    }
-  } else {
-    // Use the pre-imported bot
-    const { bot } = await import("@/bot/bot");
-    results.hasBot = !!bot;
-    if (bot) {
-      try {
-        const me = await bot.telegram.getMe();
-        results.imported = { ok: true, username: me.username };
-      } catch (e: any) {
-        results.imported = { ok: false, error: e.description || e.message, code: e.code };
-      }
-    }
+  // Method 2: fetch API
+  try {
+    const resp = await fetch(`https://api.telegram.org/bot${token}/getMe`);
+    const body = await resp.json();
+    results.fetch = { status: resp.status, body };
+  } catch (e: any) {
+    results.fetch = { error: e.message };
   }
 
   return NextResponse.json(results);

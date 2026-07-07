@@ -2,6 +2,17 @@
 # Set A record @ -> 43.133.151.242 at your registrar, then Caddy
 # will auto-provision Let's Encrypt certificates.
 
+# 9Router — AI Model Router Dashboard
+9router.senangbelajar.web.id {
+    reverse_proxy 127.0.0.1:20128
+    header {
+        -Server
+    }
+    log {
+        output file /var/log/caddy/9router.log
+    }
+}
+
 senangbelajar.web.id {
     # Reverse proxy to Next.js app
     reverse_proxy 127.0.0.1:3000
