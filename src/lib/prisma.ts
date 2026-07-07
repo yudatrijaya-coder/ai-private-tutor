@@ -1,12 +1,18 @@
 import { PrismaClient } from "../generated/prisma/client";
-import { PrismaLibSql } from "@prisma/adapter-libsql";
+import { PrismaPg } from "@prisma/adapter-pg";
+import pg from "pg";
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
 
 function createPrisma() {
-  const adapter = new PrismaLibSql({
-    url: process.env.DATABASE_URL || "file:./prisma/dev.db",
+  const pool = new pg.Pool({
+    host: process.env.PGHOST || "localhost",
+    port: parseInt(process.env.PGPORT || "5432"),
+    database: process.env.PGDATABASE || "ai_private_tutor",
+    user: process.env.PGUSER || "tutor",
+    password: process.env.PGPASSWORD || "tutor123",
   });
+  const adapter = new PrismaPg(pool);
   return new PrismaClient({ adapter });
 }
 

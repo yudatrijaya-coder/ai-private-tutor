@@ -8,6 +8,16 @@ import { SYSTEM_PROMPTS } from "@/llm/prompts";
 import { scanResponse } from "../safety";
 import { setSession } from "../session";
 
+/** Timeout wrapper — rejects if the promise doesn't resolve in `ms` ms */
+function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error(`[tutor] ${label} timed out after ${ms}ms`)), ms),
+    ),
+  ]);
+}
+
 /**
  * LLM-powered tutor message handler.
  *
@@ -46,11 +56,11 @@ export async function handleMessage(
     { role: "user", content: msg.text },
   ];
 
-  // Call LLM
+  // Call LLM with 30s timeout
   let response: string | null;
   try {
     console.log("[tutor] Calling LLM...");
-    response = await callLLM("tutor", messages);
+    response = await withTimeout(callLLM("tutor", messages), 30_000, "LLM call");
     console.log("[tutor] LLM response:", response?.substring(0, 100));
   } catch (err) {
     console.warn("[tutor] LLM call failed, using persona fallback:", err instanceof Error ? err.message : String(err));

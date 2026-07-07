@@ -73,6 +73,13 @@ function generateStudentId(name: string, _gradeLevel: string): string {
 export async function handleAdmission(input: AdmissionInput): Promise<AdmissionResult> {
   const { parentUserId, name, telegramId, gradeLevel, characterPreference, interests, scheduleConfig } = input;
 
+  // Auto-assign persona based on grade level
+  const personaMap: Record<string, string> = {
+    SD_5: "KAK_BUDI",
+    SMP_1: "KAK_DEWI",
+    SMA_2: "KAK_RAKA",
+  };
+
   // 1. Create student in DB
   const student = await prisma.student.create({
     data: {
@@ -80,6 +87,7 @@ export async function handleAdmission(input: AdmissionInput): Promise<AdmissionR
       name,
       telegramId: telegramId ?? null,
       gradeLevel,
+      persona: personaMap[gradeLevel] as any ?? "KAK_BUDI",
       characterPreference: characterPreference ?? null,
       interests: interests ?? null,
       scheduleConfig: scheduleConfig ? json(scheduleConfig) : undefined,

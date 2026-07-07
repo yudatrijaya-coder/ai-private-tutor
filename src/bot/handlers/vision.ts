@@ -26,10 +26,16 @@ export async function handlePhoto(ctx: Context, student: Student): Promise<void>
     await ctx.reply(`${persona.emoji} Kakak lagi liat fotonya ya... Sebentar ya 👀`);
 
     // Send to LLM with vision
+    const toneRules = Array.isArray(persona.toneRules)
+      ? persona.toneRules.join(", ")
+      : typeof persona.toneRules === "object" && persona.toneRules !== null
+        ? Object.values(persona.toneRules).join(", ")
+        : String(persona.toneRules ?? "");
+
     const response = await callLLM("tutor", [
       {
         role: "system",
-        content: `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${persona.toneRules.join(", ")}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nGrade: ${student.gradeLevel}`,
+        content: `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${toneRules}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nGrade: ${student.gradeLevel}`,
       },
       {
         role: "user",

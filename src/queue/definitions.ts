@@ -5,15 +5,15 @@ export const MAX_RETRIES = 3;
 
 /** Queue definitions with name and default concurrency. */
 export const QUEUES = {
-  CONTENT_SCRAPE: { name: "content:scrape", concurrency: 2 },
-  CURRICULUM_REVIEW: { name: "curriculum:review", concurrency: 2 },
-  MEDIA_RENDER: { name: "media:render", concurrency: 1 },
-  MEDIA_YT_FALLBACK: { name: "media:yt-fallback", concurrency: 2 },
-  ASSESSMENT_GENERATE: { name: "assessment:generate", concurrency: 3 },
-  ASSESSMENT_EVALUATE: { name: "assessment:evaluate", concurrency: 2 },
-  GUARDIAN_REPORT: { name: "guardian:report", concurrency: 1 },
-  SCHEDULER_ASSIGN: { name: "scheduler:assign", concurrency: 1 },
-  SCHEDULER_REMINDER: { name: "scheduler:reminder", concurrency: 3 },
+  CONTENT_SCRAPE: { name: "content-scrape", concurrency: 2 },
+  CURRICULUM_REVIEW: { name: "curriculum-review", concurrency: 2 },
+  MEDIA_RENDER: { name: "media-render", concurrency: 1 },
+  MEDIA_YT_FALLBACK: { name: "media-yt-fallback", concurrency: 2 },
+  ASSESSMENT_GENERATE: { name: "assessment-generate", concurrency: 3 },
+  ASSESSMENT_EVALUATE: { name: "assessment-evaluate", concurrency: 2 },
+  GUARDIAN_REPORT: { name: "guardian-report", concurrency: 1 },
+  SCHEDULER_ASSIGN: { name: "scheduler-assign", concurrency: 1 },
+  SCHEDULER_REMINDER: { name: "scheduler-reminder", concurrency: 3 },
 } as const;
 
 /** Union type of all queue name strings. */
@@ -102,15 +102,15 @@ export type JobPayload =
  */
 export function queueNameToAgentType(queueName: QueueName): AgentType {
   const map: Record<QueueName, AgentType> = {
-    "content:scrape": "CONTENT" as AgentType,
-    "curriculum:review": "CURRICULUM" as AgentType,
-    "media:render": "MEDIA" as AgentType,
-    "media:yt-fallback": "MEDIA" as AgentType,
-    "assessment:generate": "ASSESSMENT" as AgentType,
-    "assessment:evaluate": "ASSESSMENT" as AgentType,
-    "guardian:report": "GUARDIAN" as AgentType,
-    "scheduler:assign": "SCHEDULER" as AgentType,
-    "scheduler:reminder": "SCHEDULER" as AgentType,
+    "content-scrape": "CONTENT" as AgentType,
+    "curriculum-review": "CURRICULUM" as AgentType,
+    "media-render": "MEDIA" as AgentType,
+    "media-yt-fallback": "MEDIA" as AgentType,
+    "assessment-generate": "ASSESSMENT" as AgentType,
+    "assessment-evaluate": "ASSESSMENT" as AgentType,
+    "guardian-report": "GUARDIAN" as AgentType,
+    "scheduler-assign": "SCHEDULER" as AgentType,
+    "scheduler-reminder": "SCHEDULER" as AgentType,
   };
   return map[queueName];
 }

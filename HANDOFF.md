@@ -61,32 +61,34 @@ e4228ff VPS setup: Caddy reverse-proxy, pm2 ecosystem, webhook mode, Edge-runtim
 - ✅ **Dual role detection** — student vs parent in same bot, auto-routing
 
 ### What's pending / known issues
-- **DB not seeded** — need to run `npx tsx src/scripts/seed.ts`
-- **Redis not running** — BullMQ disabled, using local fallback; ECONNREFUSED spam fills logs
-- **PM2 restart 58×** in 3h — root cause not investigated
-- **Webhook mode** — still polling, prod needs `/api/bot/webhook`
-- **PostgreSQL swap** — still SQLite for dev
-- **Bot diagnostics** rewritten to avoid Telegraf import (edge-runtime compat)
+- **Combo ai_tutor_agent lambat** — ~1.5 menit response time
+- **Image generation** — belum ada, butuh API key external (DALL-E / FLUX)
+- **Guardian Agent pipeline** — weekly report & early warning belum auto-kirim ke parent
+- **Agent pipeline** — queue workers registered tapi belum pernah di-trigger
+- **Video generation** — Media Agent deferred
 
 ### Next priorities (suggested order)
-1. **Seed DB** → run seed script for test data
-2. **Fix Redis** → install & start Redis, or mute spam
-3. **Investigate PM2 restarts** → check error log patterns
-4. **Test LLM flow** end-to-end via bot
-5. **PostgreSQL swap** for production hardening
-6. **Webhook mode** for reliability
+1. **Optimasi combo 9Router** — pilih model lebih cepet buat ai_tutor_agent
+2. **Guardian Agent pipeline** — auto-kirim laporan mingguan ke parent
+3. **Agent pipeline** — trigger curriculum/content/assessment agents via cron
+4. **Image generation** — integrasi DALL-E / FLUX buat ilustrasi
+5. **Video generation** — render video pembelajaran
 
 ### Key configs
 ```bash
-# .env (dev)
-DATABASE_URL="file:./prisma/dev.db"
+# .env (production VPS)
+DATABASE_URL="postgresql://tutor:***@localhost:5432/ai_private_tutor"
 TELEGRAM_BOT_TOKEN="8899613141:***"
 SUMOPOD_API_KEY="..."
 NEXTAUTH_SECRET="..."
-NEXTAUTH_URL="http://localhost:3001"
+NEXTAUTH_URL="https://senangbelajar.web.id"
+LLM_BASE_URL="http://localhost:20128/v1"
 
-# Production
-# .env.production — PostgreSQL + production secrets
+# PostgreSQL connection (used by Prisma adapter)
+PGPASSWORD="tutor123"
+
+# Bot
+BOT_WEBHOOK_URL="https://senangbelajar.web.id"
 ```
 
 ### File structure highlights

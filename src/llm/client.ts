@@ -41,36 +41,46 @@ export const MODEL_ROUTES: Record<AgentRole, string> = {
 };
 
 /**
- * Fallback chain per agent role (primary → secondary → tertiary).
- * Uses 9Router model names — combo first, then direct models.
+ * Fallback chain per agent role (primary → secondary → tertiary → ...).
+ * Ordered by preference:
+ *   ai_tutor_agent → sumopod/* → hermes (9Router combo) → opencode-go native
+ *
+ * hermes = 9Router combo untuk Nous Research Hermes model (fallback murah).
+ * opencode-go native models dipakai kalo semua 9Router route gagal.
  */
 export const FALLBACK_CHAIN: Record<AgentRole, string[]> = {
   tutor: [
     "ai_tutor_agent",
     "sumopod/deepseek-v4-flash",
     "sumopod/gpt-4o-mini",
+    "hermes",
   ],
   curriculum: [
     "ai_tutor_agent",
     "sumopod/deepseek-v4-flash",
+    "hermes",
   ],
   content: [
     "ai_tutor_agent",
     "sumopod/deepseek-v4-flash",
     "sumopod/gemini/gemini-2.5-flash-lite",
+    "hermes",
   ],
   assessment: [
     "ai_tutor_agent",
     "sumopod/gpt-4o-mini",
+    "hermes",
   ],
   guardian: [
     "ai_tutor_agent",
     "sumopod/deepseek-v4-flash",
+    "hermes",
   ],
   media_script: [
     "ai_tutor_agent",
     "sumopod/deepseek-v4-flash",
     "sumopod/gpt-4o-mini",
+    "hermes",
   ],
 };
 
@@ -82,6 +92,7 @@ const MODEL_PRICING: Record<string, ModelPricing> = {
   "sumopod/gemini/gemini-2.5-flash-lite":   { input: 0.10, output: 0.40 },
   "sumopod/deepseek-v4-flash":              { input: 0.14, output: 0.28 },
   "ai_tutor_agent":                         { input: 0.14, output: 0.28 },
+  "hermes":                                 { input: 0.05, output: 0.10 },
 };
 
 // ─── Core: callLLM (non‑streaming, with fallback) ─────────────
