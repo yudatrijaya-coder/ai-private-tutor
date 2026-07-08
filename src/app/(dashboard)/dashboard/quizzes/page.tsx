@@ -191,11 +191,11 @@ export default function QuizPage() {
             Gabungkan soal dari beberapa topik jadi satu ujian dengan mix difficulty
           </p>
           <Link
-            href={`/dashboard/quizzes/exam/new?studentId=${selectedStudent}`}
-            className="inline-block px-4 py-2 rounded-lg text-sm font-medium text-white"
-            style={{ backgroundColor: "#7c3aed" }}
+            href={`/dashboard/quizzes/exam/template?studentId=${selectedStudent}`}
+            className="inline-block px-4 py-2 rounded-lg text-sm font-medium"
+            style={{ backgroundColor: "rgba(124,58,237,0.12)", color: "#a78bfa" }}
           >
-            ✨ Buat Exam Baru
+            📋 Template Ujian
           </Link>
         </div>
       )}
