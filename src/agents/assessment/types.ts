@@ -9,6 +9,7 @@ export interface QuestionData {
   question: string;
   options: string[]; // exactly 4 items for multiple choice
   correctIndex: number; // 0–3
+  difficulty?: "easy" | "medium" | "hard";
   explanation: string;
 }
 

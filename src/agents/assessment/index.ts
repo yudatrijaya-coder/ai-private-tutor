@@ -21,7 +21,7 @@ export {
 } from "./types";
 
 export { generateQuiz } from "./generator";
-export { generateExam } from "./exam";
+export { generateCompositeExam } from "./exam";
 export { gradeAttempt, calculateMastery } from "./grader";
 export {
   processAssessmentGenerate,

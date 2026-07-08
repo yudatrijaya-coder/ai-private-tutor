@@ -4,6 +4,7 @@ import Link from "next/link";
 const navLinks = [
   { href: "/dashboard", label: "🏠 Dashboard" },
   { href: "/dashboard/curriculum", label: "📚 Kurikulum" },
+  { href: "/dashboard/quizzes", label: "📝 Quiz & Exam" },
   { href: "/dashboard/students", label: "👥 Daftar Siswa" },
   { href: "/dashboard/students/new", label: "👤 Tambah Siswa" },
   { href: "/dashboard/agents", label: "🤖 Agent Pipeline" },

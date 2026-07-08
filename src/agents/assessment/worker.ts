@@ -12,7 +12,6 @@ import type {
 } from "@/queue/definitions";
 
 import { generateQuiz } from "./generator";
-import { generateExam } from "./exam";
 import { gradeAttempt } from "./grader";
 
 /* ------------------------------------------------------------------ */
@@ -63,11 +62,10 @@ export async function processAssessmentGenerate(
     return;
   }
 
-  // Cross-material exam
-  const exam = await generateExam(studentId, undefined, questionCount);
-  console.log(
-    `[assessment/worker] Generated exam=${exam.id} for student=${studentId}`,
-  );
+  // Cross-material exam — coming in v2
+  /* console.log(
+    `[assessment/worker] Cross-material exam generation coming in v2`,
+  ); */
 }
 
 /* ------------------------------------------------------------------ */

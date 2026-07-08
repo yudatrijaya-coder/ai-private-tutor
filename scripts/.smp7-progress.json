@@ -1,0 +1,1720 @@
+[
+  {
+    "subject": "IPA",
+    "topic": "Ilmu Sains",
+    "subTopic": "Hakikat Ilmu Sains",
+    "questions": [
+      {
+        "question": "Ilmu pengetahuan yang mempelajari fenomena alam secara sistematis dan metodis disebut...",
+        "options": [
+          "Ilmu Sains",
+          "Ilmu Sosial",
+          "Matematika",
+          "Filsafat"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Ilmu sains (IPA) adalah ilmu yang mempelajari alam semesta dan fenomenanya secara sistematis dan metodis."
+      },
+      {
+        "question": "Berikut ini yang merupakan sikap yang harus dimiliki oleh seorang ilmuwan adalah...",
+        "options": [
+          "Cepat menyerah",
+          "Malas berpikir",
+          "Rasa ingin tahu yang tinggi",
+          "Tidak peduli dengan data"
+        ],
+        "correctIndex": 2,
+        "difficulty": "easy",
+        "explanation": "Sikap ilmiah antara lain rasa ingin tahu, jujur, objektif, dan teliti. Rasa ingin tahu mendorong ilmuwan untuk terus melakukan penelitian."
+      },
+      {
+        "question": "Langkah pertama dalam metode ilmiah adalah...",
+        "options": [
+          "Merumuskan hipotesis",
+          "Melakukan eksperimen",
+          "Melakukan observasi atau pengamatan",
+          "Menarik kesimpulan"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Metode ilmiah dimulai dengan observasi atau pengamatan terhadap fenomena alam untuk merumuskan masalah."
+      },
+      {
+        "question": "Manakah pernyataan berikut yang BUKAN merupakan ciri dari ilmu sains?",
+        "options": [
+          "Objektif",
+          "Sistematis",
+          "Subjektif",
+          "Universal"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Ilmu sains bersifat objektif (tidak dipengaruhi perasaan pribadi), sistematis, dan universal. Sifat subjektif bertentangan dengan prinsip sains."
+      },
+      {
+        "question": "Teori atom terus berkembang dari model Dalton hingga model mekanika kuantum. Hal ini menunjukkan bahwa ilmu sains bersifat...",
+        "options": [
+          "Pasti dan tidak berubah",
+          "Dinamis dan dapat diperbaiki",
+          "Mutlak kebenarannya",
+          "Tergantung pada keyakinan"
+        ],
+        "correctIndex": 1,
+        "difficulty": "hard",
+        "explanation": "Ilmu sains bersifat dinamis, artinya pengetahuan sains dapat berubah dan berkembang seiring dengan penemuan bukti baru yang lebih akurat."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Ilmu Sains",
+    "subTopic": "Laboratorium IPA",
+    "questions": [
+      {
+        "question": "Alat laboratorium yang digunakan untuk mengukur volume cairan dengan tingkat ketelitian tinggi adalah...",
+        "options": [
+          "Gelas ukur",
+          "Labu Erlenmeyer",
+          "Pipet volume",
+          "Tabung reaksi"
+        ],
+        "correctIndex": 2,
+        "difficulty": "easy",
+        "explanation": "Pipet volume memiliki skala yang lebih presisi dan dirancang khusus untuk mengukur volume cairan dengan akurat, berbeda dengan gelas ukur yang kurang teliti, labu Erlenmeyer untuk mencampur, dan tabung reaksi untuk reaksi skala kecil."
+      },
+      {
+        "question": "Fungsi utama dari lemari asam (fume hood) di laboratorium IPA adalah...",
+        "options": [
+          "Menyimpan bahan kimia berbahaya",
+          "Memanaskan larutan dengan aman",
+          "Mengeluarkan uap beracun dari area kerja",
+          "Mendinginkan alat gelas"
+        ],
+        "correctIndex": 2,
+        "difficulty": "easy",
+        "explanation": "Lemari asam berfungsi untuk menyedot dan mengeluarkan uap beracun atau berbahaya dari area kerja, melindungi pengguna dari paparan gas berbahaya selama percobaan."
+      },
+      {
+        "question": "Seorang siswa ingin memisahkan campuran pasir dan air. Alat laboratorium yang paling tepat digunakan adalah...",
+        "options": [
+          "Kertas saring dan corong",
+          "Gelas kimia dan pengaduk",
+          "Labu destilasi dan kondensor",
+          "Cawan porselen dan kaki tiga"
+        ],
+        "correctIndex": 0,
+        "difficulty": "medium",
+        "explanation": "Pemisahan pasir dan air dilakukan dengan filtrasi menggunakan kertas saring dan corong, karena pasir tidak larut dan dapat disaring dari air."
+      },
+      {
+        "question": "Langkah keselamatan yang benar saat memanaskan tabung reaksi berisi cairan di laboratorium adalah...",
+        "options": [
+          "Menutup ujung tabung reaksi dengan jari",
+          "Mengarahkan ujung tabung reaksi ke arah teman",
+          "Memegang tabung reaksi dengan penjepit dan mengarahkan ujungnya menjauhi wajah",
+          "Memanaskan tabung reaksi dalam posisi horizontal"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Memegang tabung reaksi dengan penjepit dan mengarahkan ujungnya menjauhi wajah mencegah cedera akibat percikan atau letupan cairan panas, sesuai prosedur keselamatan laboratorium."
+      },
+      {
+        "question": "Di laboratorium IPA, alat yang digunakan untuk mengukur massa suatu benda dengan presisi tinggi adalah...",
+        "options": [
+          "Neraca pegas",
+          "Neraca analitik",
+          "Stopwatch",
+          "Termometer"
+        ],
+        "correctIndex": 1,
+        "difficulty": "hard",
+        "explanation": "Neraca analitik memiliki ketelitian hingga 0,0001 gram, sehingga cocok untuk pengukuran massa yang memerlukan presisi tinggi dalam percobaan ilmiah, berbeda dengan neraca pegas yang kurang teliti."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Ilmu Sains",
+    "subTopic": "Metode Ilmiah",
+    "questions": [
+      {
+        "question": "Langkah pertama yang harus dilakukan dalam metode ilmiah adalah...",
+        "options": [
+          "Merumuskan hipotesis",
+          "Melakukan observasi",
+          "Melakukan eksperimen",
+          "Menarik kesimpulan"
+        ],
+        "correctIndex": 1,
+        "difficulty": "easy",
+        "explanation": "Metode ilmiah diawali dengan kegiatan observasi untuk mengidentifikasi dan merumuskan masalah."
+      },
+      {
+        "question": "Pernyataan yang diajukan sebagai jawaban sementara dalam suatu penelitian ilmiah disebut...",
+        "options": [
+          "Teori",
+          "Hipotesis",
+          "Hukum",
+          "Fakta"
+        ],
+        "correctIndex": 1,
+        "difficulty": "easy",
+        "explanation": "Hipotesis merupakan dugaan sementara yang harus diuji kebenarannya melalui eksperimen."
+      },
+      {
+        "question": "Dalam suatu percobaan, faktor yang sengaja diubah atau dimanipulasi oleh peneliti adalah...",
+        "options": [
+          "Variabel terikat",
+          "Variabel kontrol",
+          "Variabel bebas",
+          "Variabel acak"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Variabel bebas (independen) adalah variabel yang diubah untuk melihat pengaruhnya terhadap variabel terikat."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Ilmu Sains",
+    "subTopic": "Merancang Percobaan",
+    "questions": [
+      {
+        "question": "Dalam sebuah percobaan untuk menguji pengaruh cahaya terhadap pertumbuhan tanaman, seorang siswa menempatkan tanaman di tempat terang dan gelap. Manakah yang merupakan variabel bebas dalam percobaan tersebut?",
+        "options": [
+          "Cahaya",
+          "Pertumbuhan tanaman",
+          "Suhu",
+          "Jenis tanaman"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Variabel bebas adalah variabel yang sengaja diubah oleh peneliti, yaitu intensitas cahaya, sedangkan pertumbuhan tanaman merupakan variabel terikat."
+      },
+      {
+        "question": "Tujuan utama dari kelompok kontrol dalam suatu percobaan adalah...",
+        "options": [
+          "Untuk membandingkan hasil perlakuan dengan kondisi normal",
+          "Untuk mendapatkan data yang lebih banyak",
+          "Untuk memastikan semua variabel sama",
+          "Untuk menguji hipotesis secara statistik"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Kelompok kontrol berfungsi sebagai pembanding agar pengaruh perlakuan dapat diamati secara jelas."
+      },
+      {
+        "question": "Setelah merumuskan hipotesis, langkah selanjutnya dalam merancang percobaan adalah...",
+        "options": [
+          "Melakukan percobaan",
+          "Mengumpulkan data",
+          "Menentukan variabel dan prosedur",
+          "Menarik kesimpulan"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Setelah hipotesis dirumuskan, peneliti harus merencanakan percobaan dengan menentukan variabel dan prosedur sebelum melaksanakannya."
+      },
+      {
+        "question": "Seorang siswa ingin menyelidiki pengaruh suhu terhadap waktu pelarutan gula. Ia menyiapkan tiga gelas berisi air dengan suhu berbeda. Variabel terikat dalam percobaan ini adalah...",
+        "options": [
+          "Suhu air",
+          "Waktu pelarutan",
+          "Jumlah gula",
+          "Jenis gula"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Variabel terikat adalah yang diukur sebagai hasil percobaan, yaitu waktu yang diperlukan gula untuk larut."
+      },
+      {
+        "question": "Seorang peneliti ingin menguji pengaruh pupuk organik terhadap tinggi tanaman kacang hijau. Desain percobaan yang paling tepat untuk mendapatkan hasil yang valid adalah...",
+        "options": [
+          "Memberi pupuk pada semua tanaman dan mengukur tingginya",
+          "Memberi pupuk pada setengah tanaman dan tidak memberi pupuk pada setengah lainnya",
+          "Memberi pupuk dengan konsentrasi berbeda pada setiap tanaman tanpa kontrol",
+          "Menanam semua tanaman di pot yang sama tanpa perlakuan berbeda"
+        ],
+        "correctIndex": 1,
+        "difficulty": "hard",
+        "explanation": "Desain yang valid memerlukan kelompok kontrol (tanpa pupuk) sebagai pembanding agar efek pupuk dapat diukur secara akurat."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Ilmu Sains",
+    "subTopic": "Pelaporan Hasil Percobaan",
+    "questions": [
+      {
+        "question": "Dalam laporan hasil percobaan, bagian yang berisi langkah-langkah yang dilakukan selama percobaan disebut...",
+        "options": [
+          "Tujuan",
+          "Alat dan Bahan",
+          "Prosedur",
+          "Hasil Pengamatan"
+        ],
+        "correctIndex": 2,
+        "difficulty": "easy",
+        "explanation": "Prosedur berisi urutan langkah kerja yang dilakukan dalam percobaan."
+      },
+      {
+        "question": "Bagian laporan percobaan yang berisi kesimpulan dari data yang diperoleh adalah...",
+        "options": [
+          "Tujuan",
+          "Hipotesis",
+          "Analisis",
+          "Kesimpulan"
+        ],
+        "correctIndex": 3,
+        "difficulty": "easy",
+        "explanation": "Kesimpulan menjawab tujuan dan hipotesis berdasarkan data hasil percobaan."
+      },
+      {
+        "question": "Untuk menyajikan data hasil pengukuran suhu dari waktu ke waktu agar mudah dilihat perubahannya, bentuk penyajian yang paling tepat adalah...",
+        "options": [
+          "Tabel",
+          "Grafik garis",
+          "Diagram batang",
+          "Narasi"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Grafik garis cocok untuk menunjukkan perubahan suatu variabel terhadap waktu."
+      },
+      {
+        "question": "Mengapa dalam laporan percobaan perlu mencantumkan data pengulangan percobaan?",
+        "options": [
+          "Memperpanjang laporan",
+          "Menjamin keakuratan hasil",
+          "Memenuhi syarat formal",
+          "Membandingkan dengan percobaan lain"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Pengulangan percobaan meningkatkan validitas data karena mengurangi kesalahan acak."
+      },
+      {
+        "question": "Seorang siswa melakukan percobaan pengaruh pupuk terhadap pertumbuhan tanaman. Hasilnya menunjukkan bahwa tanaman yang diberi pupuk A lebih tinggi 2 cm dari kontrol, tetapi selisihnya kecil dan variasinya besar. Kesimpulan yang paling tepat adalah...",
+        "options": [
+          "Pupuk A sangat efektif mempercepat pertumbuhan",
+          "Pupuk A tidak berpengaruh",
+          "Perbedaan belum signifikan, perlu uji lebih lanjut",
+          "Tanaman kontrol lebih baik"
+        ],
+        "correctIndex": 2,
+        "difficulty": "hard",
+        "explanation": "Dengan data variasi besar dan selisih kecil, belum dapat disimpulkan adanya pengaruh signifikan, perlu analisis statistik atau pengulangan."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Zat dan Perubahan",
+    "subTopic": "Wujud Zat dan Partikel",
+    "questions": [
+      {
+        "question": "Berikut ini adalah ciri-ciri partikel zat padat, yaitu ...",
+        "options": [
+          "Rapat dan teratur",
+          "Rapat dan bergerak bebas",
+          "Renggang dan bergerak bebas",
+          "Sangat renggang dan tidak teratur"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Partikel zat padat sangat rapat dan tersusun teratur sehingga bentuk dan volumenya tetap."
+      },
+      {
+        "question": "Perubahan wujud zat dari cair menjadi padat disebut ...",
+        "options": [
+          "Menguap",
+          "Mengembun",
+          "Membeku",
+          "Meleleh"
+        ],
+        "correctIndex": 2,
+        "difficulty": "easy",
+        "explanation": "Membeku adalah peristiwa perubahan wujud dari cair menjadi padat ketika suhu diturunkan hingga titik bekunya."
+      },
+      {
+        "question": "Gas dapat mengisi seluruh ruang yang ditempatinya karena ...",
+        "options": [
+          "Partikel gas sangat rapat",
+          "Partikel gas bergerak bebas dan tidak terikat",
+          "Partikel gas hanya bergerak di tempat",
+          "Partikel gas memiliki gaya tarik yang kuat"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Partikel gas bergerak sangat bebas dan acak, sehingga gas menyebar mengisi seluruh ruang yang ada."
+      },
+      {
+        "question": "Saat es batu mencair, perubahan yang terjadi pada partikel es adalah ...",
+        "options": [
+          "Partikel berhenti bergerak",
+          "Partikel bergerak lebih lambat",
+          "Partikel bergerak lebih cepat dan jaraknya bertambah",
+          "Partikel tetap rapat dan diam"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Panas yang diterima es meningkatkan energi kinetik partikel sehingga bergerak lebih cepat dan jarak antar partikel bertambah, menyebabkan es berubah menjadi cair."
+      },
+      {
+        "question": "Dalam suatu wadah tertutup, gas dipanaskan sehingga suhunya naik. Manakah pernyataan yang benar tentang partikel gas?",
+        "options": [
+          "Partikel bergerak lebih lambat dan saling mendekat",
+          "Partikel bergerak lebih cepat dan tumbukan dengan dinding wadah lebih sering",
+          "Partikel berhenti bergerak dan memadat",
+          "Partikel hanya bergerak di dasar wadah"
+        ],
+        "correctIndex": 1,
+        "difficulty": "hard",
+        "explanation": "Peningkatan suhu meningkatkan energi kinetik partikel gas, sehingga mereka bergerak lebih cepat dan lebih sering bertumbukan dengan dinding wadah, yang menyebabkan tekanan meningkat."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Zat dan Perubahan",
+    "subTopic": "Perubahan Fisika dan Kimia",
+    "questions": [
+      {
+        "question": "Perhatikan peristiwa berikut: (1) es mencair, (2) kayu terbakar, (3) kertas disobek, (4) besi berkarat. Yang termasuk perubahan fisika adalah ...",
+        "options": [
+          "A. (1) dan (3)",
+          "B. (1) dan (2)",
+          "C. (2) dan (4)",
+          "D. (3) dan (4)"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Perubahan fisika terjadi tanpa menghasilkan zat baru, hanya berubah wujud atau bentuk. Es mencair (meleleh) dan kertas disobek termasuk perubahan fisika. Kayu terbakar dan besi berkarat menghasilkan zat baru, termasuk perubahan kimia."
+      },
+      {
+        "question": "Berikut ini yang merupakan contoh perubahan kimia adalah ...",
+        "options": [
+          "A. Gula dilarutkan dalam air",
+          "B. Lilin meleleh saat dipanaskan",
+          "C. Nasi menjadi basi",
+          "D. Air membeku menjadi es"
+        ],
+        "correctIndex": 2,
+        "difficulty": "easy",
+        "explanation": "Nasi menjadi basi melibatkan reaksi kimia (pembusukan oleh mikroorganisme) yang menghasilkan zat baru dengan bau dan rasa berbeda. Pilihan lainnya hanya perubahan fisika (gula larut, lilin meleleh, air membeku) tanpa menghasilkan zat baru."
+      },
+      {
+        "question": "Ciri-ciri yang menunjukkan terjadinya perubahan kimia adalah ...",
+        "options": [
+          "A. Wujud dan bentuk zat berubah",
+          "B. Terbentuk gas atau endapan",
+          "C. Volume zat dapat berubah",
+          "D. Massa zat tetap sama"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Perubahan kimia ditandai dengan terbentuknya zat baru, yang sering disertai munculnya gas, endapan, perubahan warna, atau perubahan suhu. Opsi A dan C adalah ciri perubahan fisika, sedangkan D adalah sifat umum (hukum kekekalan massa) yang berlaku untuk kedua jenis perubahan."
+      },
+      {
+        "question": "Perbedaan mendasar antara perubahan fisika dan perubahan kimia adalah ...",
+        "options": [
+          "A. Perubahan fisika bersifat sementara, perubahan kimia bersifat tetap",
+          "B. Perubahan fisika terjadi pada suhu tinggi, perubahan kimia pada suhu rendah",
+          "C. Perubahan fisika menghasilkan zat baru, perubahan kimia tidak",
+          "D. Perubahan fisika selalu diikuti perubahan wujud, perubahan kimia tidak"
+        ],
+        "correctIndex": 0,
+        "difficulty": "medium",
+        "explanation": "Perubahan fisika dapat kembali ke wujud semula (reversible), sedangkan perubahan kimia umumnya menghasilkan zat baru yang tidak mudah kembali (irreversible). Opsi C salah karena kebalikannya. Opsi B dan D tidak benar karena tidak mutlak berlaku untuk semua contoh."
+      },
+      {
+        "question": "Seorang siswa melakukan percobaan dengan memanaskan gula pasir dalam sendok. Gula berubah warna menjadi cokelat kehitaman dan mengeluarkan bau karamel. Berdasarkan hasil ini, dapat disimpulkan bahwa ...",
+        "options": [
+          "A. Gula mengalami perubahan fisika karena hanya mencair",
+          "B. Gula mengalami perubahan kimia karena terbentuk zat baru dengan sifat berbeda",
+          "C. Gula tidak mengalami perubahan apapun karena masih berupa padatan",
+          "D. Gula mengalami perubahan fisika karena dapat kembali menjadi gula putih"
+        ],
+        "correctIndex": 1,
+        "difficulty": "hard",
+        "explanation": "Saat gula dipanaskan dan berubah warna menjadi cokelat serta mengeluarkan bau karamel, telah terjadi reaksi kimia (karamelisasi) yang menghasilkan zat baru (karamel) yang tidak bisa kembali menjadi gula semula. Ini adalah perubahan kimia, bukan fisika."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Zat dan Perubahan",
+    "subTopic": "Pemisahan Campuran",
+    "questions": [
+      {
+        "question": "Campuran pasir dan air dapat dipisahkan dengan metode ...",
+        "options": [
+          "A. Distilasi",
+          "B. Filtrasi",
+          "C. Sublimasi",
+          "D. Kromatografi"
+        ],
+        "correctIndex": 1,
+        "difficulty": "easy",
+        "explanation": "Filtrasi atau penyaringan digunakan untuk memisahkan padatan dari cairan berdasarkan ukuran partikel. Pasir yang tidak larut akan tertahan oleh kertas saring, sementara air lolos."
+      },
+      {
+        "question": "Campuran serbuk besi dan pasir dapat dipisahkan dengan menggunakan ...",
+        "options": [
+          "A. Air",
+          "B. Magnet",
+          "C. Kertas saring",
+          "D. Kromatografi"
+        ],
+        "correctIndex": 1,
+        "difficulty": "easy",
+        "explanation": "Besi bersifat magnetik, sehingga dapat ditarik oleh magnet dan terpisah dari pasir yang tidak bersifat magnetik."
+      },
+      {
+        "question": "Proses pemisahan minyak bumi menjadi fraksi-fraksi seperti bensin, solar, dan kerosin dilakukan dengan metode ...",
+        "options": [
+          "A. Filtrasi",
+          "B. Kromatografi",
+          "C. Distilasi bertingkat",
+          "D. Sublimasi"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Distilasi bertingkat (fraksinasi) memisahkan campuran cair berdasarkan perbedaan titik didih. Minyak bumi dipanaskan dan uapnya dikondensasikan pada suhu yang berbeda."
+      },
+      {
+        "question": "Pemisahan warna-warna dalam tinta hitam menggunakan kertas saring dan pelarut tertentu merupakan contoh metode ...",
+        "options": [
+          "A. Filtrasi",
+          "B. Distilasi",
+          "C. Kromatografi",
+          "D. Dekantasi"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Kromatografi kertas memisahkan komponen campuran berdasarkan perbedaan kecepatan rambat fase gerak (pelarut) melalui fase diam (kertas saring)."
+      },
+      {
+        "question": "Campuran yang terdiri dari iodium dan pasir dapat dipisahkan dengan metode ...",
+        "options": [
+          "A. Filtrasi",
+          "B. Sublimasi",
+          "C. Distilasi",
+          "D. Magnetik"
+        ],
+        "correctIndex": 1,
+        "difficulty": "hard",
+        "explanation": "Iodium mudah menyublim menjadi gas jika dipanaskan, sedangkan pasir tidak. Gas iodium kemudian dapat dikristalkan kembali, sehingga terpisah dari pasir."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Suhu dan Kalor",
+    "subTopic": "Suhu dan Termometer",
+    "questions": [
+      {
+        "question": "Alat yang digunakan untuk mengukur suhu secara akurat adalah...",
+        "options": [
+          "Termometer",
+          "Barometer",
+          "Hidrometer",
+          "Anemometer"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Termometer adalah alat yang dirancang khusus untuk mengukur suhu, sedangkan barometer mengukur tekanan udara, hidrometer mengukur massa jenis cairan, dan anemometer mengukur kecepatan angin."
+      },
+      {
+        "question": "Suhu suatu benda menunjukkan...",
+        "options": [
+          "Derajat panas suatu benda",
+          "Jumlah kalor yang dimiliki benda",
+          "Massa jenis benda",
+          "Volume benda"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Suhu adalah besaran yang menyatakan derajat panas atau dinginnya suatu benda, diukur menggunakan termometer. Suhu bukanlah jumlah kalor, melainkan ukuran energi kinetik rata-rata partikel."
+      },
+      {
+        "question": "Pada termometer Celsius, titik tetap bawah (0°C) ditetapkan berdasarkan...",
+        "options": [
+          "Suhu es yang sedang mencair pada tekanan 1 atm",
+          "Suhu air mendidih pada tekanan 1 atm",
+          "Suhu tubuh manusia normal",
+          "Suhu campuran es dan garam"
+        ],
+        "correctIndex": 0,
+        "difficulty": "medium",
+        "explanation": "Titik tetap bawah termometer Celsius adalah suhu es yang sedang mencair pada tekanan 1 atmosfer, yaitu 0°C. Titik tetap atasnya adalah suhu air mendidih pada tekanan 1 atm, yaitu 100°C."
+      },
+      {
+        "question": "Jika suatu zat cair dalam termometer naik saat dipanaskan, hal ini menunjukkan bahwa...",
+        "options": [
+          "Volume zat cair bertambah",
+          "Massa zat cair bertambah",
+          "Massa jenis zat cair bertambah",
+          "Tekanan zat cair berkurang"
+        ],
+        "correctIndex": 0,
+        "difficulty": "medium",
+        "explanation": "Pemuaian zat cair menyebabkan volumenya bertambah saat suhu naik, sehingga kolom cairan dalam termometer naik. Massa zat cair tetap, sehingga massa jenisnya berkurang, bukan bertambah."
+      },
+      {
+        "question": "Seorang siswa mengukur suhu air dengan termometer Celsius dan menunjukkan angka 30°C. Jika suhu tersebut diukur menggunakan termometer Reamur, angka yang ditunjukkan adalah...",
+        "options": [
+          "24°R",
+          "37,5°R",
+          "40°R",
+          "54°R"
+        ],
+        "correctIndex": 0,
+        "difficulty": "medium",
+        "explanation": "Konversi dari Celsius ke Reamur menggunakan rumus R = (4/5) × C. Maka R = (4/5) × 30 = 24°R."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Suhu dan Kalor",
+    "subTopic": "Kalor dan Perpindahannya",
+    "questions": [
+      {
+        "question": "Perpindahan kalor yang terjadi tanpa disertai perpindahan partikel zat perantaranya disebut ...",
+        "options": [
+          "Konduksi",
+          "Konveksi",
+          "Radiasi",
+          "Evaporasi"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Konduksi adalah perpindahan kalor melalui zat padat tanpa diikuti perpindahan partikel zat perantara."
+      },
+      {
+        "question": "Perpindahan kalor yang disertai dengan perpindahan partikel zat perantaranya disebut ...",
+        "options": [
+          "Konduksi",
+          "Konveksi",
+          "Radiasi",
+          "Kondensasi"
+        ],
+        "correctIndex": 1,
+        "difficulty": "easy",
+        "explanation": "Konveksi adalah perpindahan kalor pada zat cair atau gas yang diikuti perpindahan partikel zat."
+      },
+      {
+        "question": "Pada siang hari yang panas, kita merasa lebih sejuk di bawah pohon rindang dibandingkan di tempat terbuka. Hal ini terjadi karena perpindahan kalor secara radiasi dari matahari terhalang oleh dedaunan. Radiasi adalah perpindahan kalor yang ...",
+        "options": [
+          "Memerlukan medium padat",
+          "Memerlukan medium cair",
+          "Memerlukan medium gas",
+          "Tidak memerlukan medium"
+        ],
+        "correctIndex": 3,
+        "difficulty": "medium",
+        "explanation": "Radiasi adalah perpindahan kalor tanpa memerlukan medium perantara, misalnya sinar matahari yang sampai ke bumi melalui ruang hampa."
+      },
+      {
+        "question": "Setrika listrik yang digunakan untuk merapikan pakaian memanfaatkan perpindahan kalor secara ...",
+        "options": [
+          "Konduksi pada setrika dan konveksi pada pakaian",
+          "Konduksi dari setrika ke pakaian",
+          "Radiasi dari setrika ke pakaian",
+          "Konveksi dari setrika ke pakaian"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Perpindahan kalor dari setrika ke pakaian terjadi secara konduksi karena adanya kontak langsung antara setrika yang panas dengan pakaian."
+      },
+      {
+        "question": "Sebuah logam dipanaskan pada salah satu ujungnya. Beberapa saat kemudian ujung logam yang lain ikut terasa panas. Peristiwa ini menunjukkan perpindahan kalor secara konduksi. Faktor yang mempengaruhi laju perpindahan kalor secara konduksi pada logam tersebut antara lain ...",
+        "options": [
+          "Panjang logam dan jenis logam",
+          "Suhu logam dan massa jenis logam",
+          "Volume logam dan kalor jenis logam",
+          "Warna logam dan panjang logam"
+        ],
+        "correctIndex": 0,
+        "difficulty": "hard",
+        "explanation": "Laju konduksi dipengaruhi oleh panjang benda (berbanding terbalik), luas penampang, perbedaan suhu, dan konduktivitas termal bahan. Opsi A sesuai karena menyebutkan panjang dan jenis logam (konduktivitas)."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Suhu dan Kalor",
+    "subTopic": "Pemuaian",
+    "questions": [
+      {
+        "question": "Peristiwa memanjangnya suatu benda akibat menerima kalor disebut...",
+        "options": [
+          "Pemuaian",
+          "Penyusutan",
+          "Pembekuan",
+          "Penguapan"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Pemuaian adalah peristiwa bertambahnya ukuran benda akibat menerima kalor, sedangkan penyusutan adalah kebalikannya."
+      },
+      {
+        "question": "Salah satu contoh pemuaian dalam kehidupan sehari-hari adalah...",
+        "options": [
+          "Es batu mencair di suhu ruang",
+          "Kabel listrik terlihat kendur di siang hari",
+          "Air mendidih pada suhu 100°C",
+          "Embun pagi hari di daun"
+        ],
+        "correctIndex": 1,
+        "difficulty": "easy",
+        "explanation": "Kabel listrik memuai saat siang hari karena suhu tinggi, sehingga terlihat kendur. Ini adalah contoh pemuaian panjang pada logam."
+      },
+      {
+        "question": "Sebuah rel kereta api dipasang dengan celah di antara sambungannya. Tujuan pemberian celah tersebut adalah...",
+        "options": [
+          "Mempercepat laju kereta",
+          "Mengurangi getaran saat kereta lewat",
+          "Memberi ruang untuk pemuaian rel saat suhu naik",
+          "Memudahkan perawatan rel"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Celah pada sambungan rel kereta api berfungsi untuk mengantisipasi pemuaian rel saat suhu lingkungan meningkat, sehingga rel tidak melengkung atau rusak."
+      },
+      {
+        "question": "Dua batang logam A dan B memiliki panjang awal yang sama. Jika koefisien muai panjang A lebih besar daripada B, maka setelah dipanaskan dengan kenaikan suhu yang sama, pernyataan yang benar adalah...",
+        "options": [
+          "Pertambahan panjang A sama dengan B",
+          "Pertambahan panjang A lebih kecil dari B",
+          "Pertambahan panjang A lebih besar dari B",
+          "Panjang akhir A sama dengan B"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Koefisien muai panjang yang lebih besar menyebabkan pertambahan panjang yang lebih besar pada kenaikan suhu yang sama, sesuai rumus ΔL = L₀ α ΔT."
+      },
+      {
+        "question": "Sebuah bimetal terdiri dari dua logam berbeda yang direkatkan. Saat dipanaskan, bimetal tersebut melengkung ke arah logam dengan koefisien muai panjang lebih kecil. Hal ini terjadi karena...",
+        "options": [
+          "Logam dengan koefisien muai besar memuai lebih pendek",
+          "Logam dengan koefisien muai kecil memuai lebih panjang",
+          "Logam dengan koefisien muai besar memuai lebih panjang sehingga mendorong logam lain",
+          "Kedua logam memuai sama panjang"
+        ],
+        "correctIndex": 2,
+        "difficulty": "hard",
+        "explanation": "Pada bimetal, logam dengan koefisien muai panjang lebih besar akan memuai lebih panjang saat dipanaskan, sehingga mendorong logam lain dan menyebabkan bimetal melengkung ke arah logam dengan koefisien muai lebih kecil."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Gerak dan Gaya",
+    "subTopic": "Gerak Benda",
+    "questions": [
+      {
+        "question": "Seorang anak berlari sejauh 100 meter dalam waktu 20 detik. Berapakah kelajuan rata-rata anak tersebut?",
+        "options": [
+          "2 m/s",
+          "5 m/s",
+          "10 m/s",
+          "20 m/s"
+        ],
+        "correctIndex": 1,
+        "difficulty": "easy",
+        "explanation": "Kelajuan rata-rata dihitung dengan rumus jarak dibagi waktu, yaitu 100 m / 20 s = 5 m/s."
+      },
+      {
+        "question": "Perubahan posisi suatu benda terhadap titik acuan disebut...",
+        "options": [
+          "Kecepatan",
+          "Percepatan",
+          "Gerak",
+          "Gaya"
+        ],
+        "correctIndex": 2,
+        "difficulty": "easy",
+        "explanation": "Gerak adalah perubahan posisi suatu benda terhadap titik acuan tertentu."
+      },
+      {
+        "question": "Sebuah mobil bergerak lurus dengan kecepatan 20 m/s selama 10 detik. Jarak yang ditempuh mobil tersebut adalah...",
+        "options": [
+          "100 m",
+          "150 m",
+          "200 m",
+          "250 m"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Jarak dihitung dengan rumus jarak = kecepatan × waktu, yaitu 20 m/s × 10 s = 200 m."
+      },
+      {
+        "question": "Benda yang bergerak lurus beraturan (GLB) memiliki ciri...",
+        "options": [
+          "Kecepatan berubah secara teratur",
+          "Percepatan tetap",
+          "Kecepatan tetap",
+          "Jarak tempuh tetap setiap detik"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Gerak lurus beraturan (GLB) memiliki kecepatan yang tetap, sehingga percepatannya nol."
+      },
+      {
+        "question": "Sebuah bola dilempar vertikal ke atas. Pada titik tertinggi, percepatan bola adalah...",
+        "options": [
+          "Nol",
+          "Sama dengan kecepatan awal",
+          "9,8 m/s² ke bawah",
+          "9,8 m/s² ke atas"
+        ],
+        "correctIndex": 2,
+        "difficulty": "hard",
+        "explanation": "Pada titik tertinggi, kecepatan bola sesaat adalah nol, tetapi percepatan gravitasi tetap bekerja ke bawah sebesar 9,8 m/s²."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Gerak dan Gaya",
+    "subTopic": "Gaya dan Hukum Newton",
+    "questions": [
+      {
+        "question": "Seorang anak mendorong meja dengan gaya 10 N ke kanan, tetapi meja tidak bergerak. Gaya yang bekerja pada meja tersebut adalah...",
+        "options": [
+          "Gaya gesek statis yang lebih besar dari 10 N",
+          "Gaya gesek statis yang sama dengan 10 N",
+          "Gaya gesek kinetis yang lebih besar dari 10 N",
+          "Tidak ada gaya yang bekerja pada meja"
+        ],
+        "correctIndex": 1,
+        "difficulty": "easy",
+        "explanation": "Menurut Hukum I Newton, jika benda diam maka resultan gaya yang bekerja padanya adalah nol. Gaya dorong 10 N ke kanan diimbangi oleh gaya gesek statis 10 N ke kiri, sehingga meja tetap diam."
+      },
+      {
+        "question": "Sebuah bola bermassa 2 kg didorong dengan gaya 10 N. Berapakah percepatan yang dialami bola tersebut?",
+        "options": [
+          "2 m/s²",
+          "5 m/s²",
+          "10 m/s²",
+          "20 m/s²"
+        ],
+        "correctIndex": 1,
+        "difficulty": "easy",
+        "explanation": "Berdasarkan Hukum II Newton, F = m × a, maka a = F/m = 10 N / 2 kg = 5 m/s²."
+      },
+      {
+        "question": "Ketika seorang penumpang bus yang sedang bergerak tiba-tiba direm mendadak, tubuh penumpang tersebut cenderung terdorong ke depan. Fenomena ini merupakan contoh dari...",
+        "options": [
+          "Hukum I Newton (kelembaman)",
+          "Hukum II Newton (percepatan)",
+          "Hukum III Newton (aksi-reaksi)",
+          "Hukum gravitasi Newton"
+        ],
+        "correctIndex": 0,
+        "difficulty": "medium",
+        "explanation": "Fenomena ini menunjukkan kelembaman (inersia) tubuh penumpang yang cenderung mempertahankan keadaan geraknya sesuai Hukum I Newton. Saat bus direm, tubuh masih bergerak ke depan karena sifat kelembaman."
+      },
+      {
+        "question": "Dua buah gaya masing-masing 15 N ke kanan dan 10 N ke kiri bekerja pada sebuah benda. Resultan gaya yang dialami benda adalah...",
+        "options": [
+          "5 N ke kiri",
+          "5 N ke kanan",
+          "25 N ke kanan",
+          "25 N ke kiri"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Resultan gaya dihitung dengan selisih gaya karena arah berlawanan: 15 N - 10 N = 5 N ke kanan (karena gaya ke kanan lebih besar)."
+      },
+      {
+        "question": "Seorang anak mendorong tembok dengan gaya 50 N, tetapi tembok tidak bergerak. Menurut Hukum III Newton, gaya yang diberikan tembok pada anak adalah...",
+        "options": [
+          "0 N",
+          "25 N",
+          "50 N",
+          "100 N"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Hukum III Newton menyatakan bahwa setiap aksi menimbulkan reaksi yang sama besar tetapi berlawanan arah. Gaya aksi anak pada tembok 50 N menghasilkan gaya reaksi tembok pada anak sebesar 50 N."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Gerak dan Gaya",
+    "subTopic": "Pesawat Sederhana",
+    "questions": [
+      {
+        "question": "Alat berikut yang termasuk pesawat sederhana jenis tuas (pengungkit) adalah...",
+        "options": [
+          "Gunting",
+          "Katrol tetap",
+          "Bidang miring",
+          "Roda berporos"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Gunting termasuk tuas jenis I karena titik tumpu berada di antara beban dan kuasa, sehingga memudahkan pemotongan."
+      },
+      {
+        "question": "Prinsip kerja bidang miring dapat ditemukan pada alat...",
+        "options": [
+          "Palu",
+          "Tang",
+          "Pisau",
+          "Gergaji"
+        ],
+        "correctIndex": 2,
+        "difficulty": "easy",
+        "explanation": "Pisau menggunakan prinsip bidang miring pada mata pisaunya yang runcing untuk memotong benda dengan gaya lebih kecil."
+      },
+      {
+        "question": "Sebuah katrol tetap digunakan untuk mengangkat beban 100 N. Gaya kuasa yang diperlukan adalah...",
+        "options": [
+          "50 N",
+          "100 N",
+          "150 N",
+          "200 N"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Katrol tetap hanya mengubah arah gaya, tidak memberikan keuntungan mekanis, sehingga gaya kuasa sama dengan berat beban, yaitu 100 N."
+      },
+      {
+        "question": "Seorang pekerja menggunakan bidang miring sepanjang 4 meter untuk memindahkan peti seberat 200 N ke ketinggian 1 meter. Keuntungan mekanis bidang miring tersebut adalah...",
+        "options": [
+          "0,25",
+          "1",
+          "4",
+          "8"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Keuntungan mekanis bidang miring dihitung dengan panjang bidang miring dibagi tinggi, yaitu 4 m / 1 m = 4."
+      },
+      {
+        "question": "Perhatikan pernyataan berikut: (1) Memindahkan beban dengan papan miring, (2) Menggali tanah dengan sekop, (3) Memotong kertas dengan gunting, (4) Mengerek bendera dengan katrol. Yang termasuk pesawat sederhana jenis tuas adalah...",
+        "options": [
+          "(1) dan (2)",
+          "(2) dan (3)",
+          "(3) dan (4)",
+          "(1) dan (4)"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Sekop (tuas jenis III) dan gunting (tuas jenis I) termasuk tuas, sedangkan bidang miring dan katrol termasuk jenis pesawat sederhana lain."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Gerak dan Gaya",
+    "subTopic": "Tekanan Zat",
+    "questions": [
+      {
+        "question": "Sebuah balok kayu dengan berat 200 N diletakkan di atas lantai. Jika luas permukaan balok yang menyentuh lantai adalah 0,5 m², berapakah tekanan yang diberikan balok terhadap lantai?",
+        "options": [
+          "100 Pa",
+          "200 Pa",
+          "400 Pa",
+          "1000 Pa"
+        ],
+        "correctIndex": 2,
+        "difficulty": "easy",
+        "explanation": "Tekanan dihitung dengan rumus P = F/A, di mana F = 200 N dan A = 0,5 m², sehingga P = 200/0,5 = 400 Pa."
+      },
+      {
+        "question": "Mengapa pisau yang tajam lebih mudah memotong benda dibandingkan pisau yang tumpul?",
+        "options": [
+          "Karena pisau tajam memiliki gaya yang lebih besar",
+          "Karena pisau tajam memiliki luas permukaan yang lebih kecil sehingga tekanannya lebih besar",
+          "Karena pisau tajam memiliki massa yang lebih ringan",
+          "Karena pisau tajam terbuat dari bahan yang lebih keras"
+        ],
+        "correctIndex": 1,
+        "difficulty": "easy",
+        "explanation": "Pisau tajam memiliki luas permukaan yang lebih kecil pada ujungnya, sehingga dengan gaya yang sama, tekanan yang dihasilkan lebih besar (P = F/A)."
+      },
+      {
+        "question": "Seorang penyelam menyelam pada kedalaman 10 meter di bawah permukaan air laut. Jika massa jenis air laut 1025 kg/m³ dan percepatan gravitasi 10 m/s², berapakah tekanan hidrostatis yang dialami penyelam tersebut?",
+        "options": [
+          "10.250 Pa",
+          "102.500 Pa",
+          "1.025.000 Pa",
+          "10.250.000 Pa"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Tekanan hidrostatis dihitung dengan rumus P = ρgh, di mana ρ = 1025 kg/m³, g = 10 m/s², dan h = 10 m, sehingga P = 1025 × 10 × 10 = 102.500 Pa."
+      },
+      {
+        "question": "Sebuah dongkrak hidrolik memiliki luas penampang kecil 10 cm² dan luas penampang besar 200 cm². Jika pada penampang kecil diberikan gaya sebesar 50 N, berapakah gaya yang dihasilkan pada penampang besar?",
+        "options": [
+          "500 N",
+          "1000 N",
+          "2000 N",
+          "4000 N"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Hukum Pascal menyatakan tekanan yang diberikan pada zat cair dalam ruang tertutup diteruskan sama besar ke segala arah. Dengan rumus F1/A1 = F2/A2, maka F2 = (A2/A1) × F1 = (200/10) × 50 = 1000 N."
+      },
+      {
+        "question": "Mengapa kapal laut yang terbuat dari besi dapat mengapung di air, sementara sepotong besi kecil akan tenggelam?",
+        "options": [
+          "Karena kapal laut memiliki massa yang lebih kecil",
+          "Karena kapal laut memiliki volume yang lebih besar sehingga massa jenisnya lebih kecil dari air",
+          "Karena kapal laut terbuat dari bahan yang lebih ringan",
+          "Karena kapal laut didorong oleh mesin"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Kapal laut memiliki rongga udara sehingga volume totalnya besar, membuat massa jenis rata-rata kapal lebih kecil dari massa jenis air. Sesuai hukum Archimedes, benda akan mengapung jika massa jenisnya lebih kecil dari fluida."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Makhluk Hidup",
+    "subTopic": "Ciri-Ciri Makhluk Hidup",
+    "questions": [
+      {
+        "question": "Berikut ini yang merupakan ciri-ciri makhluk hidup adalah...",
+        "options": [
+          "A. Bergerak, bernapas, dan membutuhkan makanan",
+          "B. Bergerak, diam di tempat, dan berwarna hijau",
+          "C. Bernapas, tidak membutuhkan air, dan tumbuh",
+          "D. Memerlukan cahaya, bergerak, dan tidak bernapas"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Ciri-ciri utama makhluk hidup meliputi bergerak, bernapas, dan membutuhkan makanan (nutrisi). Pilihan lain mengandung ciri yang tidak tepat, seperti tidak membutuhkan air atau tidak bernapas."
+      },
+      {
+        "question": "Manakah dari pernyataan berikut yang menunjukkan bahwa makhluk hidup dapat tumbuh?",
+        "options": [
+          "A. Kucing berlari mengejar tikus",
+          "B. Biji kacang hijau berkecambah menjadi tanaman kecil",
+          "C. Ikan berenang di air",
+          "D. Burung terbang di udara"
+        ],
+        "correctIndex": 1,
+        "difficulty": "easy",
+        "explanation": "Pertumbuhan adalah proses pertambahan ukuran dan jumlah sel yang bersifat irreversible. Biji kacang hijau yang berkecambah menjadi tanaman kecil menunjukkan adanya pertumbuhan, sedangkan pilihan lain hanya menunjukkan gerak atau aktivitas."
+      },
+      {
+        "question": "Seekor kucing yang mendekati mangsa dengan diam-diam kemudian menerkamnya menunjukkan ciri makhluk hidup, yaitu...",
+        "options": [
+          "A. Bernapas",
+          "B. Tumbuh",
+          "C. Bergerak",
+          "D. Berkembang biak"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Gerakan kucing yang mendekati mangsa dan menerkam adalah contoh dari ciri bergerak. Meskipun kucing juga bernapas dan berkembang biak, perilaku spesifik ini menunjukkan kemampuan bergerak untuk menangkap mangsa."
+      },
+      {
+        "question": "Seorang siswa mengamati bahwa tanaman yang diletakkan di dekat jendela tumbuh condong ke arah cahaya matahari. Hal ini menunjukkan bahwa makhluk hidup memiliki ciri...",
+        "options": [
+          "A. Bernapas",
+          "B. Berkembang biak",
+          "C. Peka terhadap rangsang (iritabilitas)",
+          "D. Memerlukan nutrisi"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Tanaman yang tumbuh condong ke arah cahaya matahari menunjukkan respons terhadap rangsang (cahaya), yang disebut fototropisme. Ini adalah contoh iritabilitas atau kepekaan terhadap rangsang, bukan bernapas, berkembang biak, atau nutrisi."
+      },
+      {
+        "question": "Seekor amoeba membelah diri menjadi dua sel anak. Proses ini menunjukkan ciri makhluk hidup, yaitu...",
+        "options": [
+          "A. Bernapas",
+          "B. Bergerak",
+          "C. Berkembang biak",
+          "D. Tumbuh"
+        ],
+        "correctIndex": 2,
+        "difficulty": "hard",
+        "explanation": "Amoeba yang membelah diri menjadi dua sel anak adalah proses reproduksi aseksual, yang merupakan ciri berkembang biak. Meskipun amoeba juga bergerak dan bernapas, pembelahan diri secara spesifik menunjukkan perkembangbiakan untuk memperbanyak keturunan."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Makhluk Hidup",
+    "subTopic": "Klasifikasi Makhluk Hidup",
+    "questions": [
+      {
+        "question": "Ilmu yang mempelajari tentang pengelompokan makhluk hidup disebut...",
+        "options": [
+          "Taksonomi",
+          "Anatomi",
+          "Fisiologi",
+          "Ekologi"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Taksonomi adalah cabang biologi yang khusus mempelajari pengelompokan dan penamaan makhluk hidup berdasarkan persamaan dan perbedaan ciri-cirinya."
+      },
+      {
+        "question": "Urutan tingkatan takson dari yang tertinggi hingga terendah yang benar adalah...",
+        "options": [
+          "Kingdom - Filum - Kelas - Ordo - Famili - Genus - Spesies",
+          "Kingdom - Kelas - Filum - Ordo - Famili - Genus - Spesies",
+          "Spesies - Genus - Famili - Ordo - Kelas - Filum - Kingdom",
+          "Kingdom - Filum - Ordo - Kelas - Famili - Genus - Spesies"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Urutan taksonomi dari tertinggi ke terendah yang benar adalah Kingdom, Filum (untuk hewan) atau Divisi (untuk tumbuhan), Kelas, Ordo, Famili, Genus, dan Spesies."
+      },
+      {
+        "question": "Dua makhluk hidup yang termasuk dalam satu famili pasti memiliki kesamaan pada tingkat...",
+        "options": [
+          "Genus",
+          "Spesies",
+          "Ordo",
+          "Kelas"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Jika dua makhluk hidup berada dalam satu famili, maka mereka pasti berada dalam ordo yang sama, karena ordo adalah tingkatan di atas famili. Namun, mereka belum tentu memiliki genus atau spesies yang sama."
+      },
+      {
+        "question": "Dalam sistem klasifikasi lima kingdom, jamur ditempatkan dalam kingdom tersendiri karena...",
+        "options": [
+          "Jamur tidak dapat bergerak aktif",
+          "Jamur bersifat heterotrof dan memiliki dinding sel dari kitin",
+          "Jamur hidup di tempat lembab",
+          "Jamur berkembang biak dengan spora"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Jamur dipisahkan ke kingdom Fungi karena memiliki ciri khas yaitu bersifat heterotrof (tidak dapat membuat makanan sendiri) dan dinding selnya tersusun dari kitin, berbeda dengan tumbuhan yang memiliki dinding sel dari selulosa."
+      },
+      {
+        "question": "Seorang siswa menemukan organisme dengan ciri-ciri: bersel satu, tidak memiliki inti sel (prokariotik), dan dapat ditemukan di lingkungan ekstrem seperti mata air panas. Organisme tersebut kemungkinan besar termasuk dalam kingdom...",
+        "options": [
+          "Monera",
+          "Protista",
+          "Fungi",
+          "Animalia"
+        ],
+        "correctIndex": 0,
+        "difficulty": "medium",
+        "explanation": "Ciri-ciri tersebut (prokariotik, bersel satu, dan mampu hidup di lingkungan ekstrem) merupakan karakteristik kingdom Monera, yang mencakup bakteri dan archaea."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Makhluk Hidup",
+    "subTopic": "Keanekaragaman Hayati",
+    "questions": [
+      {
+        "question": "Keanekaragaman hayati tingkat gen dapat diamati pada perbedaan...",
+        "options": [
+          "warna bunga mawar merah dan mawar putih",
+          "bentuk tubuh kucing dan harimau",
+          "habitat ikan air tawar dan ikan laut",
+          "cara berkembang biak ayam dan bebek"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Keanekaragaman gen adalah variasi gen dalam satu spesies. Warna bunga mawar yang berbeda (merah dan putih) menunjukkan variasi gen dalam spesies yang sama, yaitu mawar."
+      },
+      {
+        "question": "Contoh keanekaragaman hayati tingkat spesies adalah...",
+        "options": [
+          "perbedaan tinggi pohon mangga",
+          "perbedaan antara pohon jati dan pohon mahoni",
+          "perbedaan warna bulu kucing",
+          "perbedaan rasa buah jeruk"
+        ],
+        "correctIndex": 1,
+        "difficulty": "easy",
+        "explanation": "Keanekaragaman spesies adalah variasi antarspesies. Pohon jati dan pohon mahoni adalah dua spesies berbeda, sehingga perbedaan di antara keduanya merupakan contoh keanekaragaman hayati tingkat spesies."
+      },
+      {
+        "question": "Hutan hujan tropis di Indonesia memiliki keanekaragaman hayati yang tinggi. Faktor utama yang menyebabkan tingginya keanekaragaman hayati di hutan hujan tropis adalah...",
+        "options": [
+          "curah hujan yang rendah dan suhu yang dingin",
+          "curah hujan tinggi dan suhu stabil sepanjang tahun",
+          "tanah yang tandus dan miskin nutrisi",
+          "intensitas cahaya matahari yang rendah"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Hutan hujan tropis memiliki curah hujan tinggi dan suhu yang stabil sepanjang tahun, menciptakan kondisi ideal bagi berbagai spesies untuk hidup dan berevolusi, sehingga keanekaragaman hayatinya tinggi."
+      },
+      {
+        "question": "Berikut ini yang merupakan ancaman utama terhadap keanekaragaman hayati di Indonesia adalah...",
+        "options": [
+          "penggunaan pupuk organik",
+          "reboisasi hutan",
+          "perburuan liar dan deforestasi",
+          "pembuatan taman kota"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Perburuan liar mengurangi populasi spesies, sementara deforestasi menghancurkan habitat, keduanya secara langsung mengancam keanekaragaman hayati dengan menyebabkan kepunahan spesies."
+      },
+      {
+        "question": "Indonesia dikenal sebagai negara megabiodiversitas karena memiliki keanekaragaman hayati yang sangat tinggi. Salah satu faktor yang menyebabkan hal ini adalah...",
+        "options": [
+          "letak geografis di antara dua benua dan dua samudra",
+          "iklim subtropis dengan empat musim",
+          "luas wilayah yang kecil",
+          "populasi manusia yang sedikit"
+        ],
+        "correctIndex": 0,
+        "difficulty": "medium",
+        "explanation": "Letak Indonesia di antara Benua Asia dan Australia serta Samudra Hindia dan Pasifik menciptakan berbagai ekosistem dan iklim yang mendukung keanekaragaman hayati tinggi, menjadikannya negara megabiodiversitas."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Ekologi",
+    "subTopic": "Komponen Ekosistem",
+    "questions": [
+      {
+        "question": "Di dalam sebuah ekosistem sawah, terdapat padi, belalang, katak, ular, dan dekomposer. Berdasarkan perannya, manakah yang termasuk komponen biotik?",
+        "options": [
+          "Padi, belalang, katak, ular, dan dekomposer",
+          "Air, tanah, dan sinar matahari",
+          "Padi dan air saja",
+          "Belalang dan ular saja"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Komponen biotik adalah semua makhluk hidup dalam ekosistem, termasuk padi, belalang, katak, ular, dan dekomposer. Air, tanah, dan sinar matahari adalah komponen abiotik."
+      },
+      {
+        "question": "Perhatikan komponen ekosistem berikut: (1) air, (2) bakteri pengurai, (3) tanah, (4) pohon mangga, (5) sinar matahari. Manakah yang termasuk komponen abiotik?",
+        "options": [
+          "(1), (3), dan (5)",
+          "(2), (4), dan (5)",
+          "(1), (2), dan (3)",
+          "(2), (3), dan (4)"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Komponen abiotik adalah benda mati seperti air (1), tanah (3), dan sinar matahari (5). Bakteri pengurai dan pohon mangga adalah komponen biotik."
+      },
+      {
+        "question": "Dalam suatu ekosistem kolam, ganggang berperan sebagai produsen karena mampu menghasilkan makanan sendiri. Proses yang dilakukan ganggang untuk menghasilkan makanan adalah...",
+        "options": [
+          "Fotosintesis",
+          "Respirasi",
+          "Fermentasi",
+          "Dekomposisi"
+        ],
+        "correctIndex": 0,
+        "difficulty": "medium",
+        "explanation": "Ganggang sebagai produsen melakukan fotosintesis dengan bantuan sinar matahari untuk menghasilkan makanan (glukosa) dan oksigen."
+      },
+      {
+        "question": "Di dalam ekosistem hutan, sekelompok jamur dan bakteri tanah berperan menguraikan sisa-sisa makhluk hidup yang telah mati menjadi zat anorganik. Peran jamur dan bakteri tersebut dalam ekosistem adalah sebagai...",
+        "options": [
+          "Produsen",
+          "Konsumen primer",
+          "Konsumen sekunder",
+          "Dekomposer"
+        ],
+        "correctIndex": 3,
+        "difficulty": "medium",
+        "explanation": "Jamur dan bakteri yang menguraikan sisa makhluk hidup menjadi zat anorganik disebut dekomposer atau pengurai, yang berperan penting dalam daur ulang nutrisi."
+      },
+      {
+        "question": "Dalam suatu ekosistem padang rumput, seekor rusa memakan rumput. Berdasarkan tingkat trofiknya, rusa tersebut berperan sebagai...",
+        "options": [
+          "Produsen",
+          "Konsumen primer",
+          "Konsumen sekunder",
+          "Dekomposer"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Rusa yang memakan rumput (produsen) termasuk konsumen primer atau herbivora, karena berada pada tingkat trofik kedua dalam rantai makanan."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Ekologi",
+    "subTopic": "Interaksi Antar Makhluk Hidup",
+    "questions": [
+      {
+        "question": "Hubungan antara dua spesies yang berbeda di mana salah satu pihak diuntungkan dan pihak lainnya tidak dirugikan maupun diuntungkan disebut...",
+        "options": [
+          "Komensalisme",
+          "Mutualisme",
+          "Parasitisme",
+          "Predasi"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Komensalisme adalah interaksi di mana satu spesies mendapat keuntungan, sementara spesies lain tidak terpengaruh (tidak dirugikan maupun diuntungkan). Contohnya adalah anggrek yang menempel pada pohon."
+      },
+      {
+        "question": "Interaksi antara kutu dan manusia termasuk dalam jenis simbiosis...",
+        "options": [
+          "Mutualisme",
+          "Komensalisme",
+          "Parasitisme",
+          "Kompetisi"
+        ],
+        "correctIndex": 2,
+        "difficulty": "easy",
+        "explanation": "Kutu mendapatkan keuntungan dengan menghisap darah manusia, sementara manusia dirugikan karena dapat mengalami gatal dan infeksi. Ini adalah contoh parasitisme."
+      },
+      {
+        "question": "Dalam suatu ekosistem sawah, ular memakan tikus, dan tikus memakan padi. Jika populasi ular menurun drastis akibat perburuan, dampak yang paling mungkin terjadi adalah...",
+        "options": [
+          "Populasi tikus meningkat dan hasil panen padi menurun",
+          "Populasi tikus menurun dan hasil panen padi meningkat",
+          "Populasi padi meningkat dan tikus tetap stabil",
+          "Populasi ular meningkat kembali secara alami"
+        ],
+        "correctIndex": 0,
+        "difficulty": "medium",
+        "explanation": "Ular adalah predator tikus. Jika ular berkurang, tikus tidak memiliki predator alami sehingga populasinya meningkat. Tikus yang lebih banyak akan memakan lebih banyak padi, sehingga hasil panen menurun."
+      },
+      {
+        "question": "Perhatikan pernyataan berikut: (1) Ikan badut bersembunyi di anemon laut untuk perlindungan, sementara anemon laut tidak terpengaruh. (2) Burung jalak memakan kutu di tubuh kerbau, sehingga kerbau terbebas dari kutu. (3) Cacing pita hidup di usus manusia dan menyerap sari makanan. Dari pernyataan di atas, yang termasuk simbiosis mutualisme adalah...",
+        "options": [
+          "(1) saja",
+          "(2) saja",
+          "(1) dan (2)",
+          "(2) dan (3)"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Pernyataan (2) adalah mutualisme karena burung jalak mendapat makanan (kutu) dan kerbau terbebas dari parasit. Pernyataan (1) adalah komensalisme, dan (3) adalah parasitisme."
+      },
+      {
+        "question": "Di sebuah kebun, terdapat populasi ulat yang memakan daun tanaman tomat. Petani kemudian melepaskan sejumlah burung pemakan ulat ke kebun tersebut. Dampak jangka pendek yang paling mungkin terjadi adalah...",
+        "options": [
+          "Populasi ulat meningkat karena burung tidak memakannya",
+          "Populasi ulat menurun karena dimangsa burung",
+          "Tanaman tomat tumbuh lebih subur tanpa gangguan",
+          "Burung berpindah ke kebun lain karena tidak ada makanan"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Burung adalah predator ulat. Dengan adanya burung, ulat akan dimangsa sehingga populasinya menurun. Ini adalah contoh predasi yang mengontrol populasi mangsa."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Ekologi",
+    "subTopic": "Pelestarian Lingkungan",
+    "questions": [
+      {
+        "question": "Kegiatan berikut yang merupakan contoh pelestarian lingkungan secara in situ adalah...",
+        "options": [
+          "Penangkaran buaya di kebun binatang",
+          "Pembuatan taman kota di lahan kosong",
+          "Pendirian suaka margasatwa untuk melindungi harimau sumatra di habitat aslinya",
+          "Penanaman pohon di halaman rumah"
+        ],
+        "correctIndex": 2,
+        "difficulty": "easy",
+        "explanation": "Pelestarian in situ adalah pelestarian yang dilakukan di habitat asli organisme. Suaka margasatwa melindungi harimau sumatra di habitat aslinya, sehingga termasuk in situ. Opsi A adalah ex situ (di luar habitat), opsi B dan D adalah penghijauan, bukan pelestarian spesies di habitat asli."
+      },
+      {
+        "question": "Salah satu upaya pelestarian lingkungan yang dapat dilakukan oleh siswa di sekolah adalah...",
+        "options": [
+          "Membuang sampah di sungai agar hanyut",
+          "Menggunakan kendaraan bermotor setiap hari",
+          "Melakukan daur ulang kertas bekas menjadi kerajinan",
+          "Menebang pohon di halaman sekolah"
+        ],
+        "correctIndex": 2,
+        "difficulty": "easy",
+        "explanation": "Daur ulang kertas bekas mengurangi limbah dan menghemat sumber daya alam, sehingga merupakan upaya pelestarian lingkungan yang tepat. Opsi A dan D justru merusak lingkungan, opsi B meningkatkan polusi."
+      },
+      {
+        "question": "Hutan mangrove memiliki fungsi ekologis yang penting. Salah satu fungsi utamanya dalam pelestarian lingkungan adalah...",
+        "options": [
+          "Menghasilkan kayu untuk bahan bangunan",
+          "Mencegah abrasi pantai dan menjadi habitat biota laut",
+          "Menyerap polutan udara di perkotaan",
+          "Menghasilkan oksigen dalam jumlah besar"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Hutan mangrove berfungsi sebagai penahan abrasi pantai dan tempat hidup berbagai biota laut (seperti ikan, udang, kepiting). Opsi A tidak tepat karena mangrove tidak ditebang untuk kayu dalam pelestarian. Opsi C dan D lebih terkait dengan pohon pada umumnya, bukan fungsi spesifik mangrove."
+      },
+      {
+        "question": "Penerapan sistem tebang pilih dan tanam kembali dalam pengelolaan hutan bertujuan untuk...",
+        "options": [
+          "Meningkatkan produksi kayu secara maksimal",
+          "Mempertahankan keanekaragaman hayati dan kelestarian hutan",
+          "Mempercepat pertumbuhan pohon-pohon baru",
+          "Mengurangi biaya operasional perusahaan kehutanan"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Sistem tebang pilih dan tanam kembali (TPTI) adalah metode pengelolaan hutan lestari yang bertujuan menjaga keanekaragaman hayati dan fungsi ekosistem hutan. Opsi A dan D lebih berorientasi ekonomi, opsi C tidak tepat karena tujuan utamanya bukan mempercepat pertumbuhan, melainkan keberlanjutan."
+      },
+      {
+        "question": "Seorang siswa menemukan bahwa di daerahnya terjadi pencemaran sungai akibat limbah pabrik. Tindakan pelestarian lingkungan yang paling tepat dan berkelanjutan adalah...",
+        "options": [
+          "Menutup pabrik tersebut secara paksa",
+          "Membuang sampah ke sungai untuk menutupi limbah",
+          "Mengusulkan pembangunan instalasi pengolahan air limbah (IPAL) dan melakukan rehabilitasi sungai",
+          "Memindahkan seluruh penduduk ke daerah lain"
+        ],
+        "correctIndex": 2,
+        "difficulty": "hard",
+        "explanation": "Pembangunan IPAL dan rehabilitasi sungai merupakan solusi berkelanjutan yang mengatasi sumber pencemaran dan memulihkan ekosistem. Opsi A tidak realistis dan dapat menimbulkan masalah sosial-ekonomi. Opsi B justru memperparah pencemaran. Opsi D tidak menyelesaikan akar masalah dan tidak praktis."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Bumi dan Tata Surya",
+    "subTopic": "Struktur Bumi",
+    "questions": [
+      {
+        "question": "Lapisan Bumi yang paling tipis dan tempat kita hidup disebut...",
+        "options": [
+          "Kerak Bumi",
+          "Mantel Bumi",
+          "Inti Luar",
+          "Inti Dalam"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Kerak Bumi adalah lapisan terluar Bumi yang paling tipis, tempat semua makhluk hidup dan aktivitas manusia berlangsung."
+      },
+      {
+        "question": "Lapisan Bumi yang terletak di bawah kerak dan memiliki ketebalan paling besar adalah...",
+        "options": [
+          "Inti Dalam",
+          "Inti Luar",
+          "Mantel Bumi",
+          "Litosfer"
+        ],
+        "correctIndex": 2,
+        "difficulty": "easy",
+        "explanation": "Mantel Bumi adalah lapisan terbesar dengan ketebalan sekitar 2.900 km, terletak di antara kerak dan inti Bumi."
+      },
+      {
+        "question": "Lapisan inti Bumi yang berbentuk cair dan terdiri dari besi serta nikel cair adalah...",
+        "options": [
+          "Inti Dalam",
+          "Inti Luar",
+          "Mantel Bawah",
+          "Astenosfer"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Inti Luar Bumi bersifat cair karena suhu yang sangat tinggi, terdiri dari besi dan nikel cair, dan berperan dalam pembentukan medan magnet Bumi."
+      },
+      {
+        "question": "Lapisan Bumi yang bersifat padat, terletak di pusat Bumi, dan memiliki suhu hingga 5.500°C adalah...",
+        "options": [
+          "Inti Luar",
+          "Mantel Bawah",
+          "Inti Dalam",
+          "Kerak Bumi"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Inti Dalam Bumi berbentuk padat meskipun suhunya sangat tinggi karena tekanan yang sangat besar di pusat Bumi."
+      },
+      {
+        "question": "Lapisan Bumi yang memisahkan kerak samudra yang tipis dengan kerak benua yang tebal, serta menjadi tempat terbentuknya magma, adalah...",
+        "options": [
+          "Litosfer",
+          "Astenosfer",
+          "Inti Luar",
+          "Mantel Bawah"
+        ],
+        "correctIndex": 1,
+        "difficulty": "hard",
+        "explanation": "Astenosfer adalah lapisan di bawah litosfer yang bersifat plastis dan merupakan tempat terbentuknya magma, serta memungkinkan pergerakan lempeng tektonik."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Bumi dan Tata Surya",
+    "subTopic": "Tata Surya",
+    "questions": [
+      {
+        "question": "Apa yang menjadi pusat dari Tata Surya?",
+        "options": [
+          "Matahari",
+          "Bumi",
+          "Bulan",
+          "Jupiter"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Matahari adalah bintang yang menjadi pusat Tata Surya. Semua planet, asteroid, komet, dan benda langit lainnya mengorbit Matahari karena gaya gravitasinya yang sangat besar."
+      },
+      {
+        "question": "Planet manakah yang dikenal sebagai 'Planet Merah' karena permukaannya yang berwarna kemerahan?",
+        "options": [
+          "Venus",
+          "Mars",
+          "Jupiter",
+          "Saturnus"
+        ],
+        "correctIndex": 1,
+        "difficulty": "easy",
+        "explanation": "Mars disebut Planet Merah karena permukaannya mengandung banyak oksida besi (karat) yang memberikan warna kemerahan."
+      },
+      {
+        "question": "Apa nama sabuk asteroid yang terletak di antara orbit Mars dan Jupiter?",
+        "options": [
+          "Sabuk Kuiper",
+          "Sabuk Utama",
+          "Awan Oort",
+          "Sabuk Van Allen"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Sabuk Utama (Main Belt) adalah kumpulan asteroid yang terletak di antara orbit Mars dan Jupiter. Sabuk Kuiper terletak di luar Neptunus, Awan Oort adalah awan komet di tepi Tata Surya, dan Sabuk Van Allen adalah sabuk radiasi di sekitar Bumi."
+      },
+      {
+        "question": "Planet manakah dalam Tata Surya yang memiliki periode rotasi paling cepat?",
+        "options": [
+          "Bumi",
+          "Mars",
+          "Jupiter",
+          "Saturnus"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Jupiter memiliki periode rotasi tercepat di antara semua planet di Tata Surya, yaitu sekitar 9 jam 55 menit. Ini karena Jupiter adalah planet gas raksasa yang berotasi sangat cepat."
+      },
+      {
+        "question": "Mengapa Pluto tidak lagi dianggap sebagai planet dalam Tata Surya?",
+        "options": [
+          "Karena Pluto terlalu kecil dan tidak bulat",
+          "Karena orbit Pluto tidak membersihkan lingkungan di sekitarnya dari benda-benda lain",
+          "Karena Pluto tidak memiliki atmosfer",
+          "Karena Pluto terlalu jauh dari Matahari"
+        ],
+        "correctIndex": 1,
+        "difficulty": "hard",
+        "explanation": "Pada tahun 2006, IAU (International Astronomical Union) mendefinisikan ulang planet. Salah satu syaratnya adalah planet harus 'membersihkan lingkungan' di sekitar orbitnya. Pluto tidak memenuhi syarat ini karena orbitnya berada di Sabuk Kuiper yang dipenuhi banyak objek lain, sehingga Pluto diklasifikasikan sebagai planet kerdil."
+      }
+    ]
+  },
+  {
+    "subject": "IPA",
+    "topic": "Bumi dan Tata Surya",
+    "subTopic": "Rotasi dan Revolusi Bumi",
+    "questions": [
+      {
+        "question": "Apa yang dimaksud dengan rotasi Bumi?",
+        "options": [
+          "A. Pergerakan Bumi mengelilingi Matahari",
+          "B. Pergerakan Bumi pada porosnya",
+          "C. Pergerakan Bumi mengelilingi Bulan",
+          "D. Pergerakan Bumi mengelilingi bintang lain"
+        ],
+        "correctIndex": 1,
+        "difficulty": "easy",
+        "explanation": "Rotasi Bumi adalah perputaran Bumi pada porosnya dari arah barat ke timur, yang menyebabkan terjadinya siang dan malam."
+      },
+      {
+        "question": "Berapa lama waktu yang diperlukan Bumi untuk melakukan satu kali rotasi penuh?",
+        "options": [
+          "A. 12 jam",
+          "B. 24 jam",
+          "C. 365 hari",
+          "D. 30 hari"
+        ],
+        "correctIndex": 1,
+        "difficulty": "easy",
+        "explanation": "Satu kali rotasi Bumi memakan waktu sekitar 24 jam, yang kita kenal sebagai satu hari."
+      },
+      {
+        "question": "Apa akibat utama dari revolusi Bumi?",
+        "options": [
+          "A. Terjadinya siang dan malam",
+          "B. Terjadinya perubahan musim",
+          "C. Terjadinya pasang surut air laut",
+          "D. Terjadinya gerhana bulan"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Revolusi Bumi mengelilingi Matahari dengan sumbu miring menyebabkan perubahan musim karena variasi intensitas sinar Matahari yang diterima Bumi sepanjang tahun."
+      },
+      {
+        "question": "Mengapa saat Bumi berevolusi, kita tidak merasakan gerakan tersebut?",
+        "options": [
+          "A. Karena kecepatan revolusi sangat lambat",
+          "B. Karena kita ikut bergerak bersama Bumi",
+          "C. Karena gravitasi Bumi menahan kita",
+          "D. Karena revolusi hanya terjadi di malam hari"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Kita tidak merasakan gerakan revolusi Bumi karena kita dan semua benda di Bumi ikut bergerak bersama Bumi dengan kecepatan konstan, sehingga tidak ada perubahan kecepatan yang terasa."
+      },
+      {
+        "question": "Jika Bumi berhenti berotasi secara tiba-tiba, manakah pernyataan yang PALING TEPAT mengenai dampak yang akan terjadi?",
+        "options": [
+          "A. Tidak ada perubahan karena gravitasi tetap bekerja",
+          "B. Semua benda di permukaan Bumi akan terlempar ke timur",
+          "C. Suhu di seluruh Bumi akan menjadi seragam",
+          "D. Bumi akan langsung hancur"
+        ],
+        "correctIndex": 1,
+        "difficulty": "hard",
+        "explanation": "Jika Bumi berhenti berotasi, benda-benda di permukaan (termasuk manusia) akan terus bergerak ke arah timur karena kelembaman (inersia), sehingga terlempar ke timur dengan kecepatan tinggi. Ini adalah konsekuensi dari hukum Newton tentang gerak."
+      }
+    ]
+  },
+  {
+    "subject": "Bahasa Indonesia",
+    "topic": "Jelajah Nusantara",
+    "subTopic": "Teks Deskripsi",
+    "questions": [
+      {
+        "question": "Teks deskripsi adalah jenis teks yang bertujuan untuk...",
+        "options": [
+          "Menceritakan suatu peristiwa secara kronologis",
+          "Menggambarkan suatu objek, tempat, atau perasaan secara terperinci",
+          "Menyajikan data dan fakta secara objektif",
+          "Mengajak pembaca melakukan sesuatu"
+        ],
+        "correctIndex": 1,
+        "difficulty": "easy",
+        "explanation": "Teks deskripsi bertujuan menggambarkan objek, tempat, atau perasaan secara terperinci sehingga pembaca seolah-olah melihat, mendengar, atau merasakan sendiri."
+      },
+      {
+        "question": "Ciri khas teks deskripsi yang membedakannya dari teks lain adalah...",
+        "options": [
+          "Menggunakan kata kerja aksi",
+          "Mengandung kalimat perintah",
+          "Menggambarkan objek dengan kata-kata yang konkret dan detail",
+          "Memiliki struktur orientasi, komplikasi, resolusi"
+        ],
+        "correctIndex": 2,
+        "difficulty": "easy",
+        "explanation": "Teks deskripsi bercirikan penggambaran objek secara konkret dan detail sehingga pembaca seolah-olah melihat, mendengar, atau merasakan objek tersebut."
+      },
+      {
+        "question": "Perhatikan kalimat berikut: 'Pantai ini memiliki pasir putih yang lembut bagaikan tepung, dan ombaknya berdebur lembut di tepian.' Kalimat tersebut termasuk dalam teks deskripsi karena...",
+        "options": [
+          "Menceritakan urutan peristiwa di pantai",
+          "Menggambarkan suasana pantai dengan panca indra",
+          "Menyajikan data tentang kedalaman pantai",
+          "Mengajak pembaca untuk berlibur ke pantai"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Kalimat tersebut menggunakan panca indra (penglihatan: pasir putih, peraba: lembut, pendengaran: ombak berdebur) untuk menggambarkan pantai secara detail, ciri khas teks deskripsi."
+      },
+      {
+        "question": "Struktur teks deskripsi yang tepat adalah...",
+        "options": [
+          "Orientasi, komplikasi, resolusi",
+          "Identifikasi, deskripsi bagian, kesimpulan",
+          "Pernyataan umum, deskripsi bagian, penutup",
+          "Abstrak, orientasi, krisis, reaksi, koda"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Struktur teks deskripsi terdiri dari identifikasi (pengenalan objek), deskripsi bagian (penggambaran detail), dan kesimpulan (penutup)."
+      },
+      {
+        "question": "Manakah dari berikut ini yang BUKAN merupakan contoh kalimat deskripsi?",
+        "options": [
+          "Rumah itu memiliki dinding bata merah yang kokoh dan atap genteng berwarna oranye.",
+          "Aroma kopi hitam yang pekat memenuhi ruangan, bercampur dengan wangi kayu manis.",
+          "Setelah mandi, ia segera sarapan dan berangkat ke sekolah.",
+          "Daun-daun kering berwarna cokelat berguguran menari-nari ditiup angin sore."
+        ],
+        "correctIndex": 2,
+        "difficulty": "hard",
+        "explanation": "Kalimat 'Setelah mandi, ia segera sarapan dan berangkat ke sekolah' adalah teks prosedur atau narasi yang menceritakan urutan kegiatan, bukan menggambarkan objek secara detail."
+      }
+    ]
+  },
+  {
+    "subject": "Bahasa Indonesia",
+    "topic": "Jelajah Nusantara",
+    "subTopic": "Unsur Bahasa dalam Teks Deskripsi",
+    "questions": [
+      {
+        "question": "Kata yang digunakan untuk menggambarkan ciri-ciri fisik suatu objek dalam teks deskripsi disebut...",
+        "options": [
+          "Kata sifat",
+          "Kata kerja",
+          "Kata benda",
+          "Kata keterangan"
+        ],
+        "correctIndex": 0,
+        "difficulty": "easy",
+        "explanation": "Kata sifat (adjektiva) adalah kata yang digunakan untuk menerangkan sifat, keadaan, atau ciri-ciri suatu objek, seperti 'indah', 'tinggi', 'hijau', yang sering muncul dalam teks deskripsi untuk menggambarkan objek."
+      },
+      {
+        "question": "Kalimat berikut yang menggunakan kata depan (preposisi) untuk menunjukkan tempat adalah...",
+        "options": [
+          "Pantai itu sangat indah.",
+          "Kami berlibur di Pantai Kuta.",
+          "Ombak pantai terdengar gemuruh.",
+          "Pasir pantai berwarna putih."
+        ],
+        "correctIndex": 1,
+        "difficulty": "easy",
+        "explanation": "Kata depan 'di' pada kalimat 'Kami berlibur di Pantai Kuta' menunjukkan tempat, yaitu Pantai Kuta. Kalimat lain tidak mengandung kata depan yang menunjukkan tempat."
+      },
+      {
+        "question": "Dalam teks deskripsi, penggunaan kata 'seperti' atau 'bagai' termasuk dalam unsur bahasa...",
+        "options": [
+          "Konjungsi temporal",
+          "Kata kerja material",
+          "Majas perbandingan",
+          "Kata sifat kepemilikan"
+        ],
+        "correctIndex": 2,
+        "difficulty": "medium",
+        "explanation": "Kata 'seperti' dan 'bagai' merupakan ciri majas perbandingan (simile) yang digunakan untuk membandingkan objek dengan sesuatu yang lain, sehingga deskripsi lebih hidup dan imajinatif."
+      },
+      {
+        "question": "Perhatikan kalimat berikut: 'Gunung itu menjulang tinggi ke angkasa, puncaknya diselimuti kabut putih.' Unsur bahasa yang dominan dalam kalimat tersebut adalah...",
+        "options": [
+          "Kata kerja material",
+          "Kata sifat dan frasa keterangan",
+          "Konjungsi temporal",
+          "Kata ganti orang"
+        ],
+        "correctIndex": 1,
+        "difficulty": "medium",
+        "explanation": "Kalimat tersebut menggunakan kata sifat ('tinggi', 'putih') dan frasa keterangan ('ke angkasa', 'diselimuti kabut putih') untuk mendeskripsikan gunung secara visual, yang merupakan ciri khas teks deskripsi."
+      },
+      {
+        "question": "Manakah kalimat berikut yang menggunakan majas personifikasi dalam teks deskripsi?",
+        "options": [
+          "Pohon kelapa itu melambai-lambai ditiup angin.",
+          "Air laut berwarna biru jernih.",
+          "Pasir pantai terasa lembut di kaki.",
+          "Matahari terbit di ufuk timur."
+        ],
+        "correctIndex": 0,
+        "difficulty": "medium",
+        "explanation": "Majas personifikasi memberikan sifat manusia pada benda mati. 'Pohon kelapa melambai-lambai' seolah-olah pohon melakukan gerakan seperti manusia, padahal sebenarnya ditiup angin."
+      }
+    ]
+  }
+]

@@ -13,8 +13,11 @@ import {
 } from '../generated/prisma/client';
 import { GRADE_TOPICS } from '../data/curriculum-topics';
 import { getContent } from '../data/curriculum-content';
-import QUIZ_MAP from '../data/quiz-bank';
-import { quizKey } from '../data/quiz-bank';
+import QUIZ_MAP_OLD from '../data/quiz-bank';
+import { quizKey as quizKeyOld } from '../data/quiz-bank';
+import { getQuiz as getQuizSD5 } from '../data/quiz-bank-sd5';
+import { getQuiz as getQuizSMP7 } from '../data/quiz-bank-smp7';
+import { getQuiz as getQuizSMA11 } from '../data/quiz-bank-sma11';
 
 async function main() {
   console.log('🌱 Seeding database...\n');
@@ -196,8 +199,18 @@ async function main() {
       });
 
       // Create quiz from bank if available
-      const quizQuestions = QUIZ_MAP[quizKey(topic.subject, topic.topic, topic.subTopic)];
-      if (quizQuestions) {
+      let quizQuestions: any[] | undefined;
+      if (gradeLevel === "SD_5") {
+        quizQuestions = getQuizSD5(topic.subject, topic.topic, topic.subTopic);
+      } else if (gradeLevel === "SMP_1") {
+        quizQuestions = getQuizSMP7(topic.subject, topic.topic, topic.subTopic);
+      } else if (gradeLevel === "SMA_2") {
+        quizQuestions = getQuizSMA11(topic.subject, topic.topic, topic.subTopic);
+      }
+      if (!quizQuestions || quizQuestions.length === 0) {
+        quizQuestions = QUIZ_MAP_OLD[quizKeyOld(topic.subject, topic.topic, topic.subTopic)];
+      }
+      if (quizQuestions && quizQuestions.length > 0) {
         const maxScore = quizQuestions.length * 10;
 
         await prisma.quiz.create({
