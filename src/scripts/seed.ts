@@ -22,6 +22,19 @@ import { getQuiz as getQuizSMA11 } from '../data/quiz-bank-sma11';
 async function main() {
   console.log('🌱 Seeding database...\n');
 
+  // ── Backup Telegram IDs before clearing ────────────────
+  console.log('💾 Backing up Telegram IDs...');
+  const existingStudents = await prisma.student.findMany({
+    where: { telegramId: { not: null } },
+    select: { studentId: true, telegramId: true, parentTelegramId: true },
+  });
+  const telegramBackup = existingStudents.map(s => ({
+    studentId: s.studentId,
+    telegramId: s.telegramId,
+    parentTelegramId: s.parentTelegramId,
+  }));
+  console.log(`   → ${telegramBackup.length} student(s) with Telegram ID backed up`);
+
   // Clean existing data in correct order (respecting FK constraints)
   console.log('🧹 Clearing existing data...');
   await prisma.progressSnap.deleteMany();
@@ -143,6 +156,23 @@ async function main() {
   console.log(`   ✓ Andi (SD/5 - Kak Budi)`);
   console.log(`   ✓ Sari (SMP/1 - Kak Dewi)`);
   console.log(`   ✓ Budi (SMA/2 - Kak Raka)\n`);
+
+  // ── Restore Telegram IDs from backup ─────────────────────
+  if (telegramBackup.length > 0) {
+    console.log('📞 Restoring Telegram IDs...');
+    for (const backup of telegramBackup) {
+      const update: Record<string, any> = {};
+      if (backup.telegramId) update.telegramId = backup.telegramId;
+      if (backup.parentTelegramId) update.parentTelegramId = backup.parentTelegramId;
+      if (Object.keys(update).length > 0) {
+        await prisma.student.updateMany({
+          where: { studentId: backup.studentId },
+          data: update,
+        });
+        console.log(`   ✓ ${backup.studentId}: Telegram ID restored`);
+      }
+    }
+  }
 
   // ── Curricula, Materials & Quizzes ────────────────────────
   console.log('📚 Creating curricula, materials and quizzes from data bank...\n');
