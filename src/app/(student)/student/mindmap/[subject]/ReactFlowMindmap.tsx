@@ -76,8 +76,8 @@ const nodeTypes = { mindmapNode: MindmapNode };
 function layoutNodes(nodes: Node[], edges: any[]): Node[] {
   const g = new dagre.graphlib.Graph();
   g.setDefaultEdgeLabel(() => ({}));
-  g.setGraph({ rankdir: "TB", nodesep: 140, ranksep: 120, marginx: 100, marginy: 100 });
-  nodes.forEach((n) => g.setNode(n.id, { width: n.data?.isCenter ? 250 : 220, height: n.data?.isCenter ? 80 : 68 }));
+  g.setGraph({ rankdir: "LR", nodesep: 180, ranksep: 320, marginx: 200, marginy: 160 });
+  nodes.forEach((n) => g.setNode(n.id, { width: n.data?.isCenter ? 200 : 190, height: n.data?.isCenter ? 64 : 56 }));
   edges.forEach((e) => g.setEdge(e.source, e.target));
   dagre.layout(g);
 
@@ -86,39 +86,38 @@ function layoutNodes(nodes: Node[], edges: any[]): Node[] {
     return {
       ...n,
       position: {
-        x: pos.x - (n.data?.isCenter ? 125 : 110),
-        y: pos.y - (n.data?.isCenter ? 40 : 34),
+        x: pos.x - (n.data?.isCenter ? 100 : 95),
+        y: pos.y - (n.data?.isCenter ? 32 : 28),
       },
     };
   });
 
   const center = positioned.find((n) => n.id === "center");
+  if (center) center.position = { x: 80, y: 360 - 32 };
+
   const branches = positioned.filter((n) => n.id !== "center" && !n.id.includes("-leaf-"));
   const leafs = positioned.filter((n) => n.id.includes("-leaf-"));
 
-  const centerX = 540;
-  const centerY = 330;
-  if (center) center.position = { x: centerX - 125, y: centerY - 40 };
-
-  // Place branches in a wide 2-row arc to prevent vertical stacking.
-  const perRow = Math.ceil(branches.length / 2);
+  // Spread branches, center is left side, branches spread to the right
+  const totalBranches = branches.length;
+  const spreadHeight = Math.max(totalBranches * 110, 350);
+  const startY = 360 - spreadHeight / 2;
   branches.forEach((n, i) => {
-    const row = i < perRow ? 0 : 1;
-    const col = i % perRow;
+    const gap = spreadHeight / Math.max(totalBranches - 1, 1);
     n.position = {
-      x: 160 + col * 280,
-      y: row === 0 ? 120 : 420,
+      x: 340 + Math.floor(i / 4) * 320,
+      y: startY + i * gap,
     };
   });
 
-  // Keep only one or two leaf snippets per branch and place them beside their parent.
-  leafs.slice(0, branches.length * 2).forEach((n, i) => {
+  // Place leafs to the right of their parent branch
+  leafs.forEach((n, i) => {
     const parentIndex = Math.min(Math.floor(i / 2), Math.max(branches.length - 1, 0));
-    const parent = branches[parentIndex] || branches[0];
-    const side = i % 2 === 0 ? 1 : -1;
+    const parent = branches[parentIndex];
+    const col = i % 2;
     n.position = {
-      x: (parent?.position?.x ?? centerX) + (side === 1 ? 180 : -10),
-      y: (parent?.position?.y ?? centerY) + (i % 2 === 0 ? 92 : 138),
+      x: (parent?.position?.x ?? 340) + 300 + col * 260,
+      y: (parent?.position?.y ?? 360) + (col === 0 ? -28 : 28),
     };
   });
 
@@ -130,15 +129,16 @@ function buildEdges(rawNodes: { id: string; children: { label: string }[] }[], c
   rawNodes.forEach((rn, i) => {
     const color = COLORS[i % COLORS.length];
     edges.push({
-      id: `e-c-${rn.id}`, source: centerId, target: rn.id, type: "smoothstep",
+      id: `e-c-${rn.id}`, source: centerId, target: rn.id, type: "default",
       style: { stroke: color, strokeWidth: 2.8, strokeOpacity: 0.7 },
+      animated: true,
     });
     rn.children.slice(0, 2).forEach((child, j) => {
       edges.push({
         id: `e-${rn.id}-leaf-${j}`,
         source: rn.id,
         target: `${rn.id}-leaf-${j}`,
-        type: "smoothstep",
+        type: "default",
         style: { stroke: color, strokeWidth: 1.8, strokeOpacity: 0.42 },
       });
     });
