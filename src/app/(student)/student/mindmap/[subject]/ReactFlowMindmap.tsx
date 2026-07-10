@@ -7,71 +7,16 @@ import {
   Controls,
   useNodesState,
   useEdgesState,
-  Handle,
-  Position,
   type Node,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import dagre from "@dagrejs/dagre";
 
-import { Globe2, Compass, Flame, Map, Sun, Mountain, Ship, Bird, BookOpen, type LucideIcon } from "lucide-react";
-
-const ICON_MAP: Record<string, LucideIcon> = {
-  geografis: Globe2, astronomis: Compass, maritim: Ship, agraris: Mountain,
-  cincin: Flame, api: Flame, pasifik: Globe2, unik: Bird, potensi: Sun,
-  peta: Map, budaya: BookOpen, bersejarah: BookOpen,
-};
-
-function getIcon(name: string): LucideIcon | null {
-  const lower = name.toLowerCase();
-  for (const [key, icon] of Object.entries(ICON_MAP)) if (lower.includes(key)) return icon;
-  return null;
-}
+import { CustomNode, type CustomNodeDataType } from "@/components/mindmap/CustomNode";
 
 const COLORS = ["#FF6B6B","#4ECDC4","#FFD93D","#6BCB77","#A66CFF","#FF8C42","#4D96FF","#FF6BDF"];
 
-interface NodeData { label: string; color: string; isCenter?: boolean; icon?: string; }
-
-function MindmapNode({ data }: { data: NodeData }) {
-  const isCenter = data.isCenter;
-  const IconComp = data.icon ? getIcon(data.icon) : null;
-  const bg = isCenter
-    ? "linear-gradient(135deg, #FFD93D 0%, #FFB347 100%)"
-    : `${data.color}18`;
-  const border = isCenter ? "#E6A800" : data.color;
-  const shadow = isCenter
-    ? "0 10px 24px rgba(230, 168, 0, 0.28)"
-    : `0 8px 20px ${data.color}24`;
-
-  return (
-    <div className="relative">
-      <Handle type="target" position={Position.Top} style={{ opacity: 0 }} />
-      <div
-        className="font-bold transition-all duration-150 hover:scale-105"
-        style={{
-          background: bg,
-          border: `2px solid ${border}`,
-          borderRadius: isCenter ? "999px" : "20px",
-          color: isCenter ? "#fff" : "#2F2A1E",
-          boxShadow: shadow,
-          maxWidth: isCenter ? 180 : 220,
-          padding: isCenter ? "12px 22px" : "10px 14px",
-          fontSize: isCenter ? "15px" : "12px",
-          fontFamily: "'Nunito', sans-serif",
-          backdropFilter: isCenter ? "none" : "blur(4px)",
-        }}
-      >
-        <div className="flex items-center gap-2 justify-center">
-          {IconComp && !isCenter && <IconComp size={16} color={data.color} strokeWidth={2.5} />}
-          <span className="leading-tight text-center">{data.label}</span>
-        </div>
-      </div>
-      <Handle type="source" position={Position.Bottom} style={{ opacity: 0 }} />
-    </div>
-  );
-}
-
-const nodeTypes = { mindmapNode: MindmapNode };
+const nodeTypes = { mindmapNode: CustomNode as any };
 
 function layoutNodes(nodes: Node[], edges: any[]): Node[] {
   const g = new dagre.graphlib.Graph();
@@ -98,7 +43,6 @@ function layoutNodes(nodes: Node[], edges: any[]): Node[] {
   const branches = positioned.filter((n) => n.id !== "center" && !n.id.includes("-leaf-"));
   const leafs = positioned.filter((n) => n.id.includes("-leaf-"));
 
-  // Spread branches, center is left side, branches spread to the right
   const totalBranches = branches.length;
   const spreadHeight = Math.max(totalBranches * 140, 400);
   const startY = 360 - spreadHeight / 2;
@@ -110,7 +54,6 @@ function layoutNodes(nodes: Node[], edges: any[]): Node[] {
     };
   });
 
-  // Place leafs to the right of their parent branch
   leafs.forEach((n, i) => {
     const parentIndex = Math.min(Math.floor(i / 2), Math.max(branches.length - 1, 0));
     const parent = branches[parentIndex];
@@ -150,12 +93,12 @@ interface Props { centerTitle: string; rawNodes: { id: string; label: string; ch
 
 export function ReactFlowMindmap({ centerTitle, rawNodes }: Props) {
   const { nodes, edges } = useMemo(() => {
-    const ns: Node[] = [];
+    const ns: Node<CustomNodeDataType>[] = [];
     ns.push({
       id: "center",
       type: "mindmapNode",
       position: { x: 0, y: 0 },
-      data: { label: `🧠 ${centerTitle}`, color: "#FFD93D", isCenter: true },
+      data: { label: `🧠 ${centerTitle}`, color: "#FFD93D", isCenter: true, theme: "sd" } as CustomNodeDataType,
     });
     rawNodes.forEach((rn, i) => {
       const color = COLORS[i % COLORS.length];
@@ -163,14 +106,14 @@ export function ReactFlowMindmap({ centerTitle, rawNodes }: Props) {
         id: rn.id,
         type: "mindmapNode",
         position: { x: 0, y: 0 },
-        data: { label: rn.label, color, icon: rn.label },
+        data: { label: rn.label, color, icon: rn.label, theme: "sd", description: rn.children.map(c => c.label).join(" • ") } as CustomNodeDataType,
       });
       rn.children.slice(0, 2).forEach((child, j) => {
         ns.push({
           id: `${rn.id}-leaf-${j}`,
           type: "mindmapNode",
           position: { x: 0, y: 0 },
-          data: { label: child.label, color, icon: child.label },
+          data: { label: child.label, color, icon: child.label, theme: "sd" } as CustomNodeDataType,
         });
       });
     });
@@ -182,18 +125,31 @@ export function ReactFlowMindmap({ centerTitle, rawNodes }: Props) {
 
   return (
     <div className="w-full relative" style={{ height: "calc(100vh - 110px)" }}>
-      {/* Background gradient blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-15" style={{ zIndex: 0 }}>
+      {/* Background dekoratif — dot grid + gradient blobs pastel */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
         <svg className="absolute inset-0 w-full h-full">
           <defs>
-            <pattern id="gf" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-              <circle cx="10" cy="10" r="1" fill="#333" opacity="0.3" />
+            <pattern id="dot-grid" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+              <circle cx="12" cy="12" r="1.5" fill="#c084fc" opacity="0.18" />
             </pattern>
+            <radialGradient id="blob-pink" cx="20%" cy="15%" r="60%">
+              <stop offset="0%" stopColor="#fbc7d4" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="#fbc7d4" stopOpacity="0" />
+            </radialGradient>
+            <radialGradient id="blob-cyan" cx="80%" cy="80%" r="60%">
+              <stop offset="0%" stopColor="#a7f3d0" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#a7f3d0" stopOpacity="0" />
+            </radialGradient>
+            <radialGradient id="blob-blue" cx="60%" cy="10%" r="50%">
+              <stop offset="0%" stopColor="#bfdbfe" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#bfdbfe" stopOpacity="0" />
+            </radialGradient>
           </defs>
-          <rect width="100%" height="100%" fill="url(#gf)" />
+          <rect width="100%" height="100%" fill="url(#dot-grid)" />
+          <rect width="100%" height="100%" fill="url(#blob-pink)" />
+          <rect width="100%" height="100%" fill="url(#blob-cyan)" />
+          <rect width="100%" height="100%" fill="url(#blob-blue)" />
         </svg>
-        <div className="absolute -top-20 -left-20 w-72 h-72 rounded-full bg-gradient-to-br from-pink-400 via-purple-300 to-blue-200 blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-gradient-to-tr from-cyan-400 via-sky-300 to-indigo-200 blur-3xl animate-pulse" style={{ animationDelay: "3s" }} />
       </div>
 
       <ReactFlow
