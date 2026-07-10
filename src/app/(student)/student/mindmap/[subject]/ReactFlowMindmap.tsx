@@ -76,7 +76,7 @@ const nodeTypes = { mindmapNode: MindmapNode };
 function layoutNodes(nodes: Node[], edges: any[]): Node[] {
   const g = new dagre.graphlib.Graph();
   g.setDefaultEdgeLabel(() => ({}));
-  g.setGraph({ rankdir: "LR", nodesep: 180, ranksep: 320, marginx: 200, marginy: 160 });
+  g.setGraph({ rankdir: "LR", nodesep: 200, ranksep: 360, marginx: 200, marginy: 160 });
   nodes.forEach((n) => g.setNode(n.id, { width: n.data?.isCenter ? 200 : 190, height: n.data?.isCenter ? 64 : 56 }));
   edges.forEach((e) => g.setEdge(e.source, e.target));
   dagre.layout(g);
@@ -100,7 +100,7 @@ function layoutNodes(nodes: Node[], edges: any[]): Node[] {
 
   // Spread branches, center is left side, branches spread to the right
   const totalBranches = branches.length;
-  const spreadHeight = Math.max(totalBranches * 110, 350);
+  const spreadHeight = Math.max(totalBranches * 140, 400);
   const startY = 360 - spreadHeight / 2;
   branches.forEach((n, i) => {
     const gap = spreadHeight / Math.max(totalBranches - 1, 1);
