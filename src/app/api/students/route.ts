@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
     }
 
     const want = !stages || stages === "all"
-      ? ["curriculum", "content", "assessment", "schedule"]
+      ? ["curriculum", "content", "assessment", "guardian", "schedule"]
       : stages;
 
     const results: { stage: string; jobId?: string; status: string; error?: string }[] = [];
@@ -85,27 +85,72 @@ export async function POST(request: NextRequest) {
     }
 
     if (want.includes("curriculum")) {
-      await trigger(QUEUES.CURRICULUM_REVIEW, { studentId: student.id, gradeLevel: student.gradeLevel }, "curriculum");
+      // Check if curriculum already exists — call generateCurriculumDraft directly
+      const existingCurriculum = await prisma.curriculum.findFirst({
+        where: { studentId: student.id },
+      });
+      if (existingCurriculum) {
+        results.push({ stage: "curriculum", status: "skipped (already exists)" });
+      } else {
+        const { generateCurriculumDraft } = await import("@/agents/curriculum/service");
+        await generateCurriculumDraft(student.id);
+        results.push({ stage: "curriculum", status: "generated" });
+      }
     }
 
     if (want.includes("content")) {
       const materials = await prisma.material.findMany({
-        where: { curriculum: { studentId: student.id }, status: { in: ["DRAFT", "RAW"] } },
+        where: {
+          curriculum: { studentId: student.id },
+          status: { in: ["DRAFT", "RAW"] },
+        },
       });
       for (const m of materials) {
-        await trigger(QUEUES.CONTENT_SCRAPE, { materialId: m.id, topic: m.topic, subTopic: m.subTopic, gradeLevel: m.gradeLevel, sources: [] }, `content:${m.topic}`);
+        await trigger(
+          QUEUES.CONTENT_SCRAPE,
+          { materialId: m.id, topic: m.topic, subTopic: m.subTopic, gradeLevel: m.gradeLevel, sources: [] },
+          `content:${m.topic}`,
+        );
       }
-      if (materials.length === 0) results.push({ stage: "content", status: "skipped (no materials)" });
+      if (materials.length === 0) results.push({ stage: "content", status: "skipped (no pending materials)" });
     }
 
     if (want.includes("assessment")) {
       const materials = await prisma.material.findMany({
         where: { curriculum: { studentId: student.id }, status: "READY" },
+        include: { _count: { select: { quizzes: true } } },
       });
+      let queued = 0;
       for (const m of materials) {
-        await trigger(QUEUES.ASSESSMENT_GENERATE, { materialId: m.id, topic: m.topic, gradeLevel: m.gradeLevel, questionCount: 5 }, `assessment:${m.topic}`);
+        if (m._count.quizzes > 0) {
+          results.push({ stage: `assessment:${m.topic}`, status: "skipped (quizzes exist)" });
+          continue;
+        }
+        await trigger(
+          QUEUES.ASSESSMENT_GENERATE,
+          { studentId: student.id, materialId: m.id, topic: m.topic, gradeLevel: m.gradeLevel, questionCount: 5 },
+          `assessment:${m.topic}`,
+        );
+        queued++;
       }
       if (materials.length === 0) results.push({ stage: "assessment", status: "skipped (no ready materials)" });
+      else if (queued === 0) results.push({ stage: "assessment", status: "all materials already have quizzes" });
+    }
+
+    if (want.includes("guardian")) {
+      // Queue a weekly report for the student (last 7 days)
+      const endDate = new Date();
+      const startDate = new Date(endDate);
+      startDate.setDate(startDate.getDate() - 7);
+      await trigger(
+        QUEUES.GUARDIAN_REPORT,
+        {
+          studentId: student.id,
+          periodStart: startDate.toISOString(),
+          periodEnd: endDate.toISOString(),
+        },
+        "guardian",
+      );
     }
 
     if (want.includes("schedule")) {

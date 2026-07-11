@@ -160,6 +160,21 @@ export async function createEmergencyIntervention(
     `[guardian/safety] EMERGENCY escalation created: intervention=${intervention.id} for student=${escalation.studentId}`,
   );
 
+  // Send emergency alert to parent
+  try {
+    const { sendEmergencyAlertToParent } = await import("./notifier");
+    await sendEmergencyAlertToParent(
+      escalation.studentId,
+      escalation.issueType,
+      escalation.context,
+    );
+  } catch (err) {
+    console.error(
+      "[guardian/safety] Failed to send emergency alert:",
+      err instanceof Error ? err.message : String(err),
+    );
+  }
+
   return intervention.id;
 }
 

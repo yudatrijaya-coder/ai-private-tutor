@@ -5,6 +5,8 @@ import { useState } from "react";
 
 export default function StudentLoginPage() {
   const router = useRouter();
+  const searchParams = new URLSearchParams(typeof window !== "undefined" ? window.location.search : "");
+  const redirectTo = searchParams.get("redirect") || "/student";
   const [studentId, setStudentId] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -34,7 +36,7 @@ export default function StudentLoginPage() {
       localStorage.setItem("student_class", data.student.gradeLevel ?? "SD Kelas 5");
       localStorage.setItem("student_character", data.student.character ?? "kak-budi");
 
-      router.push("/student");
+      router.push(redirectTo);
       router.refresh();
     } catch {
       setError("Terjadi kesalahan koneksi");

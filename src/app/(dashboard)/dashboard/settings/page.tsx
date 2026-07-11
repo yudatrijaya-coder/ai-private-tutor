@@ -302,7 +302,7 @@ export default function SettingsPage() {
           </div>
         </SectionCard>
 
-        {/* ── Queue ── */}
+        {/* ── Queue & Pipeline ── */}
         <SectionCard title="⚙️ Queue & Pipeline">
           <div className="text-sm space-y-3" style={{ color: "var(--su-text-dim)" }}>
             <div className="flex items-center justify-between py-2">
@@ -321,6 +321,14 @@ export default function SettingsPage() {
                 }
               />
             </div>
+            <a
+              href="/dashboard/settings/api-usage"
+              className="flex items-center justify-between py-2 rounded-lg px-3 transition-colors hover:opacity-80"
+              style={{ backgroundColor: "var(--su-bg-hover)" }}
+            >
+              <span className="font-medium" style={{ color: "var(--su-text)" }}>💰 Penggunaan API</span>
+              <span style={{ color: "var(--su-info)" }}>Lihat detail →</span>
+            </a>
             {queue?.queues && queue.queues.map((q) => (
               <div key={q.name} className="p-3 rounded-lg" style={{ backgroundColor: "var(--su-bg-hover)" }}>
                 <div className="flex items-center justify-between mb-2">

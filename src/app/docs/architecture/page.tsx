@@ -22,7 +22,7 @@ export default function ArchitecturePage() {
                 ['Database', 'SQLite (dev) / PostgreSQL (prod)'],
                 ['Queue', 'BullMQ + Redis / In-memory fallback'],
                 ['Bot', 'Telegraf.js (Telegram)'],
-                ['LLM', 'SumoPod / OpenCode / OpenRouter'],
+                ['LLM', '9Router combo / SumoPod / fallback chain'],
               ] as const).map(([layer, tech]) => (
                 <tr key={layer}>
                   <td className="p-2 border font-medium">{layer}</td>
@@ -334,6 +334,157 @@ Scheduler ──► reminder & jadwal harian`}
           </pre>
         </Section>
 
+        <Section title="🧠 Mindmap — Premium Interactive Learning">
+          <p className="mb-3">
+            Fitur flagship berbasis <strong>React Flow</strong> untuk visualisasi topik belajar secara interaktif.
+            Tersedia di <code className="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono">/student/mindmap/[subject]</code>.
+          </p>
+
+          <h3 className="font-semibold text-slate-800 mb-2">Key Features</h3>
+          <ul className="list-disc pl-6 space-y-1.5 text-slate-700 mb-4">
+            <li><strong>Radial quadrant layout</strong> — branches evenly spaced 360°, leaves radiate outward from parent branch direction</li>
+            <li><strong>Lucide icons</strong> per node — auto-resolved via <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">iconMap.ts</code></li>
+            <li><strong>Per-icon CSS animations</strong> — floating, wiggling, spinning, pulsing personality per node</li>
+            <li><strong>4 directional handles</strong> per node — computed dynamically via <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">angleDir()</code></li>
+            <li><strong>3-level hierarchy:</strong> center (gold glow + pulse), branch (solid border, float), leaf (solid border)</li>
+            <li><strong>SD/SMP/SMA theming</strong> — roundedness, padding, font, shadow intensity per jenjang</li>
+            <li><strong>Background</strong> — pastel gradient blobs (SVG radial gradients)</li>
+          </ul>
+
+          <h3 className="font-semibold text-slate-800 mb-2">Component Architecture</h3>
+          <pre className="bg-slate-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm mb-4 leading-relaxed">
+{`src/
+├── app/(student)/student/mindmap/[subject]/
+│   ├── ReactFlowMindmap.tsx   # Main — layout, edges, ReactFlow wrapper
+│   └── page.tsx               # Parse markdown → mindmap nodes
+├── components/mindmap/
+│   ├── CustomNode.tsx         # Node render — icons, themes, animations
+│   ├── iconMap.ts             # Topic name → Lucide icon resolver
+│   └── animMap.ts             # Per-icon CSS animation definitions
+└── lib/mindmap-template.ts    # parseMindmapFromMarkdown() utility`}
+          </pre>
+
+          <h3 className="font-semibold text-slate-800 mb-2">Template Format</h3>
+          <p className="mb-2 text-sm text-slate-600">Content dari slide markdown otomatis diparse:</p>
+          <pre className="bg-slate-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm mb-2 leading-relaxed">{`## Sistem Tata Surya
+- Planet dalam (Merkurius, Venus, Bumi, Mars)
+- Planet luar (Jupiter, Saturnus, Uranus, Neptunus)
+- Asteroid dan Komet
+
+## Gerhana
+- Gerhana Matahari
+- Gerhana Bulan`}</pre>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            <DataCard title="Layout Algorithm" items={['Radial — no dagre', '360° even branch spread', '70% wedge utilization', 'Multi-ring leaf distance']} />
+            <DataCard title="Animation Types" items={['centerPulse — gold glow', 'floatGentle — branch sway', 'wiggle — playful icons', 'spinSlow — technology icons']} />
+          </div>
+        </Section>
+
+        <Section title="📝 Quiz Bank & Exam Generator">
+          <p className="mb-3">
+            Bank soal statis berisi <strong>1650 soal</strong> yang digenerate otomatis menggunakan 9Router LLM dari data kurikulum SIBI.
+          </p>
+
+          <table className="w-full border-collapse mb-4">
+            <thead>
+              <tr className="bg-slate-100">
+                <th className="p-2 text-left border">Jenjang</th>
+                <th className="p-2 text-left border">Entries</th>
+                <th className="p-2 text-left border">Total Soal</th>
+                <th className="p-2 text-left border">File</th>
+              </tr>
+            </thead>
+            <tbody>
+              {([
+                ['SD Kelas 5', '108', '~540', 'src/data/quiz-bank-sd5.ts'],
+                ['SMP Kelas 1', '99', '~495', 'src/data/quiz-bank-smp7.ts'],
+                ['SMA Kelas 2', '123', '~615', 'src/data/quiz-bank-sma11.ts'],
+              ] as const).map(([jenjang, entries, total, file]) => (
+                <tr key={jenjang}>
+                  <td className="p-2 border font-medium">{jenjang}</td>
+                  <td className="p-2 border text-center">{entries}</td>
+                  <td className="p-2 border text-center">{total}</td>
+                  <td className="p-2 border font-mono text-xs">{file}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <h3 className="font-semibold text-slate-800 mb-2">Exam Generator</h3>
+          <ul className="list-disc pl-6 space-y-1.5 text-slate-700 mb-3">
+            <li><strong>Template-based</strong> — auto-generate dari weekly timeline di <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">/dashboard/quizzes/exam/template</code></li>
+            <li><strong>Endpoints:</strong> <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">/api/exam</code> dan <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">/api/exam/template</code></li>
+            <li>Quiz detail page di <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">/dashboard/quizzes/[id]</code></li>
+            <li>Seed data: ada di <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">scripts/seed.ts</code> + backup via Telegram</li>
+          </ul>
+        </Section>
+
+        <Section title="📚 Curriculum SIBI 2026/2027">
+          <p className="mb-3">
+            Kurikulum dari PDF resmi Kemendikdasmen melalui SIBI (Sistem Informasi Perbukuan Indonesia).
+          </p>
+
+          <table className="w-full border-collapse mb-4">
+            <thead>
+              <tr className="bg-slate-100">
+                <th className="p-2 text-left border">Jenjang</th>
+                <th className="p-2 text-left border">Topics</th>
+                <th className="p-2 text-left border">Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              {([
+                ['SD Kelas 5', '~30 topics', 'PDF resmi Kemendikdasmen'],
+                ['SMP Kelas 1', '~30 topics', 'SIBI Kemendikdasmen'],
+                ['SMA Kelas 2', '~35 topics', 'SIBI Kemendikdasmen'],
+              ] as const).map(([jenjang, topics, source]) => (
+                <tr key={jenjang}>
+                  <td className="p-2 border font-medium">{jenjang}</td>
+                  <td className="p-2 border">{topics}</td>
+                  <td className="p-2 border text-slate-600">{source}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <p className="text-slate-700 mb-2">
+            Setiap topic mencakup: subject, sub-topics lengkap dengan deskripsi, urutan prioritas belajar, dan referensi sumber.
+            Ditampilkan dengan <strong>PaginatedTable</strong> di halaman curriculum dashboard.
+          </p>
+        </Section>
+
+        <Section title="🚀 Agent Pipeline">
+          <p className="mb-3">
+            Pipeline trigger untuk menjalankan agent workflow dari dashboard — tersedia di <code className="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono">/dashboard/agents</code>.
+          </p>
+
+          <h3 className="font-semibold text-slate-800 mb-2">Pipeline Stages</h3>
+          <pre className="bg-slate-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm mb-4 leading-relaxed">
+{`Student Selected
+    │
+    ▼
+📚 Curriculum  ──► Generate draft kurikulum per student
+    │
+    ▼
+📄 Content     ──► Scrape & process materi dari internet
+    │
+    ▼
+📝 Quiz        ──► Generate soal dari materi
+    │
+    ▼
+📅 Jadwal      ──► Assign jadwal belajar harian`}
+          </pre>
+
+          <h3 className="font-semibold text-slate-800 mb-2">How It Works</h3>
+          <ul className="list-disc pl-6 space-y-1.5 text-slate-700 mb-3">
+            <li><strong>Component:</strong> <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">PipelineTrigger.tsx</code> — UI dengan tombol per stage + full pipeline</li>
+            <li><strong>API:</strong> POST <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">/api/students</code> dengan body <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">{`{action:"trigger", studentId, stages}`}</code></li>
+            <li><strong>Queue:</strong> Setiap stage masuk ke BullMQ queue — otomatis fallback ke in-memory jika Redis tidak tersedia</li>
+            <li><strong>Mode indicator:</strong> UI menampilkan apakah pakai BullMQ (✅) atau in-memory (🟡)</li>
+          </ul>
+        </Section>
+
         <Section title="Key Design Decisions">
           <table className="w-full border-collapse">
             <thead>
@@ -344,6 +495,8 @@ Scheduler ──► reminder & jadwal harian`}
             </thead>
             <tbody>
               {([
+                ['Mindmap radial layout (no dagre)', 'Layout kustom memberikan kontrol penuh atas spacing & directional handles'],
+                ['Quiz bank statis (pre-generated)', '1650 soal siap pakai tanpa LLM call — lebih cepat & hemat biaya'],
                 ['Curriculum Agent verify content', 'Agent tahu kurikulum, lebih efisien daripada human review'],
                 ['Scrape per priority', 'Hemat bandwidth — student butuh week_1 dulu'],
                 ['Video hanya untuk topik visual', 'Video mahal & lama, text lebih cepat untuk topik teoritis'],
@@ -404,6 +557,25 @@ function AgentCard({
           ))}
         </ul>
       </div>
+    </div>
+  )
+}
+
+function DataCard({
+  title,
+  items,
+}: {
+  title: string
+  items: string[]
+}) {
+  return (
+    <div className="p-3 rounded-lg bg-white border border-slate-200">
+      <h4 className="font-semibold text-slate-800 mb-2 text-sm">{title}</h4>
+      <ul className="text-sm text-slate-600 space-y-0.5">
+        {items.map((item) => (
+          <li key={item} className="text-xs">• {item}</li>
+        ))}
+      </ul>
     </div>
   )
 }

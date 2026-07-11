@@ -38,7 +38,8 @@ export async function POST(request: NextRequest) {
     const usedTopics = new Set<string>();
 
     for (const material of curriculum.materials) {
-      if (topics.includes(material.topic)) {
+      // If topics array is empty, use all materials
+      if (topics.length === 0 || topics.includes(material.topic)) {
         usedTopics.add(material.topic);
         for (const quiz of material.quizzes) {
           const qs = (quiz.questions as any[]) || [];

@@ -1,6 +1,7 @@
 import OpenAI from "openai";
 import type { ChatCompletionCreateParamsNonStreaming, ChatCompletionCreateParamsStreaming } from "openai/resources/chat/completions";
-import type { AgentRole, ChatMessage, LLMCallOptions, ModelPricing } from "./types";
+import type { AgentRole, ChatMessage, LLMCallOptions, ModelPricing, LLMResult } from "./types";
+import { prisma } from "@/lib/prisma";
 
 // ─── Re-export all types ──────────────────────────────────────
 export * from "./types";
@@ -113,6 +114,7 @@ export async function callLLM(
   let lastError: Error | null = null;
 
   for (const model of models) {
+    const start = Date.now();
     try {
       const body: ChatCompletionCreateParamsNonStreaming = {
         model,
@@ -122,7 +124,27 @@ export async function callLLM(
       };
 
       const response = await getClient().chat.completions.create(body);
-      return response.choices[0]?.message?.content ?? null;
+      const latencyMs = Date.now() - start;
+      const content = response.choices[0]?.message?.content ?? null;
+      const usage = response.usage;
+
+      // Log to ApiUsage (fire-and-forget — never block on logging)
+      if (usage) {
+        const modelUsed = response.model || model;
+        const cost = estimateCostRaw(modelUsed, usage.prompt_tokens, usage.completion_tokens);
+        logApiUsage({
+          studentId: options?.studentId,
+          agentType: role,
+          model: modelUsed,
+          promptTokens: usage.prompt_tokens,
+          completionTokens: usage.completion_tokens,
+          totalTokens: usage.total_tokens,
+          latencyMs,
+          costUsd: cost,
+        }).catch(() => {});
+      }
+
+      return content;
     } catch (err) {
       lastError = err instanceof Error ? err : new Error(String(err));
       console.warn(`[LLM] ${model} failed: ${lastError.message}. Trying fallback…`);
@@ -189,10 +211,39 @@ export function estimateCost(
   outputTokens: number,
 ): number {
   const model = FALLBACK_CHAIN[role][0];
+  return estimateCostRaw(model, inputTokens, outputTokens);
+}
+
+/** Estimate cost for a given model name (used internally + by ApiUsage logging). */
+function estimateCostRaw(model: string, inputTokens: number, outputTokens: number): number {
   const rate = MODEL_PRICING[model];
   if (!rate) return 0;
-
   return (inputTokens / 1_000_000) * rate.input + (outputTokens / 1_000_000) * rate.output;
+}
+
+// ─── ApiUsage Logger ──────────────────────────────────────────
+
+interface UsageLogInput {
+  studentId?: string;
+  agentType?: string;
+  model: string;
+  promptTokens: number;
+  completionTokens: number;
+  totalTokens: number;
+  latencyMs: number;
+  costUsd: number;
+}
+
+/**
+ * Fire-and-forget — logs LLM usage to the ApiUsage table.
+ * Never throws — silent on error.
+ */
+async function logApiUsage(input: UsageLogInput): Promise<void> {
+  try {
+    await prisma.apiUsage.create({ data: input as any });
+  } catch (err) {
+    console.warn("[LLM] Failed to log API usage:", err instanceof Error ? err.message : String(err));
+  }
 }
 
 // ─── Safe Init: noop sentinel when key is missing ─────────────

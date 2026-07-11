@@ -1,8 +1,9 @@
 # VPS Deployment Guide — AI Private Tutor
 
-> **Target:** Ubuntu 22.04 LTS at `43.157.228.42`
-> **Stack:** Next.js 15+ (npm) · PostgreSQL 16 · Redis 7 · Caddy 2 (reverse proxy + auto SSL)
-> **Process:** PM2 (recommended) or systemd
+> **Target:** Ubuntu 22.04 LTS at `43.133.151.242`
+> **Stack:** Next.js 16 (npm) · PostgreSQL 16 · Caddy 2 (reverse proxy + auto SSL) · 9Router LLM gateway
+> **Process:** PM2
+> **Domain:** `senangbelajar.web.id`
 > **Domain required** — Caddy auto-provisions Let's Encrypt SSL only when a real domain points to your server.
 
 ---
@@ -30,7 +31,7 @@
 
 ## 1. Prerequisites
 
-- Ubuntu 22.04 LTS VPS (yours: `43.157.228.42`)
+- Ubuntu 22.04 LTS VPS (yours: `43.133.151.242`)
 - A domain name pointing to the server's IP (A record)
 - SSH access as root or a sudo user
 - `curl`, `wget`, `git` installed (if not: `sudo apt install -y curl wget git`)
@@ -713,7 +714,7 @@ jobs:
         uses: easingthemes/ssh-deploy@v4
         env:
           SSH_PRIVATE_KEY: ${{ secrets.VPS_SSH_KEY }}
-          REMOTE_HOST: 43.157.228.42
+          REMOTE_HOST: 43.133.151.242
           REMOTE_USER: deploy
           TARGET: /opt/ai-tutor
           EXCLUDE: "/node_modules/, /src/, /tests/, .git, .env, .gitignore"
@@ -721,7 +722,7 @@ jobs:
       - name: Run post-deploy commands
         uses: appleboy/ssh-action@v1
         with:
-          host: 43.157.228.42
+          host: 43.133.151.242
           username: deploy
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
@@ -828,8 +829,7 @@ curl -I https://your-domain.com
 
 ---
 
-> **Need help?** Your VPS IP is `43.157.228.42`. SSH with:
+> **Need help?** Your VPS IP is `43.133.151.242`. SSH with:
 > ```bash
-> ssh deploy@43.157.228.42
+> ssh ubuntu@43.133.151.242
 > ```
-> First time? Use root: `ssh root@43.157.228.42` then create a sudo user.

@@ -111,6 +111,8 @@ model Student {
   scheduleSessions ScheduleSession[]
   sessionStates  SessionState[]
   interventions  Intervention[]
+  chatLogs       ChatLog[]
+  apiUsages      ApiUsage[]
 }
 
 model Curriculum {
@@ -259,6 +261,39 @@ model Intervention {
   updatedAt   DateTime            @updatedAt
 
   student     Student             @relation(fields: [studentId], references: [id])
+}
+
+model ChatLog {
+  id          String   @id @default(uuid())
+  studentId   String
+  role        String   // "user" or "assistant"
+  content     String
+  source      String?  // "telegram", "web"
+  metadata    Json?
+  createdAt   DateTime @default(now())
+
+  student     Student  @relation(fields: [studentId], references: [id])
+
+  @@index([studentId, createdAt])
+}
+
+model ApiUsage {
+  id               String   @id @default(uuid())
+  studentId        String?
+  agentType        String?  // "tutor", "guardian", "curriculum", etc
+  model            String
+  promptTokens     Int
+  completionTokens Int
+  totalTokens      Int
+  latencyMs        Int?     // response time in milliseconds
+  costUsd          Float
+  metadata         Json?
+  createdAt        DateTime @default(now())
+
+  student          Student? @relation(fields: [studentId], references: [id])
+
+  @@index([studentId])
+  @@index([createdAt])
 }
 
 model AgentLog {

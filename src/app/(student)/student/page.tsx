@@ -1,17 +1,42 @@
 import { Suspense } from "react";
 import { prisma } from "@/lib/prisma";
 import { unstable_noStore as noStore } from "next/cache";
+import { cookies } from "next/headers";
+import { jwtVerify } from "jose";
 import Link from "next/link";
 import { SkeletonStudentPage } from "@/components/Skeleton";
 
-const SUBJECTS = [
-  { name: "Matematika", emoji: "🔢", color: "#818cf8" },
-  { name: "Bahasa", emoji: "📖", color: "#34d399" },
-  { name: "IPA", emoji: "🔬", color: "#fbbf24" },
-  { name: "IPS", emoji: "🌍", color: "#f472b6" },
-  { name: "Agama", emoji: "🕌", color: "#a78bfa" },
-  { name: "PKN", emoji: "🤝", color: "#fb923c" },
-];
+const STUDENT_JWT_SECRET = new TextEncoder().encode(
+  process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
+);
+
+/** Baca student_session cookie dan dapatkan studentId (UUID) */
+async function getSessionStudentId(): Promise<string | null> {
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("student_session")?.value;
+    if (!token) return null;
+    const { payload } = await jwtVerify(token, STUDENT_JWT_SECRET);
+    return (payload as { studentId: string }).studentId;
+  } catch {
+    return null;
+  }
+}
+
+const SUBJECT_META: Record<string, { emoji: string; color: string }> = {
+  Matematika: { emoji: "🔢", color: "#818cf8" },
+  "Bahasa Indonesia": { emoji: "📖", color: "#34d399" },
+  Bahasa: { emoji: "📖", color: "#34d399" },
+  IPA: { emoji: "🔬", color: "#fbbf24" },
+  IPAS: { emoji: "🔬", color: "#fbbf24" },
+  IPS: { emoji: "🌍", color: "#f472b6" },
+  Agama: { emoji: "🕌", color: "#a78bfa" },
+  PKN: { emoji: "🤝", color: "#fb923c" },
+  "Pendidikan Pancasila": { emoji: "🤝", color: "#fb923c" },
+  PJOK: { emoji: "⚽", color: "#6366f1" },
+  Informatika: { emoji: "💻", color: "#06b6d4" },
+  "Bahasa Inggris": { emoji: "🌏", color: "#8b5cf6" },
+};
 
 function SubjectCircle({
   name,
@@ -30,7 +55,7 @@ function SubjectCircle({
 
   return (
     <Link
-      href={`/student/quiz?subject=${name}`}
+      href={`/student/subject/${encodeURIComponent(name)}`}
       className="flex flex-col items-center gap-1.5"
     >
       <div className="relative w-16 h-16 flex items-center justify-center">
@@ -72,15 +97,18 @@ function SubjectCircle({
 async function HeroSection() {
   noStore();
 
-  const student = await prisma.student.findFirst({
-    where: { status: "ACTIVE" },
-    include: {
-      progressSnaps: {
-        orderBy: { snapDate: "desc" },
-        take: 10,
-      },
-    },
-  });
+  const sessionId = await getSessionStudentId();
+  const student = sessionId
+    ? await prisma.student.findUnique({
+        where: { id: sessionId },
+        include: {
+          progressSnaps: {
+            orderBy: { snapDate: "desc" },
+            take: 10,
+          },
+        },
+      })
+    : null;
 
   if (!student) return null;
 
@@ -133,16 +161,19 @@ async function HeroSection() {
 async function ScheduleSection() {
   noStore();
 
-  const student = await prisma.student.findFirst({
-    where: { status: "ACTIVE" },
-    include: {
-      scheduleSessions: {
-        where: { status: "SCHEDULED" },
-        orderBy: { scheduledAt: "asc" },
-        take: 5,
-      },
-    },
-  });
+  const sessionId = await getSessionStudentId();
+  const student = sessionId
+    ? await prisma.student.findUnique({
+        where: { id: sessionId },
+        include: {
+          scheduleSessions: {
+            where: { status: "SCHEDULED" },
+            orderBy: { scheduledAt: "asc" },
+            take: 5,
+          },
+        },
+      })
+    : null;
 
   if (!student) return null;
 
@@ -233,6 +264,61 @@ async function ScheduleSection() {
   );
 }
 
+/* ── Subject grid — fetch from curriculum ── */
+
+async function SubjectGridSection() {
+  noStore();
+
+  const sessionId = await getSessionStudentId();
+  if (!sessionId) return null;
+
+  const curriculum = await prisma.curriculum.findFirst({
+    where: { studentId: sessionId },
+    select: {
+      materials: {
+        select: { subject: true },
+        distinct: ["subject"],
+        orderBy: { subject: "asc" },
+      },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
+  const subjects = (curriculum?.materials || []).map((m) => m.subject);
+
+  if (subjects.length === 0) return null;
+
+  return (
+    <div className="mb-5">
+      <h3
+        className="text-base font-bold mb-3"
+        style={{ fontFamily: "var(--font-st-display)" }}
+      >
+        📚 Mata Pelajaran
+      </h3>
+      <div
+        className="rounded-2xl p-4"
+        style={{ backgroundColor: "var(--st-bg-card)" }}
+      >
+        <div className="grid grid-cols-3 gap-y-4 gap-x-2">
+          {subjects.map((subject) => {
+            const meta = SUBJECT_META[subject] ?? { emoji: "📚", color: "#94a3b8" };
+            return (
+              <SubjectCircle
+                key={subject}
+                name={subject}
+                emoji={meta.emoji}
+                color={meta.color}
+                progress={0}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ── Page ── */
 
 export default function StudentHomePage() {
@@ -253,31 +339,29 @@ export default function StudentHomePage() {
         <HeroSection />
       </Suspense>
 
-      {/* Subject Grid — static, no Suspense needed */}
-      <div className="mb-5">
-        <h3
-          className="text-base font-bold mb-3"
-          style={{ fontFamily: "var(--font-st-display)" }}
-        >
-          📚 Mata Pelajaran
-        </h3>
-        <div
-          className="rounded-2xl p-4"
-          style={{ backgroundColor: "var(--st-bg-card)" }}
-        >
-          <div className="grid grid-cols-3 gap-y-4 gap-x-2">
-            {SUBJECTS.map((subj) => (
-              <SubjectCircle
-                key={subj.name}
-                name={subj.name}
-                emoji={subj.emoji}
-                color={subj.color}
-                progress={0}
-              />
-            ))}
+      {/* Subject Grid — from curriculum */}
+      <Suspense
+        fallback={
+          <div className="mb-5">
+            <div className="w-32 h-4 bg-gray-200 rounded mb-3 animate-pulse" />
+            <div
+              className="rounded-2xl p-4 animate-pulse"
+              style={{ backgroundColor: "var(--st-bg-card)" }}
+            >
+              <div className="grid grid-cols-3 gap-y-4 gap-x-2">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <div key={i} className="flex flex-col items-center gap-1.5">
+                    <div className="w-16 h-16 rounded-full bg-gray-200" />
+                    <div className="w-16 h-3 bg-gray-200 rounded" />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        }
+      >
+        <SubjectGridSection />
+      </Suspense>
 
       <Suspense
         fallback={

@@ -76,6 +76,7 @@ const sessionTypeLabels: Record<string, string> = {
 
 type StudentData = {
   id: string;
+  studentId: string;
   name: string;
   gradeLevel: string;
   status: string;
@@ -282,40 +283,50 @@ export function StudentDetailView({ student }: { student: StudentData }) {
       {/* ── Student Header Card ── */}
       <SectionCard title="">
         <div className="flex items-start gap-4">
-          <div
-            className="w-16 h-16 rounded-full flex items-center justify-center text-3xl"
-            style={{ backgroundColor: "var(--su-bg-hover)" }}
-          >
-            {student.characterPreference === "mbappe"
-              ? "⚽"
-              : student.characterPreference === "lisa"
-                ? "💖"
-                : "🦉"}
+        <div
+          className="w-16 h-16 rounded-full flex items-center justify-center text-3xl"
+          style={{ backgroundColor: "var(--su-bg-hover)" }}
+        >
+          {student.characterPreference === "mbappe"
+            ? "⚽"
+            : student.characterPreference === "lisa"
+              ? "💖"
+              : "🦉"}
+        </div>
+        <div className="flex-1">
+          <div className="flex items-center gap-3">
+            <h1
+              className="text-2xl font-bold"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              {student.name}
+            </h1>
+            <span
+              className="px-2 py-0.5 rounded text-xs font-medium"
+              style={{
+                backgroundColor:
+                  student.status === "ACTIVE"
+                    ? "rgba(34,197,94,0.15)"
+                    : "rgba(245,158,11,0.15)",
+                color:
+                  student.status === "ACTIVE"
+                    ? "var(--su-success)"
+                    : "var(--su-warning)",
+              }}
+            >
+              {student.status}
+            </span>
+            <a
+              href={`/dashboard/students/${student.studentId}/chat`}
+              className="text-xs px-3 py-1.5 rounded-lg font-medium transition-opacity hover:opacity-80"
+              style={{
+                backgroundColor: "var(--su-bg-hover)",
+                color: "var(--su-text)",
+              }}
+            >
+              💬 Chat
+            </a>
           </div>
-          <div className="flex-1">
-            <div className="flex items-center gap-3">
-              <h1
-                className="text-2xl font-bold"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                {student.name}
-              </h1>
-              <span
-                className="px-2 py-0.5 rounded text-xs font-medium"
-                style={{
-                  backgroundColor:
-                    student.status === "ACTIVE"
-                      ? "rgba(34,197,94,0.15)"
-                      : "rgba(245,158,11,0.15)",
-                  color:
-                    student.status === "ACTIVE"
-                      ? "var(--su-success)"
-                      : "var(--su-warning)",
-                }}
-              >
-                {student.status}
-              </span>
-            </div>
             <div
               className="text-sm mt-1"
               style={{ color: "var(--su-text-dim)" }}
@@ -601,6 +612,77 @@ export function StudentDetailView({ student }: { student: StudentData }) {
           }
         }
 
+        // ── Pipeline trigger per material ──
+        const [triggerLoading, setTriggerLoading] = useState<string | null>(null);
+
+        async function handleTriggerContent(materialId: string, topic: string) {
+          setTriggerLoading(materialId);
+          try {
+            const res = await fetch("/api/students", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                action: "trigger",
+                studentId: student.studentId,
+                stages: ["content"],
+              }),
+            });
+            const data = await res.json();
+            if (data.ok) {
+              alert(`✅ Content pipeline triggered for "${topic}"`);
+            } else {
+              alert("❌ " + (data.error || "Gagal"));
+            }
+          } catch {
+            alert("❌ Network error");
+          } finally {
+            setTriggerLoading(null);
+          }
+        }
+
+        // ── Edit sub topic ──
+        async function handleEditSubTopic(materialId: string, subTopic: string) {
+          try {
+            const res = await fetch(`/api/students/material/${materialId}`, {
+              method: "PATCH",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ subTopic }),
+            });
+            if (res.ok) window.location.reload();
+            else alert("Gagal update sub topic");
+          } catch {
+            alert("Network error");
+          }
+        }
+
+        // ── Pipeline triggers per stage ──
+        const [pipelineRunning, setPipelineRunning] = useState<string | null>(null);
+
+        async function runPipelineStage(stage: string) {
+          setPipelineRunning(stage);
+          try {
+            const res = await fetch("/api/students", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                action: "trigger",
+                studentId: student.studentId,
+                stages: [stage],
+              }),
+            });
+            const data = await res.json();
+            if (data.ok) {
+              alert(`✅ Pipeline "${stage}" selesai`);
+            } else {
+              alert("❌ " + (data.error || "Gagal"));
+            }
+          } catch {
+            alert("❌ Network error");
+          } finally {
+            setPipelineRunning(null);
+          }
+        }
+
         return (
           <SectionCard title={`📋 Kurikulum (v${curriculum.version})`}>
             {/* Summary stats */}
@@ -642,15 +724,58 @@ export function StudentDetailView({ student }: { student: StudentData }) {
             </div>
 
             {/* Materials table */}
-            <PaginatedTable materials={materials.map(m => ({
-              id: m.id,
-              subject: m.subject,
-              topic: m.topic,
-              subTopic: m.subTopic ?? "",
-              weekOrder: m.weekOrder,
-              status: m.status,
-              delivery: "TEXT",
-            }))} />
+            <PaginatedTable
+              materials={materials.map(m => ({
+                id: m.id,
+                subject: m.subject,
+                topic: m.topic,
+                subTopic: m.subTopic ?? "",
+                weekOrder: m.weekOrder,
+                status: m.status,
+                delivery: "TEXT",
+              }))}
+              gradeLevel={student.gradeLevel}
+              onTriggerContent={handleTriggerContent}
+              onEditSubTopic={handleEditSubTopic}
+              loadingTrigger={triggerLoading}
+            />
+
+            {/* ── Pipeline Trigger Bar ── */}
+            <div
+              className="mt-4 p-3 rounded-lg"
+              style={{ backgroundColor: "rgba(99,102,241,0.05)", border: "1px solid rgba(99,102,241,0.15)" }}
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-semibold" style={{ color: "var(--su-text-dim)" }}>
+                  🚀 Pipeline
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { stage: "content", label: "📄 Konten", color: "#34d399" },
+                  { stage: "assessment", label: "📝 Quiz", color: "#fbbf24" },
+                  { stage: "schedule", label: "📅 Jadwal", color: "#f472b6" },
+                ].map((btn) => (
+                  <button
+                    key={btn.stage}
+                    onClick={() => runPipelineStage(btn.stage)}
+                    disabled={pipelineRunning === btn.stage}
+                    className="px-2.5 py-1 rounded-lg text-xs font-medium transition-opacity disabled:opacity-40 hover:opacity-80"
+                    style={{ backgroundColor: `${btn.color}18`, color: btn.color }}
+                  >
+                    {pipelineRunning === btn.stage ? "⏳" : btn.label}
+                  </button>
+                ))}
+                <button
+                  onClick={() => runPipelineStage("curriculum")}
+                  disabled={pipelineRunning === "curriculum"}
+                  className="px-2.5 py-1 rounded-lg text-xs font-medium transition-opacity disabled:opacity-40 hover:opacity-80"
+                  style={{ backgroundColor: "rgba(99,102,241,0.15)", color: "#818cf8" }}
+                >
+                  {pipelineRunning === "curriculum" ? "⏳" : "📚 Curriculum"}
+                </button>
+              </div>
+            </div>
           </SectionCard>
         );
       })()}

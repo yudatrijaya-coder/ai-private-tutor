@@ -5,6 +5,7 @@ export function StudentCard({
 }: {
   student: {
     id: string;
+    studentId: string;
     name: string;
     gradeLevel: string;
     status: string;
@@ -27,7 +28,7 @@ export function StudentCard({
 
   return (
     <a
-      href={`/dashboard/students/${student.id}`}
+      href={`/dashboard/students/${student.studentId}`}
       className="block rounded-xl p-4 transition-all hover:-translate-y-0.5"
       style={{
         backgroundColor: "var(--su-bg-card)",

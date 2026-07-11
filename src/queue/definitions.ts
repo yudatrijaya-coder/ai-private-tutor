@@ -52,6 +52,7 @@ export interface YtFallbackJobPayload {
 
 export interface AssessmentGenerateJobPayload {
   studentId: string;
+  materialId?: string;
   topic: string;
   gradeLevel: string;
   questionCount?: number;

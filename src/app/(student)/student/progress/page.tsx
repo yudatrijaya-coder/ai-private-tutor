@@ -1,7 +1,25 @@
 import { Suspense } from "react";
 import { prisma } from "@/lib/prisma";
 import { unstable_noStore as noStore } from "next/cache";
+import { cookies } from "next/headers";
+import { jwtVerify } from "jose";
 import { SkeletonProgressPage } from "@/components/Skeleton";
+
+const STUDENT_JWT_SECRET = new TextEncoder().encode(
+  process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
+);
+
+async function getSessionStudentId(): Promise<string | null> {
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("student_session")?.value;
+    if (!token) return null;
+    const { payload } = await jwtVerify(token, STUDENT_JWT_SECRET);
+    return (payload as { studentId: string }).studentId;
+  } catch {
+    return null;
+  }
+}
 
 function StreakCalendar({ snapDates }: { snapDates: Date[] }) {
   const today = new Date();
@@ -194,18 +212,21 @@ const EMOJI_MAP: Record<string, string> = {
 async function ProgressContent() {
   noStore();
 
-  const student = await prisma.student.findFirst({
-    where: { status: "ACTIVE" },
-    include: {
-      progressSnaps: {
-        orderBy: { snapDate: "desc" },
-      },
-      attempts: {
-        orderBy: { createdAt: "desc" },
-        take: 20,
-      },
-    },
-  });
+  const sessionId = await getSessionStudentId();
+  const student = sessionId
+    ? await prisma.student.findUnique({
+        where: { id: sessionId },
+        include: {
+          progressSnaps: {
+            orderBy: { snapDate: "desc" },
+          },
+          attempts: {
+            orderBy: { createdAt: "desc" },
+            take: 20,
+          },
+        },
+      })
+    : null;
 
   if (!student) {
     return (

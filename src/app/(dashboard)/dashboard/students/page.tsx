@@ -147,7 +147,7 @@ export default function StudentsPage() {
                 </td>
                 <td className="p-4 font-medium">
                   <Link
-                    href={`/dashboard/students/${s.id}`}
+                    href={`/dashboard/students/${s.studentId}`}
                     className="hover:underline"
                   >
                     {s.name}

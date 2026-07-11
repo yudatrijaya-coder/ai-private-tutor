@@ -25,6 +25,19 @@ export interface ModelPricing {
 export interface LLMCallOptions {
   temperature?: number;
   maxTokens?: number;
+  /** studentId untuk logging ApiUsage — jika disediakan, otomatis dicatat */
+  studentId?: string;
+}
+
+/** Result from an LLM call including usage data */
+export interface LLMResult {
+  content: string | null;
+  model: string;
+  promptTokens: number;
+  completionTokens: number;
+  totalTokens: number;
+  latencyMs: number;
+  costUsd: number;
 }
 
 /** Type alias for OpenAI messages */

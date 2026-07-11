@@ -1,112 +1,118 @@
-# AI Private Tutor — Handoff
+# Handoff — AI Private Tutor
 
-## Current State (7 Jul 2026)
+> Terakhir update: 12 Juli 2026
 
-### Hermes Gateway Setup (VPS)
-- Profile **opencode** provider: `opencode-go`, gateway via `systemctl --user hermes-gateway`
-- Gateway state: **running** + Telegram **connected**
-- SumoPod API key valid
+---
 
-### Dua Bot — JANGAN TERTUKAR
+## Current State Overview
 
-| Bot | Token | Fungsi | Platform |
-|-----|-------|--------|----------|
-| **@senangbelajar_bot** | 8899613141:*** | Tutor AI Next.js (webhook/polling) | tutor app port 3000 |
-| **@hermes_senangbelajar_bot** | 8912247323:*** | Hermes coding agent gateway | VPS systemd |
+| Area | Status | Detail |
+|------|--------|--------|
+| **Mindmap** | ✅ Premium — radial layout, Lucide icons, CSS animations | 7 iterasi berturut-turut |
+| **Quiz Bank** | ✅ Complete — 1650 soal (SD108, SMP99, SMA123) | Auto-generated via 9Router LLM |
+| **Curriculum** | ✅ SIBI 2026/2027 — SD5, SMP1, SMA2 | Dari PDF resmi Kemendikdasmen |
+| **Exam Generator** | ✅ Auto-generate from weekly timeline | Template + detail page + seed |
+| **Pipeline Trigger** | ✅ Dashboard UI — curriculum/content/quiz/jadwal | BullMQ + in-memory fallback |
+| **LLM** | ✅ 9Router combo `ai_tutor_agent` + fallback chain | localhost:20128 |
+| **Database** | ✅ PostgreSQL (prod) / SQLite (dev) | Prisma 7 with `prisma.config.ts` |
+| **Deployment** | ✅ PM2 + Caddy + auto-SSL | senangbelajar.web.id |
+| **Bot** | ✅ Webhook mode @senangbelajar_bot | Next.js API route `/api/bot/webhook` |
 
-### VPS Info
-- **IP:** 43.133.151.242 (ubuntu)
-- **Domain:** `senangbelajar.web.id` → Caddy reverse-proxy → port 3000
-- **PM2:** `ai-private-tutor` (port 3000)
-- **Service:** `systemctl --user hermes-gateway`
-- **Profile opencode:** `~/.hermes/profiles/opencode/`
-- **Systemd unit:** `~/.config/systemd/user/hermes-gateway.service`
+---
 
-### Last commits (tutor app)
-```
-36b497f docs: add agent workflow guide in AGENTS.md for PC↔VPS sync
-214b372 docs: add documentation pages at /docs routes
-53b80d8 cleanup: remove duplicate nested ai-private-tutor folder
-a1477d6 Default model deepseek-v4-flash for all agents + update SumoPod API key
-e4228ff VPS setup: Caddy reverse-proxy, pm2 ecosystem, webhook mode, Edge-runtime instrumentation fix
-50b2eff Switch from OpenRouter to SumoPod (ai.sumopod.com/v1)
-```
+## What Was Done Recently (last 15 commits)
 
-### Routes built
-- Dashboard: stats, student cards, sidebar, settings, curriculum
-- Student: portal, profile, progress, quiz attempt
-- Bot: all commands (`/daftar`, `/quiz`, `/materi`, `/jadwal`, `/nilai`, `/help`)
-- API: admin (bot-status, set-webhook, system-info), admission, queues, curriculum/regenerate
-- Docs: `/docs` — arsitektur, getting-started guide
+### 🧠 Mindmap (7 commits — iterative refinement)
+- **Radial quadrant layout** — no dagre, branches evenly spaced 360°, leaves radiate outward
+- **Lucide icons** per node with `iconMap.ts` + CSS animation personality per-icon (`animMap.ts`)
+- **4 directional handles** per node — computed per-edge via `angleDir()` function
+- **3-level hierarchy**: center (gold glow + pulse), branch (solid border), leaf (solid border, thinner)
+- **CustomNode.tsx** — image/icon/description slots, SD/SMP/SMA theming, pastel blob backgrounds
+- **`src/lib/mindmap-template.ts`** — reusable parseMindmapFromMarkdown + createMindmapNodes utility
+- **Files:**
+  - `src/app/(student)/student/mindmap/[subject]/ReactFlowMindmap.tsx`
+  - `src/app/(student)/student/mindmap/[subject]/page.tsx`
+  - `src/components/mindmap/CustomNode.tsx`
+  - `src/components/mindmap/iconMap.ts`
+  - `src/components/mindmap/animMap.ts`
+  - `src/lib/mindmap-template.ts`
 
-### What works
-- ✅ Dashboard sidebar with active route highlighting
-- ✅ Student admission form + detail page + curriculum table + regenerate button
-- ✅ Settings page (live data: bot status, webhook form, queue per-queue stats)
-- ✅ `/daftar <id>` bot registration command
-- ✅ `/quiz` / `/kuis` direct routing (not just LLM intent)
-- ✅ Quiz answer flow (question → answer → score → DB attempt)
-- ✅ In-memory queue fallback when Redis unavailable (`@/queue/local`)
-- ✅ `/api/queues` reports BullMQ or local queue status
-- ✅ 24 routes, `npx next build` passes clean
-- ✅ Self-contained curriculum/content/quiz banks in `src/data/`
-- ✅ **LLM client via 9Router** — `ai_tutor_agent` combo + fallback chain
-- ✅ **`initQueues()` called** via `instrumentation.ts` — auto-bootstrap 9 queue workers
-- ✅ **Bot session DB-backed** — Prisma `SessionState`, no in-memory Map loss
-- ✅ **State machine** — `routeByState()` → LLM tutor agent intent detection
-- ✅ **Seed script** ready (`src/scripts/seed.ts`) — 3 students, curricula, quizzes, schedule
-- ✅ **Documentation pages** — `/docs/architecture`, `/docs/getting-started`
-- ✅ **9Router subdomain** — `9router.senangbelajar.web.id` (Caddy proxy)
-- ✅ **Parent/Guardian role** — `/parent_daftar`, `/progres`, `/laporan`, `/peringatan`
-- ✅ **Dual role detection** — student vs parent in same bot, auto-routing
+### 📝 Quiz Bank & Exam Generator (3 commits)
+- **1650 soal** — SD108 (540 Q), SMP99 (495 Q), SMA123 (615 Q)
+- Quiz bank data files: `src/data/quiz-bank-sd5.ts`, `quiz-bank-smp7.ts`, `quiz-bank-sma11.ts`
+- Auto-generated via `scripts/gen-all-quizzes.ts` using 9Router LLM
+- Exam template: auto-generator by weekly timeline at `/dashboard/quizzes/exam/template`
+- Quiz detail page at `/dashboard/quizzes/[id]`
+- Seed backup via Telegram
 
-### What's pending / known issues
-- **Combo ai_tutor_agent lambat** — ~1.5 menit response time
-- **Image generation** — belum ada, butuh API key external (DALL-E / FLUX)
-- **Guardian Agent pipeline** — weekly report & early warning belum auto-kirim ke parent
-- **Agent pipeline** — queue workers registered tapi belum pernah di-trigger
-- **Video generation** — Media Agent deferred
+### 📚 Curriculum SIBI 2026/2027 (3 commits)
+- Full curriculum from official Kemendikdasmen PDFs
+- Data files: `src/data/curriculum-topics-sd5.ts`, `curriculum-topics-smp7.ts`, `curriculum-topics-sma11.ts`
+- Features: PaginatedTable, StudentDetailView, curriculum per student
 
-### Next priorities (suggested order)
-1. **Optimasi combo 9Router** — pilih model lebih cepet buat ai_tutor_agent
-2. **Guardian Agent pipeline** — auto-kirim laporan mingguan ke parent
-3. **Agent pipeline** — trigger curriculum/content/assessment agents via cron
-4. **Image generation** — integrasi DALL-E / FLUX buat ilustrasi
-5. **Video generation** — render video pembelajaran
+### 🚀 Agent Pipeline (1 commit)
+- `PipelineTrigger.tsx` component in `/dashboard/agents`
+- Stages: curriculum → content → assessment → schedule
+- POST `/api/students` with `{action:"trigger", studentId, stages}`
+- Supports BullMQ (Redis) and in-memory fallback
 
-### Key configs
-```bash
-# .env (production VPS)
-DATABASE_URL="postgresql://tutor:***@localhost:5432/ai_private_tutor"
-TELEGRAM_BOT_TOKEN="8899613141:***"
-SUMOPOD_API_KEY="..."
-NEXTAUTH_SECRET="..."
-NEXTAUTH_URL="https://senangbelajar.web.id"
-LLM_BASE_URL="http://localhost:20128/v1"
+### 🏗 Infrastructure
+- **LLM:** 9Router combo `ai_tutor_agent` at `localhost:20128` with fallback chain (sumopod → hermes → opencode-go native)
+- **Prisma 7** with `prisma.config.ts` and `@prisma/adapter-pg`
+- **PostgreSQL** at `localhost:5432`, db=`ai_private_tutor`, user=`tutor`
+- **Next.js 16.2.10** — App Router
+- **VPS:** SumoPod ubuntu@43.133.151.242
 
-# PostgreSQL connection (used by Prisma adapter)
-PGPASSWORD="tutor123"
+---
 
-# Bot
-BOT_WEBHOOK_URL="https://senangbelajar.web.id"
-```
+## Key Files
 
-### File structure highlights
+### Mindmap
 | File | Purpose |
 |------|---------|
-| `src/bot/handlers/message.ts` | Main bot entry — command routing, LLM fallback, role detection (student/parent) |
-| `src/bot/handlers/parent.ts` | Parent/guardian commands — `/progres`, `/laporan`, `/peringatan` |
-| `src/bot/state-machine.ts` | Routes by session state (quiz_active → quiz answer) |
-| `src/bot/handlers/quiz.ts` | Start quiz, send question, record answer, score |
-| `src/bot/session.ts` | **DB-backed** bot session via Prisma SessionState |
-| `src/llm/client.ts` | SumoPod client with fallback chain + streaming |
-| `src/llm/prompts.ts` | System prompts per agent role |
-| `src/queue/local.ts` | In-memory queue with retry + backoff + dead-letter |
-| `src/queue/runner.ts` | Queue bootstrap — `initQueues()` with BullMQ/local |
-| `src/instrumentation.ts` | Next.js hook — boot queues + register local processors |
-| `src/scripts/seed.ts` | Seed 3 students + full curriculum + quizzes + schedule |
-| `src/data/curriculum-topics.ts` | All subjects & topics per grade |
-| `src/data/curriculum-content.ts` | Lesson content per topic |
-| `src/data/quiz-bank.ts` | Quiz questions per topic |
-| `src/agents/curriculum/service.ts` | Curriculum generator using data banks |
-| `ops/Caddyfile` | Caddy config with 9Router subdomain |
+| `src/app/(student)/student/mindmap/[subject]/ReactFlowMindmap.tsx` | Main component — radial layout, edges, directional handles |
+| `src/app/(student)/student/mindmap/[subject]/page.tsx` | Page wrapper — parses slide markdown → mindmap nodes |
+| `src/components/mindmap/CustomNode.tsx` | Node component — Lucide icons, 3-level theming, CSS animations |
+| `src/components/mindmap/iconMap.ts` | Topic → Lucide icon resolution |
+| `src/components/mindmap/animMap.ts` | Per-icon CSS animation definitions |
+| `src/lib/mindmap-template.ts` | parseMindmapFromMarkdown + createMindmapNodes utilities |
+
+### Quiz & Curriculum
+| File | Purpose |
+|------|---------|
+| `src/data/quiz-bank-sd5.ts` | SD Kelas 5 — 540 soal |
+| `src/data/quiz-bank-smp7.ts` | SMP Kelas 1 — 495 soal |
+| `src/data/quiz-bank-sma11.ts` | SMA Kelas 2 — 615 soal |
+| `src/data/curriculum-topics-sd5.ts` | Kurikulum SD5 dari PDF resmi |
+| `src/data/curriculum-topics-smp7.ts` | Kurikulum SMP1 dari SIBI |
+| `src/data/curriculum-topics-sma11.ts` | Kurikulum SMA2 dari SIBI |
+| `src/app/api/exam/route.ts` | Exam generation endpoint |
+| `src/app/api/exam/template/route.ts` | Template-based exam generator |
+
+### Pipeline & LLM
+| File | Purpose |
+|------|---------|
+| `src/app/(dashboard)/dashboard/agents/PipelineTrigger.tsx` | UI trigger for agent pipeline |
+| `src/app/api/students/route.ts` | POST with `{action:"trigger", studentId, stages}` |
+| `src/llm/client.ts` | 9Router LLM client with fallback chain |
+| `src/queue/definitions.ts` | BullMQ queue definitions |
+| `src/queue/runner.ts` | Queue runner with Redis / in-memory |
+
+### Infrastructure
+| File | Purpose |
+|------|---------|
+| `prisma/schema.prisma` | 14 models — Student, Curriculum, Quiz, Attempt, etc. |
+| `prisma.config.ts` | Prisma 7 config (datasource URL) |
+| `src/lib/prisma.ts` | Prisma client singleton with `@prisma/adapter-pg` |
+| `ops/Caddyfile` | Reverse proxy config for senangbelajar.web.id |
+| `ecosystem.config.cjs` | PM2 ecosystem file |
+
+---
+
+## Tips for Next Agent
+
+1. **Mindmap** — sudah premium. Kalau mau tweak layout, edit `layoutNodes()` di `ReactFlowMindmap.tsx`. Jangan ganti pendekatan radial.
+2. **Quiz bank** — data statis di `src/data/`. Kalau perlu regenerate, pakai `scripts/gen-all-quizzes.ts`.
+3. **LLM** — semua call via 9Router `localhost:20128`. Fallback chain otomatis. Jangan panggil OpenAI langsung.
+4. **User** — kid-friendly, paper-toned, marker style. Premium-first approach.
+5. **VPS** — `ssh ubuntu@43.133.151.242`, PM2 app name `ai-private-tutor`.

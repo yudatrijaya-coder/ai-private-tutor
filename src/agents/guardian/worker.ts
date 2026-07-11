@@ -15,6 +15,10 @@ import type { GuardianReportJobPayload } from "@/queue/definitions";
 import { generateWeeklyReport } from "./report";
 import { checkEarlyWarnings } from "./early-warning";
 import { checkReportSafety } from "./safety";
+import {
+  sendWeeklyReportToParent,
+  sendEarlyWarningToParent,
+} from "./notifier";
 
 /* ------------------------------------------------------------------ */
 /*  Processor                                                          */
@@ -48,6 +52,8 @@ export async function processGuardianReportJob(
     console.warn(
       `[guardian/worker] Early warnings for student=${studentId}: ${warnings.interventionsCreated} intervention(s) created`,
     );
+    // Send early warning to parent
+    await sendEarlyWarningToParent(studentId, warnings);
   }
 
   // 2. Generate the weekly report
@@ -68,6 +74,12 @@ export async function processGuardianReportJob(
       `${report.subjects.length} subject(s), ${report.weakAreas.length} weak area(s), ` +
       `${report.missedSessions} missed session(s)`,
   );
+
+  // Send report to parent via Telegram
+  const sent = await sendWeeklyReportToParent(report);
+  if (sent) {
+    console.log(`[guardian/worker] Report delivered to parent of ${studentId}`);
+  }
 
   // Return value is captured by the worker framework for AgentLog
   job.returnvalue = {

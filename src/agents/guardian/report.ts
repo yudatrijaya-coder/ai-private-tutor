@@ -172,29 +172,48 @@ async function generateRecommendations(
         ? weakAreas.map((w) => `- ${w.subject} (mastery ${(w.mastery * 100).toFixed(0)}%)`).join("\n")
         : "Tidak ada area lemah yang terdeteksi.";
 
-    const prompt = `Buat rekomendasi belajar untuk ${studentName} selama seminggu ke depan.
+    const raw = await Promise.race([
+      callLLM("guardian", [
+        { role: "system", content: systemPrompt },
+        {
+          role: "user",
+          content: `Buat 3 rekomendasi belajar personal untuk ${studentName} minggu depan berdasarkan data berikut.
 
-Ringkasan minggu ini:
+Data minggu ini:
 ${subjectsText}
 
-Area yang perlu perhatian:
+Area lemah:
 ${weakText}
 
 Sesi terlewat: ${missedSessions}
 
-Format output: berikan 3-5 poin rekomendasi dalam bahasa Indonesia, satu poin per baris, diawali dengan tanda "-".`;
-
-    const raw = await callLLM("guardian", [
-      { role: "system", content: systemPrompt },
-      { role: "user", content: prompt.slice(0, LLM_INPUT_CHAR_LIMIT) },
+ATURAN:
+- Langsung tulis rekomendasi, TANPA preamble, TANPA <think>, TANPA markdown
+- Satu rekomendasi per baris
+- Jangan pakai tanda "-" atau "*" di awal baris
+- Fokus pada actionable steps spesifik, bukan saran umum
+- Bahasa Indonesia hangat seperti orang tua bicara ke anaknya`,
+        },
+      ]),
+      new Promise<null>((_, reject) =>
+        setTimeout(() => reject(new Error("LLM timeout after 25s")), 25_000),
+      ),
     ]);
 
     if (raw && raw.trim().length > 0) {
-      const recommendations = raw
+      // Strip <think> blocks and clean markdown
+      const cleaned = raw
+        .replace(/<think>[\s\S]*?<\/think>/g, "")
+        .replace(/\*\*/g, "")
+        .replace(/^[-*\s]+/gm, "")
+        .trim();
+      const recommendations = cleaned
         .split("\n")
-        .map((l) => l.replace(/^[-*]\s*/, "").trim())
+        .map((l) => l.trim())
         .filter((l) => l.length > 0);
-      return { recommendations, llmGenerated: true };
+      if (recommendations.length >= 1) {
+        return { recommendations: recommendations.slice(0, 5), llmGenerated: true };
+      }
     }
   } catch (err) {
     console.warn(
@@ -212,6 +231,7 @@ Format output: berikan 3-5 poin rekomendasi dalam bahasa Indonesia, satu poin pe
 
 /**
  * Template-based recommendations when LLM is unavailable.
+ * Falls back to rule-based suggestions derived from actual data.
  */
 function getTemplateRecommendations(
   subjects: SubjectSummary[],
@@ -220,23 +240,33 @@ function getTemplateRecommendations(
 ): string[] {
   const recs: string[] = [];
 
-  if (weakAreas.length > 0) {
-    for (const w of weakAreas) {
-      recs.push(`Fokus ulang materi ${w.subject} — mastery masih ${(w.mastery * 100).toFixed(0)}%. Coba ulangi kuis dan diskusikan dengan orang tua.`);
-    }
+  for (const w of weakAreas) {
+    const pct = (w.mastery * 100).toFixed(0);
+    const templates = [
+      `Coba ulang materi ${w.subject} pelan-pelan ya, mastery masih ${pct}%. Baca ulang ringkasannya, lalu kerjakan latihan soalnya.`,
+      `${w.subject} perlu sedikit perhatian lebih (${pct}%). Ajak anak diskusi tentang materi yang dirasa sulit, lalu coba kuis lagi.`,
+      `Untuk ${w.subject} yang masih ${pct}%, coba gunakan flashcards atau gambar untuk membantu mengingat konsepnya.`,
+    ];
+    recs.push(templates[Math.floor(Math.random() * templates.length)]);
   }
 
   if (missedSessions > 2) {
-    recs.push(`Dalam seminggu terakhir ada ${missedSessions} sesi terlewat. Coba tetapkan jadwal belajar yang lebih konsisten.`);
+    recs.push(`Sudah ${missedSessions} sesi terlewat minggu ini. Coba buat jadwal belajar rutin setiap hari, misal 15 menit setelah mandi sore.`);
+  } else if (missedSessions > 0) {
+    recs.push(`Ada ${missedSessions} sesi terlewat. Yuk ajak anak komitmen belajar setiap hari walau cuma sebentar.`);
   }
 
-  const strongSubjects = subjects.filter((s) => s.mastery >= 0.8);
-  for (const s of strongSubjects) {
-    recs.push(`${s.subject} sudah bagus (${(s.mastery * 100).toFixed(0)}%). Lanjutkan dengan tantangan soal yang lebih sulit.`);
+  for (const s of subjects) {
+    const pct = Math.round(s.mastery * 100);
+    if (pct >= 80) {
+      recs.push(`${s.subject} sudah mantap (${pct}%). Tantang anak dengan soal cerita yang lebih menantang biar tambah jago!`);
+    } else if (pct >= 50 && pct < 80) {
+      recs.push(`${s.subject} sudah cukup baik (${pct}%). Lanjutkan belajar rutin, dan coba bahas soal-soal yang lebih variatif.`);
+    }
   }
 
   if (recs.length === 0) {
-    recs.push("Pertahankan semangat belajar! Evaluasi minggu depan untuk melihat perkembangan.");
+    recs.push("Pertahankan semangat belajar! Yuk minggu depan coba target belajar lebih rutin lagi.");
   }
 
   return recs;

@@ -14,6 +14,14 @@ interface Material {
 
 interface PaginatedTableProps {
   materials: Material[];
+  /** Student grade level for PDF linking */
+  gradeLevel?: string;
+  /** Called when triggering content pipeline for a material */
+  onTriggerContent?: (materialId: string, topic: string) => void;
+  /** Called when editing sub topic */
+  onEditSubTopic?: (materialId: string, subTopic: string) => void;
+  /** Trigger button loading state */
+  loadingTrigger?: string | null;
 }
 
 const PER_PAGE = 30;
@@ -36,13 +44,41 @@ function getSubjectColor(s: string) {
   return SUBJECT_COLORS[s] ?? "#64748b";
 }
 
+/* ── PDF mapping ── */
+const PDF_MAP: Record<string, Record<string, string>> = {
+  SD_5: {
+    IPAS: "/pdf-sd5/IPAS_SD5_BS.pdf",
+    PJOK: "/pdf-sd5/PJOK_SD5_BS.pdf",
+    Informatika: "/pdf-sd5/Koding_SD5_BS.pdf",
+    "Bahasa Inggris": "/pdf-sd5/Inggris_SD5_BS.pdf",
+    "Bahasa Indonesia": "/pdf-sd5/Indonesia_SD5_BS.pdf",
+    "Pendidikan Pancasila": "/pdf-sd5/Pancasila_SD5_BS.pdf",
+  },
+  SMP_1: {
+    IPA: "/pdf-smp7/IPA_SMP7_BS.pdf",
+    IPS: "/pdf-smp7/IPS_SMP7_BS.pdf",
+    PJOK: "/pdf-smp7/PJOK_SMP7_BS.pdf",
+    "Bahasa Indonesia": "/pdf-smp7/Indonesia_SMP7_BS.pdf",
+    Informatika: "/pdf-smp7/Informatika_SMP7_BS.pdf",
+    Matematika: "/pdf-smp7/Matematika_SMP7_BS.pdf",
+    "Pendidikan Pancasila": "/pdf-smp7/Pancasila_SMP7_BS.pdf",
+  },
+};
+
+function getPdfUrl(subject: string, gradeLevel?: string): string | null {
+  return PDF_MAP[gradeLevel ?? ""]?.[subject] ?? null;
+}
+
 type SortKey = "weekOrder" | "subject" | "topic" | "status";
 
-export function PaginatedTable({ materials }: PaginatedTableProps) {
+export function PaginatedTable({ materials, gradeLevel, onTriggerContent, onEditSubTopic, loadingTrigger }: PaginatedTableProps) {
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("weekOrder");
   const [sortAsc, setSortAsc] = useState(true);
+  // Inline edit state
+  const [editId, setEditId] = useState<string | null>(null);
+  const [editValue, setEditValue] = useState("");
 
   const filtered = useMemo(() => {
     let items = materials;
@@ -138,6 +174,9 @@ export function PaginatedTable({ materials }: PaginatedTableProps) {
               </th>
               <th className="text-left px-4 py-2 font-medium w-20">Status</th>
               <th className="text-left px-4 py-2 font-medium w-12">Delv</th>
+              {(onTriggerContent || onEditSubTopic) && (
+                <th className="text-left px-4 py-2 font-medium w-24">Aksi</th>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -146,6 +185,8 @@ export function PaginatedTable({ materials }: PaginatedTableProps) {
               const isNewTopic = m.topic !== currentTopic && !isNewSubject;
               if (isNewSubject) currentSubject = m.subject;
               if (isNewTopic) currentTopic = m.topic;
+
+              const isEditing = editId === m.id;
 
               return (
                 <tr
@@ -175,13 +216,100 @@ export function PaginatedTable({ materials }: PaginatedTableProps) {
                   </td>
                   <td className="px-4 py-2 font-medium text-sm">{m.topic}</td>
                   <td className="px-4 py-2" style={{ color: "var(--su-text-dim)" }}>
-                    {m.subTopic}
+                    {isEditing ? (
+                      <div className="flex items-center gap-1">
+                        <input
+                          type="text"
+                          value={editValue}
+                          onChange={(e) => setEditValue(e.target.value)}
+                          className="w-full px-1.5 py-0.5 rounded text-xs border"
+                          style={{
+                            backgroundColor: "var(--su-bg)",
+                            borderColor: "var(--su-border)",
+                            color: "var(--su-text)",
+                          }}
+                          autoFocus
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                              onEditSubTopic?.(m.id, editValue);
+                              setEditId(null);
+                            }
+                            if (e.key === "Escape") setEditId(null);
+                          }}
+                        />
+                        <button
+                          onClick={() => {
+                            onEditSubTopic?.(m.id, editValue);
+                            setEditId(null);
+                          }}
+                          className="text-xs px-1.5 py-0.5 rounded font-medium"
+                          style={{ color: "var(--su-success)" }}
+                        >
+                          ✓
+                        </button>
+                        <button
+                          onClick={() => setEditId(null)}
+                          className="text-xs px-1.5 py-0.5 rounded font-medium"
+                          style={{ color: "var(--su-text-dim)" }}
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ) : (
+                      <span
+                        className="cursor-pointer hover:opacity-70"
+                        onClick={() => {
+                          setEditId(m.id);
+                          setEditValue(m.subTopic);
+                        }}
+                        title="Klik untuk edit"
+                      >
+                        {m.subTopic || <span className="italic opacity-40">—</span>}
+                      </span>
+                    )}
                   </td>
                   <td className="px-4 py-2 text-xs" style={{ color: "var(--su-text-dim)" }}>
                     {m.weekOrder}
                   </td>
                   <td className="px-4 py-2"><StatusBadge status={m.status} /></td>
                   <td className="px-4 py-2"><DeliveryBadge delivery={m.delivery} /></td>
+                  {(onTriggerContent || onEditSubTopic) && (
+                    <td className="px-4 py-2">
+                      <div className="flex items-center gap-1">
+                        {/* PDF link */}
+                        {getPdfUrl(m.subject, gradeLevel) && (
+                          <a
+                            href={getPdfUrl(m.subject, gradeLevel)!}
+                            target="_blank"
+                            className="text-xs px-1.5 py-1 rounded transition-opacity hover:opacity-70"
+                            title="Buka PDF SIBI"
+                          >
+                            📖
+                          </a>
+                        )}
+                        {/* Slide viewer */}
+                        <a
+                          href={`/student/slides/${m.id}`}
+                          target="_blank"
+                          className="text-xs px-1.5 py-1 rounded transition-opacity hover:opacity-70"
+                          title="Lihat slide"
+                        >
+                          📄
+                        </a>
+                        {/* Trigger content pipeline */}
+                        {onTriggerContent && (
+                          <button
+                            onClick={() => onTriggerContent(m.id, m.topic)}
+                            disabled={loadingTrigger === m.id}
+                            className="text-xs px-1.5 py-1 rounded transition-opacity hover:opacity-70 disabled:opacity-30"
+                            title="Generate konten"
+                          >
+                            {loadingTrigger === m.id ? "⏳" : "🚀"}
+                          </button>
+                        )}
+                      </div>
+                    </td>
+                  )}
                 </tr>
               );
             })}

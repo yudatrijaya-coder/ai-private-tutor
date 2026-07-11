@@ -20,6 +20,18 @@ export default function DocsPage() {
             desc="7 Agent system, queue architecture, database schema, design decisions & pipeline flow"
           />
           <DocCard
+            href="/docs/mindmap"
+            emoji="🧠"
+            title="Mindmap"
+            desc="Premium interactive mindmap — radial layout, Lucide icons, per-node CSS animations"
+          />
+          <DocCard
+            href="/docs/map"
+            emoji="🗺️"
+            title="Peta Fungsional"
+            desc="Interactive mindmap of the entire app — 8 branches covering all features"
+          />
+          <DocCard
             href="/docs/getting-started"
             emoji="🚀"
             title="Getting Started"
@@ -38,12 +50,13 @@ export default function DocsPage() {
             <tbody>
               {([
                 ['🤖 7 AI Agents', 'Tutor, Curriculum, Content, Assessment, Media, Guardian, Scheduler — saling terintegrasi dalam pipeline otomatis'],
+                ['🧠 Mindmap Premium', 'Visualisasi topik belajar interaktif — radial layout, Lucide icons, CSS animations per node'],
                 ['💬 Telegram Bot', 'Belajar via chat dengan 3 persona: Kak Budi (SD), Kak Dewi (SMP), Kak Raka (SMA)'],
-                ['🌐 Web Dashboard', 'Monitoring progress untuk orang tua & admin, weekly report & early warning system'],
-                ['📝 Quiz Otomatis', 'Soal digenerate AI dari materi, adaptive difficulty, real-time correction'],
+                ['🌐 Web Dashboard', 'Monitoring progress untuk orang tua & admin, pipeline trigger, weekly report & early warning system'],
+                ['📝 Quiz Bank 1650 Soal', 'Bank soal statis dari kurikulum SIBI, exam auto-generator, adaptive difficulty'],
                 ['🎬 Video Pembelajaran', 'Generate video dengan karakter favorit (Mbappe, Lisa BLACKPINK), upload ke YouTube'],
                 ['⏰ Jadwal Pintar', 'Sesi harian 15 menit & intensif 3-4 jam, reminder otomatis via Telegram'],
-                ['📚 Kurikulum Merdeka', 'Curriculum Agent menyesuaikan topik & urutan belajar sesuai Kurikulum Merdeka'],
+                ['📚 Kurikulum Merdeka', 'Curriculum Agent menyesuaikan topik & urutan belajar sesuai Kurikulum Merdeka SIBI 2026/2027'],
               ] as const).map(([fitur, deskripsi]) => (
                 <tr key={fitur}>
                   <td className="p-2 border font-medium">{fitur}</td>
@@ -74,7 +87,27 @@ export default function DocsPage() {
               <span className="text-2xl">🏗️</span>
               <div>
                 <h3 className="font-semibold text-slate-900">Architecture Deep Dive</h3>
-                <p className="text-sm text-slate-600">7 agents, queue arch, DB schema, design decisions</p>
+                <p className="text-sm text-slate-600">7 agents, queue arch, DB schema, mindmap, design decisions</p>
+              </div>
+            </Link>
+            <Link
+              href="/docs/mindmap"
+              className="flex items-center gap-3 p-4 rounded-xl border border-slate-200 hover:border-amber-300 hover:shadow-sm transition-all bg-white"
+            >
+              <span className="text-2xl">🧠</span>
+              <div>
+                <h3 className="font-semibold text-slate-900">Mindmap Guide</h3>
+                <p className="text-sm text-slate-600">Komponen, layout algorithm, theming, animations</p>
+              </div>
+            </Link>
+            <Link
+              href="/docs/map"
+              className="flex items-center gap-3 p-4 rounded-xl border border-slate-200 hover:border-amber-300 hover:shadow-sm transition-all bg-white"
+            >
+              <span className="text-2xl">🗺️</span>
+              <div>
+                <h3 className="font-semibold text-slate-900">Peta Fungsional App</h3>
+                <p className="text-sm text-slate-600">Interactive mindmap — frontend, agents, LLM, infrastruktur</p>
               </div>
             </Link>
             <Link
@@ -109,7 +142,7 @@ export default function DocsPage() {
               ['Prisma ORM', 'Type-safe database access, migrations', 'bg-emerald-50 border-emerald-200 text-emerald-800'],
               ['BullMQ', 'Queue processing, Redis-backed, in-memory fallback', 'bg-amber-50 border-amber-200 text-amber-800'],
               ['Telegraf.js', 'Telegram Bot API, webhook integration', 'bg-indigo-50 border-indigo-200 text-indigo-800'],
-              ['SumoPod LLM', 'AI agent orchestration, multi-provider support', 'bg-purple-50 border-purple-200 text-purple-800'],
+              ['SumoPod / 9Router LLM', 'AI agent orchestration, multi-model fallback chain', 'bg-purple-50 border-purple-200 text-purple-800'],
             ] as const).map(([tech, detail, style]) => (
               <div
                 key={tech}

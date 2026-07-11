@@ -35,22 +35,27 @@ import { gradeAttempt } from "./grader";
 export async function processAssessmentGenerate(
   job: Job<AssessmentGenerateJobPayload, unknown, string>,
 ): Promise<void> {
-  const { studentId, topic, questionCount } = job.data;
+  const { studentId, materialId, topic, questionCount } = job.data;
 
   // Try to find a material matching this topic
   const { prisma } = await import("@/lib/prisma");
 
-  const material = await prisma.material.findFirst({
-    where: {
-      curriculum: { studentId },
-      OR: [
-        { id: topic },
-        { topic },
-        { subject: topic },
-      ],
-    },
-    orderBy: { createdAt: "desc" },
-  });
+  let material = null;
+  if (materialId) {
+    material = await prisma.material.findUnique({ where: { id: materialId } });
+  }
+  if (!material) {
+    material = await prisma.material.findFirst({
+      where: {
+        curriculum: { studentId },
+        OR: [
+          { topic },
+          { subject: topic },
+        ],
+      },
+      orderBy: { createdAt: "desc" },
+    });
+  }
 
   if (material) {
     // Single-material quiz

@@ -2,6 +2,7 @@ import type { Context } from "telegraf";
 import type { Student } from "@/generated/prisma/client";
 import type { BotSession } from "../session";
 import type { ChatMessage } from "@/llm/client";
+import { prisma } from "@/lib/prisma";
 import { getPersona } from "../personas";
 import { callLLM, callLLMStream } from "@/llm/client";
 import { SYSTEM_PROMPTS } from "@/llm/prompts";
@@ -60,7 +61,11 @@ export async function handleMessage(
   let response: string | null;
   try {
     console.log("[tutor] Calling LLM...");
-    response = await withTimeout(callLLM("tutor", messages), 30_000, "LLM call");
+    response = await withTimeout(
+      callLLM("tutor", messages, { studentId: student.id }),
+      30_000,
+      "LLM call",
+    );
     console.log("[tutor] LLM response:", response?.substring(0, 100));
   } catch (err) {
     console.warn("[tutor] LLM call failed, using persona fallback:", err instanceof Error ? err.message : String(err));
@@ -72,6 +77,18 @@ export async function handleMessage(
   // Safety scan before returning
   const safeResponse = await scanResponse(student.id, response);
   const finalResponse = safeResponse ?? response;
+
+  // Log chat to ChatLog (fire-and-forget)
+  Promise.all([
+    prisma.chatLog.create({
+      data: { studentId: student.id, role: "user", content: msg.text, source: "telegram" },
+    }),
+    prisma.chatLog.create({
+      data: { studentId: student.id, role: "assistant", content: finalResponse, source: "telegram" },
+    }),
+  ]).catch((err) =>
+    console.warn("[tutor] Failed to log chat:", err instanceof Error ? err.message : String(err)),
+  );
 
   // Save to chat history in session
   const updatedHistory = [

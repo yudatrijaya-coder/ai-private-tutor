@@ -14,6 +14,7 @@ export default function GettingStartedPage() {
             <li><strong>Node.js 20+</strong> — Runtime JavaScript</li>
             <li><strong>npm</strong> — Package manager</li>
             <li><strong>Git</strong> — Version control</li>
+            <li><strong>9Router</strong> — LLM gateway di port 20128, tersedia di VPS</li>
             <li><strong>Redis</strong> (opsional) — Untuk queue dengan BullMQ, fallback in-memory tersedia</li>
             <li><strong>Akses VPS</strong> — Untuk production deployment (PM2 + Caddy)</li>
           </ul>
@@ -47,7 +48,9 @@ npm install`}
               {([
                 ['DATABASE_URL', 'Koneksi database (SQLite / PostgreSQL)', '✅'],
                 ['TELEGRAM_BOT_TOKEN', 'Token bot @senangbelajar_bot dari BotFather', '✅'],
-                ['SUMOPOD_API_KEY', 'API key untuk LLM provider (SumoPod)', '✅'],
+                ['SUMOPOD_API_KEY', 'API key untuk LLM provider (SumoPod)', '—'],
+                ['LLM_BASE_URL', 'Base URL 9Router gateway (default: http://localhost:20128/v1)', '—'],
+                ['LLM_API_KEY', 'API key untuk 9Router (default: sk-9router)', '—'],
                 ['NEXTAUTH_SECRET', 'Secret untuk NextAuth.js (generate dengan openssl rand)', '✅'],
                 ['NEXTAUTH_URL', 'URL aplikasi (http://localhost:3000 untuk dev)', '✅'],
                 ['REDIS_URL', 'URL Redis untuk BullMQ (opsional, fallback in-memory)', '—'],
@@ -93,6 +96,9 @@ npx prisma db seed        # Seed data awal (jika ada)`}
           </CodeBlock>
           <p className="mt-2 text-sm text-slate-500">
             Untuk SQLite, database akan dibuat otomatis di file <code className="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono">prisma/dev.db</code>.
+          </p>
+          <p className="mt-2 text-sm text-slate-500">
+            <strong>Catatan:</strong> Projek menggunakan <strong>Prisma 7</strong> dengan <code className="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono">prisma.config.ts</code> (bukan <code className="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono">prisma/schema.prisma</code> untuk konfigurasi datasource). Di production, PostgreSQL digunakan via <code className="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono">@prisma/adapter-pg</code>.
           </p>
         </Section>
 

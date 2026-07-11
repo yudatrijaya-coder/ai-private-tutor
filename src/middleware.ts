@@ -12,15 +12,19 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // ---- Student routes ----
-  if (pathname.startsWith("/student")) {
+  if (pathname.startsWith("/student") && !pathname.startsWith("/login")) {
     const token = request.cookies.get(STUDENT_COOKIE)?.value;
     if (!token) {
-      return NextResponse.redirect(new URL("/login/student", request.url));
+      const loginUrl = new URL("/login/student", request.url);
+      loginUrl.searchParams.set("redirect", pathname + request.nextUrl.search);
+      return NextResponse.redirect(loginUrl);
     }
     try {
       await jwtVerify(token, STUDENT_JWT_SECRET);
     } catch {
-      return NextResponse.redirect(new URL("/login/student", request.url));
+      const loginUrl = new URL("/login/student", request.url);
+      loginUrl.searchParams.set("redirect", pathname + request.nextUrl.search);
+      return NextResponse.redirect(loginUrl);
     }
     return NextResponse.next();
   }

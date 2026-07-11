@@ -9,35 +9,66 @@ export const dynamic = "force-dynamic";
 /* ── Detail content ── */
 
 async function StudentDetailContent({ id }: { id: string }) {
-  const student = await prisma.student.findUnique({
-    where: { id },
-    include: {
-      scheduleSessions: {
-        orderBy: { scheduledAt: "asc" },
-        take: 14,
-      },
-      progressSnaps: {
-        orderBy: { snapDate: "desc" },
-        take: 30,
-      },
-      interventions: {
-        orderBy: { createdAt: "desc" },
-        take: 10,
-      },
-      curriculums: {
-        include: {
-          materials: {
-            include: {
-              _count: { select: { quizzes: true } },
-            },
-            take: 100,
-          },
+  // Cari student by id (UUID) atau studentId (ANDI001)
+  const student =
+    (await prisma.student.findUnique({
+      where: { id },
+      include: {
+        scheduleSessions: {
+          orderBy: { scheduledAt: "asc" },
+          take: 14,
         },
-        orderBy: { createdAt: "desc" },
-        take: 1,
+        progressSnaps: {
+          orderBy: { snapDate: "desc" },
+          take: 30,
+        },
+        interventions: {
+          orderBy: { createdAt: "desc" },
+          take: 10,
+        },
+        curriculums: {
+          include: {
+            materials: {
+              include: {
+                _count: { select: { quizzes: true } },
+              },
+              take: 100,
+            },
+          },
+          orderBy: { createdAt: "desc" },
+          take: 1,
+        },
       },
-    },
-  });
+    })) ??
+    (await prisma.student.findUnique({
+      where: { studentId: id },
+      include: {
+        scheduleSessions: {
+          orderBy: { scheduledAt: "asc" },
+          take: 14,
+        },
+        progressSnaps: {
+          orderBy: { snapDate: "desc" },
+          take: 30,
+        },
+        interventions: {
+          orderBy: { createdAt: "desc" },
+          take: 10,
+        },
+        curriculums: {
+          include: {
+            materials: {
+              include: {
+                _count: { select: { quizzes: true } },
+              },
+              take: 100,
+            },
+          },
+          orderBy: { createdAt: "desc" },
+          take: 1,
+        },
+      },
+    }));
 
   if (!student) notFound();
 

@@ -36,10 +36,37 @@ export async function GET(
       subject: material.subject,
       slides: metadata?.slides ?? null,
       script: metadata?.script ?? null,
-      content: material.processedContent?.substring(0, 500),
+      content: material.processedContent,
     });
   } catch (error) {
     console.error("[api/students/material] Error:", error);
     return NextResponse.json({ error: "Failed to load material" }, { status: 500 });
+  }
+}
+
+/**
+ * PATCH /api/students/material/[id] — Update material fields (e.g. subTopic)
+ */
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  const { id } = await params;
+
+  try {
+    const body = await request.json();
+    const { subTopic } = body;
+
+    if (subTopic !== undefined) {
+      await prisma.material.update({
+        where: { id },
+        data: { subTopic },
+      });
+    }
+
+    return NextResponse.json({ ok: true });
+  } catch (error) {
+    console.error("[api/students/material] Error updating:", error);
+    return NextResponse.json({ error: "Failed to update material" }, { status: 500 });
   }
 }

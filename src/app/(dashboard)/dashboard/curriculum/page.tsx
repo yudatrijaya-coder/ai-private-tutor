@@ -49,7 +49,7 @@ async function CurriculumTable() {
             >
               <div>
                 <Link
-                  href={`/dashboard/students/${student.id}`}
+                  href={`/dashboard/students/${student.studentId}`}
                   className="font-semibold hover:underline"
                   style={{ fontFamily: "var(--font-display)", fontSize: 16 }}
                 >
