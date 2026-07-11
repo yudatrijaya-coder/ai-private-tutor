@@ -10,7 +10,6 @@ import {
   type Node,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import dagre from "@dagrejs/dagre";
 
 import { CustomNode, type CustomNodeDataType } from "@/components/mindmap/CustomNode";
 
@@ -18,75 +17,86 @@ const COLORS = ["#FF6B6B","#4ECDC4","#FFD93D","#6BCB77","#A66CFF","#FF8C42","#4D
 
 const nodeTypes = { mindmapNode: CustomNode as any };
 
-function layoutNodes(nodes: Node[], edges: any[]): Node[] {
-  const g = new dagre.graphlib.Graph();
-  g.setDefaultEdgeLabel(() => ({}));
-  g.setGraph({ rankdir: "LR", nodesep: 200, ranksep: 360, marginx: 200, marginy: 160 });
-  nodes.forEach((n) => g.setNode(n.id, { width: n.data?.isCenter ? 200 : 190, height: n.data?.isCenter ? 64 : 56 }));
-  edges.forEach((e) => g.setEdge(e.source, e.target));
-  dagre.layout(g);
+/** Radial quadrant layout — every branch gets its own wedge, leaves spread within it. */
+function layoutNodes(nodes: Node[], _edges: any[]): Node[] {
+  const centerX = 420;
+  const centerY = 380;
+  const branchRadius = 360;
 
-  const positioned = nodes.map((n) => {
-    const pos = g.node(n.id);
-    return {
-      ...n,
-      position: {
-        x: pos.x - (n.data?.isCenter ? 100 : 95),
-        y: pos.y - (n.data?.isCenter ? 32 : 28),
-      },
-    };
-  });
+  const positioned = nodes.map((n) => ({ ...n, position: { x: 0, y: 0 } }));
 
+  // Center node
   const center = positioned.find((n) => n.id === "center");
-  if (center) center.position = { x: 80, y: 360 - 32 };
+  if (center) {
+    center.position = { x: centerX - 100, y: centerY - 32 };
+  }
 
   const branches = positioned.filter((n) => n.id !== "center" && !n.id.includes("-leaf-"));
   const leafs = positioned.filter((n) => n.id.includes("-leaf-"));
+  const N = branches.length;
+  if (N === 0) return positioned;
 
-  const totalBranches = branches.length;
-  const spreadHeight = Math.max(totalBranches * 140, 400);
-  const startY = 360 - spreadHeight / 2;
+  // Branches — evenly spaced around circle, starting at 12 o'clock (-90°)
   branches.forEach((n, i) => {
-    const gap = spreadHeight / Math.max(totalBranches - 1, 1);
+    const angleDeg = (i / N) * 360 - 90;
+    const angleRad = (angleDeg * Math.PI) / 180;
     n.position = {
-      x: 340 + Math.floor(i / 4) * 320,
-      y: startY + i * gap,
+      x: centerX + branchRadius * Math.cos(angleRad) - 95,
+      y: centerY + branchRadius * Math.sin(angleRad) - 28,
     };
   });
 
-  leafs.forEach((n, i) => {
-    const parentIndex = Math.min(Math.floor(i / 2), Math.max(branches.length - 1, 0));
-    const parent = branches[parentIndex];
-    const col = i % 2;
-    n.position = {
-      x: (parent?.position?.x ?? 340) + 300 + col * 260,
-      y: (parent?.position?.y ?? 360) + (col === 0 ? -28 : 28),
-    };
+  // Group leaves by parent branch
+  const leafGroups: Record<string, typeof leafs> = {};
+  leafs.forEach((n) => {
+    const parentId = n.id.replace(/-leaf-\d+$/, "");
+    if (!leafGroups[parentId]) leafGroups[parentId] = [];
+    leafGroups[parentId].push(n);
+  });
+
+  // Leaves — radiate outward from their parent branch
+  Object.entries(leafGroups).forEach(([parentId, children]) => {
+    const parentIndex = branches.findIndex((b) => b.id === parentId);
+    if (parentIndex === -1) return;
+    const K = children.length;
+    if (K === 0) return;
+
+    const branchAngleDeg = (parentIndex / N) * 360 - 90;
+    const wedgeDeg = 360 / N;
+    const utilization = 0.7;
+    const paddedWedge = wedgeDeg * utilization;
+    const margin = (wedgeDeg - paddedWedge) / 2;
+
+    children.forEach((n, j) => {
+      // Angle: slight spread within wedge, centered on branch direction
+      const spreadOffset = (K > 1) ? ((j / (K - 1)) - 0.5) * paddedWedge : 0;
+      const angleDeg = branchAngleDeg + spreadOffset;
+      const angleRad = (angleDeg * Math.PI) / 180;
+
+      // Distance: fan outward from just past branch outward — not locked to a single ring
+      const distStart = branchRadius + 200;
+      const distStep = 100;
+      const distance = distStart + j * distStep;
+
+      n.position = {
+        x: centerX + distance * Math.cos(angleRad) - 95,
+        y: centerY + distance * Math.sin(angleRad) - 28,
+      };
+    });
   });
 
   return positioned;
 }
 
-function buildEdges(rawNodes: { id: string; children: { label: string }[] }[], centerId: string) {
-  const edges: any[] = [];
-  rawNodes.forEach((rn, i) => {
-    const color = COLORS[i % COLORS.length];
-    edges.push({
-      id: `e-c-${rn.id}`, source: centerId, target: rn.id, type: "default",
-      style: { stroke: color, strokeWidth: 2.8, strokeOpacity: 0.7 },
-      animated: true,
-    });
-    rn.children.slice(0, 2).forEach((child, j) => {
-      edges.push({
-        id: `e-${rn.id}-leaf-${j}`,
-        source: rn.id,
-        target: `${rn.id}-leaf-${j}`,
-        type: "default",
-        style: { stroke: color, strokeWidth: 1.8, strokeOpacity: 0.42 },
-      });
-    });
-  });
-  return edges;
+/** Pick cardinal direction from node A → node B for handle selection */
+function angleDir(from: {x:number, y:number}, to: {x:number, y:number}): string {
+  const dx = to.x - from.x;
+  const dy = to.y - from.y;
+  const deg = ((Math.atan2(dy, dx) * 180 / Math.PI) + 360) % 360;
+  if (deg >= 315 || deg < 45) return "right";
+  if (deg >= 45 && deg < 135) return "bottom";
+  if (deg >= 135 && deg < 225) return "left";
+  return "top";
 }
 
 interface Props { centerTitle: string; rawNodes: { id: string; label: string; children: { label: string }[] }[]; }
@@ -117,7 +127,43 @@ export function ReactFlowMindmap({ centerTitle, rawNodes }: Props) {
         });
       });
     });
-    return { nodes: layoutNodes(ns, []), edges: buildEdges(rawNodes, "center") };
+
+    const positioned = layoutNodes(ns, []);
+
+    // Position lookup
+    const posMap = new Map(positioned.map(n => [n.id, n.position]));
+
+    // Edges with directional handles
+    const edges: any[] = [];
+    rawNodes.forEach((rn, i) => {
+      const color = COLORS[i % COLORS.length];
+      const centerPos = posMap.get("center")!;
+      const branchPos = posMap.get(rn.id)!;
+      const branchDir = angleDir(centerPos, branchPos); // consistent radial direction
+      edges.push({
+        id: `e-c-${rn.id}`, source: "center", target: rn.id,
+        sourceHandle: `s-${branchDir}`,
+        targetHandle: `t-${angleDir(branchPos, centerPos)}`,
+        type: "default",
+        style: { stroke: color, strokeWidth: 3.5, strokeOpacity: 0.65 },
+        animated: true,
+      });
+      rn.children.slice(0, 2).forEach((child, j) => {
+        const leafId = `${rn.id}-leaf-${j}`;
+        const leafPos = posMap.get(leafId)!;
+        edges.push({
+          id: `e-${rn.id}-leaf-${j}`,
+          source: rn.id,
+          target: leafId,
+          sourceHandle: `s-${branchDir}`, // use branch's radial direction, not leaf-specific
+          targetHandle: `t-${angleDir(leafPos, branchPos)}`,
+          type: "default",
+          style: { stroke: color, strokeWidth: 2.2, strokeOpacity: 0.4 },
+        });
+      });
+    });
+
+    return { nodes: positioned, edges };
   }, [centerTitle, rawNodes]);
 
   const [flowNodes, , onNodesChange] = useNodesState(nodes);

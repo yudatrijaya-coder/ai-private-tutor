@@ -73,7 +73,11 @@ export function CustomNode({ data }: { data: unknown }) {
 
   return (
     <div className="relative">
-      <Handle type="target" position={Position.Top} style={{ opacity: 0 }} />
+      {/* 4 directional target handles (invisible) */}
+      <Handle type="target" position={Position.Top} id="t-top" style={{ opacity: 0 }} />
+      <Handle type="target" position={Position.Right} id="t-right" style={{ opacity: 0 }} />
+      <Handle type="target" position={Position.Bottom} id="t-bottom" style={{ opacity: 0 }} />
+      <Handle type="target" position={Position.Left} id="t-left" style={{ opacity: 0 }} />
       <div
         className="font-bold transition-all duration-150 hover:scale-105 cursor-pointer group"
         onClick={() => !isCenter && setExpanded(!expanded)}
@@ -126,7 +130,11 @@ export function CustomNode({ data }: { data: unknown }) {
           </div>
         )}
       </div>
-      <Handle type="source" position={Position.Bottom} style={{ opacity: 0 }} />
+      {/* 4 directional source handles (invisible) */}
+      <Handle type="source" position={Position.Top} id="s-top" style={{ opacity: 0 }} />
+      <Handle type="source" position={Position.Right} id="s-right" style={{ opacity: 0 }} />
+      <Handle type="source" position={Position.Bottom} id="s-bottom" style={{ opacity: 0 }} />
+      <Handle type="source" position={Position.Left} id="s-left" style={{ opacity: 0 }} />
     </div>
   );
 }
