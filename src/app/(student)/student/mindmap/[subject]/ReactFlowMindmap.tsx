@@ -12,6 +12,7 @@ import {
 import "@xyflow/react/dist/style.css";
 
 import { CustomNode, type CustomNodeDataType } from "@/components/mindmap/CustomNode";
+import { resolveIcon, isLucideIcon } from "@/components/mindmap/iconMap";
 
 const COLORS = ["#FF6B6B","#4ECDC4","#FFD93D","#6BCB77","#A66CFF","#FF8C42","#4D96FF","#FF6BDF"];
 
@@ -112,18 +113,26 @@ export function ReactFlowMindmap({ centerTitle, rawNodes }: Props) {
     });
     rawNodes.forEach((rn, i) => {
       const color = COLORS[i % COLORS.length];
+      const iconName = resolveIcon(rn.label);
       ns.push({
         id: rn.id,
         type: "mindmapNode",
         position: { x: 0, y: 0 },
-        data: { label: rn.label, color, icon: rn.label, theme: "sd", description: rn.children.map(c => c.label).join(" • ") } as CustomNodeDataType,
+        data: {
+          label: rn.label, color, icon: iconName, isLucideIcon: isLucideIcon(iconName),
+          theme: "sd", description: rn.children.map(c => c.label).join(" • "),
+        } as CustomNodeDataType,
       });
       rn.children.slice(0, 2).forEach((child, j) => {
+        const leafIcon = resolveIcon(child.label);
         ns.push({
           id: `${rn.id}-leaf-${j}`,
           type: "mindmapNode",
           position: { x: 0, y: 0 },
-          data: { label: child.label, color, icon: child.label, theme: "sd" } as CustomNodeDataType,
+          data: {
+            label: child.label, color, icon: leafIcon, isLucideIcon: isLucideIcon(leafIcon),
+            theme: "sd",
+          } as CustomNodeDataType,
         });
       });
     });
