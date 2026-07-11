@@ -66,7 +66,7 @@ export function CustomNode({ data }: { data: unknown }) {
     ? "solid"
     : isBranch
       ? "solid"
-      : "dashed";
+      : "solid";
   const ring = isCenter
     ? "0 0 0 4px rgba(230, 168, 0, 0.25), 0 0 30px rgba(255, 179, 71, 0.3)"
     : "none";

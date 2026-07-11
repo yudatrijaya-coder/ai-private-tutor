@@ -145,7 +145,7 @@ export function ReactFlowMindmap({ centerTitle, rawNodes }: Props) {
         sourceHandle: `s-${branchDir}`,
         targetHandle: `t-${angleDir(branchPos, centerPos)}`,
         type: "default",
-        style: { stroke: color, strokeWidth: 3.5, strokeOpacity: 0.65 },
+        style: { stroke: color, strokeWidth: 4.5, strokeOpacity: 0.65 },
         animated: true,
       });
       rn.children.slice(0, 2).forEach((child, j) => {
@@ -158,7 +158,7 @@ export function ReactFlowMindmap({ centerTitle, rawNodes }: Props) {
           sourceHandle: `s-${branchDir}`, // use branch's radial direction, not leaf-specific
           targetHandle: `t-${angleDir(leafPos, branchPos)}`,
           type: "default",
-          style: { stroke: color, strokeWidth: 2.2, strokeOpacity: 0.4 },
+          style: { stroke: color, strokeWidth: 3.2, strokeOpacity: 0.4 },
         });
       });
     });
@@ -171,13 +171,10 @@ export function ReactFlowMindmap({ centerTitle, rawNodes }: Props) {
 
   return (
     <div className="w-full relative" style={{ height: "calc(100vh - 110px)" }}>
-      {/* Background dekoratif — dot grid + gradient blobs pastel */}
+      {/* Background dekoratif — gradient blobs pastel */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
         <svg className="absolute inset-0 w-full h-full">
           <defs>
-            <pattern id="dot-grid" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
-              <circle cx="12" cy="12" r="1.5" fill="#c084fc" opacity="0.18" />
-            </pattern>
             <radialGradient id="blob-pink" cx="20%" cy="15%" r="60%">
               <stop offset="0%" stopColor="#fbc7d4" stopOpacity="0.35" />
               <stop offset="100%" stopColor="#fbc7d4" stopOpacity="0" />
@@ -191,7 +188,6 @@ export function ReactFlowMindmap({ centerTitle, rawNodes }: Props) {
               <stop offset="100%" stopColor="#bfdbfe" stopOpacity="0" />
             </radialGradient>
           </defs>
-          <rect width="100%" height="100%" fill="url(#dot-grid)" />
           <rect width="100%" height="100%" fill="url(#blob-pink)" />
           <rect width="100%" height="100%" fill="url(#blob-cyan)" />
           <rect width="100%" height="100%" fill="url(#blob-blue)" />
