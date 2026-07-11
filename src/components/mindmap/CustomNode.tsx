@@ -49,29 +49,43 @@ export function CustomNode({ data }: { data: unknown }) {
     },
   } as const;
 
+  const isBranch = !!d.description && !isCenter;
+
   const t = tokens[theme];
   const bg = isCenter
     ? "linear-gradient(135deg, #FFD93D 0%, #FFB347 100%)"
-    : `${d.color}18`;
-  const border = isCenter ? "#E6A800" : d.color;
+    : isBranch
+      ? `${d.color}28`
+      : `${d.color}12`;
+  const border = isCenter
+    ? "#E6A800"
+    : isBranch
+      ? d.color
+      : `${d.color}50`;
+  const borderStyle = isCenter
+    ? "solid"
+    : isBranch
+      ? "solid"
+      : "dashed";
+  const ring = isCenter
+    ? "0 0 0 4px rgba(230, 168, 0, 0.25), 0 0 30px rgba(255, 179, 71, 0.3)"
+    : "none";
 
   return (
     <div className="relative">
       <Handle type="target" position={Position.Top} style={{ opacity: 0 }} />
       <div
-        className="font-bold transition-all duration-150 hover:scale-105 cursor-pointer"
+        className="font-bold transition-all duration-150 hover:scale-105 cursor-pointer group"
         onClick={() => !isCenter && setExpanded(!expanded)}
         style={{
           background: bg,
-          border: `${t.borderWidth} solid ${border}`,
+          border: `${t.borderWidth} ${borderStyle} ${border}`,
           borderRadius: t.borderRadius,
-          color: isCenter ? "#fff" : "#2F2A1E",
-          boxShadow: isCenter
-            ? "0 10px 24px rgba(230, 168, 0, 0.28)"
-            : `0 8px 20px ${d.color}24`,
+          color: isCenter ? "#fff" : (isBranch ? "#1E1A10" : "#5A5343"),
+          boxShadow: isCenter ? ring : `0 8px 20px ${d.color}24`,
           maxWidth: isCenter ? 200 : 240,
           padding: t.padding,
-          fontSize: t.fontSize,
+          fontSize: isCenter ? "18px" : t.fontSize,
           fontFamily: t.fontFamily,
           backdropFilter: isCenter ? "none" : t.backdrop,
         }}
@@ -99,6 +113,10 @@ export function CustomNode({ data }: { data: unknown }) {
             </span>
           )}
           <span className="leading-tight text-center break-words">{d.label}</span>
+          {/* Description indicator — visible on branch nodes that have description */}
+          {d.description && !isCenter && !expanded && (
+            <span className="text-[10px] opacity-40 ml-1 transition-opacity group-hover:opacity-70">▼</span>
+          )}
         </div>
 
         {/* Expanded description */}
