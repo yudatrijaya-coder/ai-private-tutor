@@ -9,6 +9,16 @@ import { SYSTEM_PROMPTS } from "@/llm/prompts";
 import { scanResponse } from "../safety";
 import { setSession } from "../session";
 
+const GRADE_LABELS: Record<string, string> = {
+  SD_5: "SD Kelas 5",
+  SMP_1: "SMP Kelas 1",
+  SMA_2: "SMA Kelas 2",
+};
+
+function getGradeLabel(grade?: string | null): string {
+  return GRADE_LABELS[grade ?? ""] ?? grade ?? "SD Kelas 5";
+}
+
 /** Timeout wrapper — rejects if the promise doesn't resolve in `ms` ms */
 function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {
   return Promise.race([
@@ -41,7 +51,7 @@ export async function handleMessage(
   const persona = getPersona(student.persona);
   const personaPrompt = persona.prompt ?? `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}`;
 
-  const systemMessage = `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${persona.toneRules.join(", ")}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nGrade: ${student.gradeLevel}\n\nCAPABILITIES — You can now do the following when the student asks:
+  const systemMessage = `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${persona.toneRules.join(", ")}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nGrade: ${getGradeLabel(student.gradeLevel)}\n\nCAPABILITIES — You can now do the following when the student asks:
 1. [QUIZ] — Generate or start a quiz
 2. [SCHEDULE] — Show or adjust study schedule
 3. [MATERIALS] — Show learning materials
@@ -136,7 +146,7 @@ export async function* streamMessage(
   const persona = getPersona(student.persona);
   const personaPrompt = persona.prompt ?? `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}`;
 
-  const systemMessage = `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${persona.toneRules.join(", ")}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nGrade: ${student.gradeLevel}\n\nCAPABILITIES — You can now do the following when the student asks:
+  const systemMessage = `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${persona.toneRules.join(", ")}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nGrade: ${getGradeLabel(student.gradeLevel)}\n\nCAPABILITIES — You can now do the following when the student asks:
 1. [QUIZ] — Generate or start a quiz
 2. [SCHEDULE] — Show or adjust study schedule
 3. [MATERIALS] — Show learning materials
