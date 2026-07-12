@@ -72,6 +72,27 @@ ai-private-tutor/
 | `NEXTAUTH_URL` | App URL |
 | `REDIS_URL` | Redis URL (opsional, fallback in-memory) |
 
+## Password Auth (Student Web)
+
+Students authenticate with `studentId` + bcrypt password on `https://senangbelajar.web.id/login/student`.
+- Admin can set/reset passwords from Dashboard → 👥 Siswa → 🔑 button
+- Students can change password via web (`/student/password`) or via bot (`[PASSWORD]` command)
+- Backward compatible: login works without password until one is set
+
+## Schedule System (Auto-Reminder)
+
+Cron job runs every 3 minutes, calling two endpoints:
+1. `/api/reminders/check` — personal reminders (homework deadlines, events)
+2. `/api/cron/schedule-sweep` — study schedule pipeline:
+   - Default config: 1x/day 16:00, exclude Sunday
+   - H-1 reminder: "Besok ada sesi belajar!" (via `agents/scheduler/reminder.ts`)
+   - T-30 reminder: "30 menit lagi!" 
+   - Missed detection: marks no-show sessions
+   - Daily brief (6-10AM): "Hari ini ada 2 sesi belajar"
+   - Auto-assign: 60/30/10 algorithm when student has no sessions
+- Bot commands: `[SCHEDULE]`, `[SCHEDULE:WEEK]`, `[SCHEDULE:SET:{json}]`, `[SCHEDULE:ASSIGN]`
+- Student can set preferences via chat: "Atur jadwal jam 4 sore"
+
 ## Safety Notes
 
 - **DO NOT** commit secrets to git — `.env` is in `.gitignore`

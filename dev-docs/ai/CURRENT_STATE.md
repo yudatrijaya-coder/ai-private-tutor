@@ -10,23 +10,33 @@
 | Feature | Status | Notes |
 |---------|--------|-------|
 | Mindmap Premium | ✅ Production | Radial layout, Lucide icons, CSS animations, 3-level nodes |
-| Quiz Bank | ✅ Production | 1650 soal (SD540, SMP495, SMA615) |
+| Quiz Bank | ✅ Production | 1650 soal (SD540, SMP495, SMA615) + exam generator |
 | Curriculum SIBI | ✅ Production | SD5, SMP1, SMA2 dari PDF resmi |
 | Exam Generator | ✅ Production | Template + detail page |
 | Pipeline Trigger | ✅ Production | Dashboard curriculum/content/quiz/jadwal |
 | LLM Integration | ✅ Production | 9Router combo + fallback chain |
+| Telegram Bot | ✅ Production | Webhook mode, 3 persona, homework/reminder/schedule |
+| Student Web Auth | ✅ Production | Login dengan password (bcrypt), ganti password, share link |
+| Schedule System | ✅ Production | 60/30/10 assignment, H-1/T-30 reminders, daily brief, auto-assign |
+| Admin Dashboard | ✅ Production | Manage students, curriculum, quizzes, set password |
 | WhatsApp Bot | 🟡 In Progress | Next.js webhook + QR auth |
-| Telegram Bot | ✅ Production | Webhook mode, 3 persona |
 
 ## What Was Done Recently
 
-- Mindmap: radial layout, Lucide icons, per-icon CSS animations, 4 directional handles
-- Quiz Bank: 1650 soal auto-generated via 9Router LLM
-- Curriculum: SIBI 2026/2027 dari PDF resmi Kemendikdasmen
-- Pipeline: Trigger dashboard dengan BullMQ + in-memory fallback
-- Docs migration: Restruktur ke format docs-ai (ai-rules/ + dev-docs/ + prod-docs/)
+- **Password management**: Student login with bcrypt + set/change password via web + admin
+- **Bot password support**: LLM can set/change password with [PASSWORD] command
+- **Navigation**: Back button in student header (← on non-home pages) + return-to-home on password page
+- **Schedule system**: Full cron pipeline (every 3m) for session reminders (H-1, T-30, missed), daily brief (6-10AM), auto-assignment via 60/30/10
+- **Schedule bot commands**: [SCHEDULE], [SCHEDULE:WEEK], [SCHEDULE:SET], [SCHEDULE:ASSIGN]
+- **Auto-default config**: New students get default schedule config (1x/day 16:00, exclude Sunday)
 
 ## Known Issues / Blockers
 
-- Tidak ada blocker saat ini
 - WhatsApp Bot masih dalam pengembangan (QR auth flow)
+- Tidak ada blocker saat ini
+
+## Cron Jobs
+
+| Name | Schedule | Script / Endpoint | Purpose |
+|------|----------|-------------------|---------|
+| Schedule + Reminder Sweep | every 3m | `/api/reminders/check` + `/api/cron/schedule-sweep` | Personal reminders + schedule H-1/T-30/missed + daily brief + auto-assign |

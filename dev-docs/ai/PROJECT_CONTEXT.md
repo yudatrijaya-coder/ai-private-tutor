@@ -26,6 +26,7 @@ AI Private Tutor adalah platform belajar pintar berbasis **7 AI Agent terintegra
 | LLM Gateway | 9Router combo `ai_tutor_agent` pada localhost:20128 |
 | Queue | BullMQ + Redis (opsional, fallback in-memory) |
 | Bot Framework | Telegraf.js (Telegram webhook) |
+| Cron System | Hermes Agent cron — runs every 3m (study schedule + reminders) |
 | Web Server | Caddy 2 (reverse proxy + auto-SSL) |
 | Process Manager | PM2 |
 
