@@ -42,6 +42,17 @@ export const MODEL_ROUTES: Record<AgentRole, string> = {
 };
 
 /**
+ * Vision-capable models only — skips models that don't support image inputs.
+ * Used by the vision handler to avoid wasting time on non-vision models.
+ */
+export const VISION_MODELS = [
+  "sumopod/gpt-4o-mini",
+  "ai_tutor_agent",           // may support vision depending on actual backend
+  "sumopod/gemini/gemini-2.5-flash-lite",
+  "sumopod/deepseek-v4-flash",  // might support vision via SumoPod proxy
+];
+
+/**
  * Fallback chain per agent role (primary → secondary → tertiary → ...).
  * Ordered by preference:
  *   ai_tutor_agent → sumopod/* → hermes (9Router combo) → opencode-go native
@@ -123,7 +134,12 @@ export async function callLLM(
         max_tokens: options?.maxTokens ?? 2048,
       };
 
-      const response = await getClient().chat.completions.create(body);
+      const fetchOptions: Record<string, unknown> = {};
+      if (options?.timeoutMs) {
+        fetchOptions.signal = AbortSignal.timeout(options.timeoutMs);
+      }
+
+      const response = await getClient().chat.completions.create(body, fetchOptions);
       const latencyMs = Date.now() - start;
       const content = response.choices[0]?.message?.content ?? null;
       const usage = response.usage;

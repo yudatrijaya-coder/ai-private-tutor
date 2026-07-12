@@ -27,6 +27,8 @@ export interface LLMCallOptions {
   maxTokens?: number;
   /** studentId untuk logging ApiUsage — jika disediakan, otomatis dicatat */
   studentId?: string;
+  /** timeout in milliseconds for the LLM request (default: none / SDK default) */
+  timeoutMs?: number;
 }
 
 /** Result from an LLM call including usage data */
