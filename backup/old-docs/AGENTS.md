@@ -1,10 +1,5 @@
 # AI Private Tutor — Agent Workflow
 
-> **Dokumentasi lengkap kontrak kerja AI ada di `dev-docs/ai/START_HERE.md` dan `ai-rules/AGENTS.md`.**
-> **Struktur dokumentasi mengikuti format docs-ai: `ai-rules/` (immutable) → `dev-docs/` + `prod-docs/` (output).**
-
----
-
 Proyek ini dikerjakan oleh **2 agent**:
 - **PC Agent** (kamu) → develop fitur di PC lokal
 - **VPS Agent** (Hermes) → maintain & deploy di VPS (43.133.151.242)
@@ -56,23 +51,43 @@ git push origin vps/nama-task
 ## Aturan Biar Gak Konflik
 
 1. **Jangan edit file yang sama** dalam waktu bersamaan
-2. **Pulling**: `git pull --rebase`
-3. **Kalau bentrok:** resolve → `git add . && git commit -m "merge: resolve conflict"`
+2. **Pulling**
+   ```bash
+   git checkout main
+   git pull --rebase   # biar history rapi
+   ```
+3. **Kalau bentrok:**
+   ```bash
+   git pull origin main
+   # Fix conflict, lalu:
+   git add .
+   git commit -m "merge: resolve conflict"
+   ```
 4. **Sebelum push**, pastikan sudah pull main dulu
 
+## Sync Cepat (Tanpa Branch)
+Kalau cuma perubahan kecil (typo, env, config):
+```bash
+# PC pull dari VPS
+git pull origin main
+
+# VPS pull dari PC
+git pull origin main
+```
+
+## File yang Sering Berubah
+Hati-hati kalau edit file ini barengan:
+- `src/app/layout.tsx`
+- `next.config.ts`
+- `src/bot/handlers/message.ts`
+- `prisma/schema.prisma`
+- `docs/` — dokumentasi
+
 ## Deploy ke VPS
+Saya (Hermes) handle ini:
 ```bash
 git pull origin main
 npm install
 npm run build
 pm2 restart ai-private-tutor
 ```
-
-## Dokumentasi Baru (docs-ai format)
-- **`ai-rules/`** — IMMUTABLE: template & aturan kerja AI
-- **`dev-docs/`** — OUTPUT: current state, architecture, module map
-- **`prod-docs/`** — OUTPUT: server ops & deployment
-- **`backup/old-docs/`** — Backup dokumentasi legacy
-
-> Semua dokumentasi offline lama (HANDOFF.md, MEMORY.md, docs/) masih ada di lokasi asli.
-> Lihat `dev-docs/ai/START_HERE.md` untuk entry point baru.

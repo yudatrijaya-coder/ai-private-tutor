@@ -134,6 +134,43 @@ export default function DocsPage() {
           </div>
         </Section>
 
+        <Section title="📁 Dokumentasi — Struktur Baru">
+          <p className="mb-3">
+            Dokumentasi project sudah dimigrasi ke format <strong>docs-ai</strong> — 
+            struktur terstandarisasi untuk vibe coding.
+          </p>
+
+          <table className="w-full border-collapse mb-4">
+            <thead>
+              <tr className="bg-slate-100">
+                <th className="p-2 text-left border">Folder</th>
+                <th className="p-2 text-left border">Status</th>
+                <th className="p-2 text-left border">Isi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {([
+                ['ai-rules/', '🔒 IMMUTABLE', 'Template & aturan kerja AI — hanya dibaca, tidak boleh diubah'],
+                ['dev-docs/', '📝 OUTPUT', 'Device documentation: START_HERE, PROJECT_CONTEXT, MODULE_MAP, CURRENT_STATE, architecture, module docs'],
+                ['prod-docs/', '🚀 OUTPUT', 'Production server docs: deployment, monitoring, backup, security, troubleshooting'],
+                ['backup/', '📦 OUTPUT', 'Backup dokumentasi legacy sebelum migrasi'],
+                ['src/app/docs/', '🌐 Web', 'Halaman docs online: architecture, mindmap, peta fungsional, getting-started'],
+              ] as const).map(([folder, status, isi]) => (
+                <tr key={folder}>
+                  <td className="p-2 border font-mono text-sm">{folder}</td>
+                  <td className="p-2 border">{status}</td>
+                  <td className="p-2 border text-slate-700">{isi}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <p className="text-sm text-slate-500">
+            Prinsip: <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">ai-rules/</code> = satu-satunya source kebenaran.
+            Semua folder lain adalah OUTPUT yang AI buat dari template di <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">ai-rules/</code>.
+          </p>
+        </Section>
+
         <Section title="Tech Stack Overview">
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {([
