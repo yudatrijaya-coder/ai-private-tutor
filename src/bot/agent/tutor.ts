@@ -53,7 +53,11 @@ export async function handleMessage(
 
   const systemMessage = `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${persona.toneRules.join(", ")}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nStudent ID: ${student.studentId}\nGrade: ${getGradeLabel(student.gradeLevel)}\n\nCAPABILITIES — You can now do the following when the student asks:
 1. [QUIZ] — Generate or start a quiz
-2. [SCHEDULE] — Show or adjust study schedule
+2. [SCHEDULE] — Show today's study schedule. Available sub-commands:
+   - [SCHEDULE:WEEK] — Show this week's full schedule
+   - [SCHEDULE:SET:{"sessionsPerDay":N,"preferredTime":"HH:MM","excludeDays":["sunday"]}] — Set study preferences
+   - [SCHEDULE:ASSIGN] — Generate sessions for upcoming days
+   When the student says "Atur jadwal" or "Aku mau belajar jam 4 sore", ask their preference then use [SCHEDULE:SET].
 3. [MATERIALS] — Show learning materials
 4. [REMINDER:CREATE:{"title":"...","remindAt":"ISO_DATE","category":"exam|homework|event|study|general","description":"..."}] — Set a reminder
 5. [REMINDER:LIST] — Show all reminders
@@ -149,7 +153,11 @@ export async function* streamMessage(
 
   const systemMessage = `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${persona.toneRules.join(", ")}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nStudent ID: ${student.studentId}\nGrade: ${getGradeLabel(student.gradeLevel)}\n\nCAPABILITIES — You can now do the following when the student asks:
 1. [QUIZ] — Generate or start a quiz
-2. [SCHEDULE] — Show or adjust study schedule
+2. [SCHEDULE] — Show today's study schedule. Available sub-commands:
+   - [SCHEDULE:WEEK] — Show this week's full schedule
+   - [SCHEDULE:SET:{"sessionsPerDay":N,"preferredTime":"HH:MM","excludeDays":["sunday"]}] — Set study preferences
+   - [SCHEDULE:ASSIGN] — Generate sessions for upcoming days
+   When the student says "Atur jadwal" or "Aku mau belajar jam 4 sore", ask their preference then use [SCHEDULE:SET].
 3. [MATERIALS] — Show learning materials
 4. [REMINDER:CREATE:{"title":"...","remindAt":"ISO_DATE","category":"exam|homework|event|study|general","description":"..."}] — Set a reminder
 5. [REMINDER:LIST] — Show all reminders

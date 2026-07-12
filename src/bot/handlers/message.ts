@@ -194,7 +194,7 @@ export async function onMessage(ctx: Context): Promise<void> {
             return;
           }
           if (/\[SCHEDULE\]/i.test(respText)) {
-            await handleSchedule(ctx, student);
+            await handleSchedule(ctx, student, respText);
             return;
           }
           if (/\[MATERIALS\]/i.test(respText)) {
