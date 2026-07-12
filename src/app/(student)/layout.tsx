@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 
 const NAV_ITEMS = [
@@ -23,12 +23,26 @@ function getStudentName(searchParams: URLSearchParams): string {
 }
 
 function StudentHeader({ studentName }: { studentName: string }) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const isHome = pathname === "/student";
+
   return (
     <header
       className="flex items-center justify-between px-4 py-3 rounded-2xl mb-4"
       style={{ backgroundColor: "var(--st-primary)", color: "#fff" }}
     >
       <div className="flex items-center gap-3">
+        {!isHome && (
+          <button
+            onClick={() => router.back()}
+            className="w-8 h-8 flex items-center justify-center rounded-full text-sm cursor-pointer transition-opacity hover:opacity-80 shrink-0"
+            style={{ backgroundColor: "rgba(255,255,255,0.2)" }}
+            aria-label="Kembali"
+          >
+            ←
+          </button>
+        )}
         <div
           className="w-10 h-10 rounded-full flex items-center justify-center text-xl"
           style={{ backgroundColor: "var(--st-mascot-bg)" }}

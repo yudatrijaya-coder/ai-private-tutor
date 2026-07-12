@@ -247,6 +247,19 @@ export default function PasswordChangePage() {
           </ul>
         </div>
       )}
+
+      {/* Back to Home */}
+      {!success && (
+        <div className="text-center">
+          <button
+            onClick={() => router.push("/student")}
+            className="text-sm px-4 py-2 rounded-xl transition-colors cursor-pointer"
+            style={{ color: "var(--st-text-dim)" }}
+          >
+            ← Kembali ke Beranda
+          </button>
+        </div>
+      )}
     </div>
   );
 }
