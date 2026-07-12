@@ -95,9 +95,14 @@ export async function setSession(
     updateData.context = data.context as Prisma.InputJsonValue;
   }
 
-  const row = await prisma.sessionState.update({
+  const row = await prisma.sessionState.upsert({
     where: { studentId },
-    data: updateData,
+    create: {
+      studentId,
+      currentMode: STATE_TO_DB[data.currentMode ?? "chat"],
+      context: (data.context ?? {}) as Prisma.InputJsonValue,
+    },
+    update: updateData,
   });
 
   return {
