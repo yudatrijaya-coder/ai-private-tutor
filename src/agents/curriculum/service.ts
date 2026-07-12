@@ -12,8 +12,10 @@ import type { Prisma } from "@/generated/prisma/client";
 import { GradeLevel, DeliveryType, MaterialStatus } from "@/generated/prisma/client";
 import { GRADE_TOPICS } from "@/data/curriculum-topics";
 import { getContent } from "@/data/curriculum-content";
-import QUIZ_MAP from "@/data/quiz-bank";
-import { quizKey } from "@/data/quiz-bank";
+// Grade-specific quiz banks
+import { getQuiz as getQuizSD5 } from "@/data/quiz-bank-sd5";
+import { getQuiz as getQuizSMP7 } from "@/data/quiz-bank-smp7";
+import { getQuiz as getQuizSMA11 } from "@/data/quiz-bank-sma11";
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
@@ -69,6 +71,15 @@ export async function generateCurriculumDraft(studentId: string): Promise<void> 
 
   const gradeLevelEnum = serializeGradeLevel(student.gradeLevel);
 
+  // ─── Quiz bank by grade ──────────────────────────────────────
+  const QUIZ_BANKS: Record<string, (subject: string, topic: string, subTopic: string) => any[]> = {
+    SD_5: getQuizSD5,
+    SMP_1: getQuizSMP7,
+    SMA_2: getQuizSMA11,
+  };
+  const getQuizForGrade = QUIZ_BANKS[student.gradeLevel] ?? getQuizSD5;
+  // ─────────────────────────────────────────────────────────────
+
   for (const topic of topics) {
     const content = getContent(topic.subject, topic.topic, topic.subTopic);
 
@@ -92,9 +103,9 @@ export async function generateCurriculumDraft(studentId: string): Promise<void> 
       },
     });
 
-    // Attach quiz from bank if available
-    const quizQuestions = QUIZ_MAP[quizKey(topic.subject, topic.topic, topic.subTopic)];
-    if (quizQuestions) {
+    // Attach quiz from bank if available (grade-specific)
+    const quizQuestions = getQuizForGrade(topic.subject, topic.topic, topic.subTopic);
+    if (quizQuestions && quizQuestions.length > 0) {
       const maxScore = quizQuestions.length * 10;
 
       await prisma.quiz.create({

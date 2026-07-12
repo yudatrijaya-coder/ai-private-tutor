@@ -44,12 +44,16 @@ export const MODEL_ROUTES: Record<AgentRole, string> = {
 /**
  * Vision-capable models only — skips models that don't support image inputs.
  * Used by the vision handler to avoid wasting time on non-vision models.
+ *
+ * ai_tutor_agent (9Router combo) is tried first — the combo has auto-fallback
+ * to a vision model internally when it detects image input. If the combo
+ * doesn't support vision on the current route, fallback to direct models.
  */
 export const VISION_MODELS = [
-  "sumopod/gpt-4o-mini",
-  "ai_tutor_agent",           // may support vision depending on actual backend
-  "sumopod/gemini/gemini-2.5-flash-lite",
-  "sumopod/deepseek-v4-flash",  // might support vision via SumoPod proxy
+  "ai_tutor_agent",                    // 9Router combo — auto-fallback to vision internally
+  "sumopod/gpt-4o-mini",               // known good vision model
+  "sumopod/gemini/gemini-2.5-flash-lite", // Google Gemini vision
+  "sumopod/deepseek-v4-flash",         // SumoPod proxy — may support vision
 ];
 
 /**
@@ -121,7 +125,7 @@ export async function callLLM(
   messages: ChatMessage[],
   options?: LLMCallOptions,
 ): Promise<string | null> {
-  const models = FALLBACK_CHAIN[role];
+  const models = options?.models ?? FALLBACK_CHAIN[role];
   let lastError: Error | null = null;
 
   for (const model of models) {

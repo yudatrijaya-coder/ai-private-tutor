@@ -29,6 +29,8 @@ export interface LLMCallOptions {
   studentId?: string;
   /** timeout in milliseconds for the LLM request (default: none / SDK default) */
   timeoutMs?: number;
+  /** Override model list — skip the role's fallback chain and try these instead */
+  models?: string[];
 }
 
 /** Result from an LLM call including usage data */
