@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Context, Telegraf } from "telegraf";
 import { onMessage } from "@/bot/handlers/message";
+import { routeCallback } from "@/bot/state-machine";
 import { bot } from "@/bot/bot";
 
 /**
@@ -22,6 +23,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     console.log("[webhook] Update:", update.update_id, "from", update.message?.from?.id);
 
     const ctx = new Context(update, (bot as any).telegram, (bot as any).botInfo || {});
+
+    // Route callback queries (inline keyboard buttons)
+    if (update.callback_query) {
+      console.log("[webhook] Callback query:", update.callback_query.data);
+      await routeCallback(ctx as any);
+      return NextResponse.json({ ok: true });
+    }
+
     console.log("[webhook] Calling onMessage...");
     await onMessage(ctx as any);
     console.log("[webhook] onMessage completed");

@@ -7,7 +7,12 @@ export type BotSessionState =
   | "choosing_topic"
   | "vision_answer"
   | "vision_pending"
-  | "waiting_quiz_answer";
+  | "waiting_quiz_answer"
+  | "registering_name"
+  | "registering_grade"
+  | "registering_character"
+  | "registering_days"
+  | "registering_confirm";
 
 export interface BotSession {
   studentId: string;
@@ -25,6 +30,11 @@ const DB_TO_STATE: Record<string, BotSessionState> = {
   vision_answer: "vision_answer",
   vision_pending: "vision_pending",
   waiting_quiz_answer: "waiting_quiz_answer",
+  registering_name: "registering_name",
+  registering_grade: "registering_grade",
+  registering_character: "registering_character",
+  registering_days: "registering_days",
+  registering_confirm: "registering_confirm",
 };
 
 const STATE_TO_DB: Record<BotSessionState, string> = {
@@ -34,6 +44,11 @@ const STATE_TO_DB: Record<BotSessionState, string> = {
   vision_answer: "vision_answer",
   vision_pending: "vision_pending",
   waiting_quiz_answer: "waiting_quiz_answer",
+  registering_name: "registering_name",
+  registering_grade: "registering_grade",
+  registering_character: "registering_character",
+  registering_days: "registering_days",
+  registering_confirm: "registering_confirm",
 };
 
 /**

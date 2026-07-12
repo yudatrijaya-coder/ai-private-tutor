@@ -1,6 +1,6 @@
 import type { Context } from "telegraf";
 import { prisma } from "@/lib/prisma";
-import { getSession } from "../session";
+import { getSession, clearSession } from "../session";
 import { routeByState } from "../state-machine";
 import { handleMessage } from "../agent/tutor";
 import { handleStart } from "./start";
@@ -15,6 +15,8 @@ import {
   handleReport,
   handleWarning,
 } from "./parent";
+import { handleOnboardingStart } from "./onboarding";
+import { routeCallback } from "../state-machine";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 
@@ -74,10 +76,29 @@ export async function onMessage(ctx: Context): Promise<void> {
 
     // ── Step 1: Registration commands ──
     if (text) {
-      const daftar = text.match(/^\/daftar\s+(.+)$/i);
-      if (daftar) {
-        await handleRegister(ctx, daftar[1]);
+      // /daftar with ID — link existing student record
+      const daftarWithId = text.match(/^\/daftar\s+(.+)$/i);
+      if (daftarWithId) {
+        await handleRegister(ctx, daftarWithId[1]);
         return;
+      }
+
+      // /daftar without args — start onboarding flow
+      if (/^\/daftar$/i.test(text)) {
+        await handleOnboardingStart(ctx);
+        return;
+      }
+
+      // /batal — cancel any ongoing registration
+      if (/^\/batal$/i.test(text)) {
+        const sessionId = `anon_${telegramId}`;
+        const session = await getSession(sessionId).catch(() => null);
+        if (session && session.currentMode.startsWith("registering_")) {
+          await clearSession(sessionId).catch(() => {});
+          await ctx.reply("Pendaftaran dibatalkan. Ketik /daftar kalau mau mulai lagi 😊");
+          return;
+        }
+        // If not registering, let it fall through
       }
 
       const parentDaftar = text.match(/^\/parent_daftar\s+(.+)$/i);
@@ -85,6 +106,15 @@ export async function onMessage(ctx: Context): Promise<void> {
         await handleParentRegister(ctx, parentDaftar[1]);
         return;
       }
+    }
+
+    // ── Step 1.5: Check active registration (before student lookup) ──
+    // If user is in registration flow, they don't have a student record yet.
+    const anonSessionId = `anon_${telegramId}`;
+    const anonSession = await getSession(anonSessionId).catch(() => null);
+    if (anonSession && anonSession.currentMode.startsWith("registering_")) {
+      const handled = await routeByState(ctx, anonSession, null as any);
+      if (handled) return;
     }
 
     // ── Step 2: Parent commands (check parentTelegramId first) ──

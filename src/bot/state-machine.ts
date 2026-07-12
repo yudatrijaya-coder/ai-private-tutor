@@ -3,6 +3,10 @@ import type { Student } from "@/generated/prisma/client";
 import type { BotSession } from "./session";
 import { handleQuizAnswer } from "./handlers/quiz";
 import { handlePhoto } from "./handlers/vision";
+import {
+  handleOnboardingMessage,
+  handleOnboardingCallback,
+} from "./handlers/onboarding";
 
 /**
  * Route an incoming message based on the current session state.
@@ -15,6 +19,17 @@ export async function routeByState(
 ): Promise<boolean> {
   const msg = ctx.message;
   if (!msg) return false;
+
+  // Registration flow states — route to onboarding handler
+  if (
+    session.currentMode === "registering_name" ||
+    session.currentMode === "registering_grade" ||
+    session.currentMode === "registering_character" ||
+    session.currentMode === "registering_days" ||
+    session.currentMode === "registering_confirm"
+  ) {
+    return await handleOnboardingMessage(ctx, session);
+  }
 
   // Quiz active — message IS a quiz answer
   if (
@@ -38,4 +53,23 @@ export async function routeByState(
   }
 
   return false; // not handled by state machine, fall through to intent detection
+}
+
+/**
+ * Route callback queries (inline keyboard buttons).
+ */
+export async function routeCallback(
+  ctx: Context,
+): Promise<boolean> {
+  if (!ctx.callbackQuery || !("data" in ctx.callbackQuery)) return false;
+
+  const data = ctx.callbackQuery.data;
+
+  // Onboarding callbacks
+  if (data.startsWith("onboard_") || data.startsWith("approve:") || data.startsWith("reject:")) {
+    await handleOnboardingCallback(ctx);
+    return true;
+  }
+
+  return false;
 }
