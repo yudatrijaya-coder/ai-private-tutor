@@ -387,6 +387,48 @@ export default function StudentHomePage() {
       >
         <ScheduleSection />
       </Suspense>
+
+      {/* ── Settings Section ── */}
+      <section className="mb-5">
+        <h3
+          className="text-base font-bold mb-3"
+          style={{ fontFamily: "var(--font-st-display)" }}
+        >
+          ⚙️ Pengaturan
+        </h3>
+        <div
+          className="rounded-2xl overflow-hidden"
+          style={{ backgroundColor: "var(--st-bg-card)" }}
+        >
+          <Link
+            href="/student/password"
+            className="flex items-center gap-3 p-4 transition-opacity hover:opacity-80"
+            style={{ borderBottom: "1px solid var(--st-bg, #f0f4ff)" }}
+          >
+            <span className="text-xl">🔑</span>
+            <div className="flex-1">
+              <p className="text-sm font-medium">Password</p>
+              <p className="text-xs" style={{ color: "var(--st-text-dim)" }}>
+                Buat atau ganti password login
+              </p>
+            </div>
+            <span style={{ color: "var(--st-text-dim)" }}>→</span>
+          </Link>
+          <Link
+            href="/student/profile-link"
+            className="flex items-center gap-3 p-4 transition-opacity hover:opacity-80"
+          >
+            <span className="text-xl">🔗</span>
+            <div className="flex-1">
+              <p className="text-sm font-medium">Profil & Link Login</p>
+              <p className="text-xs" style={{ color: "var(--st-text-dim)" }}>
+                Lihat ID siswa & bagikan ke orang tua
+              </p>
+            </div>
+            <span style={{ color: "var(--st-text-dim)" }}>→</span>
+          </Link>
+        </div>
+      </section>
     </>
   );
 }

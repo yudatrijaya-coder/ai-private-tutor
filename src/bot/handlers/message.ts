@@ -183,8 +183,8 @@ export async function onMessage(ctx: Context): Promise<void> {
         if (response) {
           const respText = response;
 
-          // ── Check for REMINDER / HOMEWORK intents (multi-line JSON) ──
-          if (/\[REMINDER/i.test(respText) || /\[HOMEWORK/i.test(respText)) {
+          // ── Check for REMINDER / HOMEWORK / PASSWORD intents ──
+          if (/\[REMINDER/i.test(respText) || /\[HOMEWORK/i.test(respText) || /\[PASSWORD/i.test(respText)) {
             await handleReminderCommand(ctx, student, respText);
             return;
           }

@@ -8,6 +8,7 @@
 import type { Context } from "telegraf";
 import type { Student } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
+import bcrypt from "bcryptjs";
 import { bot } from "../bot";
 
 // ─── Parse helpers ────────────────────────────────────────────
@@ -125,6 +126,23 @@ async function handleSubmitHomework(studentId: string, data: Record<string, any>
   return count > 0 ? "✅ Tugas ditandai selesai! Mantap! 🎉" : "❌ Tugas tidak ditemukan.";
 }
 
+// ─── Password handlers ────────────────────────────────────────
+
+async function handleSetPassword(studentId: string, data: Record<string, any>): Promise<string> {
+  const password = data.password;
+  if (!password || password.length < 6) {
+    return "❌ Password minimal 6 karakter ya. Coba lagi! 🔑";
+  }
+
+  const hash = await bcrypt.hash(password, 10);
+  await prisma.student.update({
+    where: { id: studentId },
+    data: { passwordHash: hash },
+  });
+
+  return "✅ *Password berhasil dibuat/diubah!* 🔐\nSekarang kamu bisa login di https://senangbelajar.web.id/login/student pake ID siswa kamu dan password baru. Jangan lupa dicatat ya! 📝";
+}
+
 // ─── Main entry point ─────────────────────────────────────────
 
 export async function handleReminderCommand(ctx: Context, student: Student, response: string): Promise<void> {
@@ -167,6 +185,28 @@ export async function handleReminderCommand(ctx: Context, student: Student, resp
         break;
       default:
         reply = "❌ Perintah tugas tidak dikenal.";
+    }
+    await ctx.reply(reply, { parse_mode: "Markdown" });
+    return;
+  }
+
+  // Check for [PASSWORD] command
+  const pwdCmd = extractCommand(response, "PASSWORD");
+
+  if (pwdCmd) {
+    let reply: string;
+    switch (pwdCmd.action) {
+      case "SET":
+        reply = await handleSetPassword(student.id, pwdCmd.data);
+        break;
+      default:
+        reply = await handleSetPassword(student.id, {}); // Prompt to set password
+    }
+    // Clean the response — remove the [PASSWORD] command text from the bot reply
+    const cleanText = response.replace(/\[PASSWORD:[^\]]*\]/gi, "").trim();
+    // Send the tutor's message first (without command), then the result
+    if (cleanText) {
+      await ctx.reply(cleanText);
     }
     await ctx.reply(reply, { parse_mode: "Markdown" });
     return;

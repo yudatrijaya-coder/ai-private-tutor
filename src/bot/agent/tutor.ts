@@ -51,7 +51,7 @@ export async function handleMessage(
   const persona = getPersona(student.persona);
   const personaPrompt = persona.prompt ?? `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}`;
 
-  const systemMessage = `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${persona.toneRules.join(", ")}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nGrade: ${getGradeLabel(student.gradeLevel)}\n\nCAPABILITIES — You can now do the following when the student asks:
+  const systemMessage = `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${persona.toneRules.join(", ")}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nStudent ID: ${student.studentId}\nGrade: ${getGradeLabel(student.gradeLevel)}\n\nCAPABILITIES — You can now do the following when the student asks:
 1. [QUIZ] — Generate or start a quiz
 2. [SCHEDULE] — Show or adjust study schedule
 3. [MATERIALS] — Show learning materials
@@ -61,6 +61,7 @@ export async function handleMessage(
 7. [HOMEWORK:CREATE:{"subject":"...","description":"...","deadlineAt":"ISO_DATE"}] — Record a homework
 8. [HOMEWORK:LIST] — Show pending homework
 9. [HOMEWORK:SUBMIT:{"subject":"..."}] — Mark homework as done
+10. [PASSWORD] — When the student asks to create or change their web login password, respond with their Student ID and ask them to type a new password (min 6 characters). Then call [PASSWORD:SET:{"password":"the_new_password"}] — This will update their password. Do NOT reveal existing passwords.
 
 When the student asks about reminders, homework, or deadlines, respond naturally AND append the appropriate command at the end.
 Example: "Baik Andi, aku catat ulangan matematikanya ya! 😊 [REMINDER:CREATE:{"title":"Ulangan Matematika","remindAt":"2026-07-14T08:00:00","category":"exam"}]"
@@ -146,7 +147,7 @@ export async function* streamMessage(
   const persona = getPersona(student.persona);
   const personaPrompt = persona.prompt ?? `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}`;
 
-  const systemMessage = `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${persona.toneRules.join(", ")}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nGrade: ${getGradeLabel(student.gradeLevel)}\n\nCAPABILITIES — You can now do the following when the student asks:
+  const systemMessage = `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${persona.toneRules.join(", ")}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nStudent ID: ${student.studentId}\nGrade: ${getGradeLabel(student.gradeLevel)}\n\nCAPABILITIES — You can now do the following when the student asks:
 1. [QUIZ] — Generate or start a quiz
 2. [SCHEDULE] — Show or adjust study schedule
 3. [MATERIALS] — Show learning materials
@@ -156,6 +157,7 @@ export async function* streamMessage(
 7. [HOMEWORK:CREATE:{"subject":"...","description":"...","deadlineAt":"ISO_DATE"}] — Record a homework
 8. [HOMEWORK:LIST] — Show pending homework
 9. [HOMEWORK:SUBMIT:{"subject":"..."}] — Mark homework as done
+10. [PASSWORD] — When the student asks to create or change their web login password, respond with their Student ID and ask them to type a new password (min 6 characters). Then call [PASSWORD:SET:{"password":"the_new_password"}] — This will update their password. Do NOT reveal existing passwords.
 
 When the student asks about reminders, homework, or deadlines, respond naturally AND append the appropriate command at the end.
 Example: "Baik Andi, aku catat ulangan matematikanya ya! 😊 [REMINDER:CREATE:{"title":"Ulangan Matematika","remindAt":"2026-07-14T08:00:00","category":"exam"}]"
