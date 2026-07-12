@@ -1,6 +1,6 @@
 import type { Context } from "telegraf";
 import { prisma } from "@/lib/prisma";
-import { getSession, clearSession } from "../session";
+import { getSession } from "../session";
 import { routeByState } from "../state-machine";
 import { handleMessage } from "../agent/tutor";
 import { handleStart } from "./start";
@@ -16,6 +16,7 @@ import {
   handleWarning,
 } from "./parent";
 import { handleOnboardingStart } from "./onboarding";
+import { hasActiveRegistration, cancelRegistration, handleOnboardingMessage } from "./onboarding";
 import { routeCallback } from "../state-machine";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -91,10 +92,7 @@ export async function onMessage(ctx: Context): Promise<void> {
 
       // /batal — cancel any ongoing registration
       if (/^\/batal$/i.test(text)) {
-        const sessionId = `anon_${telegramId}`;
-        const session = await getSession(sessionId).catch(() => null);
-        if (session && session.currentMode.startsWith("registering_")) {
-          await clearSession(sessionId).catch(() => {});
+        if (cancelRegistration(telegramId)) {
           await ctx.reply("Pendaftaran dibatalkan. Ketik /daftar kalau mau mulai lagi 😊");
           return;
         }
@@ -110,10 +108,8 @@ export async function onMessage(ctx: Context): Promise<void> {
 
     // ── Step 1.5: Check active registration (before student lookup) ──
     // If user is in registration flow, they don't have a student record yet.
-    const anonSessionId = `anon_${telegramId}`;
-    const anonSession = await getSession(anonSessionId).catch(() => null);
-    if (anonSession && anonSession.currentMode.startsWith("registering_")) {
-      const handled = await routeByState(ctx, anonSession, null as any);
+    if (hasActiveRegistration(telegramId)) {
+      const handled = await handleOnboardingMessage(ctx);
       if (handled) return;
     }
 

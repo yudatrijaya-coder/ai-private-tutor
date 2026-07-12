@@ -3,22 +3,74 @@
  *
  * Flow:
  * 1. /daftar → tanya nama
- * 2. Nama → tanya kelas (SD/SMP/SMA)
+ * 2. Nama → tanya kelas (SD/SMP/SMA) via inline keyboard
  * 3. Kelas → tanya karakter favorit (Kak Budi/Dewi/Raka)
- * 4. Karakter → tanya hari belajar intensif
+ * 4. Karakter → tanya hari belajar intensif (multi-select)
  * 5. Hari → konfirmasi + kirim ke admin untuk approval
- * 6. Admin /approve <studentId> → student jadi ACTIVE + welcome
+ * 6. Admin tap "Setujui" → student ACTIVE + welcome
+ *
+ * State disimpan di in-memory Map (bukan DB SessionState) karena
+ * SessionState.studentId punya FK ke Student.id — belum ada student record-nya.
  */
 
 import type { Context } from "telegraf";
 import { Markup } from "telegraf";
-import type { BotSession } from "../session";
 import { prisma } from "@/lib/prisma";
 import { generateCurriculumDraft } from "@/agents/curriculum";
-import { getSession, setSession, clearSession } from "../session";
 import { bot } from "../bot";
 
-// ─── Grade selection ─────────────────────────────────────────
+// ─── Types ────────────────────────────────────────────────────
+
+export type OnboardingState =
+  | "registering_name"
+  | "registering_grade"
+  | "registering_character"
+  | "registering_days"
+  | "registering_confirm";
+
+interface RegistrationData {
+  state: OnboardingState;
+  telegramId: string;
+  name: string;
+  grade: string;
+  character: string;
+  intensiveDays: string[];
+  interests?: string;
+  studentId: string;
+}
+
+// ─── In-memory store ──────────────────────────────────────────
+
+const sessions = new Map<string, RegistrationData>();
+
+/** Auto-expire after 1 hour */
+function setSession(telegramId: string, data: RegistrationData): void {
+  sessions.set(telegramId, data);
+  setTimeout(() => sessions.delete(telegramId), 3600_000);
+}
+
+function getSession(telegramId: string): RegistrationData | undefined {
+  return sessions.get(telegramId);
+}
+
+function deleteSession(telegramId: string): void {
+  sessions.delete(telegramId);
+}
+
+// ─── Pending registrations awaiting admin approval ────────────
+
+const pendingRegistrations = new Map<string, RegistrationData & { messageId?: number }>();
+
+export function storePendingRegistration(studentId: string, data: any): void {
+  pendingRegistrations.set(studentId, data);
+  setTimeout(() => pendingRegistrations.delete(studentId), 3600_000);
+}
+
+function getPendingRegistration(studentId: string): (RegistrationData & { messageId?: number }) | undefined {
+  return pendingRegistrations.get(studentId);
+}
+
+// ─── Options ──────────────────────────────────────────────────
 
 const GRADE_OPTIONS = [
   { key: "SD_5", label: "SD Kelas 5", emoji: "🎒" },
@@ -32,21 +84,15 @@ const GRADE_LABELS: Record<string, string> = {
   SMA_2: "SMA Kelas 2",
 };
 
-// ─── Character options ────────────────────────────────────────
-
 const CHARACTER_OPTIONS = [
   { key: "KAK_BUDI", label: "Kak Budi", emoji: "🦉", desc: "Seru & sabar — cocok buat SD" },
   { key: "KAK_DEWI", label: "Kak Dewi", emoji: "🌟", desc: "Asyik & santai — cocok buat SMP" },
   { key: "KAK_RAKA", label: "Kak Raka", emoji: "🔥", desc: "Gas pol! — cocok buat SMA" },
 ] as const;
 
-// ─── Day options ──────────────────────────────────────────────
+const DAYS = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"] as const;
 
-const DAYS = [
-  "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu",
-] as const;
-
-// ─── Inline keyboard helpers ──────────────────────────────────
+// ─── Inline keyboards ─────────────────────────────────────────
 
 function gradeKeyboard() {
   return Markup.inlineKeyboard(
@@ -73,37 +119,28 @@ function dayKeyboard(selected: string[] = []) {
     );
   });
 
-  // Split into 2 rows of 4 + 3
-  return Markup.inlineKeyboard(
-    [
-      buttons.slice(0, 4),
-      buttons.slice(4, 7),
-      [Markup.button.callback(selected.length > 0 ? "✅ Selesai pilih hari" : "⏭ Lewati", "onboard_day:done")],
-    ],
-  );
-}
-
-function confirmKeyboard(studentId: string) {
   return Markup.inlineKeyboard([
-    Markup.button.url("✅ Setujui", `https://senangbelajar.web.id/admin/approve?id=${studentId}`),
-    Markup.button.callback("❌ Tolak", `onboard_reject:${studentId}`),
+    buttons.slice(0, 4),
+    buttons.slice(4, 7),
+    [Markup.button.callback(
+      selected.length > 0 ? "✅ Selesai pilih hari" : "⏭ Lewati",
+      "onboard_day:done",
+    )],
   ]);
 }
 
-// ─── Step handlers ────────────────────────────────────────────
+// ─── Step functions ───────────────────────────────────────────
 
 async function stepName(ctx: Context): Promise<void> {
   await ctx.reply(
-    `👋 *Halo!* Ayo daftar belajar bareng!\n\n` +
-    `Siapa nama kamu? 🧒`,
+    `👋 *Halo!* Ayo daftar belajar bareng!\n\nSiapa nama kamu? 🧒`,
     { parse_mode: "Markdown" },
   );
 }
 
 async function stepGrade(ctx: Context, name: string): Promise<void> {
   await ctx.reply(
-    `Senang kenalan, *${name}!* 🎉\n\n` +
-    `Sekarang kamu kelas berapa?`,
+    `Senang kenalan, *${name}!* 🎉\n\nSekarang kamu kelas berapa?`,
     { parse_mode: "Markdown", ...gradeKeyboard() },
   );
 }
@@ -125,7 +162,7 @@ async function stepDays(ctx: Context): Promise<void> {
 }
 
 async function stepConfirm(ctx: Context, data: RegistrationData): Promise<void> {
-  const daysText = data.intensiveDays && data.intensiveDays.length > 0
+  const daysText = data.intensiveDays?.length
     ? data.intensiveDays.join(", ")
     : "Belum ditentukan";
 
@@ -140,7 +177,6 @@ async function stepConfirm(ctx: Context, data: RegistrationData): Promise<void> 
     { parse_mode: "Markdown" },
   );
 
-  // Kirim ke admin untuk approval
   await notifyAdmin(ctx, data);
 }
 
@@ -149,15 +185,17 @@ async function stepConfirm(ctx: Context, data: RegistrationData): Promise<void> 
 async function notifyAdmin(ctx: Context, data: RegistrationData): Promise<void> {
   const adminId = process.env.ADMIN_TELEGRAM_ID;
   if (!adminId) {
-    console.warn("[onboarding] ADMIN_TELEGRAM_ID not set — skipping admin notification");
-    // Auto-approve for now
-    await autoApprove(ctx, data);
+    console.warn("[onboarding] ADMIN_TELEGRAM_ID not set — auto-approving");
+    await approveStudent(ctx, data);
     return;
   }
 
-  const daysText = data.intensiveDays && data.intensiveDays.length > 0
+  const daysText = data.intensiveDays?.length
     ? data.intensiveDays.join(", ")
     : "Belum ditentukan";
+
+  // Store in pending map so admin approval can pick it up
+  pendingRegistrations.set(data.studentId, { ...data, messageId: ctx.message?.message_id });
 
   try {
     await bot?.telegram.sendMessage(
@@ -185,119 +223,107 @@ async function notifyAdmin(ctx: Context, data: RegistrationData): Promise<void> 
     );
   } catch (err) {
     console.error("[onboarding] Failed to notify admin:", err);
-    await autoApprove(ctx, data);
+    await approveStudent(ctx, data);
   }
 }
 
-// ─── Auto-approve (fallback) ──────────────────────────────────
+// ─── Approve (create student + welcome) ───────────────────────
 
-async function autoApprove(ctx: Context, data: RegistrationData): Promise<void> {
-  try {
-    // Buat student record
-    const student = await prisma.student.create({
-      data: {
-        studentId: data.studentId,
-        name: data.name,
-        gradeLevel: data.grade as any,
-        persona: data.character as any,
-        interests: data.interests,
-        scheduleConfig: { intensiveDays: data.intensiveDays },
-        telegramId: String(ctx.from!.id),
-        status: "ACTIVE",
-      },
-    });
+async function approveStudent(ctx: Context, data: RegistrationData): Promise<void> {
+  // Clear registration data
+  deleteSession(data.telegramId);
 
-    await ctx.reply(
-      `🎉 *Selamat datang, ${data.name}!* Kamu udah terdaftar!\n\n` +
-      `📖 Kelas: *${GRADE_LABELS[data.grade] ?? data.grade}*\n` +
-      `🎯 Tutor: *${data.character.replace("KAK_", "Kak ")}*\n\n` +
-      `Lagi nyiapin kurikulum untukmu... 📚`,
-      { parse_mode: "Markdown" },
-    );
+  const student = await prisma.student.create({
+    data: {
+      studentId: data.studentId,
+      name: data.name,
+      gradeLevel: data.grade as any,
+      persona: data.character as any,
+      interests: data.interests,
+      scheduleConfig: { intensiveDays: data.intensiveDays },
+      telegramId: data.telegramId,
+      status: "ACTIVE",
+    },
+  });
 
-    // Generate curriculum
-    await generateCurriculumDraft(student.id);
+  await ctx.reply(
+    `🎉 *Selamat datang, ${data.name}!* Kamu udah terdaftar!\n\n` +
+    `📖 Kelas: *${GRADE_LABELS[data.grade] ?? data.grade}*\n` +
+    `🎯 Tutor: *${data.character.replace("KAK_", "Kak ")}*\n\n` +
+    `Lagi nyiapin kurikulum untukmu... 📚`,
+    { parse_mode: "Markdown" },
+  );
 
-    await ctx.reply(
-      `Siap! Sekarang kamu bisa:\n` +
-      `📚 /materi — Lihat materi\n📝 /quiz — Kerjakan kuis\n📅 /jadwal — Jadwal belajar\n❓ /help — Bantuan\n\n` +
-      `Semangat belajarnya! 💪🔥`,
-    );
-  } catch (err) {
-    console.error("[onboarding] Auto-approve failed:", err);
-    await ctx.reply("Maaf, terjadi kesalahan. Coba lagi nanti ya 🙏");
-  }
+  await generateCurriculumDraft(student.id);
+
+  await ctx.reply(
+    `Siap! Sekarang kamu bisa:\n` +
+    `📚 /materi — Lihat materi\n📝 /quiz — Kerjakan kuis\n📅 /jadwal — Jadwal belajar\n❓ /help — Bantuan\n\n` +
+    `Semangat belajarnya! 💪🔥`,
+  );
 }
 
-// ─── Registration data type ───────────────────────────────────
-
-interface RegistrationData {
-  name: string;
-  grade: string;
-  character: string;
-  intensiveDays: string[];
-  interests?: string;
-  studentId: string;
-}
-
-// ─── Main entry — start registration ──────────────────────────
+// ─── Entry point: /daftar ─────────────────────────────────────
 
 export async function handleOnboardingStart(ctx: Context): Promise<void> {
   const telegramId = String(ctx.from!.id);
 
   // Check if already registered
   const existing = await prisma.student.findFirst({
-    where: { telegramId, status: { in: ["ACTIVE", "PENDING"] } },
+    where: {
+      telegramId,
+      status: { in: ["ACTIVE", "PENDING"] as any },
+    },
   });
 
   if (existing) {
     await ctx.reply(
-      `Kamu sudah terdaftar sebagai *${existing.name}* 🙋\n\n` +
-      `Ketik /start untuk mulai belajar.`,
+      `Kamu sudah terdaftar sebagai *${existing.name}* 🙋\n\nKetik /start untuk mulai belajar.`,
       { parse_mode: "Markdown" },
     );
     return;
   }
 
-  // Generate temporary studentId
-  const tempId = `NEW_${Date.now().toString(36).toUpperCase()}`;
-
-  // Simpan state awal
-  const sessionId = `anon_${telegramId}`;
-  await setSession(sessionId, {
-    currentMode: "registering_name",
-    context: { registrationData: { studentId: tempId } },
+  // Init registration session
+  setSession(telegramId, {
+    state: "registering_name",
+    telegramId,
+    name: "",
+    grade: "",
+    character: "",
+    intensiveDays: [],
+    studentId: `STU_${Date.now().toString(36).toUpperCase()}`,
   });
 
   await stepName(ctx);
 }
 
-// ─── Route onboarding messages by state ───────────────────────
+// ─── Route text messages during registration ──────────────────
 
 export async function handleOnboardingMessage(
   ctx: Context,
-  session: BotSession,
 ): Promise<boolean> {
   const msg = ctx.message;
   if (!msg || !("text" in msg)) return false;
 
-  const text = msg.text?.trim() ?? "";
-  const context = session.context ?? {};
-  const data = (context.registrationData ?? { studentId: null }) as RegistrationData;
+  const telegramId = String(ctx.from!.id);
+  const session = getSession(telegramId);
+  if (!session) return false;
 
-  switch (session.currentMode) {
+  const text = msg.text?.trim() ?? "";
+
+  switch (session.state) {
     case "registering_name": {
-      if (text.length < 2) {
+      const name = text;
+      if (name.length < 2) {
         await ctx.reply("Nama kamu terlalu pendek. Coba tulis lagi ya 😊");
         return true;
       }
-      data.name = text;
-      data.studentId = `STU_${Date.now().toString(36).toUpperCase()}`;
-      await setSession(session.studentId, {
-        currentMode: "registering_grade",
-        context: { registrationData: data },
-      });
-      await stepGrade(ctx, text);
+
+      session.state = "registering_grade";
+      session.name = name;
+      setSession(telegramId, session);
+      await stepGrade(ctx, name);
       return true;
     }
 
@@ -306,106 +332,105 @@ export async function handleOnboardingMessage(
   }
 }
 
-// ─── Handle callback queries ──────────────────────────────────
+// ─── Route callback queries ──────────────────────────────────
 
-export async function handleOnboardingCallback(ctx: Context): Promise<void> {
-  if (!ctx.callbackQuery || !("data" in ctx.callbackQuery)) return;
+export async function handleOnboardingCallback(ctx: Context): Promise<boolean> {
+  if (!ctx.callbackQuery || !("data" in ctx.callbackQuery)) return false;
 
   const callbackData = ctx.callbackQuery.data;
   const [action, value] = callbackData.split(":", 2);
-  if (!action) return;
+  if (!action) return false;
 
-  // Extract telegramId from callback query
   const telegramId = String(ctx.from!.id);
-  const sessionId = `anon_${telegramId}`;
-  const session = await getSession(sessionId);
-  const regData = (session.context?.registrationData ?? {}) as RegistrationData;
+  const session = getSession(telegramId);
 
   switch (action) {
+    // ── Grade selection ──
     case "onboard_grade": {
-      regData.grade = value;
-      await setSession(sessionId, {
-        currentMode: "registering_character",
-        context: { registrationData: regData },
-      });
-      await ctx.editMessageReplyMarkup({ inline_keyboard: [] });
+      if (!session) return false;
+      session.state = "registering_character";
+      session.grade = value;
+      setSession(telegramId, session);
+      await ctx.editMessageReplyMarkup({ inline_keyboard: [] }).catch(() => {});
       await stepCharacter(ctx);
-      break;
+      return true;
     }
 
+    // ── Character selection ──
     case "onboard_char": {
-      regData.character = value;
-      await setSession(sessionId, {
-        currentMode: "registering_days",
-        context: { registrationData: regData },
-      });
-      await ctx.editMessageReplyMarkup({ inline_keyboard: [] });
+      if (!session) return false;
+      session.state = "registering_days";
+      session.character = value;
+      setSession(telegramId, session);
+      await ctx.editMessageReplyMarkup({ inline_keyboard: [] }).catch(() => {});
       await stepDays(ctx);
-      break;
+      return true;
     }
 
+    // ── Day toggle ──
     case "onboard_day": {
+      if (!session) return false;
+
       if (value === "done") {
-        await setSession(sessionId, {
-          currentMode: "registering_confirm",
-          context: { registrationData: regData },
-        });
-        await ctx.editMessageReplyMarkup({ inline_keyboard: [] });
-        await stepConfirm(ctx, regData);
+        session.state = "registering_confirm";
+        setSession(telegramId, session);
+        await ctx.editMessageReplyMarkup({ inline_keyboard: [] }).catch(() => {});
+        await stepConfirm(ctx, session);
       } else {
-        // Toggle day selection
-        const days = regData.intensiveDays ?? [];
+        // Toggle day
+        const days = session.intensiveDays ?? [];
         const idx = days.indexOf(value);
         if (idx >= 0) days.splice(idx, 1);
         else days.push(value);
-        regData.intensiveDays = days;
-        await setSession(sessionId, {
-          currentMode: "registering_days",
-          context: { registrationData: regData },
-        });
+        session.intensiveDays = days;
+        setSession(telegramId, session);
         // Re-render keyboard
         await ctx.editMessageReplyMarkup({
           inline_keyboard: dayKeyboard(days).reply_markup.inline_keyboard,
-        });
+        }).catch(() => {});
       }
-      break;
+      return true;
     }
 
+    // ── Admin approve ──
     case "approve": {
       await handleAdminApprove(ctx, value);
-      break;
+      return true;
     }
 
+    // ── Admin reject ──
     case "reject": {
       await handleAdminReject(ctx, value);
-      break;
+      return true;
     }
 
-    case "onboard_reject": {
-      await ctx.editMessageText("❌ Pendaftaran ditolak.");
-      break;
-    }
+    default:
+      return false;
   }
 }
 
-// ─── Admin approval ───────────────────────────────────────────
+// ─── Cancel registration ─────────────────────────────────────
+
+export function cancelRegistration(telegramId: string): boolean {
+  const had = sessions.has(telegramId);
+  deleteSession(telegramId);
+  return had;
+}
+
+export function hasActiveRegistration(telegramId: string): boolean {
+  return sessions.has(telegramId);
+}
+
+// ─── Admin approval handlers ──────────────────────────────────
 
 async function handleAdminApprove(ctx: Context, studentId: string): Promise<void> {
+  const regData = getPendingRegistration(studentId);
+  if (!regData) {
+    await ctx.answerCbQuery("❌ Data pendaftaran tidak ditemukan / kadaluarsa");
+    return;
+  }
+
   try {
-    // Find the pending student record (created during autoApprove or pending)
-    // Actually, for the flow where admin approves after notification, the student
-    // was not yet created. We need to look for the studentId from registrationData.
-
-    // For now, let's use the simpler approach: admin receives notification,
-    // we create the student when they approve.
-
-    // Extract registration data from the message context
-    const regData = await getPendingRegistration(studentId);
-    if (!regData) {
-      await ctx.answerCbQuery("❌ Data pendaftaran tidak ditemukan");
-      return;
-    }
-
     const student = await prisma.student.create({
       data: {
         studentId: regData.studentId,
@@ -429,18 +454,16 @@ async function handleAdminApprove(ctx: Context, studentId: string): Promise<void
         { parse_mode: "Markdown" },
       );
 
-      // Generate curriculum
       await generateCurriculumDraft(student.id);
     }
 
     await ctx.editMessageText(
-      ctx.callbackQuery && "message" in ctx.callbackQuery
-        ? `✅ *Pendaftaran Disetujui!*\n\n👤 ${student.name}\n📖 ${GRADE_LABELS[regData.grade] ?? regData.grade}\n🎯 ${regData.character.replace("KAK_", "Kak ")}`
-        : "✅ Disetujui!",
+      `✅ *Pendaftaran Disetujui!*\n\n👤 ${student.name}\n📖 ${GRADE_LABELS[regData.grade] ?? regData.grade}\n🎯 ${regData.character.replace("KAK_", "Kak ")}`,
       { parse_mode: "Markdown" },
     );
 
     await ctx.answerCbQuery("✅ Pendaftaran disetujui!");
+    pendingRegistrations.delete(studentId);
   } catch (err) {
     console.error("[onboarding] Admin approve error:", err);
     await ctx.answerCbQuery("❌ Gagal menyetujui");
@@ -448,33 +471,16 @@ async function handleAdminApprove(ctx: Context, studentId: string): Promise<void
 }
 
 async function handleAdminReject(ctx: Context, studentId: string): Promise<void> {
-  try {
-    await ctx.editMessageText("❌ Pendaftaran ditolak.");
+  await ctx.editMessageText("❌ Pendaftaran ditolak.");
 
-    const regData = await getPendingRegistration(studentId);
-    if (regData?.telegramId) {
-      await bot?.telegram.sendMessage(
-        regData.telegramId,
-        `Maaf, pendaftaran kamu belum bisa disetujui. 😅\n\n` +
-        `Coba daftar lagi atau hubungi admin untuk info lebih lanjut.`,
-      );
-    }
-
-    await ctx.answerCbQuery("❌ Pendaftaran ditolak");
-  } catch (err) {
-    console.error("[onboarding] Admin reject error:", err);
+  const regData = getPendingRegistration(studentId);
+  if (regData?.telegramId) {
+    await bot?.telegram.sendMessage(
+      regData.telegramId,
+      `Maaf, pendaftaran kamu belum bisa disetujui. 😅\n\nCoba daftar lagi atau hubungi admin untuk info lebih lanjut.`,
+    );
   }
-}
 
-// Simple in-memory store for pending registrations (since they're not in DB yet)
-const pendingRegistrations = new Map<string, any>();
-
-export function storePendingRegistration(studentId: string, data: any): void {
-  pendingRegistrations.set(studentId, data);
-  // Auto-expire after 1 hour
-  setTimeout(() => pendingRegistrations.delete(studentId), 3600_000);
-}
-
-async function getPendingRegistration(studentId: string): Promise<any | null> {
-  return pendingRegistrations.get(studentId) ?? null;
+  await ctx.answerCbQuery("❌ Pendaftaran ditolak");
+  pendingRegistrations.delete(studentId);
 }

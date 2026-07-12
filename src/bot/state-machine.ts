@@ -20,17 +20,6 @@ export async function routeByState(
   const msg = ctx.message;
   if (!msg) return false;
 
-  // Registration flow states — route to onboarding handler
-  if (
-    session.currentMode === "registering_name" ||
-    session.currentMode === "registering_grade" ||
-    session.currentMode === "registering_character" ||
-    session.currentMode === "registering_days" ||
-    session.currentMode === "registering_confirm"
-  ) {
-    return await handleOnboardingMessage(ctx, session);
-  }
-
   // Quiz active — message IS a quiz answer
   if (
     session.currentMode === "quiz_active" ||
@@ -67,8 +56,7 @@ export async function routeCallback(
 
   // Onboarding callbacks
   if (data.startsWith("onboard_") || data.startsWith("approve:") || data.startsWith("reject:")) {
-    await handleOnboardingCallback(ctx);
-    return true;
+    return await handleOnboardingCallback(ctx);
   }
 
   return false;
