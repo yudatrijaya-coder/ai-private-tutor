@@ -113,6 +113,8 @@ model Student {
   interventions  Intervention[]
   chatLogs       ChatLog[]
   apiUsages      ApiUsage[]
+  reminders      Reminder[]
+  homeworkTasks  HomeworkTask[]
 }
 
 model Curriculum {
@@ -275,6 +277,42 @@ model ChatLog {
   student     Student  @relation(fields: [studentId], references: [id])
 
   @@index([studentId, createdAt])
+}
+
+/// Reminder — pengingat tugas / acara personal
+model Reminder {
+  id          String    @id @default(uuid())
+  studentId   String
+  title       String    // judul: "Ulangan Matematika", "Les Bahasa Inggris"
+  description String?   // deskripsi opsional
+  remindAt    DateTime  // kapan dikirim notifikasi
+  category    String    @default("general") // "exam", "homework", "event", "study", "general"
+  status      String    @default("pending") // "pending", "sent", "cancelled"
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  student     Student   @relation(fields: [studentId], references: [id])
+
+  @@index([studentId, remindAt, status])
+  @@index([remindAt, status])
+}
+
+/// HomeworkTask — tugas PR dari sekolah dengan deadline
+model HomeworkTask {
+  id          String    @id @default(uuid())
+  studentId   String
+  subject     String    // "Matematika", "IPA", "Bahasa Indonesia"
+  description String    // deskripsi PR
+  deadlineAt  DateTime  // deadline
+  status      String    @default("pending") // "pending", "submitted", "overdue", "cancelled"
+  attachments Json?     // array of file URLs (foto PR)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  student     Student   @relation(fields: [studentId], references: [id])
+
+  @@index([studentId, deadlineAt, status])
+  @@index([studentId, status])
 }
 
 model ApiUsage {

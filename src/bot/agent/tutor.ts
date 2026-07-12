@@ -41,7 +41,20 @@ export async function handleMessage(
   const persona = getPersona(student.persona);
   const personaPrompt = persona.prompt ?? `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}`;
 
-  const systemMessage = `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${persona.toneRules.join(", ")}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nGrade: ${student.gradeLevel}\n\nIf student asks for quiz, schedule, or materials, respond with the appropriate command wrapped in square brackets like [QUIZ], [SCHEDULE], [MATERIALS] at the end of your message.`;
+  const systemMessage = `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${persona.toneRules.join(", ")}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nGrade: ${student.gradeLevel}\n\nCAPABILITIES — You can now do the following when the student asks:
+1. [QUIZ] — Generate or start a quiz
+2. [SCHEDULE] — Show or adjust study schedule
+3. [MATERIALS] — Show learning materials
+4. [REMINDER:CREATE:{"title":"...","remindAt":"ISO_DATE","category":"exam|homework|event|study|general","description":"..."}] — Set a reminder
+5. [REMINDER:LIST] — Show all reminders
+6. [REMINDER:DELETE:{"all":true}] — Delete all reminders
+7. [HOMEWORK:CREATE:{"subject":"...","description":"...","deadlineAt":"ISO_DATE"}] — Record a homework
+8. [HOMEWORK:LIST] — Show pending homework
+9. [HOMEWORK:SUBMIT:{"subject":"..."}] — Mark homework as done
+
+When the student asks about reminders, homework, or deadlines, respond naturally AND append the appropriate command at the end.
+Example: "Baik Andi, aku catat ulangan matematikanya ya! 😊 [REMINDER:CREATE:{"title":"Ulangan Matematika","remindAt":"2026-07-14T08:00:00","category":"exam"}]"
+Respond in Indonesian, warm, friendly.`;
 
   // Build message history — last 10 from session context
   const chatHistory = (session.context?.chatHistory as Array<{ role: string; content: string }>) ?? [];
@@ -123,7 +136,20 @@ export async function* streamMessage(
   const persona = getPersona(student.persona);
   const personaPrompt = persona.prompt ?? `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}`;
 
-  const systemMessage = `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${persona.toneRules.join(", ")}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nGrade: ${student.gradeLevel}\n\nIf student asks for quiz, schedule, or materials, respond with the appropriate command wrapped in square brackets like [QUIZ], [SCHEDULE], [MATERIALS] at the end of your message.`;
+  const systemMessage = `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${persona.toneRules.join(", ")}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nGrade: ${student.gradeLevel}\n\nCAPABILITIES — You can now do the following when the student asks:
+1. [QUIZ] — Generate or start a quiz
+2. [SCHEDULE] — Show or adjust study schedule
+3. [MATERIALS] — Show learning materials
+4. [REMINDER:CREATE:{"title":"...","remindAt":"ISO_DATE","category":"exam|homework|event|study|general","description":"..."}] — Set a reminder
+5. [REMINDER:LIST] — Show all reminders
+6. [REMINDER:DELETE:{"all":true}] — Delete all reminders
+7. [HOMEWORK:CREATE:{"subject":"...","description":"...","deadlineAt":"ISO_DATE"}] — Record a homework
+8. [HOMEWORK:LIST] — Show pending homework
+9. [HOMEWORK:SUBMIT:{"subject":"..."}] — Mark homework as done
+
+When the student asks about reminders, homework, or deadlines, respond naturally AND append the appropriate command at the end.
+Example: "Baik Andi, aku catat ulangan matematikanya ya! 😊 [REMINDER:CREATE:{"title":"Ulangan Matematika","remindAt":"2026-07-14T08:00:00","category":"exam"}]"
+Respond in Indonesian, warm, friendly.`;
 
   const chatHistory = (session.context?.chatHistory as Array<{ role: string; content: string }>) ?? [];
   const recentHistory = chatHistory.slice(-10);

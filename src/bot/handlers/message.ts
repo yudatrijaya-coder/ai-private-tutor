@@ -5,6 +5,7 @@ import { routeByState } from "../state-machine";
 import { handleMessage } from "../agent/tutor";
 import { handleStart } from "./start";
 import { handleRegister } from "./register";
+import { handleReminderCommand, processPendingReminders } from "../agent/reminder";
 import { handleQuizStart } from "./quiz";
 import { handleSchedule } from "./schedule";
 import { handleMaterial } from "./material";
@@ -155,6 +156,12 @@ export async function onMessage(ctx: Context): Promise<void> {
 
         if (response) {
           const respText = response;
+
+          // ── Check for REMINDER / HOMEWORK intents (multi-line JSON) ──
+          if (/\[REMINDER/i.test(respText) || /\[HOMEWORK/i.test(respText)) {
+            await handleReminderCommand(ctx, student, respText);
+            return;
+          }
 
           if (/\[QUIZ\]/i.test(respText)) {
             await handleQuizStart(ctx, student);
