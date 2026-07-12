@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import bcrypt from "bcryptjs";
 import { studentLoginSchema } from "@/lib/validations/auth";
 import { safeString } from "@/lib/sanitize";
 import { rateLimit } from "@/lib/rate-limit";
@@ -7,9 +8,9 @@ import { createStudentSession } from "@/lib/auth/student";
 
 export async function POST(request: Request) {
   try {
-    // Rate limit by IP
+    // Rate limit by IP — 10 requests per minute
     const ip = request.headers.get("x-forwarded-for") ?? "unknown";
-    const rl = rateLimit(`student-login:${ip}`, 10); // stricter: 10/min
+    const rl = rateLimit(`student-login:${ip}`, 10);
     if (!rl.allowed) {
       return NextResponse.json(
         { error: "Terlalu banyak percobaan. Coba lagi nanti." },
@@ -31,7 +32,7 @@ export async function POST(request: Request) {
     // Sanitize
     const studentId = safeString(parsed.data.studentId.toUpperCase());
 
-    // Look up student by studentId
+    // Look up student by studentId — include passwordHash for verification
     const student = await prisma.student.findUnique({
       where: { studentId },
       select: {
@@ -40,6 +41,7 @@ export async function POST(request: Request) {
         name: true,
         gradeLevel: true,
         characterPreference: true,
+        passwordHash: true,
       },
     });
 
@@ -49,6 +51,28 @@ export async function POST(request: Request) {
         { status: 401 },
       );
     }
+
+    // Password verification
+    const password = parsed.data.password;
+
+    if (student.passwordHash) {
+      // Student has a password set — require verification
+      if (!password) {
+        return NextResponse.json(
+          { error: "Password diperlukan untuk akun ini" },
+          { status: 401 },
+        );
+      }
+
+      const valid = await bcrypt.compare(password, student.passwordHash);
+      if (!valid) {
+        return NextResponse.json(
+          { error: "Password salah" },
+          { status: 401 },
+        );
+      }
+    }
+    // else: no passwordHash set — backward compat, allow login without password
 
     // Create session JWT
     await createStudentSession({

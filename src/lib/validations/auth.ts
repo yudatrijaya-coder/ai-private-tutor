@@ -7,6 +7,18 @@ export const loginSchema = z.object({
 
 export const studentLoginSchema = z.object({
   studentId: z.string().min(3, "ID siswa minimal 3 karakter"),
+  password: z.string().optional(),
+});
+
+export const setPasswordSchema = z.object({
+  studentId: z.string().min(3, "ID siswa minimal 3 karakter"),
+  currentPassword: z.string().optional(),
+  newPassword: z.string().min(6, "Password minimal 6 karakter"),
+});
+
+export const resetPasswordSchema = z.object({
+  studentId: z.string().min(3, "ID siswa minimal 3 karakter"),
+  newPassword: z.string().min(6, "Password minimal 6 karakter"),
 });
 
 export const profileSchema = z.object({

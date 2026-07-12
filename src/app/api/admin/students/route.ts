@@ -16,19 +16,22 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const search = searchParams.get("search") ?? "";
+    const status = searchParams.get("status") ?? "";
     const page = parseInt(searchParams.get("page") ?? "1");
     const limit = Math.min(parseInt(searchParams.get("limit") ?? "50"), 100);
     const skip = (page - 1) * limit;
 
-    const where = search
-      ? {
-          OR: [
-            { name: { contains: search, mode: "insensitive" as const } },
-            { studentId: { contains: search, mode: "insensitive" as const } },
-            { telegramId: { contains: search } },
-          ],
-        }
-      : {};
+    const where: Record<string, unknown> = {};
+    if (search) {
+      where.OR = [
+        { name: { contains: search, mode: "insensitive" as const } },
+        { studentId: { contains: search, mode: "insensitive" as const } },
+        { telegramId: { contains: search } },
+      ];
+    }
+    if (status && ["ACTIVE", "PENDING", "PAUSED", "ARCHIVED"].includes(status)) {
+      where.status = status;
+    }
 
     const [students, total] = await Promise.all([
       prisma.student.findMany({
@@ -41,6 +44,7 @@ export async function GET(request: NextRequest) {
             select: {
               chatLogs: true,
               curriculums: true,
+              attempts: true,
             },
           },
         },
@@ -58,8 +62,13 @@ export async function GET(request: NextRequest) {
         telegramId: s.telegramId,
         parentTelegramId: s.parentTelegramId,
         persona: s.persona,
+        hasPassword: s.passwordHash !== null,
         createdAt: s.createdAt,
-        _count: s._count,
+        _count: {
+          chatLogs: s._count.chatLogs,
+          curriculums: s._count.curriculums,
+          quizAttempts: s._count.attempts,
+        },
       })),
       total,
       page,

@@ -14,6 +14,7 @@ type StudentData = {
   telegramId: string | null;
   parentTelegramId: string | null;
   persona: string | null;
+  hasPassword: boolean;
   createdAt: string;
   _count: {
     chatLogs: number;
@@ -539,6 +540,12 @@ export default function StudentsPage() {
   // Action loading state
   const [actionLoading, setActionLoading] = useState<string | null>(null);
 
+  // Password modal state
+  const [passwordTarget, setPasswordTargetInternal] = useState<StudentData | null>(null);
+  const [passwordValue, setPasswordValue] = useState("");
+  const [passwordSaving, setPasswordSaving] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
+
   // Debounce search input
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -751,6 +758,40 @@ export default function StudentsPage() {
   function handleCopyId(id: string, studentId: string) {
     copyToClipboard(studentId);
     showToast(`📋 ID "${studentId}" copied`, "info");
+  }
+
+  function openPasswordModal(student: StudentData) {
+    setPasswordTargetInternal(student);
+    setPasswordValue("");
+    setPasswordError("");
+  }
+
+  async function handleSetPassword() {
+    if (!passwordTarget) return;
+    if (passwordValue.length < 6) {
+      setPasswordError("Password minimal 6 karakter");
+      return;
+    }
+    setPasswordSaving(true);
+    setPasswordError("");
+    try {
+      const res = await fetch(`/api/admin/students/${passwordTarget.id}/set-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: passwordValue }),
+      });
+      if (res.ok) {
+        showToast(`🔑 Password ${passwordTarget.name} berhasil diatur`, "success");
+        setPasswordTargetInternal(null);
+      } else {
+        const data = await res.json();
+        setPasswordError(data.error ?? "Gagal");
+      }
+    } catch {
+      setPasswordError("Terjadi kesalahan");
+    } finally {
+      setPasswordSaving(false);
+    }
   }
 
   // ── Derived ──
@@ -1106,6 +1147,11 @@ export default function StudentsPage() {
                               title="Click to edit"
                             >
                               {s.name}
+                              {s.hasPassword ? (
+                                <span className="ml-1.5 text-[10px] opacity-50" title="Password sudah diatur">🔒</span>
+                              ) : (
+                                <span className="ml-1.5 text-[10px] opacity-40" title="Belum ada password">🔓</span>
+                              )}
                             </button>
                           )}
                         </td>
@@ -1303,6 +1349,21 @@ export default function StudentsPage() {
                               📋
                             </button>
 
+                            {/* Set Password */}
+                            <button
+                              onClick={() =>
+                                openPasswordModal(s)
+                              }
+                              className="p-1.5 rounded-lg text-xs cursor-pointer transition-colors hover:opacity-80"
+                              style={{
+                                backgroundColor: "rgba(245,158,11,0.1)",
+                                color: "var(--su-warning)",
+                              }}
+                              title="Set / Reset Password"
+                            >
+                              🔑
+                            </button>
+
                             {/* Send Message */}
                             <button
                               onClick={() =>
@@ -1457,6 +1518,78 @@ export default function StudentsPage() {
           fetchStats();
         }}
       />
+
+      {/* ── Set Password Modal ── */}
+      <Modal
+        open={passwordTarget !== null}
+        title={`🔑 Set Password — ${passwordTarget?.name ?? ""}`}
+        onClose={() => setPasswordTargetInternal(null)}
+      >
+        <div className="space-y-4">
+          <p className="text-sm" style={{ color: "var(--su-text-dim)" }}>
+            Set atau reset password untuk login web siswa.
+            <br />
+            Student ID: <strong>{passwordTarget?.studentId}</strong>
+          </p>
+
+          {passwordError && (
+            <div
+              className="text-sm px-3 py-2 rounded-lg"
+              style={{
+                backgroundColor: "rgba(239,68,68,0.12)",
+                color: "var(--su-danger)",
+              }}
+            >
+              {passwordError}
+            </div>
+          )}
+
+          <div>
+            <label className="block text-sm font-medium mb-1.5" style={{ color: "var(--su-text)" }}>
+              Password Baru
+            </label>
+            <input
+              type="text"
+              value={passwordValue}
+              onChange={(e) => setPasswordValue(e.target.value)}
+              placeholder="Minimal 6 karakter"
+              className="w-full rounded-lg px-3.5 py-2.5 text-sm outline-none transition-shadow focus:ring-2"
+              style={{
+                backgroundColor: "var(--su-bg)",
+                border: "1px solid var(--su-border)",
+                color: "var(--su-text)",
+              } as React.CSSProperties}
+            />
+          </div>
+
+          <div className="flex gap-3 pt-2">
+            <button
+              type="button"
+              onClick={() => setPasswordTargetInternal(null)}
+              className="flex-1 py-2.5 rounded-xl text-sm font-medium cursor-pointer transition-opacity hover:opacity-80"
+              style={{
+                backgroundColor: "var(--su-bg)",
+                border: "1px solid var(--su-border)",
+                color: "var(--su-text)",
+              }}
+            >
+              Batal
+            </button>
+            <button
+              type="button"
+              disabled={passwordSaving}
+              onClick={handleSetPassword}
+              className="flex-1 py-2.5 rounded-xl text-sm font-semibold cursor-pointer transition-opacity disabled:opacity-50"
+              style={{
+                backgroundColor: "var(--su-accent)",
+                color: "#fff",
+              }}
+            >
+              {passwordSaving ? "Menyimpan..." : "Simpan"}
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

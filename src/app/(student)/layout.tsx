@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { href: "/student", label: "Beranda", icon: "🏠" },
   { href: "/student/quiz", label: "Quiz", icon: "📝" },
   { href: "/student/progress", label: "Progres", icon: "📊" },
+  { href: "/student/profile-link", label: "Profil", icon: "🔑" },
   { href: "/student/profile", label: "Karakter", icon: "⭐" },
 ];
 
