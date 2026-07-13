@@ -107,8 +107,12 @@ export default function CurriculumEditorPage() {
       const res = await fetch(`/api/admin/curriculum?studentId=${studentId}`);
       if (res.ok) {
         const data = await res.json();
-        // API returns { curricula: [...] }, extract first item
-        setCurriculum(data.curricula?.[0] ?? data.curriculum ?? null);
+        const raw = data.curricula?.[0] ?? data.curriculum ?? null;
+        if (raw) {
+          setCurriculum({ ...raw, materials: (raw.materials || []).map(mapMaterial) });
+        } else {
+          setCurriculum(null);
+        }
       } else {
         setCurriculum(null);
       }
@@ -132,7 +136,8 @@ export default function CurriculumEditorPage() {
         const res = await fetch(`/api/admin/curriculum?studentId=${s.studentId}`);
         if (res.ok) {
           const data = await res.json();
-          results[s.studentId] = data.curricula?.[0] ?? null;
+          const raw = data.curricula?.[0] ?? null;
+          results[s.studentId] = raw ? { ...raw, materials: (raw.materials || []).map(mapMaterial) } : null;
         }
       } catch {
         results[s.studentId] = null;
@@ -300,6 +305,22 @@ export default function CurriculumEditorPage() {
   const selectedStudent = students.find((s) => s.studentId === selectedStudentId);
   const currentStudentId = selectedStudentId;
   const noCurriculum = !loading && !curriculum;
+
+  /* ── Map API fields (topic→title, subTopic→description, delivery→type) ── */
+
+  function mapMaterial(m: any): Material {
+    return {
+      id: m.id,
+      title: m.topic ?? m.title ?? "",
+      description: m.subTopic ?? m.description ?? "",
+      subject: m.subject ?? "",
+      type: m.delivery ?? m.type ?? "materi",
+      weekOrder: m.weekOrder,
+      status: m.status ?? "DRAFT",
+      curriculumId: m.curriculumId ?? "",
+      createdAt: m.createdAt ?? "",
+    };
+  }
 
   /* ── Render ── */
 
