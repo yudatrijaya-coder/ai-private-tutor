@@ -107,7 +107,8 @@ export default function CurriculumEditorPage() {
       const res = await fetch(`/api/admin/curriculum?studentId=${studentId}`);
       if (res.ok) {
         const data = await res.json();
-        setCurriculum(data.curriculum || data);
+        // API returns { curricula: [...] }, extract first item
+        setCurriculum(data.curricula?.[0] ?? data.curriculum ?? null);
       } else {
         setCurriculum(null);
       }
@@ -130,7 +131,8 @@ export default function CurriculumEditorPage() {
       try {
         const res = await fetch(`/api/admin/curriculum?studentId=${s.studentId}`);
         if (res.ok) {
-          results[s.studentId] = await res.json();
+          const data = await res.json();
+          results[s.studentId] = data.curricula?.[0] ?? null;
         }
       } catch {
         results[s.studentId] = null;
