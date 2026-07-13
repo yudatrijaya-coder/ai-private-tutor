@@ -115,30 +115,34 @@ async function main() {
       // Skip Sunday
       if (dowWIB === 0) continue;
 
-      // Daily session 19:30 WIB (15 min)
+      // Daily session 19:30 WIB (15 min) — skip if completely past
       const dailyWIB = dayStartWIB + (19 * 60 + 30) * 60 * 1000;
       const dailyUTC = wibToUtc(dailyWIB);
+      const dailyEndUTC = new Date(dailyUTC.getTime() + 15 * 60 * 1000);
 
-      // Skip if already past (for today)
-      if (dailyUTC.getTime() < now.getTime() - 5 * 60 * 1000) {
-        console.log(`  ${student.name}: skipping past daily at ${formatWIB(dailyUTC)}`);
-        continue; // Skip past sessions
+      // Only skip daily if the 15-min session has fully ended
+      if (dailyEndUTC.getTime() < now.getTime()) {
+        if (dayOffset === 0) {
+          console.log(`  ${student.name}: skipping past daily (ended at ${formatWIB(dailyEndUTC)})`);
+        }
+      } else {
+        sessions.push({
+          studentId: student.id,
+          type: "DAILY",
+          scheduledAt: dailyUTC,
+          durationMin: 15,
+          status: "SCHEDULED",
+        });
       }
-
-      sessions.push({
-        studentId: student.id,
-        type: "DAILY",
-        scheduledAt: dailyUTC,
-        durationMin: 15,
-        status: "SCHEDULED",
-      });
 
       // Intensive session Mon/Wed/Fri 19:30-21:00 (90 min)
       if (intensiveDays.includes(dowWIB)) {
         const intensiveStartWIB = dayStartWIB + (19 * 60 + 30) * 60 * 1000;
         const intensiveUTC = wibToUtc(intensiveStartWIB);
+        const intensiveEndUTC = new Date(intensiveUTC.getTime() + 90 * 60 * 1000);
 
-        if (intensiveUTC.getTime() >= now.getTime() - 5 * 60 * 1000) {
+        // Create if not completely past (still ongoing counts!)
+        if (intensiveEndUTC.getTime() > now.getTime()) {
           sessions.push({
             studentId: student.id,
             type: "INTENSIVE",
@@ -146,8 +150,8 @@ async function main() {
             durationMin: 90,
             status: "SCHEDULED",
           });
-        } else {
-          console.log(`  ${student.name}: skipping past intensive at ${formatWIB(intensiveUTC)}`);
+        } else if (dayOffset === 0) {
+          console.log(`  ${student.name}: skipping past intensive (ended at ${formatWIB(intensiveEndUTC)})`);
         }
       }
     }
