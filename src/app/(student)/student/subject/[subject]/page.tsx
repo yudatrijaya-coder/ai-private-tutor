@@ -42,6 +42,19 @@ const PDF_MAP: Record<string, Record<string, string>> = {
     "Bahasa Indonesia": "Indonesia_SMP7_BS.pdf",
     Matematika: "Matematika_SMP7_BS.pdf",
     "Pendidikan Pancasila": "Pancasila_SMP7_BS.pdf",
+    "Bahasa Inggris": "Inggris_SMP7_BS.pdf",
+  },
+  // SMA Kelas 11 — pdf-sma11
+  SMA_2: {
+    "Bahasa Indonesia": "Indonesia_SMA11_BS.pdf",
+    Geografi: "Geografi_SMA11_BS.pdf",
+    Informatika: "Informatika_SMA11_BS.pdf",
+    PJOK: "PJOK_SMA11_BS.pdf",
+    Sosiologi: "Sosiologi_SMA11_BS.pdf",
+    Matematika: "Matematika_TL_SMA11_BS.pdf",
+    Ekonomi: "Ekonomi_SMA11_BS.pdf",
+    "Pendidikan Pancasila": "Pancasila_SMA11_BS.pdf",
+    "Bahasa Inggris": "Inggris_SMA11_BS.pdf",
   },
 };
 
@@ -50,7 +63,7 @@ function getPdfUrl(subject: string, gradeLevel?: string): string | null {
   if (!gradeMap) return null;
   const pdfFile = gradeMap[subject];
   if (!pdfFile) return null;
-  const dir = gradeLevel === "SD_5" ? "pdf-sd5" : "pdf-smp7";
+  const dir = gradeLevel === "SD_5" ? "pdf-sd5" : gradeLevel === "SMA_2" ? "pdf-sma11" : "pdf-smp7";
   return `/${dir}/${pdfFile}`;
 }
 
@@ -169,15 +182,26 @@ async function SubjectContent({ subject }: { subject: string }) {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-4 gap-2">
-        <Link
-          href={getPdfUrl(decodedSubject, studentData?.gradeLevel) ?? `/student/slides/${curriculum.materials[0]?.id || ""}`}
-          target={getPdfUrl(decodedSubject, studentData?.gradeLevel) ? "_blank" : undefined}
-          className="flex flex-col items-center gap-1.5 rounded-2xl p-4 transition-all hover:scale-105 active:scale-95"
-          style={{ backgroundColor: "var(--st-bg-card)" }}
-        >
-          <span className="text-2xl">📖</span>
-          <span className="text-xs font-medium text-center">Buku SIBI</span>
-        </Link>
+        {getPdfUrl(decodedSubject, studentData?.gradeLevel) ? (
+          <Link
+            href={getPdfUrl(decodedSubject, studentData?.gradeLevel)!}
+            target="_blank"
+            className="flex flex-col items-center gap-1.5 rounded-2xl p-4 transition-all hover:scale-105 active:scale-95"
+            style={{ backgroundColor: "var(--st-bg-card)" }}
+          >
+            <span className="text-2xl">📖</span>
+            <span className="text-xs font-medium text-center">Buku SIBI</span>
+          </Link>
+        ) : (
+          <span
+            className="flex flex-col items-center gap-1.5 rounded-2xl p-4 opacity-50 cursor-not-allowed"
+            style={{ backgroundColor: "var(--st-bg-card)" }}
+            title="Buku SIBI belum tersedia untuk jenjang ini"
+          >
+            <span className="text-2xl">📖</span>
+            <span className="text-xs font-medium text-center">Buku SIBI</span>
+          </span>
+        )}
         <Link
           href={`/student/quiz?subject=${encodeURIComponent(decodedSubject)}`}
           className="flex flex-col items-center gap-1.5 rounded-2xl p-4 transition-all hover:scale-105 active:scale-95"
@@ -313,7 +337,7 @@ async function SubjectContent({ subject }: { subject: string }) {
 
                 {/* YouTube — per topik */}
                 {(() => {
-                  const ytVideos = getYouTubeForTopic(decodedSubject, material.topic);
+                  const ytVideos = getYouTubeForTopic(decodedSubject, material.topic, studentData?.gradeLevel);
                   if (ytVideos.length === 0) return null;
                   return (
                     <div className="flex gap-0.5">

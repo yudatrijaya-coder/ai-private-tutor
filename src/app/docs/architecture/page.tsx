@@ -463,6 +463,42 @@ Scheduler ──► reminder & jadwal harian`}
           </p>
         </Section>
 
+        <Section title="🔌 SIBI API — Cara Download PDF Buku">
+          <p className="mb-3">
+            API publik SIBI (Sistem Informasi Perbukuan Indonesia) untuk mencari dan download PDF buku.
+            endpoint: <code className="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono">https://api.buku.cloudapp.web.id</code>
+          </p>
+          <p className="text-slate-700 mb-3">
+            <strong>Flow:</strong> Search → dapat slug → detail → attachment URL → download.
+            Gak perlu pake browser, cukup 2x curl.
+          </p>
+          <table className="w-full border-collapse mb-3">
+            <thead>
+              <tr className="bg-slate-100">
+                <th className="p-2 text-left border">Endpoint</th>
+                <th className="p-2 text-left border">Contoh</th>
+              </tr>
+            </thead>
+            <tbody>
+              {([
+                ['GET /api/catalogue/search?q={keyword}', 'curl .../search?q=Ekonomi+SMA+XI'],
+                ['GET /api/catalogue/getDetails?slug={slug}', 'curl .../getDetails?slug=ekonomi-...'],
+                ['GET /api/catalogue/getBooksByTag?tag=STEM', 'curl .../getBooksByTag?tag=STEM'],
+              ] as const).map(([endpoint, example]) => (
+                <tr key={endpoint}>
+                  <td className="p-2 border font-mono text-sm">{endpoint}</td>
+                  <td className="p-2 border text-sm text-slate-600">{example}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="text-slate-700">
+            Field <code className="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono">attachment</code> dari response detail adalah URL PDF langsung.
+            CDN: <code className="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono">https://static-sc.cloudapp.web.id</code>.
+            Dokumentasi lengkap ada di <strong>sibi-api</strong> skill Hermes.
+          </p>
+        </Section>
+
         <Section title="🚀 Agent Pipeline">
           <p className="mb-3">
             Pipeline trigger untuk menjalankan agent workflow dari dashboard — tersedia di <code className="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono">/dashboard/agents</code>.

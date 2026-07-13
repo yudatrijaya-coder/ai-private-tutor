@@ -189,10 +189,33 @@ export const YOUTUBE_RECOMMENDATIONS: YouTubeResource[] = [
   },
 ];
 
-export function getYouTubeForTopic(_subject: string, topic: string): YouTubeResource[] {
-  // Fuzzy match: cari video yang topiknya cocok
+import { YOUTUBE_SMP7 } from "./youtube-smp7";
+import { YOUTUBE_SMA11 } from "./youtube-sma11";
+
+const ALL_YOUTUBE = [
+  ...YOUTUBE_RECOMMENDATIONS,
+  ...YOUTUBE_SMP7,
+  ...YOUTUBE_SMA11,
+];
+
+export function getYouTubeForTopic(
+  _subject: string,
+  topic: string,
+  gradeLevel?: string,
+): YouTubeResource[] {
+  // Jika grade diketahui, filter hanya video untuk grade tsb
+  const pool = !gradeLevel
+    ? ALL_YOUTUBE
+    : gradeLevel === "SD_5"
+      ? YOUTUBE_RECOMMENDATIONS
+      : gradeLevel === "SMP_1"
+        ? YOUTUBE_SMP7
+        : gradeLevel === "SMA_2"
+          ? YOUTUBE_SMA11
+          : ALL_YOUTUBE;
+  // Fuzzy match
   const t = topic.toLowerCase();
-  return YOUTUBE_RECOMMENDATIONS.filter(
+  return pool.filter(
     (yt) =>
       yt.topic.toLowerCase() === t ||
       t.includes(yt.topic.toLowerCase()) ||
