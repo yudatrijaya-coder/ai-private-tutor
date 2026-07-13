@@ -49,7 +49,7 @@ export default function ExamTemplatePage() {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <div>
-        <Link href="/dashboard/quizzes" className="text-sm opacity-60 hover:opacity-100">← Kembali</Link>
+        <Link href="/dashboard/quizzes" className="text-sm opacity-60 hover:opacity-100">← Kembali ke Quiz</Link>
         <h1 className="text-2xl font-bold mt-2" style={{ fontFamily: "var(--font-display)" }}>
           📋 Template Ujian
         </h1>

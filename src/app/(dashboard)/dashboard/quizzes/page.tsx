@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 
 /* ── Types ── */
 
@@ -251,13 +252,22 @@ export default function QuizManagerPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>
-          📝 Quiz Manager
-        </h1>
-        <p className="text-sm mt-1" style={{ color: "var(--su-text-dim)" }}>
-          Kelola soal quiz — {data ? `${data.total} total` : "memuat..."}
-        </p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>
+            📝 Quiz Manager
+          </h1>
+          <p className="text-sm mt-1" style={{ color: "var(--su-text-dim)" }}>
+            Kelola soal quiz — {data ? `${data.total} total` : "memuat..."}
+          </p>
+        </div>
+        <Link
+          href="/dashboard/quizzes/exam/template"
+          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium"
+          style={{ backgroundColor: "rgba(124,58,237,0.12)", color: "#a78bfa" }}
+        >
+          📋 Template Ujian →
+        </Link>
       </div>
 
       {/* Message */}
