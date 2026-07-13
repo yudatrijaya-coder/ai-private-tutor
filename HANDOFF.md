@@ -1,6 +1,6 @@
 # Handoff — AI Private Tutor
 
-> Terakhir update: 12 Juli 2026
+> Terakhir update: 13 Juli 2026
 
 ---
 
@@ -44,6 +44,19 @@
 - Exam template: auto-generator by weekly timeline at `/dashboard/quizzes/exam/template`
 - Quiz detail page at `/dashboard/quizzes/[id]`
 - Seed backup via Telegram
+
+### 🧠 Batch Mindmap Generation (13 Jul 2026)
+- **330/330 materials** now have `metadata.mindmap` — parsed from existing slides
+- **2,414 leaf nodes** across all 3 students
+- New endpoint `POST /api/curriculum/batch-mindmap` — parses slides markdown into mindmap node data
+- Parser handles 3 slide formats: `## headers`, `- bullets`, `• bullets`, and `1. numbered lists`
+- Files:
+  - `src/app/api/curriculum/batch-mindmap/route.ts` — new batch generation endpoint
+
+### 📥 Exam Template Generation (13 Jul 2026)
+- **92 exams generated** — 30 Syifa, 28 Raihan, 34 SHOFI
+- Auto-grouped per 4-week period, balanced difficulty (40/40/20)
+- Existing `POST /api/exam/template` endpoint, now populated for all 3 students
 
 ### 📚 Curriculum SIBI 2026/2027 (3 commits)
 - Full curriculum from official Kemendikdasmen PDFs

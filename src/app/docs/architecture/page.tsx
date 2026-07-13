@@ -418,6 +418,15 @@ Scheduler ──► reminder & jadwal harian`}
             <li>Quiz detail page di <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">/dashboard/quizzes/[id]</code></li>
             <li>Seed data: ada di <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">scripts/seed.ts</code> + backup via Telegram</li>
           </ul>
+
+          <h3 className="font-semibold text-slate-800 mb-2">Batch Mindmap Generator</h3>
+          <ul className="list-disc pl-6 space-y-1.5 text-slate-700 mb-3">
+            <li><strong>Endpoint:</strong> <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">POST /api/curriculum/batch-mindmap</code> — generate mindmap data dari slides yang sudah ada</li>
+            <li>Parse slides markdown (metadata.slides) menjadi node data untuk ReactFlow mindmap</li>
+            <li>Mendukung 3 format: <code>## headers</code>, bullet list (<code>-</code>, <code>•</code>), dan numbered list (<code>1.</code>)</li>
+            <li>Hasil disimpan di <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">metadata.mindmap</code> tiap Material</li>
+            <li>3 murid sudah digenerate: 108 + 99 + 123 = <strong>330 mindmaps, 2.414 leaf nodes</strong></li>
+          </ul>
         </Section>
 
         <Section title="📚 Curriculum SIBI 2026/2027">
