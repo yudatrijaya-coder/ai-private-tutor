@@ -499,6 +499,38 @@ Scheduler ──► reminder & jadwal harian`}
           </p>
         </Section>
 
+        <Section title="🎬 YouTube Learning Resources">
+          <p className="mb-3">
+            Video pembelajaran edukatif yang dikurasi dari YouTube untuk setiap jenjang, terverifikasi via oEmbed API. Tampil per-topik di halaman student.
+          </p>
+          <table className="w-full mb-3">
+            <thead>
+              <tr className="bg-slate-100">
+                <th className="p-2 text-left border">Jenjang</th>
+                <th className="p-2 text-left border">Jumlah Video</th>
+                <th className="p-2 text-left border">File</th>
+              </tr>
+            </thead>
+            <tbody>
+              {([
+                ["SD Kelas 5", "28 video", "youtube.ts"],
+                ["SMP Kelas 1", "91 video", "youtube-smp7.ts"],
+                ["SMA Kelas 2", "113 video", "youtube-sma11.ts"],
+              ] as const).map(([jenjang, count, file]) => (
+                <tr key={jenjang}>
+                  <td className="p-2 border font-medium">{jenjang}</td>
+                  <td className="p-2 border">{count}</td>
+                  <td className="p-2 border font-mono text-xs">{file}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="text-slate-700">
+            Fungsi <code className="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono">getYouTubeForTopic()</code> mendukung filtering per grade level. 
+            Total <strong>232 video</strong> dari channel edukasi Indonesia terverifikasi.
+          </p>
+        </Section>
+
         <Section title="🚀 Agent Pipeline">
           <p className="mb-3">
             Pipeline trigger untuk menjalankan agent workflow dari dashboard — tersedia di <code className="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono">/dashboard/agents</code>.

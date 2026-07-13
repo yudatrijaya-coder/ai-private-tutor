@@ -58,6 +58,14 @@
 - Auto-grouped per 4-week period, balanced difficulty (40/40/20)
 - Existing `POST /api/exam/template` endpoint, now populated for all 3 students
 
+### 📚 SIBI PDF & YouTube (13 Jul 2026)
+- **PDF Lengkap** — 23 PDF Kurikulum Merdeka: SD5 (6 mapel, 102MB), SMP1 (8 mapel, 170MB), SMA2 (9 mapel, 99MB)
+- Fix 2 corrupt SMP PDF + tambah Bahasa Inggris SMP
+- **YouTube Links**: SD 28 video, SMP 91 video, SMA 113 video — semua terverifikasi via oEmbed API
+  - `src/data/youtube-smp7.ts`, `src/data/youtube-sma11.ts`
+  - `getYouTubeForTopic()` now supports grade-level filtering
+- **Mindmap Page Fix** — prioritaskan `metadata.mindmap`, fallback ke slide parsing (flat bullets handled)
+
 ### 📚 Curriculum SIBI 2026/2027 (3 commits)
 - Full curriculum from official Kemendikdasmen PDFs
 - Data files: `src/data/curriculum-topics-sd5.ts`, `curriculum-topics-smp7.ts`, `curriculum-topics-sma11.ts`
@@ -90,7 +98,7 @@
 | `src/components/mindmap/animMap.ts` | Per-icon CSS animation definitions |
 | `src/lib/mindmap-template.ts` | parseMindmapFromMarkdown + createMindmapNodes utilities |
 
-### Quiz & Curriculum
+### Quiz, Curriculum & YouTube
 | File | Purpose |
 |------|---------|
 | `src/data/quiz-bank-sd5.ts` | SD Kelas 5 — 540 soal |
@@ -99,6 +107,9 @@
 | `src/data/curriculum-topics-sd5.ts` | Kurikulum SD5 dari PDF resmi |
 | `src/data/curriculum-topics-smp7.ts` | Kurikulum SMP1 dari SIBI |
 | `src/data/curriculum-topics-sma11.ts` | Kurikulum SMA2 dari SIBI |
+| `src/data/youtube.ts` | YouTube links SD5 (28 video) + getYouTubeForTopic pool |
+| `src/data/youtube-smp7.ts` | YouTube links SMP1 (91 video) |
+| `src/data/youtube-sma11.ts` | YouTube links SMA2 (113 video) |
 | `src/app/api/exam/route.ts` | Exam generation endpoint |
 | `src/app/api/exam/template/route.ts` | Template-based exam generator |
 

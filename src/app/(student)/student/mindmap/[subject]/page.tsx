@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { unstable_noStore as noStore } from "next/cache";
 import Link from "next/link";
 import { ReactFlowMindmap } from "./ReactFlowMindmap";
-import { parseMindmapFromMarkdown } from "@/lib/mindmap-template";
+import { parseMindmapFromMarkdown, type MindmapNode } from "@/lib/mindmap-template";
 
 async function MindmapContent({ materialId }: { materialId: string }) {
   noStore();
@@ -14,12 +14,44 @@ async function MindmapContent({ materialId }: { materialId: string }) {
   if (!material) return <div className="text-center py-20 text-amber-400">Materi tidak ditemukan</div>;
 
   const metadata = material.metadata as Record<string, any> | null;
+
+  // Prioritaskan metadata.mindmap yang sudah jadi
+  let rawNodes = metadata?.mindmap as MindmapNode[] | undefined;
+  if (rawNodes && rawNodes.length > 0) {
+    return (
+      <ReactFlowMindmap
+        centerTitle={material.topic || "Mindmap"}
+        rawNodes={rawNodes}
+      />
+    );
+  }
+
+  // Fallback: parse dari slides markdown
   const raw = (metadata?.slides as string) || material.processedContent || "";
   if (!raw) return <div className="text-center py-20 text-amber-400">Konten belum tersedia</div>;
 
-  const rawNodes = parseMindmapFromMarkdown(raw);
+  rawNodes = parseMindmapFromMarkdown(raw);
 
-  if (rawNodes.length === 0) return <div className="text-center py-20 text-amber-400">Belum ada konten</div>;
+  // Fallback flat bullet: coba pakai slidesToMindmap
+  if (!rawNodes || rawNodes.length === 0) {
+    const lines = raw.split("\n").map(l => l.trim()).filter(Boolean);
+    const bulletLines = lines
+      .filter(l => l.length > 0)
+      .filter(l => !/^[-•=*]{1,3}$/.test(l))
+      .map(l => l.replace(/^[-*•]\s*/, "").replace(/^\d+\.\s*/, "").trim())
+      .filter(l => l.length > 5);
+    if (bulletLines.length > 0) {
+      rawNodes = [{
+        id: "branch-0",
+        label: "Pokok Bahasan",
+        children: bulletLines.map((label) => ({
+          label: label.length > 60 ? label.substring(0, 57) + "..." : label,
+        })),
+      }];
+    }
+  }
+
+  if (!rawNodes || rawNodes.length === 0) return <div className="text-center py-20 text-amber-400">Belum ada konten</div>;
 
   return (
     <ReactFlowMindmap
