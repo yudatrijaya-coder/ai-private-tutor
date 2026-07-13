@@ -71,7 +71,7 @@ function StudentHeader({ studentName }: { studentName: string }) {
           aria-label="Keluar"
           title="Keluar"
         >
-          🚪
+          🚪 Logout
         </button>
       </div>
     </header>
