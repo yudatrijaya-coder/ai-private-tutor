@@ -85,7 +85,24 @@ export default function QuizManagerPage() {
       if (search.trim()) params.set("search", search.trim());
       const res = await fetch(`/api/admin/quizzes?${params}`);
       if (res.ok) {
-        setData(await res.json());
+        const raw = await res.json();
+        // Normalize: API returns quizzes with nested questions[] array,
+        // frontend expects flat { question, options, correctAnswer, ... }
+        const quizzes: Quiz[] = (raw.quizzes || []).map((q: any) => {
+          const qs = q.questions?.[0] || {};
+          return {
+            id: q.id,
+            question: qs.question ?? "",
+            options: qs.options ?? [],
+            correctAnswer: qs.correctIndex ?? 0,
+            difficulty: qs.difficulty ?? "medium",
+            explanation: qs.explanation ?? "",
+            subject: q.material?.subject ?? "",
+            enabled: true,
+            createdAt: q.createdAt ?? "",
+          };
+        });
+        setData({ quizzes, total: raw.total, page: 1, totalPages: 1 });
       }
     } catch {
       setMsg("❌ Gagal memuat quiz");
