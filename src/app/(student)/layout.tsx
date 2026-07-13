@@ -61,6 +61,18 @@ function StudentHeader({ studentName }: { studentName: string }) {
         <span className="text-sm font-bold">3</span>
         <span className="text-lg ml-2">⭐</span>
         <span className="text-sm font-bold">120</span>
+        <button
+          onClick={() => {
+            localStorage.clear();
+            router.push("/login/student");
+          }}
+          className="ml-2 w-8 h-8 flex items-center justify-center rounded-full text-sm cursor-pointer transition-opacity hover:opacity-80"
+          style={{ backgroundColor: "rgba(255,255,255,0.2)" }}
+          aria-label="Keluar"
+          title="Keluar"
+        >
+          🚪
+        </button>
       </div>
     </header>
   );
