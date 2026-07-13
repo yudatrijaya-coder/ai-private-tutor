@@ -1,0 +1,1312 @@
+Hak Cipta pada
+Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi Republik Indonesia.
+Dilindungi Undang-Undang.
+Penaian: Buku ini disiapkan oleh Pemerintah dalam rangka pemenuhan kebutuhan 
+buku pendidikan yang bermutu, murah, dan merata sesuai dengan amanat dalam 
+UU No. 3 Tahun 2017. Buku ini digunakan secara terbatas pada Sekolah Penggerak. 
+Buku ini disusun dan ditelaah oleh berbagai pihak di bawah koordinasi Kementerian 
+Pendidikan, Kebudayaan, Riset, dan Teknologi. Buku ini merupakan dokumen hidup 
+yang senantiasa diperbaiki, diperbaharui, dan dimutakhirkan sesuai dengan dinamika 
+kebutuhan dan perubahan zaman. Masukan dari berbagai kalangan yang dialamatkan 
+kepada penulis atau melalui alamat surel buku@kemdikbud.go.id diharapkan dapat 
+meningkatkan kualitas buku ini.
+Ilmu Pengetahuan Sosial untuk SMP/MTs Kelas VII (Edisi Revisi)
+Penulis 
+Muhammad Nursa’ban 
+Supardi
+Penelaah  
+Purnawan Basundoro 
+Budi Handoyo 
+Rokhis Setiawati
+ 
+Penyelia/Penyelaras 
+Supriyatno 
+Lenny Puspita Ekawaty 
+Kartika
+Ilustrator
+Nana Maulana
+Editor 
+Uly Amalia
+Editor Visual
+Randi Ramliyana
+Desainer
+M Rizal Abdi
+Penerbit
+Kementerian Pendidikan, Kebudayaan, 
+Riset, dan Teknologi
+Dikeluarkan oleh
+Pusat Perbukuan
+Kompleks Kemendikbud, 
+Jalan RS. Fatmawati, Cipete, Jakarta Selatan
+https://buku.kemdikbud.go.id
+Edisi Revisi, 2023
+ISBN 978-623-118-436-8 (no.jil. lengkap)
+ISBN 978-623-118-437-5  (jil. 1)
+Isi buku menggunakan 
+Noto Serif 11 pt, Steve Matterson
+xvi, 264 hlm: 17,6 cm x 25 cm
+
+iii
+Kata Pengantar
+Pusat Perbukuan; Badan Standar, Kurikulum, dan Asesmen Pendidikan; 
+Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi memiliki tugas 
+dan fungsi mengembangkan buku pendidikan pada satuan Pendidikan 
+Anak Usia Dini, Pendidikan Dasar, dan Pendidikan Menengah, termasuk 
+Pendidikan Khusus. Buku berkaitan erat dengan kurikulum. Buku yang 
+dikembangkan saat ini mengacu pada kurikulum yang berlaku, yaitu 
+Kurikulum Merdeka.  
+Salah satu bentuk dukungan terhadap implementasi Kurikulum 
+Merdeka di satuan pendidikan ialah mengembangkan buku teks utama yang 
+terdiri atas buku siswa dan panduan guru. Buku ini merupakan sumber 
+belajar utama dalam pembelajaran bagi siswa dan menjadi salah satu 
+referensi atau inspirasi bagi guru dalam merancang dan mengembangkan 
+pembelajaran sesuai karakteristik, potensi, dan kebutuhan peserta didik. 
+Keberadaan buku teks utama ini diharapkan menjadi fondasi dalam 
+membentuk Proil Pelajar Pancasila yang beriman dan bertakwa kepada 
+Tuhan yang Maha Esa, dan berakhlak mulia; berkebinekaan global, berjiwa 
+gotong royong, mandiri, kritis, dan kreatif. 
+Buku teks utama, sebagai salah satu sarana membangun dan 
+meningkatkan budaya literasi masyarakat Indonesia, perlu mendapatkan 
+perhatian khusus. Pemerintah perlu menyiapkan  buku teks utama yang 
+mengikuti perkembangan zaman untuk semua mata pelajaran wajib dan 
+mata pelajaran peminatan, termasuk Pendidikan Khusus. Sehubungan 
+dengan hal itu, Pusat Perbukuan merevisi dan menerbitkan buku-buku teks 
+utama berdasarkan Capaian Pembelajaran dalam Kurikulum Merdeka.   
+Kami mengucapkan terima kasih kepada semua pihak yang telah 
+berkolaborasi dalam upaya menghadirkan buku teks utama ini. Kami 
+berharap buku ini dapat menjadi landasan dalam memperkuat ketahanan 
+budaya bangsa, membentuk mentalitas maju, modern, dan berkarakter 
+
+iv
+bagi seluruh generasi penerus. Semoga buku teks utama ini dapat menjadi 
+tonggak perubahan yang menginspirasi, membimbing, dan mengangkat 
+kualitas pendidikan kita ke puncak keunggulan.
+Jakarta, Desember 2023
+Kepala Pusat Perbukuan,
+Supriyatno, S.Pd., M.A.
+
+v
+Prakata
+Dua elemen capaian pembelajaran dalam kurikulum 2024 yaitu pemahaman 
+konsep dan keterampilan proses yang dirancang untuk memperkuat 
+kompetensi luaran peserta didik. Proses pencapaian ini dilakukan melalui 
+pembelajaran dengan dukungan berbagai komponen seperti buku teks 
+utama sebagai salah satu sumber atau bahan pembelajaran. Substansi 
+buku teks utama ini dipetakan dari tujuan pembelajaran setiap fase mata 
+pelajaran. 
+Penentuan tema pada setiap bagian besar buku ini merupakan anchor 
+pada konstruksi scaffolding IPS yang memberikan tinjauan terintegrasi 
+dari berbagai perspektif kajian sosial, seperti tinjauan geograis, sosiologi, 
+sejarah, dan ekonomi. Tinjauan geograis digunakan sebagai platform/
+landasan setting suatu fenomena yang dikuatkan oleh tinjauan sejarah, 
+sosiologi, dan ekonomi secara komprehensif. Pada awal fase D di kelas 
+VII, peserta didik dirancang dapat memahami kondisi lingkungan tempat 
+tinggal atau tempat asal dalam lingkup keluarga dan tetangga. 
+Pada buku ini, muatan materi terintegrasi dalam konstruksi tema yang 
+dikembangkan oleh penulis. Kemerdekaan dalam menentukan tema pada 
+setiap bab dapat dilakukan oleh para guru dengan mengadaptasikan dengan 
+karakteristik dan keberagaman peserta didik pada setiap satuan pendidikan. 
+Buku kelas VII ini tersusun atas empat tema, yaitu (1) Kehidupan Sosial 
+dan Kondisi Lingkungan Sekitar, (2) Keberagaman Lingkungan Sekitar, (3) 
+Potensi Ekonomi Lingkungan, dan (4) Pemberdayaan Masyarakat. Keempat 
+tema menjadi pijakan dalam mengembangkan pemahaman konsep dan 
+keterampilan proses IPS dari berbagai sudut pandang keilmuan yang 
+mendukungnya. Keempat tema sebagai penguatan terhadap kedua elemen 
+Capaian Pembelajaran dengan tujuan menghasilkan atau memantik potensi 
+kognitif, afektif, dan psikomotorik peserta didik. Guru dapat mendesainnya 
+melalui pembelajaran yang berpusat pada peserta didik, khususnya pada 
+
+vi
+implementasi model Project Based Learning, Studi Kasus, dan Problem 
+Based Learning.
+Dalam upaya mencari informasi pengetahuan yang lebih komprehensif, 
+buku ini menyajikan tautan sumber secara daring sebagai salah satu 
+alternatif. Peserta didik dapat diarahkan agar memiliki kemauan dan 
+kemampuan untuk mencari serta memanfaatkan sumber-sumber belajar 
+yang tersimpan dalam sumber terbuka seperti internet, selain yang 
+terbentang luas di lingkungan sekitarnya. Guru diharapkan berperan untuk 
+mengarahkan, sekaligus menjadi motivator dan fasilitator bagi aktivitas 
+peserta didik. Kreativitas guru sangat berperan dalam mendesain aktivitas 
+pembelajaran yang bersumber dari lingkungan alam, sosial, maupun 
+budaya di sekitar lingkungan peserta didik dengan mengedepankan 
+prinsip Activity Based Learning, Resource Based Learning, dan Integrated 
+Learning.
+Melalui semangat Merdeka Belajar, keberadaan buku ini baik secara 
+substansi maupun tampilan penyajiannya dapat dijadikan inspirasi 
+dalam pembelajaran. Buku ini sangat terbuka dan terus-menerus dapat 
+dilakukan perbaikan dan penyempurnaan seiring dengan kebutuhan 
+capaian pembelajaran dan perkembangan ilmu dan teknologi. Untuk 
+itu, Pemerintah mengundang para pembaca khususnya pengguna untuk 
+memberikan kritik, saran, dan masukan yang berharga untuk perbaikan 
+dan penyempurnaan buku ini. Secara khusus, disampaikan terima kasih 
+kepada tim penyusun buku, penelaah, dan para kontributor lain. Semoga 
+buku ini dan kita semua dapat berkontribusi bagi kemajuan pendidikan 
+dalam rangka mempersiapkan generasi “Indonesia Emas” tepat 100 tahun 
+Indonesia Merdeka (2045).
+Yogyakarta, Desember 2023
+Tim Penulis
+
+vii
+Daftar Isi
+Kata Pengantar — iii
+Prakata — v
+Daftar Isi — vii
+Daftar Sumber Gambar — ix
+Daftar Tabel — xiii
+Petunjuk Penggunaan Buku — xiv
+Tema I Kehidupan Sosial dan Kondisi Lingkungan Sekitar — 1
+A. Mengenal Lokasi Tempat Tinggal — 4
+B. Konektivitas Antarruang — 11
+C. Perubahan Iklim— 19
+D. Potensi Bencana Alam di Indonesia — 24
+E. Kegiatan Ekonomi — 30
+F. 
+Interaksi Sosial — 37
+G. Konsep Dasar Ilmu Sejarah — 43
+Tema II Keberagaman Lingkungan Sekitar — 61
+A. Berkenalan dengan Lingkungan Sekitar — 65
+B. Pembiasaan Diri untuk Melestarikan Lingkungan — 76
+C. Pembiasaan Diri dalam Kebutuhan — 90
+Tema III Potensi Ekonomi Lingkungan — 103
+A. Pemanfaatan dan Pelestarian Potensi Sumber Daya Alam — 108
+B. Potensi Indonesia Menjadi Negara Maju — 126
+C. Toponimi — 131
+
+viii
+D. Ekonomi di Lingkungan Sekitar — 135
+E. Interaksi Sosial — 146
+Tema IV Pemberdayaan Masyarakat — 161
+A. Keragaman Sosial Budaya di Masyarakat — 166
+B. Permasalahan Kehidupan Sosial Budaya — 178
+C. Pemberdayaan Masyarakat — 197
+D. Peranan Komunitas dalam Kehidupan Masyarakat — 217
+Glosarium — 233
+Daftar Pustaka— 240
+Indeks — 245
+Proil Pelaku Perbukuan — 256
+
+ix
+Daftar Sumber Gambar
+Gambar 1.1
+Nepal van Java, Magelang — 3
+Gambar 1.2
+Letak Astronomis Indonesia — 4
+Gambar 1.3 
+Pembagian Garis Lintang dan Garis Bujur — 5
+Gambar 1.4
+Royal Observatorium di Greenwich, Inggris — 6
+Gambar 1.5 
+Pembagian Zona Waktu di Dunia — 7
+Gambar 1.6
+Pemanfaatan peta digital untuk mencari alternatif jalan dan kondisi 
+kepadatan lalu lintas — 9
+Gambar 1.7 
+Bentuk-Bentuk Muka Bumi — 11
+Gambar 1.8 
+Skema Wilayah yang Saling Melengkapi — 12
+Gambar 1.9 
+Skema Intervensi Suatu Wilayah — 13
+Gambar 1.10 
+Skema relasi antarwilayah yang lemah karena pemindahan sumber 
+daya – 14
+Gambar 1.11 
+Pertanian Bawang di Brebes — 16
+Gambar 1.12 
+Pertanian Kentang di Wonosobo — 17
+Gambar 1.13 
+Interaksi antarwilayah untuk memenuhi kebutuhan pangan — 17
+Gambar 1.14 
+Peta Curah Hujan Indonesia Desember 2023 — 19
+Gambar 1.15 
+Akibat cuaca buruk, para calon penumpang mengalami penundaan 
+penerbangan — 21
+Gambar 1.16
+Sakit Inluenza akibat Cuaca Buruk — 22
+Gambar 1.17 
+Dampak Ekonomi — 23
+Gambar 1.18
+Dampak Sosial Budaya — 23
+Gambar 1.19 
+Letak Geologis Indonesia — 24
+Gambar 1.20 
+Tanah di kawasan gunung berapi mengandung banyak unsur hara yang 
+menyuburkan tanaman — 25
+Gambar 1.21
+Penjual Jamu — 26
+Gambar 1.22
+Suvenir Komodo — 26
+Gambar 1.23 
+Berbagai Pemanfaatan Hasil Minyak Bumi — 27
+Gambar 1.24 
+Gempa Bumi Palu 2018 — 28
+Gambar 1.25 
+Dampak Tsunami Aceh 2005 — 28
+Gambar 1.26 
+Dampak Letusan Gunung Sinabung — 29
+Gambar 1.27 
+Produksi Mebel, Salah Satu Contoh Kegiatan Produksi — 31
+Gambar 1.28 
+Kegiatan Distribusi — 34
+Gambar 1.29
+Kegiatan Konsumsi — 35
+Gambar 1.30
+Berpamitan kepada Orang Tua Sebelum Berangkat Sekolah — 38
+Gambar 1.31 
+Kerja Bakti di Kampung — 39
+
+x
+Gambar 1.32 
+Mediasi oleh Ketua RT — 40
+Gambar 1.33
+Salah Satu Contoh Akulturasi — 40
+Gambar 1.34 
+Persaingan Antartim Sepak Bola — 41
+Gambar 1.35 
+Interaksi Sosial di Pasar — 43
+Gambar 1.36 
+Sumber Tertulis Sejarah — 45
+Gambar 1.37 
+Sumber Benda dalam Sejarah — 45
+Gambar 1.38
+Candi Borobudur — 54
+Gambar 1.39
+Pembangunan Tol Jogja-Bawen — 56
+Gambar 2.1
+Berkemah di Alam  — 64
+Gambar 2.2 
+Penggambaran suasana bumi di era Arkhean, ketika mahkluk hidup 
+pertama berupa prakariota dan sianobakteri mulai muncul — 65
+Gambar 2.3 
+Polusi di Langit Jakarta  — 68
+Gambar 2.4
+Pencemaran Air — 69
+Gambar 2.5
+Pencemaran Tanah — 71
+Gambar 2.6 
+Tugu Jogja, 1930 — 72
+Gambar 2.7
+Tugu Jogja, 2015 — 72
+Gambar 2.8
+TV Pertama yang Diproduksi Massal — 72
+Gambar 2.9 
+TV Pintar — 72
+Gambar 2.10 
+Blackpink, salah satu idol K-pop yang menjadi ikon budaya Korea 
+Selatan — 75
+Gambar 2.11 
+Bersepeda ke sekolah atau tempat kerja, salah satu upaya pelestarian 
+sumber daya udara — 76
+Gambar 2.12 
+Membersihkan sungai, salah satu upaya pelestarian sumber daya air — 
+78
+Gambar 2.13
+Berkebun secara organik, salah satu upaya pelestarian sumber daya 
+tanah — 79
+Gambar 2.14 
+Penggambaran Imajinatif dari Masa Berburu dan Meramu — 82
+Gambar 2.15 
+Kapak Genggam — 84
+Gambar 2.16 
+Salah satu contoh kjokkenmoddinger, jejak sampah dapur manusia era 
+Mesolitikum yang ditemukan di pinggir pantai — 85
+Gambar 2.17
+Beliung Persegi dan Mata Tombak yang Sudah Terasah — 87
+Gambar 2.18
+Perhiasan Perunggu Masa Praaksara — 89
+Gambar 2.19
+Sustainable Development Goals (SDGs) Summit pada 2015 yang 
+menjadi tonggak lahirnya deklarasi SDGs — 90
+Gambar 2.20
+Logo SDGs Versi Bahasa Indonesia — 91
+Gambar 2.21 
+Ikon-Ikon SDGs  dan Pilar-Pilarnya — 92
+Gambar 2.22 
+Salah Satu Dampak La Nina di Indonesia — 93
+Gambar 2.23 
+Pakaian hangat biasa dikenakan di daerah pegunungan — 94
+
+xi
+Gambar 2.24 
+Produksi bata merah secara manual dengan tenaga manusia di 
+Pekalongan, Jawa Tengah — 95
+Gambar 3.1
+Aktivitas nelayan di Indonesia sangat dipengaruhi oleh iklim tropis dan 
+arus laut — 106
+Gambar 3.2
+Contoh Sumber Daya Alam yang Dapat Diperbarui — 108
+Gambar 3.3
+Contoh Sumber Daya Alam yang Tidak Dapat Diperbarui — 108
+Gambar 3.4 
+Hutan Jati Sebagai Hutan Produksi — 109
+Gambar 3.5 
+Kawasan Hutan Lindung Bukit Putri Pencit, Tuban — 110
+Gambar 3.6 
+Cagar Alam Telaga Renjeng — 111
+Gambar 3.7 
+Suaka Margasatwa Baluran —111
+Gambar 3.8 
+Macam-Macam Kawasan Pelestarian Alam —112
+Gambar 3.9 
+Tambang Minyak Bumi — 113
+Gambar 3.10
+Bongkahan Emas — 114
+Gambar 3.11 
+Tambang Pasir — 114
+Gambar 3.12 
+Persebaran Hasil Tambang di Indonesia — 115
+Gambar 3.13 
+Infograik Tahapan Pemanfaatan Sumber Daya Tambang — 118
+Gambar 3.14
+Nelayan Tradisional di Banyuwangi — 119
+Gambar 3.15 
+Nelayan Modern di Pelabuhan Balohan, Provinsi Aceh — 119
+Gambar 3.16 
+Pembangkit listrik tenaga ombak Pelamis P-750 di Portugal, salah satu 
+sumber energi terbarukan. — 120
+Gambar 3.17 
+Snorkeling, Salah Satu Wisata Bahari — 121
+Gambar 3.18 
+Pengaruh Pertambahan Populasi terhadap Kerusakan Lingkungan — 
+122
+Gambar 3.19
+Kerusakan Hutan akibat Eksploitasi — 123
+Gambar 3.20 
+Ralesia Arnoldi — 126
+Gambar 3.21
+Perkebunan Kopi — 126
+Gambar 3.22
+Tambang Minyak Bumi — 127
+Gambar 3.23
+Ladang Panel Surya —127
+Gambar 3.24
+Hasil Perikanan — 127
+Gambar 3.25
+Kayu Jati — 127
+Gambar 3.26
+Laboratorium Bioteknologi — 128
+Gambar 3.27 
+Nikel — 128
+Gambar 3.28 
+Minyak Biodiesel dari Sawit — 128
+Gambar 3.29
+Pembangunan infrastruktur kereta api cepat untuk merespons potensi 
+bonus demograi — 130
+Gambar 3.30
+Sudut Jalan di Yogyakarta dengan Nama Jalan dan Muasal 
+Toponiminya — 131
+Gambar 3.31
+Peta Lama Jakarta ketika Masih Bernama Batavia — 133
+
+xii
+Gambar 3.32 
+Contoh Pelaku Ekonomi — 135
+Gambar 3.33
+Kantor Kelurahan, Tempat Rumah Tangga Pemerintahan — 137
+Gambar 3.34 
+Window display, Salah Satu Cara Promosi dalam Pasar — 141
+Gambar 3.35 
+Kurva Keseimbangan Harga — 144
+Gambar 3.36
+Sukarno dan Hatta — 146
+Gambar 3.37
+Joey Alexander, Pianis Muda Indonesia Peraih Nominasi Grammy 
+Award  — 147
+Gambar 3.38
+Sultan Hamengkubuwono IX — 147
+Gambar 3.39
+Kepala Sekolah, Salah Satu Peran Sosial — 149
+Gambar 3.40 
+Kebakaran Hutan dan Lahan di Bromo — 154
+Gambar 3.41 
+Beruang Madu — 157
+Gambar 3.42 
+Proses Pembuatan Tempe — 159
+Gambar 4.1 
+Keberagaman Indonesia — 164
+Gambar 4.2
+Upacara Melasti — 166
+Gambar 4.3 
+Proses Masuknya Nenek Moyang Bangsa Indonesia dari Yunan — 168
+Gambar 4.4 
+Pulau Talisei dan Pulau Gangga, Sulawesi Utara.  Laut merupakan 
+isolasi alami karena manusia membutuhkan teknologi berupa kapal 
+atau perahu untuk berpindah pulau — 169
+Gambar 4.5 
+Baju Adat Papua Barat — 171
+Gambar 4.6 
+Baju Adat Batak, Sumatra Utara — 171
+Gambar 4.7 
+Rumah adat Baduy di Kanekes menghadap utara dan selatan agar 
+cahaya matahari bisa masuk ke dalam rumah dan memperlancar 
+sirkulasi udara — 172
+Gambar 4.8 
+Gedung Sate, Bandung. Bangunan hasil akulturasi dengan arsitektur 
+budaya Belanda — 174
+Gambar 4.9 
+Masjid Cheng-Ho, Surabaya. Bangunan hasil akulturasi dengan 
+arsitektur budaya Tionghoa — 174
+Gambar 4.10 
+Lukisan Masjid di Waru, Seram, Markas Sultan Nuku Saat Perjuangan 
+Melawan Belanda — 180
+Gambar 4.11
+Pelabuhan Jepara, sekitar 1650, di bawah pemerintahan Ratu 
+Kalinyamat menjadi tempat penting dan strategis di pesisir utara Jawa 
+— 182
+Gambar 4.12
+Bekas Reruntuhan dan Pangkalan Militer Armada Inong Balee di Desa 
+Lamreh, Aceh — 186
+Gambar 4.13 
+Hutan Hujan Tropis Indonesia — 191
+Gambar 4.14 
+Aksi Vandalisme di Situs Cagar Budaya — 195
+Gambar 4.15 
+Pengelolaan Keuangan — 197
+Gambar 4.16 
+Contoh Uang Kertas dan Uang Logam — 198
+Gambar 4.17 
+Ernst Engel —199
+
+xiii
+Gambar 4.18 
+Emas Batangan — 202
+Gambar 4.19 
+Graik Indeks  Literasi Keuangan 2022 — 202
+Gambar 4.20 
+Graik Tingkat Literasi Keuangan Berdasarkan Sektor Jasa Keuangan — 
+203
+Gambar 4.21
+Berlatih Membedakan antara Kebutuhan dan Keinginan  — 207
+Gambar 4.22
+Pembagian pendapatan disimpan ke dalam amplop sesuai dengan 
+rencana kebutuhan — 209
+Gambar 4.23
+Menabung di Lembaga Keuangan Bank — 212
+Gambar 4.24 
+Pegadaian Sebagai Salah Satu Lembaga Keuangan Nonbank—213
+Gambar 4.25 
+Beberapa  Platform Ekonomi Digital — 215
+Gambar 4.26 
+Pemberdayaan ekonomi desa dengan memanfaatkan lahan 
+pekarangan rumah di Desa Wisata Anggrek Tulungrejo, Kota Batu — 
+218
+Gambar 4.27 
+Aktivitas Bank Sampah — 220
+Gambar 4.28 
+Pahlawan Nasional — 224
+Gambar 4.29 
+Cornelis van Vollenhoven — 228
+Daftar Tabel
+Tabel 1.1  
+Perbandingan Karakteristik Wilayah Perdesaan dan Perkotaan— 14
+Tabel 4.1  
+Data Populasi Penduduk Dunia Tahun 2020—2023 — 189
+Tabel 4.2 
+Persentase Tutupan Hutan Alam di Indonesia Tahun 2000—2017 — 189
+Tabel 4.3 
+Contoh Pencatatan Keuangan Sederhana — 210
+
+Petunjuk Penggunaan Buku
+Buku Ilmu Pengetahuan Sosial untuk SMP/MTs Kelas VII menyajikan materi terkait 
+dengan keberadaan diri dan keluarga dalam keberagaman lingkungan sosial 
+terdekat, potensi ekonomi lingkungan, dan pemberdayaan masyarakat. Buku ini 
+dapat digunakan sebagai buku sumber utama atau buku alternatif yang digunakan 
+selama proses pembelajaran. Buku ini secara umum disajikan dalam beberapa 
+bagian berikut ini. 
+Halaman Awal Tema
+Pada halaman awal terdapat ilustrasi dan 
+paragraf/pertanyaan pemantik yang memberi 
+gambaran terkait materi yang akan dipelajari.
+Tujuan Pembelajaran
+Deskripsi capaian pembelajaran yang 
+diharapkan akan kalian miliki setelah 
+mempelajari materi pada setiap tema. 
+Kata Kunci
+Kata-kata kunci sebagai titian dalam 
+mengidentiikasi kata atau istilah penting terkait 
+dengan materi yang muncul pada uraian materi 
+setiap tema. 
+Peta Konsep
+Peta konsep dibuat untuk menghubungkan 
+struktur pemahaman dari fakta-fakta dengan 
+pengetahuan berikutnya dan untuk belajar 
+mengorganisasikan sesuatu mulai dari 
+informasi, fakta, hingga konsep ke dalam 
+suatu konteks pemahaman sehingga terbentuk 
+pemahaman yang baik. 
+xiv
+
+Apersepsi
+Apersepsi disajikan dalam 
+bentuk pertanyaan pemantik atau 
+aktivitas untuk mengingat kembali 
+pengetahuan yang telah kalian peroleh 
+sebelumnya atau pengetahuan 
+awal kalian. Pengetahuan awal 
+tersebut akan dihubungkan dengan 
+pengetahuan yang akan dipelajari 
+selama proses pembelajaran. 
+Materi Utama
+Penyajian materi dan kegiatan pembelajaran pada setiap tema “diikat” dalam 
+satu tema yang relevan yang dikembangkan dengan penguatan konseptual, 
+prinsipiel, prosedural, maupun metakognitif secara eksplist dan implisit dalam 
+konteks IPS. Materi disajikan dengan gambar dan contoh kegiatan pada tema 
+terkait. Materi juga dilengkapi dengan studi kasus dan aktivitas untuk membantu 
+kalian dalam mengasosiasikan materi pembelajaran. Aktivitas mencakup 
+Aktivitas Individu, Aktivitas Kelompok, dan Aktivitas Proyek.
+xv
+
+Uji Kompetensi
+Uji kompetensi sebagai alat dan cara 
+untuk menguji capaian pembelajaran 
+kalian berdasarkan tujuan pembelajaran. 
+Uji kompetensi disajikan dalam bentuk 
+pertanyaan pilihan ganda dan pertanyaan 
+uraian. Pertanyaan disesuaikan dengan HOTS 
+(Higher Order Thinking Skills) untuk merangsang 
+kemampuan berpikir kalian. 
+Pengayaan
+Pengayaan diberikan ketika kalian sudah 
+mampu melampaui persyaratan minimal 
+yang ditentukan oleh kurikulum. Pengayaan 
+dikembangkan untuk meningkatkan potensi 
+secara optimal dengan memanfaatkan waktu 
+yang tersedia.
+Releksi
+Releksi dapat dilakukan untuk memberikan umpan balik dan sebagai upaya 
+sadar kalian setelah pembelajaran dalam implementasi di kehidupan sehari-hari. 
+Releksi dapat berkaitan dengan sikap, pengetahuan, dan keterampilan. Releksi 
+dapat dilakukan secara lisan atau tertulis.
+Daftar Pustaka
+Daftar pustaka menyajikan berbagai referensi yang menjadi sumber penulisan 
+buku ini. Kalian dapat belajar lebih lanjut melalui referensi yang tersaji. 
+xvi
+
+Adakah potensi ekonomi 
+dan potensi bencana alam di 
+lingkungan sekitarmu?
+KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI 
+REPUBLIK INDONESIA, 2023
+Ilmu Pengetahuan Sosial untuk SMP/MTs Kelas VII (Edisi Revisi)
+Penulis: Muhammad Nursa’ban, Supardi 
+ISBN 978-623-118-436-8 (no. jil. lengkap)
+Kehidupan Sosial 
+dan Kondisi 
+Lingkungan Sekitar
+Tema I
+
+Tujuan Pembelajaran
+Pada tema ini, kalian akan mempelajari kehidupan sosial dan kondisi 
+lingkungan sekitar tempat tinggal. Kalian akan mendeskripsikan kondisi 
+lingkungan sekitar tempat tinggal, menjelaskan konektivitas antarruang, 
+menguraikan dampak perubahan iklim, dan potensi bencana alam di 
+Indonesia. Kalian juga akan belajar mengidentiikasi berbagai kegiatan 
+ekonomi, interaksi sosial, dan menjelaskan konsep dasar ilmu sejarah.
+Kata Kunci
+Lokasi, perubahan iklim, bencana alam, kegiatan ekonomi, interaksi sosial
+Peta Konsep
+Mengenal Lokasi 
+Tempat Tinggal 
+Konektivitas 
+Antarruang
+Perubahan 
+Iklim
+Potensi Bencana Alam 
+di Indonesia
+Kegiatan Ekonomi
+Interaksi Sosial
+Konsep Dasar 
+Ilmu Sejarah
+Kehidupan Sosial 
+dan Kondisi 
+Lingkungan Sekitar
+2
+ILMU PENGETAHUAN SOSIAL UNTUK SMP/MTs KELAS VII (EDISI REVISI)
+
+Coba kalian perhatikan foto di atas! Foto tersebut 
+menampilkan sebuah daerah yang berada di Dusun 
+Butuh, 
+Temanggung, 
+Kecamatan 
+Kaliangkrik, 
+Kabupaten Magelang, Jawa Tengah. Banyak orang 
+menyebutnya sebagai Nepal van Java karena mirip 
+permukiman yang berada di negara Nepal. Menurut 
+kalian, apakah ada potensi ekonomi dan ancaman 
+bencana alam yang bisa terjadi di daerah tersebut? 
+Coba kalian tuliskan pada tabel berikut ini!
+Gambar 1.1
+Nepal van Java, 
+Magelang
+Sumber: Pemprov Jawa Tengah 
+(2023)
+Potensi Ekonomi
+Potensi Bencana Alam
+3
+TEMA I: KEHIDUPAN SOSIAL DAN KONDISI LINGKUNGAN SEKITAR
+
+A. Mengenal Lokasi Tempat Tinggal
+Untuk memahami lokasi, kalian perhatikan gambar 
+peta Indonesia berikut ini!
+Gambar 1.2
+Letak Astronomis 
+Indonesia
+Sumber: M Rizal Abdi (2023)
+ Isilah titik-titik berikut berdasarkan data pada 
+gambar!
+ 
+Batas utara … LU  
+ 
+Batas selatan 11°LS 
+ 
+Batas barat … BT 
+ 
+Batas timur … BT
+Lokasi merupakan letak suatu objek di permukaan 
+bumi. Lokasi dapat dibedakan menjadi dua, yaitu lokasi 
+absolut dan lokasi relatif. Lokasi absolut merupakan 
+letak yang tetap terhadap sistem koordinat. Sifat lokasi 
+absolut adalah tetap dan tidak berubah-ubah meskipun 
+kondisi tempat yang dimaksud terhadap sekitarnya 
+mungkin berubah. Kegiatan di atas menunjukkan 
+konsep lokasi absolut Indonesia yang berada pada 
+6°LU—11°LS dan 95°BT—141°BT. Hal ini menunjukkan 
+4
+ILMU PENGETAHUAN SOSIAL UNTUK SMP/MTs KELAS VII (EDISI REVISI)
+
+Gambar 1.3 Pembagian Garis Lintang dan Garis Bujur
+Sumber: M Rizal Abdi (2023)
+00
+300
+-600
+600
+600
+900
+1200
+1500
+1800
+-300
+900
+-900
+00
+300
+-300
+-600
+-900
+-1200
+-1500
+bahwa tidak ada tempat lain di muka bumi yang menunjukkan lokasi yang 
+sama dengan tempat tersebut. Lokasi absolut tidak akan berubah selama 
+koordinat yang digunakan sebagai dasar perhitungan masih berupa garis 
+ekuator dan meridian Greenwich (Inggris). 
+Penentuan lokasi absolut menggunakan sistem koordinat garis lintang 
+dan garis bujur yang telah disepakati. Sistem koordinat tersebut berfungsi 
+memberi “alamat” terhadap setiap lokasi di permukaan bumi. Coba kalian 
+perhatikan gambar di bawah ini!
+Garis lintang adalah garis horizontal yang mengukur sudut suatu 
+titik dengan garis khatulistiwa. Adapun garis bujur merupakan garis 
+vertikal yang mengukur suatu titik dengan titik nol di bumi yang terdapat 
+di Greenwich dan telah disepakati secara internasional. Garis lintang 
+dan garis bujur ini dapat menjadi penunjuk koordinat untuk kapal laut, 
+pesawat, dan sebagainya. Seorang nakhoda kapal yang berada di tengah 
+laut dapat kebingungan jika tidak terdapat koordinat lokasi yang jelas. 
+Seorang pilot menggunakan koordinat garis lintang dan garis bujur dalam 
+mengemudikan pesawat terbang. 
+Ekuator
+Meridian Utama
+GARIS LINTANG
+GARIS BUJUR
+5
+TEMA I: KEHIDUPAN SOSIAL DAN KONDISI LINGKUNGAN SEKITAR
+5
+
+Garis lintang juga digunakan dalam membagi iklim 
+di dunia, misalnya iklim tropis, subtropis, sedang, dan 
+dingin. Sementara itu, garis bujur juga dimanfaatkan 
+dalam pembagian zona waktu di dunia. Tahukah 
+kalian bahwa standar waktu yang kita gunakan sampai 
+saat ini baru ada pada tahun 1884? Lantas, apa standar 
+waktu yang digunakan sebelum tahun tersebut?
+Sebelum diperkenalkan standar waktu, setiap ko-
+ta mengatur waktunya sesuai dengan posisi matahari 
+di 
+wilayah 
+masing-masing, 
+tidak 
+terkecuali 
+di 
+Inggris. Biasanya nelayan dan pelaut mengandalkan 
+pengamatan bintang dalam menentukan arah dan 
+waktu. Bisnis maritim di Inggris berkembang pesat 
+sehingga penentuan waktu menjadi sesuatu yang 
+penting. Pada tahun 1675, pemerintah Inggris mulai 
+membangun observatorium di Greenwich untuk 
+membantu navigasi.
+Gambar 1.4
+Royal 
+Observatorium 
+di Greenwich, 
+Inggris
+Sumber: Joyofmuseums/
+Wikimedia Commons 
+(2018)
+6
+ILMU PENGETAHUAN SOSIAL UNTUK SMP/MTs KELAS VII
+
+Perbedaan waktu tersebut tidak menjadi masalah hingga diperkenalkan 
+moda transportasi kereta api antarkota yang diiringi dengan perkembangan 
+perdagangan global. Persoalan terjadi ketika petugas kereta api antarkota 
+harus terus-menerus mencocokkan jamnya dengan waktu lokal yang 
+berbeda-beda. Maka dari itu, standar yang sama diperlukan dalam 
+penentuan waktu. 
+Gambar 1.5 Pembagian Zona Waktu di Dunia
+Sumber: UnaitxuGV, Heitordp, dkk./Wikimedia Commons/Domain Publik (2012)
+Konferensi Internasional Meridian, yang diselenggarakan pada tahun 
+1884 di Washington DC, memutuskan bahwa Greenwich di London menjadi 
+standar waktu internasional dengan pembagian zona waktu berdasarkan 
+Greenwich Mean Time (GMT). Apabila garis bujur dipindah 15 derajat 
+ke timur, waktu akan lebih cepat 1 jam dibandingkan dengan waktu di 
+Greenwich. Adapun jika dipindahkan 15 derajat ke barat, waktu akan lebih 
+lambat 1 jam dibandingkan dengan waktu di Greenwich. 
+Lokasi relatif adalah letak suatu tempat yang dapat berubah-ubah 
+sesuai dengan keadaan sekitarnya. Sebagai contoh, awalnya Kabupaten 
+Tana Tidung merupakan bagian dari Provinsi Kalimantan Timur, tetapi saat 
+ini termasuk Provinsi Kalimantan Utara. Selain itu, lokasi relatif memiliki 
+7
+TEMA I: KEHIDUPAN SOSIAL DAN KONDISI LINGKUNGAN SEKITAR
+
+pengaruh terhadap nilai suatu objek. Lokasi di dekat jalan raya memiliki 
+harga tanah yang lebih mahal, tetapi kurang sesuai untuk tempat tinggal 
+karena polusi suara dan polusi udara dari kendaraan bermotor. Suatu lokasi 
+memiliki kelebihan dan kekurangan berkaitan dengan keadaan sekitarnya.
+Seiring dengan perkembangan teknologi, kita tidak harus mendatangi 
+lokasi secara langsung untuk mengetahui lokasi suatu wilayah karena bisa 
+melihatnya melalui peta. Saat ini, wujud peta tidak hanya dalam bentuk 
+kertas, tetapi juga dalam bentuk digital. Berbagai sektor telah memanfaatkan 
+peta digital untuk menunjang usahanya. Tanpa disadari, kalian juga telah 
+memanfaatkannya dalam kehidupan sehari-hari. Berikut beberapa contoh 
+pemanfaatan peta digital. 
+1. Pengembangan transportasi berbasis daring (online)
+Sebelum adanya jasa transportasi berbasis daring, pengguna harus 
+mencari dan mendatangi langsung penyedia transportasi publik 
+untuk memesannya. Selain itu, pengguna juga harus bernegosiasi 
+untuk menyepakati harga. Kegiatan ini membutuhkan waktu lebih 
+lama daripada memesan jasa transportasi daring. Keberadaan 
+jasa transportasi berbasis daring memberi kemudahan kepada 
+pengguna untuk menemukan moda transportasi di sekitarnya 
+dengan tarif yang tertera pada aplikasi. 
+2. Perhitungan estimasi biaya dan waktu ekspedisi pengiriman 
+barang
+Salah satu faktor yang memengaruhi biaya pengiriman adalah 
+jarak lokasi pengiriman dengan lokasi tujuan. Perusahaan ekspedisi 
+pengiriman memanfaatkan data jarak untuk mengetahui estimasi 
+biaya dan waktu pengiriman. Penjual dan pembeli juga tidak perlu 
+mendatangi ekspedisi untuk menanyakan estimasi biaya dan 
+waktu pengiriman barang. Penjual dan pembeli dapat melakukan 
+pengecekan secara mandiri melalui aplikasi ekspedisi pengiriman 
+yang digunakan. 
+8
+ILMU PENGETAHUAN SOSIAL UNTUK SMP/MTs KELAS VII (EDISI REVISI)
+
+3. Memudahkan dalam menemukan alamat tujuan
+Penulisan alamat tujuan pada undangan biasanya dilengkapi 
+dengan denah. Seiring dengan perkembangan teknologi, banyak 
+undangan yang dibuat dalam bentuk digital. Undangan digital 
+umumnya mencantumkan peta digital dalam bentuk barcode yang 
+akan menghubungkan dengan alamat tujuan apabila dipindai. 
+Pemanfaatan lainnya ialah dalam pemesanan makanan secara 
+daring melalui aplikasi pemesanan. Cara tersebut memudahkan 
+pengemudi untuk menemukan restoran tujuan. Setelah makanan 
+siap, pengemudi akan mengantarkan makanan ke alamat pemesan 
+yang juga memanfaatkan peta digital. Pemesan juga dapat 
+memantau posisi pengemudi melalui layar ponsel pintar. 
+4. Menyajikan berbagai alternatif jalan agar waktu lebih eisien 
+Seseorang yang akan menuju lokasi tertentu dapat memilih rute 
+dari berbagai rute jalan yang disajikan. Kondisi kepadatan lalu 
+lintas juga ditampilkan sehingga pengguna dapat memilih rute 
+yang eisien dan cepat untuk sampai ke tujuan. 
+Gambar 1.6
+Pemanfaatan peta digital untuk mencari alternatif jalan dan kondisi kepadatan lalu lintas.
+Sumber: Googlemap (2023)
+9
+TEMA I: KEHIDUPAN SOSIAL DAN KONDISI LINGKUNGAN SEKITAR
+
+AKTIVITAS 1 | INDIVIDU
+Kalian dapat mengunduh aplikasi GPS Essentials melalui ponsel pintar. 
+Cari alamat tempat tinggal masing-masing melalui GPS, kemudian tuliskan 
+hasil pencarian kalian dengan menyalin dan mengisi tabel berikut! 
+Lembar Kerja Peserta Didik
+No
+Lokasi Absolut
+Lokasi Relatif
+1.
+2.
+3.
+4.
+5.
+Selanjutnya, perhatikan bacaan berikut!
+Harga Tanah di Sekitar Ibu Kota Baru Melonjak 10 Kali Lipat
+Harga Tanah di Kabupaten Penajam Paser Utara, Kalimantan Timur, 
+melonjak lima hingga sepuluh kali lipat dari 2019. Hal tersebut terjadi 
+seiring dengan keputusan pemerintah untuk memindahkan Ibu Kota 
+Negara (IKN) ke wilayah tersebut.
+Koordinator Substansi Survei dan Pemetaan Tematik Kanwil BPN 
+Provinsi Kalimantan Timur Heru Maulana menjelaskan bahwa ketika 
+bertanya kepada masyarakat sekitar tentang harga tanah, mereka 
+menjawab Rp1 miliar per hektare (Ha). Padahal, pada 2018-2019, sebelum 
+pengumuman pemindahan IKN, harga tanah di area tersebut hanya sekitar 
+Rp100 juta hingga Rp200 juta saja per hektare.
+(Dikutip dan diringkas dari CNN Indonesia, 18 Januari 2022)
+Menurut kalian, jenis lokasi apa yang memengaruhi kenaikan harga 
+tersebut? Mengapa bisa terjadi kenaikan harga lahan di daerah tersebut?
+Tuliskan pendapat kalian pada kertas dan kumpulkan kepada guru!
+10
+ILMU PENGETAHUAN SOSIAL UNTUK SMP/MTs KELAS VII (EDISI REVISI)
+
+B. Konektivitas Antarruang
+Fenomena perbedaan satu tempat dengan tempat lain menjadikan setiap 
+tempat unik. Setiap tempat memiliki potensi sumber dan kebutuhan yang 
+berbeda-beda. Hal inilah yang mendasari terjadinya interaksi antarwilayah 
+dalam rangka memenuhi kebutuhan. Interaksi merupakan peristiwa saling 
+memengaruhi pada daya, objek, atau tempat.
+AKTIVITAS 2 | INDIVIDU
+Coba kalian tuliskan mata pencaharian yang dominan sesuai dengan 
+setiap gambar bentuk muka bumi berikut!
+Lembar Kerja Peserta Didik
+No
+Bentuk Muka Bumi
+Mata Pencaharian
+1.
+2
+3.
+Gambar 1.7 Bentuk-Bentuk Muka Bumi
+11
+TEMA I: KEHIDUPAN SOSIAL DAN KONDISI LINGKUNGAN SEKITAR
+
+Setelah kalian mengerjakan aktivitas individu di atas, apa yang dapat 
+kalian simpulkan? Kalian melihat bahwa berbagai karakteristik muka bumi 
+dapat memengaruhi mata pencaharian. Setiap wilayah dapat menghasilkan 
+barang kebutuhan yang berbeda dengan wilayah lain karena adanya 
+perbedaan bentuk muka bumi. Selain itu, interaksi antarruang seperti 
+kawasan pesisir yang menghasilkan hasil laut dengan dataran tinggi yang 
+menghasilkan berbagai sayuran, tidak hanya dipengaruhi oleh perbedaan 
+bentuk muka bumi. Jaringan jalan dan transportasi juga memengaruhi 
+interaksi tersebut. Hal ini menyebabkan terjadinya interaksi antarwilayah 
+dalam rangka saling memenuhi kebutuhan yang tidak ada di wilayah 
+masing-masing.
+Pada dasarnya, interaksi terjadi karena adanya perbedaan potensi dan 
+perbedaan kebutuhan antarwilayah. Edward Ullman menyebutkan bahwa 
+terdapat tiga faktor utama yang memengaruhi terjadinya interaksi wilayah, 
+yaitu sebagai berikut.
+1. Adanya wilayah-wilayah yang saling melengkapi 
+(regional complementarity) 
+Adanya 
+perbedaan 
+kemampuan 
+sumber 
+daya 
+setiap 
+wilayah 
+menyebabkan 
+munculnya 
+dorongan 
+untuk 
+saling 
+melengkapi 
+kebutuhan (komplementer). Misalnya suatu wilayah memiliki kelebihan 
+sumber daya, seperti hasil pertanian, hasil hutan, dan barang industri. 
+Adapun wilayah lainnya ternyata kekurangan sumber daya tersebut 
+padahal membutuhkannya. Keadaan ini akan mendorong terjadinya 
+interaksi antarwilayah tersebut.
+Gambar 1.8 Skema wilayah yang Saling Melengkapi
+Wilayah A
+Wilayah B
+Surplus sumber daya X
+Minus sumber daya Y
+Minus sumber daya X 
+Surplus sumber daya Y
+12
+ILMU PENGETAHUAN SOSIAL UNTUK SMP/MTs KELAS VII (EDISI REVISI)
+
+2. Adanya kesempatan untuk saling berintervensi 
+(intervening opportunity)
+Kesempatan berintervensi merupakan kemungkinan adanya perantara 
+yang dapat menghambat timbulnya interaksi antarwilayah. Kondisi 
+wilayah A dan wilayah B secara potensial memungkinkan terjadinya 
+hubungan timbal balik karena saling melengkapi sumber daya. Namun, 
+karena kebutuhan setiap wilayah dapat dipenuhi oleh wilayah C, 
+interaksi antara wilayah A dan wilayah B menjadi lemah (ditunjukkan 
+dengan garis putus-putus).
+Gambar 1.9 Skema Intervensi Suatu Wilayah
+3. Adanya kemudahan pemindahan dalam ruang 
+(spatial transfer ability) 
+Pemindahan sumber daya tidak terlepas dari faktor-faktor yang 
+memengaruhinya, seperti jarak, biaya, dan kemudahan transportasi 
+antarwilayah. Jika satu wilayah memiliki surplus sumber daya dan 
+wilayah lain minus sumber daya, tetapi mampu menggunakan alternatif 
+sumber daya lain, hubungan antarwilayah tersebut menjadi melemah 
+(ditunjukkan dengan garis putus-putus). 
+Wilayah A
+Wilayah B
+Surplus sumber daya X
+Minus sumber daya Y
+Surplus sumber daya X
+Minus sumber daya X 
+Surplus sumber daya Y
+Surplus sumber daya Y
+Wilayah C
+13
+TEMA I: KEHIDUPAN SOSIAL DAN KONDISI LINGKUNGAN SEKITAR
+
+Contoh interaksi antarwilayah:
+Suatu desa menghasilkan pangan dan produk-produk yang dibutuhkan 
+penduduk kota. Suatu kota menghasilkan barang industri, jasa, dan 
+informasi yang dibutuhkan penduduk desa. Interaksi antara pedesaan 
+dan perkotaan dapat terjadi karena perbedaan karakteristik wilayah 
+yang memengaruhi hasil produksi. Hal ini juga didukung oleh akses 
+jalan yang baik sehingga dapat terjadi pertukaran barang.  
+Tabel berikut menunjukkan perbandingan karakteristik wilayah 
+perdesaan dan perkotaan.
+Tabel 1.1 Perbandingan Karakteristik 
+Wilayah Perdesaan dan Perkotaan
+No
+Unsur 
+Pembeda
+Perdesaan
+Perkotaan
+1.
+Basis 
+ekonomi
+Pertanian menjadi basis 
+ekonomi, seperti pertanian 
+padi, jagung, sayur, dan 
+buah.
+Industri, perdagangan, 
+dan jasa menjadi basis 
+ekonomi. Banyak tempat 
+makan, pusat perbelanjaan, 
+dan penyedia jasa seperti 
+penatu (laundry) di 
+perkotaan.
+Wilayah A
+Wilayah B
+Surplus sumber daya X
+Minus sumber daya X, 
+tetapi memiliki sumber 
+daya Z sebagai alternatif 
+pengganti kebutuhan
+Gambar 1.10 Skema relasi antarwilayah yang lemah karena pemindahan sumber daya.
+14
+ILMU PENGETAHUAN SOSIAL UNTUK SMP/MTs KELAS VII (EDISI REVISI)
+
+No
+Unsur 
+Pembeda
+Perdesaan
+Perkotaan
+2.
+Mata 
+pencaharian 
+Agraris, homogen. 
+Ruang terbuka yang luas 
+biasanya dimanfaatkan 
+untuk kegiatan pertanian 
+sehingga mayoritas 
+penduduk desa memiliki 
+pekerjaan yang homogen, 
+yaitu bekerja di sektor 
+pertanian.
+Nonagraris, heterogen. 
+Lahan terbuka yang 
+terbatas membuat 
+mayoritas penduduk kota 
+bekerja di luar sektor 
+agraris dan mencoba 
+berbagai peluang pekerjaan 
+sehingga jenis pekerjaan 
+di kota menjadi heterogen. 
+Contohnya menjadi 
+pedagang, pencuci sepatu, 
+dan penyedia jasa desain 
+grais. 
+3.
+Musim atau 
+cuaca
+Penting dan menentukan. 
+Pertanian tidak terlepas dari 
+musim dan cuaca sehingga 
+komponen ini menjadi 
+penting. Contohnya, ketika 
+musim kemarau petani 
+memilih menanam jagung, 
+sedangkan pada musim 
+penghujan menanam padi.
+Tidak terlalu penting. 
+Baik cuaca maupun musim 
+tidak terlalu penting karena 
+banyak pekerjaan di kota 
+yang tidak bergantung 
+pada  komponen tersebut. 
+Misalnya, pekerjaan sebagai 
+karyawan di perusahaan 
+tidak terpengaruh cuaca 
+dan musim karena bekerja 
+di dalam ruangan. 
+15
+TEMA I: KEHIDUPAN SOSIAL DAN KONDISI LINGKUNGAN SEKITAR
+
+No
+Unsur 
+Pembeda
+Perdesaan
+Perkotaan
+4.
+Rumah dan 
+tempat kerja 
+Dekat. 
+Lokasi pertanian biasanya 
+masih di desa yang sama 
+sehingga jarak rumah 
+dengan sawah tidak jauh.
+Berjauhan. 
+Terdapatnya pemusatan 
+kegiatan ekonomi dan  
+harga sewa tempat tinggal 
+yang tinggi membuat 
+sebagian orang memilih 
+untuk tinggal sedikit lebih 
+jauh dari tempat kerja.
+5.
+Kepadatan 
+penduduk
+Tidak padat. 
+Banyak penduduk desa 
+yang mencoba mencari 
+pekerjaan ke luar desa.
+Padat. 
+Banyak perantau dari luar 
+daerah ke kota membuat 
+kota semakin padat.
+Wilayah perdesaan mempunyai ruang terbuka lebih luas dibandingkan 
+areal terbangun karena penggunaan lahan didominasi pertanian, 
+termasuk perkebunan dan perikanan. Jenis penggunaan lahan ini memiliki 
+heterogenitas yang lebih rendah dibandingkan dengan wilayah perkotaan 
+sehingga wilayah perdesaan mampu menghasilkan bahan pangan yang 
+dibutuhkan penduduk perkotaan. Interaksi juga dapat terjadi antarwilayah 
+penghasil produk pertanian.
+Gambar 1.11 Pertanian Bawang di Brebes
+Sumber: Nizambagusp/Wikimedia Commons (2015)
+16
+ILMU PENGETAHUAN SOSIAL UNTUK SMP/MTs KELAS VII (EDISI REVISI)
+
+Gambar 1.12 Pertanian Kentang di Wonosobo 
+Sumber: Anis Eizudin/Antara Foto (2019)
+Kabupaten Brebes memiliki komoditas pertanian bawang merah dan 
+Kabupaten Wonosobo menghasilkan komoditas pertanian kentang. Kedua 
+wilayah tersebut saling berinteraksi untuk memenuhi kebutuhan pangan. 
+Kabupaten Brebes dan Kabupaten Wonosobo saling mengirimkan hasil 
+pertanian masing-masing. Interaksi tersebut merupakan contoh dari 
+interaksi antarwilayah dalam rangka memenuhi kebutuhan di bidang 
+pangan.
+Kentang Wonosobo
+Bawang Brebes
+Gambar 1.13 Interaksi antarwilayah untuk memenuhi kebutuhan pangan.
+Sumber: M Rizal Abdi (2023)
+17
+TEMA I: KEHIDUPAN SOSIAL DAN KONDISI LINGKUNGAN SEKITAR
+
+AKTIVITAS 3 | KELOMPOK
+Kerjakan aktivitas dengan mengikuti langkah-langkah berikut!
+1. Buatlah kelompok yang terdiri atas 3—5 orang per kelompok.
+2. Carilah informasi makanan tradisional yang terdapat di berbagai 
+wilayah di Indonesia. Kalian bisa bertanya kepada orang tua, saudara, 
+atau mencari informasi melalui jaringan internet.
+3. Tuliskan hasil pencarian informasi tersebut dengan menyalin dan 
+melengkapi tabel berikut. 
+Lembar Kerja Peserta Didik
+No
+Nama Makanan 
+Tradisional
+Asal Daerah
+Bahan Baku Utama 
+Pembuatan
+1.
+2.
+3.
+4.
+4.  Diskusikan dengan anggota kelompok kalian beberapa pertanyaan 
+berikut.
+a. Apakah bahan baku utama pembuatan makanan tradisional di 
+setiap daerah berasal dari daerah yang sama? Jelaskan!
+b. Mengapa produk tersebut bisa menjadi ciri khas makanan 
+tradisional di daerah tersebut? 
+c. Apa yang dapat dilakukan untuk menjaga eksistensi makanan 
+tradisional tersebut? 
+5. Presentasikan hasil diskusi kalian di depan kelas. Kalian dapat memilih 
+mempresentasikannya dalam bentuk poster, fail PowerPoint, atau 
+video penjelasan.  
+18
+ILMU PENGETAHUAN SOSIAL UNTUK SMP/MTs KELAS VII (EDISI REVISI)
+
+C. Perubahan Iklim
+1. Cuaca dan Iklim
+Cuaca adalah kondisi rata-rata udara pada saat tertentu di suatu wilayah 
+yang relatif sempit dan dalam waktu singkat. Adapun iklim merupakan 
+kondisi cuaca rata-rata tahunan pada suatu wilayah yang luas. 
+Contoh cuaca: 
+Suhu udara di Kabupaten Bantul pagi ini mencapai 24oC, kemarin 
+Kabupaten Berastagi diguyur hujan deras, sore ini terjadi hujan lebat 
+disertai angin di Kabupaten Bogor dengan arah angin dari selatan dan 
+kecepatan mencapai 25 km/jam. 
+Contoh iklim: 
+Indonesia beriklim tropis. Rata-rata curah hujan tertinggi di Riau 
+selama tahun 2022 terjadi pada bulan April yaitu sebanyak 417 mm.
+Gambar 1.14 Peta Curah Hujan Indonesia Desember 2023
+Sumber: BMKG (2023)
+19
+TEMA I: KEHIDUPAN SOSIAL DAN KONDISI LINGKUNGAN SEKITAR
+
+Karena beriklim tropis, Indonesia mengalami dua musim, yaitu musim 
+hujan dan musim kemarau. Musim hujan umumnya terjadi pada bulan 
+Oktober—Maret, sedangkan musim kemarau umumnya terjadi pada bulan 
+April—September. Arus angin yang banyak mengandung uap air dari 
+Samudra Pasiik melewati Laut Cina Selatan menyebabkan musim hujan di 
+Indonesia, terutama di wilayah bagian barat. Semakin ke timur, curah hujan 
+semakin sedikit. Hal ini karena hujan telah banyak jatuh dan menguap di 
+bagian barat. 
+Keadaan iklim dapat diamati dengan memperhatikan unsur-unsur 
+cuaca dan iklim. Unsur-unsur tersebut, antara lain penyinaran matahari, 
+suhu udara, kelembapan udara, angin, dan hujan. Iklim berpengaruh 
+dalam kehidupan manusia seperti pada sektor pertanian. Tanaman tropis 
+memiliki banyak varietas yang kaya akan hidrat arang, terutama tanaman 
+bahan makanan pokok. Berikut pengaruh unsur-unsur iklim terhadap 
+tanaman.
+• 
+Penyinaran matahari adalah lamanya matahari bersinar cerah yang 
+dihitung dari matahari terbit hingga terbenam. Lamanya penyinaran 
+matahari dapat memengaruhi fotosintesis tanaman dan meningkatkan 
+suhu udara. 
+• 
+Suhu merupakan derajat panas atau dingin yang diukur dengan skala 
+tertentu. Pengaruh suhu terhadap tanaman yaitu mengurangi kadar air 
+sehingga tanaman cenderung mengering.
+• 
+Kelembapan adalah kemampuan udara dalam mengandung uap air. 
+Kelembapan udara ditentukan oleh jumlah uap air yang terkandung 
+di dalam udara. Pengaruh kelembapan udara terhadap tanaman yaitu 
+membatasi hilangnya air.
+• 
+Angin adalah gerak alami udara yang sejajar dengan permukaan bumi. 
+Angin disebabkan oleh perbedaan tekanan atmosfer suatu tempat 
+dengan tempat lainnya. Pengaruh angin terhadap tanaman yaitu 
+membantu proses penyerbukan secara alami dan mengurangi kadar 
+air.
+20
+ILMU PENGETAHUAN SOSIAL UNTUK SMP/MTs KELAS VII (EDISI REVISI)
+
+• 
+Curah hujan merupakan intensitas turunnya butir-butir air dari langit 
+ke permukaan bumi akibat kondensasi. Pengaruh hujan terhadap 
+tanaman yaitu dapat meningkatkan kadar air dan mengikis tanah.
+Kondisi cuaca dan iklim dapat memengaruhi kehidupan manusia dalam 
+berbagai bidang, seperti pertanian, perhubungan, industri, dan kesehatan. 
+Berikut ini penjabaran dari setiap bidang tersebut.
+a. Bidang Pertanian 
+Iklim sangat berpengaruh dalam pertanian karena berhubungan 
+dengan jenis tanaman, pertumbuhan tanaman, dan perencanaan dalam 
+menentukan pola menanam tumbuhan tertentu. Sebagai contoh, petani 
+menanam padi pada musim hujan dan menanam jagung pada musim 
+kemarau.
+b. Bidang Perhubungan 
+Curah hujan, kabut, dan angin termasuk unsur-unsur iklim yang dapat 
+memengaruhi bidang transportasi. Misalnya, penundaan penerbangan 
+karena cuaca buruk dan penundaan pelayaran karena siklon tropis yang 
+dapat membahayakan pelayaran. 
+Gambar 1.15 
+Akibat cuaca buruk, para calon penumpang mengalami penundaan penerbangan.
+21
+TEMA I: KEHIDUPAN SOSIAL DAN KONDISI LINGKUNGAN SEKITAR
+
+c. 
+Bidang Industri
+Iklim dapat memengaruhi cara perawatan mesin-mesin industri. 
+Kelembapan udara dan curah hujan dapat menyebabkan bagian-bagian 
+tertentu pada mesin-mesin industri menjadi berkarat. 
+d. Bidang Kesehatan 
+Peralihan musim seperti pancaroba dapat berdampak pada kesehatan 
+manusia. Panas matahari yang terik dan debu-debu yang beterbangan dapat 
+menyebabkan radang tenggorokan, demam, inluenza, dan sebagainya.  
+2. Dampak Perubahan Iklim
+Menurut Kementerian Lingkungan Hidup (2001) dalam Admin dlh (2019), 
+perubahan iklim merupakan berubahnya kondisi isik atmosfer bumi, 
+antara lain suhu dan distribusi curah hujan yang membawa dampak luas 
+terhadap berbagai sektor kehidupan manusia. Perubahan iklim dapat 
+memengaruhi siklus hujan, bahkan dapat menyebabkan kekeringan 
+berkepanjangan dan curah hujan ekstrem. Saat terjadi kekeringan, air 
+menjadi langka. Sementara itu, terjadinya hujan dengan intensitas dan 
+frekuensi tinggi dalam waktu lama dapat menyebabkan banjir, terutama di 
+wilayah perkotaan dan kawasan pesisir. 
+Gambar 1.16 
+Sakit Inluenza akibat Cuaca Buruk.
+22
+ILMU PENGETAHUAN SOSIAL UNTUK SMP/MTs KELAS VII (EDISI REVISI)
+
+a. Dampak Perubahan Iklim dalam Bidang 
+Ekonomi
+Perubahan 
+iklim 
+yang 
+signiikan 
+dapat 
+mengganggu 
+proses 
+pertumbuhan 
+tanaman 
+sehingga berdampak pada penurunan produksi. 
+Sebagai contoh, hujan dengan intensitas tinggi dan 
+waktu lama dapat membuat lahan yang ditanami 
+sayuran mengalami banjir sehingga petani gagal 
+panen.
+AKTIVITAS 4 | INDIVIDU
+Kalian tentu sudah mempelajari dampak perubahan iklim. Selanjutnya, 
+lakukan langkah-langkah berikut!
+1. Buatlah poster bertema Perubahan Iklim. 
+2. Kalian dapat membuatnya pada kertas atau dalam bentuk digital 
+dengan memanfaatkan berbagai aplikasi untuk membuat poster.
+3. Kumpulkan hasil kreasi poster kalian kepada guru.
+Gambar 1.17 
+Dampak Ekonomi
+Gambar 1.18
+Dampak Sosial Budaya
+b. Dampak Perubahan Iklim dalam Bidang Sosial 
+dan Budaya
+Kenaikan permukaan air laut disertai kondisi 
+cuaca yang tidak menentu dapat membuat 
+nelayan kesulitan dalam mencari ikan di laut. 
+Hal ini berpotensi membuat nelayan kehilangan 
+pekerjaannya. Selain itu, kondisi cuaca tidak 
+menentu seperti ketika panas tiba-tiba hujan, 
+membuat seseorang sering membawa payung 
+dan jas hujan.
+23
+TEMA I: KEHIDUPAN SOSIAL DAN KONDISI LINGKUNGAN SEKITAR
+
+D. Potensi Bencana Alam di Indonesia
+1. Kondisi Geologis Indonesia
+Letak geologis adalah posisi suatu wilayah yang didasarkan pada struktur 
+geologi atau susunan batuan di sekitarnya. Secara geologis, Indonesia dilalui 
+dua jalur pegunungan dunia, yaitu Sirkum Pasiik dan Sirkum Mediterania. 
+Letak tersebut menyebabkan Indonesia memiliki sebanyak 127 gunung 
+api aktif. Jalur pegunungan di Indonesia membentang dari ujung utara 
+Sumatra memanjang melalui pantai barat Sumatra, melewati Jawa, Nusa 
+Tenggara, Banda, Sulawesi, hingga Halmahera. 
+Gambar 1.19 Letak Geologis Indonesia
+Aktivitas vulkanik yang intens di Indonesia terjadi karena pertemuan 
+tiga lempeng dunia. Lempeng Eurasia di sebelah utara, lempeng Indo-
+Australia di sebelah selatan, dan lempeng Pasiik di sebelah timur. 
+Pertemuan lempeng tektonik dapat menyebabkan patahan, retakan, dan 
+kerusakan pada kerak bumi yang memungkinkan magma mengalir ke 
+permukaan bumi, kemudian terbentuk gunung berapi. 
+Aktivitas ketiga lempeng tersebut juga membuat Indonesia menjadi 
+wilayah yang rawan terjadi gempa bumi. 
+24
+ILMU PENGETAHUAN SOSIAL UNTUK SMP/MTs KELAS VII (EDISI REVISI)

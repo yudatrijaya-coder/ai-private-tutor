@@ -1,0 +1,1547 @@
+Hak Cipta pada Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi Republik Indonesia.
+Dilindungi Undang-Undang.
+Disclaimer: Buku ini disiapkan oleh Pemerintah dalam rangka pemenuhan kebutuhan buku pendidikan 
+yang bermutu, murah, dan merata sesuai dengan amanat dalam UU No. 3 Tahun 2017. Buku ini disusun 
+dan ditelaah oleh berbagai pihak di bawah koordinasi Kementerian Pendidikan, Kebudayaan, Riset, 
+dan Teknologi. Buku ini merupakan dokumen hidup yang senantiasa diperbaiki, diperbarui, dan 
+dimutakhirkan sesuai dengan dinamika kebutuhan dan perubahan zaman. Masukan dari berbagai 
+kalangan yang dialamatkan kepada penulis atau melalui alamat surel buku@kemdikbud.go.id 
+diharapkan dapat meningkatkan kualitas buku ini.
+English for Nusantara untuk SMP/MTs Kelas VII
+Penulis
+Ika Lestari Damayanti
+Yusnita Febrianti
+Iyen Nurlaelawati
+Pipit Prihartanti Suharto
+Aji Jehan Fellani
+Raymon Rahmadhani
+Penelaah
+Emi Emilia
+Penyelia/Penyelaras
+Supriyatno
+Lenny Puspita Ekawaty
+Awaliyah Nurina Utami Umri
+Kontributor
+Muhammad Fathulloh Hasan
+Yuni Tampi
+Ilustrator
+Okky Bagus Wahyudi
+Editor
+Kristine Ann M. Capa
+Made Ayu Utami Chandra Dewina
+Desainer
+Rinaldi
+Penerbit
+Pusat Perbukuan
+Badan Standar, Kurikulum, dan Asesmen Pendidikan
+Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi
+Komplek Kemdikbudristek Jalan RS Fatmawati, Cipete, Jakarta Selatan
+Cetakan pertama, 2022
+ISBN 978-602-244-884-6 (no.jil.lengkap)
+ISBN 978-602-244-885-3 (jil.1)
+Isi buku ini menggunakan huruf Noto Serif 11/15 pt, Google Font
+xxxii, 264 hlm.: 17,6 x 25 cm.
+
+iii
+Kata Pengantar
+Pusat Perbukuan; Badan Standar, Kurikulum, dan Asesmen Pendidikan; 
+Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi memiliki tugas dan 
+fungsi mengembangkan buku pendidikan pada satuan Pendidikan Anak Usia 
+Dini, Pendidikan Dasar, dan Pendidikan Menengah. Buku yang dikembangkan 
+saat ini mengacu pada Kurikulum Merdeka, dimana kurikulum ini memberikan 
+keleluasaan bagi satuan/program pendidikan dalam mengembangkan potensi 
+dan karakteristik yang dimiliki oleh peserta didik. Pemerintah dalam hal ini 
+Pusat Perbukuan mendukung implementasi Kurikulum Merdeka di satuan 
+pendidikan Pendidikan Anak Usia Dini, Pendidikan Dasar, dan Pendidikan 
+Menengah dengan mengembangkan Buku Teks Utama. 
+ 
+Buku teks utama merupakan salah satu sumber belajar utama untuk 
+digunakan pada satuan pendidikan. Adapun acuan penyusunan buku teks 
+utama adalah Pedoman Penerapan Kurikulum dalam rangka Pemulihan 
+Pembelajaran yang ditetapkan melalui Keputusan Menteri Pendidikan, 
+Kebudayaan, Riset, dan Teknologi Nomor 56/M/2022 Tanggal 10 Februari 
+2022, serta Capaian Pembelajaran pada Pendidikan Anak Usia Dini, Jenjang 
+Pendidikan Dasar, dan Jenjang Pendidikan Menengah pada Kurikulum Merdeka 
+yang ditetapkan melalui Keputusan Kepala Badan Standar, Kurikulum, 
+dan Asesmen Pendidikan Nomor 008/H/KR/2022 Tanggal 15 Februari 2022. 
+Sajian buku dirancang dalam bentuk berbagai aktivitas pembelajaran 
+untuk 
+mencapai 
+kompetensi 
+dalam 
+Capaian 
+Pembelajaran 
+tersebut. 
+ 
+Sebagai dokumen hidup, buku ini tentu dapat diperbaiki dan 
+disesuaikan dengan kebutuhan serta perkembangan keilmuan dan teknologi. 
+Oleh karena itu, saran dan masukan  dari para guru, peserta didik, orang tua, 
+dan masyarakat sangat dibutuhkan untuk pengembangan buku ini di masa 
+yang akan datang. Pada kesempatan ini, Pusat Perbukuan menyampaikan 
+terima kasih kepada semua pihak yang telah terlibat dalam penyusunan 
+buku ini, mulai dari penulis, penelaah, editor, ilustrator, desainer, dan 
+kontributor terkait lainnya. Semoga buku ini dapat bermanfaat khususnya 
+bagi peserta didik dan guru dalam meningkatkan mutu pembelajaran.
+ 
+ 
+ 
+ 
+ 
+ 
+Jakarta, Juni 2022
+ 
+ 
+ 
+ 
+ 
+ 
+Kepala Pusat,
+ 
+ 
+ 
+ 
+ 
+ 
+Supriyatno
+ 
+ 
+ 
+ 
+ 
+ 
+NIP 19680405 198812 1 001
+
+iv
+Prakata
+Pendidikan adalah salah satu aspek yang mendapat dampak dari pandemi 
+Covid-19 seperti menghilangnya pengetahuan dan keterampilan (learning loss) 
+dan kesenjangan pendidikan yang dialami peserta didik. Berdasarkan kondisi 
+tersebut, Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi merilis 
+Kurikulum Merdeka sebagai upaya untuk memulihkan kembali kondisi belajar 
+peserta didik di Indonesia. Kurikulum Merdeka didesain sebagai kerangka 
+kurikulum yang lebih leksibel. Artinya, kurikulum ini memberi ruang untuk 
+setiap individu mengembangkan potensinya masing-masing.
+ 
+Buku English for Nusantara Kelas VII ini bertujuan untuk memberi 
+kesempatan kepada peserta didik pada tingkat Sekolah Menengah Pertama, 
+khususnya Kelas 7, untuk mengeksplorasi Bahasa Inggris pada tahap awal. 
+Buku ini menyajikan berbagai macam kegiatan yang dapat dilakukan peserta 
+didik untuk mengeksplorasi penggunaan Bahasa Inggris yang sesuai dengan 
+konteks yang biasa ditemui peserta didik remaja. Di dalam buku ini, peserta 
+didik dipajankan pada karakter dan ilustrasi yang erat dengan dunia remaja 
+serta penggunaan sederhana Bahasa Inggris dalam berbagai konteks seperti 
+lingkungan rumah dan sekolah.
+ 
+Buku English for Nusantara untuk peserta didik ini dikembangkan 
+sesuai dengan Capaian Pembelajaran yang dimuat dalam Kurikulum Merdeka. 
+Pendekatan yang dipakai dalam buku ini meliputi karakteristik peserta didik 
+menengah pertama, proses pemerolehan bahasa pertama yang beranjak 
+dari oral skills menuju ke written skills, dan Genre-Based Approach. Dengan 
+demikian, topik, kegiatan pembelajaran, penggunaan bahasa, dan ilustrasi 
+disesuaikan dengan karakteristik peserta didik remaja, dimulai dari bahasa 
+lisan ke bahasa tulis, dan mengadaptasi tahapan pembelajaran menulis dari 
+Genre-Based Approach. Adapun keterampilan yang yang difokuskan pada 
+buku ini meliputi menyimak, berbicara, membaca, memirsa, menulis dan 
+mempresentasikan yang disajikan secara terpadu dalam berbagai jenis teks.
+ 
+Selain itu, buku ini juga mengadopsi Proil Pelajar Pancasila dan 
+Sustainable Development Goals (SDG) dari Perserikatan Bangsa-Bangsa (PBB). 
+Pengembangan kompetensi dan karakter peserta didik menjadi sorotan utama 
+dalam Proil Pelajar Pancasila. Buku ini memberikan kesempatan bagi peserta 
+didik untuk mengeksplorasi pengalaman mereka yang berkaitan dengan 
+diri sendiri, kebudayaan melalui makanan, lingkungan rumah, dan sekolah. 
+Dan, buku ini memfasilitasi empat dari 17 isu SDG, yaitu (1) ruang lingkup 
+
+v
+kesadaran lingkungan (environmental awareness); (2) ruang lingkup keamanan 
+digital (digital safety); (3) ruang lingkup nutrisi dan kebugaran (nutrition and 
+wellness) dan; (4) ruang lingkup literasi inansial (inancial literation).
+ 
+Buku Siswa diharapkan dapat memberi motivasi belajar Bahasa Inggris 
+yang ramah terhadap peserta didik melalui topik, ilustrasi, dan karakter yang 
+ditampilkan. Melalui buku ini, peserta didik diharapkan mendapat kesempatan 
+untuk mengeksplorasi Bahasa Inggris sehingga menumbuhkan rasa percaya 
+diri dalam menggunakan Bahasa Inggris dalam situasi-situasi yang familiar 
+bagi mereka. Selain itu, Buku Siswa ini juga diharapkan dapat mewujudkan 
+implementasi Capaian Pembelajaran dalam Kurikulum Merdeka.
+ 
+Terima kasih kepada seluruh pihak yang telah membantu dalam 
+penyusunan buku ini. Semoga buku ini memberi banyak manfaat dalam 
+penguasaan Bahasa Inggris oleh peserta didik Sekolah Menengah Pertama.
+Tim Penulis
+
+vi
+Daftar Isi
+Kata Pengantar ......................................................................................... iii
+Daftar Isi ................................................................................................... vi
+Daftar Gambar .......................................................................................viii
+Petunjuk Penggunaan Buku .................................................................... xi
+Peta Pemikiran Buku .............................................................................. xv
+Scope and Sequence ............................................................................... xvi
+Tokoh dalam Buku English for Nusantara .........................................xxxi
+Chapter 0. The Beginning  ..........................................................................1
+Chapter 1. About Me ................................................................................13
+Learning Objectives ...............................................................................................14
+Unit 1. Galang from Kalimantan ........................................................................15
+Unit 2. I Love Fishing  ............................................................................................28
+Unit 3. My Friends and I .......................................................................................40
+Chapter 2. Culinary and Me .....................................................................57
+Learning Objectives ...............................................................................................58
+Unit 1. My Favorite Food ......................................................................................59
+Unit 2. My Favorite Snack ....................................................................................74
+Unit 3. A Secret Recipe ..........................................................................................83
+Chapter 3. Home Sweet Home ...............................................................101
+Learning Objectives ............................................................................................ 102
+Unit 1. My House ................................................................................................. 103
+Unit 2. My House Chores  .................................................................................. 117
+Unit 3. Let’s Clean Up! ........................................................................................ 130
+Progress Check 1.....................................................................................148
+
+vii
+Chapter 4. My School Activities ............................................................153
+Learning Objectives ............................................................................................ 154
+Unit 1. My Class Schedule .................................................................................. 155
+Unit 2. My Online Class ...................................................................................... 171
+Unit 3. My Study Habits ..................................................................................... 183
+Chapter 5. This is My School ..................................................................203
+Learning Objectives ............................................................................................ 204
+Unit 1. School Buildings ..................................................................................... 205
+Unit 2. Extracurricular Activities  ................................................................... 219
+Unit 3. School Festival ........................................................................................ 231
+Progress Check 2.....................................................................................244
+Daftar Worksheet ...................................................................................250
+Daftar Audio ...........................................................................................250
+Daftar Pustaka ........................................................................................251
+Proil Pelaku Perbukuan .......................................................................253
+
+viii
+Daftar Gambar
+Picture
+Picture 1.1 People’s activities in the park ........................................................28
+Text 1.1 People’s Hobbies .....................................................................................33
+Text 1.2 Galang’s hobby ........................................................................................35
+Text 1.3 Hobbies......................................................................................................36
+Picture 1.2 Galang and his friends .....................................................................40
+Picture 1.3 Galang and Friends. .........................................................................43
+Picture 1.4 Made .....................................................................................................45
+Picture 2.1 Monita’s favorite food ......................................................................59
+Picture 2.2 Kinds of Food ......................................................................................68
+Picture 2.3 I like it! vs I don’t like it. ..................................................................72
+Picture 2.4 Nasi goreng .........................................................................................74
+Picture 2.5 Monita’s shopping list. .....................................................................76
+Picture 2.6 Monita’s post about her cake .........................................................77
+Picture 2.7 Cooking ................................................................................................83
+Picture 3.1 Galang’s house ................................................................................ 103
+Picture 3.2 The rooms in Galang’s house. ..................................................... 103
+Picture 3.3 In front of Galang’s house ............................................................ 104
+Picture 3.5 A house tour .................................................................................... 115
+Picture 3.6 Living room ..................................................................................... 117
+Picture 3.7 The Rahmansyah’s family cleaning up .................................... 120
+Picture 3.8 Sticker sign ....................................................................................... 124
+Picture 3.9 Trash bin full of rubbish .............................................................. 130
+Picture 3.10 School canteen .............................................................................. 137
+Picture 3.11 Pencil case ...................................................................................... 140
+Picture 4.1 My desk ............................................................................................. 153
+Picture 4.2 Monita’s class schedule................................................................. 161
+Text 4.1 Monita describing her class schedule. ........................................... 162
+
+ix
+Picture 4.3 Bingo Game ...................................................................................... 165
+Picture 4.4 Online class ...................................................................................... 169
+Picture 4.5 Pipit and Monita chat .................................................................... 174
+Picture 4.6 Galang and Andre’s infographics ............................................... 179
+Picture 4.7 Monita’s study room ...................................................................... 182
+Picture 4.8 Andre study habits......................................................................... 186
+Picture 4.9 Adverbs of frequency .................................................................... 189
+Picture 4.10 Adverbs of frequency ................................................................. 190
+Picture 4.11 Board game .................................................................................... 193
+Picture 5.1 SMP Merdeka .................................................................................. 203
+Text 5.1 Describing location ............................................................................. 210
+Picture 5.2 .............................................................................................................. 213
+Picture 5.3 .............................................................................................................. 213
+Picture 5.4 .............................................................................................................. 213
+Picture 5.5 .............................................................................................................. 213
+Picture 5.6 SMP Merdeka’s map ............................................................ 214
+Picture 5.7 Andre and friends dancing.......................................................... 217
+Picture 5.8 Andre and friends talking about Basketball ........................... 227
+Picture 5.9 Chart .................................................................................................. 228
+Picture 5.10 School festival ............................................................................... 229
+Picture 5.11 my school garden ......................................................................... 233
+Picture 5.12 School exhibition ......................................................................... 235
+Comic Strip
+Comic strip 1.1 Galang’s introduction ...............................................................16
+Comic strip 1.2 Part 1 Galang and Andre are introducing themselves to  ..  
+                       each other. ......................................................................20
+Comic strip 1.2  Part 2 Galang and Andre are introducing themselves to             
+                        each other. .....................................................................21
+Comic strip 1.3 Introduction ...............................................................................23
+
+x
+Comic strip 1.4  Three students are introducing themselves .....................24
+Comic strip 1.5 Greeting and introducing someone .....................................26
+Comic strip 1.6 Greetings around the school ..................................................27
+Comic strip 1.7 Talking about hobbies .............................................................30
+Comic strip 1.8 Galang and Andre hobbies .....................................................31
+Comic strip 1.9 Part 1 Pronouns .........................................................................35
+Comic strip 1.9 Part 2 Pronouns .........................................................................37
+Comic strip 2.1 Part 1 Monita and Galang’s favorite meals ........................61
+Comic strip 2.1 Part 2 Monita and Galang’s favorite meals ........................62
+Comic strip 2.2 Part 1 Monita’s family lunch ..................................................64
+Comic strip 2.2 Part 2 Monita’s family lunch ..................................................66
+Comic strip 2.3 Andre and Galang favorite food. ..........................................71
+Comic strip 3.1 Galang shows his house to Andre and Monita ............... 106
+Comic strip 3.2 Conversation between Pak Rahmansyah and Galang 
+ ..................................................................................................... 133
+Comic strip 4.1 School subjects and days. ..................................................... 155
+Comic strip 4.2 School subject and time. ....................................................... 157
+Comic strip 4.3 Online Class Rule .................................................................... 172
+Comic strip 5.1 At the canteen ......................................................................... 204
+Comic strip 5.2 School facilities ....................................................................... 206
+Comic strip 5.3 Where is the teachers’ room? ............................................. 208
+Comic strip 5.4 Talking about Pencak Silat .................................................. 220
+
+xi
+Chapter 0
+Bab ini menampilkan materi yang meliputi: 
+alphabets, numbers, days of the week, months 
+of the year, family members, time, WH-
+Questions, school subjects, colours, dan simple 
+instructions.
+a. Say What You Know
+Say What You Know adalah pembuka setiap 
+unit. Pada bagian ini kalian dharapkan 
+mengungkapkan pengalaman dan pikiran 
+berdasarkan pengalaman sendiri yang sesuai 
+dengan topik yang akan dipelajari. Kosa 
+kata kunci akan membantu kalian dalam 
+melakukan kegiatan Say What You Know. 
+Kalian boleh menggunakan Bahasa Inggris, 
+Bahasa Indonesia, atau bahasa daerah. 
+b. Listening
+Listening menampilkan berbagai macam 
+teks lisan baik dalam bentuk monolog 
+maupun dialog. Teks-teks ini dapat kalian 
+pelajari sebagai contoh-contoh penggunaan 
+bahasa Inggris yang berterima. Kalian juga 
+diharapkan menguasai pemahaman terhadap 
+teks-teks lisan yang ditampilkan.
+c. Speaking
+Speaking 
+menampilkan 
+berbagai 
+teks 
+model listening, language focus, dan kosa 
+kata kunci. Kalian akan difasilitasi untuk 
+mengekspresikan 
+keterampilan 
+berbicara 
+secara monolog maupun dialog bersama 
+seorang teman atau teman-teman di dalam 
+kelas. 
+Petunjuk Penggunaan Buku
+ Say What You Know
+
+xii
+d. Reading
+Reading menampilkan berbagai teks tulis. 
+Dengan bantuan kosa kata kunci, kalian akan 
+dibantu untuk mendapatkan pemahaman 
+terhadap teks-teks yang ditampilkan. Kalian 
+akan dilatih mengidentiikasi berbagai cara 
+memahami teks melalui pertanyaan yang 
+literal, inferential, dan interpretive. 
+e. Viewing
+Viewing menampilkan fenomena-fenomena 
+dalam dalam bentuk gambar, diagram, 
+tabel, infograis, dan lain-lain. Kalian akan 
+mendapat latihan pemahaman pembentukan 
+makna 
+yang 
+mengkombinasikan 
+bahasa 
+verbal dan visual.
+f. 
+Writing
+Writing menampilkan teks-teks tulis yang 
+dijadikan model untuk menulis. Melalui 
+teks 
+model 
+yang 
+ditampilkan, 
+kalian 
+dapat 
+mengamati 
+cara 
+menyusun 
+teks 
+dalam berbagai genre (jenis teks). Setelah 
+mengamati teks model, kalian akan dipandu 
+untuk menulis sebuah jenis teks dengan 
+menunjukkan 
+struktur 
+teks 
+dan 
+unsur 
+kebahasan.
+g. Presenting
+Presenting 
+membantu 
+kalian 
+dalam 
+memaparkan gagasan dalam Bahasa Inggris. 
+Kalian akan dibantu dengan berbagai media 
+visual, digital, dan audio-visual. 
+h. Your Turn
+Your Turn merupakan bagian yang ditujukan 
+untuk kalian mengekspresikan keterampilan 
+berbahasa Inggris. Ini dijadikan penilaian 
+bagi guru sebagai bukti hasil belajar kalian. 
+
+xiii
+i. 
+Fun Time
+Kalian akan diajak bersenang-senang dalam 
+belajar Bahasa Inggris pada kegiatan Fun 
+Time. Kalian dimotivasi untuk menggunakan 
+Bahasa Inggris dalam suasana santai, tapi 
+tetap 
+menunjukkan 
+keseriusan 
+dalam 
+menggunakan Bahasa Inggris.
+j. 
+Enrichment 
+Kalian dapat mengekspresikan kemampuan 
+berbahasa Inggris pada lingkup yang lebih 
+luas. Selain dengan lingkungan kelas, kalian 
+bisa berinteraksi dengan lingkungan di luar 
+kelas seperti sekolah dan rumah.  
+k. Relection
+Kalian 
+menunjukkan 
+hasil 
+perjalanan/
+pengalaman belajar. Kalian mengidentiikasi 
+yang 
+telah 
+dipelajari 
+dengan 
+memberi 
+penilaian pada hasil belajar diri sendiri. 
+l. 
+Did You Know?
+Did You Know? Ditampilkan kepada kalian 
+untuk dijadikan informasi tambahan selain 
+materi-materi pokok yang ditampilkan pada 
+setiap bab. Informasi yang ditampilkan 
+berasal dari berbagai tempat baik dari 
+Indonesia maupun luar negeri. Kalian akan 
+mendapatkan fakta-fakta menarik terkait 
+dengan topik-topik yang dipelajari.
+m. Progress Check
+Progress 
+Check 
+ditampilkan 
+setelah 
+meneyelsaikan materi pada Chapters 1-3 dan 
+Chapters 4-5. Kalian bisa melakukan asesmen 
+secara mandiri terkait dengan materi-materi 
+pokok pada bab-bab yang terdapat pada buku.
+Progress Check
+People around the world have unusual 
+or extreme hobbies. Have you ever 
+heard of stone skipping and Parkour? 
+Stone skipping is the art of throwing lat 
+rocks across the water. The goal is to see 
+how many times a stone bounces off the 
+surface of water before sinking (https://
+www.surfertoday.com/skimboarding/
+the-science-and-art-of-stone-skipping). 
+Did You Know?
+
+xiv
+n. Wordbox
+Wordbox berisi kumpulan kosa kata yang terdapat 
+pada teks lisan dan tulis. Ini dapat digunakan untuk 
+membantu kalian dalam memahami teks. 
+
+xv
+Peta Pemikiran Buku
+ENGLISH FOR
+NUSANTARA
+SMP/MTs KELAS VII
+
+xvi
+Functions
+Language 
+Features
+Listening
+Speaking
+Reading
+Writing
+Chapter 0. The Beginning
+Learn alphabets, 
+numbers, 
+time, family 
+members, 
+colors, and 
+simple 
+instructions to 
+use in context.
+Preposition: in, 
+on with dates
+Listen to 
+alphabets, 
+numbers, 
+time, family 
+members, 
+colors, and 
+simple 
+instructions in 
+context
+Say alphabets, 
+numbers, 
+time, family 
+members, 
+colors, and 
+simple 
+instructions in 
+context
+Read and spell 
+alphabets, 
+numbers, 
+time, family 
+members, 
+colors, and 
+simple 
+instructions in 
+context
+Write alphabets, 
+numbers, time, 
+family members, 
+colors, and 
+simple 
+instructions in 
+context
+Scope and Sequence
+
+xvii
+Chapter 1. About Me
+Unit 1. Galang from Kalimantan
+Greet people 
+and say goodbye
+Verbs: be 
+-airmative, 
+negative, 
+interrogative, 
+short answers
+Listen to 
+monologues and 
+conversations 
+for introducing 
+one’s self and 
+others
+Practice and 
+demonstrate a 
+monologue and 
+a conversation 
+for introducing 
+one’s self and 
+others
+Read a text 
+for speciic 
+information 
+about personal 
+identity
+Write speciic 
+information 
+about personal 
+identity
+Introduce one’s 
+self and other 
+people
+Vocabulary: 
+name, age, 
+school, address, 
+hobby, and 
+sibling
+Do a survey 
+to ask for and 
+give personal 
+information
+Unit 2. I Love Fishing
+Introduce others
+Verbs:
+be–airmative, 
+negative, 
+interrogative, 
+short answers. 
+use pronoun: 
+singular and 
+plural
+Listen to 
+monologues 
+and dialogues 
+about describing 
+hobbies
+Practice and 
+demonstrate 
+the expressions 
+learned in 
+context
+Read 
+descriptions in 
+context
+Write speciic 
+information 
+based on the 
+spoken and 
+written texts
+
+xviii
+Describe 
+hobbies
+Vocabulary:
+name, hobby, 
+frequency, tools
+Unit 3. My Friends and I
+Describe people
+Verbs:
+be–airmative, 
+negative, 
+interrogative, 
+short answers. 
+Use pronouns: 
+singular and 
+plural. 
+Introduce the 
+structures of 
+descriptive text
+-
+Identify 
+characters
+Read texts 
+for speciic 
+information
+Match pictures 
+and words
+Describe daily 
+activities
+Vocabulary:
+name, age, 
+characters, 
+hobby, 
+frequency, 
+physical 
+features, 
+personality 
+traits, job, place
+Complete 
+speciic 
+information
+
+xix
+Write a 
+descriptive text
+Chapter 2. Culinary and Me
+Unit 1. My Favorite Food
+Describe one’s 
+favorite meal: 
+food, drinks, 
+snack, texture, 
+taste
+Verbs: be 
+-airmative, 
+negative, 
+interrogative, 
+short answers
+Listen to 
+conversations 
+for speciic 
+information
+Practice and 
+demonstrate 
+monologues and 
+conversations in 
+context
+Read a text 
+for speciic 
+information
+Write speciic 
+information in 
+context
+Use pronoun: 
+singular and 
+plural
+Share the 
+information 
+based on the 
+writing section
+Write speciic 
+information 
+in the correct 
+category
+Vocabulary: 
+foods, meals, 
+speeds, eating 
+activities, tastes, 
+and textures
+
+xx
+Unit 2. My Favorite Snack
+Describe grocery 
+shopping: 
+grocery, foods, 
+topping, unit/
+weight/volume 
+size, texture, 
+taste
+Verbs: be 
+-airmative, 
+interrogative, 
+short answers
+-
+Discuss a picture 
+and a text with 
+friends
+Read texts 
+for speciic 
+information
+Write correct 
+speciic 
+information 
+based on texts
+Use articles (a/
+an)
+Use pronoun: 
+singular and 
+plural
+Circle the right 
+answer
+Use articles:
+‘a, A, an, An’
+Vocabulary: 
+grocery, foods, 
+topping, unit/
+weight/volume 
+size, texture, 
+taste
+Unit 3. A Secret Recipe
+Inform 
+recipe: goal, 
+ingredients, 
+steps, utensils
+Verbs: be 
+-airmative, 
+negative, 
+interrogative, 
+short answers
+-
+Discuss speciic 
+information 
+with friends
+Read procedure 
+texts for speciic 
+information
+Write 
+instructions 
+using imperative 
+sentences in 
+context
+
+xxi
+Use imperative 
+sentence 
+(positive and 
+negative)
+Use pronoun: 
+singular and 
+plural
+Write procedure 
+texts in context
+Introduce the 
+structures of 
+procedure 
+text: Goals, 
+ingredients, and 
+steps
+Use imperative 
+sentence: 
+positive and 
+negative
+
+xxii
+Vocabulary: 
+foods, cooking 
+ingredients, 
+utensils, and 
+imperative 
+verbs
+Chapter 3. Home Sweet Home
+Unit 1. My House
+Describe rooms 
+in a house
+Verbs: be 
+-airmative, 
+negative, 
+interrogative, 
+short answers
+Listen to 
+conversations 
+for speciic 
+information
+Practice and 
+demonstrate 
+the expressions 
+learned in the 
+unit
+Read a 
+monologues and 
+conversations 
+for speciic 
+information
+Write correct 
+speciic 
+information and 
+a description 
+based on 
+pictures, 
+personal 
+information, 
+and a 
+conversation
+
+xxiii
+Describe things 
+in the rooms
+Preposition: 
+in, on, under, 
+next to, behind, 
+behind, in front 
+of, above
+Practice and 
+demonstrate 
+monologues to 
+describe a house 
+and a room in 
+context
+Vocabulary: 
+rooms in a 
+house, things 
+in rooms, and 
+weather
+Unit 2. My House Chores
+Describe 
+household 
+activities
+Verbs: be 
+-airmative, 
+negative, 
+interrogative, 
+short answers
+-
+-
+Read 
+monologues 
+for speciic 
+information
+Write speciic 
+information 
+based on 
+pictures and 
+personal 
+information
+Describe things 
+to use to clean 
+up
+Use pronoun: 
+singular and 
+plural
+
+xxiv
+Use simple 
+present tense to 
+describe things
+Vocabulary: 
+room in a house, 
+household 
+activities, things 
+to use to clean 
+up, and things in 
+a house
+Unit 3. Let’s Clean Up!
+Describe 
+cleaning up 
+activities
+Verbs: be 
+-airmative, 
+negative, 
+interrogative, 
+short answers, 
+action verbs
+-
+Say speciic 
+information 
+based on a 
+picture
+Read a 
+monologue 
+for speciic 
+information
+Write correct 
+speciic 
+information 
+based on 
+pictures and 
+monologue
+Conjunction:
+irst, second, 
+next, then, etc. 
+Read a 
+procedure text 
+for speciic 
+information
+Write the 
+imperative 
+sentences based 
+on pictures
+Use imperative 
+sentences
+Fill in the 
+crossword 
+puzzle
+
+xxv
+Match the 
+imperative 
+sentences with 
+pictures
+Chapter 4. My School Activities
+Unit 1. My Class Schedule
+Describe a class 
+schedule
+Verbs: be 
+-airmative, 
+negative, 
+interrogative, 
+and short 
+answers
+Listen to 
+conversations 
+and a 
+monologue 
+about one’s 
+class schedule 
+for speciic 
+information
+Say personal 
+information 
+based on the 
+picture
+-
+Match pictures 
+and words
+Practice and 
+demonstrate 
+monologues to 
+describe one’s 
+schedule with 
+friends
+Write scripts of 
+a conversation 
+about asking 
+and giving 
+information 
+of one’s class 
+schedule
+
+xxvi
+Write a script 
+of a monologue 
+to describe a 
+personal class 
+schedule
+Unit 2. My Online Class
+Talk about 
+online class
+Verbs: be-
+airmative, 
+negative, 
+interrogative, 
+short answers
+-
+Say speciic 
+and personal 
+information 
+based on the 
+picture and in 
+context
+Read a 
+monologue and 
+conversations 
+about online 
+class for speciic 
+information
+Match pictures 
+and words
+Use the 
+expressions: 
+“could you …” 
+and “can you …”
+Using the 
+expressions 
+“could you …” 
+and “can you …”
+Use the 
+expressions to 
+ask something 
+in context
+Read 
+infographics 
+about learning 
+tips for speciic 
+information
+Arrange words 
+into correct 
+sentences
+Vocabulary: 
+activities in 
+and features of 
+online learning
+Write 
+expressions 
+learned in the 
+unit, speciic 
+information, 
+and personal 
+information in 
+context
+
+xxvii
+Write an 
+infographic 
+about the 
+learning tips
+Unit 3. My Study Habits
+Talk about study 
+habits
+Verbs: be 
+-airmative, 
+negative, 
+interrogative, 
+short answers
+-
+Say wordings 
+that describes 
+someone based 
+on the picture
+Read descriptive 
+texts for speciic 
+information
+Write speciic 
+information 
+based on the 
+picture and texts
+Use adverbs of 
+frequency
+Using adverbs 
+of frequency: 
+always, usually, 
+normally/
+generally, often/
+frequently, 
+sometimes, 
+occasionally, 
+seldom, hardly 
+ever/rarely, 
+never
+Complete the 
+text about study 
+habits in context
+
+xxviii
+Change verbs, 
+and complete 
+and underline 
+adverbs in the 
+texts
+Write 
+descriptive texts 
+about study 
+habits in context
+Chapter 5. This is My School
+Unit 1. School Buildings
+Ask for and give 
+directions
+Verbs: be 
+-airmative, 
+negative, 
+interrogative, 
+short answers
+Listen to 
+conversations 
+for speciic 
+information
+Say speciic 
+and personal 
+information 
+based on 
+pictures
+Give direction 
+based on the 
+picture (map)
+-
+Write speciic 
+information 
+based on the 
+pictures, audio, 
+and map
+
+xxix
+Describe 
+extracurricular 
+activities
+Using 
+preposition of 
+place: beside, 
+between, 
+behind, in front 
+of, or across 
+from
+Draw a school 
+map
+Describe a 
+school festival
+Vocabulary: 
+rooms in a 
+school, things in 
+a school
+Unit 2. Extracurricular Activities
+Talk about 
+extracurricular 
+activities
+Verbs: be-
+airmative, 
+negative, 
+interrogative, 
+short answers
+Listen to 
+conversations 
+about 
+extracurricular 
+activities 
+for speciic 
+information
+Say speciic 
+and personal 
+information 
+about 
+extracurricular 
+activities based 
+on the picture
+Read 
+monologues 
+about 
+extracurricular 
+activities 
+for speciic 
+information
+Match pictures 
+with words
+Vocabulary: 
+extracurricular 
+activities, time, 
+and place
+Practice and 
+demonstrate a 
+conversation 
+about 
+extracurricular 
+activities with a 
+friend in context
+Write correct 
+sentences about 
+extracurricular 
+activities based 
+on speciic 
+information on 
+the pictures
+
+xxx
+Unit 3. School Festival
+Describe a school 
+festival
+Verbs: be-
+airmative, 
+negative, 
+interrogative, 
+short answers
+-
+Say speciic 
+and personal 
+information based 
+on the picture
+Read texts about 
+school festivals 
+for speciic 
+information
+Write sentences 
+based on the 
+provided words
+Describe rooms in 
+the school
+Vocabulary: 
+features of the 
+room like the 
+identiication, the 
+size, the object, 
+and the activity
+Describe a room 
+with friends in the 
+chain sentences 
+activity
+Practice and write 
+descriptive texts 
+about a room
+Make a poster for 
+a school event
+
+xxxi
+Tokoh dalam Buku English for Nusantara
+Dalam buku ini terdapat karakter tetap yang akan menemani peserta 
+didik dalam belajar Bahasa Inggris. Peserta didik akan menemukan 
+berbagai karakter yaitu Galang, keluarga Galang (Pak Rahmansyah, 
+Ibu Posma, Shinta, dan Tamara), teman-teman Galang (Monita, Andre, 
+Pipit, Leni, dan Made), guru Bahasa Inggris (Ibu Ida), Kepala Sekolah 
+(Pak Edo), guru IPA (Pak Romy) dan lain-lain. Tokoh-tokoh tersebut 
+mewakili berbagai suku bangsa yang ada di nusantara.
+ 
+Galang Rahmansyah adalah seorang siswa SMP berusia 13 tahun 
+yang bersekolah di SMP Merdeka. Ia lahir di Kalimantan. Galang tinggal 
+bersama ayah, ibu, dan kedua saudara perempuannya. Ayah Galang 
+yang bernama Pak Rahmansyah adalah seorang petani penggarap 
+yang memiliki ternak ayam dan sapi. Ibu Galang yaitu Ibu Posma 
+Hutasuhut adalah seorang yang berasal dari Medan dan berprofesi 
+sebagai penjahit. Galang adalah anak kedua. Kakaknya bernama Sinta 
+Rahmansyah berusia 17 tahun, sedangkan adiknya yang bernama 
+Tamara Rahmansyah masih berusia 6 tahun.
+ 
+Galang memiliki beberapa sahabat, yaitu Andre Tanudjaja, 
+seorang keturunan Tionghoa; Monita Turangan, berdarah Manado; 
+Pipit Saitri yang berdarah Sunda; Leni Lestari yang berdarah Minang; 
+dan Made Wirawan yang berdarah Bali. Di sekolah, Galang memiliki 
+guru Bahasa Inggris yang berasal dari Bali, yaitu Ibu Ida Ayu Komang. 
+Sedangkan kepala sekolahnya adalah seorang yang berasal dari Papua 
+bernama Pak Edo Salosa.”
+
+xxxii
+Galang Rahmansyah
+Pipit Saitri
+Ibu Ida Ayu Komang
+Monita Turangan
+Leni Lestari
+ Pak Edo Salosa
+ Pak Rahmansyah
+Ibu Posma Hutasuhut 
+Sinta Rahmansyah
+Tamara Rahmansyah
+Andre Tanudjaja
+Made Wirawan
+
+The Beginning
+Chapter 0
+KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI
+REPUBLIK INDONESIA, 2022
+English for Nusantara
+untuk SMP/MTs Kelas VII
+Penulis: Ika Lestari Damayanti, dkk. 
+ISBN 978-602-244-885-3 (jil.1)
+
+2
+English for Nusantara untuk SMP/MTs Kelas VII
+Chapter ini dirancang untuk menunjang proses belajar peserta didik, 
+khususnya yang belum memiliki pengalaman belajar Bahasa Inggris 
+di Sekolah Dasar. Materi yang disajikan dalam Chapter ini meliputi: 
+alphabets, numbers, time, family members, colours, dan simple 
+instructions. Penyajian materi disertai dengan pranala sumber belajar 
+bagi peserta didik yang memiliki akses Internet. Bila tidak, contoh 
+pelafalan dapat ditanyakan pada guru Bahasa Inggris di sekolah.
+CHAPTER 0
+A. Alphabets
+Let’s learn alphabets together. Sing along to 
+this song. 
+Scan Me
+
+3
+Chapter 0 - The Beginning
+`
+B. Numbers
+Listen to the audio on how to pronounce the 
+numbers.
+Cardinal Numbers
+Ordinal Numbers
+0
+Zero
+Nol
+1
+One
+Satu
+1st
+First
+Pertama
+2
+Two
+Dua
+2nd
+Second
+Kedua
+3
+Three
+Tiga
+3rd
+Third
+Ketiga
+4
+Four
+Empat
+4th
+Fourth
+Keempat
+5
+Five
+Lima
+5th
+Fifth
+Kelima
+6
+Six
+Enam
+6th
+Sixth
+Keenam
+7
+Seven
+Tujuh
+7th
+Seventh
+Ketujuh
+8
+Eight
+Delapan
+8th
+Eighth
+Kedelapan
+9
+Nine
+Sembilan
+9th
+Ninth
+Kesembilan
+10
+Ten
+Sepuluh
+10th
+Tenth
+Kesepuluh
+11
+Eleven
+Sebelas
+11th
+Eleventh
+Kesebelas
+12
+Twelve
+Dua belas
+12th
+Twelfth
+Kedua belas
+Scan Me
+
+4
+English for Nusantara untuk SMP/MTs Kelas VII
+30
+Thirty
+Tiga puluh
+30th
+Thirtieth
+Ketiga puluh
+40
+Fourty
+Empat 
+puluh
+40th
+Fourtieth
+Keempat 
+puluh
+50
+Fifty
+Lima puluh
+50th
+Fiftieth
+Kelima puluh
+60
+Sixty
+Enam 
+puluh
+60th
+Sixtieth
+Keenam 
+puluh
+70
+Seventy
+Tujuh 
+puluh
+70th
+Seventieth
+Ketujuh 
+puluh
+80
+Eighty
+Delapan 
+puluh
+80th
+Eightieth
+Kedelapan 
+puluh
+90
+Ninety
+Sembilan 
+puluh
+90th
+Nintieth
+Kesembilan 
+puluh
+100
+One 
+hundred
+Seratus
+100th
+One 
+hundredth
+Keseratus
+500
+Five 
+hundred
+Lima ratus
+500th
+Five 
+hundredth
+Kelima ratus
+1,000
+One thousand
+Seribu
+1,000th
+One thousandth
+Keseribu
+13
+Thirteen
+Tiga Belas
+13th
+Thirteenth
+Ketiga belas
+14
+Fourteen
+Empat 
+belas
+14th
+Fourteenth
+Keempat 
+belas
+15
+Fifteen
+Lima belas
+15th
+Fifteenth
+Kelima belas
+16
+Sixteen
+Enam belas
+16th
+Sixteenth
+Keenam belas
+17
+Seventeen
+Tujuh belas
+17th
+Seventeenth
+Ketujuh belas
+18
+Eighteen
+Delapan 
+belas
+18th
+Eighteenth
+Kedelapan 
+belas
+19
+Nineteen
+Sembilan 
+belas
+19th
+Nineteenth
+Kesembilan 
+belas
+20
+Twenty
+Dua puluh
+20th
+Twentieth
+Kedua puluh
+
+5
+Chapter 0 - The Beginning
+Example on a sentence:
+1. Cardinal numbers
+“I picked twelve apples from the garden.”
+2. Ordinal numbers
+“I got the ifth rank last semester.
+C. Days of the Week
+Listen to the audio on how to pronounce the days of the week.
+Scan Me
+
+6
+English for Nusantara untuk SMP/MTs Kelas VII
+D. Months of the Year
+Listen to the audio on how to pronounce the months of the 
+year.
+Scan Me
+1 Januari
+January
+4 April
+April
+7 Juli
+July
+10 Oktober
+October
+2 Februari
+February
+5 Mei
+May
+8 Agustus
+August
+11 November
+November
+3 Maret
+March
+6 Juni
+June
+9 September
+September
+12 Desember
+December
+
+7
+Chapter 0 - The Beginning
+E. Family Members
+Listen to the audio on how to pronounce the family members.
+Scan Me
+
+8
+English for Nusantara untuk SMP/MTs Kelas VII
+F. Telling the Time
+3.00 = It’s three o’clock
+8.15 = It’s quarter past eight
+11.35 = It’s thirty ive past eleven
+3.30 = It’s half past three
+2.45 = It’s quarter to three
+12.55 = It’s ive to one

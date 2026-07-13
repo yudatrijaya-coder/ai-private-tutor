@@ -1,0 +1,1502 @@
+Hak Cipta pada Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi Republik Indonesia 
+Dilindungi Undang-Undang.
+Disclaimer: Disclaimer: Buku ini disiapkan oleh Pemerintah dalam rangka pemenuhan kebutuhan 
+buku pendidikan yang bermutu, murah, dan merata sesuai dengan amanat dalam UU No. 3 
+Tahun 2017. Buku ini disusun dan ditelaah oleh berbagai pihak di bawah koordinasi Kementerian 
+Pendidikan, Kebudayaan, Riset, dan Teknologi. Buku ini merupakan dokumen hidup yang senantiasa 
+diperbaiki, diperbarui, dan dimutakhirkan sesuai dengan dinamika kebutuhan dan perubahan 
+zaman. Masukan dari berbagai kalangan yang dialamatkan kepada penulis atau melalui alamat 
+surel buku@kemdikbud.go.id diharapkan dapat meningkatkan kualitas buku ini.
+Matematika untuk SMP/MTs Kelas VII
+Penulis  
+Dicky Susanto 
+Savitri Sihombing 
+Marianna Magdalena Radjawane 
+Ambarsari Kusuma Wardani 
+Theja Kurniawan 
+Yulian Candra 
+Sinta Mulyani
+Penelaah  
+Yogi Anggraena 
+Kiki Ariyanti Sugeng
+Penyelia/Penyelaras 
+Supriyatno 
+Lenny Puspita Ekawaty 
+Eko Budiono 
+Berthin Sappang
+Kontributor 
+Petrus Pangli 
+Saefudin Zuchri
+Ilustrator 
+Ahmad Saad Ibrahim
+Editor  
+Tri Hartini
+Desainer 
+M. Firdaus Jubaedi
+Penerbit 
+Pusat Perbukuan 
+Badan Standar, Kurikulum, dan Asesmen Pendidikan  
+Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi  
+Kompleks Kemdikbudristek Jalan RS. Fatmawati, Cipete, Jakarta Selatan  
+https://buku.kemdikbud.go.id
+Cetakan Pertama, 2022 
+ISBN 978-602-244-882-2 (no.jil.lengkap) 
+ISBN 978-602-244-883-9 (jil.1)
+Isi buku ini menggunakan huruf Noto Serif 11/16 pt, Steve Matteson 
+xxii, 250 hlm.: 17,6 x 25 cm.
+
+iii
+Kata Pengantar
+Pusat Perbukuan; Badan Standar, Kurikulum, dan Asesmen Pendidikan; 
+Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi memiliki tugas dan 
+fungsi mengembangkan buku pendidikan pada satuan Pendidikan Anak Usia 
+Dini, Pendidikan Dasar, dan Pendidikan Menengah. Buku yang dikembangkan 
+saat ini mengacu pada Kurikulum Merdeka, dimana kurikulum ini memberikan 
+keleluasaan bagi satuan/program pendidikan dalam mengembangkan potensi 
+dan karakteristik yang dimiliki oleh peserta didik. Pemerintah dalam hal ini 
+Pusat Perbukuan mendukung implementasi Kurikulum Merdeka di satuan 
+pendidikan Pendidikan Anak Usia Dini, Pendidikan Dasar, dan Pendidikan 
+Menengah dengan mengembangkan Buku Teks Utama. 
+Buku teks utama merupakan salah satu sumber belajar utama untuk 
+digunakan pada satuan pendidikan. Adapun acuan penyusunan buku teks 
+utama adalah Pedoman Penerapan Kurikulum dalam rangka Pemulihan 
+Pembelajaran yang ditetapkan melalui Keputusan Menteri Pendidikan, 
+Kebudayaan, Riset, dan Teknologi Nomor 56/M/2022 Tanggal 10 Februari 
+2022, serta Capaian Pembelajaran pada Pendidikan Anak Usia Dini, Jenjang 
+Pendidikan Dasar, dan Jenjang Pendidikan Menengah pada Kurikulum Merdeka 
+yang ditetapkan melalui Keputusan Kepala Badan Standar, Kurikulum, dan 
+Asesmen Pendidikan Nomor 008/H/KR/2022 Tanggal 15 Februari 2022. Sajian 
+buku dirancang dalam bentuk berbagai aktivitas pembelajaran untuk mencapai 
+kompetensi dalam Capaian Pembelajaran tersebut. Buku ini digunakan pada 
+satuan pendidikan pelaksana implementasi Kurikulum Merdeka.
+Sebagai dokumen hidup, buku ini tentu dapat diperbaiki dan disesuaikan 
+dengan kebutuhan serta perkembangan keilmuan dan teknologi. Oleh 
+karena itu, saran dan masukan dari para guru, peserta didik, orang tua, dan 
+masyarakat sangat dibutuhkan untuk pengembangan buku ini di masa yang 
+akan datang. Pada kesempatan ini, Pusat Perbukuan menyampaikan terima 
+kasih kepada semua pihak yang telah terlibat dalam penyusunan buku ini, 
+mulai dari penulis, penelaah, editor, ilustrator, desainer, dan kontributor 
+terkait lainnya. Semoga buku ini dapat bermanfaat khususnya bagi peserta 
+didik dan guru dalam meningkatkan mutu pembelajaran.
+ 
+ 
+ 
+ 
+ 
+ 
+Jakarta, Juni 2022 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Kepala Pusat,
+ 
+ 
+ 
+ 
+ 
+ 
+Supriyatno 
+ 
+ 
+ 
+ 
+ 
+ 
+NIP 19680405 198812 1 001 
+
+iv
+Prakata
+Puji syukur kami panjatkan kepada Tuhan Yang Maha Esa atas berkat dan 
+rahmat-Nya dalam menyelesaikan penulisan buku siswa ini. Buku ini disusun 
+untuk memenuhi Capaian Pembelajaran Fase D untuk SMP/MTs Kelas VII. 
+Matematika sering kali dianggap pelajaran yang abstrak, sulit, dan 
+kurang relevan dalam kehidupan. Padahal pada hakikatnya, banyak konsep 
+dan prinsip matematika justru muncul di alam dan dekat dengan kehidupan 
+sehari-hari. Harapan kami, buku ini dapat mengubah mispersepsi mengenai 
+matematika dengan menggunakan pendekatan yang lebih kontekstual melalui 
+permasalahan kehidupan nyata dan melibatkan siswa secara aktif dalam 
+bereksplorasi dengan pertanyaan penuntun. Sebagian besar pembelajaran 
+matematika dalam buku ini diupayakan menarik perhatian dan minat siswa 
+sehingga “tidak merasa sedang belajar matematika”. Siswa akan diajak 
+untuk berpikir kritis dan kreatif untuk mengembangkan keterampilan 
+berpikir aras tinggi (HOTS). Selain itu, di banyak kesempatan siswa akan 
+berdiskusi, berkomunikasi, bekerja sama, dan menggunakan teknologi dalam 
+menyelesaikan permasalahan sehingga mengasah kemampuan sesuai dengan 
+Profil Pelajar Pancasila dan keterampilan abad ke-21.
+Kami menghaturkan ucapan terima kasih kepada berbagai pihak yang 
+telah membantu mewujudkan buku ini, khususnya para penelaah, yaitu Dr. 
+Kiki Ariyanti Sugeng dari Universitas Indonesia dan Dr. Yogi Anggraena, M.Si 
+dari Pusat Kurikulum dan Pembelajaran untuk bimbingan dan masukan yang 
+berharga dari awal sampai akhir proses penulisan.
+Akhir kata, kami berharap buku ini bermanfaat bagi pembelajaran 
+matematika SMP/MTs Kelas VII, dan semakin banyak siswa yang mulai 
+menyenangi matematika dan merasakan manfaat belajar matematika.
+Selamat bermatematika!
+ 
+Jakarta, Maret 2022
+Tim Penulis
+
+v
+Daftar Isi
+Kata Pengantar ............................................................................................. 
+iii
+Prakata ............................................................................................................ 
+iv
+Petunjuk Penggunaan Buku ...................................................................... 
+xiii
+Peta Pemikiran Buku .................................................................................. xxiii
+Bab 1 Bilangan Bulat ................................................................................ 
+1
+A. Memahami Bilangan Bulat ............................................................... 
+5
+B. Operasi Hitung Bilangan Bulat ........................................................ 
+12
+C. Faktor Bilangan Bulat ........................................................................ 
+22
+Bab 2 Bilangan Rasional ........................................................................ 
+35
+A. Di Antara Dua Bilangan Bulat .......................................................... 
+40
+B. Membandingkan Bilangan Rasional .............................................. 
+48
+C. Operasi Hitung Bilangan Rasional .................................................. 
+54
+Bab 3 Rasio .................................................................................................... 
+83
+A. Konsep Rasio ........................................................................................ 
+87
+B. Skala  ...................................................................................................... 
+99
+C. Laju Perubahan Satuan  .................................................................... 112
+Bab 4 Bentuk Aljabar ............................................................................... 123
+A. Unsur-Unsur Bentuk Aljabar ............................................................ 126
+B. Sifat-Sifat dan Operasi Aljabar ........................................................ 136
+C. Pemodelan dengan Bentuk Aljabar ................................................ 146
+Bab 5 Kesebangunan ............................................................................... 159
+A. Hubungan Antar Sudut...................................................................... 163
+B. Arti Kesebangunan ............................................................................. 170
+C. Kesebangunan pada Segitiga ........................................................... 175
+
+vi
+Bab 6 Data dan Diagram ......................................................................... 185
+A. Investigasi Statistika ........................................................................... 189
+B. Macam-Macam Data ........................................................................... 194
+C. Diagram dalam Statistika  ................................................................. 200
+D. Diagram Batang ................................................................................... 207
+E. Diagram Lingkaran ............................................................................. 214
+F. Memilih Diagram yang Tepat ........................................................... 219
+Lampiran ........................................................................................................ 
+229
+Daftar Pustaka .............................................................................................. 
+230
+Biodata Penulis ............................................................................................. 
+232
+Biodata Penelaah ......................................................................................... 
+243
+Biodata Editor ............................................................................................... 
+246
+Biodata Ilustrator ......................................................................................... 
+248
+Biodata Desainer .......................................................................................... 
+249
+
+vii
+Daftar Gambar
+Gambar 1.1  Suhu di Puncak Jaya .......................................................... 
+2
+Gambar 1.2  Bilangan Bulat pada Kedalaman Laut dan Jumlah 
+Uang pada Buku Tabungan  ............................................ 
+3
+Gambar 1.3  Garis Bilangan ..................................................................... 
+5
+Gambar 1.4  Termometer Suhu Ruangan ............................................. 
+5
+Gambar 1.5  Ilustrasi Suhu pada Termometer Suhu Ruangan ...... 
+6
+Gambar 1.6  Garis Bilangan Kosong ...................................................... 
+7
+Gambar 1.7  Pembagian Bilangan Bulat .............................................. 
+7
+Gambar 1.8  Prediksi Suhu di Berbagai Kota di Dunia  ................... 
+9
+Gambar 1.9  Garis Bilangan Kosong ...................................................... 
+9
+Gambar 1.10 Garis Bilangan pada Bilangan Bulat Negatif .............. 
+10
+Gambar 1.11 Ilustrasi Transfer Pemain Sepakbola  ........................... 
+13
+Gambar 1.12 Mesin Pendingin Ruang.................................................... 
+17
+Gambar 1.13 Mesin Pendingin Makanan .............................................. 
+22
+Gambar 1.14 Mesin Pendingin Makanan dengan Tiga Tombol 
+Pengatur Suhu ..................................................................... 
+23
+Gambar 1.15 Contoh Penguatan Karakter yaitu Menolong 
+Sesama .................................................................................. 
+26
+Gambar 1.16 Perincian Tabungan Milik Haris .................................... 
+31
+Gambar 1.17 Suasana Empat Musim di Jepang .................................. 
+33
+Gambar 2.1  Pizza ....................................................................................... 
+36
+Gambar 2.2  Cek Suhu Badan di Tempat Umum ................................ 
+37
+Gambar 2.3  Hasil Pengukuran Kecepatan Internet ......................... 
+37
+Gambar 2.4  Diagram Venn Bilangan Bulat ........................................ 
+40
+Gambar 2.5  Dua Macam Termometer ................................................. 
+41
+Gambar 2.6  Diagram Venn Bilangan Real .......................................... 
+47
+Gambar 2.7  Sendok Ukur dan Cangkir Ukur ..................................... 
+54
+Gambar 2.8  Tepung Beras, Gula Pasir, dan Santan .......................... 
+56
+Gambar 2.9  Gantungan Dinding Berperekat ..................................... 
+58
+Gambar 3.1  Ukuran Foto dan Lukisan ................................................ 
+84
+Gambar 3.2  Beberapa Ukuran Kertas Fotokopi ................................ 
+85
+Gambar 3.3  Susu Cokelat dengan Kepekatan Cokelat Berbeda .... 
+85
+Gambar 3.4  Peta Konsep.......................................................................... 
+87
+
+viii
+Gambar 3.5  Susu dan Cokelat  ............................................................... 
+88
+Gambar 3.6  Kandungan Cokelat ........................................................... 
+89
+Gambar 3.7  Berbagai Jenis Donat ......................................................... 
+90
+Gambar 3.8  Gir dengan Banyak Gigi Berbeda ................................... 
+91
+Gambar 3.9  Dua Minuman Susu Cokelat dengan  
+Kepekatan Sama ................................................................. 
+92
+Gambar 3.10 Dua Minuman Susu Cokelat dengan 
+Kepekatan Berbeda ........................................................... 
+92
+Gambar 3.11 Dua Minuman Susu Cokelat dengan 
+Kepekatan Sama ................................................................. 
+92
+Gambar 3.12 Dua Minuman Susu Cokelat dengan 
+Kepekatan Berbeda ........................................................... 
+93
+Gambar 3.13 Banyak Cokelat dan Banyak Susu .................................. 
+94
+Gambar 3.14 Persentase Cokelat, Susu dan Gula ................................ 
+96
+Gambar 3.15 Larutan Alkohol 70%......................................................... 
+97
+Gambar 3.16 Bidang Miring ..................................................................... 
+98
+Gambar 3.17 Perubahan Ukuran Gambar ............................................ 100
+Gambar 3.18 Ukuran Gambar Proporsional dan 
+Tidak Proporsional ............................................................ 102
+Gambar 3.19 Denah Rumah ...................................................................... 103
+Gambar 3.20 Dua Persegi Panjang Proporsional ................................ 104
+Gambar 3.21 Kelinci dan Makanannya ................................................. 105
+Gambar 3.22 Bagan Penyelesaian Masalah Rasio Ekuivalen .......... 106
+Gambar 3.23 Photo & Picture Resize ...................................................... 106
+Gambar 3.24 Mikroskop dan Perbesarannya ...................................... 107
+Gambar 3.25 Pengecilan Ukuran ............................................................. 107
+Gambar 3.26 Denah Rumah Sederhana ................................................ 108
+Gambar 3.27 Peta Indonesia ..................................................................... 109
+Gambar 3.28 Ukuran Berbagai Kertas ................................................... 111
+Gambar 3.29 Bahan Pembuat Eko-enzim  ............................................ 112
+Gambar 3.30 Botol Susu Cokelat .............................................................. 113
+Gambar 3.31 Dua Sampel dengan Massa Jenis Berbeda ................... 115
+Gambar 3.32 Peta Taman Nasional Komodo ........................................ 116
+Gambar 3.33 Mesin Penggiling Cokelat ................................................. 117
+Gambar 3.34 Berbagai Kemasan Air Mineral ...................................... 118
+Gambar 3.35 Cokelat Batang .................................................................... 119
+
+ix
+Gambar 3.36 Penanaman Pohon ............................................................. 121
+Gambar 3.37 Curah Hujan dan Volume ................................................. 122
+Gambar 4.1 Alat Infus .............................................................................. 124
+Gambar 4.2 Al-Khawarizmi .................................................................... 130
+Gambar 4.3 Kolam Renang Berbentuk Persegi ................................. 136
+Gambar 4.4 Sketsa Rani ........................................................................... 137
+Gambar 5.1 Maket ..................................................................................... 160
+Gambar 5.2 Foto ......................................................................................... 161
+Gambar 5.3 Peta ......................................................................................... 161
+Gambar 5.4 Fraktal ................................................................................... 161
+Gambar 5.5 Persimpangan Jalan .......................................................... 163
+Gambar 5.6 Persimpangan di Daerah N ............................................. 164
+Gambar 5.7 Dua Garis yang Sejajar yang Berpotongan dengan 
+Garis Lain ............................................................................. 166
+Gambar 5.8 Pas Foto Berbagai Ukuran ................................................ 170
+Gambar 5.9 Fraktal ................................................................................... 175
+Gambar 5.10 Penamaan Sudut ................................................................ 179
+Gambar 6.1 Kartu Pelajar ....................................................................... 186
+Gambar 6.2 Piktogram dan Diagram Batang Buah-Buahan yang 
+Paling Disukai ..................................................................... 188
+Gambar 6.3 Alur Proses Investigasi Statistika ................................... 190
+Gambar 6.4 Diagram Line Plot Panjang Nama Siswa 7A ............... 191
+Gambar 6.5 Diagram Batang Panjang Nama Siswa 7A ................... 192
+Gambar 6.6 Diagram Batang Data Kelompok Panjang Nama 
+Siswa 7A ................................................................................ 194
+Gambar 6.7 Klasifikasi Jenis Data ......................................................... 194
+Gambar 6.8 Jenis Media Sosial yang Diakses Pengguna Internet 
+di Indonesia ......................................................................... 196
+Gambar 6.9 Diagram Banyak Aplikasi Online ................................... 199
+Gambar 6.10 Diagram Jenis Aplikasi Online ........................................ 199
+Gambar 6.11 Jumlah Kasus Terkonfirmasi Harian di Indonesia 
+per 23 Februari 2022 ......................................................... 201
+Gambar 6.12 Diagram Batang Penggunaan Kuota Internet untuk 
+Pembelajaran Jarak Jauh ................................................. 202
+Gambar 6.13 Diagram Batang Perolehan Medali Emas di 
+Olimpiade Musim Panas .................................................. 203
+
+x
+Gambar 6.14 Diagram Batang Banyaknya Sepatu Terjual ............... 204
+Gambar 6.15 Diagram Batang Jumlah Pengunjung 
+Taman Wisata ..................................................................... 205
+Gambar 6.16 Diagram Batang Nilai Ulangan ....................................... 206
+Gambar 6.17 Diagram Batang Jumlah Mobil di Tempat Parkir ...... 206
+Gambar 6.18 Diagram Batang Ganda Pilihan Cabang Olahraga 
+Siswa kelas 7C dan kelas 7D ............................................ 209
+Gambar 6.19 Diagram Batang dan Garis Kasus Baru Positif 
+Covid-19 di DKI Jakarta pada Januari 2022 ................. 210
+Gambar 6.20 Diagram Batang Ganda Level Emisi CO2 yang 
+Dihasilkan Pada Tahun 1990 dan 1998 ........................ 211
+Gambar 6.21 Diagram Lingkaran Kapasitas Hard Disk .................... 215
+Gambar 6.22 Peserta Lomba Matematika ............................................ 216
+Gambar 6.23 Jumlah Suara pada Pemilihan Ketua OSIS .................. 217
+Gambar 6.24 Diagram Lingkaran Panjang Password Email Siswa  223
+Gambar 6.25 Diagram Batang Ganda Perolehan Medali 
+Indonesia di SEA Games ................................................... 225
+Gambar 6.26 Diagram Lingkaran Komponen Makanan ................... 226
+
+xi
+Daftar Tabel
+Tabel 1.1  Detail Perhitungan Nilai dan Efek Performa Bagi Klub 
+dari Berbagai Proses Transfer ............................................. 
+13
+Tabel 1.2  Detail Perhitungan Nilai dan Efek Performa Bagi Klub 
+dari Berbagai Proses ............................................................... 
+14
+Tabel 1.3  Tabel Perubahan Suhu dari Mesin Pendingin Ruang ... 
+19
+Tabel 2.1  Jenis Bilangan ........................................................................... 
+39
+Tabel 2.2 Melengkapi Kolom  ............................................................... 
+42
+Tabel 2.3  Menyatakan Bilangan Rasional dalam  ........................... 
+43
+Tabel 2.4  Menyatakan  dalam Bentuk Desimal ............................... 
+45
+Tabel 2.5  Jenis Bilangan ........................................................................... 
+46
+Tabel 2.6  Melengkapi Bilangan .............................................................. 
+50
+Tabel 2.7  Ketercukupan Bahan Kue ..................................................... 
+57
+Tabel 2.8  Ketercukupan Bahan untuk 6 Kali Resep ......................... 
+64
+Tabel 2.9  Menentukan Nilai Kebenaran Pernyataan....................... 
+76
+Tabel 2.10 Berat Ayam  ............................................................................... 
+77
+Tabel 2.11 Nilai Tukar KRW ke IDR ........................................................ 
+79
+Tabel 2.12 Kategori Indeks Massa Tubuh ............................................. 
+81
+Tabel 2.13 Data Berat dan Tinggi Badan ............................................... 
+81
+Tabel 3.1 Kegiatan Belajar dan Penggunaan Media Sosial ............ 
+95
+Tabel 3.2 Larutan Alkohol ....................................................................... 
+97
+Tabel 3.3 Angka Putus Sekolah, 2019  .................................................. 
+98
+Tabel 3.4 Panjang Terhadap Ketinggian Bidang Miring ................. 
+99
+Tabel 3.5  Perubahan Skala Panjang dan Skala Lebar 
+dalam Persen  ........................................................................... 101
+Tabel 3.6  Perubahan Ukuran Panjang dan Lebar dalam  
+Satuan cm  ................................................................................. 101
+Tabel 3.7  Kebutuhan Energi dan Zat Gizi pada Remaja 
+Berdasarkan AKG 2013 .......................................................... 108
+Tabel 3.8  Panjang pada Peta dan Jarak Sebenarnya  ....................... 109
+Tabel 3.9  Rasio Bingkai dan Foto........................................................... 110
+Tabel 3.10 Resep Kue .................................................................................. 110
+Tabel 3.11 Susu dan Bubuk Cokelat ........................................................ 113
+Tabel 3.12 Berbagai Harga Cokelat ......................................................... 115
+
+xii
+Tabel 3.13 Populasi Komodo   ................................................................... 116
+Tabel 3.14 Jarak Tempuh dan Bahan Bakar ......................................... 117
+Tabel 3.15 Ukuran Cokelat ........................................................................ 120
+Tabel 5.1 Nama Sudut .............................................................................. 165
+Tabel 5.2 Istilah dalam Hubungan Antar Sudut untuk 
+Gambar 5.7 ................................................................................ 167
+Tabel 5.3 Hubungan Antar Sudut untuk Sudut pada Tabel 5.1 .... 168
+Tabel 6.1 Formulasi Pertanyaan dalam Investigasi Statistika ...... 189
+Tabel 6.2 Tabel Banyak Aplikasi Online............................................... 199
+Tabel 6.3 Tabel Jenis Aplikasi Online.................................................... 199
+Tabel 6.4 Tabel Distribusi Frekuensi Pilihan Cabang Olahraga 
+Siswa Kelas 7C dan 7D............................................................ 208
+Tabel 6.5 Tabel Distribusi Frekuensi Cara Siswa Berangkat 
+ke Sekolah .................................................................................. 210
+Tabel 6.6  Tabel Persentase Jumlah Pengguna Internet Indonesia 
+yang Mengakses Media Sosial Tertentu ............................ 212
+Tabel 6.7  Jumlah Kalori yang Terbakar .............................................. 214
+Tabel 6.8  Penjualan Kaus pada HUT RI ............................................... 217
+Tabel 6.9  Penggunaan Diagram Batang, Garis, dan Lingkaran .... 219
+Tabel 6.10 Jumlah Kalori per 100 gram ................................................. 222
+Tabel 6.11 Tingkat Suku Bunga Deposito Jangka 12 Bulan .............. 226
+
+xiii
+Petunjuk Penggunaan Buku
+Tujuan Pembelajaran
+Terdapat pada awal bab yang menjadi arahan tercapainya kompetensi 
+setelah mempelajari bab tersebut. Tujuan pembelajaran membantu 
+kalian untuk memonitor perkembangan belajar kalian dalam 
+bab tersebut yang akan dihubungkan dengan refleksi pada akhir 
+pembahasan.   
+Pembuka Bab
+Kalian menemukan pembuka bab sebagai bagian paling awal dari 
+bab yang memberikan gambaran besar mengenai topik yang akan 
+dipelajari. Ada rasionalisasi dalam bab sehingga timbul minat dan 
+motivasi kalian untuk mempelajari ide utama atau ide besar yang 
+menghubungkan konsep-konsep.
+
+xiv
+Pertanyaan Pemantik 
+Kalian menemukan bagian ini pada awal bab karena merupakan 
+pertanyaan yang menuntun pemahaman materi dan pengembangannya 
+sepanjang pembelajaran bab tersebut. Kalian akan menemukan 
+kedalaman dan keluasan dari materi pelajaran tersebut melalui 
+pertanyaan tersebut. 
+Kata Kunci
+Kata atau konsep yang merupakan kunci untuk dihubungkan dengan 
+kata atau konsep lain. Pemahaman terhadap kata kunci menolong 
+kalian untuk mengaitkan konsep yang satu dengan konsep lainnya.
+Bagan Materi
+Bagan materi yang terdapat pada awal bab merupakan diagram yang 
+menunjukkan hubungan antar materi yang terdapat dalam setiap 
+bab. Kalian perlu mencermati bagan materi ini untuk mendapatkan 
+gambaran yang luas tentang isi bab tersebut.
+Rasio
+Konsep Rasio
+Skala
+Laju 
+Perubahan
+Satuan
+
+xv
+Ayo Mengingat Kembali 
+Apa yang telah kalian pelajari di SD berhubungan dengan apa yang 
+akan kalian pelajari di kelas VII. Kalian akan lebih mudah memahami 
+materi pelajaran kelas VII dengan pengetahuan yang telah dipelajari di 
+SD. 
+ Ayo Bereksplorasi
+Kalian melakukan kegiatan ini untuk menyelidiki konsep matematika 
+yang berkaitan dengan pembahasan materi. Eksplorasi selalu dilakukan 
+sebelum kalian mendalami konsep matematika beserta aplikasinya.
+Ayo Berpikir Kritis
+Kalian berpikir kritis jika kalian dapat menganalisis informasi 
+untuk mengambil kesimpulan atau menilai suatu hal dengan tepat. 
+Keterampilan ini perlu kalian latih secara terus-menerus karena 
+merupakan salah satu dari keterampilan abad ke-21.
+Ayo Berpikir Kreatif
+Kalian berpikir kreatif jika kalian dapat membuat ide atau alternatif 
+solusi yang baru yang berbeda dari hal umum.
+Ayo Mengingat Kembali
+Ayo Bereksplorasi
+Ayo Berpikir Kritis
+Ayo Berpikir Kreatif
+
+xvi
+Ayo Mencoba 
+Kalian diharapkan dapat mengerjakan soal atau kegiatan sejenis setelah 
+diberikan penjelasan penyelesaian satu atau lebih dari satu soal.
+Penguatan Karakter
+Kalian diharapkan dapat menghayati dan menerapkan karakter-
+karakter Profil Pelajar Pancasila yang perlu dipupuk sepanjang hayat 
+dalam kegiatan pembelajaran serta kehidupan sehari-hari.
+Kesadaran Lingkungan
+Topik yang berkaitan dengan perubahan iklim/pemanasan global, 
+keanekaragaman hayati, pengelolaan limbah, deforestasi, bencana 
+alam, perilaku gaya hidup berkelanjutan, dan kemampuan berpikir 
+sistem. 
+Literasi Finansial
+Topik mengenai uang dan transaksi, perencanaan dan pengelolaan 
+keuangan, 
+risiko 
+dan 
+pendapatan, 
+pemahaman 
+regulasi 
+dan 
+perlindungan konsumen, hak dan kewajiban dalam transaksi keuangan, 
+fungsi lembaga keuangan, dan gaya hidup (keinginan, kebutuhan). 
+Termasuk juga keterampilan mengidentifikasi informasi finansial, 
+menganalisis informasi dan situasi finansial, mengevaluasi isu-isu 
+finansial, dan menerapkan pemahaman finansial dalam konteks yang 
+beragam.
+Ayo Mencoba
+Penguatan Karakter
+Kesadaran Lingkungan
+Literasi Finansial
+
+xvii
+Keamanan Digital
+Topik yang berkaitan dengan teknologi digital dan internet sehat, risiko 
+aktivitas dan interaksi dalam jaringan, etika berinternet, dan bijak 
+dalam bermedia sosial.
+Ayo Berkomunikasi
+Bertukar pikiran dengan teman-teman dan menyatakan gagasan 
+merupakan 
+kegiatan 
+yang 
+bermanfaat 
+untuk 
+memperdalam 
+pengetahuan sehingga dapat menyelesaikan masalah atau menjawab 
+pertanyaan. Kalian juga dapat menyampaikan ide dan gagasan secara 
+lisan maupun tulisan.
+Ayo Bekerja Sama
+Bekerja sama merupakan salah satu bentuk dari bergotong royong. 
+Kalian bekerja sama untuk menyelesaikan masalah atau menjawab 
+pertanyaan matematika sehingga pemahaman kalian terhadap materi 
+pelajaran lebih baik lagi. Selain itu, bekerja sama memerlukan saling 
+memahami dan menghargai satu sama lain.
+Petunjuk
+Petunjuk kalian gunakan dalam pemecahan masalah. Baca dan 
+gunakan bagian ini jika kalian mengalami kendala saat mencari solusi 
+dari sebuah masalah.
+Keamanan Digital
+Ayo Berkomunikasi
+Ayo Bekerja Sama
+Petunjuk
+i
+
+xviii
+Tahukah Kalian?
+Kalian mendapatkan informasi tambahan yang berkaitan dengan materi 
+yang sedang kalian pelajari yang merupakan aplikasi matematika 
+dalam suatu fenomena atau peristiwa.   
+Ayo Bereﬂeksi
+Merenungkan dan melihat kembali secara evaluatif dan mendalam apa 
+yang sudah dipelajari, membandingkannya, dan menarik pelajaran 
+atau kesimpulan sederhana.
+Ayo Menggunakan Teknologi 
+Teknologi memudahkan kalian untuk menyelesaikan masalah atau 
+pekerjaan matematika. Kalian dapat memanfaatkan kalkulator dan 
+berbagai aplikasi untuk mengerjakan tugas kalian. Kalian juga dapat 
+memilih teknologi yang sesuai dengan kebutuhan kalian.
+Tahukah Kalian?
+?
+Ayo Berefleksi
+Ayo Menggunakan Teknologi
+
+xix
+Contoh Soal
+Bagian ini diberikan untuk membantu pemahaman kalian atas konsep 
+yang dipelajari. Perhatikan contoh soal dan kaitkan dengan penjelasan 
+sebelumnya agar kalian merasakan manfaat bagian tersebut.
+Latihan
+Kalian mengerjakan soal-soal dengan tiga jenis tingkat kesulitan, yaitu 
+dasar, menengah, dan tinggi. Pertanyaan pada tingkat dasar berupa 
+jawaban pendek yang menguji pemahaman konsep dan keterampilan 
+dasar. Tingkat menengah berupa permasalahan yang lebih terstruktur, 
+sedangkan tingkat tinggi merupakan permasalahan aplikasi dan 
+keterampilan aras tinggi (HOTS).
+
+xx
+Reﬂeksi
+Pada akhir bab atau subbab, kalian akan diajak memikirkan kembali 
+apa yang sudah dipelajari dan seberapa dalam/tepat pemahaman 
+kalian atas pembelajaran pada bagian tersebut.
+Uji Kompetensi
+Terdapat pada akhir bab, merupakan sarana bagi kalian untuk mengukur 
+pencapaian kalian dalam topik bab. Kalian dapat mengerjakan sejumlah 
+soal yang bervariasi dari yang sederhana hingga yang kompleks. Selain 
+itu, soal dapat berupa hitungan ataupun pemahaman konsep.
+
+xxi
+Materi Pengayaan/Proyek
+Kegiatan yang dapat digunakan untuk memperluas atau memperdalam 
+wawasan dan pemahaman atas konsep matematika yang sedang 
+dipelajari. Materi pengayaan dapat bersifat sebagai pendalaman 
+materi, penerapan dalam bidang teknologi/informatika, atau kegiatan 
+eksplorasi/proyek.
+
+xxii
+Peta Pemikiran Buku
+Buku
+Matematika
+Kelas VII
+Bilangan Bulat
+0
+0
+10
+10
+20
+20
+30
+30
+40
+50
+C
+37
+36
+38
+40
+41
+39
+42
+35
+Memahami bilangan bulat,
+Operasi hitung bilangan bulat,
+dan Faktor bilangan bulat
+BAB  2
+Bilangan Rasional
+BAB  3
+Rasio
+Di antara dua bilangan bulat,
+Membandingkan bilangan rasional,
+dan Operasi hitung bilangan rasional.
+Konsep rasio,
+Skala
+dan Laju perubahan satuan
+BAB  4
+Bentuk Aljabar
+Unsur-unsur aljabar,
+Operasi aljabar,
+dan Sifat aljabar
+BAB  5
+Kesebangunan
+Hubungan antar sudut,
+Arti kesebangunan,
+dan Kesebangunan pada segitiga
+BAB  6
+Data dan Diagram
+Data dan diagram
+
+Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi 
+Republik Indonesia, 2022
+Matematika untuk SMP/MTs Kelas VII
+Penulis: Dicky Susanto, dkk. 
+ISBN: 978-602-244-883-9 (Jil.1)
+0
+0
+10
+10
+20
+20
+30
+30
+40
+50
+C
+37
+36
+38
+40
+41
+39
+42
+35
+°C
+Bab 1
+Bilangan Bulat
+Mengapa perlu bilangan bulat, dan 
+apa bedanya dengan bilangan cacah?
+
+Matematika untuk SMP/MTs Kelas VII
+2
+Tujuan Pembelajaran
+Setelah mempelajari bab ini, diharapkan kalian dapat:
+ 
+√Menjelaskan hubungan antara bilangan bulat positif dan bilangan 
+bulat negatif dengan memodelkannya pada garis bilangan (arah 
+dan jarak)
+ 
+√Menggunakan notasi yang tepat untuk menyatakan bilangan bulat
+ 
+√Membandingkan dan mengurutkan bilangan bulat dan meletakkan 
+pada garis bilangan
+ 
+√Mengenal dan menggunakan hubungan antara bilangan dan 
+kebalikannya (invers penjumlahan) untuk menyelesaikan masalah
+ 
+√Menentukan hasil dari operasi hitung penjumlahan, pengurangan, 
+perkalian, dan pembagian bilangan bulat
+ 
+√Menentukan faktor dari bilangan bulat
+ 
+√Mengenal dan menggunakan fakta bahwa bilangan cacah dapat 
+ditulis tepat satu cara sebagai hasil kali bilangan prima 
+ 
+√Menghubungkan faktorisasi prima dari dua bilangan dengan KPK 
+dan FPB 
+ 
+√Menyelesaikan permasalahan mengenai bilangan bulat yang terkait 
+dengan kehidupan sehari-hari
+Pengantar bab
+Gambar 1.1 Suhu di Puncak Jaya
+-3
+07.00
+Presipitasi: 8%
+Selasa 06.00
+Berawan
+Kelembapan: 85%
+Angin: 2 km/h
+-3
+C
+Selasa
+Suhu
+Puncak Jaya
+3
+Rabu
+Kamis
+Jumat
+Sabtu
+Minggu
+Senin
+Selasa
+10.00
+13.00
+16.00
+19.00
+22.00
+01.00
+04.00
+1
+3
+2
+-1
+-2
+-3
+-4
+-4
+F
+3
+-4
+5
+-4
+4
+-4
+4
+-5
+4
+-4
+4
+-4
+4
+-4
+
+Bab 1 | Bilangan Bulat
+3
+Tahukah Kalian?
+?
+Puncak Jaya adalah puncak gunung yang merupakan bagian dari 
+rangkaian pegunungan Jayawijaya yang berada di Papua.
+Terlihat pada Gambar 1.1, bahwa suhu di Puncak Jaya berada 
+sekitar 
+ hingga 
+. Dengan suhu seperti itu, mengakibatkan salju 
+di Puncak Jaya selalu ada sepanjang tahun. Itulah sebabnya mengapa 
+salju di Puncak Jaya disebut salju abadi.
+Apa arti tanda (–) pada penulisan suhu tersebut?
+Gambar 1.2 Bilangan Bulat pada Kedalaman Laut dan Jumlah Uang pada Buku Tabungan 
+Selain pada penulisan suhu, bilangan dengan tanda negatif juga 
+digunakan pada berbagai konteks dalam kehidupan nyata. Seperti 
+yang tampak pada Gambar 1.2 bilangan negatif juga digunakan ketika 
+menyatakan kedalaman di bawah permukaan laut, jumlah uang pada 
+rincian buku tabungan, dan lain sebagainya. Pada bab ini, kalian akan 
+mempelajari mengenai jenis-jenis bilangan bulat, membandingkan 
+bilangan bulat, operasi hitung bilangan bulat, serta menentukan faktor 
+dari bilangan bulat.
++ 3000
+- 5000
+- 10000
+0
+Gunung Semeru
+Palung Jawa
+Permukaan Laut 0 m
+TANGGAL
+15/04/22
+16/04/22
+5,000,000
+11,000,000
+10,800,000
+SANDI
+DEBET
+KREDIT
+SALDO
+MUTASI (Rupiah)
+200,000
+GTU
+ATR
+
+Matematika untuk SMP/MTs Kelas VII
+4
+Pertanyaan Pemantik
+ 
+■
+Bilangan bulat mana yang nilainya lebih besar atau lebih kecil?
+ 
+■
+Bagaimana hasil operasi hitung antara bilangan bulat positif dan 
+bilangan bulat negatif?
+ 
+■
+Berapa hasil estimasi pada operasi hitung bilangan bulat?
+ 
+■
+Apa perbedaan dari faktor bilangan bulat positif dan bilangan 
+bulat negatif?
+Kata Kunci
+Bilangan bulat, positif, negatif, estimasi, faktor bilangan
+Bagan Materi
+Memahami
+Bilangan Bulat
+Operasi hitung
+Bilangan Bulat
+Faktor
+Bilangan Bulat
+Pengertian 
+Bilangan Bulat
+Membandingkan
+Bilangan Bulat
+Bilangan Bulat
+Penjumlahan dan
+Pengurangan
+Perkalian dan
+Pembagian
+Faktor
+Bilangan Bulat Positif
+dan Bilangan Bulat
+Negatif
+FPB dan KPK
+
+Bab 1 | Bilangan Bulat
+5
+Garis bilangan adalah garis yang berisi titik-titik di mana titik tersebut 
+mewakili bilangan tertentu. Garis bilangan juga dapat membantu dalam 
+membandingkan dan melakukan operasi hitung khususnya penjumlahan 
+dan pengurangan bilangan bulat positif. 
+Gambar 1.3 Garis Bilangan
+Sisi sebelah kiri dan kanan garis bilangan dibuat seperti tanda panah, 
+hal ini berarti garis bilangan panjangnya tidak terhingga. Jika sisi 
+sebelah kanan diperpanjang, maka bilangan selanjutnya adalah 10, 11, 
+12, dan seterusnya.
+Lalu, bagaimana jika sisi sebelah kiri yang diperpanjang? Bilangan 
+apa yang ada di sebelah kiri bilangan nol (0)?
+A. Memahami Bilangan Bulat
+Permasalahan
+Gambar 1.4  Termometer Suhu Ruangan
+Ayo Mengingat Kembali
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+0
+-10
+10
+-20
+20
+-30
+30
+40
+30
+100
+120
+20
+0
+40
+-20
+60
+-40
+80
+C
+F
+
+Matematika untuk SMP/MTs Kelas VII
+6
+Termometer adalah alat yang digunakan untuk mengukur suhu atau 
+temperatur. Termometer di atas ini menyatakan suhu dalam dua satuan 
+yang berbeda F : Fahrenheit, C : Celcius. 
+Terdapat beberapa jenis termometer dengan fungsi masing-masing, 
+contohnya termometer digital, termometer badan, serta termometer 
+suhu ruangan.
+Gambar 1.4 menunjukkan suhu di Puncak Jaya hari ini. Dengan 
+suhu seperti itu, cuaca di Puncak Jaya terasa sangat dingin.
+Dari penjelasan di atas, jawablah pertanyaan berikut ini.
+1. 
+Berapa kira-kira suhu di Puncak Jaya hari ini?
+2. 
+Menurutmu, apa perbedaan antara angka yang berada di atas 
+ dan angka yang berada di bawah 
+ pada termometer suhu 
+ruangan tersebut? Jelaskan jawaban kalian.
+1. Pengertian Bilangan Bulat
+Eksplorasi
+1.1
+ Suhu pada Termometer
+Gambar 1.5 Ilustrasi Suhu pada Termometer Suhu Ruangan
+50
+40
+30
+20
+10
+0
+10
+20
+30
+
+Bab 1 | Bilangan Bulat
+7
+Gambar 1.5 merupakan ilustrasi bilangan yang ditunjukkan pada 
+termometer suhu ruangan. Ilustrasi tersebut disajikan dalam garis 
+vertikal sesuai dengan letak bilangan pada termometer suhu ruangan 
+pada Gambar 1.4. Pada Gambar 1.5 terlihat bahwa terdapat angka 
+ 
+hingga 
+ yang berada di sebelah atas angka  dan angka 
+ hingga 30 
+yang terletak di sebelah bawah angka .
+Coba kalian tuliskan semua bilangan yang ditunjukkan pada Gambar 
+1.5 disajikan secara horizontal pada garis bilangan kosong pada Gambar 
+1.6. berikut ini. 
+Gambar 1.6 Garis Bilangan Kosong
+Apakah terdapat perbedaan antara bilangan pada sisi sebelah 
+kanan dan sebelah kiri dari titik 0 (nol)? Jelaskan jawaban kalian.
+Berdasarkan hasil pada kegiatan Eksplorasi 1.1, bilangan bulat 
+merupakan bilangan yang terdiri dari bilangan bulat negatif, bilangan 
+nol, dan bilangan bulat positif seperti yang ditunjukkan pada Gambar 
+1.6.
+Gambar 1.7 Pembagian Bilangan Bulat
+Ayo Bereksplorasi
+0
+0
+1
+-1
+2
+Bilangan bulat positif
+Bilangan nol
+Bilangan bulat negatif
+-2
+3
+-3
+4
+-4
+5
+-5
+6
+-6
+
+Matematika untuk SMP/MTs Kelas VII
+8
+Pembahasan
+Bilangan nol dan bilangan bulat positif disebut bilangan cacah.
+Bilangan bulat positif dapat disebut juga dengan bilangan asli.
+Ayo Berdiskusi
+Diskusikan bersama teman kalian, mengenai pengertian bilangan bulat 
+negatif dan bilangan bulat positif berdasarkan letak pada garis bilangan. 
+Tuliskan dengan bahasa kalian sendiri.
+Ayo Berpikir Kritis
+Nyatakanlah bilangan di bawah ini dengan tanda positif atau negatif.
+a. 
+Berat badan Amir susut sebanyak 3 kg setelah sakit selama satu 
+minggu.
+b. 
+Pedagang masker itu mendapat keuntungan sebesar 
+Rp200.000,00 dari hasil penjualan hari ini.
+c. 
+Gunung Batur memiliki ketinggian 1.717 meter di atas 
+permukaan laut.
+d. 
+Kapal selam menyelam di kedalaman 100 meter di bawah 
+permukaan laut.
+Ayo Berpikir Kreatif
+Sebutkan contoh penerapan bilangan bulat positif dan bilangan bulat 
+negatif dalam kehidupan sehari-hari (minimal 2).
+
+Bab 1 | Bilangan Bulat
+9
+2. Membandingkan Bilangan Bulat
+Eksplorasi
+1.2
+Suhu Berbagai Kota di Dunia
+Ayo Bereksplorasi
+Gambar 1.8 Prediksi Suhu di Berbagai Kota di Dunia 
+Dari beberapa nama kota di dunia beserta prediksi suhunya di atas, 
+jawablah beberapa pertanyaan berikut.
+a. 
+Kota mana yang cuacanya paling dingin?
+b. 
+Kota mana yang cuacanya paling panas?
+c. 
+Kota mana saja yang lebih dingin dibanding Seoul?
+d. 
+Kota mana saja yang lebih panas dibanding Tokyo?
+e. 
+Kota mana yang lebih dingin, Seoul atau Tokyo?
+f. 
+Kota mana yang lebih panas, New Delhi atau Titlis?
+g. 
+Tuliskan perkiraan letak suhu dari kota di atas pada Gambar 
+1.9 di bawah ini.
+Gambar 1.9 Garis Bilangan Kosong
+Salju ringan
+-31
+C
+Oymyakon, Sakha, Rusia
+F
+Salju
+-14
+C
+Titlis, Swiss
+F
+Sebagian besar berawan
+-2
+C
+Seoul, Korea Selatan
+F
+Cerah
+6
+C
+Tokyo, Jepang
+F
+Kabut
+11
+C
+New Delhi, Delhi, India
+F
+Sebagian berawan
+30
+C
+Kota Kupang, Nusa Tenggara Timur
+F
+0
+
+Matematika untuk SMP/MTs Kelas VII
+10
+Dari jawaban beberapa pertanyaan di atas, dapat disimpulkan 
+bahwa jika semakin besar suhu yang bertanda positif, maka cuaca 
+semakin panas.
+Jika semakin besar suhu yang bertanda negatif, maka cuaca 
+semakin dingin.
+Ayo Bekerja Sama
+Gunakan garis bilangan yang telah dibuat pada pertanyaan g kegiatan 
+Eksplorasi 1.2 untuk menjawab beberapa pertanyaan di bawah ini. 
+Jawablah  bersama teman sekelompok kalian.
+a. 
+Bilangan mana yang memiliki nilai lebih besar, 
+ atau 
+?
+b. 
+Bilangan mana yang memiliki nilai lebih kecil, 
+ atau ?
+c. 
+Bilangan mana yang memiliki nilai lebih besar, −14 atau −31
+Untuk bilangan positif, kalian sudah memahami jika semakin besar 
+bilangannya, maka nilai dari bilangan tersebut semakin besar. Dan jika 
+semakin kecil bilangannya, maka nilai dari bilangan tersebut semakin 
+kecil.
+Lalu, bagaimana dengan bilangan bulat negatif?
+Ayo Mencoba
+Perhatikan garis bilangan berikut, lalu jawab pertanyaan di bawah ini.
+Gambar 1.10 Garis Bilangan pada Bilangan Bulat Negatif
+a. 
+Bilangan mana yang memiliki nilai lebih besar, 
+ atau 
+? 
+Perhatikan 
+ dan 
+ pada garis bilangan di atas. 
+ 
+Dari kedua bilangan tersebut, bilangan mana yang terletak 
+di sebelah kiri pada garis bilangan jika dibandingkan dengan 
+bilangan lainnya? …. 
+ 
+0
+-1
+-2
+-3
+-4
+-5
+-6
+-7
+-8
+-9
+-10
+
+Bab 1 | Bilangan Bulat
+11
+Dari kedua bilangan tersebut, bilangan mana yang terletak 
+di sebelah kanan pada garis bilangan dibandingkan dengan 
+bilangan lainnya? ….. 
+ 
+Pada garis bilangan, 
+ berada di sebelah kanan 
+, jadi nilai 
+dari 
+ lebih besar dari 
+.  
+ 
+Dapat dituliskan dengan 
+ atau −8 < −3
+b. 
+Bilangan mana yang memiliki nilai lebih kecil, 
+ atau 
+ ? 
+Perhatikan letak 
+ dan 
+ pada garis bilangan.  
+ 
+Pada garis bilangan, bilangan ….. berada di sebelah kiri 
+bilangan ….. 
+ 
+Jadi, bilangan …. nilainya lebih kecil dibanding bilangan ….. 
+Dapat dituliskan dengan ….. > ….. atau ….. < …..
+Pembahasan
+Dari beberapa contoh di atas, dapat disimpulkan bahwa pada bilangan 
+bulat negatif, semakin besar bilangannya, nilainya semakin kecil.
+Sebaliknya, semakin kecil bilangannya, maka nilainya semakin besar.
+1. 
+Nyatakan bilangan berikut ini dengan tanda positif atau negatif.
+a. 
+Lia baru membuka tabungan di koperasi sekolah lalu ia 
+menyetorkan uang sebesar Rp100.000,00.
+b. 
+Dino meminjam uang kepada Anne sebesar Rp50.000,00.
+c. 
+Penjualan di toko hari ini mengalami kerugian sebesar 
+Rp250.000,00.
+2. 
+Isilah titik-titik di bawah ini dengan tanda “ > ” yang menyatakan 
+lebih dari atau tanda “ < ” yang menyatakan kurang dari.
+a. 
+−253 ..... 108
+b. 
+38 ..... −79
+c. 
+−1000 ..... 500
+Latihan 1.1
+
+Matematika untuk SMP/MTs Kelas VII
+12
+3. 
+Urutkan bilangan bulat di bawah ini dari yang terkecil ke terbesar.
+a. 
+b. 
+c. 
+Ayo Berefleksi
+Dari beberapa aktivitas yang telah kalian lakukan, jawablah pertanyaan di 
+bawah ini.
+a. 
+Tuliskan contoh penerapan bilangan bulat negatif dan bilangan 
+bulat positif dalam kehidupan sehari-hari.
+b. 
+Bagaimana nilai bilangan bulat yang semakin ke kanan pada 
+garis bilangan?
+c. 
+Lalu, bagaimana nilai bilangan bulat yang semakin ke kiri pada 
+garis bilangan?
+B. Operasi Hitung Bilangan Bulat
+1. Operasi Penjumlahan dan Pengurangan Bilangan 
+Bulat
+Eksplorasi
+1.3
+Transfer Pemain Liga Sepakbola
+Ayo Bereksplorasi
+Pada liga sepakbola terdapat waktu yang diberikan pengelola liga kepada 
+klub untuk melakukan transfer pemain. Berbagai klub sepakbola tentu 
+saja ingin mendapatkan pemain bagus dapat masuk ke tim mereka dan 
+dapat melepaskan pemain yang performanya buruk.
+
+Bab 1 | Bilangan Bulat
+13
+Gambar 1.11 Ilustrasi Transfer Pemain Sepakbola 
+Sebelum mengambil keputusan terkait proses transfer pemain, 
+klub harus mempertimbangkan level performa tim di akhir proses 
+transfer. Pada tabel 1.1 disajikan representasi aturan yang berlaku jika 
+melakukan transfer pemain pada Liga Sepakbola di suatu negara.
+Tabel 1.1 Detail Perhitungan Nilai dan Efek Performa Bagi Klub dari Berbagai Proses Transfer
+Proses Transfer Pemain
+Perhitungan 
+Nilai
+Efek Performa 
+Bagi Klub
+Mendapatkan satu pemain bagus
++(+1)
+Performa naik
+Mendapatkan satu pemain buruk
++(−1)
+Performa turun
+Melepaskan satu pemain bagus
+−(+1)
+Performa turun
+Melepaskan satu pemain buruk
+−(−1)
+Performa naik
+Keterangan: 
+Mendapatkan dilambangkan dengan tanda 
+  
+Melepaskan dilambangkan dengan tanda 
+ 
+ 
+Kriteria pemain: Bagus 
+, buruk 
+CLUB BOLA D
+CLUB BOLA F
+
+Matematika untuk SMP/MTs Kelas VII
+14
+Tuliskan perhitungan nilai dan efek performa bagi klub tersebut 
+setelah melakukan transfer pemain di bawah ini.
+a. 
+Klub A: mendapatkan 3 pemain bagus, mendapatkan 2 pemain 
+buruk. 
+b. 
+Klub B: mendapatkan 4 pemain bagus, melepaskan 2 pemain 
+bagus.
+c. 
+Klub C: mendapatkan 1 pemain bagus, melepaskan 2 pemain 
+bagus, melepaskan 3 pemain buruk.
+d. 
+Klub D: mendapatkan 5 pemain bagus, mendapatkan 2 pemain 
+buruk, melepaskan 3 pemain bagus, melepaskan 4 pemain 
+buruk.
+Ayo Berdiskusi
+Selain proses transfer pemain, transfer pelatih dan sponsor juga 
+menentukan kualitas sebuah klub sepak bola. Berikut disajikan pada 
+Tabel 1.2 perhitungan nilai dan efek performa bagi klub dari proses 
+transfer pelatih dan sponsor.
+Tabel 1.2 Detail Perhitungan Nilai dan Efek Performa Bagi Klub dari Berbagai Proses
+Proses Transfer
+Perhitungan 
+Nilai
+Efek Performa 
+Bagi Klub
+Mendapatkan pelatih bagus
++(+3)
+Performa naik
+Mendapatkan pelatih buruk
+Performa turun
+Melepaskan pelatih bagus
+Performa turun
+Melepaskan pelatih buruk
+Performa naik
+Mendapatkan manajer bagus
+Performa naik
+
+Bab 1 | Bilangan Bulat
+15
+Proses Transfer
+Perhitungan 
+Nilai
+Efek Performa 
+Bagi Klub
+Mendapatkan manajer buruk
+Performa turun
+Melepaskan manajer bagus
+Performa turun
+Melepaskan manajer buruk
+Performa naik
+Jawablah pertanyaan di bawah ini dengan berdiskusi bersama 
+teman kalian.
+Tentukan hasil perhitungan nilai di bawah ini dan tuliskan detail 
+proses transfer pelatih dan sponsor jika perhitungan nilainya sebagai 
+berikut.
+a. 
+b. 
+c. 
+d. 
+Ayo Berpikir Kritis
+Jawablah pertanyaan berikut ini berdasarkan soal pada kegiatan Ayo 
+Berdiskusi di atas.
+a. 
+Bagaimana hasil perhitungan dari poin a dan b? Apa kesimpulan 
+yang dapat kalian peroleh? 
+b. 
+Bagaimana hasil perhitungan dari poin c dan d? Apa kesimpulan 
+yang dapat kalian peroleh?
+Ayo Mencoba
+Jawablah pertanyaan berikut dengan merujuk pada Tabel 1.1 dan Tabel 
+1.2.
+
+Matematika untuk SMP/MTs Kelas VII
+16
+a. 
+Tentukan perhitungan nilai dan efek performa bagi klub dari 
+bursa transfer berikut.
+Klub E
+mendapatkan 2 pemain bagus 
+dan mendapatkan pelatih 
+buruk
+Klub F
+mendapatkan pelatih buruk 
+dan mendapatkan 2 pemain 
+bagus
+Klub G
+pada bulan 1: mendapatkan 2 
+pemain bagus, mendapatkan 1 
+pemain buruk
+pada bulan 2: mendapatkan 
+manajer bagus
+Klub H 
+pada bulan 1: mendapatkan 2 
+pemain bagus
+pada bulan 2: mendapatkan 1 
+pemain buruk, mendapatkan 
+manajer bagus
+b. 
+Apakah yang terjadi pada hasil perhitungan nilai dan efek 
+performa Klub E dan F, serta Klub G dan H? Apakah urutan 
+transfer pemain dan manajer memengaruhi hasil perhitungan 
+dan efek performa?
+Kesimpulan dari kegiatan di atas adalah pada operasi hitung 
+penjumlahan bilangan bulat berlaku sifat:
+1. Sifat komutatif
+Jika  dan  bilangan bulat sembarang , maka berlaku:
+ 
+ 
+2. Sifat asosiatif
+Jika ,    dan   bilangan bulat sembarang, maka berlaku:
+ 
+Ayo Berpikir Kritis
+Apakah sifat komutatif dan sifat asosiatif berlaku juga pada operasi 
+hitung pengurangan bilangan bulat? Jelaskan jawaban kalian.
+
+Bab 1 | Bilangan Bulat
+17
+2. Operasi Perkalian dan Pembagian Bilangan Bulat
+Eksplorasi
+1.4
+Mesin Pendingin Ruang
+Ayo Bereksplorasi
+Gambar 1.12  Mesin Pendingin Ruang
+Mesin pendingin ruang yang prinsip kerjanya bisa menambah dan 
+mengurangi udara dingin serta udara panas dalam kelipatan suhu 
+tertentu. 
+Suhu akan tampak pada indikator seperti pada Gambar 1.12.
+Jawablah pertanyaan di bawah ini.
+1. 
+Suhu ruang sekarang yaitu 
+, prediksilah apakah suhu baru 
+akan berada di atas atau di bawah nol derajat jika ditekan tombol:
+a. 
+b. 
+Jelaskan jawaban kalian.
+2. 
+Jika suhu ruang sekarang sesuai dengan yang tampak pada gambar 
+yaitu 
+. Tentukanlah berapa suhu baru jika ditekan tombol:
+a. 
+b. 
+Jelaskan jawaban kalian.
+x (-2)
+x (-3)
+x (-4)
+x (+2)
++
+-
+x (+3)
+x (+4)
++
+-
+
+Matematika untuk SMP/MTs Kelas VII
+18
+3. 
+Jika suhu ruang sekarang yaitu 
+, tentukanlah suhu baru jika 
+ditekan tombol:
+a. 
+b. 
+Jelaskan kalian.
+Pembahasan
+Pada kegiatan Eksplorasi 1.5 terdapat operasi hitung perkalian bilangan 
+bulat.
+1. 
+Untuk perkalian dua bilangan positif, contoh: 
+  
+Langkah-langkahnya:
+a. 
+Dimulai dari bilangan kedua yaitu 5. Karena 5 merupakan 
+bilangan positif, maka gambarkan panah dari 0 ke arah 5.
+b. 
+Ketika dikalikan dengan 2 artinya ditarik searah sehingga 
+panjangnya menjadi 2 kalinya yaitu jatuh ke angka 10 
+ 
+ 
+Sehingga, 
+2. 
+Untuk perkalian bilangan negatif dan positif, contoh 
+Langkah-langkahnya:
+a. 
+Dimulai dari bilangan kedua yaitu 5. Karena 5 merupakan 
+bilangan positif, maka gambarkan panah dari 0 ke arah 5.
+b. 
+Ketika dikalikan dengan 
+ artinya ditarik ke berlawanan 
+arah sehingga panjangnya menjadi 2 kalinya yaitu jatuh ke 
+angka 
+. 
+ 
+Sehingga, 
+0
+1
+-1
+2
+-2
+3
+-3
+4
+-4
+5
+-5
+6
+7
+8
+9
+10
+-6
+-7
+-8
+-9
+-10
+0
+1
+-1
+2
+-2
+3
+-3
+4
+-4
+5
+-5
+6
+7
+8
+9
+10
+-6
+-7
+-8
+-9
+-10

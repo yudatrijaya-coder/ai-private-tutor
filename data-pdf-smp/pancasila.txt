@@ -1,0 +1,1651 @@
+Hak Cipta pada Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi Republik Indonesia 
+Dilindungi Undang-Undang
+Penaian: Buku ini disiapkan oleh Pemerintah dalam rangka pemenuhan kebutuhan buku pendidikan 
+yang bermutu, murah, dan merata sesuai dengan amanat dalam UU No. 3 Tahun 2017. Buku ini disusun 
+dan ditelaah oleh berbagai pihak di bawah koordinasi Kementerian Pendidikan, Kebudayaan, Riset, 
+dan Teknologi serta Badan Pembinaan Ideologi Pancasila. Buku ini merupakan dokumen hidup yang 
+senantiasa diperbaiki, diperbarui, dan dimutakhirkan sesuai dengan dinamika kebutuhan dan perubahan 
+zaman. Masukan dari berbagai kalangan yang dialamatkan kepada penulis atau melalui alamat surel 
+buku@kemdikbud.go.id diharapkan dapat meningkatkan kualitas buku ini.
+Pendidikan Pancasila untuk SMP/MTs Kelas VII
+Penulis
+Yayat Suryatna
+Ai Tin Sumartini 
+Devita Puspa Sari 
+Dwi Indah Mustiko Ningrum
+Penelaah
+Susan Fitriasari
+Suhadi
+Penyelia/Penyelaras
+Supriyatno
+Aris Heru Utomo
+Lenny Puspita Ekawaty
+Ervina
+Soia Nida Khoerunnisa
+Kontributor
+At. Sugeng Priyatno
+Yulies Andriana
+Titik Sulandari
+Ilustrator
+Okky Bagus Wahyudi
+Editor
+Tri Hartini
+Editor Visual
+Tauiq Yuniarto
+Desainer
+Suhardiman
+Penerbit
+Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi
+Dikeluarkan oleh
+Pusat Perbukuan
+Kompleks Kemdikbudristek Jalan RS. Fatmawati, Cipete, Jakarta Selatan 
+https://buku.kemdikbud.go.id
+Cetak Pertama, 2021
+Cetakan Kedua Edisi Revisi, 2023
+ISBN 978-623-194-632-4 (no.jil.lengkap) 
+ISBN 978-623-194-633-1 (jil.1 PDF) 
+Isi buku ini menggunakan huruf Noto Serif 10/16 pt, (SIL Open Font License (OFL)).
+xvi, 200 hlm.: 17,6 × 25 cm.
+
+iii
+Kata Pengantar
+Pancasila sebagai dasar negara, pandangan hidup, dan ideologi negara harus 
+diinternalisasikan dalam kehidupan berbangsa dan bernegara. Kementerian 
+Pendidikan, Kebudayaan, Riset, dan Teknologi (Kemendikbudristek) melalui 
+gerakan Merdeka Belajar telah berkormitmen untuk terus mengedepankan 
+Pendidikan Pancasila sebagai bagian dari penguatan proil Pelajar Pancasila.
+Pendidikan Pancasila dalam Kurikulum Merdeka bertujuan membentuk 
+peserta didik yang beriman, bertakwa kepada Tuhan Yang Maha Esa dan 
+berakhlak mulia, berkebinekaan global, bergotong royong, mandiri, benalar 
+kritis, dan kreatif. Pembelajaran Pendidikan Pancasila di satuan pendidikan 
+diaplikasikan melalui praktik belajar kewarganegaraan yang berdasarkan 
+Pancasila, Undang-Undang Dasar Negara Republik Indonesia Tahun 1945, 
+semangat Bhinneka Tunggal Ika, dan komitmen Negara Kesatuan Republik 
+Indonesia.
+Untuk mendukung implementasi Kurikulum Merdeka pada mata 
+pelajaran Pendidikan Pancasila, telah disusun buku teks utama Pendidikan 
+Pancasila yang terdiri dari Buku Siswa dan Buku Panduan Guru. Keduanya 
+merupakan salah satu sumber belajar utama untuk digunakan oleh satuan 
+pendidikan pelaksana Kurikulum Merdeka. Buku yang dikembangkan saat ini 
+mengacu pada Capaian Pembelajaran Kurikulum Merdeka yang memberikan 
+keleluasaan bagi satuan pendidikan dalam mengembangkan potensi dan 
+minat peserta didik sesuai karakteristiknya masing-masing. Buku teks utama 
+Pendidikan Pancasila disajikan dalam bentuk berbagai aktivitas pembelajaran 
+untuk mencapai kompetensi dalam Capaian Pembelajaran.
+Dalam 
+pengembangan 
+buku 
+teks 
+utama 
+Pendidikan 
+Pancasila, 
+Kemendikbudristek 
+berkoordinasi 
+dan 
+bekerja 
+sama 
+dengan 
+Badan 
+Pembinaan Ideologi Pancasila (BPIP) sebagai badan yang menyelenggarakan 
+tugas pemerintahan di bidang pembinaan ideologi Pancasila. BPIP memiliki 
+kewenangan dalam memastikan muatan pembelajaran Pancasila dalam 
+buku, mencerminkan dan memperkuat nilai-nilai Pancasila yang menjadi 
+landasan ideologi negara. Kerja sama antara Kemendikbudristek dan BPIP 
+dalam pengembangan buku teks utama Pendidikan Pancasila memungkinkan 
+
+iv
+pengintegrasian pemahaman yang mendalam tentang Pancasila serta 
+praktiknya dalam kehidupan bermasyarakat, berbangsa, dan bernegara.
+Kami mengucapkan terima kasih kepada seluruh pihak yang terlibat dan 
+bekerja sama dalam proses penyusunan buku teks utama Pendidikan Pancasila. 
+Besar harapan kami agar buku ini dimanfaatkan sebagai pedoman semua 
+satuan pendidikan di seluruh Indonesia dalam upaya melahirkan Pelajar 
+Pancasila. Mari terus menguatkan Pendidikan Pancasila dengan semangat 
+Merdeka Belajar untuk membentuk generasi penerus yang berintegritas, 
+beretika, dan memiliki semangat kebangsaan.
+Jakarta,  Juli 2023
+Menteri Pendidikan, Kebudayaan, Riset, dan Teknologi,
+Nadiem Anwar Makarim
+
+v
+Kata Pengantar
+Salam Pancasila!
+Pancasila dan nilai-nilai yang dikandungnya merupakan falsafah dasar, 
+pandangan hidup bangsa, dasar negara, ideologi, kekuatan pemersatu bangsa, 
+dan sumber segala hukum negara. Pancasila sebagai dasar dan ideologi 
+negara merupakan “meja statis” yang menyatukan berbagai keragaman yang 
+ada, sekaligus sebagai “bintang penuntun” (leitstar) yang dinamis dengan 
+gerak evolusioner pemikiran manusia. Untuk itu, sudah selayaknya kita, 
+bangsa Indonesia, mengaktualisasikan Pancasila dari waktu ke waktu dan 
+dari generasi ke generasi sehingga kelestarian dan kelanggengan Pancasila 
+senantiasa diamalkan dalam kehidupan bermasyarakat, berbangsa, dan 
+bernegara. 
+Buku Pendidikan Pancasila ini merupakan buku teks utama yang 
+digunakan dalam pembelajaran di seluruh satuan pendidikan jenjang SD/MI, 
+SMP/MTs, dan SMA/MA/SMK/MAK dan bentuk pendidikan sederajat lainnya. 
+Buku ini hadir dalam rangka memperkaya pemahaman ideologi Pancasila. 
+Penyusunan buku teks utama Pendidikan Pancasila ini mengacu pada Capaian 
+Pembelajaran dalam Kurikulum Merdeka yang telah diselaraskan dengan 
+Capaian Kompetensi BPIP. Dalam penyusunannya, digunakan buku bahan 
+ajar Pendidikan dan Pembinaan Ideologi Pancasila (PPIP) sebagai salah satu 
+sumber rujukan (referensi). Hadirnya buku bahan ajar tersebut berawal 
+dari arahan Presiden RI, Joko Widodo, yang saat itu didampingi oleh Menteri 
+Sekretaris Negara RI dalam pertemuan terbatas di Istana Negara pada 22 
+Februari 2021 dengan Kepala Badan Pembinaan Ideologi Pancasila (BPIP). 
+Pada kesempatan itu juga, Presiden Joko Widodo berpesan kembali tentang 
+pentingnya menanamkan nilai Pancasila dengan metode yang menyenangkan 
+bagi peserta didik. 
+Dalam 
+upaya 
+memenuhi 
+harapan 
+Presiden, 
+BPIP 
+bersama 
+Kemendikbudristek melakukan penyusunan bersama buku teks utama 
+Pendidikan Pancasila dengan melibatkan tim penulis yang terdiri atas 
+guru, pakar, serta praktisi bidang pendidikan dan ideologi Pancasila yang 
+mendapatkan peran aktif dari Dewan Pengarah BPIP, Staf Khusus Ketua Dewan 
+Pengarah, Dewan Pakar BPIP, dan unsur pimpinan lainnya. Buku ini disusun 
+sesuai dengan amanat Peraturan Pemerintah Nomor 4 Tahun 2022 untuk 
+menerapkan mata pelajaran Pendidikan Pancasila dalam sistem pendidikan 
+nasional. 
+Penulisan buku teks utama ini didasarkan pada fakta dan sejarah yang 
+autentik. Buku ini diharapkan menjadi penuntun bagaimana memahami 
+dan mengaktualisasikan nilai-nilai Pancasila secara kontekstual sehingga 
+
+vi
+mengembalikan pemahaman yang benar tentang Pancasila. Oleh karena itu, 
+digunakanlah metode pembelajaran Pancasila yang berorientasi pada peserta 
+didik (student-centered learning). Metode ini dapat membuat peserta didik 
+lebih aktif terlibat dalam praktik dan pengalaman ber-Pancasila secara nyata 
+yang selaras dengan Kurikulum Merdeka. Penyampaian materi yang ada di 
+dalam buku ini, mendorong agar para peserta didik dapat mengeksplorasi rasa 
+ingin tahu, kreativitas, serta sikap gotong-royong dalam meneladani Pancasila. 
+Buku teks utama Pendidikan Pancasila ini menggunakan konsep “Tri 
+Pusat Pendidikan” yang dicetuskan oleh Ki Hajar Dewantara untuk menyentuh 
+seluruh warga sekolah, anggota keluarga di rumah, dan berbagai pemangku 
+kepentingan (stakeholder) terkait di lingkungan masyarakat agar terlibat 
+langsung dalam proses pembelajaran. Buku ini mengandung pesan bahwa 
+pembinaan ideologi Pancasila, khususnya bagi generasi penerus, sejatinya 
+merupakan tanggung jawab yang harus dipikul bersama, secara bergotong-
+royong, demi terwujudnya kehidupan masyarakat yang adil dan makmur 
+berdasarkan Pancasila. Pengaktualisasian Pancasila dalam kehidupan sehari-
+hari memang diyakini mampu mewujudkan negara Indonesia yang lebih baik. 
+Kepada semua pihak, baik dari BPIP, Kemendikbudristek, dan pihak 
+lainnya yang telah bergotong-royong dengan tekun sedari awal menyusun 
+buku teks utama Pendidikan Pancasila untuk jenjang SD/MI, SMP/MTs, dan 
+SMA/MA/SMK/MAK dan bentuk pendidikan sederajat lainnya, saya haturkan 
+terima kasih dan penghargaan setinggi-tingginya. Semoga Tuhan Yang Maha 
+Esa selalu melimpahkan rida dan rahmat-Nya kepada seluruh masyarakat 
+Indonesia. 
+Jakarta, Juni 2023
+Kepala,
+Prof. Drs. K.H. Yudian Wahyudi,  M.A., Ph.D.
+
+vii
+Prakata
+Buku teks Pendidikan Pancasila ini adalah salah satu sumber belajar bagi 
+peserta didik. Materi pada buku ini disusun berdasarkan Capaian Pembelajaran 
+Kurikulum Merdeka.
+Penulisan buku ini bertujuan untuk menyediakan bahan bacaan yang 
+tepat sehingga dapat meningkatkan pemahaman yang lebih mendalam tentang 
+Pendidikan Pancasila, khususnya bagi peserta didik di kelas VII jenjang SMP 
+dan MTs. Materi pada buku ini disusun berdasarkan Capaian Pembelajaran 
+yang telah diturunkan menjadi tujuan pembelajaran. Buku ini adalah satu 
+rangkaian dengan buku teks yang digunakan untuk kelas VIII dan IX.
+Keunggulan buku ini adalah bahasanya yang mudah dipahami dan 
+disajikan secara sistematis. Selain itu, buku ini dilengkapi dengan ilustrasi dan 
+contoh kasus yang dapat membantu peserta didik memahami topik dengan 
+lebih baik. Buku ini juga merupakan buku yang berbasis aktivitas belajar di 
+mana peserta didik dapat mempraktikkan aktivitas pembelajaran di kelas.
+Penulis berharap peserta didik dapat memanfaatkan buku ini sebagai 
+sumber pengetahuan dan wawasan yang bermanfaat. Semoga buku ini dapat 
+memberikan solusi bagi masalah-masalah yang dihadapi peserta didik dan 
+dapat menjadi inspirasi dalam menjalani kehidupan, khususnya memahami 
+materi Pendidikan Pancasila di masa sekarang.
+Jakarta, Mei 2023
+Tim Penulis
+
+viii
+Daftar Isi
+Kata Pengantar .................................................................................................................iii
+Kata Pengantar ..................................................................................................................v
+Prakata .............................................................................................................................. vii
+Daftar Isi .......................................................................................................................... viii
+Daftar Tabel ........................................................................................................................x
+Daftar Gambar ..................................................................................................................xi
+Fitur-Fitur di Buku........................................................................................................ xiii
+BAB 1 - Sejarah Kelahiran Pancasila ............................................................ 1
+A. Kelahiran Pancasila dalam Sidang BPUPK .........................................................6
+B. 
+Perumusan Pancasila oleh Panitia Sembilan ..................................................16
+C. 
+Proklamasi dan Penetapan Pancasila sebagai Dasar Negara .....................20
+Uji Kompetensi.................................................................................................................33
+Pengayaan .........................................................................................................................37
+Releksi...............................................................................................................................38
+BAB 2 - Penerapan Nilai-Nilai Pancasila .....................................................39
+A. Makna Sila-Sila Pancasila .....................................................................................43
+B. 
+Penerapan Pancasila dalam Kehidupan Bermasyarakat .............................56
+C. 
+Penerapan Pancasila dalam Kehidupan Berbangsa dan Bernegara.........59
+Uji Kompetensi.................................................................................................................61
+Pengayaan .........................................................................................................................66
+Releksi...............................................................................................................................66
+BAB 3 - Patuh Terhadap Norma ...................................................................69
+A. Manusia sebagai Makhluk Tuhan Yang Maha Esa, Makhluk Individu,  
+dan Makhluk Sosial ................................................................................................72
+B. 
+Pengertian Norma ..................................................................................................75
+C. 
+Macam-Macam Norma ..........................................................................................78
+D. Mari Bertindak Sesuai Norma .............................................................................87
+Uji Kompetensi.................................................................................................................97
+Pengayaan .......................................................................................................................103
+Releksi.............................................................................................................................103
+
+ix
+BAB 4 - Keberagaman Bangsa Indonesia dalam Bingkai                                          
+Bhinneka Tunggal Ika .................................................................................105
+A. Makna Persatuan dalam Keberagaman..........................................................109
+B. 
+Persatuan dalam Keberagaman Suku, Agama, Ras, dan  
+Antargolongan dalam Kehidupan Bermasyarakat ......................................114
+C. 
+Faktor-Faktor Penyebab Perubahan Sosial dan Keberagaman ................128
+D. Tantangan dan Sikap terhadap Pengaruh Perubahan Budaya  
+Tingkat Lokal, Nasional, dan Global ................................................................131
+E. 
+Keberagaman dalam Bingkai Bhinneka Tunggal Ika ..................................136
+Uji Kompetensi...............................................................................................................137
+Pengayaan .......................................................................................................................141
+Releksi.............................................................................................................................142
+BAB 5 - Wilayah Negara Kesatuan Republik Indonesia ...........................143
+A. Makna Negara dan Unsur-Unsur Negara .......................................................148
+B. 
+Wilayah Negara Kesatuan Republik Indonesia ............................................152
+C. 
+Indonesia sebagai Negara Kesatuan  ...............................................................160
+D. Upaya Menjaga Keutuhan Wilayah..................................................................166
+Uji Kompetensi...............................................................................................................174
+Pengayaan .......................................................................................................................178
+Releksi.............................................................................................................................178
+Glosarium ........................................................................................................................180
+Daftar Pustaka ...............................................................................................................183
+Daftar Kredit  Gambar .................................................................................................185
+Indeks ...............................................................................................................................188
+Proil Pelaku Perbukuan .............................................................................................192
+
+x
+Daftar Tabel
+Tabel 1.1  Asesmen Awal .............................................................................................5
+Tabel 1.2  Biograi Tokoh Anggota BPUPK ............................................................12
+Tabel 1.3  Sidang Panitia Sembilan.........................................................................19
+Tabel 2.1  Menganalisis Keberagaman Agama ....................................................46
+Tabel 2.2  Menyimpulkan Pendapat Arti Penting dan Penerapan Nilai 
+Persatuan ....................................................................................................50
+Tabel 2.3  Menerapkan Nilai-Nilai Pancasila dalam Kehidupan 
+Bermasyarakat ..........................................................................................58
+Tabel 3.1  Peran positif sebagai makhluk individu dan makhluk sosial   ....74
+Tabel 3.2  Perilaku Sesuai Norma dan Perilaku Tidak Sesuai Norma ..........96
+Tabel 4.1  Keberagaman suku bangsa..................................................................117
+Tabel 4.2  Asal wilayah suku bangsa ....................................................................119
+Tabel 4.3  Keberagaman agama di Indonesia ....................................................122
+Tabel 5.1  Asesmen awal ..........................................................................................147
+Tabel 5.2  Unsur-Unsur negara ..............................................................................151
+Tabel 5.3  Bentuk Negara berdasarkan UUD yang berlaku ...........................166
+
+xi
+Daftar Gambar
+Gambar 1.1  Suasana pembukaan sidang BPUPK. Tampak hadirin  
+sedang mendengarkan nasehat Saikoo Sikikan ke-16  
+(Panglima Balatentara Jepang di Jawa), 28 Mei 1945 ...................3
+Gambar 1.2  Ir. Sukarno ................................................................................................3
+Gambar 1.3  Serangan Jepang ke Pangkalan Militer Amerika Serikat  
+di Pearl Harbour  ....................................................................................7
+Gambar 1.4  Gedung Pancasila di Jalan Pejambon No. 6 Jakarta ......................9
+Gambar 1.5  dr. K.R.T. Radjiman Wedjodiningrat ................................................11
+Gambar 1.6  Sidang BPUPK Perumusan Dasar Negara ......................................13
+Gambar 1.7  Pidato Ir. Sukarno pada rapat BPUPK .............................................15
+Gambar 1.9  Piagam Jakarta ......................................................................................18
+Gambar 1.10  RP Soeroso Tjondronegoro .................................................................20
+Gambar 1.11  Ki Hadjar Dewantara ...........................................................................21
+Gambar 1.12  Husein Mutahar  ...................................................................................23
+Gambar 1.13  Drs. Mohammad Hatta ........................................................................25
+Gambar 1.14  Rumah Rengasdengklok .....................................................................26
+Gambar 1.15  Teks Proklamasi yang ditulis tangan oleh Ir. Sukarno  ..............27
+Gambar 1.16  Teks Proklamasi yang ditik oleh Sayuti Melik ..............................28
+Gambar 1.17  Pengibaran Bendera Merah Putih  pada tanggal 17 Agustus 
+1945 di depan rumah Ir. Sukarno, Jalan Pegangsaan  
+Timur No. 56 Jakarta ............................................................................29
+Gambar 1.18 Suasana sidang PPKI, Agustus 1945 ..................................................31
+Gambar 2.1  Garuda Pancasila ..................................................................................42
+Gambar 2.2  Bintang ....................................................................................................44
+Gambar 2.3  Ilustrasi Keberagaman Agama ..........................................................45
+Gambar 2.5  Ilustrasi Penerapan Nilai Kemanusiaan .........................................47
+Gambar 2.4  Rantai .......................................................................................................47
+Gambar 2.7   Ilustrasi Persatuan dalam Keberagaman Budaya........................49
+Gambar 2.6  Pohon Beringin ......................................................................................49
+Gambar 2.8  Kepala Banteng......................................................................................51
+Gambar 2.9  Ilustrasi Kegiatan Musyawarah ........................................................52
+Gambar 2.10  Kapas dan Padi ......................................................................................54
+Gambar 2.11  Ilustrasi Penerapan Nilai Keadilan Sosial ......................................54
+
+xii
+Gambar 3.1  Interaksi sosial untuk memenuhi kebutuhan manusia .............74
+Gambar 3.2  Beribadah sesuai agama dan kepercayaan masing-masing .....80
+Gambar 3.3  Berani jujur ............................................................................................82
+Gambar 3.4  Budayakan antre ...................................................................................83
+Gambar 3.5  Anak di bawah umur dilarang berkendara ..................................85
+Gambar 3.6  Aksi cium tangan wasit pemain Timnas Indonesia U-12   
+tuai pujian...............................................................................................87
+Gambar 4.1  Rumah adat suku Baduy .................................................................. 115
+Gambar 4.2  Suku Minangkabau memiliki ciri khas yang berbeda  
+dalam berbusana ............................................................................... 116
+Gambar 4.3  Batik tulis merupakan salah satu karya suku Jawa ................. 116
+Gambar 4.4  Suku Bali sangat kaya akan karya budaya ................................. 117
+Gambar 4.5  Masjid sebagai rumah ibadah umat Islam ................................. 119
+Gambar 4.6  Gereja sebagai rumah ibadah umat Kristen .............................. 119
+Gambar 4.7  Gereja Katedral sebagai rumah ibadah umat Katolik ............. 120
+Gambar 4.8  Pura sebagai rumah ibadah umat Hindu .................................... 120
+Gambar 4.9  Vihara/Wihara sebagai rumah ibadah umat Buddha ............. 120
+Gambar 4.10  Klenteng Ma Co Po sebagai rumah ibadah umat  
+Khonghucu .......................................................................................... 120
+Gambar 4.11  Permainan tarik tambang ............................................................... 126
+Gambar 5.1  Pengibaran bendera Merah Putih di wisata Klangon,  
+Sleman pada 17 Agustus 2021.  ...................................................... 146
+Gambar 5.2  Wilayah Negara Kesatuan Republik Indonesia ......................... 152
+Gambar 5.3  Perairan Indonesia ............................................................................ 157
+Gambar 5.4  Batas Wilayah Udara Negara .......................................................... 159
+Gambar 5.5  Istana Merdeka ................................................................................... 161
+Gambar 5.6  Gedung DPR dan MPR RI ................................................................. 163
+Gambar 5.7  Konferensi Meja Bundar di Den Haag Belanda ......................... 164
+Gambar 5.8  Kampung Halaman ........................................................................... 167
+Gambar 5.9  Saling rukun sesama anggota keluarga ....................................... 171
+Gambar 5.10  Gotong royong kebersihan kelas ................................................... 172
+Gambar 5.11  Ronda malam ...................................................................................... 172
+
+xiii
+Fitur-Fitur di Buku
+Tujuan Pembelajaran
+Suatu hasil yang diharapkan dari 
+proses pembelajaran. Rumusan tujuan 
+pembelajaran merujuk pada sejumlah 
+kompetensi pada aspek pengetahuan, 
+keterampilan, dan sikap.
+Kata Kunci
+Kata kunci adalah sejumlah kata yang sering 
+muncul atau dibahas dalam bab materi.
+Peta Konsep
+Peta konsep adalah peta kumpulan materi 
+utama yang akan dipelajari peserta didik.
+Pendidikan Pancasila untuk SMP/MTs Kelas VII
+2
+Pada bab ini kalian akan memahami tentang sejarah kelahiran Pancasila, 
+yaitu mendeskripsikan kelahiran Pancasila dalam sidang BPUPK (Badan 
+Penyelidik Usaha Persiapan Kemerdekaan), mendeskripsikan perumu-
+san Pancasila oleh Panitia Sembilan, mendeskripsikan proklamasi dan 
+penetapan Pancasila sebagai dasar negara.
+Tujuan Pembelajaran
+•  
+Kelahiran Pancasila
+•  
+Perumusan Pancasila
+•  
+Penetapan Pancasila
+Kata Kunci
+Sejarah Kelahiran 
+Pancasila
+Kelahiran Pancasila 
+dalam Sidang 
+BPUPK
+Perumusan 
+Pancasila oleh 
+Panitia Sembilan
+Proklamasi 
+dan Penetapan 
+Pancasila sebagai 
+Dasar Negara
+Peta Konsep
+Bab 1 | Sejarah Kelahiran Pancasila
+37
+e. 
+Nilai-nilai apa yang tampak dari pengalaman proyek mind mapping
+bersama anggota kelompokmu?
+Untuk memperdalam pemahaman tentang sejarah kelahiran Pancasila kalian 
+dapat menyimak materinya dari kode respons cepat berikut.
+Buku Referensi 
+Pendidikan dan Pembinaan Ideologi 
+Pancasila Kelas VII. 
+https://buku.kemdikbud.go.id/katalog/
+pendidikan-dan-pembinaan-ideologi-
+pancasila-untuk-smpmts-kelas-vii
+Pindai Aku
+Video YouTube
+Kata Pencarian “Karikatur Sejarah Pancasila”
+1. 
+Berilah tanda centang ( ) pada gambar yang mewakili perasaanmu 
+setelah mempelajari materi sejarah kelahiran Pancasila.
+Pengayaan
+Rel eksi
+Pengayaan/Remedial
+Pengayaan diberikan kepada peserta didik 
+yang sudah melampaui kompetensi yang 
+disebutkan pada tujuan pembelajaran. 
+Remedial adalah upaya untuk meningkatkan 
+kompetensi peserta didik agar mencapai 
+tujuan pembelajaran.
+
+xiv
+ Pendidikan 
+Pendidikan  Pancasila untuk SMP/MTs Kelas VII
+Pancasila untuk SMP/MTs Kelas VII
+72
+maaf” kepada sesama karena dianggap kata yang sepele dan tak bernilai. 
+Padahal jika kita menerapkan penggunaan kata “tolong, terima kasih, 
+dan maaf” ke sesama secara ikhlas akan memberikan efek positif dalam 
+kehidupan masyarakat. Kebiasaan kecil mengucapkan “tolong, terima 
+kasih, dan maaf” kepada sesama mempererat hubungan persaudaraan.
+Dari cerita di atas, perilaku baik apa yang bisa kalian contoh? 
+Dapatkah kalian menerapkan perilaku baik tersebut setiap hari?
+1. 
+Apa yang dimaksud manusia sebagai makhluk individu dan makhluk 
+sosial?
+2. 
+Menurut kalian, apa saja syarat berlakunya norma dan aturan di dalam 
+kehidupan masyarakat?
+3. 
+Apa saja norma yang ada di lingkungan sekitar tempat tinggal kalian?
+4. 
+Mengapa norma hukum menjadi norma paling tegas dalam kehidupan 
+bermasyarakat?
+5. 
+Tuliskan satu contoh tindakan sesuai norma yang menggambarkan 
+hubungan antara manusia dengan alam!
+A. Manusia sebagai Makhluk Tuhan Yang Maha Esa, 
+Makhluk Individu, dan Makhluk Sosial
+Manusia adalah makhluk ciptaan Tuhan yang paling sempurna sebab manusia 
+diberikan karunia oleh Tuhan berupa akal dan pikiran. Setiap manusia yang 
+terlahir memiliki ciri khas masing-masing yang membedakan dirinya dengan 
+manusia lain, meskipun terlahir dari satu keluarga. Sesuai sifat kodratnya tiap 
+manusia memiliki kedudukan sebagai makhluk monodualis yaitu makhluk 
+individu dan makhluk sosial. Berikut ini penjelasan lebih lanjut. 
+Asesmen Awal
+Ayo, Membaca
+ Pendidikan 
+Pendidikan  Pancasila untuk SMP/MTs Kelas VII
+Pancasila untuk SMP/MTs Kelas VII
+136
+Amatilah lingkungan sekitar sekolah atau rumah kalian!
+1. 
+Fakta yang ada di lingkungan sekitar
+Aspek
+Jumlah
+Sebutkan
+Suku
+Agama 
+Pengguna 
+bahasa daerah
+Pekerjaan
+Hobi
+2. 
+Apakah ada nilai positif dari perbedaan atau perubahan sosial yang kalian 
+rasakan? Jelaskan!
+3. 
+Apakah ada dampak positif dari perbedaan atau perubahan sosial yang 
+kalian rasakan? Jelaskan!
+4. 
+Bagaimana kalian mengambil sikap terhadap hal tersebut?
+E. Keberagaman dalam Bingkai Bhinneka Tunggal Ika
+Bhinneka Tunggal Ika adalah semboyan atau motto nasional Indonesia yang 
+berarti “berbeda-beda (tetapi) tetap satu jua”. Semboyan ini menggambarkan 
+makna pentingnya persatuan dalam keberagaman yang ada di Indonesia.
+Dalam bingkai Bhinneka Tunggal Ika, keberagaman merujuk pada 
+banyaknya perbedaan yang ada di Indonesia, baik dari segi suku, agama, 
+budaya, bahasa, maupun ras. Indonesia memiliki lebih dari 300 suku bangsa 
+yang memiliki kebudayaan, bahasa, dan adat istiadat yang berbeda-beda. Selain 
+itu, Indonesia juga memiliki beragam agama seperti Islam, Kristen, Katolik, 
+Hindu, Buddha, Khonghucu, dan kepercayaan-kepercayaan tradisional yang 
+masih dijalankan oleh sebagian masyarakat.
+Meskipun 
+terdapat 
+perbedaan-perbedaan 
+tersebut, 
+keberagaman 
+dalam bingkai Bhinneka Tunggal Ika mengajarkan pentingnya menghargai, 
+menghormati, dan menerima perbedaan satu sama lain. Keberagaman juga 
+Ayo, Mengamati
+Bab 5 | Wilayah Negara Kesatuan 
+121
+A. Pilihan Ganda 
+Pilihlah jawaban yang paling tepat dengan memberi tanda silang (x) pada 
+huruf a, b, c, atau d. 
+1. 
+Para ahli menyatakan pendapat yang beragam tentang negara tergantung 
+sudut pandangnya masing-masing. Akan tetapi, pada dasarnya negara 
+itu memiliki unsur-unsur yang mutlak harus ada, karena jika salah satu 
+unsur tidak ada bukanlah negara. Unsur-unsur tersebut merupakan unsur 
+konstitutif atau secara de facto, yaitu negara memiliki ….
+a. 
+wilayah darat, laut, dan udara
+b. 
+kekuasaan bekerja sama dengan negara lain
+c. 
+rakyat, pemerintah yang berdaulat, wilayah
+d. 
+pengakuan dari negara lain
+2. 
+Dalam sidang BPUPK para pendiri negara bermusyawarah untuk 
+menentukan bentuk negara. Terdapat perbedaan pendapat di antara para 
+tokoh. Ada yang berpendapat bentuk negara kesatuan, tetapi juga ada yang 
+berpendapat sebaiknya negara Indonesia merupakan negara kesatuan. 
+Tokoh-tokoh BPUPK yang berpendapat bentuk negara kesatuan adalah ....
+a. 
+Ir. Sukarno, Drs. Mohammad Hatta, Mr. Soepomo
+b. 
+Drs. Mohammad Hatta, Mr. Muhammad Yamin, Ir. Sukarno
+c. 
+Mr. Soepomo, Drs. Mohammad Hatta, Mr. Muhammad Yamin
+d. 
+Mr. Muhammad Yamin. Mr. Soepomo, Ir. Sukarno
+3. 
+Ketika Indonesia merdeka, masih ada negara yang belum mengakui 
+kedaulatan negara Indonesia. Belanda dan Sekutunya melakukan 
+serangkaian agresi militer di berbagai daerah. Untuk mempertahankan 
+kemerdekaan, perjuangan bangsa Indonesia dilakukan baik secara ﬁ sik 
+dengan peperangan di medan perang, maupun perjuangan melalui 
+perdamaian atau perjanjian. Belanda baru mengakui kemerdekaan 
+Indonesia melalui ....
+a. 
+Perjanjian Linggarjati 
+b. 
+Konferensi Meja Bundar 
+Uji Kompetensi
+Uji Kompetensi
+Kegiatan untuk mengukur ketercapaian 
+tujuan pembelajaran.
+Aktivitas
+Aktivitas pembelajaran berupa 
+sejumlah kegiatan yang 
+dilaksanakan selama proses 
+pembelajaran.
+
+xv
+180
+Glosarium
+adat
+:
+gagasan kebudayaan yang terdiri atas nilai budaya, 
+kebiasaan, hukum adat, norma masyarakat yang berguna 
+untuk mengatur tingkah laku manusia dalam suatu 
+kelompok adat tertentu
+agama
+:
+kepercayaan/keyakinan terhadap Tuhan Yang Maha Esa
+beradab
+:
+kehalusan budi pekerti, kesopanan, atau akhlak seseorang
+budaya
+:
+tata cara hidup yang berkembang dalam diri sekelompok 
+orang dan diwariskan dari generasi ke generasi 
+dasar negara
+: dasar aturan yang mengatur dan menjadi pedoman 
+jalannya penyelenggaraan negara
+demograﬁ 
+: ilmu yang mengkaji tentang ukuran, struktur, dan 
+distribusi kependudukan seperti tingkat kelahiran, 
+perpindahan penduduk, kematian, dan lain sebagainya
+diskriminasi
+: perbedaan perlakuan yang dilakukan terhadap seseorang 
+atau sekelompok orang yang dianggap tidak seimbang
+dokuritsu 
+zyunbi iinkai
+: bahasa Jepang dari Panitia Persiapan Kemerdekaan 
+Indonesia
+dokuritsu 
+zyunbi 
+tyoosakai
+:
+bahasa Jepang dari Badan Penyelidik Usaha-usaha 
+Persiapan Kemerdekaan
+etika   
+: tata cara atau kebiasaan manusia dalam bertindak 
+berdasarkan kebenaran dan kebaikan dalam kehidupan 
+sosialnya
+evaluasi   
+: kegiatan yang dilakukan dengan tujuan menentukan 
+nilai dari suatu hal atau capaian tertentu
+genetik   
+: asal mula garis keturunan
+globalisasi   
+: adanya proses pertukaran pandangan dunia, pemikiran, 
+aspek budaya, produk
+horizontal   
+: garis atau bidang yang ada pada posisi mendatar
+185
+Daftar Pustaka
+Basmatulhana, 
+Hanindita. 
+2022. 
+Keteladanan 
+dari 
+Tokoh 
+Nasional 
+dalam 
+Mewujudkan 
+Nilai 
+Pancasila. 
+https://www.detik.com/edu/
+detikpedia/d-6267935/keteladanan-dari-tokoh-nasional-dalam-
+mewujudkan-nilai-Pancasila
+Budiardjo, Miriam. 2007. Dasar-dasar Ilmu Politik. Gramedia Pustaka Utama: 
+Jakarta
+Erwin, Muhamad. 2013. Pendidikan Kewarganegaraan Republik Indonesia. 
+Jakarta: Reﬁ ka Aditama.
+Fauzi, Ahmad. 2020. Pancasila Konteks Sejarah, Filsafat, Ideologi Nasional, dan 
+Ketatanegaraan Republik Indonesia. Jawa Timur: Madani Media. 
+Giddens, Anthony. 1986. Kapitalisme dan Teori Sosial Modern: Suatu Analisis 
+Karya Tulis Marx, Durkheim, dan Max Weber. Diterjemahkan oleh Soeheba 
+Kramadibrata, Jakarta: UI-Press.
+Givari, Hilwan dkk. 2022. Pendidikan dan Pembinaan Ideologi Pancasila untuk 
+SMP/MTs kelas VII. Jakarta: BPIP dan Kemendikbudristek.
+Hatta, Mohammad. 1970. Sekitar Proklamasi 17 Agustus 1945. Jakarta: Tintamas.
+Kardiman, Yuyus. 2010. Norma Bukan Untuk Dilanggar. Jakarta Timur: PT 
+Multazam Mulia Utama.
+Kusuma, RM. AB. 2004. Lahirnya Undang-Undang Dasar. Depok: Badan Penerbit 
+Fakultas Hukum Universitas Indonesia
+Laning, Vina Dwi dan Endar Wismulyani. 2009. Masyarakat: Sendi Dasar 
+Kehidupan Berbangsa. Surabaya: PT JePe Press Media Utama.
+Mangku, Dewa Gede Sudika. 2020. Pengantar Ilmu Hukum. Klaten: Lakeisha.
+Manus, MPB dkk. 1993. Tokoh-tokoh Badan Penyelidik Usaha-Usaha Persiapan 
+kemerdekaan Indonesia. Jakarta: Departemen Pendidikan dan Kebudayaan. 
+Direktorat Sejarah dan Nilai Tradisional. Proyek Inverntarisasi dan 
+Dokumentasi Sejarah Nasional.
+Marwati Djoened Poesponegoro. Nugroho Notosusanto. 2015. Sejarah nasional 
+Indonesia VI: Zaman Jepang dan Zaman Republik Indonesia, ±1942. Jakarta: 
+Balai Pustaka.
+Glosarium
+Bagian ini memuat penjelasan khusus 
+kumpulan daftar kata atau istilah penting 
+yang tersusun secara alfabet untuk 
+mendeinisikan bidang pengetahuan 
+tertentu. 
+Daftar Pustaka
+Memuat daftar referensi yang digunakan, 
+baik berupa buku, jurnal, peraturan, 
+undang-undang, atau situs online.
+
+
+Bab 1
+Tahukah kalian mengenai sejarah kelahiran 
+Pancasila sebagai dasar negara?
+Sejarah Kelahiran 
+Sejarah Kelahiran 
+Pancasila
+Pancasila
+KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI 
+REPUBLIK INDONESIA, 2023
+Pendidikan Pancasila untuk SMP/MTs Kelas VII
+Penulis: Yayat Suryatna dkk. 
+ISBN: 9978-623-194-633-1 (jil.1 PDF) 
+
+Pendidikan 
+Pendidikan Pancasila untuk SMP/MTs Kelas VII
+Pancasila untuk SMP/MTs Kelas VII
+2
+Pada bab ini kalian akan memahami tentang sejarah kelahiran Pancasila, 
+yaitu mendeskripsikan kelahiran Pancasila dalam sidang BPUPK (Badan 
+Penyelidik Usaha Persiapan Kemerdekaan), mendeskripsikan perumu-
+san Pancasila oleh Panitia Sembilan, mendeskripsikan proklamasi dan 
+penetapan Pancasila sebagai dasar negara.
+Tujuan Pembelajaran
+•  
+Kelahiran Pancasila
+•  
+Perumusan Pancasila
+•  
+Penetapan Pancasila
+Kata Kunci
+Sejarah Kelahiran 
+Pancasila
+Kelahiran Pancasila 
+dalam Sidang 
+BPUPK
+Perumusan 
+Pancasila oleh 
+Panitia Sembilan
+Proklamasi 
+dan Penetapan 
+Pancasila sebagai 
+Dasar Negara
+Peta Konsep
+
+Bab 1 | Sejarah Kelahiran Pancasila
+3
+Selamat atas keberhasilan kalian diterima di 
+sekolah baru pada jenjang pendidikan SMP. Tentu 
+saja kalian bertemu dengan lingkungan baru, guru-
+guru baru, serta teman-teman yang baru pula. 
+Kita patut bersyukur kepada Tuhan Yang Maha 
+Esa karena atas karunia-Nya kalian mendapat 
+kesempatan untuk melanjutkan pendidikan ke 
+jenjang yang lebih tinggi. 
+Materi pertama yang akan kalian pelajari 
+adalah tentang sejarah kelahiran Pancasila. Pada 
+bagian ini kalian akan membahas tentang kelahiran 
+Pancasila dalam sidang BPUPK, perumusan dasar 
+negara oleh Panitia Sembilan, pembentukan 
+Panitia Persiapan Kemerdekaan Indonesia (PPKI), 
+detik-detik Proklamasi, serta penetapan Pancasila 
+sebagai dasar negara.
+Masih ingatkah kalian materi tentang Pancasila 
+sebagai dasar negara sewaktu di SD/MI? Apa arti 
+Pancasila? Dalam mempersiapkan dasar negara 
+Gambar 1.1 Suasana pembukaan sidang BPUPK. Tampak hadirin sedang mendengarkan nasehat Saikoo Sikikan 
+ke-16 (Panglima Balatentara Jepang di Jawa), 28 Mei 1945
+Sumber: Arsip Nasional/BPUPK 1.
+Gambar 1.2 Ir. Sukarno
+Sumber: Domain Publik, https://
+id.wikipedia.org/
+Ir. Sukarno lahir pada 6 Juni 
+1901 dengan nama lengkap 
+Koesno Sosro Soekarno. 
+Ayahnya bernama Sukemi 
+dan ibunya bernama 
+Ida Ayu Nyoman Rai. Ia 
+menempuh pendidikan 
+di Europeesche Lagere 
+School (1914), HBS (1921), 
+THS di Bandung (1927). Ir. 
+Sukarno mendirikan Partai 
+Nasional Indonesia bersama 
+teman-temannya. Pada 
+masa pendudukan Jepang, 
+Ir. Sukarno memimpin 
+Poetra dan Jawa Hokokai. Ia 
+juga menjabat ketua Tjhuo 
+Sangi-In.
+
+Pendidikan 
+Pendidikan Pancasila untuk SMP/MTs Kelas VII
+Pancasila untuk SMP/MTs Kelas VII
+4
+Indonesia merdeka dalam sidang BPUPK pada 1 Juni 1945, Sukarno berpidato 
+bahwa “Pancasila: Sila artinya asas atau dasar dan di atas kelima dasar itulah 
+kita mendirikan negara Indonesia, kekal dan abadi.” Inilah untuk pertama 
+kalinya Pancasila sebagai dasar negara Indonesia merdeka diperkenalkan 
+secara eksplisit dan jelas oleh Sukarno di sidang BPUPK pada 1 Juni 1945.
+Coba kalian sebutkan bunyi sila-sila dalam Pancasila itu!
+Bagus kalau kalian masih hafal, namun bukan hanya hafal bunyi sila-sila 
+dalam Pancasila saja, ya. Kita perlu memahami sejarah kelahiran Pancasila 
+dalam sidang BPUPK, perumusan Pancasila oleh Panitia Sembilan, serta 
+proklamasi dan penetapan Pancasila sebagai dasar negara. 
+Nah, untuk memahami materi ini, ayo, kita nyanyikan dengan khidmat 
+lagu wajib nasional berikut ini!
+Ayo, Menyanyi
+GARUDA PANCASILA 
+Ciptaan Sudharnoto
+Garuda Pancasila
+Akulah pendukungmu
+Patriot proklamasi
+Sedia berkorban untukmu
+Pancasila dasar negara
+Rakyat adil makmur sentosa 
+Pribadi bangsaku
+Ayo maju maju
+Ayo maju maju
+Ayo maju maju
+Raky
+
+Bab 1 
+Bab 1 | Sejarah Kelahiran Pancasila
+| Sejarah Kelahiran Pancasila
+5
+Setelah menyanyikan lagu wajib nasional berjudul “Garuda Pancasila” 
+yang diciptakan oleh Sudharnoto tersebut, pahami apa makna yang terkandung 
+di dalam lagu itu? Apa kedudukan Pancasila dalam lagu tersebut? Apa nilai-
+nilai dan semangat yang terkandung dalam lagu itu? Bagaimana sikap yang 
+akan kalian tunjukkan sesuai dengan nilai-nilai dalam lagu tersebut?
+Pancasila sebagai dasar negara merupakan hasil jerih payah perjuangan 
+para pendiri bangsa dalam merumuskan dan menetapkannya. Dasar negara 
+merupakan fondasi sebuah negara. Oleh karena itu, negara akan kokoh 
+apabila fondasinya kuat. 
+Sebelum memahami materi pokok mengenai kelahiran Pancasila dalam 
+sidang BPUPK, perumusan Pancasila oleh Panitia Sembilan, serta proklamasi 
+dan penetapan Pancasila sebagai dasar negara. Silakan kalian kerjakan 
+terlebih dahulu asesmen awal berikut ini.     
+Tabel 1.1 Asesmen Awal
+Pertanyaan
+Jawaban
+Apa yang kalian pahami tentang sejarah 
+kelahiran Pancasila?
+Bagaimana bunyi sila-sila dalam Pancasila?
+Bagaimana lambang-lambang dari tiap sila 
+Pancasila?
+Siapa yang memberi nama dasar negara 
+dengan Pancasila?
+Asesmen Awal
+
+Pendidikan Pancasila untuk SMP/MTs Kelas VII
+6
+Pertanyaan
+Jawaban
+Bagaimana proses penetapan Pancasila 
+sebagai dasar negara?
+Apakah kalian dapat menjawab semua pertanyaan di atas? Selamat 
+dan sukses jika kalian mampu menjawabnya dengan benar. Untuk lebih 
+memahaminya, marilah kita simak uraian penyajian materi dan lakukan 
+aktivitas pembelajaran berikut ini!
+A. Kelahiran Pancasila dalam Sidang BPUPK
+1. Pembentukan BPUPK
+Bangsa Indonesia mengalami masa penjajahan 
+yang sangat panjang. Belanda menguasai 
+Indonesia kurang lebih selama 350 tahun dan 
+berpindah tangan pada kekuasaan Jepang 
+selama 3,5 tahun. Bagaimana latar belakangnya 
+hingga harus ber pindah tangan dari penjajahan 
+kolonial Belanda kepada kekuasaan Jepang? 
+Untuk menjawabnya tentu kita harus kembali 
+mengingat sejarahnya.
+Pada tanggal 8 Desember 1941, Jepang 
+menyerang 
+pangkalan 
+armada 
+Amerika 
+Serikat di Kota Pearl Harbour Pulau Hawai. 
+Penyerangan tersebut mengakibatkan pecah 
+Perang Pasiik atau Perang Asia Timur Raya 
+karena Jepang ingin merebut semua negara di 
+seluruh Asia Timur dan Asia Tenggara termasuk 
+wilayah Indonesia. Pada saat itu, Indonesia 
+dikuasai Belanda yang masih bernama Hindia 
+Belanda.
+Ayo, Membaca
+Mengapa Jepang 
+Menyerang Amerika 
+Serikat?
+Sejak akhir 1930-an, Jepang 
+dibuat tidak nyaman dengan 
+kebijakan luar negeri Amerika 
+Serikat di Pasiik. Ketegangan 
+di antara kedua negara 
+semakin memuncak saat AS 
+menghentikan perjanjian 
+perdagangan dengan Jepang. 
+Sedangkan Jepang, yang 
+telah menduduki Indochina, 
+bersekutu dengan Blok Poros 
+(Jerman dan Italia). Pada awal 
+1940, Angkatan Laut AS telah 
+ditempatkan di Pearl Harbour, 
+yang terletak di Pulau Oahu, 
+Hawaii. Sejak itu, AS terus 
+menambah ketersediaan 
+kapalnya di Pearl Harbour 
+hingga menjadi pangkalan 
+utamanya di Pasiik. Pada 
+7 Desember 1941, puluhan 
+pesawat Jepang tiba-tiba 
+menyerang Pangkalan 
+Angkatan Laut AS di Pearl 
+Harbour.
+Sumber: Verelladevanka 
+Adryamarthanino, www.kompas.
+com, 2022.
+Sekilas Info
+Sekilas Info
+
+Bab 1 
+Bab 1 | Sejarah Kelahiran Pancasila
+| Sejarah Kelahiran Pancasila
+7
+Coba amati gambar berikut!
+Gambar 1.3 Serangan Jepang ke Pangkalan Militer Amerika Serikat di Pearl Harbour 
+Sumber: Museum Perumusan Naskah Proklamasi, Kemendikbud 2017.
+1. 
+Apa yang kalian pahami dari gambar di atas?
+2. 
+Mengapa Jepang menghancurkan pang kalan militer Amerika Serikat?
+3. 
+Bagaimana dampak dari peristiwa tersebut?
+Ayo, Menganalisis
+
+Pendidikan 
+Pendidikan Pancasila untuk SMP/MTs Kelas VII
+Pancasila untuk SMP/MTs Kelas VII
+8
+Bacalah kembali paparan materi berikut ini!
+Setelah melakukan serangan terhadap pangkalan militer Amerika Serikat 
+di Pearl Harbour, selanjutnya Jepang menyerbu kawasan Asia Tenggara 
+termasuk wilayah Indonesia yang tidak terbendung oleh tentara Belanda dan 
+Sekutu. Oleh karena itu, pada tanggal 8 Maret 1942 panglima tentara Hindia 
+Belanda menyerah kepada Jepang di Kalijati, Subang, Jawa Barat. Sejak saat 
+itulah masa pendudukan Jepang di wilayah Indonesia dimulai.
+Semula rakyat Indonesia menyambut gembira atas kedatangan Jepang 
+yang akan membebaskan kita dari penjajahan Belanda. Jepang selalu mengaku 
+sebagai saudara tua yang sama-sama bangsa Asia dan menamakan dirinya 
+Nippon dengan mendirikan “Gerakan Tiga A”, yaitu Nippon cahaya Asia, 
+Nippon pelindung Asia, dan Nippon pemimpin Asia.
+Akan tetapi, setelah menduduki tanah air kita, tentara Jepang melakukan 
+tindakan-tindakan yang tidak berperikemanusiaan bahkan dianggap lebih 
+kejam dibandingkan masa penjajahan Belanda. Sementara itu, pihak Amerika 
+Serikat dan Sekutunya yang dahulu kalah perang menghadapi Jepang, mulai 
+melancarkan aksi balasannya hingga Jepang mulai menderita kekalahan. 
+Tanggal 7 September 1944, Jepang mulai berjanji akan memberikan 
+kemerdekaan kepada Indonesia, yang bunyinya, “Hindia Timur akan 
+dimerdekakan di kemudian hari.” Yang dimaksud Hindia Timur adalah 
+Indonesia. Makna ‘di kemudian hari’ tentu tidak jelas kapan waktunya, bahkan 
+langkah-langkah menuju kemerdekaan pun tidak tampak. 
+Serangan demi serangan tentara Amerika Serikat dan Sekutunya terus 
+dilakukan sehingga Jepang meminta bantuan rakyat Indonesia dalam 
+menghadapi serangan Amerika Serikat tersebut. Jepang memberikan janjinya 
+yang kedua akan memerdekakan Indonesia. Sebagai buktinya, Jepang 
+membentuk Badan Penyelidik Usaha Persiapan Kemerdekaan disingkat 
+BPUPK atau Dokuritsu Zyunbi Tyoosakai pada tanggal 1 Maret 1945.  Badan ini 
+dibentuk oleh pemerintah Militer Angkatan Darat ke-16 Jepang yang hanya 
+memiliki wewenang untuk Jawa dan Madura saja, bukan untuk seluruh 
+Indonesia, sedangkan wilayah Sumatra yang dipimpin oleh Pemerintahan 
+Militer Angkatan Darat ke-25 Jepang baru diizinkan mendirikan BPUPK pada 
+Ayo, Membaca
+
+Bab 1 
+Bab 1 | Sejarah Kelahiran Pancasila
+| Sejarah Kelahiran Pancasila
+9
+tanggal 25 Juli 1945. Badan Penyelidik ini dilantik pada tanggal 29 April 1945 
+untuk menyelidiki usaha-usaha yang harus dilakukan untuk mempersiapkan 
+kemerdekaan. 
+Anggota BPUPK semula berjumlah 62 orang Indonesia terdiri atas 60 
+orang anggota, 1 orang ketua, dan 1 orang wakil ketua. Sebanyak 8 orang 
+Jepang, yaitu 1 orang wakil ketua serta 7 orang anggota lebih berperan sebagai 
+pengamat dan tidak aktif dalam sidang-sidang yang diadakan. Jumlah anggota 
+bertambah menjadi 76 orang pada saat sidang BPUPK ke-2 dalam perumusan 
+Undang-Undang Dasar. 
+dr. K.R.T. Radjiman Wedyodiningrat diangkat sebagai ketua, didampingi 
+oleh Raden Pandji Soeroso dari Indonesia dan Ichibangase Yosio dari Jepang 
+sebagai wakil ketua. BPUPK melaksanakan sidangnya yang pertama pada 
+tanggal 29 Mei–1 Juni 1945 untuk membahas dasar negara, sedangkan 
+sidangnya yang kedua pada tanggal 10–17 Juli 1945 membahas rancangan 
+Undang-Undang Dasar. Sidang BPUPK dilaksanakan di gedung Chuo Sangi In 
+yang sekarang dikenal dengan nama Gedung Pancasila di Jalan Pejambon No. 
+6 Jakarta.
+Gambar 1.4 Gedung Pancasila di Jalan Pejambon No. 6 Jakarta
+Sumber: Rochelimit/Wikimedia Commons, 2011.
+
+Pendidikan 
+Pendidikan Pancasila untuk SMP/MTs Kelas VII
+Pancasila untuk SMP/MTs Kelas VII
+10
+Susunan anggota BPUPK adalah sebagai berikut.
+Ketua 
+:  dr. K.R.T. Radjiman Wedyodiningrat
+Wakil Ketua :  ▪ Ichibangase Yosio (Jepang)
+ 
+ 
+▪ R.P. Soeroso (Indonesia)
+Anggota:
+1. 
+Raden Abikoesno Tjokrosoejoso
+2. 
+H.A. Sanoesi
+3. 
+K.H. Abdul Halim
+4. 
+Prof. Dr. Rd. Djenal Asikin 
+Widjaja Koesoema
+5. 
+M. Aris
+6. 
+R. Abdoel Kadir
+7. 
+Dr. R. Boentaran Martoatmojo
+8. 
+B.P.H Bintoro
+9. 
+Ki Hajar Dewantara
+10. Agus Muhsin Dasaad
+11. Prof. Dr. P.A.H. Djajadiningrat
+12. Drs. Mohammad Hatta
+13. Ki Bagoes Hadikoesoemoe 
+14. Mr. R. Hindromartono
+15. Mr. Mohammad Yamin
+16. R.A.A. Soemitro Kolopaking 
+Poerbonegoro
+17. Mr. Dr. R. Koesoema Atmadja
+18. Mr. J. Latuharhary
+19. R.M. Margono 
+Djojohadkoesoemo
+20. Mr. A.A. Maramis
+21. K.H. Masjkoer
+22. K.H.M Mansoer
+23. Moenandar
+24. A.K. Moezakir
+25. R. Otto Iskandar Dinata
+26. Parada Harahap
+27. B.P.H Poerbojo
+28. R. Abdoelrahim Pratalykrama
+29. R. Roeslan Wongsokoesoemo
+30. Prof. Ir. R. Rooseno
+31. H. Agoes Salim
+32. Dr. Samsi
+33. Mr. R.M. Sartono
+34. Mr. R. Samsoedin
+35. Mr. R. Sastromoeljono
+36. Mr. R.P. Saragih
+37. Ir. Sukarno
+38. R. Soedirman
+39. R. Soerkardjo Wirjopranoto
+40. Dr. Soekiman
+41. Mr. A. Soebardjo
+42. Prof. Mr. Dr. Soepomo
+43. Ir. R.M.P.  Soerachman 
+Tjokroadisoerjo
+44. M. Soetardjo Kartahadikoesoema
+45. R.M.T.A. Soerjo
+46. Mr. Soesanto
+47. Mr. Soewandi
+48. Drs. K.R.M.A. Sosrodiningrat
+49. K.H. A. Wachid Hasjim
+50. K.R.M.T.H. Woerjaningrat
+51. R.A.A Wiranatakoesoema
+52. Mr. K.R.M.T Wongsonegoro
+53. Ny. Mr. Maria Oelfah Santoso
+54. Ny. R.S.S Soenarjo 
+Mangoenpoespito
+55. Oei Tjong Hauw
+56. Oei Tiang Tjoei
+57. Liem Koen Hian
+58. Mr. Tan Eng Hoa
+59. P.F. Dahler
+60. A.R. Baswedan
+Anggota Tambahan (menjadi 
+anggota pada masa sidang kedua, 
+10–17 Juli 1945):
+1. 
+K.H. Abdul Fatah Hasan
+2. 
+R. Asikin Natanegara
+3. 
+B.P.K.A. Soerjo Hamidjojo
+4. 
+Ir. Pangeran M. Noor
+5. 
+Mr. M. Besar
+6. 
+Badul Kaffar
+
+Bab 1 
+Bab 1 | Sejarah Kelahiran Pancasila
+| Sejarah Kelahiran Pancasila
+11
+Anggota Istimewa:
+1. 
+Tokonomi Tokuzi
+2. 
+Miyano Syoozoo
+3. 
+Itagaki Masamitu
+4. 
+Matuura Mitokiyo
+5. 
+Tanaka Minoru
+6. 
+Masuda Toyohiko
+7. 
+Ide Teitiroe
+(Sumber: PPIP untuk SMP/MTs kelas VII, BPIP, 2022)
+dr. K.R.T Radjiman Wedjodiningrat lahir pada 21 
+April 1879 di Lempuyangan, Yogyakarta.  Putra 
+pertama keluarga Sutrodono ini merupakan anak 
+yang sangat didambakan dan dicita-citakan dapat 
+mengharumkan nama orang tua, berbakti kepada 
+orang tua, dan menjunjung tinggi keluarga di 
+kemudian hari. Sejak kecil, Radjiman dididik 
+disiplin, suka bekerja keras, bersahaja, tabah, 
+dan kesatria. Ia disekolahkan di Europeesche 
+Lagere School (ELS) Yogyakarta, selesai tahun 
+1893. Selanjutnya ia menjadi mahasiswa School 
+tot Opleiding Van Inlandsche Artsen (STOVIA), sambil menjalankan tugas 
+sebagai asisten leenar. Berkat ketekunannya, ia mendapatkan gelar 
+Indish Arts.
+Pada 1910 Radjiman belajar di Universitas Amsterdam, Netherland 
+hingga mendapatkan gelar Europees Arts. Selanjutnya, pada 1911, ia 
+belajar ilmu kebidanan dan penyakit pada wanita di Berlin, Jerman. Pada 
+1919, ia belajar rontgenologie di Amsterdam, Netherland. Beberapa tahun 
+kemudian, ia memperdalam ilmu gudascopie urinoir di Paris, Prancis.
+Radjiman mulai aktif dalam kegiatan politik sejak menjadi anggota 
+Boedi Oetomo pada awal pendirian organisasi ini. Pada 1914, ia menjabat 
+wakil ketua Pengurus Besar Boedi Oetomo. Ia juga menjadi anggota 
+volksraad pada masa awal lembaga bentukan Belanda itu berdiri (1918–
+1921).
+Pada masa pendudukan Jepang, Radjiman berperan serta dalam 
+Poetra sebagai Majelis Pertimbangan, di samping menjadi anggota Chuo 
+Gambar 1.5 dr. K.R.T. 
+Radjiman Wedjodiningrat
+Sumber: Dok IKPNI,  https://
+kumparan.com/.
+Sekilas Info
+Sekilas Info
+
+Pendidikan 
+Pendidikan Pancasila untuk SMP/MTs Kelas VII
+Pancasila untuk SMP/MTs Kelas VII
+12
+Sangi In. Sebagai ketua BPUPK, Radjiman sangat demokratis dan tegas 
+mengambil sikap terhadap keputusan yang telah disepakati sebelumnya. 
+Pada masa awal kemerdekaan, Radjiman menjabat sebagai 
+anggota Komite Nasional Indonesia. Ia juga aktif dalam usaha-usaha 
+mempertahankan kemerdekaan Indonesia. Setelah pengakuan Indonesia 
+oleh Belanda, Radjiman ikut serta dalam Dewan Perwakilan Rakyat (DPR) 
+Negara Kesatuan Republik Indonesia.
+(disarikan dari Tokoh-Tokoh Badan Penyelidik Usaha-Usaha Persiapan Kemerdekaan Indonesia, 1993).
+Berdasarkan daftar nama tokoh anggota BPUPK di atas, pilihlah lima tokoh 
+untuk dicari informasinya tentang tempat lahir, tanggal lahir, pendidikan, dan 
+perjuangannya bagi bangsa, kemudian tuliskan secara singkat informasinya 
+pada tabel berikut!
+Tabel 1.2 Biograi Tokoh Anggota BPUPK
+No.
+Nama Tokoh
+Tempat, Tanggal 
+Lahir
+Pendidikan
+Perjuangan bagi Bangsa
+1.
+2.
+3.
+4.
+5.
+Ayo, Mencari Informasi
+
+Bab 1 
+Bab 1 | Sejarah Kelahiran Pancasila
+| Sejarah Kelahiran Pancasila
+13
+2. Kelahiran Pancasila dalam Sidang BPUPK 
+Gambar 1.6 Sidang BPUPK Perumusan Dasar Negara
+Sumber: Arsip Nasional Republik Indonesia/Wikimedia Commons, 2011.
+1. 
+Dengan mengamati gambar 1.6, bagaimana suasana sidang BPUPK? 
+2. 
+Bagaimana perasaan kalian seandainya pada saat itu kalian turut hadir 
+dalam sidang tersebut?
+3. 
+Apa yang akan kalian lakukan jika saat itu hadir sebagai anggota BPUPK?
+Untuk memperkuat pemahamanmu, ayo, 
+simak “Video Dokumenter Hari Lahir 
+Pancasila” berikut.
+https://buku.kemdikbud.go.id/s/VideoDHLP
+Pindai Aku
+Ayo, Mengamati
+
+Pendidikan 
+Pendidikan Pancasila untuk SMP/MTs Kelas VII
+Pancasila untuk SMP/MTs Kelas VII
+14
+Setelah BPUPK terbentuk dan dilantik, BPUPK segera melaksanakan sidang 
+untuk menyelidiki persiapan kemerdekaan bagi bangsa Indonesia. Masa 
+persidangan BPUPK yang pertama dimulai pada tanggal 29 Mei 1945 sampai 
+dengan 1 Juni 1945 dipimpin oleh ketua BPUPK, yaitu dr. K.R.T. Radjiman 
+Wedyodiningrat.
+Dalam sidang hari pertama dr. K.R.T. Radjiman Wedyodiningrat 
+menanyakan kepada seluruh anggota BPUPK tentang dasar negara yang 
+akan dibentuk. Pada sidang BPUPK yang pertama ini terdapat 32 orang yang 
+turut menyampaikan pendapatnya. Pendapat tersebut terkait dengan bentuk 
+negara, cara menjalankan pemerintahan, dan lain-lain.
+Selanjutnya, para peserta sidang BPUPK mencoba untuk menjawab 
+pertanyaan dari ketua sidang dr. K.R.T. Radjiman Wedyodiningrat. Sesuai 
+jadwal, pada tanggal 29 Mei 1945 terdapat 12 anggota yang berbicara. Pada 
+tanggal 30 Mei 1945 terdapat ada 9 anggota yang berbicara, lalu pada tanggal 
+31 Mei 1945 terdapat 14 anggota yang berbicara. Pada tanggal 1 Juni 1945 
+terdapat 6 anggota yang berbicara. 
+Suasana persidangan pada saat itu relatif bebas dari gangguan dan tekanan 
+penguasa Jepang sehingga anggota BPUPK dapat menyampaikan aspirasinya. 
+Jepang semakin terdesak dan mengalami kekalahan dalam menghadapi 
+Sekutu. Sebagai upaya untuk menarik simpati dan dukungan rakyat Indonesia, 
+Jepang memberikan kebebasan untuk membahas berbagai hal dalam rangka 
+persiapan kemerdekaan Indonesia. Termasuk dalam membahas dasar negara 
+Indonesia merdeka.
+Setelah 3 (tiga) hari sidang berlangsung tidak ada satupun peserta sidang 
+yang menjawab pertanyaan ketua sidang tentang dasar negara, barulah 
+pada tanggal 1 Juni 1945 dalam pidatonya Ir. Sukarno menyampaikan 
+pemikirannya tentang dasar negara yang mengandung prinsip: Kebangsaan; 
+Internasionalisme atau Peri Kemanusiaan; Mufakat atau Demokrasi; 
+Kesejahteraan Sosial; dan Ketuhanan. Dasar negara itu kemudian diberi nama 
+Pancasila, yang menjadi pemersatu seluruh elemen bangsa. Pancasila menjadi 
+alat pemersatu keragaman budaya, agama, dan etnik yang menjadi bagian 
+integral dari masyarakat Nusantara.
+Ayo, Membaca
+
+Bab 1 
+Bab 1 | Sejarah Kelahiran Pancasila
+| Sejarah Kelahiran Pancasila
+15
+Gambar 1.7 Pidato Ir. Sukarno pada rapat BPUPK
+Sumber: Kompas.com/Kemendikbud/2022.
+Di akhir Sidang BPUPK dan setelah mendengarkan usulan Ir. Sukarno 
+mengenai Pancasila sebagai dasar negara pada 1 Juni 1945 tersebut, Sidang 
+menyepakati untuk menerima usulan Pancasila sebagai dasar negara. Sidang 
+BPUPK kemudian juga memutuskan untuk merumuskan Pancasila sebagai 
+dasar negara oleh panitia kecil yang dibentuk oleh Ketua Sidang dan diketuai 
+oleh Ir. Sukarno.
+Sesuai Keputusan Presiden Nomor 24 Tahun 2016 tentang Hari Lahir 
+Pancasila, rumusan Pancasila sejak tanggal 1 Juni 1945 yang dipidatokan Ir. 
+Soekarno di sidang BPUPK, rumusan Piagam Jakarta oleh Panitia Sembilan 
+pada tanggal 22 Juni 1945 hingga rumusan inal oleh Panitia Persiapan 
+Kemerdekaan Indonesia pada tanggal 18 Agustus 1945 adalah satu kesatuan 
+proses lahirnya Pancasila sebagai Dasar Negara.
+
+Pendidikan 
+Pendidikan Pancasila untuk SMP/MTs Kelas VII
+Pancasila untuk SMP/MTs Kelas VII
+16
+Setelah menyimak materi di atas, lakukanlah permainan peran tentang proses 
+sidang BPUPK yang pertama!
+1. 
+Bentuklah kelompok 5–6 orang.
+2. 
+Carilah informasi lebih lanjut tentang sejarah kelahiran Pancasila.
+3. 
+Buatlah skenario sederhana untuk permainan peran sidang BPUPK yang 
+pertama.
+4. 
+Tentukan peran masing-masing sesuai dengan tokoh-tokoh dalam sidang 
+BPUPK.
+5. 
+Berlatihlah percakapan atau dialog sesuai dengan skenario yang telah 
+disusun.
+6. 
+Tampilkan permainan peran di depan kelas.
+B. Perumusan Pancasila oleh Panitia Sembilan
+Sidang BPUPK yang pertama belum menghasilkan kesepakatan tentang 
+rumusan dasar negara. Akan tetapi, pidato Ir. Sukarno pada 1 Juni 1945 
+mempunyai arti yang sangat penting karena dapat mengintegrasikan 
+seluruh pandangan anggota BPUPK menjadi suatu kesatuan yang utuh juga 
+disampaikan dengan retorika yang kuat. 
+Setelah berakhirnya sidang BPUPK yang pertama, dibentuklah Panitia 
+Kecil yang terdiri atas delapan orang yang diketuai oleh Ir. Sukarno. Panitia ini 
+bertugas mengumpulkan usul-usul para anggota BPUPK serta merumuskan 
+Pancasila sebagai dasar negara berdasarkan pidato yang disampaikan Ir. 
+Sukarno.
+Panitia Kecil tersebut di antaranya sebagai berikut.
+1. 
+Ir. Sukarno
+2. 
+Drs. Mohammad Hatta
+3. 
+R. Otto Iskandar Dinata
+4. 
+K.H. A. Wachid Hasjim
+5. 
+Mohammad Yamin
+6. 
+Ki Bagoes Hadikoesoemo
+7. 
+M. Soetardjo Kartohadikoesoemo
+8. 
+A.A. Maramis
+Ayo, Bermain Peran
+Ayo, Membaca
+
+Bab 1 
+Bab 1 | Sejarah Kelahiran Pancasila
+| Sejarah Kelahiran Pancasila
+17
+Belum sempat mengadakan pertemuan, keanggotaan Panitia Delapan 
+diganti menjadi sembilan orang sehingga menjadi Panitia Sembilan. 
+Penggantian ini dilakukan untuk menghadirkan komposisi keanggotaan 
+panitia yang lebih mewakili dinamika pembahasan tentang dasar negara 
+dalam Sidang BPUPK pertama tersebut, yang merepresentasikan golongan 
+nasionalis religius dan Islamis nasionalis. 
+Berikut adalah kesembilan anggota BPUPK tersebut.
+1. 
+Ir. Sukarno (ketua) 
+2. 
+Drs. Moh. Hatta (wakil ketua) 
+3. 
+Mr. Achmad Soebardjo (anggota)
+4. 
+Mr. Muhammad Yamin (anggota)
+5. 
+K.H. Wachid Hasyim (anggota)
+6. 
+Abdul Kahar Muzakir (anggota)
+7. 
+Abikoesno Tjokrosoejoso 
+(anggota)
+8. 
+H. Agus Salim (anggota) 
+9. 
+Mr. Alexander Andries Maramis 
+(anggota)
+Panitia 
+Sembilan 
+yang 
+menggantikan 
+Panitia 
+Delapan 
+beranggotakan 
+4 
+orang 
+golongan 
+nasionalis 
+religius 
+dan 
+4 
+orang 
+golongan Islam nasionalis, sedangkan 
+Ir. Sukarno sebagai ketua sekaligus penengahnya. Panitia Sembilan ini, pada 
+tanggal 22 Juni 1945 di kediaman Ir. Sukarno Jalan Pegangsaan Timur No. 
+56 Jakarta, berhasil menyepakati rancangan preambul yang di dalamnya 
+terdapat rumusan Pancasila. Ir. Sukarno menyebut rancangan preambul ini 
+dengan “Mukadimah”, Muhammad Yamin menyebutnya “Piagam Jakarta”, 
+dan Soekirman Wirsosandjojo menyebutnya “Gentlemen’s Agreement”.
+Gambar 1.8 Tokoh Panitia Sembilan
+Sumber: Foto Ist/demokratis.co.id, 2021.
+
+Pendidikan 
+Pendidikan Pancasila untuk SMP/MTs Kelas VII
+Pancasila untuk SMP/MTs Kelas VII
+18
+Gambar 1.9 Piagam Jakarta
+Sumber: Arsip Nasional Republik Indonesia, 2011
+Melalui pembahasan yang demokratis, Panitia Sembilan menyepakati 
+untuk menyempurnakan rumusan Pancasila yang diusulkan Ir. Sukarno 
+menjadi sebuah rumusan yang dikenal sebagai Piagam Jakarta pada 22 Juni 
+1945. Rumusan Pancasila tersebut berbunyi:
+
+Bab 1 
+Bab 1 | Sejarah Kelahiran Pancasila
+| Sejarah Kelahiran Pancasila
+19
+1. 
+Ketuhanan dengan kewajiban menjalankan syariat Islam bagi pemeluk-
+pemeluknya
+2. 
+Kemanusiaan yang adil dan beradab
+3. 
+Persatuan Indonesia
+4. 
+Kerakyatan 
+yang 
+dipimpin 
+oleh 
+hikmat 
+kebijaksanaan 
+dalam 
+permusyawaratan-perwakilan
+5. 
+Keadilan sosial bagi seluruh rakyat Indonesia
+Berdasarkan uraian materi di atas, silakan identiikasi tentang perumusan 
+dasar negara dalam sidang Panitia Sembilan dengan melengkapi tabel di 
+bawah ini.     
+Tabel 1.3 Sidang Panitia Sembilan
+No.
+Pernyataan
+Deskripsi
+1.
+Waktu pelaksanaan sidang 
+Panitia Sembilan
+2.
+Tempat pelaksanaan sidang 
+Panitia Sembilan
+3.
+Nama tokoh-tokoh Panitia 
+Sembilan
+4.
+Karakter tokoh-tokoh Panitia 
+Sembilan
+5.
+Hasil sidang Panitia Sembilan
+
+Pendidikan 
+Pendidikan Pancasila untuk SMP/MTs Kelas VII
+Pancasila untuk SMP/MTs Kelas VII
+20
+C. Proklamasi dan Penetapan Pancasila sebagai Dasar 
+Negara
+1. Pembentukan PPKI
+Bagaimana selanjutnya setelah proses perumusan 
+dasar negara baik dalam sidang BPUPK maupun 
+sidang Panitia Sembilan? 
+Ayo, kita pahami kembali paparan materi 
+berikut ini!
+Ternyata 
+Jepang 
+semakin 
+mengalami 
+kemunduran dalam Perang Asia Timur Raya. Pada 
+6 Agustus 1945, Kota Hirosima dibom atom oleh 
+Amerika Serikat. Kemudian, pada tanggal tanggal 
+9 Agustus 1945 giliran Kota Nagasaki juga dijatuhi 
+bom atom oleh Sekutu. Korban meninggal di 
+Hiroshima sekitar 140.000 orang dan di Nagasaki 
+sekitar 70.000 orang.  
+Menghadapi situasi tersebut, pada 7 Agustus 
+1945, Jenderal Terauchi menyetujui pembentukan 
+Dokuritsu Zyunbi Iinkai atau Panitia Persiapan 
+Kemerdekaan 
+Indonesia 
+(PPKI). 
+Tugas 
+PPKI 
+yaitu 
+melanjutkan 
+tugas 
+BPUPK 
+dan 
+untuk 
+mempersiapkan Kemerdekaan Indonesia. Ketua 
+PPKI adalah Ir. Sukarno, sedangkan wakilnya Drs. 
+Mohammad Hatta. PPKI beranggotakan 21 orang 
+dan semuanya orang Indonesia yang berasal dari 
+berbagai daerah, yaitu dari 12 wakil dari Jawa, 3 
+wakil dari Sumatra, 2 wakil dari Sulawesi, 1 wakil dari Kalimantan, 1 wakil 
+dari Sunda Kecil, 1 wakil dari Maluku, dan 1 wakil dari golongan penduduk 
+Cina. Dengan demikian, kemerdekaan yang dipersiapkan itu murni hasil 
+perjuangan bangsa Indonesia sendiri karena semua anggotanya dari bangsa 
+Indonesia.
+Gambar 1.10 RP Soeroso 
+Tjondronegoro
+Sumber: Departement of Social Afairs 
+of Indonesia. https://commons.
+wikimedia.org.
+RP Soeroso Tjondronegoro 
+lahir pada 3 November 1895 di 
+Porong Sidoardjo, Jawa Timur. 
+Ia menempuh pendidikan 
+di Eerste Volkschool dan 
+Kweekschool Probolinggo, 
+Jawa timur. Ia menjadi 
+anggota Boedi Oetomo 
+sejak berdirinya organisasi 
+tersebut dan menjadi ketua 
+Serikat Islam di Probolinggo 
+pada 1913–1919. Pada masa 
+pendudukan Jepang, Soeroso 
+menjadi ketua Poetra daerah 
+Malang, Jawa Timur, serta 
+menjadi anggota BPUPK 
+dengan jabatan ketua muda 
+atau wakil ketua. 
+Ayo, Membaca
+
+Bab 1 
+Bab 1 | Sejarah Kelahiran Pancasila
+| Sejarah Kelahiran Pancasila
+21
+Anggota PPKI itu di antaranya sebagai berikut.
+1. 
+Ir. Sukarno (ketua)
+2. 
+Drs. Moh. Hatta (wakil ketua)
+3. 
+Prof. Mr. Dr. Soepomo
+4. 
+dr. K.R.T. Radjiman Wedyodiningrat
+5. 
+R.P. Soeroso
+6. 
+Soetardjo Kartohadikoesoemo
+7. 
+K.A. Wachid Hasjim
+8. 
+Ki Bagoes Hadikoesoemo
+9. 
+Otto Iskandar Dinata
+10. Abdoel Kadir
+11. Pangeran Soerjohamidjojo
+12. Pangeran Poerbojo
+13. Dr. Mohammad Amir
+14. Mr. Abdul Maghfar
+15. Teuku Mohammad Hasan
+16. Dr. G.S.S.S.J Ratulangi
+17. Andi Pangerang
+18. A.A Hamidhan
+19. I Goesti Ketoet Poedja
+20. Mr. Johannes Latuharhary
+21. Drs. Yap Tjwan Bing
+Selanjutnya 
+tanpa 
+sepengetahuan 
+Jepang, 
+keanggotaan bertambah 6 orang, di antaranya 
+sebagai berikut.
+1. 
+Achmad Soebardjo 
+2. 
+Sajoeti Melik 
+3. 
+Ki Hadjar Dewantara 
+4. 
+R.A.A. Wiranatakoesoema 
+5. 
+Kasman Singodimedjo 
+6. 
+Iwa Koesoemasoemantri
+Gambar 1.11 Ki Hadjar 
+Dewantara
+Sumber: Dok. KOMPAS, www.kompas.
+com.
+Ki Hajar Dewantara 
+dilahirkan tanggal 2 Mei 1889 
+dengan nama Raden Mas 
+Soewardi Soerjaningrat. Ia 
+adalah salah seorang cucu Sri 
+Paku Alam III di Yogyakarta. 
+Ki Hajar Dewantara aktif 
+sebagai pendukung organisasi 
+Boedi Oetomo, kemudian 
+Sarekat Islam dan mendirikan 
+organisasi baru bernama  
+Indische Partij tanggal 6 
+September 1912 bersama 
+Douwes Dekker dan dr. 
+Tjipto Mangoenkoesoemo 
+yang dikenal dengan “tiga 
+serangkai”.
+
+Pendidikan 
+Pendidikan Pancasila untuk SMP/MTs Kelas VII
+Pancasila untuk SMP/MTs Kelas VII
+22
+Aktivitas Kelompok 
+1. 
+Bentuklah kelompok belajar terdiri atas 3–4 orang.     
+2. 
+Diskusikan bersama anggota kelompokmu untuk memilih salah seorang 
+anggota PPKI dan carilah informasi biograi beserta fotonya. Usahakan 
+tokoh yang dipilih tidak sama dengan kelompok lain.
+3. 
+Buatlah laporan tertulis biograi tokoh anggota PPKI tersebut sesuai 
+kemampuan kelompok. Laporan bisa berupa esai, power point, infograis, 
+mind mapping, dan lain-lain untuk dipresentasikan di depan kelas.
+4. 
+Foto tokoh anggota PPKI tersebut dicetak dan beri bingkai foto untuk 
+ditempelkan di dinding kelas. 
+2. Detik-Detik Proklamasi
+Sebelum melanjutkan ke materi berikutnya, ayo, kita nyanyikan lagu berikut 
+dengan semangat!
+Ayo, Berdiskusi
+Ayo, Menyanyi
+
+Bab 1 
+Bab 1 | Sejarah Kelahiran Pancasila
+| Sejarah Kelahiran Pancasila
+23
+Hari Merdeka 
+Ciptaan H. Mutahar
+Tujuh belas Agustus tahun empat lima
+Itulah hari kemerdekaan kita
+Hari merdeka nusa dan bangsa
+Hari lahirnya bangsa Indonesia
+Merdeka
+Sekali merdeka tetap merdeka
+Selama hayat masih dikandung badan
+Kita tetap setia tetap sedia
+Mempertahankan Indonesia
+Kita tetap setia tetap sedia
+Membela negara kita
+Husein Mutahar yang lebih dikenal dengan H. Mutahar lahir 
+di Semarang pada 5 Agustus 1916. Pendidikannya ditempuh 
+di MULO B (1934), AMS AI (1938), dan UGM (1946–1947). H. 
+Mutahar bekerja sebagai Sekretaris Panglima Angkatan 
+Laut RI di Yogyakarta (1947), kemudian menjadi pegawai 
+tinggi Sekretariat Negara di Yogyakarta. Jabatan terakhirnya 
+sebagai Sekretaris Jenderal Departemen Luar Negeri 
+(1974) setelah menjadi Duta Besar Indonesia di Vatikan 
+(1969–1973). H. Mutahar dikenal sebagai pencipta lagu-lagu 
+nasional, di antaranya “Hari Merdeka”, “Hymne Pramuka”, 
+“Syukur”, dan sebagainya. H. Mutahar merupakan tokoh 
+kepanduan Indonesia (1945–1961) dan pendiri Pasukan Pengibar Bendera Pusaka 
+(Paskibraka), yaitu tim yang beranggotakan pelajar dari seluruh Indonesia.  
+Sekilas Info
+Sekilas Info
+Gambar 1.12 Husein 
+Mutahar 
+Sumber: Dok. Gerakan Pramuka, 
+www.tvonenews.com.
+
+Pendidikan 
+Pendidikan Pancasila untuk SMP/MTs Kelas VII
+Pancasila untuk SMP/MTs Kelas VII
+24
+Setelah menyanyikan lagu wajib nasional berjudul “Hari Merdeka” jawablah 
+pertanyaan berikut!
+1. 
+Apa makna yang terkandung dalam lagu tersebut?
+2. 
+Nilai-nilai apa yang tersirat dalam lagu itu?
+3. 
+Bagaimana cara kita mempertahankan kemerdekaan?
+4. 
+Apa yang dapat kalian lakukan untuk membela negara?
+Menyusul pembentukan PPKI, pada tanggal 9 Agustus 1945 Ir. Sukarno, 
+Drs. Mohammad Hatta, dan Radjiman Wedyodiningrat berangkat ke Dalat, 
+Vietnam untuk menemui Jenderal Terauchi, pimpinan Angkatan Perang 
+Jepang yang berkedudukan di Saigon (sekarang Ho Chi Minh City, Vietnam) 
+untuk membahas persiapan kemerdekaan. Di Dalat, pada 12 Agustus 1945, 
+Jenderal Terauchi menyatakan bahwa pelaksanaan kemerdekaan Indonesia 
+itu terserah kepada PPKI yang ketua dan wakil ketuanya adalah Sukarno dan 
+Muhammad Hatta. Dengan demikian, kemerdekaan Indonesia dipersiapkan 
+oleh bangsa Indonesia sendiri.
+Ketika ketiga tokoh itu pulang kembali ke Jakarta pada 14 Agustus 1945, 
+di lapangan terbang Kemayoran Sukarno disambut oleh para petinggi Jepang, 
+anggota-anggota PPKI dan beberapa rakyat Jakarta. Dalam kesempatan itu 
+Sukarno diminta untuk berpidato. Pada pidatonya Sukarno mengatakan: 
+“Kalau dahulu saya berkata, sebelum jagung berbuah Indonesia akan merdeka, 
+sekarang saya dapat memastikan Indonesia akan merdeka sebelum jagung 
+berbunga. Soalnya hanya bergantung pada saya dan kemauan rakyat”. Selain 
+itu, drs. Mohammad Hatta pun sudah ditunggu oleh Sutan Syahrir ketika tiba 
+di rumahnya di Jalan Diponegoro No. 57 Jakarta Pusat. 
+Kabar mengenai Jepang mengajukan damai kepada Sekutu disampaikan 
+Sutan Syahrir kepada Drs. Mohammad Hatta. Saat itu juga Sutan Syahrir 
+menyarankan agar kemerdekaan segera diproklamasikan oleh Ir. Sukarno, 
+supaya terhindar dari label kemerdekaan Indonesia sebagai pemberian dari 
+Jepang. Tetapi Drs. Mohammad Hatta menyatakan ketidaksetujuannya, karena 
+proklamasi kemerdekaan sudah diserahkan kepada PPKI. Jika dilakukan oleh 
+Ir. Sukarno sendiri maka akan merampas hak-hak anggota PPKI yang lainnya.
+Ayo, Menganalisis

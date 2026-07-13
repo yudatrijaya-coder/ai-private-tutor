@@ -1,0 +1,1413 @@
+Hak Cipta pada Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi Republik Indonesia
+Dilindungi Undang-Undang
+Penafian: Buku ini disiapkan oleh Pemerintah dalam rangka pemenuhan kebutuhan buku pendidikan yang 
+bermutu, murah, dan merata sesuai dengan amanat dalam UU No. 3 Tahun 2017. Buku ini disusun dan ditelaah 
+oleh berbagai pihak di bawah koordinasi Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi. Buku ini 
+merupakan dokumen hidup yang senantiasa diperbaiki, diperbarui, dan dimutakhirkan sesuai dengan dinamika 
+kebutuhan dan perubahan zaman. Masukan dari berbagai kalangan yang dialamatkan kepada penulis atau 
+melalui alamat surel buku@kemdikbud.go.id diharapkan dapat meningkatkan kualitas buku ini.
+Informatika untuk SMP/MTs Kelas VII (Edisi Revisi)
+Penulis
+Maresha Caroline Wijanto
+Irya Wisnubhadra
+Vania Natali
+Wahyono
+Sri Mulyati
+Ari Wardhani
+Heni Pratiwi
+Budiman Saputra
+Kurnia Astiani
+Sumiati
+Penelaah
+Aris Sunawar
+Septiaji Eko Nugroho
+Penyelia/Penyelaras
+Supriyatno 
+Lenny Puspita Ekawaty 
+Maharani Prananingrum
+Eko Budiono
+Kontributor
+Misianita Hapsari 
+Maryanti
+Ilustrator
+Nana Maulana
+Editor
+Christina Tulalessy
+Editor Visual
+Randi Ramliyana
+ 
+Desainer
+Ines Mentari
+Penerbit
+Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi
+Dikeluarkan oleh
+Pusat Perbukuan Kompleks Kemdikbudristek  
+Jalan RS. Fatmawati, Cipete, Jakarta Selatan 
+https://buku.kemdikbud.go.id
+Edisi Revisi, 2023
+ISBN 978-623-118-482-5 (no.jil.lengkap PDF)
+ISBN 978-623-118-483-2 (jil.1 PDF)
+Isi buku ini menggunakan huruf Noto Serif 10/15 pt., Steve Matteson
+xvi, 264 hlm.: 17,6 × 25 cm.
+
+iii
+Kata Pengantar
+Pusat Perbukuan; Badan Standar, Kurikulum, dan Asesmen Pendidikan; Kementerian 
+Pendidikan, 
+Kebudayaan, 
+Riset, 
+dan 
+Teknologi 
+memiliki 
+tugas 
+dan 
+fungsi 
+mengembangkan buku pendidikan pada satuan Pendidikan Anak Usia Dini, Pendidikan 
+Dasar, dan Pendidikan Menengah, termasuk Pendidikan Khusus. Buku berkaitan erat 
+dengan kurikulum. Buku yang dikembangkan saat ini mengacu pada kurikulum yang 
+berlaku, yaitu Kurikulum Merdeka.  
+Salah satu bentuk dukungan terhadap implementasi Kurikulum Merdeka di satuan 
+pendidikan ialah mengembangkan buku teks utama yang terdiri atas buku siswa dan 
+panduan guru.   Buku ini merupakan sumber belajar utama dalam pembelajaran bagi 
+peserta didik dan menjadi salah satu referensi atau inspirasi bagi guru dalam merancang 
+dan mengembangkan pembelajaran sesuai karakteristik, potensi, dan kebutuhan peserta 
+didik. Keberadaan buku teks utama ini diharapkan menjadi fondasi   dalam membentuk 
+Profil Pelajar Pancasila yang beriman dan bertakwa kepada Tuhan Yang Maha Esa, dan 
+berakhlak mulia; berkebinekaan global, berjiwa gotong royong, mandiri, kritis, dan kreatif. 
+Buku teks utama, sebagai salah satu sarana membangun dan meningkatkan budaya 
+literasi masyarakat Indonesia, perlu mendapatkan perhatian khusus. Pemerintah 
+perlu menyiapkan  buku teks utama yang mengikuti perkembangan zaman untuk 
+semua mata pelajaran wajib dan mata pelajaran peminatan, termasuk mata pelajaran 
+untuk Pendidikan Khusus. Sehubungan dengan hal itu, Pusat Perbukuan merevisi 
+dan menerbitkan buku-buku teks utama berdasarkan Capaian Pembelajaran dalam 
+Kurikulum Merdeka.   
+Kami mengucapkan terima kasih kepada semua pihak yang telah berkolaborasi 
+dalam upaya  menghadirkan buku teks utama ini. Kami berharap buku ini dapat menjadi 
+landasan   dalam memperkuat ketahanan budaya bangsa, membentuk mentalitas maju, 
+modern, dan berkarakter bagi seluruh generasi penerus. Semoga buku teks utama ini 
+dapat menjadi tonggak perubahan yang menginspirasi, membimbing, dan mengangkat 
+kualitas pendidikan kita ke puncak keunggulan.
+Jakarta, Desember 2023
+Kepala Pusat Perbukuan,
+Supriyatno, S.Pd., M.A.
+
+iv
+Prakata
+Puji syukur kepada Tuhan Yang Maha Esa karena berkat dan rahmat-Nya, penulisan 
+buku siswa mata pelajaran Informatika ini dapat diselesaikan dengan baik. Buku siswa 
+ini merupakan bahan ajar mata pelajaran Informatika untuk pegangan siswa di jenjang 
+Sekolah Menengah Pertama dengan tujuan untuk menjadi sumber belajar siswa dalam 
+mempelajari informatika.
+Informatika adalah bidang ilmu mengenai studi, perancangan, dan pembuatan 
+sistem komputasi, serta prinsip-prinsip yang menjadi dasar perancangan tersebut. 
+Landasan berpikir untuk belajar informatika dinamakan berpikir komputasional 
+(computational thinking). Berpikir komputasional ini merupakan suatu kerangka 
+dan proses berpikir yang mencakup perangkat keras, perangkat lunak, dan menalar 
+(reasoning) mengenai sistem dan persoalan. Moda berpikir (thinking mode) ini 
+didukung dan dilengkapi dengan pengetahuan teoretis dan praktis, serta teknik untuk 
+menganalisis, memodelkan, dan menyelesaikan persoalan.
+Mata pelajaran Informatika terdiri atas empat elemen, yaitu Berpikir Komputasional 
+(BK), Literasi Digital (LD),  Analisis Data, serta Algoritma dan Pemrograman. Dua elemen 
+pertama inilah yang akan dipelajari bersama di buku siswa ini. Isi materi setiap bab 
+terdiri atas konsep/materi/teori terkait elemen yang disajikan secara tematik beserta 
+aktivitas-aktivitas yang dapat dilakukan oleh siswa. Aktivitas berupa aktivitas individu dan 
+berkelompok untuk menuju profil bernalar kritis, kreatif, dan bergotong royong. Aktivitas 
+juga menggunakan moda plugged (membutuhkan komputer) dan unplugged (tidak 
+membutuhkan komputer). Harapannya siswa dapat memahami konsep dan implementasi 
+informatika dengan lebih baik dan bermakna. 
+Materi dan aktivitas yang disampaikan sudah disesuaikan dengan kebutuhan 
+siswa kelas VII dan dikemas dalam bentuk yang menarik. Akhir kata, penulis berharap 
+semoga buku siswa ini dapat bermanfaat dan digunakan untuk pendamping belajar 
+Informatika sebaik-baiknya. Saran dan kritik membangun sangat penulis harapkan 
+untuk meningkatkan kualitas buku ini. 
+Jakarta, Desember 2023
+Penulis
+
+v
+Daftar Isi
+Kata Pengantar........................................................................................... iii
+Prakata......................................................................................................... iv
+Daftar Isi....................................................................................................... v
+Daftar Gambar............................................................................................ viii
+Daftar Tabel................................................................................................. xi
+Petunjuk Penggunaan Buku.................................................................... xii
+Bab 1
+Berpikir Komputasi untuk Penyelesaian Masalah................................... 1
+A.	 Berpikir Komputasional ................................................................................ 4
+B.	 Algoritma dan Dasar Pemrograman............................................................ 13
+C.	 Uji Kompetensi ............................................................................................... 32
+Bab 2
+Pengolahan Data................................................................................................. 37
+A.	 Mengenal Data................................................................................................ 39
+B.	 Perkakas Pengolah Lembar Kerja................................................................. 48
+C.	 Pengolahan Data Dasar................................................................................. 65
+D.	 Pengolahan Data Lanjutan............................................................................ 76
+E.	 Uji Kompetensi................................................................................................ 90
+Bab 3
+Literasi Informasi................................................................................................ 93
+A.	 Data, Informasi, dan Konten......................................................................... 96
+B.	 Pengolahan Data, Informasi, dan Konten .................................................. 105
+
+vi
+Daftar Isi
+C.	 Cara Menyimpan Konten............................................................................... 106
+D.	 Relevansi Hasil Pencarian.............................................................................. 111
+E.	 Mesin Pencari di Internet.............................................................................. 111
+F.	
+Kredibilitas Sumber Informasi...................................................................... 120
+G.	 Ekosistem Media Pers Digital........................................................................ 121
+H.	 Fakta, Opini, dan Hoaks................................................................................. 126
+I.	
+Uji Kompetensi................................................................................................ 131
+Bab 4
+Keseimbangan Hidup di Dunia Digital.......................................................... 137
+A.	 Ruang Publik Virtual....................................................................................... 139
+B.	 Keseimbangan Dunia Virtual dan Nyata...................................................... 147
+C.	 Memilah Informasi yang Bersifat Privat dan Publik................................... 151
+D.	 Membuat Kata Sandi yang Aman ................................................................ 156
+E.	 Uji Kompetensi ............................................................................................... 164
+Bab 5
+Perkakas Teknologi Informasi dan Komunikasi........................................ 167
+A.	 Sistem Komputer............................................................................................ 169
+B.	 Perangkat Lunak untuk Produktivitas.......................................................... 193
+C.	 Pengantar Jaringan Komputer dan Internet............................................... 223
+D.	 Uji Kompetensi................................................................................................ 230
+
+vii
+Daftar Isi
+Glosarium..................................................................................................... 235
+Daftar Pustaka............................................................................................ 240
+Daftar Sumber Gambar............................................................................. 246
+Indeks........................................................................................................... 248
+Profil Pelaku Perbukuan........................................................................... 251
+
+viii
+Daftar Gambar
+Gambar 1.1	
+Rumah dan Bagian-Bagian Rumah.................................................3
+Gambar 1.2	
+Anak-Anak Membuat Kue di Rumah.............................................5
+Gambar 1.3	
+Ibu-Ibu Membuat Kue untuk UMKM.............................................5
+Gambar 1.4	
+Mesin Pembuat Kue di Pabrik Kue.................................................5
+Gambar 1.5	
+Contoh Daftar Belanja........................................................................9
+Gambar 1.6	
+Universe Scratch..................................................................................19
+Gambar 1.7	
+Grid View Scratch................................................................................20
+Gambar 1.8	
+Block Sound pada Scratch.................................................................24
+Gambar 1.9	
+Block Control pada Scratch...............................................................28
+Gambar 1.10	 Blok  Motion  pada Scratch................................................................29
+Gambar 2.1	
+CCTV, smartwatch, smartphone dan juga data dalam  
+	
+berbagai bentuk angka dan grafik.................................................41
+Gambar 2.2	
+Grafik Buah Kesukaan Siswa...........................................................45
+Gambar 2.3	
+Temperatur Ruangan dalam Sehari...............................................46
+Gambar 2.4	
+Flashdisk dan Ukurannya.................................................................47
+Gambar 2.5	
+New File Perkakas Pengolah Lembar Kerja..................................48
+Gambar 2.6	
+Halaman menyimpan perkakas pengolah lembar kerja..........49
+Gambar 2.7	
+Detail Cell dan Range..........................................................................51
+Gambar 2.8	
+Freeze First Column............................................................................54
+Gambar 2.9	
+Unfreeze Panes.....................................................................................55
+Gambar 2.10	 Format Cell............................................................................................57
+Gambar 2.11	 Dialog Box Format Cells.....................................................................57
+Gambar 2.12	 Penganturan Number dengan Scientific.......................................58
+Gambar 2.13	 Pengaturan Alignment.......................................................................61
+Gambar 2.14	 Dialog Box Format Cells – Alignment.............................................61
+Gambar 2.15	 Dialog Box Format Cells – Font........................................................62
+Gambar 2.16	 Font Style...............................................................................................62
+
+ix
+Gambar 2.17	 Dialog Box Format Cells – Border...................................................63
+Gambar 2.18	 Dialog Box Format Cells – Fill...........................................................63
+Gambar 2.19	 Hasil Perhitungan Countif................................................................68
+Gambar 2.20	 Penambahan Header Footer pada Lembar Kerja.......................86
+Gambar 2.21	 Hasil Penerapan Header pada lembar kerja................................86
+Gambar 2.22	 Page Layout, Header dan Footer.....................................................87
+Gambar 2.23	 Dialog Box Protect Sheet....................................................................88
+Gambar 2.24	 Dialog Box memasukan password..................................................88
+Gambar 2.25	 Protect Workbook................................................................................89
+Gambar 2.26	 Pengaktifan Protect Workbook........................................................89
+Gambar 3.1	
+Tombol  Game  Konsol........................................................................97
+Gambar 3.2	
+Informasi  Berupa Pilihan Karakter...............................................97
+Gambar 3.3	
+Informasi Berupa Video dan Foto...................................................97
+Gambar 3.4	
+Informasi Berupa Grafik Angka......................................................97
+Gambar 3.5	
+Contoh Konten Website.....................................................................98
+Gambar 3.6	
+Tampilan Google Images...................................................................103
+Gambar 3.7	
+Tampilan Google Bookmark.............................................................106
+Gambar 3.8	
+Tampilan Google Drive......................................................................107
+Gambar 3.9	
+Aplikasi Penyimpanan Instapaper.................................................107
+Gambar 3.10	 Crawler, Indexer, Ranking.................................................................112
+Gambar 3.11	 Mesin Pencari Google.........................................................................114
+Gambar 3.12	 Mesin Pencari Bing.............................................................................114
+Gambar 3.13	 Mesin Pencari Yahoo..........................................................................115
+Gambar 3.14	 Mesin Pencari Baidu...........................................................................115
+Gambar 3.15	 ChatGPT, Bing Chat, Google Bard....................................................116
+Gambar 3.16	 Contoh Poster Kesadaran Literasi Digital.....................................124
+Gambar 3.17	 Berita Kemenangan Tim Sepak Bola Indonesia..........................125
+Gambar 3.18	 Fakta dan Opini pada Poster Makanan.........................................126
+Gambar 3.19	 Contoh Berita Hoaks...........................................................................126
+
+x
+Gambar 4.1	
+Ruang Publik Fisik dan Ruang Publik Digital..............................140
+Gambar 4.2	
+Perkembangan Sosial Media............................................................142
+Gambar 4.3	
+Media online sebagai sumber belajar............................................147
+Gambar 4.4	
+Kartu Identitas Anak Indonesia......................................................151
+Gambar 4.5	
+Pengaman ganda  saat login pada akun Google..........................160
+Gambar 4.6	
+Ilustrasi algoritma membuat kata sandi.......................................161
+Gambar 5.1	
+Revolusi Komputer menjadi semakin kecil.................................. 171
+Gambar 5.2	
+Perkembangan Komputer Dan Ponsel........................................... 171
+Gambar 5.3	
+Peralatan yang dapat diganti dengan smartphone.................... 172
+Gambar 5.4	
+Logo Telegram dan Whatsapp ........................................................ 176
+Gambar 5.5	
+Logo Aplikasi Konferensi Video...................................................... 177
+Gambar 5.6	
+Logo Perkakas Digital dalam Produktivitas................................. 177
+Gambar 5.7	
+Logo Penyedia Streaming Musik..................................................... 178
+Gambar 5.8	
+Aplikasi Penyedia Streaming Video............................................... 178
+Gambar 5.9	
+Salah Satu Game Online..................................................................... 179
+Gambar 5.10	 Sistem Komputer Secara Umum...................................................... 181
+Gambar 5.11	 Hubungan jenis perangkat lunak dan keras................................ 184
+Gambar 5.12	 Logo Beberapa Sistem Operasi ....................................................... 185
+Gambar 5.13	 Jenis Interaksi Pengguna dengan Komputer............................... 194
+Gambar 5.14	 Kalendar dan File Explorer.............................................................. 196
+Gambar 5.15	 Struktur Folder..................................................................................... 199
+Gambar 5.16	 Pengolah Kata Elektromekanis Dan Elektronik.......................... 205
+Gambar 5.17	 Cara kerja email .................................................................................. 209
+Gambar 5.18	 Peranti yang dapat berinteraksi dengan Peranti lain............... 220
+Gambar 5.19	 CCTV di perkotaan .............................................................................. 221
+Gambar 5.20	 Jaringan Internet ................................................................................ 224
+Gambar 5.21	 Wireless LAN ....................................................................................... 227
+Gambar 5.22	 Tethering................................................................................................ 228
+
+xi
+Daftar Tabel
+Tabel 2.1 	
+Data  Kegemaran Teman  di Sekolah ........................................ 42
+Tabel 2.2 	
+Satuan Ukuran Data....................................................................... 43
+Tabel 2.3 	
+Keterangan COUNTIF.................................................................... 69
+Tabel 2.4 	
+Fungsi Year, Month, Day............................................................... 70
+Tabel 2.5 	
+Fungsi Date....................................................................................... 70
+Tabel 2.6 	
+HOUR, MINUTE, SECOND............................................................. 71
+Tabel 2.7 	
+Fungsi Text....................................................................................... 72
+Tabel 2.8 	
+Fungsi Logika................................................................................... 74
+Tabel 2.9 	
+Fungsi Kondisional......................................................................... 75
+Tabel 2.10 	
+Langkah-Langkah Filter............................................................... 79
+Tabel 2.11 	
+Langkah-langkah Duplikasi Data .............................................. 82
+Tabel 2.12 	
+Penjelasan Menu untuk Print..................................................... 85
+Tabel 3.1 	
+Contoh Masukan dan Data Keluaran........................................ 97
+Tabel 3.2 	
+Mencari Dokumen dengan Kata Kunci.................................... 104
+Tabel 4.1 	
+Berbagai Aplikasi Media Sosial.................................................. 143
+Tabel 5.1 	
+Jenis-Jenis Program Aplikasi...................................................... 185
+
+xii
+Petunjuk Penggunaan Buku
+Tujuan pembelajaran berisi 
+kompetensi utama yang akan 
+kamu capai setelah proses 
+pembelajaran pada bab 
+tersebut selesai. 
+1
+Buku teks utama Informatika dirancang sebagai sumber belajar siswa 
+dalam melakukan pembelajaran. Buku siswa ini yang berisi konsep dan 
+aktivitas yang merangsang siswa untuk dapat belajar 
+dan melakukan eksplorasi secara mandiri. Bagian-bagian 
+penting dari buku siswa adalah:
+Tujuan Pembelajaran 
+Pada bab ini, kamu akan mempelajari tentang apa itu berpikir komputasional dan 
+bagaimana menggunakannya untuk menyelesaikan berbagai persoalan. Selain 
+itu, kamu juga akan belajar untuk mengimplementasikan pemrograman visual.
+Kata Kunci
+• 
+Berpikir Komputasional 
+• 
+Penyelesaian Masalah 
+• 
+Algoritma, Struktur Data
+• 
+Representasi Data
+Pertanyaan pemantik berisi 
+pertanyaan yang memantik 
+siswa untuk berpikir dan 
+menjawab pertanyaan mengenai 
+hal baru yang akan dipelajari. 
+Siswa dapat mendiskusikan 
+jawaban tersebut dengan guru.
+9
+Bab 2
+Pengolahan Data
+Mengapa kita perlu mengolah data? Apakah data 
+yang telah diolah berguna bagi kehidupan kita?
+
+xiii
+Peta Konsep berisi gambaran 
+umum atau abstraksi dari konsep 
+yang akan kamu pelajari pada tiap 
+bab. Peta konsep berbentuk konsep 
+yang terhubung. 
+3
+Kata Kunci adalah daftar kata 
+penting yang akan kamu pelajari 
+pada tiap bab.
+4
+Aktivitas adalah kegiatan pembelajaran yang akan kamu lakukan untuk 
+mencapai kompetensi yang telah ditetapkan pada tiap bab. Aktivitas 
+ini dapat dilakukan secara individu, berpasangan, maupun kelompok 
+untuk mendapatkan keseimbangan kompetensi dalam hal kemandirian 
+dan gotong-royong yang sering dilakukan pada kegiatan pengembangan 
+produk informatika. Guru akan memberikan penjelasan mengenai aktivitas 
+ini dan kamu diharapkan dapat bereksplorasi secara 
+maksimal. Jenis-jenis aktivitas adalah sebagai berikut:
+2
+INFORMATIKA untuk SMP/MTs Kelas VII
+Peta Konsep
+Berpikir Komputasional 
+Penerapan Berpikir  
+Komputasional untuk  
+Penyelesaian Berbagai  
+Persoalan
+Penerapan Berpikir  
+Komputasional 
+dalam Kehidupan 
+Sehari-hari
+AP dengan Kartu 
+Permainan 
+(Unplugged)
+Penerapan Berpikir 
+Komputasional 
+dalam Literasi 
+Bahasa
+AP dengan 
+Pemprograman 
+Visual (Scartch) 
+Algoritma dan 
+Pemprograman (AP)
+Tujuan Pembelajaran 
+Pada bab ini, kamu akan mempelajari tentang apa itu berpikir komputasional dan 
+bagaimana menggunakannya untuk menyelesaikan berbagai persoalan. Selain 
+itu, kamu juga akan belajar untuk mengimplementasikan pemrograman visual.
+Kata Kunci
+• 
+Berpikir Komputasional 
+• 
+Penyelesaian Masalah 
+• 
+Algoritma, Struktur Data
+• 
+Representasi Data
+
+xiv
+Ayo, Berdiskusi adalah aktivitas 
+yang memandumu untuk saling 
+berdiskusi pada suatu topik yang 
+diberikan. Di Akhir diskusi, kamu 
+akan membagi hasil diskusi 
+dengan kelompok diskusi lainnya. 
+5
+Ayo, Berlatih adalah salah satu 
+jenis aktivitas pembelajaran 
+untuk melatihmu menguasai 
+tujuan pembelajaran yang 
+diberikan. Kamu diharapkan 
+berlatih untuk menyelesaikan 
+masalah yang ada dengan cara 
+yang efektif dan efisien. 
+6
+Ayo, Berpikir adalah aktivitas 
+menggunakan akal budi untuk 
+membentuk konsep, memecahkan 
+masalah, melakukan penalaran, 
+atau membuat keputusan. 
+7
+Ayo, Berlatih
+Aktivitas Individu 
+Aktivitas VII-BK-18-U: Bermain Robot Manual
+Dalam aktivitas ini, kamu akan dilatih untuk bernalar kritis, mandiri, dan 
+kreatif untuk mengenal kartu pemrograman yang lebih kompleks dengan 
+menggunakan kartu perintah untuk menyelesaikan permainan. 
+Warna
+Fungsi
+Kartu Perintah
+Jenis
+Keterangan
+Orange
+Mengatur 
+kontrol.
+Ulangi selalu.
+Ulangi selalu
+Kontrol
+Ulangi selalu.
+       Maju satu langkah.
+Ulangi selalu
+Maju satu langkah
+• 
+Buatlah karakter pemain dapat memakan 
+semua makanan yang ada selain batu 
+dan mencapai titik Finis dengan langkah 
+sesedikit mungkin.
+• 
+Tambahkan juga jika sudah mencapai Finis, 
+harus menyebutkan juga kata “Selesai”.
+Ayo, Berpikir
+Aktivitas Individu 
+Aktivitas VII-LD-24-U: Tolong kami! 
+ 
+Angga terperangkap di lantai atas sebuah toko. Tepat saat malam hari. Apa yang 
+dapat dia lakukan untuk mendapatkan pertolongan? Angga telah mencoba 
+berteriak, tetapi tidak ada seorang pun di sekitarnya. Di seberang jalan, Angga 
+melihat beberapa orang masih bekerja sampai larut malam. Bagaimana dia bisa 
+menarik perhatian orang-orang tersebut? Angga melihat sekeliling untuk mencari 
+apa yang bisa dia gunakan. Lalu, dia punya ide cemerlang, Angga menggunakan 
+lampu untuk mengirim pesan kepada orang-orang di seberang jalan. Angga 
+menghidupkan dan mematikannya. Angga menggunakan kode biner sederhana, 
+yang dia tahu orang-orang di seberang jalan pasti akan mengerti. 
+Pertanyaan: Kode yang diciptakan Angga membentuk kata apa?
+Ayo, Berdiskusi
+Aktivitas Kelompok 
+  Aktivitas VII-LD-13-U: Mengidentifikasi Informasi Pribadi
+Pada aktivitas ini, kamu akan menerapkan gotongroyong dengan memahami 
+informasi, gagasan yang diungkapkan oleh orang lain dengan menggunakan 
+berbagai simbol dan media secara efektif, serta memanfaatkannya untuk 
+meningkatkan kualitas hubungan interpersonal guna mencapai tujuan bersama.
+Aktivitas ke-1
+Diskusikan dalam kelompokmu, mana saja informasi yang termasuk 
+informasi personal dan mana yang informasi privat.  Tuliskan pada 
+tabel berikut.
+Informasi 
+Personal  
+Privat 
+Nama Lengkap  
+ 
+ 
+Umur 
+ 
+ 
+Alamat  
+ 
+ 
+Alamat Surel  
+ 
+ 
+Tanggal Lahir  
+ 
+ 
+Jenis Kelamin/Gender  
+ 
+ 
+Banyaknya Saudara  
+ 
+ 
+Tokoh Favorit
+ 
+ 
+Nomor Telepon  
+ 
+ 
+Hobi  
+ 
+ 
+Genre Musik Favorit 
+ 
+ 
+Nama Hewan Peliharaan
+ 
+ 
+Nama Ibu Kandung  
+ 
+ 
+Nama Sekolah  
+ 
+ 
+
+xv
+Ayo, Lakukan adalah aktivitas 
+menggunakan akal budi untuk 
+membentuk konsep, memecahkan 
+masalah, dan melakukannya 
+dengan aksi tertentu. 
+8
+Ayo, Renungkan adalah aktivitas 
+refleksi yang dikerjakan di 
+akhir aktivitas, subbab, atau 
+bab. Refleksi ini berfungsi 
+untuk merekatkan pengalaman 
+belajarmu dalam ingatan jangka 
+panjang yang akan bermanfaat di 
+kemudian hari.
+9
+Uji Kompetensi berisi soal-soal 
+untuk menguji apakah kamu 
+telah mencapai kompetensi 
+yang ditetapkan pada tujuan 
+pembelajaran
+10
+36
+INFORMATIKA untuk SMP/MTs Kelas VII
+Ayo, Renungkan
+Setelah mempelajari materi ini, renungkan dan tuliskan pada lembar kertas 
+(disarankan catatan menggunakan kertas lepasan atau loose leaf).
+1. 
+Apa pendapat kamu tentang algoritma  pemrograman?
+2. 
+Apa yang kamu rasakan ketika mencoba Scratch pertama kali?
+3. 
+Selama mencoba Scratch, menurut kamu, fungsi/method apa yang paling 
+mudah dan yang paling sulit untuk digunakan/dimengerti? Ceritakan 
+dengan bahasa kamu!
+4. 
+Setelah menyelesaikan semua aktivitas, bagaimana perasaan kamu terkait 
+Scratch dan pemrograman visual ini?
+5. 
+Bagaimana pengalamanmu mencoba permainan robot manual?
+C. Uji Kompetensi 
+Ayo, Jawab Tantangan
+Kibo dan Koko sedang membuat kerajinan tangan dari batang kayu kecil. Kibo 
+memiliki dua puluh buah batang kayu yang setiap panjangnya 10 cm. 
+ 
+Koko memerlukan batang kayu tambahan yang berukuran 4 cm sebanyak 
+7 buah dan berukuran 3 cm sebanyak 7 buah. Kibo ingin memberikan kayu 
+miliknya kepada Koko. 
+Tantangan
+Berapa banyak batang kayu minimal yang diberikan oleh Kibo kepada Koko?
+Jawaban kamu ialah . . . .
+Tuliskan caramu  menyelesaikan masalah ini.
+Ayo, Lakukan
+Aktivitas Berpasangan 
+Aktivitas VII-LD-21-U: Troubleshoot Perangkat Sederhana 
+Dengan melakukan pencarian informasi di Internet, diskusikan pertanyaan 
+berikut dengan teman kamu. Pilih jawab pertanyaan yang paling tepat dari 
+diskusi dan catat di lembar kerja siswa.
+a. 
+Pernahkah kamu melihat sebuah alat elektronik, misalnya televisi atau 
+laptop, yang saat dinyalakan, tidak berfungsi seperti biasa? Carilah 
+informasi tentang berbagai kemungkinan alat elektronik atau komputer 
+tidak mau menyala.
+b. 
+Jika kamu menggunakan laptop dalam 12 jam berturut-turut tanpa 
+dimatikan, kira-kira apa yang akan terjadi?
+c. 
+Pernahkah kamu melihat baterai smartphone atau bagian belakang 
+smartphone yang menggelembung? Apa kira-kira penyebabnya? Carilah 
+informasi tentang baterai yang menggelembung dengan memanfaatkan 
+mesin pencari.
+d. 
+Menurut kamu, bagaimana caranya komputer mendeteksi adanya error 
+pada alat input-output yang ada di dalamnya?
+e. 
+Bagaimana cara menemukan solusi untuk HP atau laptop yang mengalami 
+“hang” (tiba-tiba diam dan tidak berfungsi seperti biasa)? Jika fasilitas 
+internet tersedia, carilah informasi untuk mengatasi komputer dan 
+HP yang nge-hang. Kata kunci apa yang kamu gunakan untuk mencari 
+informasi tersebut?
+
+xvi
+Tahukah kamu?
+Kumpulan fakta dan suplemen 
+informasi menarik terkait dengan 
+materi yang disampaikan
+11
+Ingin Tahu Lebih?
+Bagian ini berisi daftar 
+sumber referensi yang dapat 
+kamu gunakan sebagai bahan 
+pendamping pembelajaran. 
+Referensi ini dapat kamu 
+eksplorasi secara mandiri.
+12
+Ingin Tahu Lebih?
+Jika kamu tertarik dengan materi ini dan ingin mempelajari lebih lanjut, 
+kamu dapat mengakses tautan berikut ini.
+1. 
+Kegiatan unplugged, https://csunplugged.org/en/ atau https://code.org/
+curriculum/unplugged 
+2. 
+Situs Praktis berpikir komputasional: https://www.bbc.co.uk/bitesize/
+topics/z7tp34j 
+3. 
+Membuat Drumset dengan aplikasi scratch https://docs.google.com/
+document/d/1TH9hsRX5J6dgwyRWFvdvOcg9tNvYe7qB/edit 
+4. 
+Video : https://www.youtube.com/watch?v=VFcUgSYyRPg
+171
+Bab 5 - Perkakas Teknologi Informasi dan Komunikasi
+Tahukah kamu?
+Electronic-payment (e-payment) ialah sistem pembayaran yang memfasilitasi 
+pembayaran secara elektronik untuk transaksi online. Sistem pembayaran 
+ini makin populer karena meluasnya penggunaan belanja dan perbankan 
+yang dilakukan secara online berbasis internet. Sistem pembayaran pada 
+e-payment saat ini didominasi oleh pembayaran melalui kartu kredit/debet 
+(MasterCard, VISA, GPN) lewat internet banking. Pembayaran juga banyak 
+dilakukan dengan electronic-wallet (e-wallet) atau dompet elektronik yang 
+memungkinkan pembayaran tanpa lewat bank, tetapi lewat aplikasi, seperti 
+Gopay, Ovo, LinkAja, Dana, dan lainnya.
+
+KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI 
+REPUBLIK INDONESIA, 2023
+Informatika untuk SMP/MTs Kelas VII (Edisi Revisi)
+Penulis: Maresha Caroline Wijanto, dkk.
+ISBN 978-623-118-483-2
+Apa perbedaan antara bertindak dan berpikir? 
+Bab I
+Berpikir Komputasional 
+untuk Penyelesaian Masalah
+
+2
+Informatika untuk SMP/MTs Kelas VII (Edisi Revisi)
+Tujuan Pembelajaran 
+Pada bab ini, kamu akan mempelajari tentang apa itu berpikir komputasional dan 
+bagaimana menggunakannya untuk menyelesaikan berbagai persoalan. Selain 
+itu, kamu juga akan belajar untuk mengimplementasikan pemrograman visual.
+Kata Kunci
+Peta Materi
+•	
+berpikir komputasional 
+•	
+penyelesaian masalah 
+•	
+algoritma 
+•	
+struktur data
+•	
+representasi data
+Berpikir Komputasional 
+untuk Penyelesaian Masalah
+Berpikir  
+Komputasional
+Berpikir  
+Komputasional 
+dalam Kehidupan 
+Sehari-hari
+Pengenalan Dasar 
+Pemrograman
+LIterasi Bahasa 
+Indonesia
+Pengembangan 
+Pemrograman
+Algoritma dan Dasar 
+Pemrograman
+
+3
+Bab 1 - Berpikir Komputasional untuk Penyelesaian Masalah
+Gambar 1.1	 Rumah dan Bagian-Bagian Rumah
+Perhatikan gambar berikut.
+Urutkan  bagian-bagian rumah  diatas sehingga menjadi sebuah rumah. Tuliskan 
+langkah-langkah tersebut pada kertas. Setelah selesai, tukar kertasmu dengan 
+beberapa temanmu secara bergiliran. Perhatikan, apakah langkah-langkah yang 
+dibuat temanmu sama dengan langkah yang kamu buat? Periksalah, jika langkah-
+langkah yang ditulis temanmu tersebut diikuti, apakah benar dapat membuat 
+gambar rumah seperti yang diharapkan?
+Mungkin saja kamu menemukan bahwa langkah yang dibuat teman-temanmu 
+berbeda dari langkah yang kamu buat, tetapi tetap dapat membuat gambar 
+rumah yang benar. Mengapa demikian?
+
+4
+Informatika untuk SMP/MTs Kelas VII (Edisi Revisi)
+Dalam kehidupan sehari-hari, kegiatan yang kita 
+lakukan sering kali dibantu oleh komputer. Dapatkah 
+kamu menyebutkan contoh kegiatan yang dibantu oleh 
+komputer? Pada pembelajaran ini, kamu akan mempelajari 
+tentang langkah-langkah penyelesaian masalah dengan 
+konsep informatika, mengenal algoritma, struktur data, 
+representasi data, dan memahami tentang komponen dasar 
+pemrograman melalui berbagai macam aktivitas. 
+Komponen dasar pemrograman akan dipelajari 
+melalui aplikasi Scratch.  Aplikasi ini akan 
+membantumu untuk belajar membuat animasi 
+visual secara mandiri dan kreatif. 
+A.	 Berpikir Komputasional 
+Apa itu berpikir komputasional?
+Apakah kamu pernah memikirkan perbedaan antara  biskuit 
+atau kue yang dibuat di rumah masing-masing dan biskuit 
+dalam kemasan dengan merk tertentu yang dijual di warung 
+atau di toko swalayan? Mari, kita lihat sekilas perbedaan proses 
+pembuatan biskuit tersebut.
+Jika kamu mau membuat biskuit atau kue untuk anggota keluarga di 
+rumah yang terdiri atas lima orang, kamu  cukup membuat biskuit tersebut 
+di dapur dengan peralatan yang ada di rumah (Gambar 1.2). Lain halnya 
+dengan beberapa ibu yang membuat biskuit dalam jumlah yang cukup banyak 
+untuk dijual dan menjalankan Usaha Mikro Kecil Menengah (UMKM). Ibu-ibu 
+tersebut tidak membuat kuenya di dapur rumah yang kecil dengan peralatan 
+seadanya.  Mereka memerlukan tempat dan beberapa peralatan yang lebih 
+canggih dibandingkan dengan peralatan yang kamu  gunakan untuk membuat 
+kue di rumah. 
+
+5
+Bab 1 - Berpikir Komputasional untuk Penyelesaian Masalah
+Untuk menjalankan UMKM, membuat dan menjual biskuit, ibu-ibu 
+mengerjakan pembuatan biskuit tersebut bersama-sama (Gambar 1.3). Hal 
+yang berbeda lagi terjadi pada proses pembuatan biskuit yang ditujukan 
+untuk diproduksi secara massal dan dalam jumlah yang sangat besar. Biskuit 
+tersebut dibuat dan dikemas dengan mesin di pabrik (Gambar 1.4).
+Gambar 1.2	
+Anak-Anak 
+Membuat Kue di Rumah
+Gambar 1.3	 Ibu-Ibu Membuat 
+Kue untuk UMKM
+Gambar 1.4	 Mesin Pembuat  
+Kue di Pabrik Kue
+Dari berbagai cara pembuatan biskuit tersebut, untuk menyelesaikan 
+masalah yang cakupannya kecil, yaitu “membuat biskuit untuk lima orang”, 
+cara penyelesaiannya berbeda dengan cakupan masalah yang menengah, 
+yaitu untuk UMKM, dan berbeda pula untuk cakupan masalah besar, yaitu 
+untuk diproduksi massal setiap hari. Dalam kasus tersebut,  makin besar 
+cakupan permasalahannya, bantuan mesin  makin diperlukan. Di dalam mesin 
+tersebut, terdapat berbagai komponen yang dirangkai  sehingga dapat bekerja 
+dengan cara yang mirip dengan manusia bekerja. Sederhananya, dalam topik 
+ini, kita dapat menyebut rangkaian komponen  tersebut sebagai “komputer”.
+Komputer banyak dipergunakan dalam kehidupan sehari-hari untuk 
+mempermudah atau membantu penyelesaian berbagai permasalahan yang 
+kita hadapi. Cara kerja komputer menyerupai cara kerja manusia. Pada proses 
+pembuatan biskuit, dengan alat apa pun, tentunya tetap diperlukan bahan 
+dasar tepung, margarin, dan bahan-bahan lainnya. Bahan-bahan tersebut 
+dicampur dan diproses lebih lanjut.
+Berpikir komputasional adalah cara berpikir untuk menyelesaikan 
+persoalan, yang cara penyelesaiannya, jika dikembangkan, dapat dilakukan 
+oleh komputer. Dengan demikian, kita akan belajar bagaimana menyelesaikan 
+berbagai persoalan dengan cara yang efektif dan efisien. Ada empat fondasi 
+dari berpikir komputasional, yaitu sebagai berikut.
+
+6
+Informatika untuk SMP/MTs Kelas VII (Edisi Revisi)
+•	
+Dekomposisi, yaitu formulasi persoalan sedemikian rupa persoalan yang 
+kompleks/rumit dibagi-bagi menjadi sub-subpersoalan yang lebih kecil 
+agar dapat diselesaikan dengan cepat dan efisien serta optimal. Jika 
+diperlukan, dapat menggunakan komputer sebagai alat bantu.
+•	
+Abstraksi, yaitu menyarikan bagian penting dari suatu permasalahan dan 
+mengabaikan yang tidak penting sehingga memudahkan fokus kepada solusi.
+•	
+Algoritma, yaitu menuliskan automasi solusi melalui berpikir algoritmik 
+(langkah-langkah yang terurut).
+•	
+Pengenalan pola persoalan, generalisasi dan mentransfer proses 
+penyelesaian persoalan ke sekumpulan persoalan sejenis.
+1.	 Berpikir Komputasional dalam Kehidupan Sehari-hari
+Dalam kegiatan sehari-hari sebenarnya tanpa kita sadari, seringkali 
+menemukan kegiatan yang termasuk dalam berpikir komputasional, 
+contohnya ketika kita mencuci pakaian, kita akan memisahkan pakaian yang 
+putih dengan pakaian yang berwarna, kemudian menyiapkan ember dan 
+keperluan cuci lainnya seperti detergen, sikat baju, dan lain-lain. Kita dapat 
+menerapkan cara berpikir komputasional untuk menyelesaikan masalah 
+mencuci baju, berapa banyak detergen yang dibutuhkan, berapa banyak 
+air yang dibutuhkan untuk mencuci baju. Ini akan menjadi hal yang sangat 
+menarik untuk dipelajari.
+a.	 Algoritma
+Dalam mengerjakan berbagai kegiatan, biasanya kita harus mengikuti 
+langkah-langkah atau aturan-aturan tertentu. Misalnya: seorang siswa 
+diperbolehkan mengikuti ujian jika membawa kartu bukti peserta ujian. 
+Atau, pernahkah kamu membaca atau bertanya kepada orang tuamu 
+tentang langkah-langkah untuk melakukan sesuatu, misalnya langkah-
+langkah untuk memasak nasi goreng? Algoritma adalah langkah-langkah 
+terstruktur untuk melakukan suatu pekerjaan. Dalam algoritma, bisa saja 
+terdapat syarat-syarat yang harus diikuti.
+
+7
+Bab 1 - Berpikir Komputasional untuk Penyelesaian Masalah
+Oh, ya, apakah kamu  memahami 
+perbedaan antara efisien dan efektif? 
+Berikut ini definisi dari kedua kata 
+tersebut berdasarkan Kamus Besar 
+Bahasa Indonesia.
+Sebagai contoh, dalam proses pembuatan kue yang dijelaskan 
+pada bagian “Apa itu Berpikir Komputasional”, jika seorang ibu ingin 
+membuat lima buah biskuit dan dia membuatnya dengan mesin pabrik 
+yang seharusnya digunakan untuk membuat ratusan biskuit, prosesnya 
+akan menjadi tidak efisien dan bahkan tidak efektif. Tidak efisien karena 
+penggunaan mesin menjadi berlebihan untuk kasus tersebut. Tidak efektif 
+karena dapat saja dengan penggunaan mesin, tidak ada biskuit yang dapat 
+dihasilkan karena semua adonan biskuit menempel pada mesin tersebut. 
+Untuk menyelesaikan berbagai persoalan, Informatika pada umumnya 
+berusaha mencari solusi yang optimal, yaitu solusi yang efisien dan efektif.
+Aktivitas VII-BK-01-U: Gelang Warna-Warni
+Aktivitas pembelajaran dapat 
+diakses pada tautan (QR Code) 
+berikut:
+https://buku.kemdikbud.go.id/s/
+mpthhv
+Aktivitas VII-BK-02-U: Pengembangan Soal 
+Gelang Warna-Warni
+Aktivitas pembelajaran dapat 
+diakses pada tautan (QR Code) 
+berikut:
+https://buku.kemdikbud.go.id/
+s/96gpca
+
+8
+Informatika untuk SMP/MTs Kelas VII (Edisi Revisi)
+b.	 Optimasi Penjadwalan
+Dalam kehidupan sehari-hari, terkadang kita perlu mengatur jadwal 
+untuk berbagai kegiatan. Misalnya, dari pukul  07.00 sampai dengan pukul 
+12.00, kita sekolah. Setelah sekolah, ada beberapa kegiatan yang dapat 
+kita lakukan, misalnya membaca buku, belajar musik, belajar memasak, 
+bermain bersama teman, dan lainnya. Dengan demikian, kita harus dapat 
+memilih kegiatan mana saja yang akan kita lakukan pada hari tertentu. 
+Tentunya, kita perlu juga mengatur jadwal agar kegiatan-kegiatan tersebut 
+tidak bertabrakan waktunya.
+Dalam mengatur rangkaian pekerjaan, terkadang, ditemukan ada dua 
+atau lebih pekerjaan yang dapat dilakukan secara bersamaan (paralel). 
+Misalnya, ketika kamu akan membaca buku, ibu meminta bantuanmu 
+untuk mendidihkan air yang berada di sebuah panci besar. Kamu dapat 
+menyalakan kompor dan menaruh panci berisi air di atas kompor tersebut. 
+Tentunya, kamu tidak perlu menunggu air tersebut sampai mendidih 
+terlebih dahulu baru mulai membaca buku. Kamu dapat membaca 
+buku selagi menunggu air tersebut mendidih. Namun, jangan keasyikan 
+mengerjakan PR sampai air habis karena terlalu lama mendidih.
+Aktivitas VII-BK-03-U: Mengisi Ember
+Aktivitas pembelajaran dapat 
+diakses pada tautan (QR Code) 
+berikut:
+https://buku.kemdikbud.go.id/s/
+woh6fs
+
+9
+Bab 1 - Berpikir Komputasional untuk Penyelesaian Masalah
+c.	 Struktur Data
+Dalam 
+kehidupan 
+sehari-
+hari, 
+kamu 
+pasti 
+pernah 
+mengetahui data yang disusun 
+dalam bentuk sebuah daftar. 
+Dalam 
+bidang 
+Informatika, 
+biasanya disebut list. Contoh 
+dari daftar/list adalah daftar 
+belanja  yang dibawa ketika 
+ibu akan ke pasar, dan daftar 
+siswa dalam sebuah kelas. 
+Dari kedua daftar tersebut ada 
+yang 
+memiliki 
+keterurutan 
+dan ada yang tidak. Daftar 
+nama siswa dalam satu kelas 
+mungkin terurut berdasarkan 
+alfabet. Daftar belanja ibu 
+mungkin tidak memiliki keterurutan tertentu sehingga tidak menjadi 
+masalah kalau ibu membeli tomat terlebih dahulu sebelum membeli 
+wortel, atau ibu membeli keduanya bersamaan, atau ibu membeli wortel 
+terlebih dahulu sebelum membeli tomat. Dapatkah kamu menyebutkan 
+contoh lain data yang disampaikan dalam bentuk daftar? Apakah contoh 
+daftar yang kamu sebutkan diurutkan berdasarkan aturan tertentu?
+Gambar 1.5	   Contoh Daftar Belanja
+Aktivitas VII-BK-04-U: Kata Rahasia
+Aktivitas pembelajaran dapat 
+diakses pada tautan (QR Code) 
+berikut:
+https://buku.kemdikbud.go.id/
+s/8nrsyh
+
+10
+Informatika untuk SMP/MTs Kelas VII (Edisi Revisi)
+d.	 Representasi Data
+Dalam kehidupan sehari-hari, sering kali kita dihadapkan pada banyak pilihan. 
+Pilihannya dapat terdiri atas dua kemungkinan atau lebih. Jika hanya terdiri atas 
+dua kemungkinan, biasanya, jawabannya ialah ya atau tidak. Sebagai contoh: 
+Apakah hari ini kamu sarapan roti? Jawabannya ialah ya atau tidak. Apakah 
+kemarin turun hujan? Pertanyaan tersebut tentu berbeda dengan pertanyaan: 
+Apa warna kesukaan kamu? Pertanyaan mengenai warna kesukaan tidak dapat 
+dijawab dengan ya atau tidak. Jika pertanyaannya diubah menjadi “Apakah 
+warna kesukaan kamu ialah biru?”, pertanyaan tersebut dapat dijawab dengan 
+ya atau tidak. Dapatkah kamu menyebutkan contoh pertanyaan lain yang 
+peluang jawabannya pada umumnya ialah ya atau tidak?
+2.	 Literasi Bahasa Indonesia
+Dalam kegiatan sehari-hari, kita sering bertukar informasi melalui surat. 
+Terkadang, kita  menemukan surat dalam bentuk yang berbeda-beda, baik 
+surat elektronik maupun surat biasa. Tahukah kamu, ada berapa macam 
+surat yang sering digunakan untuk berkomunikasi atau bertukar informasi? 
+Berikut ini contoh jenis surat yang sering digunakan dalam berbagai 
+kegiatan. 
+a.	
+Surat Resmi 
+Surat ini biasanya digunakan dalam lingkup kegiatan resmi sekolah, 
+kedinasan, perkantoran, dan lain-lain. Surat resmi adalah surat yang 
+dikirimkan oleh suatu instansi atau lembaga kepada perseorangan atau ke 
+instansi lain yang berisi hal-hal kedinasan. Contoh surat resmi ialah surat 
+undangan, surat jual beli, surat perjanjian, surat dinas, dan lain-lain.
+Aktivitas VII-BK-05-U: Peminjaman Ruang
+Aktivitas pembelajaran dapat 
+diakses pada tautan (QR Code) 
+berikut:
+https://buku.kemdikbud.go.id/s/
+kzrcup
+
+11
+Bab 1 - Berpikir Komputasional untuk Penyelesaian Masalah
+b.	 Surat Pribadi
+Surat ini biasanya digunakan dalam lingkup kegiatan pribadi, contohnya 
+saling bertukar kabar, atau menyampaikan informasi yang bersifat pribadi.
+Perhatikan beberapa contoh surat resmi dan surat pribadi berikut ini.
+Surat Resmi 1
+PANITIA KEGIATAN PERKEMAHAN SABTU MINGGU PRAMUKA
+SMP MERDEKA JAYA
+Palu
+08 November 2023
+ 
+No                  : 2023/11/P-08/URS
+Hal                 : Permohonan Izin
+Lampiran      : 1 berkas
+ 
+Yth. Wali Murid Arrabella
+di tempat
+ 
+Dengan hormat,
+Dalam rangka kegiatan pelestarian alam lingkungan sekitar dan pengukuhan 
+anggota pramuka penggalang kelas VII, Pramuka SMP Merdeka Jaya akan 
+melaksanakan kegiatan perkemahan Sabtu dan Minggu (persami) pada tanggal 
+11 sampai dengan 12 November 2023 di KP Pangandaran. Oleh sebab itu, kami 
+memohon kepada Bapak/Ibu orang tua/wali untuk mengizinkan putra/putrinya 
+mengikuti kegiatan persami tersebut. Sebagai bahan pertimbangan, berikut kami 
+lampirkan jadwal kegiatan.
+Atas perhatiannya, kami ucapkan terima kasih.
+Mengetahui,
+               Fairuz, M.Pd                  
+Kepala Sekolah SMP Merdeka Jaya
+Hormat kami,
+            Rhesa, S.Pd          
+Ketua Panitia Persami 2023
+
+12
+Informatika untuk SMP/MTs Kelas VII (Edisi Revisi)
+Surat Pribadi 1 
+Tokyo, 08 November 2023
+Untuk Sahabatku 
+Arumi
+di Pematang Siantar
+ 
+Salam persahabatan, 
+Hai, apa kabarmu, sahabatku? Bagaimana keadaanmu? Semoga kamu dan 
+keluarga selalu sehat dan bahagia. Arumi, tidak terasa, kita tidak bertemu 
+dalam waktu yang cukup lama. Aku sangat merindukanmu. Apa kamu juga 
+merindukanku? 
+Arumi sahabatku, tidak terasa dua tahun sudah aku bekerja di Tokyo. 
+Bulan depan  waktu akhir aku bekerja di sini. Sebelum pulang ke 
+Indonesia, aku ingin mengajakmu untuk datang ke Tokyo. Kita akan 
+berjalan-jalan dan menikmati suasana di Tokyo. Aku akan mengirimkan 
+tiket pesawat untukmu datang ke Tokyo. Aku berharap kamu mau datang 
+ke sini dan kita akan kembali pulang ke Indonesia bersama-sama. 
+Arumi, sekian dulu, ya, surat dariku. Aku tunggu kabar darimu, ya. Salam 
+untuk keluarga di Indonesia. Aku sangat merindukan mereka. Terima kasih, 
+sampai bertemu di Tokyo, ya.
+Sampai jumpa.
+ 
+Sahabatmu,
+Asyifa
+
+Contoh surat resmi dan surat 
+pribadi lainnya dapat diakses  
+pada tautan (QR Code) berikut:
+https://buku.kemdikbud.go.id/s/
+z0ifql
+13
+Bab 1 - Berpikir Komputasional untuk Penyelesaian Masalah
+B.	 Algoritma dan Dasar Pemrograman
+Salah satu contoh sederhana algoritma ialah langkah-langkah memasak mi instan. 
+Pertama untuk memasak mi instan kita perlu penyiapkan bahan berupa mi instan, 
+panci, mangkuk, sendok, dan air. Setelah bahan siap, tahap selanjutnya adalah 
+mendidihkan air dengan menuang air ke dalam panci dan menyalakan kompor. 
+Kemudian setelah air mendidih masukkan mie instan dan aduk hingga merata. 
+Setelah mi instan matang masukkan bumbu dan aduk kembali. Selanjutnya mi 
+siap dihidangkan di mangkuk yang telah kita sediakan. Jangan lupa setelah selesai 
+makan, cuci mangkuk, sendok, dan panci yang tadi kita digunakan. Bersihkan 
+area tempat memasak dari sisa-sisa mi dan air.
+Aktivitas VII-BK-06-U: Surat Pribadi 
+dan Surat Resmi
+Aktivitas pembelajaran dapat 
+diakses pada tautan (QR Code) 
+berikut:
+https://buku.kemdikbud.go.id/
+s/4wmdmd
+
+14
+Informatika untuk SMP/MTs Kelas VII (Edisi Revisi)
+Contoh langkah sederhana ini, adalah algoritma yang memandu langkah-
+langkah yang diperlukan untuk memasak mi instan secara sistematis dan 
+efisien. Dengan mengikuti langkah-langkah tersebut, kita dapat memastikan 
+bahwa mi instan dimasak dengan baik dan area dapur dibersihkan 
+setelahnya. Itulah algoritma. Algoritma adalah langkah-langkah terstruktur 
+untuk melakukan suatu pekerjaan. Algoritma dibuat untuk dapat dipahami 
+oleh manusia dan juga komputer. Algoritma akan diterjemahkan menjadi 
+kode program untuk memberikan urutan instruksi pada perangkat komputer. 
+Algoritma dan Pemgrograman (AP) yang mengatur jalannya Sistem Komputer, 
+membawa masyarakat berkomunikasi dengan cara yang baru dan membantu 
+menyelesaikan beberapa masalah lainnya. Proses untuk membuat program 
+yang efisien dan efektif memerlukan pemilihan informasi yang tepat untuk 
+digunakan, bagaimana memproses dan menyimpannya, menyelesaikan 
+permasalahan besar menjadi kasus yang lebih. Proses itu juga termasuk 
+mengombinasikan solusi-solusi yang sudah ada sebelumnya dan mencoba 
+analisis solusi baru lainnya.
+Pemrograman adalah proses mengembangkan program, perangkat lunak 
+komputer, aplikasi, dan situs web. Saat ini, komputer tidak dapat berpikir 
+sendiri. Komputer hanya menjalankan perintah yang diberikan kepadanya 
+atau yang sudah tersimpan dan siap dijalankan. Komputer meminta pengguna 
+untuk memberi serangkaian instruksi yang diperintahkan untuk mengetahui 
+apa yang harus dilakukan. Perintah yang dipahami oleh komputer disebut kode. 
+Pemrograman merupakan  elemen inti dari Informatika karena membantu 
+kamu untuk mengembangkan keterampilan penting seperti penyelesaian 
+masalah, logika, dan berpikir kritis.
+Saat ini, kamu akan belajar pemrograman visual, yang juga dikenal 
+sebagai pemrograman berbasis blok. Pemrograman visual ialah sebuah 
+bahasa pengodean yang  memungkinkan kamu untuk membuat program 
+dengan menyusun elemen visual secara grafis, bukan menuliskannya dalam 
+bentuk teks. Elemen visual dalam pemrograman visual berbentuk blok 
+grafik yang dapat disusun untuk membentuk program. Setiap elemen visual 
+merepresentasikan pernyataan atau struktur kontrol. Dengan pemrograman 
+visual, memprogram menjadi seperti ketika kamu menyusun permainan balok 
+untuk membangun gedung, kapal terbang, atau lainnya. Akan tetapi, hasilnya 
+bukan benda nyata, melainkan sebuah “program” yang kalau dijalankan, akan 
+memberikan efek menakjubkan, misalnya animasi atau bahkan game.
+Seperti halnya di Indonesia ada beragam bahasa, pemrograman visual 
+juga menyediakan banyak bahasa pemprograman, seperti: Microsoft Visual 
+
+15
+Bab 1 - Berpikir Komputasional untuk Penyelesaian Masalah
+Studio, Microsoft Visual Basic, Blender (koding), Ardublock, mBlock, Minibloq 
+dan Scratch. Sebagai langkah pertama, kamu akan mengenal sebuah bahasa 
+pemrograman yang bernama Scratch yang akan memungkinkan kamu 
+membuat berbagai karya kreatif yang lucu. 
+1.	 Pengenalan Dasar Pemrograman
+Belajar programming (di dalamnya mencakup koding) diperlukan bukan 
+hanya untuk menjadi programmer (penulis program profesional). 
+Programming diperlukan dalam bidang apa pun, seperti halnya siapa pun 
+perlu belajar menulis.
+Informatika membangun keterampilan yang berguna untuk belajar 
+bidang-bidang lainnya termasuk matematika, sains, penyelesaian 
+persoalan, bekerja dalam tim, pembelajaran berbasis proyek, seni kreatif, 
+dan banyak lagi. Seperti yang dikatakan oleh Steve Jobs (pencipta  komputer 
+Apple, yang sangat terkenal): "koding mengajari Anda cara berpikir".
+Belajar pemrograman sama bergunanya seperti belajar bahasa asing. 
+Makin awal kamu memulai belajar suatu bahasa asing (bahkan jika kamu 
+dilahirkan di suatu negeri asing),  makin mudah untuk mempelajari 
+dan menguasai bahasa asing tersebut. Bedanya ialah bahwa bahasa 
+pemrograman dirancang agar kamu dapat memerintahkan komputer 
+melakukan apa yang kamu rancang.
+Zaman sekarang, dan di masa mendatang, diprediksi akan banyak 
+sekali lapangan kerja yang membutuhkan kemampuan programming 
+di seluruh dunia. Pemrograman komputer mengajarkan keterampilan 
+praktis yang relevan dengan pasar tenaga kerja saat ini dan masa 
+mendatang. Pertumbuhan kebutuhan tenaga kerja di bidang lain yang 
+mensyaratkan kemampuan programming selalu meningkat. Jika kamu 
+mampu memprogram, kamu akan mudah bekerja di mana pun.   
+Informatika ialah ilmu yang terpakai di semua bidang  karena semua 
+bidang akan membutuhkan komputer. Komputasi menggerakkan hampir 
+setiap industri: dari pendidikan hingga pertanian, dari hukum hingga 
+bisnis, dan dari konstruksi hingga obat-obatan. Perangkat lunak (program 
+komputer) berada di balik semua ini. Hal yang paling sederhana dan kamu 
+ketahui ialah aplikasi yang terdapat pada smartphone mulai dari game hingga 
+aplikasi sosial media semuanya dibuat melalui programming. Memiliki 
+kemampuan programming berarti memiliki kemampuan koding, seni terbaru 
+dan membuat kamu akan berkreasi tanpa batas. Banyak seniman saat ini 
+membuat karya-karya dibantu dengan program komputer.
+
+16
+Informatika untuk SMP/MTs Kelas VII (Edisi Revisi)
+a.	 Bagaimana Belajar Programming?
+Pertama-tama, kamu akan dikenalkan dengan lingkungan pemrograman 
+yang akan dipakai. Pengenalan lingkungan pemrograman itu dapat 
+langsung dari internet secara online, dengan komputer atau gawai yang 
+sudah disiapkan, atau tanpa komputer. Jika tidak ada komputer, gurumu 
+akan mengatur sebuah permainan, dengan sebagian siswa menjalankan 
+perintah seolah-olah dia   komputernya. Blok akan disusun dalam bentuk 
+kartu yang secara keseluruhan akan membentuk sebuah program, yaitu 
+“skenario” tindakan yang akan dieksekusi (dijalankan).
+Kamu akan belajar pemrograman lewat contoh yang diberikan. 
+Tentu, mula-mula, kamu akan mencontoh  karena baru belajar pertama 
+kali. Namun, ingat, bahwa itu hanya contoh. Dengan modal contoh 
+yang diberikan, kamu dapat berkreasi untuk membuat program sesuai 
+imajinasimu. Seperti halnya jika kamu diminta membuat rumah dengan 
+balok, setiap anak atau setiap kelompok boleh membangun rumah 
+dengan bentuk, warna, dan gaya yang disukai. Pemrograman juga 
+memungkinkanmu membuat berbagai variasi dari contoh yang diberikan. 
+Jika fasilitas memungkinkan, kamu dapat memotret blok hasil karyamu, 
+memvideo hasilnya, walaupun tidak diminta oleh gurumu. Namun, fokus 
+lebih dulu untuk menyelesaikan tugas yang diminta oleh gurumu.
+Selamat mencoba dan berkarya! 
+Jangan lupa untuk mencatat hasil 
+karyamu di jurnal kegiatan, ya. 
+
+17
+Bab 1 - Berpikir Komputasional untuk Penyelesaian Masalah
+b.	 Pengantar Scratch
+Ayo kita mulai belajar programming. Pengalaman belajarmu akan dimulai 
+dengan mengenal salah satu aplikasi, yaitu Scratch. Scratch dibuat oleh MIT 
+Media Lab, sebuah tim dari Massachusetts Institute of Technology. Dengan 
+Scratch, kamu dapat mengembangkan sebuah program sederhana berisi 
+cerita, games, maupun animasi interaktif sesuai kehidupan sehari-hari. 
+Program sederhana ini dibuat dari susunan blok-blok yang menghasilkan 
+tampilan visual sesuai blok tadi. Hasil karya Scratch juga dapat dibagikan 
+dalam komunitas online. Kamu dapat mengasah kemampuan berpikir 
+kreatif, mampu memberikan alasan secara sistematis, dan berkolaborasi 
+yang merupakan kemampuan penting dalam hidup bermasyarakat saat 
+ini. Sebelum kamu mempelajari lebih jauh tentang aplikasi Scratch  kamu 
+dapat membuka dan menyimak video berikut ini video pengantar: https://
+buku.kemdikbud.go.id/s/pymrvr
+Hal yang akan dilakukan saat kamu menggunakan Scratch ialah membuat 
+akun sehingga hasil karyamu dapat tersimpan. Aktivitas yang akan kamu 
+lakukan menggunakan aplikasi Scratch yang dapat diakses secara online 
+maupun di-install langsung di komputermu. Untuk akses online, dapat 
+melalui laman: https://buku.kemdikbud.go.id/s/vdyd0q Instalasi aplikasi 
+dapat mengunduh terlebih dulu aplikasinya melalui laman: https://buku.
+kemdikbud.go.id/s/1wxpdg. 
+Gurumu akan menentukan apakah 
+kamu akan bekerja online atau 
+menggunakan program Scratch 
+yang sudah disediakan.
+
+18
+Informatika untuk SMP/MTs Kelas VII (Edisi Revisi)
+1)	 Membuat Akun
+Untuk menggunakan Scratch, kamu dapat memilih untuk memiliki akun atau tidak. 
+Kelebihan memiliki akun ialah dapat menyimpan semua hasil proyek Scratch. 
+Ikutilah langkah-langkah berikut ini.
+MENDAFTARKAN AKUN SCRATCH 
+Langkah
+Tampilan
+Pilih Join Scratch di bagian kanan 
+atas menu, lalu daftarkan akun 
+yang dimiliki dan ikuti sesuai 
+langkah.
+Username dan password yang 
+digunakan perlu diingat dan dicatat 
+jika perlu.
+Gunakan selalu akun yang sama 
+untuk akses Scratch sehingga 
+tersimpan semua hasil kerjamu.   
+Apabila sudah memiliki akun, 
+kamu dapat langsung masuk  (login) 
+menggunakan akun yang sesuai 
+dengan memilih menu Sign in di 
+bagian atas kanan menu.
+Setelah berhasil login, akan muncul 
+halaman home, contohnya seperti di 
+samping. 
+
+19
+Bab 1 - Berpikir Komputasional untuk Penyelesaian Masalah
+2)	 Mengenal “Universe” Scratch
+Mari, mengenal apa saja yang dapat kamu lakukan di Scratch. Pilih menu 
+Create di menu atas Home, lalu akan muncul tampilan seperti berikut.
+Gambar 1.6	 Universe Scratch
+Sumber:  Tangkapan Layar Scratch dengan Penambahan (2023) 
+Keterangan:
+1.	
+Menu A: Kumpulan kategori kode yang dapat dilakukan oleh objek. 
+2.	
+Menu B: Kode yang dapat di-assign untuk objek, dapat juga dipilih dari 
+kategori di menu A. Blok kode tinggal di-drag & drop ke bagian Menu C 
+untuk menggunakannya dan hasilnya dapat dilihat di bagian Menu D. 
+Contoh di sini apabila yang aktif ialah sprite (Menu G).
+Menu B dapat berubah apabila objek yang aktif ialah “Backdrops” (Menu F).
+3.	
+Menu C: Daftar blok kode yang diimplementasikan pada objek.
+4.	
+Menu D: Stage Grid untuk review hasil implementasi blok kode pada objek.
+Grid ini memiliki titik X dan Y yang berpusat di tengah, contohnya:
+
+20
+Informatika untuk SMP/MTs Kelas VII (Edisi Revisi)
+Gambar 1.7	 Grid View Scratch
+Titik X dan Y ini membantu untuk penentuan posisi dari objek.
+5.	
+Menu E: Di bagian ini, kamu dapat meng-customize bentuk dan suara dari 
+objek/backdrops sesuai kreativitas sendiri. 
+6.	
+Menu F: kamu dapat mengatur backdrops yang akan digunakan. Hasilnya 
+akan diperlihatkan di menu D.
+7.	
+Menu G: Kumpulan sprite yang digunakan pada project. Blok kode yang 
+ada di menu B dapat diimplementasikan untuk setiap sprite yang ada.
+8.	
+Menu H: Nama project yang dibuat.
+Aktivitas VII-BK-07-U: Memahami Lebih 
+Komponen Dasar Pemrograman
+Aktivitas pembelajaran dapat 
+diakses pada tautan (QR Code) 
+berikut:
+https://buku.kemdikbud.go.id/s/
+r6xlar
+
+21
+Bab 1 - Berpikir Komputasional untuk Penyelesaian Masalah
+2.	 Pengembangan Pemrograman
+Dalam kegiatan programming, kita sering menjumpai urutan, kondisional, 
+dan pengulangan. Urutan dalam kegiatan ini ialah langkah-langkah yang 
+dinyatakan dengan jelas dan tidak rancu untuk menyelesaikan suatu 
+masalah dalam rentang waktu tertentu. Contohnya: langkah-langkah 
+mengganti baterai pada jam dinding. Kondisional di sini dapat diartikan 
+sebagai suatu kejadian ketika kamu mulai menuliskan kode, kamu 
+pasti akan menjalankan berbagai macam jenis perintah dalam kondisi 
+tertentu. Contohnya, “Jika air di dalam teko sudah mendidih (berbunyi), 
+kamu harus mematikan kompor”. Pengulangan atau yang sering disebut 
+looping ialah bahasa pemrograman dan algoritma yang kegunaannya 
+untuk mengulang sebuah perintah yang dibuat. Pengulangan bertujuan 
+untuk mempersingkat waktu pernyataan programming ditulis dalam 
+jumlah banyak. Kita akan mempelajari tentang urutan, kondisional, dan 
+pengulangan melalui aktivitas-aktivitas berikut ini.
+a.	 Pengenalan Kartu Permainan AP (Unplugged)
+Kegiatan pemrograman juga dapat dilakukan tanpa komputer atau yang 
+biasa disebut unplugged. Pada kali ini, kamu akan berkenalan dengan 
+kartu pemrograman sederhana. Nantinya, dengan kartu ini, kamu akan 
+melakukan beberapa permainan bersama. Terdapat dua jenis  kartu, yaitu 
+Kartu Karakter (sama seperti sprite  pada Scratch) dan kartu untuk perintah 
+(sama seperti blok kode pada Scratch). Karakter dapat menggunakan 
+contoh di bawah ini atau kamu boleh menggambar sendiri karakter sesuai 
+dengan keinginan kamu.
+Aktivitas VII-BK-08-P:  
+Objek Pertama Kamu
+Aktivitas pembelajaran dapat 
+diakses pada tautan (QR Code) 
+berikut:
+https://buku.kemdikbud.go.id/s/
+tngogt
+
+22
+Informatika untuk SMP/MTs Kelas VII (Edisi Revisi)
+b.	 Eksplorasi Scratch I
+Pada bagian ini, kita akan mulai untuk mengeksplorasi Scratch. Setiap 
+aktivitas yang ada akan mengajak kamu untuk mengenal pemrograman 
+visual secara bertahap.
+1)	 Sprite pada Scratch
+Ketika menggunakan aplikasi Scratch, kamu akan menemukan istilah yang 
+disebut sprite. Sprite ialah objek-objek yang digunakan dalam sebuah proyek 
+baik dibuat sendiri, unggahan atau yang terdapat pada aplikasi Scratch. 
+Kamu dapat menambahkan lebih dari satu sprite ke dalam proyek kamu. 
+Aktivitas VII-BK-09-U: Bermain dengan 
+Kartu Pemrograman I
+Aktivitas pembelajaran dapat 
+diakses pada tautan (QR Code) 
+berikut:
+https://buku.kemdikbud.go.id/s/
+j1ycpm
+2)	 Latar Gambar/Backdrop pada Scratch
+Ketika kamu membuat sebuah proyek dalam aplikasi scratch, kamu 
+bisa menambahkan latar gambar atau backdrop pada proyek kamu. Ini 
+bertujuan agar proyek yang kamu buat terlihat lebih menarik. Backdrop 
+ini dapat digunakan dari awal atau dapat ditampilkan dari event tertentu 
+yang sudah pernah kamu buat sebelumnya. 
+Aktivitas VII-BK-10-P: Bermain  
+dengan Karakter
+Aktivitas pembelajaran dapat 
+diakses pada tautan (QR Code) 
+berikut: 
+https://buku.kemdikbud.go.id/s/
+stjm6x
+
+23
+Bab 1 - Berpikir Komputasional untuk Penyelesaian Masalah
+c.	 Kartu Permainan AP I
+Aktivitas kali ini akan melanjutkan aktivitas unplugged sebelumnya. 
+Jangan lupakan papan permainan, karakter, dan kartu perintah yang sudah 
+dipelajari sebelumnya. Akan ada beberapa tambahan kartu perintah lagi 
+dan selesaikan setiap aktivitas yang ada.
+d.	 Eksplorasi Scratch II
+Pada pemrograman, urutan itu sangatlah penting. Urutan dalam hal ini 
+bertujuan untuk memunculkan bagian pertama, kedua, dan seterusnya. 
+Ketika membuat sebuah cerita di Scratch, kamu tentu akan membuat 
+alur cerita terlebih dahulu, contohnya siapa yang muncul pertama kali 
+pada cerita, kemudian pergerakan apa yang dia lakukan, dan seterusnya. 
+Perhatikan aktivitas berikut untuk melihat bagaimana urutan itu 
+berpengaruh pada jalannya sebuah program.
+Aktivitas VII-BK-11-P: Bermain  
+dengan Latar Gambar
+Aktivitas pembelajaran dapat 
+diakses pada tautan (QR Code) 
+berikut:
+https://buku.kemdikbud.go.id/s/
+c5m5h5
+Aktivitas VII-BK-12-U: Bermain 
+dengan Kartu Pemrograman II
+Aktivitas pembelajaran dapat 
+diakses pada tautan (QR Code) 
+berikut:
+https://buku.kemdikbud.go.id/s/
+xndekd
+
+24
+Informatika untuk SMP/MTs Kelas VII (Edisi Revisi)
+1)	 Urutan pada Scratch
+e.	 Kartu Permainan AP II
+Pada 
+aktivitas 
+kali 
+ini, 
+kamu 
+masih 
+dapat 
+menggunakan semua karakter lainnya, tetapi kartu 
+e. Kartu Permainan AP II
+2)	 Blok Suara pada Scratch
+Ketika kamu sudah dapat membuat sebuah proyek dengan menambahkan 
+beberapa sprite dan latar gambar, kamu juga dapat menambahkan suara 
+di projek kamu. Pada pemrograman visual, penggunaan suara sangatlah 
+penting karena dapat membuat hasil visualisasi sebuah karya menjadi 
+lebih hidup. 
+Pada Scratch, terdapat beberapa macam blok sound yang dapat kamu 
+gunakan di antaranya seperti berikut.
+Gambar 1.8	 Block Sound pada Scratch
+Sumber: Tangkapan Layar Scratch (2023) 
+Untuk mengetahui fungsi dari setiap blok sound tersebut, 
+kamu dapat mengeksplorasi satu per satu blok yang ada. 
+Setelah melakukan kegiatan eksplorasi,  tuliskan minimal 5 
+arti atau kegunaan dari  blok sound tersebut. 
+Aktivitas VII-BK-13-P:  
+Story Telling
+Aktivitas pembelajaran dapat 
+diakses pada tautan (QR Code) 
+berikut:
+https://buku.kemdikbud.go.id/s/
+ecswzk

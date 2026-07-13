@@ -26,6 +26,7 @@ export async function handleStart(ctx: Context, student: Student): Promise<void>
       `📝 /quiz — Kerjakan kuis\n` +
       `📅 /jadwal — Cek jadwal belajar\n` +
       `📊 /nilai — Lihat nilai terakhir\n` +
+      `🌐 /web — Buka dashboard di browser\n` +
       `❓ /help — Bantuan perintah\n\n` +
       `Ada yang mau ditanyakan? 😊`,
     { parse_mode: "Markdown" },
