@@ -9,7 +9,7 @@ import { handleReminderCommand, processPendingReminders } from "../agent/reminde
 import { handleQuizStart } from "./quiz";
 import { handleSchedule } from "./schedule";
 import { handleMaterial } from "./material";
-import { handleYoutubeSummary } from "./youtube";
+import { handleYoutubeSummary, handleVideoRecommendation } from "./youtube";
 import {
   handleParentRegister,
   handleProgress,
@@ -230,6 +230,13 @@ export async function onMessage(ctx: Context): Promise<void> {
           const ytMatch = respText.match(/\[YOUTUBE:([a-zA-Z0-9_-]{11})\]/);
           if (ytMatch) {
             await handleYoutubeSummary(ctx, student, ytMatch[1]);
+            return;
+          }
+
+          // ── Check for VIDEOS intent (recommend from curated database) ──
+          const videoMatch = respText.match(/\[VIDEOS:(.+?)\]/i);
+          if (videoMatch) {
+            await handleVideoRecommendation(ctx, student, videoMatch[1].trim());
             return;
           }
 

@@ -1,10 +1,11 @@
 /**
- * YouTube summary handler for the bot.
+ * YouTube handler for the bot.
  *
- * When a student shares a YouTube link, this handler:
- * 1. Fetches the transcript via /api/youtube/transcript
- * 2. Feeds the transcript to LLM for summarization/explanation
- * 3. Sends the explanation back to the student
+ * Two features:
+ * 1. [VIDEOS:topic] — Promote curated YouTube links from our database.
+ *    Called when the tutor wants to recommend a video about a topic.
+ * 2. [YOUTUBE:VIDEO_ID] — Summarize a YouTube video (student shares link).
+ *    Fetches transcript and explains via LLM.
  */
 
 import type { Context } from "telegraf";
@@ -12,12 +13,89 @@ import type { Student } from "@/generated/prisma/client";
 import { callLLM } from "@/llm/client";
 import { getPersona } from "../personas";
 import { prisma } from "@/lib/prisma";
+import { getYouTubeForTopic } from "@/data/youtube";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://senangbelajar.web.id";
 
 /**
+ * Map grade level to display name
+ */
+function getGradeName(grade?: string | null): string {
+  const map: Record<string, string> = {
+    SD_5: "SD Kelas 5",
+    SMP_1: "SMP Kelas 1 (Kurikulum Merdeka)",
+    SMA_2: "SMA Kelas 2 (Kurikulum Merdeka)",
+  };
+  return map[grade ?? ""] ?? grade ?? "SD Kelas 5";
+}
+
+/**
+ * Handle video recommendation request.
+ * Called when the LLM outputs [VIDEOS:topic].
+ *
+ * Looks up curated videos from our database and sends them to the student.
+ */
+export async function handleVideoRecommendation(
+  ctx: Context,
+  student: Student,
+  topic: string,
+): Promise<void> {
+  const persona = getPersona(student.persona);
+
+  // Look up videos from our curated database
+  const videos = getYouTubeForTopic(
+    topic,
+    topic,
+    student.gradeLevel ?? undefined,
+  );
+
+  // If no exact match, try broader search by subject
+  if (videos.length === 0) {
+    // Try searching all grades
+    const allVideos = getYouTubeForTopic(topic, topic, undefined);
+    if (allVideos.length > 0) {
+      // Found in other grades — show anyway
+      const lines = allVideos.slice(0, 5).map((v, i) =>
+        `${i + 1}. *${v.title}*\n   🔗 ${v.url}\n   📺 ${v.channel}`
+      );
+      await ctx.reply(
+        `📹 *Video Rekomendasi* tentang *${topic}*\\n\\n` +
+        `${lines.join("\\n\\n")}\\n\\n` +
+        `${persona.emoji} Tonton ya, seru loh! Kalau ada yang mau ditanyain, bilang aja!`,
+        { parse_mode: "Markdown" },
+      );
+      return;
+    }
+
+    await ctx.reply(
+      `${persona.emoji} Hmm, aku belum punya video tentang *${topic}* nih. Tapi aku bisa jelasin langsung kok! ` +
+      `Ada topik lain yang mau ditanyakan? 😊`,
+      { parse_mode: "Markdown" },
+    );
+    return;
+  }
+
+  // Show up to 5 recommended videos
+  const lines = videos.slice(0, 5).map((v, i) =>
+    `${i + 1}. *${v.title}*\n   🔗 ${v.url}\n   📺 ${v.channel}`
+  );
+
+  const gradeLabel = getGradeName(student.gradeLevel);
+
+  await ctx.reply(
+    `📹 *Rekomendasi Video* — *${topic}*\\n\\n` +
+    `Cocok buat ${gradeLabel}! Langsung tonton aja:\\n\\n` +
+    `${lines.join("\\n\\n")}\\n\\n` +
+    `${persona.emoji} Seru kan? Kalau ada bagian yang kurang paham, tanya aja ya!`,
+    { parse_mode: "Markdown" },
+  );
+}
+
+/**
  * Handle YouTube video summarization request.
  * Called when the LLM outputs [YOUTUBE:VIDEO_ID].
+ *
+ * Fetches transcript and explains it via LLM.
  */
 export async function handleYoutubeSummary(
   ctx: Context,
