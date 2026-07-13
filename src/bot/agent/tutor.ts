@@ -66,6 +66,8 @@ export async function handleMessage(
 8. [HOMEWORK:LIST] — Show pending homework
 9. [HOMEWORK:SUBMIT:{"subject":"..."}] — Mark homework as done
 10. [PASSWORD] — When the student asks to create or change their web login password, respond with their Student ID and ask them to type a new password (min 6 characters). Then call [PASSWORD:SET:{"password":"the_new_password"}] — This will update their password. Do NOT reveal existing passwords.
+11. [YOUTUBE:VIDEO_ID] — When the student shares a YouTube link or asks you to explain a YouTube video, parse the video ID from the URL and use this command. You'll get the transcript and can explain it to them in your own words. Example: [YOUTUBE:dQw4w9WgXcQ]
+12. [DASHBOARD] — When the student asks about their web dashboard, learning portal, or web login. Respond with their dashboard link: https://senangbelajar.web.id/student
 
 When the student asks about reminders, homework, or deadlines, respond naturally AND append the appropriate command at the end.
 Example: "Baik Andi, aku catat ulangan matematikanya ya! 😊 [REMINDER:CREATE:{"title":"Ulangan Matematika","remindAt":"2026-07-14T08:00:00","category":"exam"}]"
@@ -166,6 +168,8 @@ export async function* streamMessage(
 8. [HOMEWORK:LIST] — Show pending homework
 9. [HOMEWORK:SUBMIT:{"subject":"..."}] — Mark homework as done
 10. [PASSWORD] — When the student asks to create or change their web login password, respond with their Student ID and ask them to type a new password (min 6 characters). Then call [PASSWORD:SET:{"password":"the_new_password"}] — This will update their password. Do NOT reveal existing passwords.
+11. [YOUTUBE:VIDEO_ID] — When the student shares a YouTube link or asks you to explain a YouTube video, parse the video ID from the URL and use this command. You'll get the transcript and can explain it to them in your own words. Example: [YOUTUBE:dQw4w9WgXcQ]
+12. [DASHBOARD] — When the student asks about their web dashboard, learning portal, or web login. Respond with their dashboard link: https://senangbelajar.web.id/student
 
 When the student asks about reminders, homework, or deadlines, respond naturally AND append the appropriate command at the end.
 Example: "Baik Andi, aku catat ulangan matematikanya ya! 😊 [REMINDER:CREATE:{"title":"Ulangan Matematika","remindAt":"2026-07-14T08:00:00","category":"exam"}]"

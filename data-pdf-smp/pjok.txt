@@ -1,0 +1,1472 @@
+Hak Cipta pada Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi Republik Indonesia
+Dilindungi Undang-Undang
+Penaian: Buku ini disiapkan oleh Pemerintah dalam rangka pemenuhan kebutuhan buku pendidikan 
+yang bermutu, murah, dan merata sesuai dengan amanat dalam UU No. 3 Tahun 2017. Buku ini 
+disusun dan ditelaah oleh berbagai pihak di bawah koordinasi Kementerian Pendidikan, Kebudayaan, 
+Riset, dan Teknologi. Buku ini merupakan dokumen hidup yang senantiasa diperbaiki, diperbarui, dan 
+dimutakhirkan sesuai dengan dinamika kebutuhan dan perubahan zaman. Masukan dari berbagai kalangan 
+yang dialamatkan kepada penulis atau melalui alamat surel buku@kemdikbud.go.id diharapkan dapat 
+meningkatkan kualitas buku ini.
+Pendidikan Jasmani, Olahraga, dan Kesehatan untuk SMP/MTs Kelas VII 
+Penulis 
+Ebta Heri Susanto
+Muhajir
+Penelaah
+Erwin Setyo Kriswanto
+Moh. Fathur Rohman
+Penyelia/Penyelaras
+Supriyatno 
+Lenny Puspita Ekawaty 
+NPM Yuliarti Dewi 
+Galuh Ayu Mungkashi
+Kontributor
+Jujuk Arianto 
+Shodiq Purnomo
+Ilustrator
+Suina Wamina Rizki
+Editor 
+Weni Rahayu
+Galuh Ayu Mungkashi
+Editor Visual
+M. Firdaus Jubaedi
+Desainer
+Marna Sumarna
+Penerbit
+Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi
+Dikeluarkan oleh
+Pusat Perbukuan 
+Kompleks Kemdikbudristek Jalan RS. Fatmawati, Cipete, Jakarta Selatan 
+https://buku.kemdikbud.go.id
+Cetakan Pertama, 2024
+ISBN 978-623-388-725-0 (no.jil.lengkap)
+ISBN 978-623-388-727-4 (jil.1 PDF)
+Isi buku ini menggunakan huruf Noto Serif 10 pt, SIL Open Font License. xiv, 202 hlm.: 17,6 X 25 cm
+
+iiiiii
+Kata Pengantar
+Pusat Perbukuan; Badan Standar, Kurikulum, dan Asesmen Pendidikan; 
+Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi memiliki tugas 
+dan fungsi mengembangkan buku pendidikan pada satuan Pendidikan Anak 
+Usia Dini, Pendidikan Dasar, dan Pendidikan Menengah, termasuk Pendidikan 
+Khusus. Buku berkaitan erat dengan kurikulum. Buku yang dikembangkan 
+saat ini mengacu pada kurikulum yang berlaku, yaitu Kurikulum Merdeka. 
+Salah satu bentuk dukungan terhadap implementasi Kurikulum Merdeka 
+di satuan pendidikan ialah mengembangkan buku teks utama yang terdiri 
+atas buku siswa dan panduan guru. Buku ini merupakan sumber belajar 
+utama dalam pembelajaran bagi siswa dan menjadi salah satu referensi atau 
+inspirasi bagi guru dalam merancang dan mengembangkan pembelajaran 
+sesuai karakteristik, potensi, dan kebutuhan peserta didik. Keberadaan buku 
+teks utama ini diharapkan menjadi fondasi  dalam membentuk Proil Pelajar 
+Pancasila yang beriman dan bertakwa kepada Tuhan yang Maha Esa, dan 
+berakhlak mulia; berkebinekaan global, berjiwa gotong royong, mandiri, 
+kritis, dan kreatif. 
+Buku teks utama, sebagai salah satu sarana membangun dan meningkatkan 
+budaya literasi masyarakat Indonesia, perlu mendapatkan perhatian khusus. 
+Pemerintah perlu menyiapkan buku teks utama yang mengikuti perkembangan 
+zaman untuk semua mata pelajaran wajib dan mata pelajaran peminatan, 
+termasuk Pendidikan Khusus. Sehubungan dengan hal itu, Pusat Perbukuan 
+merevisi dan menerbitkan buku-buku teks utama berdasarkan Capaian 
+Pembelajaran dalam Kurikulum Merdeka.
+Kami mengucapkan terima kasih kepada semua pihak yang telah 
+berkolaborasi dalam upaya  menghadirkan buku teks utama ini. Kami 
+berharap buku ini dapat menjadi landasan   dalam memperkuat ketahanan 
+budaya bangsa, membentuk mentalitas maju, modern, dan berkarakter bagi 
+seluruh generasi penerus. Semoga buku teks utama ini dapat menjadi tonggak 
+perubahan yang menginspirasi, membimbing, dan mengangkat kualitas 
+pendidikan kita ke puncak keunggulan.
+Jakarta, Juli  2024
+Kepala Pusat Perbukuan,
+Supriyatno, S.Pd., M.A.
+
+iviv 
+Prakata
+Dengan rasa syukur dan bahagia kami persembahkan buku ini sebagai 
+kontribusi dalam pengembangan pendidikan, khususnya dalam mata pelajaran 
+Pendidikan Jasmani, Olahraga, dan Kesehatan (PJOK) di Sekolah Menengah 
+Pertama (SMP/MTs) Kelas VII.
+Pendidikan Jasmani, Olahraga, dan Kesehatan (PJOK) memegang peranan 
+penting dalam pembentukan karakter dan kesejahteraan peserta didik. Sejalan 
+dengan semangat Merdeka Belajar, buku ini kami fokuskan pada materi 
+esensial dalam pembelajaran PJOK. Materi-materi tersebut dipilih dengan 
+cermat untuk memberikan landasan yang kokoh bagi pemahaman konsep 
+dasar PJOK sesuai dengan tujuan pendidikan nasional.
+Dalam menyusun buku ini, kami mengacu pada hasil revisi capaian 
+pembelajaran serta mengikuti prinsip efisiensi dan efektivitas dalam 
+penyampaian materi. Kami berharap buku ini dapat menjadi panduan yang 
+bermanfaat bagi peserta didik dalam memahami konsep dasar PJOK serta 
+memberikan sumber bacaan dan pengetahuan sehingga tercipta pembelajaran 
+yang bermakna.
+Kami mengucapkan terima kasih kepada semua pihak yang telah 
+mendukung terwujudnya buku ini. Selain itu, kami juga berharap agar buku 
+ini dapat memberikan kontribusi yang signiikan dalam meningkatkan kualitas 
+pendidikan di Indonesia.
+Selamat membaca!
+Jakarta, Juli 2024
+Tim Penulis
+
+v
+Daftar Isi
+Kata Pengantar ......................................................................................... 
+iii
+Prakata ....................................................................................................... 
+iv
+Daftar Gambar .......................................................................................... 
+vii
+Daftar Tabel .............................................................................................. 
+xi
+Panduan Penggunaan Buku ..................................................................... xiii
+Bab I 
+Meningkatkan Keterampilan Gerak ......................................... 
+1
+ 
+A. Melatih Keterampilan Gerak ........................................................... 
+3
+ 
+B. 
+Hubungan Keterampilan Gerak Dasar dan Keterampilan 
+Gerak Spesiik Olahraga ................................................................... 
+7
+ 
+C. 
+Mendapatkan Keterampilan Baru: Bagaimana Tubuh 
+Belajar Gerak ....................................................................................... 
+10
+ 
+D. Umpan Balik dalam Belajar Keterampilan Gerak ................... 
+14
+ 
+Uji Kompetensi Bab  .................................................................................. 
+32
+ 
+Pengayaan ..................................................................................................... 
+35
+ 
+Releksi ........................................................................................................... 
+35
+Bab II  Memperagakan Strategi Gerak .................................................. 
+37
+ 
+A. Pembelajaran Taktik  ........................................................................ 
+39
+ 
+B. 
+Konsep Ruang dalam Olahraga Tim ............................................ 
+43
+ 
+C. 
+Konsep Ruang dalam Olahraga Individu.................................... 
+46
+ 
+D. Menciptakan, Menggunakan, dan Mempertahankan Ruang 
+dalam Aktivitas Permainan  ........................................................... 
+48
+ 
+E. 
+Pergerakan dengan Bola dan Pergerakan tanpa Bola ........... 
+56
+ 
+F. 
+Memilih Pertahanan Zona atau Pertahanan 
+Satu Lawan Satu ................................................................................. 
+60
+ 
+Uji Kompetensi Bab ................................................................................... 
+67
+ 
+Pengayaan ..................................................................................................... 
+69
+ 
+Releksi ........................................................................................................... 
+70
+Bab III  Belajar Melalui Gerak ................................................................ 
+71
+ 
+A. Konsep Gerak ....................................................................................... 
+73
+ 
+B. 
+Fase Gerak  ........................................................................................... 
+75
+ 
+C. 
+Transfer Keterampilan Gerak ......................................................... 
+78
+ 
+D. Belajar Gerak dalam Permainan ................................................... 
+84
+ 
+E. 
+Menemukan Solusi pada Masalah Gerak ................................... 
+90
+ 
+Uji Kompetensi Bab  .................................................................................. 
+95
+ 
+Pengayaan ..................................................................................................... 
+97
+ 
+Releksi ........................................................................................................... 
+98
+
+vivi 
+Bab IV Kerja Sama dalam Sebuah Tim ................................................. 
+99
+ 
+A. Kohesi (Kepaduan) Tim .................................................................... 101
+ 
+B. 
+Kerja Sama  .......................................................................................... 106
+ 
+C. 
+Taktik dan Strategi dalam Tim ...................................................... 110
+ 
+D. Berbagai Peran di dalam Olahraga .............................................. 113
+ 
+E. 
+Emosi dalam Olahraga...................................................................... 120
+ 
+Uji Kompetensi Bab ................................................................................... 123
+ 
+Pengayaan ..................................................................................................... 125
+ 
+Releksi ........................................................................................................... 126
+Bab V Membugarkan Tubuh ................................................................. 127
+ 
+A. Perlunya Berpartisipasi dalam Aktivitas Jasmani ................... 129
+ 
+B. 
+Kesehatan Sosial ................................................................................. 133
+ 
+C. 
+Kebugaran Jasmani Terkait dengan Kesehatan ........................ 134
+ 
+D. Tes Komponen Kebugaran Jasmani yang Terkait dengan 
+Kesehatan .............................................................................................. 136
+ 
+E. 
+Intensitas Latihan Kebugaran  ....................................................... 142
+ 
+F. 
+Reaksi Tubuh ketika Melakukan Aktivitas Jasmani 
+Olahraga ................................................................................................ 148
+ 
+Uji Kompetensi Bab ................................................................................... 152
+ 
+Pengayaan ..................................................................................................... 154
+ 
+Releksi ........................................................................................................... 154
+Bab VI  Memilih Hidup Sehat .................................................................. 155
+ 
+A. Risiko Kesehatan Akibat Gaya Hidup .......................................... 157
+ 
+B. 
+Gaya Hidup Tidak Sehat .................................................................. 160
+ 
+C. 
+Kesehatan Mental ............................................................................... 167
+ 
+D. Rekomendasi Hidup Sehat bagi Remaja ..................................... 168
+ 
+E. 
+Merancang dan Memonitor Aktivitas Jasmani untuk 
+Menerapkan Hidup Sehat ................................................................ 172
+ 
+Uji Kompetensi Bab  .................................................................................. 176
+ 
+Pengayaan ..................................................................................................... 178
+ 
+Releksi ........................................................................................................... 181
+Glosarium .................................................................................................. 182
+Daftar Pustaka .......................................................................................... 187
+Daftar Sumber Gambar ........................................................................... 188
+Indeks ......................................................................................................... 189
+Proil Pelaku Perbukuan ......................................................................... 191
+
+vii
+vii
+Daftar Gambar
+Gambar 1.1  Berbagai Variasi Keterampilan Gerak Melempar Bola  ..... 
+4
+Gambar 1.2  Belajar Gerak Mengancingkan Baju ......................................... 
+5
+Gambar 1.3  Ronaldo melakukan tendangan bebas. .................................... 
+6
+Gambar 1.4  Berbagai Macam Keterampilan Gerak Dasar  ....................... 
+8
+Gambar 1.5  Hubungan antara Keterampilan Gerak Dasar 
+dengan Gerak Spesiik ................................................................... 
+9
+Gambar 1.6  Proses Pembelajaran PJOK di Sekolah ..................................... 
+11
+Gambar 1.7  Tahapan Akuisisi Keterampilan Gerak Sesuai 
+dengan Gerak Spesiik ................................................................... 
+13
+Gambar 1.8  Tiga Fungsi dari Umpan Balik Ekstrinsik ............................... 
+15
+Gambar 1.9  Pemberian Umpan Balik secara Eksternal 
+Melalui Guru PJOK di Sekolah ................................................... 
+16
+Gambar 1.10  Bermain Bola Voli 4 vs. 4 ............................................................. 
+18
+Gambar 1.11  Dribble dengan fokus pada bola dapat menyebabkan 
+kehilangan bola. .............................................................................. 
+20
+Gambar 1.12  Aktivitas Gerak Dominan dan Nondominan.......................... 
+21
+Gambar 1.13  Aktivitas Bermain Bola Basket 4 vs. 4 ..................................... 
+22
+Gambar 1.14  Aktivitas Bermain Bola Voli 3 vs. 3 
+dengan Net Tertutup  .................................................................... 
+23
+Gambar 1.15  Aktivitas Bermain Umpan Balik Keterampilan Gerak ........ 
+24
+Gambar 1.16  Umpan Balik Melalui Video......................................................... 
+26
+Gambar 1.17  Aktivitas Pengamatan Keterampilan Gerak  .......................... 
+29
+Gambar 1.18  Merekam Keterampilan Gerak Spesiik ................................... 
+30
+Gambar 2.1  Bermain Permainan Bola Tangan 3 Lawan 3 ....................... 
+40
+Gambar 2.2  Bermain Permainan Lempar Tangkap Bola Tenis ............... 
+41
+Gambar 2.3  Bermain Lempar Tangkap Bola Permainan Kasti ............... 
+42
+Gambar 2.4  Aktivitas Gerak, ketika Guru/Pelatih Memberikan 
+Instruksi Strategi ............................................................................. 
+44
+
+viii
+viii 
+Gambar 2.5  Penggunaan Konsep Ruang dalam Permainan 
+Sepak Bola ......................................................................................... 
+45
+Gambar 2.6  Penggunaan Konsep Ruang dalam Aktivitas 
+Pencak Silat ....................................................................................... 
+46
+Gambar 2.7  Perhitungan sudut tolakan merupakan pemanfaatan 
+konsep ruang dalam olahraga tolak peluru. ......................... 
+47
+Gambar 2.8  Guru atau Pelatih Memberikan Instruksi Strategi............... 
+49
+Gambar 2.9  Strategi Menciptakan Ruang dalam Olahraga ....................... 
+50
+Gambar 2.10  Strategi Menggunakan Ruang dalam Permainan dan 
+Olahraga ............................................................................................. 
+51
+Gambar 2.11  Strategi Mempertahankan Ruang dalam Olahraga ............. 
+52
+Gambar 2.12  Menciptakan Ruang dalam Aktivitas Jasmani 
+Merujuk pada Kemampuan Individu atau Tim .................... 
+53
+Gambar 2.13  Aktivitas Permainan Bola Basket dengan Ruang yang 
+Terbatas .............................................................................................. 
+55
+Gambar 2.14  Gerakan tanpa Bola dalam Bentuk Blocking 
+pada Permainan Sepak Takraw ................................................. 
+57
+Gambar 2.15  Pertahanan Satu Lawan Satu dalam Permainan 
+Sepak Bola ......................................................................................... 
+61
+Gambar 2.16  Pertahanan Satu Lawan Satu dalam Bola Basket ................ 
+61
+Gambar 2.17  Skema Strategi Parkir Bus dengan Menumpuk Pemain di 
+Garis Pertahanan ............................................................................ 
+62
+Gambar 2.18  Bermain Permainan Give-and-Go............................................... 
+62
+Gambar 2.19  Bermain Permainan Invasi Give-and-Go 3 vs. 2 ................... 
+63
+Gambar 2.20  Mengembangkan Strategi Menyerang ...................................... 
+65
+Gambar 3.1  Ilustrasi Pelaksanaan Pembelajaran PJOK .............................. 
+74
+Gambar 3.2  Macam-macam Fase Persiapan dalam Cabang Olahraga .. 
+75
+Gambar 3.3  Macam-macam Fase Menghasilkan Tenaga dalam Cabang 
+Olahraga ............................................................................................. 
+76
+Gambar 3.4  Macam-macam Fase Eksekusi Menghasilkan Tenaga 
+dalam Cabang Olahraga ............................................................... 
+76
+Gambar 3.5  Macam-macam Fase Lanjutan Menghasilkan Tenaga 
+dalam Cabang Olahraga ............................................................... 
+77
+
+ixix
+Gambar 3.6  Transfer Keterampilan Positif ..................................................... 
+78
+Gambar 3.7  Transfer Keterampilan Negatif ................................................... 
+79
+Gambar 3.8  Transfer Keterampilan Antarkonteks ....................................... 
+79
+Gambar 3.9  Transfer Keterampilan Proaktif ................................................. 
+80
+Gambar 3.10  Transfer Keterampilan Retroaktif.............................................. 
+80
+Gambar 3.11  Transfer Keterampilan Bilateral ................................................ 
+81
+Gambar 3.12  Mempergakan Transfer Keterampilan ..................................... 
+83
+Gambar 3.13  Olahraga memerlukan berbagai keterampilan 
+agar dapat menunjukkan performa yang baik. ................... 
+84
+Gambar 3.14  Permainan Melalui Small Sides Game ...................................... 
+85
+Gambar 3.15  Permainan Sepak Bola ketika Menyerang .............................. 
+87
+Gambar 3.16  Ilustrasi Permainan Bola Voli ketika Bertahan ..................... 
+88
+Gambar 3.17  Strategi Bertahan Satu Lawan Satu dan Strategi 
+Bertahan Zona ................................................................................. 
+88
+Gambar 3.18  Bermain Lempar Bola 3 vs. 3 ..................................................... 
+89
+Gambar 3.19  Ilustrasi Penggunaan Pendekatan Constraint ........................ 
+91
+Gambar 3.20  Bermain Gawang Lingkaran ....................................................... 
+93
+Gambar 4.1  Tim basket di sekolah merupakan bentuk tim 
+yang telah ada di mayoritas sekolah. ...................................... 102
+Gambar 4.2  Tim Thomas Indonesia yang Menjuarai Piala Thomas 
+Tahun 2020 ....................................................................................... 103
+Gambar 4.3  Tim dayung Indonesia meraih medali perunggu di Asian 
+Games 2023 berkat kerja sama. ................................................. 107
+Gambar 4.4  Melatih Teamwork .......................................................................... 108
+Gambar 4.5  Melatih Teamwork dengan Memindahkan Botol 
+dengan Tali ....................................................................................... 109
+Gambar 4.6  Servis Bola Voli dengan Mengarahkan kepada Pemain 
+Lawan yang Dianggap Lemah di Tim Lawan ....................... 110
+Gambar 4.7  Drop shot dalam permainan bulu tangkis merupakan 
+salah satu bentuk penerapan taktik. ........................................ 111
+Gambar 4.8  Pola Permainan Serangan Balik dengan Bimbingan .......... 111
+Gambar 4.9  Merencanakan Taktik dan Strategi Permainan .................... 112
+
+x 
+Gambar 4.10  Model Pembelajaran Sport Education Model (SEM) 
+dalam Pembelajaran PJOK ........................................................... 113
+Gambar 4.11  Kapten tim sedang berdiskusi dengan wasit dalam 
+pertandingan. ................................................................................... 115
+Gambar 4.12  Pelatih memiliki peran merencanakan dan 
+melaksanakan strategi. .................................................................. 116
+Gambar 4.13  Wasit berperan sebagai penghubung antartim 
+dalam menegakkan aturan permainan. .................................. 117
+Gambar 4.14  Olahraga Penuh dengan Berbagai Perasaan .......................... 120
+Gambar 5.1  Piramida Segitiga Aktivitas Meningkatkan Kebugaran ...... 130
+Gambar 5.2  Contoh-contoh Latihan Aerobik ................................................. 131
+Gambar 5.3  Latihan ini membantu memperkuat tulang, mencegah 
+cedera otot, dan memberikan manfaat Kesehatan. ............ 132
+Gambar 5.4  Bentuk-bentuk Latihan Kelenturan........................................... 132
+Gambar 5.5  Bentuk-bentuk Perilaku Kurang Bergerak .............................. 133
+Gambar 5.6  Latihan Kebugaran yang Terkait dengan Kesehatan .......... 135
+Gambar 5.7  Latihan Kekuatan dan Daya Tahan Otot ................................ 135
+Gambar 5.8  Tes Daya Tahan Menggunakan Bleep Test .............................. 136
+Gambar 5.9  Mengukur Fleksibilitas Menggunakan 
+Tes V-Sit and Reach ........................................................................ 138
+Gambar 5.10  Mengukur Kekuatan Otot dengan Tes Sit-up ......................... 139
+Gambar 5.11  Mengukur Daya Ledak Otot Tungkai ....................................... 140
+Gambar 5.12  Mencari Titik Denyut Nadi .......................................................... 143
+Gambar 5.13  Pengukuran Denyut Nadi ............................................................. 143
+Gambar 6.1  Memilih Gaya Hidup yang Menyehatkan ............................... 157
+Gambar 6.2  Pola makan yang buruk dapat menyebabkan obesitas. .... 161
+Gambar 6.3  Merokok dapat membahayakan kesehatan............................ 162
+Gambar 6.4  Tips Mengatasi Kecanduan Gawai pada Remaja .................. 164
+Gambar 6.5  Isi Piringku ........................................................................................ 169
+
+xixi
+Daftar Tabel
+Tabel 1.1  Aspek Keterampilan Gerak ................................................................. 
+4
+Tabel 1.2  Mencocokkan Keterampilan Gerak Dasar dengan 
+Keterampilan Gerak Spesiik .............................................................. 
+10
+Tabel 1.3  Analisis Keterampilan Gerak Dasar dengan Keterampilan 
+Gerak Spesiik ......................................................................................... 
+10
+Tabel 1.4  Tahap Pelaksanaan Akuisisi Keterampilan ................................... 
+12
+Tabel 1.5  Keterampilan yang Dipelajari pada Tahap Akuisisi 
+Keterampilan ........................................................................................... 
+13
+Tabel 1.6  Umpan Balik Pelempar Bola .............................................................. 
+25
+Tabel 1.7  Hasil Rekaman Tendangan Penalti .................................................. 
+27
+Tabel 1.8  Latihan untuk Meningkatkan Keterampilan................................. 
+27
+Tabel 1.9  Hasil Pengamatan Keterampilan Gerak ......................................... 
+29
+Tabel 2.1  Pemanfaatan Konsep Ruang dalam Olahraga Tim ..................... 
+45
+Tabel 2.2  Pemanfaatan Konsep Ruang dalam Olahraga Individu ............ 
+48
+Tabel 2.3  Mencipatakan Ruang dalam Permainan  ...................................... 
+54
+Tabel 2.4  Mengelompokkan Gerak ...................................................................... 
+58
+Tabel 2.5  Analisis Waktu dalam Penguasaan Bola ........................................ 
+59
+Tabel 2.6  Hasil Serangan Pertahanan Zona 1-2-1 .......................................... 
+65
+Tabel 2.7  Hasil Serangan Pertahanan Zona 2-1-2 .......................................... 
+66
+Tabel 5.1  Hasil Tes Daya Tahan Kardiorespiratori ........................................ 137
+Tabel 5.2  Hasil Tes Fleksibilitas ........................................................................... 138
+Tabel 5.3  Hasil Tes Kekuatan Otot ...................................................................... 139
+Tabel 5.4  Hasil Tes Daya Ledak Otot Tungkai ................................................ 141
+Tabel 5.5  Hasil Tes Komponen Kebugaran Jasmani ...................................... 142
+Tabel 5.6  Hasil Pengukuran Peningkatan Denyut Nadi ............................... 146
+Tabel 5.7  Hasil Pengukuran Denyut Nadi Istirahat, Denyut Nadi Maksimal, 
+dan Rentang Denyut Nadi Latihan .................................................. 148
+Tabel 6.1  Gaya Hidup Sehat dan Tidak Sehat ................................................. 151
+Tabel 6.2  Contoh Penggunaan Ponsel ................................................................ 158
+
+xii
+xii 
+Tabel 6.3  Observasi Penggunaan Ponsel  ......................................................... 158
+Tabel 6.4  Prinsip FITT ............................................................................................. 164
+Tabel 6.5  Rencana Aktivitas Jasmani ................................................................. 166
+Tabel 6.6  Monitoring Aktivitas Jasmani ............................................................ 166
+Tabel 6.7  Daftar Kalori Makanan Pokok ........................................................... 168
+Tabel 6.8  Daftar Kalori Lauk dan Sayur ........................................................... 169
+Tabel 6.9  Daftar Kalori Buah-buahan ................................................................ 170
+
+xiii
+xiii
+Panduan Penggunaan Buku
+Judul Bab
+Nama atau topik utama yang akan dibahas dalam satu bagian buku dilengkapi 
+dengan ilustrasi yang menarik.
+Pertanyaan Pemantik
+Pertanyaan yang 
+dirancang untuk 
+menarik perhatian dan 
+memotivasi peserta 
+didik agar tertarik pada 
+topik yang akan dibahas 
+dalam buku.
+Tujuan Pembelajaran
+Tujuan pembelajaran disusun dengan 
+merujuk Capaian Pembelajaran yang 
+telah ditetapkan.
+Kata Kunci
+Kata-kata penting atau istilah 
+kunci yang terkait dengan topik 
+yang dibahas dalam buku dan 
+perlu diingat oleh peserta didik.
+Siap-Siap Belajar 
+Membantu peserta 
+didik mengaitkan dan 
+mengintegrasikan informasi 
+baru dengan pengetahuan 
+yang sudah ada sehingga 
+pembaca lebih siap, 
+termotivasi, dan mampu 
+memahami materi yang 
+disajikan.
+Peta Konsep
+Diagram yang menunjukkan hubungan antara konsep-konsep 
+utama dalam topik yang dibahas dalam buku, membantu 
+memvisualisasikan dan memahami struktur materi.
+
+xiv
+xiv 
+Materi Pembelajaran
+Konten atau informasi yang 
+disampaikan di dalam buku, 
+meliputi teori, contoh, dan 
+penjelasan.
+Aktivitas
+Kegiatan atau 
+tugas yang 
+direkomendasikan 
+untuk membantu 
+peserta didik dalam 
+memahami dan 
+menerapkan materi 
+yang dibahas.
+Uji Kompetensi
+Asesmen yang digunakan 
+untuk mengukur sejauh mana 
+peserta didik telah 
+menguasai materi 
+yang dibahas.
+Pengayaan
+Kegiatan yang dilakukan peserta 
+didik setelah mencapai capaian 
+pembelajaran dalam setiap 
+pertemuan.
+Releksi
+Kegiatan dan proses yang 
+dilakukan peserta didik untuk 
+menilai dan merenungkan apa 
+yang telah mereka pelajari, 
+antara lain keberhasilan dan 
+kesulitan yang mereka alami.
+
+Bab I
+KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI
+REPUBLIK INDONESIA, 2024
+Pendidikan Jasmani, Olahraga, dan Kesehatan
+untuk SMP/MTs Kelas VII
+Penulis 
+: Ebta Heri Susanto, Muhajir 
+ISBN 
+:  978-623-388-727-4 (jil.1 PDF)
+Bagaimana cara meningkatkan keterampilan 
+gerak dan apa peran penting latihan dalam 
+menghaluskan keterampilan gerak?
+Meningkatkan 
+Meningkatkan 
+Keterampilan Gerak
+Keterampilan Gerak
+
+2 
+Pendidikan Jasmani, Olahraga, dan Kesehatan untuk SMP/MTs Kelas VII
+Dalam bab ini, kamu akan belajar memperagakan latihan keterampilan 
+gerak dan mengidentiikasi hubungan keterampilan dasar dengan 
+keterampilan gerak spesifik olahraga. Selain itu, kamu akan 
+belajar bagaimana mendapatkan keterampilan baru, menjelaskan, 
+mengidentiikasi, serta mempraktikkan berbagai bentuk umpan balik 
+dalam belajar keterampilan.
+Tujuan Pembelajaran
+Kata Kunci
+ 
+Gerak Dasar
+ 
+Gerak Spesiik 
+ 
+Keterampilan Gerak 
+ 
+Akuisisi Keterampilan
+ 
+Umpan Balik
+ 
+Meningkatkan 
+Keterampilan Gerak
+Hubungan Keterampilan 
+Gerak Dasar 
+dengan Keterampilan Olahraga
+Umpan Balik Hasil 
+Keterampilan (HA) dan Penampilan 
+Keterampilan (KT)
+Umpan Balik
+Mendapatkan 
+Keterampilan Baru: 
+Bagaimana Tubuh 
+Belajar Gerak
+Melatih 
+Keterampilan 
+Gerak
+Umpan Balik 
+Visual, Kinestetik, 
+dan Auditori
+Umpan Balik 
+Isyarat
+Peta Materi
+
+3
+Bab I Meningkatkan Keterampilan Gerak 
+Siap-Siap Belajar
+Pernahkah kamu menonton pertandingan sepak bola? Dalam pertandingan 
+sepak bola, seorang pemain menggiring bola melewati lawan dan melakukan 
+tendangan dengan akurasi tinggi. Maka, terciptalah gol ke gawang lawan. 
+Atau pernahkah kamu melihat permainan bola basket? Seorang pemain 
+men-dribble bola tanpa melihat bola, melewati lawan, dan melakukan lay-up. 
+Maka, dia berhasil mencetak poin kemenangan bagi timnya.
+Dua contoh tersebut merupakan bentuk keterampilan gerak dalam 
+olahraga. Keterampilan gerak merupakan hasil sebuah proses belajar dan 
+latihan yang dilakukan secara terus-menerus. Nah, bagaimana dengan 
+kamu? “Tentu saja kamu tidak harus belajar dan berlatih seperti layaknya 
+pemain profesional”. Akan tetapi, sebagai pelajar, kamu cukup mendapatkan 
+keterampilan gerak dalam mendukung aktivitas olahraga yang akan kamu 
+lakukan. Dengan demikian, kamu lebih dapat menikmati aktivitas jasmani. 
+Dalam pembelajaran PJOK kamu akan belajar berbagai bentuk keterampilan 
+gerak. Kamu juga akan mempraktikkannya dalam bentuk permainan. Sekarang 
+mari kita pelajari aktivitas pembelajaran ini untuk membantu meningkatkan 
+keterampilan gerakmu.
+A. Melatih Keterampilan Gerak
+Melatih keterampilan gerak merupakan proses yang dilakukan secara 
+sistematis untuk belajar dan mengasah kemampuan fisik dan motorik. 
+Keterampilan gerak memainkan peran penting dalam meningkatkan kesehatan 
+isik dan melatih keterampilan gerak. Keterampilan gerak juga penting untuk 
+meningkatkan kinerja dalam berbagai olahraga. Selain itu, keterampilan 
+gerak berperan dalam pengembangan keterampilan sosial, seperti kerja sama, 
+komunikasi, dan kepemimpinan.
+Aktivitas 
+1.1
+Identiikasi Keterampilan Gerak
+1. 
+Bentuklah kelompok berisi dua siswa (berpasangan)! 
+2. 
+Gunakan bola basket, bola tangan, bola voli, atau sejenisnya! 
+
+4 
+Pendidikan Jasmani, Olahraga, dan Kesehatan untuk SMP/MTs Kelas VII
+3. 
+Atur jarak dengan pasangan minimal enam meter, kemudian lakukan 
+gerakan lempar dan tangkap bola tersebut!
+4. 
+Praktikkan keterampilan gerak variasi lemparan bola! Di antaranya, 
+lemparan dari atas kepala, lemparan dari arah dada, lemparan dengan 
+memantulkan bola ke lantai, dan sebagainya.
+Gambar 1.1 Berbagai Variasi Keterampilan Gerak Melempar Bola 
+5. 
+Setelah mempraktikkan aktivitas keterampilan gerak di atas, coba 
+identiikasilah aspek yang dapat kalian pelajari dari aktivitas tersebut!
+Tabel 1.1 Aspek Keterampilan Gerak
+Komponen 
+Keterampilan Gerak
+Ada (√)
+Tidak 
+Ada (√)
+Penjelasan
+Koordinasi Mata dan 
+Tangan
+Akurasi
+Reaksi Cepat
+Persepsi Ruang
+Kelincahan
+Komunikasi
+Berdasarkan aktivitas keterampilan gerak di atas, mungkin kamu mengira 
+bahwa aktivitas tersebut sederhana. Namun, dalam melatih keterampilan 
+gerak, dibutuhkan banyak aspek atau komponen agar tercipta keterampilan 
+gerak yang baik.
+
+5
+Bab I Meningkatkan Keterampilan Gerak 
+Ingatkah kamu ketika belajar mengancingkan baju pertama kali? Setiap 
+orang pasti melalui proses belajar ini. Secara sederhana proses tersebut dibagi 
+menjadi dua, yaitu sebagai berikut.
+Gambar 1.2 Belajar Gerak Mengancingkan Baju
+ 
+Proses pengenalan visual melalui indra mata dan persepsi sensori dengan 
+indra sensori. Misalnya, penglihatan dan perabaan untuk mengenali 
+tekstur baju dan kancing serta menentukan letak dan ukuran kancing.
+ 
+Proses koordinasi dan keterampilan motorik dengan koordinasi antara 
+tangan dan mata untuk melakukan gerakan yang tepat dan presisi. 
+Gerakan tangan yang terampil dan halus untuk memegang kancing, 
+memasukkan kancing ke dalam lubang, serta menarik kancing melalui 
+lubang.
+Untuk memperoleh keterampilan baru, ada proses menggabungkan gerak 
+yang halus dan persepsi sensori. Pemahaman sangat penting saat kamu 
+belajar keterampilan gerak.
+Setelah latihan yang konsisten dan terencana, kamu dapat dengan 
+cepat meningkatkan dan memperbaiki keterampilan gerak tersebut. 
+Upaya meningkatkan keterampilan dapat dilakukan melalui latihan rutin, 
+pengulangan, variasi latihan, dan umpan balik. Kegiatan yang lain dapat 
+dilakukan untuk berlatih dan mengulang keterampilan gerak dalam situasi 
+bermain.
+
+6 
+Pendidikan Jasmani, Olahraga, dan Kesehatan untuk SMP/MTs Kelas VII
+Mempelajari keterampilan gerak baru sering kali menimbulkan rasa 
+kecewa. Akan tetapi, untuk meningkatkan keterampilan gerak, kamu dapat 
+berlatih dan bermain melalui pertandingan dengan durasi yang relatif panjang. 
+Di samping itu, dapat pula dilakukan dengan menekankan pada berbagai 
+variasi untuk memperluas kemampuan gerak. Hal ini dapat membantumu 
+mengatasi tantangan baru dan meningkatkan leksibilitas gerakan.
+Gambar 1.3 Ronaldo melakukan tendangan bebas.
+Sumber: Tim Spiers and Mark Carey/The Athletic (2022)
+Kisah pemain sepak bola yang paling terkenal di dunia ialah Cristiano 
+Ronaldo. Ronaldo biasa menghabiskan waktu cukup lama untuk berlatih 
+di lapangan, hingga pelatih menyuruhnya pulang. Teman satu timnya 
+bercerita bahwa Ronaldo menghabiskan waktu tambahan untuk melatih 
+keterampilannya. Ronaldo selalu meninggalkan tempat latihan paling akhir. 
+Bahkan, tidak ada yang dapat menghentikan latihannya. Dia melatih tekniknya 
+tanpa henti. “Kami melihatnya berlatih tanpa henti untuk mengasah tendangan 
+bebas, dribbling, dan passing”.
+Ronaldo memang dikenal pesepak bola yang tak kenal lelah dan selalu 
+mengasah tekniknya. Salah satunya ialah tendangan bebas. Karena gigihnya 
+berlatih, Ronaldo telah menduduki posisi teratas daftar top skor tahun 2023. 
+Hal ini berkat jumlah gol yang dicetak Ronaldo hingga mencapai 54 gol. 
+Jumlah tersebut sudah tak terkejar oleh pemain lain.
+
+7
+Bab I Meningkatkan Keterampilan Gerak 
+Berdasarkan fakta di atas, setiap kemampuan olahraga memerlukan 
+keterampilan gerak fundamental yang terus diasah. Keterampilan ini 
+semestinya sudah kamu pelajari di sekolah dasar.
+Penguasaan keterampilan gerak fundamental menjadi landasan penting 
+dalam memperoleh keterampilan yang lebih tinggi dalam olahraga tertentu. 
+Tentu saja kamu tidak harus berlatih seperti Ronaldo untuk meningkatkan 
+keterampilan gerak kamu.
+Pada bab ini kamu akan belajar tentang hubungan antara keterampilan 
+gerak fundamental dengan keterampilan gerak spesifik. Kedua jenis 
+keterampilan ini menjadi prasyarat penting bagi kamu untuk dapat 
+berpartisipasi aktif. Kamu akan belajar bagaimana keterampilan ini 
+membentuk landasan bagi penguasaan teknik-teknik khusus dalam berbagai 
+cabang olahraga.
+B. Hubungan Keterampilan Gerak Dasar dan Keterampilan 
+Gerak Spesiik Olahraga
+Berlatih keterampilan gerak dengan bermain dalam pertandingan akan 
+membantu kamu mengurangi kesalahan gerak, meningkatkan teknik, dan 
+mengembangkan keahlian. Jika kamu memahami permainan dan teknik 
+yang dibutuhkan, kamu dapat mengikuti banyak aktivitas yang menyehatkan.
+Sebagai contoh, jika kamu telah belajar bersepeda sejak kecil, kamu 
+bisa bersepeda lebih terampil saat ini. Jika kamu pandai melempar bola 
+(keterampilan gerak fundamental), kamu bisa melakukan servis atau smes 
+dalam permainan bola voli (keterampilan gerak dasar).
+Sejak lahir kamu telah mempelajari keterampilan gerak dasar. Beberapa 
+contoh keterampilan gerak dasar ialah berguling, keseimbangan, melompat, 
+menghindar, melempar, menangkap, menendang, dan memukul. Keterampilan 
+gerak dasar sangat penting karena merupakan dasar bagi pengembangan 
+keterampilan gerak yang lebih kompleks.
+Jika kamu menguasai keterampilan gerak dasar, kamu dapat berpartisipasi 
+dalam berbagai aktivitas isik dan olahraga dengan lebih halus dan efektif. 
+Selain itu, analisis keterampilan gerak dasar juga membantu perkembangan 
+fisik, kesehatan, dan kemandirian. Oleh karena itu, setiap orang perlu 
+mempelajari dan menguasai keterampilan gerak dasar sejak dini.
+
+8 
+Pendidikan Jasmani, Olahraga, dan Kesehatan untuk SMP/MTs Kelas VII
+Menangkap
+Melompat
+Melempar
+Menendang
+Berguling
+Keseimbangan
+Gambar 1.4 Berbagai Macam Keterampilan Gerak Dasar 
+Keterampilan gerak dasar merupakan landasan untuk meningkatkan 
+keterampilan khusus (gerak spesiik). Keterampilan ini digunakan dalam 
+permainan, bela diri, olahraga, senam, pendidikan alam dan rekreasi, 
+serta permainan tradisional yang menggunakan isik. Orang yang memiliki 
+keterampilan gerak dasar yang baik, cenderung akan lebih aktif dan menikmati 
+aktivitas isiknya. Di samping itu, dia akan memiliki daya tahan jantung dan 
+paru-paru yang lebih tinggi serta lebih percaya diri. 
+Gerak spesiik olahraga merupakan serangkaian gerakan atau keterampilan 
+yang sangat khusus dan relevan dengan praktik dan kompetisi dalam olahraga 
+tertentu. Setiap olahraga memiliki kumpulan gerakan yang unik dan penting 
+yang diperlukan untuk berpartisipasi dan berhasil dalam olahraga tersebut. 
+Misalnya, dalam sepak bola, gerakan spesiik mencakup teknik menggiring 
+bola, melempar, mengoper bola, menendang, atau melakukan umpan. Dalam 
+bulu tangkis, gerakan spesiik meliputi teknik pukulan forehand, pukulan 
+backhand, teknik servis, dan teknik pukulan overhead.
+
+9
+Bab I Meningkatkan Keterampilan Gerak 
+Gambar 1.5 Hubungan antara Keterampilan Gerak Dasar dengan Gerak Spesiik
+Keterampilan gerak dasar merupakan dasar dari berbagai gerakan spesiik 
+dalam olahraga. Gerakan ini merupakan gerakan dasar yang diperlukan 
+dalam hampir semua jenis olahraga. Hubungan antara keterampilan gerak 
+fundamental dan gerak spesifik dalam olahraga sangat erat. Gerakan 
+fundamental membentuk dasar bagi kemampuan isik dan teknik yang 
+diperlukan dalam olahraga. 
+Keterampilan gerak dasar adalah pola gerakan dasar yang menjadi fondasi 
+untuk keterampilan gerak yang lebih kompleks, khususnya keterampilan gerak 
+spesiik. Keterampilan ini membentuk landasan bagi gerakan yang lebih maju. 
+Secara keseluruhan keterampilan gerak dasar menyediakan landasan yang 
+penting dan menjadi pendahulu bagi perolehan dan penguasaan keterampilan 
+gerak spesiik.
+Aktivitas 
+1.2
+Identiikasi Keterampilan Gerak dalam Pembelajaran PJOK
+1. 
+Identiikasi tiga contoh keterampilan gerak dasar yang telah kamu pelajari 
+dalam pembelajaran PJOK!
+2. 
+Apakah kamu dapat melakukan keterampilan gerak dasar tersebut dengan 
+baik? Diskusikan dengan temanmu!
+3. 
+Jelaskan alasan mengapa kamu dapat atau tidak dapat memperagakan 
+keterampilan gerak dasar tersebut dengan baik!
+
+10
+10 
+Pendidikan Jasmani, Olahraga, dan Kesehatan untuk SMP/MTs Kelas VII
+Aktivitas 
+1.3
+Mencocokkan Gerak dasar dengan Keterampilan Spesiik Olahraga
+1. 
+Cocokkan keterampilan gerak dasar dengan keterampilan gerak spesiik 
+dalam olahraga!
+Tabel 1.2 Mencocokkan Keterampilan Gerak Dasar dengan Keterampilan Gerak Spesiik
+Keterampilan 
+Gerak Dasar
+Keterampilan Gerak 
+Spesiik dalam Olahraga
+Lemparan Atas
+Pukulan Backhand Tenis 
+Lapangan
+Lemparan Bawah
+Lompat Jauh
+Memantulkan Bola
+Dribble Bola Basket
+Melempar
+Smes Bulu Tangkis
+Melompat
+Lemparan Penjaga Gawang 
+2. 
+Lakukan analisis dan tulislah saran gerak lainnya dengan tiga keterampilan 
+gerak dasar dan keterampilan gerak dalam olahraga!
+Tabel 1.3 Analisis Keterampilan Gerak Dasar dengan Keterampilan Gerak Spesiik
+Keterampilan Gerak Dasar
+Keterampilan Gerak Spesiik 
+dalam Olahraga
+C. Mendapatkan Keterampilan Baru: Bagaimana Tubuh 
+Belajar Gerak
+Akuisisi keterampilan gerak (skill acquisition) adalah proses untuk 
+memperoleh keterampilan baru dengan cara memahami, mengembangkan, 
+dan meningkatkan kemampuan dalam melakukan tugas atau aktivitas tertentu 
+dengan efektif. 
+
+11
+11
+Bab I Meningkatkan Keterampilan Gerak 
+Proses ini melibatkan penguasaan keterampilan motorik, kognitif, 
+perseptual, dan pengambilan keputusan yang terkait dengan aktivitas atau 
+gerak spesiik. Hal ini merupakan proses yang berkelanjutan sepanjang 
+hidup. Kamu akan terus beradaptasi dan mempertajam keterampilan dalam 
+menghadapi tantangan serta pengalaman baru. Akuisisi keterampilan dapat 
+membantumu meningkatkan kemampuan gerak. Kamu dapat belajar tentang 
+pengambilan keputusan dan memperoleh pengetahuan baru, baik melalui 
+pembelajaran formal maupun informal.
+Fase akuisisi keterampilan dalam pembelajaran PJOK merujuk pada 
+tahap dalam proses pembelajaran. Pada fase tersebut kamu memperoleh 
+dan mengembangkan keterampilan gerak dasar dan gerak spesiik dalam 
+olahraga. Selama fase akuisisi keterampilan, pembelajaran difokuskan pada 
+penguasaan keterampilan motorik dasar. Di antaranya, berlari, melompat, 
+melempar, menangkap, menendang, dan memukul. Kamu juga belajar teknik 
+dasar yang diperlukan untuk olahraga atau aktivitas tertentu. Misalnya, 
+dribbling dalam bola basket; pukulan forehand dalam tenis; atau teknik gaya 
+renang dalam aktivitas air.
+Gambar 1.6 Proses Pembelajaran PJOK di Sekolah
+
+12
+12 
+Pendidikan Jasmani, Olahraga, dan Kesehatan untuk SMP/MTs Kelas VII
+Kamu dapat melihat komponen penting dari fase akuisisi keterampilan 
+dalam pembelajaran PJOK pada tabel di bawah ini.
+Tabel 1.4 Tahap Pelaksanaan Akuisisi Keterampilan
+Tahap Akuisisi
+Keterampilan
+Kegiatan Pembelajaran
+Demonstrasi
+Guru atau teman kamu mendemonstrasikan teknik 
+dan gerakan yang tepat kepada peserta didik, 
+memberikan model visual untuk ditiru.
+Penjelasan
+Guru menjelaskan komponen-komponen kunci dari 
+setiap keterampilan atau teknik, memecah gerakan 
+menjadi langkah-langkah yang lebih kecil dan lebih 
+mudah dikelola.
+Latihan
+Peserta didik terlibat dalam sesi latihan berulang 
+untuk mengembangkan memori otot dan 
+menyempurnakan keterampilan motorik mereka. 
+Latihan dapat melibatkan drill, latihan, permainan, 
+atau simulasi yang relevan dengan olahraga atau 
+aktivitas yang diajarkan.
+Umpan balik
+Guru, teman kamu, atau bahkan kamu sendiri dapat 
+memberikan umpan balik dan menunjukkan area 
+yang perlu diperbaiki dan memperkuat teknik yang 
+benar.
+Progresi
+Saat peserta didik menunjukkan kecakapan dalam 
+keterampilan dasar, kompleksitas dan kesulitan 
+aktivitas dapat secara bertahap ditingkatkan untuk 
+menguji kemampuan mereka lebih lanjut.
+Aplikasi
+Peserta didik menerapkan keterampilan yang telah 
+mereka pelajari dalam berbagai situasi seperti 
+permainan, memungkinkan mereka merasakan 
+bagaimana teknik digunakan dalam konteks dunia 
+nyata.
+Fase akuisisi keterampilan dalam PJOK menyiapkan dasar bagi kamu untuk 
+menjadi peserta didik yang kompeten dan percaya diri. Kamu juga diarahkan 
+untuk mencapai kemahiran dalam berbagai aktivitas jasmani dan olahraga.
+
+13
+13
+Bab I Meningkatkan Keterampilan Gerak 
+Aktivitas 
+1.4
+Identiikasi Fase Akuisisi Keterampilan Gerak
+1. 
+Ikuti rangkaian pembelajaran PJOK di sekolah dengan berbagai materi 
+aktivitas pembelajaran yang berbeda! Misalnya, dribbling sepak bola, 
+dribbling bola basket, shooting dalam handball, pukulan bola kasti, passing 
+bawah bola voli, dan sebagainya.
+2. 
+Identiikasi dan catatlah tahapan akuisisi keterampilan gerak sesuai 
+dengan gerak spesiik yang telah kamu pelajari!
+3. 
+Jelaskan kegiatan pembelajaran dari tiap-tiap tahapan akuisisi 
+keterampilan gerak sesuai dengan tabel yang dijelaskan di atas!
+Gambar 1.7 Tahapan Akuisisi Keterampilan Gerak Sesuai dengan Gerak Spesiik
+4. 
+Tuliskan dalam tabel di bawah ini!
+ 
+Keterampilan yang dipelajari:_____________________
+Tabel 1.5 Keterampilan yang Dipelajari pada Tahap Akuisisi Keterampilan
+Tahap Akuisisi Keterampilan
+Kegiatan Pembelajaran
+Demonstrasi
+Penjelasan
+
+14
+14 
+Pendidikan Jasmani, Olahraga, dan Kesehatan untuk SMP/MTs Kelas VII
+Tahap Akuisisi Keterampilan
+Kegiatan Pembelajaran
+Latihan
+Umpan balik
+Progresi
+Aplikasi
+D. Umpan Balik dalam Belajar Keterampilan Gerak
+Bagaimana cara kamu mengetahui kesalahan dari gerakanmu? Dapatkah 
+kamu menemukan sendiri kesalahanmu ketika melakukan gerakan olahraga? 
+Bagaimana cara mengetahui kelebihan dan kekurangan dari gerakan olahraga 
+yang kamu lakukan? 
+Umpan balik merupakan proses penting dalam pembelajaran PJOK. Umpan 
+balik merupakan informasi tentang kinerja yang diberikan oleh guru, rekan 
+satu tim, atau bahkan dirimu sendiri. Umpan balik membantu kamu dalam 
+memahami kemajuan, mengidentiikasi permasalahan gerak yang perlu 
+diperbaiki, serta merangsang motivasi dan keterlibatan dalam pembelajaran. 
+Umpan balik juga membantumu memperbaiki teknik, meningkatkan kinerja, 
+dan memperoleh pemahaman yang lebih baik tentang tujuan pembelajaran 
+yang ingin dicapai.
+Umpan balik yang membangun dan penuh motivasi sangatlah berharga. 
+Umpan balik tersebut dapat membantu kamu dalam memperbaiki 
+keterampilan. Setiap melakukan gerakan, sebenarnya kamu menerima umpan 
+balik dari indramu. Misalnya, kamu bermain bola basket dan melempar bola 
+ke ring. Saat bola menyentuh papan pantul dan bola masuk ke dalam ring, 
+kamu akan mendengar suara. Itu merupakan bentuk respons bahwa kamu 
+telah melakukan gerakan shooting dengan benar.
+1. 
+Umpan Balik dari Dalam Diri Kita (Internal)   
+Umpan balik internal adalah tanggapan yang diterima oleh tubuh melalui 
+indra dan otot, kemudian dikirimkan ke otak melalui perasaan gerak. Ini 
+terjadi ketika kamu mengevaluasi diri sendiri menggunakan indra, seperti 
+penglihatan atau pendengaran. Misalnya, kamu akan melihat apakah 
+
+15
+15
+Bab I Meningkatkan Keterampilan Gerak 
+tembakanmu dalam permainan sepak bola berhasil masuk ke gawang 
+atau tidak. Contoh lain, ketika kamu melakukan lay-up dalam permainan 
+bola basket, kamu akan merasakan bola itu masuk ring dengan baik. Atau 
+apakah kamu berhasil mendarat dengan baik saat melakukan lompatan 
+dalam olahraga lompat jauh.
+2. 
+Umpan Balik dari Luar Diri Kita (Eksternal)
+Ada tiga fungsi utama dari umpan balik eksternal, yaitu memberikan 
+informasi, motivasi, dan penguatan. 
+Informasi
+• Hasil
+•  Sensasi
+•  Kualitas Gerakan
+• Apa kesalahan yang 
+telah aku perbuat?
+•  Bagaimana cara 
+memperbaikinya?
+Motivasi
+•  Perbaikan memberikan 
+manfaat
+•  Sedikit perbaikan bisa 
+membuat kita putus asa
+Penguatan
+• Penguatan positif: 
+mengarah pada 
+perbaikan lebih lanjut
+• Penguatan negatif: 
+menghindari perasaan 
+tidak menyenangkan 
+akan membawa 
+perbaikan lebih lanjut
+Umpan Balik
+Gambar 1.8 Tiga Fungsi dari Umpan Balik Ekstrinsik
+Pertama, umpan balik eksternal dapat memberikan informasi. Umpan 
+balik dapat membantu kamu dalam memahami gerak, mengenali tindakan 
+yang dilakukan dengan benar atau salah, serta mengetahui cara untuk 
+memperbaiki kesalahan. Informasi tersebut menjadi panduan untuk mencapai 
+penampilan yang lebih baik. Umpan balik diberikan untuk memperbaiki 
+kesalahan gerak, jenis kesalahan yang dilakukan, dan saran tentang cara 
+mengoreksi kesalahan gerak.
+Kedua, umpan balik dapat memberikan motivasi. Ketika kamu terus 
+berusaha memperbaiki penampilan gerak, seharusnya kamu mendapat 
+umpan balik positif. Hasil yang memuaskan dapat mendorongmu untuk terus 
+berlatih. Sebaliknya, jika kamu merasa tidak ada perkembangan atau bahkan 
+memburuk, hal itu dapat membuatmu frustrasi. Frustrasi dapat mengurangi 
+semangat dan motivasi. Mintalah guru atau temanmu agar memberikan lebih 
+banyak umpan balik positif untuk mengurangi rasa frustrasi tersebut.
+
+16
+16 
+Pendidikan Jasmani, Olahraga, dan Kesehatan untuk SMP/MTs Kelas VII
+Ketiga, umpan balik memiliki peran penting dalam memperkuat kinerja. 
+Hal ini terjadi ketika umpan balik dapat meningkatkan keterampilanmu di 
+masa depan. Ada dua jenis penguatan dari umpan balik, yaitu positif dan 
+negatif. Penguatan positif, seperti pujian, dapat memberikan motivasi untuk 
+mencoba kinerja lebih baik lagi. Namun, pujian harus diberikan segera setelah 
+kinerja agar efektif. Selain itu, gestur nonverbal, seperti senyum atau tepukan 
+di punggung, juga dapat memberikan dorongan positif.
+Gambar 1.9 Pemberian Umpan Balik secara Eksternal Melalui Guru PJOK di Sekolah
+ 
+Umpan balik dapat diberikan sepanjang permainan atau pertandingan, 
+saat istirahat jeda, atau selama permainan dalam pembelajaran berlangsung. 
+Umpan balik diberikan dengan pertimbangan waktu yang tepat. Umpan balik 
+lebih dari sekadar mengatakan “bagus sekali” atau “permainan yang bagus”. 
+Umpan balik yang bagus memiliki ciri-ciri sebagai berikut.
+1. 
+Membangun (Konstruktif)
+Umpan balik yang membangun dapat dilakukan oleh peserta didik. 
+Umpan balik diberikan atas kelemahan dalam sebuah permainan atau 
+pertandingan. Ketika pemain melakukan gerakan dan performa yang 
+dapat merugikan tim, dapat diberikan umpan balik.
+Berikut ini contoh umpan balik yang konstruktif (membangun).
+a. 
+Mulai dan akhiri pertandingan dengan positif!
+
+17
+17
+Bab I Meningkatkan Keterampilan Gerak 
+b. 
+Jangan lihat skor, fokus pada jalannya pertandingan! 
+c. 
+Jangan mengkritik secara pribadi, tetapi kritiklah pada keterampilannya!
+Umpan balik yang membangun dapat diberikan ketika kamu mengalami 
+penurunan performa dalam permainan atau pertandingan. Selain 
+memberikan semangat, umpan balik tersebut juga memberikan saran 
+teknis tentang permainan yang sedang kamu lakukan.
+2. 
+Spesiik
+Umpan balik secara spesiik berarti memberikan umpan balik yang tidak 
+terlalu umum. Sebagai contoh, dalam pembelajaran renang. Jangan berikan 
+umpan balik dengan mengatakan, “Itu gerakan kaki yang kurang tepat!” 
+Kamu dapat memberikan umpan balik yang lebih spesiik. Misalnya, 
+“Coba luruskan lutut ketika kamu mengayuh!” Demikian pula, dalam 
+permainan bola voli. Jangan memberikan umpan balik umum, seperti 
+“Ayo, passing yang bagus!” Kamu dapat memberikan umpan balik yang 
+lebih jelas, seperti “Perhatikan perkenaan bola saat passing!” Umpan 
+balik semacam itu akan lebih mudah dipahami dan diterima.
+3. 
+Segera
+Dalam situasi permainan, kamu membutuhkan umpan balik sesegera 
+mungkin. Umpan balik harus diberikan dengan cepat saat kamu benar-
+benar membutuhkannya. Jika umpan balik diberikan 20 menit setelah 
+kejadian, kamu tentu sudah lupa yang terjadi saat itu.
+4. 
+Ringkas
+Umpan balik akan mudah diingat jika diberikan dengan kalimat dan 
+intonasi yang jelas. Dengan demikian, saat permainan atau pertandingan, 
+kamu dapat memperbaiki gerakan menjadi lebih baik. Berikut ini contoh 
+beberapa bentuk umpan balik yang dilakukan secara ringkas.
+a. 
+Olahraga renang: “Menyelamlah seperti anak panah, tajam, cepat, 
+dan panjang!”.
+b. 
+Olahraga sepak bola: “Berdirilah dengan gagah dan kuat, jaga 
+kesimbanganmu agar tidak mudah jatuh!”.
+c. 
+Olahraga softball: “Saat berlari, jangan ragu! Larilah dengan cepat!”
+Memberikan umpan balik melalui pertanyaan kunci merupakan cara 
+yang efektif untuk melibatkanmu dalam proses evaluasi diri. Dengan cara 
+ini, kamu dapat merenungkan kinerjamu secara mandiri dan mencari solusi 
+
+18
+18 
+Pendidikan Jasmani, Olahraga, dan Kesehatan untuk SMP/MTs Kelas VII
+atas tantangan yang dihadapi. Guru atau temanmu dapat membimbingmu 
+dengan memberikan pertanyaan yang relevan. Dengan demikian, kamu dapat 
+memahami area yang perlu kamu tingkatkan.
+Berikut ini contoh pertanyaan kunci ketika memberikan umpan balik.
+a. 
+Dalam Permainan Tenis 
+Pertanyaan kunci: “Di mana seharusnya bola kamu arahkan?”
+Jawaban: “Arah kanan pemain lawan.”
+b. 
+Dalam Permainan Bola Voli
+Pertanyaan kunci: “Apakah kamu dapat mengubah arah servis agar lebih 
+tinggi?”
+Jawaban: “Oke, saya akan meninggikan arah bola servisnya.”
+c. 
+Contoh Lain Umpan Balik dalam Bentuk Pertanyaan
+1) “Bagaimana perasaanmu terkait penampilanmu hari ini?”
+2) “Apa yang dapat kamu lakukan untuk membantu rekan satu tim 
+agar lebih baik lagi?”
+3) “Bagaimana kamu menilai penampilanmu dibandingkan dengan 
+pertandingan sebelumnya?”
+4) “Apa hal terpenting yang dapat kamu ambil dari pengalaman ini?”
+Aktivitas 
+1.5
+Aktivitas Bermain Bola Voli 4 vs. 4
+Gambar 1.10 Bermain Bola Voli 4 vs. 4
+
+19
+19
+Bab I Meningkatkan Keterampilan Gerak 
+Bermainlah bola voli yang dimodiikasi dengan 4 vs. 4 pemain! Demonstrasikan 
+permainan tersebut dengan menggunakan semua gerak spesifik dalam 
+permainan bola voli! 
+1. 
+Observasilah teman dalam tim kamu ketika bermain! Lalu, identiikasilah 
+gerak spesiik dalam permainan tersebut!
+a. 
+Mulailah permainan dengan komentar yang positif!
+b. 
+Berikan umpan balik yang konstruktif!
+c. 
+Akhiri permainan dengan komentar yang positif!
+2. 
+Evaluasilah umpan balik dengan menjawab pertanyaan di bawah ini!
+a. 
+Apakah kamu menerima umpan balik secara membangun? Jelaskan!
+b. 
+Apakah kamu menerima umpan balik secara spesiik? Jelaskan!
+c. 
+Apakah kamu menerima umpan balik dengan segera? Jelaskan!
+d. 
+Apakah kamu menerima umpan balik secara ringkas? Jelaskan!
+1. Umpan Balik Visual, Kinestetik, dan Auditori
+Umpan balik visual sangat penting dalam pembelajaran PJOK, terutama 
+saat kamu sedang berlatih permainan atau olahraga. Umpan balik visual 
+biasanya datang melalui indra penglihatan. Kamu menggunakan mata untuk 
+memahami bentuk dan ukuran suatu objek. Sebagai contoh, saat berlatih chest 
+pass (mengoper bola basket ke teman searah dada), kamu perlu fokus pada 
+mata temanmu agar dia dapat menangkap bola dengan baik.
+Umpan balik melalui kinestetik adalah kemampuan merasakan posisi dan 
+gerakan tubuh serta mengenali tekanan saat kita bergerak. Ini membantu kita 
+mengatur gerakan dengan baik tanpa harus melihat. Misalnya, saat berlari 
+atau berjalan, persepsi kinestetik membantu kita menjaga keseimbangan dan 
+mengontrol gerakan tubuh dengan baik.
+Umpan balik secara kinestetik akan membantumu untuk mengetahui 
+keadaan tertentu. Misalnya, kamu akan mengetahui apakah temanmu sedang 
+duduk, berdiri, atau berbaring karena umpan balik ini. Dengan umpan balik 
+secara kinestetik, kamu dapat mengetahui apakah temanmu memegang raket 
+tenis dengan nyaman ataukah mereka berenang gaya bebas dengan baik. 
+Sebab, keterampilan tersebut sudah pernah mereka lakukan di masa lalu. 
+Inilah pentingnya persepsi kinestetik dalam memahami gerakan dan posisi 
+tubuh dalam aktivitas sehari-hari dan olahraga.
+
+20
+20 
+Pendidikan Jasmani, Olahraga, dan Kesehatan untuk SMP/MTs Kelas VII
+Contohnya, dalam pembelajaran bola basket. Ketika kamu belajar dribble 
+dengan posisi kepala menunduk, bola dapat diambil oleh lawan dengan 
+mudah. Oleh karena itu, kamu harus mengatur penglihatan dengan latihan 
+pengulangan keterampilan. 
+Koordinasi mata dan tangan merupakan hasil dari visual. Ketergantungan 
+terhadap mata akan berkurang jika kamu mendapatkan masukan yang 
+bagus dari indra peraba. Sebagai contoh, dribble menggunakan bola basket 
+jauh lebih mudah daripada dribble dengan bola tenis. Hal ini terjadi karena 
+ukuran bola basket lebih besar sehingga memberikan area tangan yang lebih 
+luas. Otak kita akan menerima lebih banyak informasi melalui sentuhan. 
+Makin banyak latihan yang dilakukan dengan variasi bola, makin baik pula 
+kemampuan kamu dalam mengendalikan pergerakan bola dengan tangan.
+Gambar 1.11 Dribble dengan fokus pada bola dapat menyebabkan kehilangan bola.
+Koordinasi antara mata dan kaki merupakan bentuk pengendalian gerakan 
+mata dengan gerakan kaki yang terkoordinasi. Menendang bola dengan 
+ukuran standar pasti akan lebih mudah daripada menendang bola kasti. Hal 
+ini terjadi karena dalam menendang bola berukuran standar, otakmu lebih 
+banyak menerima informasi melalui sentuhan dari kaki.
+Sementara itu, umpan balik auditori dalam proses pembelajaran PJOK 
+mengacu pada penggunaan suara atau isyarat lisan. Tujuannya untuk 
+memberikan informasi tentang kinerja gerakmu, teknik yang kamu gunakan, 
+
+21
+21
+Bab I Meningkatkan Keterampilan Gerak 
+atau keputusan taktis selama aktivitas isik atau tugas terkait aktivitas, baik 
+dalam bentuk permainan atau olahraga.
+Contoh umpan balik auditori ialah ketika guru atau pelatih memberikan 
+instruksi verbal kepada kamu. Misalnya, tentang gerak yang benar saat 
+melakukan pukulan dalam permainan bulu tangkis atau langkah-langkah 
+dalam melakukan gerakan renang. Umpan balik auditori juga bisa berupa 
+arahan atau pujian verbal. Ketika kamu berhasil melakukan keterampilan 
+dengan baik, guru mengatakan, “Bagus! Teknik pukulanmu semakin baik!” 
+Hal itu membantumu memahami dan meningkatkan keterampilan dalam 
+olahraga dan aktivitas isik.
+Aktivitas 
+1.6
+Gerak Dominan dan Nondominan
+Praktikkan aktivitas berikut untuk mengetahui pentingnya penglihatan dalam 
+proses keterampilan gerak!
+Gambar 1.12 Aktivitas Gerak Dominan dan Nondominan
+1. 
+Tulislah kalimat ini di kertas dengan tanganmu yang dominan!
+ 
+“Anak Indonesia Bugar dan Sehat”
+2. 
+Tulislah kalimat yang sama dengan tangan yang tidak dominan!
+3. 
+Tulis lagi kalimat tersebut dengan tangan dominan, tetapi dengan mata 
+tertutup!
+
+22
+22 
+Pendidikan Jasmani, Olahraga, dan Kesehatan untuk SMP/MTs Kelas VII
+4. 
+Di akhir, tulis kalimat tersebut dengan tangan yang tidak dominan dan 
+dengan mata tertutup!
+5. 
+Buatlah kesimpulan dari pengamatanmu pada langkah nomor 1–4!
+6. 
+Jelaskan pentingnya penglihatan terhadap kinerja keterampilan gerak!
+Aktivitas 
+1.7
+Bermain Bola Basket 4 vs. 4
+Gambar 1.13 Aktivitas Bermain Bola Basket 4 vs. 4
+Bermainlah bola basket modiikasi 4 vs. 4 pemain, dengan setengah 
+lapangan atau satu lapangan penuh! Ketika satu tim mencapai 5 operan 
+berturut-turut dan mencetak poin, tim tersebut harus bergantian dengan 
+lawan dalam menguasai bola. 
+Aturan Permainan:
+1. 
+Babak 1 selama 10 menit, tidak diperbolehkan berbicara atau bersuara. 
+Jika melanggar, bola diserahkan kepada lawan.
+2. 
+Babak 2 selama 10 menit harus ada komunikasi melalui suara dan 
+pembicaraan. Bola di-passing kepada teman dan harus dengan memanggil 
+nama mereka.
+3. 
+Setelah permainan berakhir, jawablah pertanyaan di bawah ini!
+a. 
+Bandingkan jalannya permainan antara babak 1 dan babak 2! Apa 
+perbedaan yang dapat kamu identiikasi?
+b. 
+Jelaskan pentingnya komunikasi dalam permainan dan olahraga!
+c. 
+Teknik komunikasi apa saja yang kamu rasa efektif ketika komunikasi 
+verbal tidak diizinkan dalam permainan?
+
+23
+23
+Bab I Meningkatkan Keterampilan Gerak 
+Aktivitas 
+1.8
+Bermain Bola Voli 3 vs. 3 dengan Net Tertutup
+Gambar 1.14 Aktivitas Bermain Bola Voli 3 vs. 3 dengan Net Tertutup 
+Mainkan permainan bola voli dengan 3 vs. 3! Gunakan net tertutup 
+(dapat menggunakan kain atau penutup lainnya)! Pemain hanya dapat 
+memandang bola karena net telah tertutup sehingga kedua tim tidak dapat 
+saling memandang. 
+Setelah mempraktikkan permainan tersebut, jawablah pertanyaan berikut ini!
+1. 
+Apa tujuan dari permainan ini?
+2. 
+Identiikasilah jenis umpan balik apa saja yang penting dalam permainan 
+ini!
+3. 
+Jelaskan dampak umpan balik auditori terhadap kinerja tim!
+4. 
+Catatlah kalimat-kalimat umpan balik auditori yang sudah kalian terima 
+selama bermain!
+2. Umpan Balik Hasil Keterampilan (HA) dan Penampilan 
+Keterampilan (KT)
+Sebelumnya kamu sudah mempelajari umpan balik visual, kinestetik, dan 
+auditori. Sekarang kamu akan belajar tentang umpan balik yang mengacu pada 
+hasil keterampilan (HA) dan umpan balik terhadap penampilan keterampilan 
+(KT). Contoh umpan balik HA ialah berhasil mencetak gol dalam sepak bola 
+
+24
+24 
+Pendidikan Jasmani, Olahraga, dan Kesehatan untuk SMP/MTs Kelas VII
+atau menambah skor dengan smes dalam bulu tangkis. Sementara itu, umpan 
+balik terhadap proses penampilan, seperti umpan balik umum ketika kamu 
+sedang berlatih rutin, termasuk umpan balik KT. 
+Berikut ini contoh umpan balik pada hasil keterampilan (HA).
+a. 
+Saya berenang gaya dada 50 meter dengan waktu 48,7 detik.
+b. 
+Kamu unggul skor 13–2 dalam permainan bulu tangkis.
+c. 
+Saya berhasil mencetak 2 gol dalam pertandingan sepak bola.
+Berikut ini contoh umpan balik terhadap penampilan keterampilan (KT).
+a. 
+Kamu pemain futsal yang hebat jika kamu menghentikan passing dari 
+lawan.
+b. 
+Lain kali pukul bola kasti itu ketika ketinggian bola sedikit di atas 
+kepalamu!
+c. 
+Cobalah tendang bola lebih tinggi!
+Aktivitas 
+1.9
+Umpan Balik yang Efektif
+1. 
+Buatlah kelompok yang beranggotakan lima orang!
+Gambar 1.15 Aktivitas Bermain Umpan Balik Keterampilan Gerak
+
+25
+25
+Bab I Meningkatkan Keterampilan Gerak 
+2. 
+Tujuan permainan ialah untuk melihat efektivitas antara umpan balik 
+terhadap hasil (HA) dengan umpan balik terhadap penampilan (KT).
+3. 
+Peralatan yang digunakan setiap kelompok antara lain, 1 penutup mata 
+(dapat menggunakan kain), 1 keranjang/ember, dan 5 buah bola tenis.
+4. 
+Peraturannya ialah sebagai berikut. Setiap kelompok bertugas untuk 
+memasukkan bola ke dalam keranjang yang berjarak 3 meter dengan mata 
+tertutup. Empat orang anggota kelompok bertugas sebagai pelempar dan 
+satu orang bertugas sebagai pelatih yang tugasnya memberikan umpan 
+balik. Setiap pelempar memiliki kesempatan melempar bola sebanyak 5 
+kali.
+a. 
+Pelempar pertama menerima umpan balik HA dan KT.
+b. 
+Pelempar kedua hanya menerima umpan balik KT.
+c. 
+Pelempar ketiga hanya menerima umpan balik HA.
+d. 
+Pelempar keempat tidak menerima umpan balik.
+Tabel 1.6 Umpan Balik Pelempar Bola
+Urutan 
+Pelempar
+Nama 
+Pelempar
+Umpan Balik 
+yang Diterima
+Jumlah Bola 
+yang Masuk
+Pertama
+Umpan balik HA dan KT
+Kedua
+Hanya umpan balik KT
+Ketiga
+Hanya umpan balik HA
+Keempat
+Tidak menerima umpan balik
+5. 
+Diskusikan siapakah pelempar bola yang paling sukses berdasarkan hasil 
+di atas!
+6. 
+Laporkan kepada bapak/ibu guru ketika sudah selesai mengerjakannya! 
+7. 
+Jika kalian tidak memahami aktivitas ini, bertanyalah kepada bapak/ibu 
+guru kalian!
+
+26
+26 
+Pendidikan Jasmani, Olahraga, dan Kesehatan untuk SMP/MTs Kelas VII
+Aktivitas 1.10
+Umpan Balik Melalui Video
+Gambar 1.16 Umpan Balik Melalui Video
+1. 
+Lakukan pengamatan dengan melihat video seorang atlet ketika bermain 
+dalam sebuah pertandingan atau perlombaan di internet! Temukan 
+inspirasi dari video tersebut!
+a. 
+Diskusikan kemampuan apa yang akan kamu coba tantang pada 
+dirimu!
+b. 
+Jelaskan bagaimana kamu ingin memperoleh kemampuan itu!
+c. 
+Identiikasi tantangan apa saja yang kamu hadapi saat melakukan 
+keterampilan tersebut!
+2. 
+Buatlah sebuah tim yang terdiri atas tiga orang atau lebih! Lakukan 
+aktivitas berikut ini!
+a. 
+Perlengkapan yang dibutuhkan antara lain bola dan gawang (sepak 
+bola) atau bola basket dan ring serta kamera video (bisa menggunakan 
+smartphone).
+b. 
+Mainkan salah satu aktivitas di bawah ini!
+1) Aktivitas 1, tendangan penalti sepak bola/futsal: 1 orang 
+bertugas menjadi penjaga gawang dan 1 orang bertugas menjadi 
+penendang.

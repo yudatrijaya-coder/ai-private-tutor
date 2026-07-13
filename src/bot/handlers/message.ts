@@ -9,6 +9,7 @@ import { handleReminderCommand, processPendingReminders } from "../agent/reminde
 import { handleQuizStart } from "./quiz";
 import { handleSchedule } from "./schedule";
 import { handleMaterial } from "./material";
+import { handleYoutubeSummary } from "./youtube";
 import {
   handleParentRegister,
   handleProgress,
@@ -169,11 +170,34 @@ export async function onMessage(ctx: Context): Promise<void> {
               `/materi — Lihat materi pelajaran\n` +
               `/quiz — Kerjakan kuis\n` +
               `/jadwal — Cek jadwal belajar\n` +
+              `/web — Buka dashboard di browser\n` +
               `/nilai — Lihat nilai dan progres\n` +
               `/help — Tampilkan bantuan ini\n\n` +
               `Atau cukup tanya aja langsung! 😊`,
             { parse_mode: "Markdown" },
           );
+          return;
+        }
+
+        // /web command — send dashboard link
+        if ("text" in msg && /^\/web$/i.test(msg.text?.trim() ?? "")) {
+          const dashboardUrl = `https://senangbelajar.web.id/student`;
+          const parts = [
+            "🌐 *Dashboard Belajar*",
+            "",
+            "Klik link di bawah untuk buka dashboard kamu:",
+            `[Buka Dashboard](${dashboardUrl})`,
+            "",
+            "Di dashboard kamu bisa:",
+            "📚 Lihat materi pelajaran",
+            "🧠 Mindmap interaktif",
+            "📝 Quiz & latihan",
+            "📊 Progress belajar",
+            "📅 Jadwal belajar",
+            "",
+            "Login pakai ID siswa dan password kamu ya! 🔑",
+          ];
+          await ctx.reply(parts.join("\n"), { parse_mode: "Markdown" });
           return;
         }
 
@@ -199,6 +223,24 @@ export async function onMessage(ctx: Context): Promise<void> {
           }
           if (/\[MATERIALS\]/i.test(respText)) {
             await handleMaterial(ctx, student);
+            return;
+          }
+
+          // ── Check for YOUTUBE intent ──
+          const ytMatch = respText.match(/\[YOUTUBE:([a-zA-Z0-9_-]{11})\]/);
+          if (ytMatch) {
+            await handleYoutubeSummary(ctx, student, ytMatch[1]);
+            return;
+          }
+
+          // ── Check for DASHBOARD intent ──
+          if (/\[DASHBOARD\]/i.test(respText)) {
+            const cleaned = respText.replace(/\[DASHBOARD\]/gi, "").trim();
+            const dashboardUrl = "https://senangbelajar.web.id/student";
+            const msg = cleaned
+              ? `${cleaned}\n\n🌐 *Dashboard:* [Klik di sini](${dashboardUrl})`
+              : `🌐 *Dashboard Belajar*\nKlik link di bawah:\n[Buka Dashboard](${dashboardUrl})`;
+            await ctx.reply(msg, { parse_mode: "Markdown" });
             return;
           }
 
