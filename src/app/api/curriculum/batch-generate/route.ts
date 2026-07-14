@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { callLLM } from "@/llm/client";
 import { getContent, hasContent } from "@/data/curriculum-content";
 import { GRADE_TOPICS } from "@/data/curriculum-topics";
+import { normalizeVideoUrl } from "@/lib/video-url";
 
 /**
  * POST /api/curriculum/batch-generate
@@ -140,6 +141,11 @@ PENTING:
       const slides = slidesMatch ? slidesMatch[1].trim() : null;
       const video = videoMatch ? videoMatch[1].trim() : null;
 
+      // Normalize video description to YouTube search URL
+      const normalizedVideo = video
+        ? normalizeVideoUrl(video)
+        : null;
+
       // Find matching material
       const material = batch.find(
         (m) =>
@@ -152,7 +158,7 @@ PENTING:
           where: { id: material.id },
           data: {
             processedContent: content,
-            videoUrl: video || material.videoUrl,
+            videoUrl: normalizedVideo || material.videoUrl,
             metadata: {
               ...(material.metadata as any || {}),
               slides: slides || undefined,
