@@ -4,9 +4,10 @@
  * Called when a parent adds a new child to the system.
  * Orchestrates the full admission workflow:
  *   1. Create student in DB
- *   2. Queue curriculum:review job for curriculum generation
- *   3. Set up initial schedule (daily 06:30 + intensive Mon/Wed/Fri 16:00)
- *   4. Log to AgentLog
+ *   2. If template student exists for the same grade level → deep-copy entire curriculum
+ *   3. Otherwise, fall back to generating curriculum from data banks
+ *   4. Set up initial schedule (daily 06:30 + intensive Mon/Wed/Fri 16:00)
+ *   5. Log to AgentLog
  *
  * @module @/agents/guardian/admission
  */
@@ -40,6 +41,7 @@ export interface AdmissionResult {
   studentId: string;
   curriculumEnqueued: boolean;
   sessionCount: number;
+  copiedFromTemplate?: string; // studentId of template
 }
 
 /* ------------------------------------------------------------------ */
@@ -59,6 +61,103 @@ function generateStudentId(name: string, _gradeLevel: string): string {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Template deep-copy                                                 */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Check if there's a template student for the same grade level.
+ * If yes, deep-copy their entire curriculum (materials, slides metadata,
+ * mindmaps, quizzes) to the new student.
+ *
+ * Returns true if a template was copied, false if no template found.
+ */
+async function tryCopyFromTemplate(
+  studentId: string,
+  gradeLevel: string,
+): Promise<string | null> {
+  // Find template student for this grade level
+  const template = await prisma.student.findFirst({
+    where: { isTemplate: true, gradeLevel: gradeLevel as any },
+    include: {
+      curriculums: {
+        orderBy: { createdAt: "desc" },
+        take: 1,
+        include: {
+          materials: {
+            include: { quizzes: true },
+            orderBy: { weekOrder: "asc" },
+          },
+        },
+      },
+    },
+  });
+
+  if (!template || template.curriculums.length === 0) return null;
+
+  const templateCurriculum = template.curriculums[0];
+  if (templateCurriculum.materials.length === 0) return null;
+
+  // Create new curriculum (same as template)
+  const newCurriculum = await prisma.curriculum.create({
+    data: {
+      studentId,
+      gradeLevel: templateCurriculum.gradeLevel,
+      version: templateCurriculum.version,
+      changelog: `Copied from template ${template.name} (${template.studentId})`,
+      metadata: templateCurriculum.metadata
+        ? json(templateCurriculum.metadata)
+        : undefined,
+    },
+  });
+
+  // Deep-copy each material + quiz
+  for (const mat of templateCurriculum.materials) {
+    const newMaterial = await prisma.material.create({
+      data: {
+        curriculumId: newCurriculum.id,
+        topic: mat.topic,
+        subTopic: mat.subTopic,
+        subject: mat.subject,
+        gradeLevel: mat.gradeLevel,
+        weekOrder: mat.weekOrder,
+        priority: mat.priority,
+        delivery: mat.delivery,
+        status: mat.status,
+        prerequisiteId: mat.prerequisiteId,
+        sourceUrls: mat.sourceUrls ? json(mat.sourceUrls) : undefined,
+        rawContent: mat.rawContent,
+        processedContent: mat.processedContent,
+        videoUrl: mat.videoUrl,
+        videoScript: mat.videoScript,
+        characterUsed: mat.characterUsed,
+        metadata: mat.metadata ? json(mat.metadata) : undefined,
+      },
+    });
+
+    // Copy quizzes
+    for (const quiz of mat.quizzes) {
+      await prisma.quiz.create({
+        data: {
+          materialId: newMaterial.id,
+          studentId,
+          type: quiz.type,
+          questions: quiz.questions ? json(quiz.questions) : [],
+          maxScore: quiz.maxScore,
+          timeLimit: quiz.timeLimit,
+        },
+      });
+    }
+  }
+
+  console.log(
+    `[guardian/admission] Copied curriculum from template ${template.studentId} (${template.name}) to new student ${studentId}: ` +
+      `${templateCurriculum.materials.length} materials`,
+  );
+
+  return template.studentId;
+}
+
+/* ------------------------------------------------------------------ */
 /*  Admission pipeline                                                 */
 /* ------------------------------------------------------------------ */
 
@@ -66,9 +165,10 @@ function generateStudentId(name: string, _gradeLevel: string): string {
  * Execute the full admission workflow for a new student.
  *
  * 1. Creates the Student record
- * 2. Queues a `curriculum:review` job for the curriculum agent
- * 3. Creates initial schedule entries (daily + intensive sessions)
- * 4. Writes an AgentLog entry
+ * 2. Checks for template student in same grade → deep-copy if found
+ * 3. Falls back to data bank curriculum generation if no template
+ * 4. Creates initial schedule entries (daily + intensive sessions)
+ * 5. Writes an AgentLog entry
  */
 export async function handleAdmission(input: AdmissionInput): Promise<AdmissionResult> {
   const { parentUserId, name, telegramId, gradeLevel, characterPreference, interests, scheduleConfig } = input;
@@ -96,12 +196,22 @@ export async function handleAdmission(input: AdmissionInput): Promise<AdmissionR
 
   console.log(`[guardian/admission] Created student=${student.id} (${name}, ${gradeLevel})`);
 
-  // 2. Generate curriculum draft directly
-  await generateCurriculumDraft(student.id);
-  const curriculumEnqueued = true;
-  console.log(
-    `[guardian/admission] Generated curriculum draft for student=${student.id}`,
-  );
+  // 2. Try template copy first
+  let copiedFromTemplate: string | null = null;
+  let curriculumEnqueued = false;
+
+  copiedFromTemplate = await tryCopyFromTemplate(student.id, gradeLevel);
+
+  if (copiedFromTemplate) {
+    curriculumEnqueued = true;
+  } else {
+    // Fallback: generate curriculum from data banks
+    await generateCurriculumDraft(student.id);
+    curriculumEnqueued = true;
+    console.log(
+      `[guardian/admission] Generated curriculum draft for student=${student.id} (no template found)`,
+    );
+  }
 
   // 3. Set up initial schedule
   const sessions = buildInitialSchedule(student.id);
@@ -119,10 +229,11 @@ export async function handleAdmission(input: AdmissionInput): Promise<AdmissionR
       status: "COMPLETED",
       input: json({ parentUserId, name, gradeLevel }),
       output: json({
-          studentId: student.id,
-          curriculumDraftGenerated: true,
-          sessionCount: sessions.length,
-        }),
+        studentId: student.id,
+        curriculumDraftGenerated: true,
+        sessionCount: sessions.length,
+        copiedFromTemplate,
+      }),
     },
   });
 
@@ -131,6 +242,7 @@ export async function handleAdmission(input: AdmissionInput): Promise<AdmissionR
     studentId: student.studentId,
     curriculumEnqueued,
     sessionCount: sessions.length,
+    copiedFromTemplate: copiedFromTemplate ?? undefined,
   };
 }
 
