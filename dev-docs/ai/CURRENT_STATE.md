@@ -23,6 +23,7 @@
 
 ## What Was Done Recently
 
+- **Docs migration complete**: `dev-docs/modules/` (11 files) + `dev-docs/architecture/` (4 files revised to Indonesian) + web docs updated
 - **Password management**: Student login with bcrypt + set/change password via web + admin
 - **Bot password support**: LLM can set/change password with [PASSWORD] command
 - **Navigation**: Back button in student header (← on non-home pages) + return-to-home on password page

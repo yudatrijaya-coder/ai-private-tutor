@@ -16,7 +16,7 @@ import { bot } from "@/bot/bot";
 /* ------------------------------------------------------------------ */
 
 /** Window sizes (milliseconds) */
-const H1_WINDOW = 60 * 60 * 1000;               // 1 hour window for H-1
+const H1_WINDOW = 2 * 60 * 60 * 1000;            // 2 hour window for H-1 (catches 22h-26h range)
 const T30_WINDOW = 30 * 60 * 1000;              // 30 min window
 const MISSED_GRACE = 5 * 60 * 1000;             // 5 min grace after session start
 
