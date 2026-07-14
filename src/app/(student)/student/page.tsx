@@ -5,19 +5,37 @@ import { cookies } from "next/headers";
 import { jwtVerify } from "jose";
 import Link from "next/link";
 import { SkeletonStudentPage } from "@/components/Skeleton";
+import { QuoteRotator } from "@/components/QuoteRotator";
+import { getYouTubeForTopic } from "@/data/youtube";
 
 const STUDENT_JWT_SECRET = new TextEncoder().encode(
   process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
 );
 
-/** Baca student_session cookie dan dapatkan studentId (UUID) */
-async function getSessionStudentId(): Promise<string | null> {
+/** Baca student_session cookie dan dapatkan studentId dan studentIdentifier (kode) */
+async function getSessionStudent(): Promise<{
+  id: string;
+  identifier: string;
+  name: string;
+  gradeLevel?: string;
+} | null> {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("student_session")?.value;
     if (!token) return null;
     const { payload } = await jwtVerify(token, STUDENT_JWT_SECRET);
-    return (payload as { studentId: string }).studentId;
+    const p = payload as {
+      studentId: string;
+      studentIdentifier: string;
+      name: string;
+      gradeLevel?: string;
+    };
+    return {
+      id: p.studentId,
+      identifier: p.studentIdentifier,
+      name: p.name,
+      gradeLevel: p.gradeLevel,
+    };
   } catch {
     return null;
   }
@@ -38,154 +56,352 @@ const SUBJECT_META: Record<string, { emoji: string; color: string }> = {
   "Bahasa Inggris": { emoji: "🌏", color: "#8b5cf6" },
 };
 
-function SubjectCircle({
-  name,
-  emoji,
-  color,
-  progress,
-}: {
-  name: string;
-  emoji: string;
-  color: string;
-  progress: number;
-}) {
-  const r = 28;
-  const circumference = 2 * Math.PI * r;
-  const offset = circumference - (progress / 100) * circumference;
+/* ── Map subject + grade level → PDF SIBI path ── */
+const PDF_MAP: Record<string, Record<string, string>> = {
+  SD_5: {
+    IPAS: "IPAS_SD5_BS.pdf",
+    PJOK: "PJOK_SD5_BS.pdf",
+    Informatika: "Koding_SD5_BS.pdf",
+    "Bahasa Inggris": "Inggris_SD5_BS.pdf",
+    "Bahasa Indonesia": "Indonesia_SD5_BS.pdf",
+    "Pendidikan Pancasila": "Pancasila_SD5_BS.pdf",
+  },
+  SMP_1: {
+    IPA: "IPA_SMP7_BS.pdf",
+    IPS: "IPS_SMP7_BS.pdf",
+    PJOK: "PJOK_SMP7_BS.pdf",
+    Informatika: "Informatika_SMP7_BS.pdf",
+    "Bahasa Indonesia": "Indonesia_SMP7_BS.pdf",
+    Matematika: "Matematika_SMP7_BS.pdf",
+    "Pendidikan Pancasila": "Pancasila_SMP7_BS.pdf",
+    "Bahasa Inggris": "Inggris_SMP7_BS.pdf",
+  },
+  SMA_2: {
+    "Bahasa Indonesia": "Indonesia_SMA11_BS.pdf",
+    Geografi: "Geografi_SMA11_BS.pdf",
+    Informatika: "Informatika_SMA11_BS.pdf",
+    PJOK: "PJOK_SMA11_BS.pdf",
+    Sosiologi: "Sosiologi_SMA11_BS.pdf",
+    Matematika: "Matematika_TL_SMA11_BS.pdf",
+    Ekonomi: "Ekonomi_SMA11_BS.pdf",
+    "Pendidikan Pancasila": "Pancasila_SMA11_BS.pdf",
+    "Bahasa Inggris": "Inggris_SMA11_BS.pdf",
+  },
+};
 
-  return (
-    <Link
-      href={`/student/subject/${encodeURIComponent(name)}`}
-      className="flex flex-col items-center gap-1.5"
-    >
-      <div className="relative w-16 h-16 flex items-center justify-center">
-        <svg className="absolute inset-0 w-16 h-16 -rotate-90">
-          <circle
-            cx="32"
-            cy="32"
-            r={r}
-            fill="none"
-            stroke="#e5e7eb"
-            strokeWidth="5"
-          />
-          <circle
-            cx="32"
-            cy="32"
-            r={r}
-            fill="none"
-            stroke={color}
-            strokeWidth="5"
-            strokeDasharray={circumference}
-            strokeDashoffset={offset}
-            strokeLinecap="round"
-          />
-        </svg>
-        <span className="text-2xl relative z-10">{emoji}</span>
-      </div>
-      <span
-        className="text-xs font-medium text-center"
-        style={{ color: "var(--st-text)" }}
-      >
-        {name}
-      </span>
-    </Link>
-  );
+function getPdfUrl(subject: string, gradeLevel?: string): string | null {
+  const gradeMap = PDF_MAP[gradeLevel ?? ""];
+  if (!gradeMap) return null;
+  const pdfFile = gradeMap[subject];
+  if (!pdfFile) return null;
+  const dir =
+    gradeLevel === "SD_5" ? "pdf-sd5" : gradeLevel === "SMA_2" ? "pdf-sma11" : "pdf-smp7";
+  return `/${dir}/${pdfFile}`;
 }
 
-/* ── Hero card section ── */
+function getMeta(subject: string) {
+  return SUBJECT_META[subject] ?? { emoji: "📚", color: "#94a3b8" };
+}
 
-async function HeroSection() {
-  noStore();
-
-  const sessionId = await getSessionStudentId();
-  const student = sessionId
-    ? await prisma.student.findUnique({
-        where: { id: sessionId },
-        include: {
-          progressSnaps: {
-            orderBy: { snapDate: "desc" },
-            take: 10,
-          },
-        },
-      })
-    : null;
-
-  if (!student) return null;
-
-  const totalMastery =
-    student.progressSnaps.length > 0
-      ? Math.round(
-          student.progressSnaps.reduce((sum, s) => sum + s.mastery, 0) /
-            student.progressSnaps.length *
-            100,
-        )
-      : 0;
-
+/* ── Quote Rotator ── */
+function QuoteSection() {
   return (
-    <div
-      className="rounded-2xl p-5 mb-5 relative overflow-hidden"
-      style={{ backgroundColor: "var(--st-primary)" }}
-    >
-      <div className="relative z-10">
-        <p className="text-white/80 text-xs mb-1">✨ Lanjut Belajar</p>
-        <h2
-          className="text-white text-xl font-bold mb-3"
-          style={{ fontFamily: "var(--font-st-display)" }}
-        >
-          {totalMastery >= 70
-            ? "Keren! Kamu udah jago! 🎉"
-            : totalMastery >= 40
-              ? "Terus semangat! 💪"
-              : "Ayo mulai belajar hari ini! 🚀"}
-        </h2>
-        <Link
-          href="/student/quiz"
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-sm transition-transform hover:scale-105 active:scale-95"
-          style={{
-            backgroundColor: "#fff",
-            color: "var(--st-primary)",
-            fontFamily: "var(--font-st-display)",
-          }}
-        >
-          Mulai Quiz ➜
-        </Link>
+    <div className="mb-4">
+      <div
+        className="rounded-2xl p-4"
+        style={{ backgroundColor: "var(--st-bg-card)" }}
+      >
+        <QuoteRotator />
       </div>
-      <div className="absolute -right-6 -bottom-6 w-28 h-28 rounded-full bg-white/10" />
-      <div className="absolute -right-2 -bottom-2 w-16 h-16 rounded-full bg-white/10" />
     </div>
   );
 }
 
-/* ── Schedule section ── */
+/* ── Rekomendasi Hari Ini ── */
+async function RecommendationSection() {
+  noStore();
+  const session = await getSessionStudent();
+  if (!session) return null;
 
+  const student = await prisma.student.findUnique({
+    where: { id: session.id },
+    select: { gradeLevel: true },
+  });
+
+  // Ambil materi dari jadwal hari ini + beberapa random
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const todaySessions = await prisma.scheduleSession.findMany({
+    where: {
+      studentId: session.id,
+      scheduledAt: { gte: today, lt: tomorrow },
+      status: "SCHEDULED",
+    },
+    orderBy: { scheduledAt: "asc" },
+  });
+
+  // Collect unique topics from today's sessions
+  const topicKeys = new Set<string>();
+  const todayTopics: { subject: string; topic: string }[] = [];
+
+  for (const s of todaySessions) {
+    const key = `${s.subject}|${s.topic}`;
+    if (s.subject && s.topic && !topicKeys.has(key)) {
+      topicKeys.add(key);
+      todayTopics.push({ subject: s.subject, topic: s.topic });
+    }
+  }
+
+  // Fallback: ambil random materials jika tidak ada jadwal hari ini
+  if (todayTopics.length === 0) {
+    const fallbackMats = await prisma.material.findMany({
+      where: {
+        curriculum: {
+          studentId: session.id,
+        },
+      },
+      select: { subject: true, topic: true },
+      take: 20,
+      orderBy: { weekOrder: "asc" },
+    });
+    const seen = new Set<string>();
+    for (const m of fallbackMats) {
+      const key = `${m.subject}|${m.topic}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        todayTopics.push({ subject: m.subject, topic: m.topic });
+      }
+    }
+  }
+
+  // Shuffle and take max 5
+  const shuffled = todayTopics.sort(() => Math.random() - 0.5).slice(0, 5);
+
+  if (shuffled.length === 0) return null;
+
+  // For each topic, generate recommendations
+  const recommendations: {
+    type: string;
+    icon: string;
+    label: string;
+    subtitle: string;
+    href: string;
+    color: string;
+  }[] = [];
+
+  for (const t of shuffled) {
+    const meta = getMeta(t.subject);
+    // 1. Baca slide
+    recommendations.push({
+      type: "slide",
+      icon: "📖",
+      label: `Baca slide: ${t.topic}`,
+      subtitle: `${t.subject} — Pelajari konsepnya dulu!`,
+      href: `/student/subject/${encodeURIComponent(t.subject)}`,
+      color: meta.color,
+    });
+
+    // 2. Quiz
+    recommendations.push({
+      type: "quiz",
+      icon: "📝",
+      label: `Kerjain quiz: ${t.topic}`,
+      subtitle: `${t.subject} — Uji pemahaman kamu!`,
+      href: `/student/quiz?subject=${encodeURIComponent(t.subject)}`,
+      color: meta.color,
+    });
+
+    // 3. Mindmap
+    recommendations.push({
+      type: "mindmap",
+      icon: "🧠",
+      label: `Lihat mindmap: ${t.topic}`,
+      subtitle: `${t.subject} — Biar makin paham!`,
+      href: `/student/topic-tree/${encodeURIComponent(t.subject)}`,
+      color: "#a78bfa",
+    });
+
+    // 4. YouTube video (if available)
+    const videos = getYouTubeForTopic(t.subject, t.topic, student?.gradeLevel);
+    if (videos.length > 0) {
+      recommendations.push({
+        type: "video",
+        icon: "▶️",
+        label: `Tonton video: ${t.topic}`,
+        subtitle: videos[0].channel,
+        href: videos[0].url,
+        color: "#ef4444",
+      });
+    }
+
+    // 5. Buku SIBI (if available)
+    const pdfUrl = getPdfUrl(t.subject, student?.gradeLevel);
+    if (pdfUrl) {
+      recommendations.push({
+        type: "sibi",
+        icon: "📚",
+        label: `Baca buku ${t.subject}`,
+        subtitle: "Buku SIBI Kurikulum Merdeka",
+        href: pdfUrl,
+        color: "#f59e0b",
+      });
+    }
+  }
+
+  // Shuffle final recs — ambil 6 random
+  const finalRecs = recommendations.sort(() => Math.random() - 0.5).slice(0, 6);
+
+  return (
+    <div className="mb-5">
+      <h3
+        className="text-base font-bold mb-3"
+        style={{ fontFamily: "var(--font-st-display)" }}
+      >
+        ✨ Rekomendasi Hari Ini
+      </h3>
+      <div className="space-y-2">
+        {finalRecs.map((rec, i) => (
+          <Link
+            key={`${rec.type}-${i}`}
+            href={rec.href}
+            target={rec.type === "video" || rec.type === "sibi" ? "_blank" : undefined}
+            rel={rec.type === "video" ? "noopener noreferrer" : undefined}
+            className="flex items-center gap-3 rounded-xl p-3.5 transition-all hover:scale-[1.01] active:scale-95"
+            style={{ backgroundColor: "var(--st-bg-card)" }}
+          >
+            <span
+              className="w-10 h-10 rounded-xl flex items-center justify-center text-lg shrink-0"
+              style={{ backgroundColor: `${rec.color}20` }}
+            >
+              {rec.icon}
+            </span>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold truncate">{rec.label}</p>
+              <p className="text-xs mt-0.5" style={{ color: "var(--st-text-dim)" }}>
+                {rec.subtitle}
+              </p>
+            </div>
+            <span className="text-lg" style={{ color: "var(--st-text-dim)" }}>
+              {rec.type === "video" || rec.type === "sibi" ? "↗" : "→"}
+            </span>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── Aktivitas Cepat ── */
+function QuickActionsSection({ gradeLevel }: { gradeLevel?: string }) {
+  const actions = [
+    { icon: "📝", label: "Quiz", href: "/student/quiz", color: "#6366f1" },
+    { icon: "📋", label: "Exam", href: "/student/quiz?exam=true", color: "#f59e0b" },
+    { icon: "🧠", label: "Mindmap", href: "/student/topic-tree", color: "#a78bfa" },
+  ];
+
+  return (
+    <div className="mb-5">
+      <h3
+        className="text-base font-bold mb-3"
+        style={{ fontFamily: "var(--font-st-display)" }}
+      >
+        🚀 Aktivitas Cepat
+      </h3>
+      <div className="grid grid-cols-3 gap-2">
+        {actions.map((a) => (
+          <Link
+            key={a.label}
+            href={a.href}
+            className="flex flex-col items-center gap-1.5 rounded-2xl p-4 transition-all hover:scale-105 active:scale-95"
+            style={{ backgroundColor: "var(--st-bg-card)" }}
+          >
+            <span className="text-3xl">{a.icon}</span>
+            <span className="text-xs font-semibold text-center">{a.label}</span>
+          </Link>
+        ))}
+        {/* Buku SIBI - pilih subject random yang punya PDF */}
+        <SibiQuickLink gradeLevel={gradeLevel} />
+      </div>
+    </div>
+  );
+}
+
+async function SibiQuickLink({ gradeLevel }: { gradeLevel?: string }) {
+  if (!gradeLevel) return null;
+  const gradeMap = PDF_MAP[gradeLevel];
+  if (!gradeMap) return null;
+  const entries = Object.entries(gradeMap);
+  const randomEntry = entries[Math.floor(Math.random() * entries.length)];
+  const dir = gradeLevel === "SD_5" ? "pdf-sd5" : gradeLevel === "SMA_2" ? "pdf-sma11" : "pdf-smp7";
+
+  return (
+    <a
+      href={`/${dir}/${randomEntry[1]}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex flex-col items-center gap-1.5 rounded-2xl p-4 transition-all hover:scale-105 active:scale-95"
+      style={{ backgroundColor: "var(--st-bg-card)" }}
+    >
+      <span className="text-3xl">📚</span>
+      <span className="text-xs font-semibold text-center">Buku SIBI</span>
+    </a>
+  );
+}
+
+/* ── Schedule section — INTERAKTIF ── */
 async function ScheduleSection() {
   noStore();
 
-  const sessionId = await getSessionStudentId();
-  const student = sessionId
-    ? await prisma.student.findUnique({
-        where: { id: sessionId },
-        include: {
-          scheduleSessions: {
-            where: { status: "SCHEDULED" },
-            orderBy: { scheduledAt: "asc" },
-            take: 5,
-          },
-        },
-      })
-    : null;
+  const session = await getSessionStudent();
+  if (!session) return null;
 
-  if (!student) return null;
-
-  const todaySessions = student.scheduleSessions.filter((s) => {
-    const today = new Date();
-    const sDate = new Date(s.scheduledAt);
-    return (
-      sDate.getDate() === today.getDate() &&
-      sDate.getMonth() === today.getMonth() &&
-      sDate.getFullYear() === today.getFullYear()
-    );
+  const student = await prisma.student.findUnique({
+    where: { id: session.id },
+    select: { gradeLevel: true },
   });
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const todaySessions = await prisma.scheduleSession.findMany({
+    where: {
+      studentId: session.id,
+      scheduledAt: { gte: today, lt: tomorrow },
+      status: "SCHEDULED",
+    },
+    orderBy: { scheduledAt: "asc" },
+  });
+
+  if (todaySessions.length === 0) return null;
+
+  // Get matching materials for each session (by subject+topic)
+  const matQueries = todaySessions.map((s) => ({
+    subject: s.subject ?? "",
+    topic: s.topic ?? "",
+  }));
+  const materials = await prisma.material.findMany({
+    where: {
+      curriculum: { studentId: session.id },
+      OR: matQueries.map((mq) => ({
+        subject: mq.subject,
+        topic: mq.topic,
+      })),
+    },
+    select: {
+      id: true,
+      subject: true,
+      topic: true,
+      quizzes: { select: { id: true }, take: 1 },
+    },
+  });
+  const matByKey = new Map(
+    materials.map((m) => [`${m.subject}|${m.topic}`, m])
+  );
 
   return (
     <div className="mb-5">
@@ -196,84 +412,142 @@ async function ScheduleSection() {
         📅 Jadwal Hari Ini
       </h3>
       <div
-        className="rounded-2xl p-4"
+        className="rounded-2xl overflow-hidden"
         style={{ backgroundColor: "var(--st-bg-card)" }}
       >
-        {todaySessions.length === 0 ? (
-          <div className="flex flex-col items-center py-4 gap-2">
-            <span className="text-2xl">🎉</span>
-            <p
-              className="text-sm text-center"
-              style={{ color: "var(--st-text-dim)" }}
-            >
-              Tidak ada jadwal hari ini. Santai aja dulu!
-            </p>
-          </div>
-        ) : (
-          <div className="space-y-3">
-            {todaySessions.map((session) => (
-              <div
-                key={session.id}
-                className="flex items-center gap-3 p-3 rounded-xl"
-                style={{ backgroundColor: "var(--st-bg)" }}
-              >
-                <span className="text-lg">
-                  {session.type === "DAILY" ? "📖" : "⚡"}
-                </span>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold truncate">
-                    {session.subject ?? session.topic ?? "Belajar"}
-                  </p>
-                  <p className="text-xs" style={{ color: "var(--st-text-dim)" }}>
-                    {new Date(session.scheduledAt).toLocaleTimeString("id-ID", {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}{" "}
-                    · {session.durationMin} menit
-                  </p>
+        <div className="divide-y" style={{ borderColor: "var(--st-bg, #f0f4ff)" }}>
+          {todaySessions.map((sessionItem) => {
+            const meta = getMeta(sessionItem.subject ?? "");
+            const subject = sessionItem.subject ?? "";
+            const topic = sessionItem.topic ?? "";
+
+            // Cari materialId dari matching subject+topic
+            const mat = matByKey.get(`${subject}|${topic}`);
+            const matId = mat?.id;
+            const quizId = mat?.quizzes[0]?.id;
+
+            // YouTube videos
+            const videos = getYouTubeForTopic(subject, topic, student?.gradeLevel);
+            const pdfUrl = getPdfUrl(subject, student?.gradeLevel);
+
+            return (
+              <div key={sessionItem.id} className="p-4 space-y-3">
+                {/* Header jadwal */}
+                <div className="flex items-center gap-3">
+                  <span className="text-lg">
+                    {sessionItem.type === "DAILY" ? "📖" : "⚡"}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold truncate">
+                      {subject ? `${subject} — ${topic}` : topic || "Belajar"}
+                    </p>
+                    <p className="text-xs" style={{ color: "var(--st-text-dim)" }}>
+                      {new Date(sessionItem.scheduledAt).toLocaleTimeString("id-ID", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}{" "}
+                      · {sessionItem.durationMin} menit
+                    </p>
+                  </div>
+                  <span
+                    className="text-xs px-2.5 py-1 rounded-full font-medium shrink-0"
+                    style={{
+                      backgroundColor:
+                        sessionItem.type === "DAILY"
+                          ? "rgba(99,102,241,0.1)"
+                          : "rgba(249,115,22,0.1)",
+                      color: "var(--st-primary)",
+                    }}
+                  >
+                    {sessionItem.type === "DAILY" ? "Harian" : "Intensif"}
+                  </span>
                 </div>
-                <span
-                  className="text-xs px-2.5 py-1 rounded-full font-medium"
-                  style={{
-                    backgroundColor:
-                      session.type === "DAILY"
-                        ? "rgba(99,102,241,0.1)"
-                        : "rgba(249,115,22,0.1)",
-                    color: "var(--st-primary)",
-                  }}
-                >
-                  {session.type === "DAILY" ? "Harian" : "Intensif"}
-                </span>
+
+                {/* Action buttons */}
+                <div className="flex flex-wrap gap-1.5">
+                  {matId && (
+                    <Link
+                      href={`/student/slides/${matId}`}
+                      className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all hover:opacity-80"
+                      style={{
+                        backgroundColor: `${meta.color}15`,
+                        color: meta.color,
+                      }}
+                    >
+                      📖 Baca
+                    </Link>
+                  )}
+                  {matId && (
+                    <Link
+                      href={`/student/quiz?quizId=${quizId || matId}`}
+                      className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all hover:opacity-80"
+                      style={{
+                        backgroundColor: "rgba(99,102,241,0.1)",
+                        color: "var(--st-primary)",
+                      }}
+                    >
+                      📝 Quiz
+                    </Link>
+                  )}
+                  {matId && (
+                    <Link
+                      href={`/student/mindmap/${encodeURIComponent(subject)}`}
+                      className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all hover:opacity-80"
+                      style={{
+                        backgroundColor: "rgba(167,139,250,0.1)",
+                        color: "#a78bfa",
+                      }}
+                    >
+                      🧠 Mindmap
+                    </Link>
+                  )}
+                  {videos.length > 0 && (
+                    <a
+                      href={videos[0].url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all hover:opacity-80"
+                      style={{
+                        backgroundColor: "rgba(239,68,68,0.1)",
+                        color: "#ef4444",
+                      }}
+                    >
+                      ▶️ Video
+                    </a>
+                  )}
+                  {pdfUrl && (
+                    <a
+                      href={pdfUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all hover:opacity-80"
+                      style={{
+                        backgroundColor: "rgba(245,158,11,0.1)",
+                        color: "#d97706",
+                      }}
+                    >
+                      📚 Buku
+                    </a>
+                  )}
+                </div>
               </div>
-            ))}
-          </div>
-        )}
-        {student.scheduleSessions.length > 5 && (
-          <button
-            className="w-full text-center text-xs font-semibold mt-3 pt-3 border-t"
-            style={{
-              color: "var(--st-primary)",
-              borderColor: "#e5e7eb",
-            }}
-          >
-            Lihat semua jadwal →
-          </button>
-        )}
+            );
+          })}
+        </div>
       </div>
     </div>
   );
 }
 
-/* ── Subject grid — fetch from curriculum ── */
-
+/* ── Subject grid ── */
 async function SubjectGridSection() {
   noStore();
 
-  const sessionId = await getSessionStudentId();
-  if (!sessionId) return null;
+  const session = await getSessionStudent();
+  if (!session) return null;
 
   const curriculum = await prisma.curriculum.findFirst({
-    where: { studentId: sessionId },
+    where: { studentId: session.id },
     select: {
       materials: {
         select: { subject: true },
@@ -285,7 +559,6 @@ async function SubjectGridSection() {
   });
 
   const subjects = (curriculum?.materials || []).map((m) => m.subject);
-
   if (subjects.length === 0) return null;
 
   return (
@@ -319,35 +592,161 @@ async function SubjectGridSection() {
   );
 }
 
-/* ── Page ── */
+function SubjectCircle({
+  name,
+  emoji,
+  color,
+  progress,
+}: {
+  name: string;
+  emoji: string;
+  color: string;
+  progress: number;
+}) {
+  const r = 28;
+  const circumference = 2 * Math.PI * r;
+  const offset = circumference - (progress / 100) * circumference;
 
+  return (
+    <Link
+      href={`/student/subject/${encodeURIComponent(name)}`}
+      className="flex flex-col items-center gap-1.5"
+    >
+      <div className="relative w-16 h-16 flex items-center justify-center">
+        <svg className="absolute inset-0 w-16 h-16 -rotate-90">
+          <circle
+            cx="32" cy="32" r={r}
+            fill="none" stroke="#e5e7eb" strokeWidth="5"
+          />
+          <circle
+            cx="32" cy="32" r={r}
+            fill="none" stroke={color} strokeWidth="5"
+            strokeDasharray={circumference}
+            strokeDashoffset={offset}
+            strokeLinecap="round"
+          />
+        </svg>
+        <span className="text-2xl relative z-10">{emoji}</span>
+      </div>
+      <span
+        className="text-xs font-medium text-center"
+        style={{ color: "var(--st-text)" }}
+      >
+        {name}
+      </span>
+    </Link>
+  );
+}
+
+/* ── Settings ── */
+function SettingsSection() {
+  return (
+    <section className="mb-5">
+      <h3
+        className="text-base font-bold mb-3"
+        style={{ fontFamily: "var(--font-st-display)" }}
+      >
+        ⚙️ Pengaturan
+      </h3>
+      <div
+        className="rounded-2xl overflow-hidden"
+        style={{ backgroundColor: "var(--st-bg-card)" }}
+      >
+        <Link
+          href="/student/password"
+          className="flex items-center gap-3 p-4 transition-opacity hover:opacity-80"
+          style={{ borderBottom: "1px solid var(--st-bg, #f0f4ff)" }}
+        >
+          <span className="text-xl">🔑</span>
+          <div className="flex-1">
+            <p className="text-sm font-medium">Password</p>
+            <p className="text-xs" style={{ color: "var(--st-text-dim)" }}>
+              Buat atau ganti password login
+            </p>
+          </div>
+          <span style={{ color: "var(--st-text-dim)" }}>→</span>
+        </Link>
+        <Link
+          href="/student/profile-link"
+          className="flex items-center gap-3 p-4 transition-opacity hover:opacity-80"
+        >
+          <span className="text-xl">🔗</span>
+          <div className="flex-1">
+            <p className="text-sm font-medium">Profil & Link Login</p>
+            <p className="text-xs" style={{ color: "var(--st-text-dim)" }}>
+              Lihat ID siswa & bagikan ke orang tua
+            </p>
+          </div>
+          <span style={{ color: "var(--st-text-dim)" }}>→</span>
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+/* ── Skeleton fallbacks ── */
+function SkeletonRecs() {
+  return (
+    <div className="mb-5">
+      <div className="w-40 h-4 bg-gray-200 rounded mb-3 animate-pulse" />
+      <div className="space-y-2">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="flex items-center gap-3 p-3.5 rounded-xl animate-pulse" style={{ backgroundColor: "var(--st-bg-card)" }}>
+            <div className="w-10 h-10 rounded-xl bg-gray-200" />
+            <div className="flex-1 space-y-1">
+              <div className="w-3/4 h-3 bg-gray-200 rounded" />
+              <div className="w-1/2 h-2 bg-gray-200 rounded" />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SkeletonSchedule() {
+  return (
+    <div className="mb-5 animate-pulse">
+      <div className="w-32 h-4 bg-gray-200 rounded mb-3" />
+      <div className="rounded-2xl p-4 space-y-3" style={{ backgroundColor: "var(--st-bg-card)" }}>
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="flex items-center gap-3 p-3">
+            <div className="w-6 h-6 bg-gray-200 rounded" />
+            <div className="flex-1 space-y-1">
+              <div className="w-2/3 h-3 bg-gray-200 rounded" />
+              <div className="w-1/2 h-2 bg-gray-200 rounded" />
+            </div>
+            <div className="w-16 h-5 bg-gray-200 rounded-full" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── Page ── */
 export default function StudentHomePage() {
   return (
     <>
-      <Suspense
-        fallback={
-          <div
-            className="rounded-2xl p-5 mb-5 animate-pulse"
-            style={{ backgroundColor: "var(--st-primary)" }}
-          >
-            <div className="w-1/3 h-3 bg-white/30 rounded mb-2" />
-            <div className="w-2/3 h-6 bg-white/30 rounded mb-3" />
-            <div className="w-32 h-10 bg-white/30 rounded-xl" />
-          </div>
-        }
-      >
-        <HeroSection />
+      {/* Rekomendasi Hari Ini */}
+      <Suspense fallback={<SkeletonRecs />}>
+        <RecommendationSection />
       </Suspense>
 
-      {/* Subject Grid — from curriculum */}
+      {/* Quote */}
+      <QuoteSection />
+
+      {/* Aktivitas Cepat */}
+      <Suspense fallback={null}>
+        <QuickActionsDynamic />
+      </Suspense>
+
+      {/* Subject Grid */}
       <Suspense
         fallback={
           <div className="mb-5">
             <div className="w-32 h-4 bg-gray-200 rounded mb-3 animate-pulse" />
-            <div
-              className="rounded-2xl p-4 animate-pulse"
-              style={{ backgroundColor: "var(--st-bg-card)" }}
-            >
+            <div className="rounded-2xl p-4 animate-pulse" style={{ backgroundColor: "var(--st-bg-card)" }}>
               <div className="grid grid-cols-3 gap-y-4 gap-x-2">
                 {Array.from({ length: 6 }).map((_, i) => (
                   <div key={i} className="flex flex-col items-center gap-1.5">
@@ -363,72 +762,24 @@ export default function StudentHomePage() {
         <SubjectGridSection />
       </Suspense>
 
-      <Suspense
-        fallback={
-          <div className="mb-5 animate-pulse">
-            <div className="w-32 h-4 bg-gray-200 rounded mb-3" />
-            <div
-              className="rounded-2xl p-4 space-y-3"
-              style={{ backgroundColor: "var(--st-bg-card)" }}
-            >
-              {Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className="flex items-center gap-3 p-3">
-                  <div className="w-6 h-6 bg-gray-200 rounded" />
-                  <div className="flex-1 space-y-1">
-                    <div className="w-2/3 h-3 bg-gray-200 rounded" />
-                    <div className="w-1/2 h-2 bg-gray-200 rounded" />
-                  </div>
-                  <div className="w-16 h-5 bg-gray-200 rounded-full" />
-                </div>
-              ))}
-            </div>
-          </div>
-        }
-      >
+      {/* Jadwal Interaktif */}
+      <Suspense fallback={<SkeletonSchedule />}>
         <ScheduleSection />
       </Suspense>
 
-      {/* ── Settings Section ── */}
-      <section className="mb-5">
-        <h3
-          className="text-base font-bold mb-3"
-          style={{ fontFamily: "var(--font-st-display)" }}
-        >
-          ⚙️ Pengaturan
-        </h3>
-        <div
-          className="rounded-2xl overflow-hidden"
-          style={{ backgroundColor: "var(--st-bg-card)" }}
-        >
-          <Link
-            href="/student/password"
-            className="flex items-center gap-3 p-4 transition-opacity hover:opacity-80"
-            style={{ borderBottom: "1px solid var(--st-bg, #f0f4ff)" }}
-          >
-            <span className="text-xl">🔑</span>
-            <div className="flex-1">
-              <p className="text-sm font-medium">Password</p>
-              <p className="text-xs" style={{ color: "var(--st-text-dim)" }}>
-                Buat atau ganti password login
-              </p>
-            </div>
-            <span style={{ color: "var(--st-text-dim)" }}>→</span>
-          </Link>
-          <Link
-            href="/student/profile-link"
-            className="flex items-center gap-3 p-4 transition-opacity hover:opacity-80"
-          >
-            <span className="text-xl">🔗</span>
-            <div className="flex-1">
-              <p className="text-sm font-medium">Profil & Link Login</p>
-              <p className="text-xs" style={{ color: "var(--st-text-dim)" }}>
-                Lihat ID siswa & bagikan ke orang tua
-              </p>
-            </div>
-            <span style={{ color: "var(--st-text-dim)" }}>→</span>
-          </Link>
-        </div>
-      </section>
+      {/* Pengaturan */}
+      <SettingsSection />
     </>
   );
+}
+
+/* ── QuickActions with gradeLevel ── */
+async function QuickActionsDynamic() {
+  const session = await getSessionStudent();
+  if (!session) return null;
+  const student = await prisma.student.findUnique({
+    where: { id: session.id },
+    select: { gradeLevel: true },
+  });
+  return <QuickActionsSection gradeLevel={student?.gradeLevel} />;
 }
