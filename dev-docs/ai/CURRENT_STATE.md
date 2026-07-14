@@ -17,6 +17,8 @@
 | LLM Integration | ✅ Production | 9Router combo + fallback chain |
 | Telegram Bot | ✅ Production | Webhook mode, 3 persona, homework/reminder/schedule |
 | Student Web Auth | ✅ Production | Login dengan password (bcrypt), ganti password, share link |
+| Student Landing Page | ✅ Production | Quote rotator, recommendation carousel, quick actions, interactive schedule |
+| Template System | ✅ Production | New students copy curriculum from Syifa/Raihan/SHOFI per grade level |
 | Schedule System | ✅ Production | 60/30/10 assignment, H-1/T-30 reminders, daily brief, auto-assign |
 | Admin Dashboard | ✅ Production | Manage students, curriculum, quizzes, set password |
 | WhatsApp Bot | 🟡 In Progress | Next.js webhook + QR auth |
@@ -30,6 +32,9 @@
 - **Schedule system**: Full cron pipeline (every 3m) for session reminders (H-1, T-30, missed), daily brief (6-10AM), auto-assignment via 60/30/10
 - **Schedule bot commands**: [SCHEDULE], [SCHEDULE:WEEK], [SCHEDULE:SET], [SCHEDULE:ASSIGN]
 - **Auto-default config**: New students get default schedule config (1x/day 16:00, exclude Sunday)
+- **Student Web improvements**: Quiz page fixed — subject picker when no subject param, no more infinite loading
+- **Landing page revamp**: Motivational quote rotator (auto-roll 8s, 15 tokoh), recommendation carousel (3 cards/page, auto-roll 6s), quick action buttons (Quiz/Exam/Mindmap/Buku), interactive schedule with per-item action buttons
+- **Template system**: Syifa/Raihan/SHOFI marked as template. New student registered at same grade level gets deep-copied curriculum (materials, quizzes, slides, mindmaps) instead of generating from data banks
 
 ## Known Issues / Blockers
 
