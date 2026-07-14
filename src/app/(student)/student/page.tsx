@@ -58,6 +58,7 @@ const SUBJECT_META: Record<string, { emoji: string; color: string }> = {
   PJOK: { emoji: "⚽", color: "#6366f1" },
   Informatika: { emoji: "💻", color: "#06b6d4" },
   "Bahasa Inggris": { emoji: "🌏", color: "#8b5cf6" },
+  "Bahasa Mandarin": { emoji: "🀄", color: "#ef4444" },
 };
 
 /* ── Map subject + grade level → PDF SIBI path ── */

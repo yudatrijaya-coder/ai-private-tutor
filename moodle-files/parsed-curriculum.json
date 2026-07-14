@@ -1,0 +1,251 @@
+{
+  "SHOFI": {
+    "Bahasa_Indonesia": {
+      "Ganjil": {
+        "class": "XI/Ganjil",
+        "school": "SMA Kusuma Bangsa",
+        "total_hours": 36,
+        "weeks": 18,
+        "teacher": "Agus Noprianto, S.Pd.",
+        "topics": [
+          {
+            "topic": "Drama",
+            "subtopics": [
+              "Menemukan perbedaan puisi, prosa, dan drama",
+              "Menentukan unsur pembangun drama",
+              "Menulis naskah drama",
+              "Mempersiapkan pertunjukan drama",
+              "Menampilkan pertunjukan drama"
+            ],
+            "hours": 9,
+            "assessments": { "sumatif": 2, "remedial": 2 },
+            "weeks": [1, 2, 3, 4, 5]
+          },
+          {
+            "topic": "Berita",
+            "subtopics": [
+              "Menemukan informasi aktual dan akurat dalam berita",
+              "Menganalisis struktur dan unsur teks berita",
+              "Membuat vlog dari teks berita yang dibaca"
+            ],
+            "hours": 6,
+            "assessments": { "sumatif": 2, "remedial": 2 },
+            "weeks": [6, 7, 8, 9]
+          },
+          {
+            "topic": "Fakta dan Opini dalam Teks Argumentasi",
+            "subtopics": [
+              "Menemukan kalimat opini dan kalimat fakta"
+            ],
+            "hours": 2,
+            "weeks": [10, 11]
+          },
+          {
+            "topic": "Poster sebagai Teks Persuasi",
+            "subtopics": [
+              "Memahami poster sebagai jenis persuasi"
+            ],
+            "hours": 2,
+            "weeks": [12, 13]
+          },
+          {
+            "topic": "Membuat Poster",
+            "subtopics": [
+              "Membuat poster dengan tema bersosial media yang baik dan bijak",
+              "Mempromosikan ketahanan pangan lokal"
+            ],
+            "hours": 3,
+            "weeks": [14, 15, 16]
+          }
+        ],
+        "weekly_hours": [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2]
+      },
+      "Genap": {
+        "class": "XI/Genap",
+        "school": "SMA Kusuma Bangsa",
+        "total_hours": 36,
+        "weeks": 18,
+        "teacher": "Agus Noprianto, S.Pd.",
+        "topics": [
+          {
+            "topic": "Karya Ilmiah",
+            "subtopics": [
+              "Mengidentifikasi jurnal karya ilmiah dan mengenal sistematika karya ilmiah",
+              "Memahami struktur karya ilmiah",
+              "Memahami ragam karya ilmiah",
+              "Menulis karya ilmiah dengan memperhatikan kaidah penulisan karya ilmiah",
+              "Menyajikan karya ilmiah dalam aplikasi presentasi"
+            ],
+            "hours": 10,
+            "assessments": { "sumatif": 2, "remedial": 2 },
+            "weeks": [1, 2, 3, 4, 5, 6, 7]
+          },
+          {
+            "topic": "Cerpen (Cerita Pendek)",
+            "subtopics": [
+              "Menemukan nilai-nilai dalam cerpen bertema sejarah",
+              "Menganalisis unsur intrinsik cerpen",
+              "Menulis cerpen dengan tema kearifan lokal"
+            ],
+            "hours": 6,
+            "assessments": { "sumatif": 2, "remedial": 2 },
+            "weeks": [8, 9, 10, 11]
+          }
+        ],
+        "weekly_hours": [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+      }
+    },
+    "Biologi": {
+      "Ganjil": {
+        "class": "XI/Ganjil",
+        "school": "SMA Kusuma Bangsa",
+        "total_hours": 72,
+        "weeks": 18,
+        "teacher": "Novita Manalu, M.Pd.",
+        "topics": [
+          {
+            "topic": "Sistem Pencernaan (Sistem Digesti)",
+            "subtopics": [
+              "Makanan dan zat makanan",
+              "Air dan zat aditif pada makanan",
+              "Praktikum uji kandungan zat makanan",
+              "Struktur dan fungsi organ pembentuk sistem pencernaan",
+              "Mekanisme pencernaan makanan",
+              "Gangguan sistem pencernaan makanan"
+            ],
+            "hours": 11,
+            "assessments": { "sumatif": 2, "remedial": 1 }
+          },
+          {
+            "topic": "Sistem Sirkulasi",
+            "subtopics": [
+              "Fungsi sistem sirkulasi",
+              "Struktur dan fungsi organ pembentuk sistem sirkulasi",
+              "Struktur jantung",
+              "Arteri dan vena",
+              "Peredaran darah pulmonalis dan peredaran darah sistemik",
+              "Struktur dan fungsi berbagai macam sel darah, golongan darah dan transfusi darah",
+              "Penyakit-penyakit terkait sistem sirkulasi"
+            ],
+            "hours": 12,
+            "assessments": { "sumatif": 2, "remedial": 1 }
+          },
+          {
+            "topic": "Sistem Respirasi (Pernapasan)",
+            "subtopics": [
+              "Fungsi sistem respirasi",
+              "Struktur dan fungsi organ pembentuk sistem respirasi",
+              "Mekanisme pernapasan",
+              "Transport dan pertukaran gas pada alveolus dan sel-sel jaringan tubuh",
+              "Volume udara pernapasan (kapasitas vital paru-paru)",
+              "Penyakit-penyakit terkait sistem respirasi"
+            ],
+            "hours": 10,
+            "assessments": { "sumatif": 1, "remedial": 1 }
+          },
+          {
+            "topic": "Sistem Gerak (Sistem Lokomosi)",
+            "subtopics": [
+              "Fungsi sistem gerak dan organ-organ penyusun sistem gerak",
+              "Macam-macam tulang",
+              "Struktur osteon",
+              "Hubungan antar tulang",
+              "Sendi",
+              "Macam-macam otot",
+              "Macam-macam gerakan antagonis dan sinergis",
+              "Penyakit-penyakit terkait sistem lokomosi"
+            ],
+            "hours": 13,
+            "assessments": { "sumatif": 2, "remedial": 1 }
+          },
+          {
+            "topic": "Sistem Eksresi",
+            "subtopics": [
+              "Struktur dan fungsi organ penyusun sistem eksresi",
+              "Mekanisme pembentukan urine",
+              "Faktor yang memengaruhi jumlah urine",
+              "Praktikum uji urin",
+              "Struktur dan fungsi hati",
+              "Proses pembentukan urobilin dan sterkobilin",
+              "Struktur dan fungsi kulit",
+              "Penyakit-penyakit terkait sistem eksresi"
+            ],
+            "hours": 13,
+            "assessments": { "sumatif": 2, "remedial": 1 }
+          }
+        ],
+        "weekly_hours": [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4]
+      }
+    },
+    "Fisika": {
+      "Ganjil": {
+        "class": "XI/Ganjil",
+        "school": "SMA Kusuma Bangsa",
+        "total_hours": 72,
+        "weeks": 18,
+        "teacher": "Elisabeth Pransiska Tumanggor, S.Pd.",
+        "topics": [
+          {
+            "topic": "Dinamika Gerak",
+            "subtopics": [
+              "Gaya Pemulih",
+              "Elastisitas Benda Padat (tegangan, regangan, modulus Young)",
+              "Konstanta pegas susunan seri dan paralel",
+              "Dinamika Rotasi (momen inersia, momen gaya)",
+              "Kesetimbangan Benda Tegar (titik berat)",
+              "Praktikum Kesetimbangan Benda Tegar/Pegas"
+            ],
+            "hours": 32,
+            "assessments": { "sumatif": 2, "remedial": 2 },
+            "detail": [
+              { "subtopic": "Gaya Pemulih", "hours": 8 },
+              { "subtopic": "Elastisitas Benda Padat", "hours": 4 },
+              { "subtopic": "Penilaian Sumatif", "hours": 2 },
+              { "subtopic": "Remedial", "hours": 2 },
+              { "subtopic": "Dinamika Rotasi", "hours": 6 },
+              { "subtopic": "Kesetimbangan Benda Tegar", "hours": 8 },
+              { "subtopic": "Praktikum Kesetimbangan Benda Tegar/Pegas", "hours": 2 }
+            ]
+          },
+          {
+            "topic": "Fluida",
+            "subtopics": [
+              "Tekanan hidrostatika",
+              "Gaya ke atas (Hukum Archimedes)",
+              "Praktikum Gaya Archimedes",
+              "Tegangan permukaan dan kapilaritas",
+              "Fluida Dinamis (debit, persamaan kontinuitas, Hukum Bernoulli)"
+            ],
+            "hours": 24,
+            "assessments": { "sumatif": 2, "remedial": 2 },
+            "detail": [
+              { "subtopic": "Tekanan hidrostatika", "hours": 4 },
+              { "subtopic": "Gaya ke atas (Archimedes)", "hours": 4 },
+              { "subtopic": "Praktikum Gaya Archimedes", "hours": 2 },
+              { "subtopic": "Tegangan permukaan", "hours": 2 },
+              { "subtopic": "Fluida Dinamis", "hours": 8 },
+              { "subtopic": "Penilaian Sumatif", "hours": 2 },
+              { "subtopic": "Remedial", "hours": 2 }
+            ]
+          },
+          {
+            "topic": "Kalor",
+            "subtopics": [
+              "Kalor (perubahan suhu, perubahan wujud, asas Black)",
+              "Perpindahan kalor (konduksi, konveksi, radiasi)",
+              "Dampak perubahan iklim dan alternatif solusi"
+            ],
+            "hours": 16,
+            "assessments": { "sumatif": 2, "remedial": 2 },
+            "detail": [
+              { "subtopic": "Kalor", "hours": 6 },
+              { "subtopic": "Perpindahan Kalor", "hours": 8 },
+              { "subtopic": "Tugas Kuis", "hours": 2 }
+            ]
+          }
+        ],
+        "weekly_hours": [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4]
+      }
+    }
+  }
+}

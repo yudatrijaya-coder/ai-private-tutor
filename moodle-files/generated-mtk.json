@@ -1,0 +1,98 @@
+[
+  {
+    "subject": "Matematika",
+    "topic": "Matriks",
+    "weekOrder": 31,
+    "materialId": "65527586-ab98-489b-a9bd-f4086d5c667a",
+    "rawContentLength": 6779,
+    "quizQuestions": 5
+  },
+  {
+    "subject": "Matematika",
+    "topic": "Transformasi Geometri",
+    "weekOrder": 32,
+    "materialId": "8b0d2682-8087-4c4b-bdd4-8d10723ca149",
+    "rawContentLength": 5513,
+    "quizQuestions": 5
+  },
+  {
+    "subject": "Matematika",
+    "topic": "Fungsi Komposisi dan Invers",
+    "weekOrder": 33,
+    "materialId": "996d66f7-f63e-4547-a8f2-e40b5b61c869",
+    "rawContentLength": 6442,
+    "quizQuestions": 5
+  },
+  {
+    "subject": "Matematika",
+    "topic": "Limit Fungsi",
+    "weekOrder": 34,
+    "materialId": "67b77c67-1b4f-44fe-a102-9af37103ea41",
+    "rawContentLength": 7789,
+    "quizQuestions": 5
+  },
+  {
+    "subject": "Matematika",
+    "topic": "Turunan Fungsi",
+    "weekOrder": 35,
+    "materialId": "7d3eaf72-84cb-4d46-af78-776fc56def73",
+    "rawContentLength": 5640,
+    "quizQuestions": 5
+  },
+  {
+    "subject": "Matematika",
+    "topic": "Lingkaran",
+    "weekOrder": 36,
+    "materialId": "8093b16c-202f-4c74-94f0-7a6cfcb3d262",
+    "rawContentLength": 8285,
+    "quizQuestions": 5
+  },
+  {
+    "subject": "Matematika Penalaran",
+    "topic": "Himpunan",
+    "weekOrder": 37,
+    "materialId": "953400c4-a8f9-420d-9889-6cd5ef6afe69",
+    "rawContentLength": 7434,
+    "quizQuestions": 5
+  },
+  {
+    "subject": "Matematika Penalaran",
+    "topic": "Hubungan Garis & Sudut",
+    "weekOrder": 38,
+    "materialId": "4b6a2d82-7fbf-4919-9afb-021cf72248ec",
+    "rawContentLength": 7986,
+    "quizQuestions": 5
+  },
+  {
+    "subject": "Matematika Penalaran",
+    "topic": "Kesebangunan & Kekongruenan",
+    "weekOrder": 39,
+    "materialId": "6a0ad1c6-9331-4a63-826a-350c942fe500",
+    "rawContentLength": 7452,
+    "quizQuestions": 5
+  },
+  {
+    "subject": "Matematika Penalaran",
+    "topic": "Bangun Datar",
+    "weekOrder": 40,
+    "materialId": "c33926ec-c8a2-4ee4-bbce-3eb197e1bda3",
+    "rawContentLength": 6705,
+    "quizQuestions": 5
+  },
+  {
+    "subject": "Matematika Penalaran",
+    "topic": "Bangun Ruang",
+    "weekOrder": 41,
+    "materialId": "6834d4b9-2d70-49ae-af82-69e066b18d1d",
+    "rawContentLength": 7900,
+    "quizQuestions": 5
+  },
+  {
+    "subject": "Matematika Penalaran",
+    "topic": "Bilangan & Operasi",
+    "weekOrder": 42,
+    "materialId": "e883cc1a-328e-4615-aca9-ddcabc01a9cf",
+    "rawContentLength": 7353,
+    "quizQuestions": 5
+  }
+]

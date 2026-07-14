@@ -148,7 +148,7 @@ const SCHEDULE_MAP: SchoolScheduleMap = {
   },
 
   // ─── SHOFI (SMA XI 4) — FULL WEEK ───
-  H0EX2D: {
+  RHQL6KX: { // DB: STU_MRHQL6KX
     Senin: [
       { time: "07:00 - 07:40", subject: "Bahasa Inggris", room: "Ruang Kelas", teacher: "Tyani Alrizki, S.S." },
       { time: "07:40 - 08:20", subject: "Bahasa Inggris", room: "Ruang Kelas", teacher: "Tyani Alrizki, S.S." },

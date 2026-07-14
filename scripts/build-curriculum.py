@@ -1,0 +1,91 @@
+#!/usr/bin/env python3.12
+"""
+Generate comprehensive curriculum JSON for SHOFI & Raihan
+based on parsed Program Semester data + LLM-generated content
+"""
+import json, sys, os
+
+# ── Struktur kurikulum SHOFI berdasarkan Program Semester Moodle ──
+SHOFI_CURRICULUM = {
+    "Bahasa Indonesia": [
+        # Ganjil
+        {"topic": "Drama", "subtopics": ["Perbedaan Puisi, Prosa, dan Drama", "Unsur Pembangun Drama", "Menulis Naskah Drama", "Persiapan Pertunjukan Drama", "Menampilkan Pertunjukan Drama"]},
+        {"topic": "Berita", "subtopics": ["Informasi Aktual dan Akurat dalam Berita", "Struktur dan Unsur Teks Berita", "Membuat Vlog dari Teks Berita"]},
+        {"topic": "Fakta dan Opini dalam Teks Argumentasi", "subtopics": ["Kalimat Opini dan Kalimat Fakta"]},
+        {"topic": "Poster sebagai Teks Persuasi", "subtopics": ["Pengertian Poster, Ciri-ciri, dan Jenis Poster"]},
+        {"topic": "Membuat Poster", "subtopics": ["Membuat Poster Tema Bersosial Media", "Mempromosikan Ketahanan Pangan Lokal"]},
+        # Genap
+        {"topic": "Karya Ilmiah", "subtopics": ["Identifikasi Jurnal Karya Ilmiah", "Sistematika Karya Ilmiah", "Ragam Karya Ilmiah", "Menulis Karya Ilmiah", "Menyajikan Karya Ilmiah"]},
+        {"topic": "Cerpen (Cerita Pendek)", "subtopics": ["Nilai-nilai dalam Cerpen", "Unsur Intrinsik Cerpen", "Menulis Cerpen Tema Kearifan Lokal"]},
+    ],
+    "Biologi": [
+        {"topic": "Sistem Pencernaan", "subtopics": ["Makanan dan Zat Makanan", "Air dan Zat Aditif", "Praktikum Uji Zat Makanan", "Struktur Organ Pencernaan", "Mekanisme Pencernaan", "Gangguan Sistem Pencernaan"]},
+        {"topic": "Sistem Sirkulasi", "subtopics": ["Fungsi Sistem Sirkulasi", "Struktur Jantung", "Arteri dan Vena", "Peredaran Darah Pulmonalis dan Sistemik", "Sel Darah dan Golongan Darah", "Penyakit Sistem Sirkulasi"]},
+        {"topic": "Sistem Respirasi", "subtopics": ["Fungsi Sistem Respirasi", "Organ Pernapasan", "Mekanisme Pernapasan", "Transport dan Pertukaran Gas", "Volume Udara Pernapasan", "Penyakit Sistem Respirasi"]},
+        {"topic": "Sistem Gerak", "subtopics": ["Fungsi Sistem Gerak", "Macam-macam Tulang", "Struktur Osteon", "Sendi", "Macam-macam Otot", "Gerak Antagonis dan Sinergis"]},
+        {"topic": "Sistem Eksresi", "subtopics": ["Organ Eksresi", "Mekanisme Pembentukan Urine", "Faktor yang Memengaruhi Urine", "Praktikum Uji Urin", "Struktur dan Fungsi Hati", "Struktur dan Fungsi Kulit"]},
+    ],
+    "Fisika": [
+        {"topic": "Dinamika Gerak", "subtopics": ["Gaya Pemulih", "Elastisitas Benda Padat", "Konstanta Pegas Seri dan Paralel", "Dinamika Rotasi", "Kesetimbangan Benda Tegar", "Praktikum Kesetimbangan Benda Tegar"]},
+        {"topic": "Fluida", "subtopics": ["Tekanan Hidrostatika", "Gaya ke Atas (Archimedes)", "Praktikum Gaya Archimedes", "Tegangan Permukaan dan Kapilaritas", "Fluida Dinamis", "Hukum Bernoulli"]},
+        {"topic": "Kalor", "subtopics": ["Kalor dan Perubahan Suhu", "Perubahan Wujud", "Asas Black", "Perpindahan Kalor", "Konduksi, Konveksi, Radiasi"]},
+    ],
+    "Matematika": [
+        {"topic": "Matriks", "subtopics": ["Konsep Matriks", "Jenis-Jenis Matriks", "Kesamaan Matriks", "Operasi Matriks", "Determinan Matriks", "Invers Matriks", "Aplikasi Matriks"]},
+        {"topic": "Transformasi Geometri", "subtopics": ["Translasi", "Refleksi", "Rotasi", "Dilatasi", "Aplikasi Transformasi"]},
+        {"topic": "Fungsi Komposisi dan Invers", "subtopics": ["Konsep Fungsi Komposisi", "Sifat Fungsi Komposisi", "Aplikasi Fungsi Komposisi", "Fungsi Invers", "Invers Fungsi Linear/Kuadrat/Eksponen"]},
+        {"topic": "Limit Fungsi", "subtopics": ["Konsep Limit", "Sifat Limit", "Menentukan Nilai Limit"]},
+        {"topic": "Turunan Fungsi", "subtopics": ["Konsep Turunan", "Sifat Turunan", "Aplikasi Turunan", "Menggambar Grafik"]},
+        {"topic": "Lingkaran", "subtopics": ["Persamaan Lingkaran", "Jarak Titik ke Lingkaran", "Kedudukan Garis", "Garis Singgung Lingkaran"]},
+    ],
+    "Matematika Penalaran": [
+        {"topic": "Himpunan", "subtopics": ["Definisi Himpunan", "Cara Menyatakan Himpunan", "Jenis Himpunan", "Operasi Himpunan"]},
+        {"topic": "Hubungan Garis dan Sudut", "subtopics": ["Garis dan Jenisnya", "Sudut dan Jenisnya", "Hubungan Antar Sudut"]},
+        {"topic": "Kesebangunan dan Kekongruenan", "subtopics": ["Kekongruenan Bangun Datar", "Kekongruenan Segitiga", "Kesebangunan Bangun Datar", "Kesebangunan Segitiga"]},
+        {"topic": "Bangun Datar", "subtopics": ["Segitiga", "Segiempat", "Lingkaran", "Garis Singgung"]},
+        {"topic": "Bangun Ruang", "subtopics": ["Kubus dan Balok", "Prisma dan Limas", "Tabung, Kerucut, Bola"]},
+        {"topic": "Bilangan dan Operasi", "subtopics": ["Operasi Dasar", "Pecahan", "FPB dan KPK", "Pola Barisan", "Skala", "Perbandingan", "Diskon"]},
+    ],
+    "Bahasa Mandarin": [
+        {"topic": "Kosakata HSK 3.0 Level 1", "subtopics": ["Hanzi Dasar", "Pinyin dan Nada", "Kosakata Sehari-hari"]},
+        {"topic": "Kosakata HSK 3.0 Level 2", "subtopics": ["Kosakata Baru", "Struktur Kalimat Dasar"]},
+        {"topic": "Kosakata HSK 3.0 Level 3", "subtopics": ["Kosakata Lanjutan", "Percakapan Sederhana"]},
+        {"topic": "Kosakata HSK 3.0 Level 4", "subtopics": ["Kosakata Mahir", "Karakter Kompleks"]},
+    ],
+}
+
+RAIHAN_CURRICULUM = {
+    "Bahasa Indonesia": [
+        {"topic": "Teks Deskripsi", "subtopics": ["Informasi Eksplisit", "Gaya Penulisan", "Kata Jarang Muncul", "Analisis Teks dan Visual"]},
+        {"topic": "Menyajikan Teks Deskripsi", "subtopics": ["Deskripsi Lisan", "Menyunting Teks", "Menulis Deskripsi"]},
+        {"topic": "Puisi Rakyat dan Cerita Naratif", "subtopics": ["Puisi Rakyat", "Elemen Naratif", "Sifat Tokoh"]},
+        {"topic": "Menulis Cerita Fantasi", "subtopics": ["Struktur Cerita", "Amanat", "Kreativitas"]},
+        {"topic": "Teks Prosedur", "subtopics": ["Struktur Prosedur", "Ciri Kebahasaan", "Infografik", "Menyajikan Prosedur"]},
+    ],
+    "Fisika": [
+        {"topic": "Besaran dan Pengukuran", "subtopics": ["Besaran Pokok", "Besaran Turunan", "Satuan", "Alat Ukur"]},
+        {"topic": "Gerak Lurus", "subtopics": ["Jarak dan Perpindahan", "Kecepatan", "Percepatan", "GLB dan GLBB"]},
+        {"topic": "Gaya dan Hukum Newton", "subtopics": ["Hukum I Newton", "Hukum II Newton", "Hukum III Newton", "Aplikasi"]},
+    ],
+    "Kimia": [
+        {"topic": "Objek IPA dan Pengenalan Kimia", "subtopics": ["Hakikat Ilmu Kimia", "Metode Ilmiah", "Laboratorium Kimia"]},
+        {"topic": "Mengklasifikasikan Materi", "subtopics": ["Unsur", "Senyawa", "Campuran", "Lambang Unsur"]},
+        {"topic": "Senyawa dan Campuran", "subtopics": ["Perbedaan Senyawa dan Campuran", "Metode Pemisahan"]},
+        {"topic": "Asam, Basa, dan Garam", "subtopics": ["Sifat Asam", "Sifat Basa", "Indikator", "Garam"]},
+    ],
+}
+
+# Save all
+output = {
+    "SHOFI": {s: {"topics": t} for s, t in SHOFI_CURRICULUM.items()},
+    "RAIHAN": {s: {"topics": t} for s, t in RAIHAN_CURRICULUM.items()},
+}
+
+os.makedirs("moodle-files", exist_ok=True)
+with open("moodle-files/curriculum-complete.json", "w") as f:
+    json.dump(output, f, indent=2, ensure_ascii=False)
+
+total_shofi = sum(len(v) for v in SHOFI_CURRICULUM.values())
+total_raihan = sum(len(v) for v in RAIHAN_CURRICULUM.values())
+print(f"✅ Curriculum complete: SHOFI={total_shofi} topik, Raihan={total_raihan} topik")
+print(f"   File: moodle-files/curriculum-complete.json")
