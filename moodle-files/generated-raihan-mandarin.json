@@ -1,0 +1,194 @@
+{
+  "generated": "2026-07-14T22:00:00Z",
+  "source": "LLM SumoPod deepseek-v4-flash",
+  "students": {
+    "STU_MRHQL6KX": {
+      "name": "Shofi",
+      "gradeLevel": "SMA_2",
+      "materials": [
+        {
+          "topic": "Kosakata HSK 3.0 Level 1",
+          "subTopic": "Kosakata HSK 3.0 Level 1",
+          "status": "PUBLISHED",
+          "contentLength": 3713,
+          "videos": [
+            "https://www.youtube.com/watch?v=5Sj1hYTmQnE",
+            "https://www.youtube.com/watch?v=7j7C4Vpc_1M",
+            "https://www.youtube.com/watch?v=3zT6_JQqFrA"
+          ],
+          "quizQuestions": 5,
+          "quizMaxScore": 50
+        },
+        {
+          "topic": "Kosakata HSK 3.0 Level 2",
+          "subTopic": "Kosakata HSK 3.0 Level 2",
+          "status": "PUBLISHED",
+          "contentLength": 3610,
+          "videos": [
+            "https://www.youtube.com/watch?v=YgKPJ6kE-lQ",
+            "https://www.youtube.com/watch?v=aFwF5aZtW2U",
+            "https://www.youtube.com/watch?v=Vxwv2u9QP_g"
+          ],
+          "quizQuestions": 5,
+          "quizMaxScore": 50
+        },
+        {
+          "topic": "Kosakata HSK 3.0 Level 3",
+          "subTopic": "Kosakata HSK 3.0 Level 3",
+          "status": "PUBLISHED",
+          "contentLength": 4174,
+          "videos": [
+            "https://www.youtube.com/watch?v=5_J2NFvKkhI",
+            "https://www.youtube.com/watch?v=Q3Q_fYmkNcw"
+          ],
+          "quizQuestions": 5,
+          "quizMaxScore": 50
+        },
+        {
+          "topic": "Kosakata HSK 3.0 Level 4",
+          "subTopic": "Kosakata HSK 3.0 Level 4",
+          "status": "PUBLISHED",
+          "contentLength": 4091,
+          "videos": [
+            "https://www.youtube.com/watch?v=5_J2NFvKkhI",
+            "https://www.youtube.com/watch?v=3zT6_JQqFrA"
+          ],
+          "quizQuestions": 5,
+          "quizMaxScore": 50
+        }
+      ]
+    },
+    "STU_MRHLH4LX": {
+      "name": "Raihan",
+      "gradeLevel": "SMP_1",
+      "materials": [
+        {
+          "subject": "Bahasa Indonesia",
+          "topic": "Teks Deskripsi",
+          "subTopic": "Informasi eksplisit, gaya penulisan, kata jarang, analisis",
+          "status": "PUBLISHED",
+          "contentLength": 4939,
+          "quizQuestions": 5,
+          "quizMaxScore": 50,
+          "weekOrder": 1
+        },
+        {
+          "subject": "Bahasa Indonesia",
+          "topic": "Menyajikan Teks Deskripsi",
+          "subTopic": "Lisan, menyunting, menulis",
+          "status": "PUBLISHED",
+          "contentLength": 5879,
+          "quizQuestions": 24,
+          "quizMaxScore": 240,
+          "weekOrder": 2
+        },
+        {
+          "subject": "Bahasa Indonesia",
+          "topic": "Puisi Rakyat & Cerita Naratif",
+          "subTopic": "Puisi, elemen naratif, tokoh",
+          "status": "PUBLISHED",
+          "contentLength": 6777,
+          "quizQuestions": 5,
+          "quizMaxScore": 50,
+          "weekOrder": 3
+        },
+        {
+          "subject": "Bahasa Indonesia",
+          "topic": "Menulis Cerita Fantasi",
+          "subTopic": "Struktur, amanat, kreativitas",
+          "status": "PUBLISHED",
+          "contentLength": 6060,
+          "quizQuestions": 8,
+          "quizMaxScore": 80,
+          "weekOrder": 4
+        },
+        {
+          "subject": "Bahasa Indonesia",
+          "topic": "Teks Prosedur",
+          "subTopic": "Struktur, ciri bahasa, infografik, penyajian",
+          "status": "PUBLISHED",
+          "contentLength": 4847,
+          "quizQuestions": 5,
+          "quizMaxScore": 50,
+          "weekOrder": 5
+        },
+        {
+          "subject": "Fisika",
+          "topic": "Besaran dan Pengukuran",
+          "subTopic": "Besaran pokok/turunan, satuan, alat ukur",
+          "status": "PUBLISHED",
+          "contentLength": 5432,
+          "quizQuestions": 10,
+          "quizMaxScore": 100,
+          "weekOrder": 6
+        },
+        {
+          "subject": "Fisika",
+          "topic": "Gerak Lurus",
+          "subTopic": "Jarak, perpindahan, kecepatan, GLB/GLBB",
+          "status": "PUBLISHED",
+          "contentLength": 5723,
+          "quizQuestions": 5,
+          "quizMaxScore": 50,
+          "weekOrder": 7
+        },
+        {
+          "subject": "Fisika",
+          "topic": "Gaya dan Hukum Newton",
+          "subTopic": "Hukum I, II, III Newton",
+          "status": "PUBLISHED",
+          "contentLength": 5650,
+          "quizQuestions": 8,
+          "quizMaxScore": 80,
+          "weekOrder": 8
+        },
+        {
+          "subject": "Kimia",
+          "topic": "Objek IPA dan Pengenalan Kimia",
+          "subTopic": "Hakikat kimia, metode ilmiah",
+          "status": "PUBLISHED",
+          "contentLength": 4869,
+          "quizQuestions": 5,
+          "quizMaxScore": 50,
+          "weekOrder": 9
+        },
+        {
+          "subject": "Kimia",
+          "topic": "Mengklasifikasikan Materi",
+          "subTopic": "Unsur, senyawa, campuran",
+          "status": "PUBLISHED",
+          "contentLength": 4367,
+          "quizQuestions": 9,
+          "quizMaxScore": 90,
+          "weekOrder": 10
+        },
+        {
+          "subject": "Kimia",
+          "topic": "Senyawa dan Campuran",
+          "subTopic": "Pemisahan campuran",
+          "status": "PUBLISHED",
+          "contentLength": 5115,
+          "quizQuestions": 3,
+          "quizMaxScore": 30,
+          "weekOrder": 11
+        },
+        {
+          "subject": "Kimia",
+          "topic": "Asam, Basa, dan Garam",
+          "subTopic": "Sifat, indikator, reaksi",
+          "status": "PUBLISHED",
+          "contentLength": 5895,
+          "quizQuestions": 5,
+          "quizMaxScore": 50,
+          "weekOrder": 12
+        }
+      ]
+    }
+  },
+  "summary": {
+    "totalStudents": 2,
+    "totalMaterials": 16,
+    "totalQuizzes": 16,
+    "totalQuizQuestions": 112
+  }
+}
