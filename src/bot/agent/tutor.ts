@@ -59,16 +59,22 @@ export async function handleMessage(
    - [SCHEDULE:ASSIGN] — Generate sessions for upcoming days
    When the student says "Atur jadwal" or "Aku mau belajar jam 4 sore", ask their preference then use [SCHEDULE:SET].
 3. [MATERIALS] — Show learning materials
-4. [REMINDER:CREATE:{"title":"...","remindAt":"ISO_DATE","category":"exam|homework|event|study|general","description":"..."}] — Set a reminder
-5. [REMINDER:LIST] — Show all reminders
-6. [REMINDER:DELETE:{"all":true}] — Delete all reminders
-7. [HOMEWORK:CREATE:{"subject":"...","description":"...","deadlineAt":"ISO_DATE"}] — Record a homework
-8. [HOMEWORK:LIST] — Show pending homework
-9. [HOMEWORK:SUBMIT:{"subject":"..."}] — Mark homework as done
-10. [PASSWORD] — When the student asks to create or change their web login password, respond with their Student ID and ask them to type a new password (min 6 characters). Then call [PASSWORD:SET:{"password":"the_new_password"}] — This will update their password. Do NOT reveal existing passwords.
-11. [VIDEOS:topic] — When the student asks about a topic, you can recommend YouTube learning videos from our curated database. Use this to fetch and share video links. Example: [VIDEOS:Cahaya] or [VIDEOS:Hakikat Ilmu Sains] or [VIDEOS:Zat dan Perubahan]
-12. [YOUTUBE:VIDEO_ID] — When the student specifically shares a YouTube link and asks you to explain it. You'll get the transcript and can explain. Example: [YOUTUBE:dQw4w9WgXcQ]
-13. [DASHBOARD] — When the student asks about their web dashboard, learning portal, or web login. Respond with their dashboard link: https://senangbelajar.web.id/student
+4. [SCHOOL_SCHEDULE] — Show today's school schedule (real timetable). Use when student asks "jadwal sekolah", "mapel hari ini", "sekolah". Sub-commands:
+   - [SCHOOL_SCHEDULE] — Today's schedule
+   - [SCHOOL_SCHEDULE:WEEK] — Full week
+   - [SCHOOL_SCHEDULE:Senin] / :Selasa / :Rabu / :Kamis / :Jumat — Specific day
+   - [SCHOOL_SCHEDULE:NEXT:Matematika] — Next subject class
+   IMPORTANT: "jadwal" alone = [SCHEDULE]. "sekolah" = [SCHOOL_SCHEDULE].
+5. [REMINDER:CREATE:{"title":"...","remindAt":"ISO_DATE","category":"exam|homework|event|study|general","description":"..."}] — Set a reminder
+6. [REMINDER:LIST] — Show all reminders
+7. [REMINDER:DELETE:{"all":true}] — Delete all reminders
+8. [HOMEWORK:CREATE:{"subject":"...","description":"...","deadlineAt":"ISO_DATE"}] — Record a homework
+9. [HOMEWORK:LIST] — Show pending homework
+10. [HOMEWORK:SUBMIT:{"subject":"..."}] — Mark homework as done
+11. [PASSWORD] — When the student asks to create or change their web login password, respond with their Student ID and ask them to type a new password (min 6 characters). Then call [PASSWORD:SET:{"password":"the_new_password"}] — This will update their password. Do NOT reveal existing passwords.
+12. [VIDEOS:topic] — When the student asks about a topic, you can recommend YouTube learning videos from our curated database. Use this to fetch and share video links. Example: [VIDEOS:Cahaya] or [VIDEOS:Hakikat Ilmu Sains] or [VIDEOS:Zat dan Perubahan]
+13. [YOUTUBE:VIDEO_ID] — When the student specifically shares a YouTube link and asks you to explain it. You'll get the transcript and can explain. Example: [YOUTUBE:dQw4w9WgXcQ]
+14. [DASHBOARD] — When the student asks about their web dashboard, learning portal, or web login. Respond with their dashboard link: https://senangbelajar.web.id/student
 
 When the student asks about reminders, homework, or deadlines, respond naturally AND append the appropriate command at the end.
 Example: "Baik Andi, aku catat ulangan matematikanya ya! 😊 [REMINDER:CREATE:{"title":"Ulangan Matematika","remindAt":"2026-07-14T08:00:00","category":"exam"}]"
@@ -162,16 +168,22 @@ export async function* streamMessage(
    - [SCHEDULE:ASSIGN] — Generate sessions for upcoming days
    When the student says "Atur jadwal" or "Aku mau belajar jam 4 sore", ask their preference then use [SCHEDULE:SET].
 3. [MATERIALS] — Show learning materials
-4. [REMINDER:CREATE:{"title":"...","remindAt":"ISO_DATE","category":"exam|homework|event|study|general","description":"..."}] — Set a reminder
-5. [REMINDER:LIST] — Show all reminders
-6. [REMINDER:DELETE:{"all":true}] — Delete all reminders
-7. [HOMEWORK:CREATE:{"subject":"...","description":"...","deadlineAt":"ISO_DATE"}] — Record a homework
-8. [HOMEWORK:LIST] — Show pending homework
-9. [HOMEWORK:SUBMIT:{"subject":"..."}] — Mark homework as done
-10. [PASSWORD] — When the student asks to create or change their web login password, respond with their Student ID and ask them to type a new password (min 6 characters). Then call [PASSWORD:SET:{"password":"the_new_password"}] — This will update their password. Do NOT reveal existing passwords.
-11. [VIDEOS:topic] — When the student asks about a topic, you can recommend YouTube learning videos from our curated database. Use this to fetch and share video links. Example: [VIDEOS:Cahaya] or [VIDEOS:Hakikat Ilmu Sains] or [VIDEOS:Zat dan Perubahan]
-12. [YOUTUBE:VIDEO_ID] — When the student specifically shares a YouTube link and asks you to explain it. You'll get the transcript and can explain. Example: [YOUTUBE:dQw4w9WgXcQ]
-13. [DASHBOARD] — When the student asks about their web dashboard, learning portal, or web login. Respond with their dashboard link: https://senangbelajar.web.id/student
+4. [SCHOOL_SCHEDULE] — Show today's school schedule (real timetable). Use when student asks "jadwal sekolah", "mapel hari ini", "sekolah". Sub-commands:
+   - [SCHOOL_SCHEDULE] — Today's schedule
+   - [SCHOOL_SCHEDULE:WEEK] — Full week
+   - [SCHOOL_SCHEDULE:Senin] / :Selasa / :Rabu / :Kamis / :Jumat — Specific day
+   - [SCHOOL_SCHEDULE:NEXT:Matematika] — Next subject class
+   IMPORTANT: "jadwal" alone = [SCHEDULE]. "sekolah" = [SCHOOL_SCHEDULE].
+5. [REMINDER:CREATE:{"title":"...","remindAt":"ISO_DATE","category":"exam|homework|event|study|general","description":"..."}] — Set a reminder
+6. [REMINDER:LIST] — Show all reminders
+7. [REMINDER:DELETE:{"all":true}] — Delete all reminders
+8. [HOMEWORK:CREATE:{"subject":"...","description":"...","deadlineAt":"ISO_DATE"}] — Record a homework
+9. [HOMEWORK:LIST] — Show pending homework
+10. [HOMEWORK:SUBMIT:{"subject":"..."}] — Mark homework as done
+11. [PASSWORD] — When the student asks to create or change their web login password, respond with their Student ID and ask them to type a new password (min 6 characters). Then call [PASSWORD:SET:{"password":"the_new_password"}] — This will update their password. Do NOT reveal existing passwords.
+12. [VIDEOS:topic] — When the student asks about a topic, you can recommend YouTube learning videos from our curated database. Use this to fetch and share video links. Example: [VIDEOS:Cahaya] or [VIDEOS:Hakikat Ilmu Sains] or [VIDEOS:Zat dan Perubahan]
+13. [YOUTUBE:VIDEO_ID] — When the student specifically shares a YouTube link and asks you to explain it. You'll get the transcript and can explain. Example: [YOUTUBE:dQw4w9WgXcQ]
+14. [DASHBOARD] — When the student asks about their web dashboard, learning portal, or web login. Respond with their dashboard link: https://senangbelajar.web.id/student
 
 When the student asks about reminders, homework, or deadlines, respond naturally AND append the appropriate command at the end.
 Example: "Baik Andi, aku catat ulangan matematikanya ya! 😊 [REMINDER:CREATE:{"title":"Ulangan Matematika","remindAt":"2026-07-14T08:00:00","category":"exam"}]"
