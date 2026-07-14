@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { jwtVerify } from "jose";
 import Link from "next/link";
 import { getYouTubeForTopic } from "@/data/youtube";
+import { SubjectTracker } from "@/components/SubjectTracker";
 
 const STUDENT_JWT_SECRET = new TextEncoder().encode(
   process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
@@ -376,8 +377,10 @@ export default async function SubjectPage({
   params: Promise<{ subject: string }>;
 }) {
   const { subject } = await params;
+  const decodedSubject = decodeURIComponent(subject);
 
   return (
+    <SubjectTracker subject={decodedSubject}>
     <Suspense
       fallback={
         <div className="flex items-center justify-center py-20">
@@ -387,5 +390,6 @@ export default async function SubjectPage({
     >
       <SubjectContent subject={subject} />
     </Suspense>
+    </SubjectTracker>
   );
 }
