@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { useActivityTracker } from "@/hooks/useActivityTracker";
 
 /* ── Tema warna per subjek ── */
 const SUBJECT_THEMES: Record<string, { bg: string; card: string; accent: string; gradient: string; particles: string }> = {
@@ -115,6 +116,19 @@ export default function SlideViewerPage() {
   const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState("");
   const [subject, setSubject] = useState("");
+  const [studentId, setStudentId] = useState<string | null>(null);
+
+  const { trackSlide } = useActivityTracker(studentId, subject);
+
+  // Fetch student ID
+  useEffect(() => {
+    fetch("/api/auth/me")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.student?.studentId) setStudentId(data.student.studentId);
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     fetch(`/api/students/material/${id}`)
@@ -135,6 +149,15 @@ export default function SlideViewerPage() {
       })
       .catch(() => setLoading(false));
   }, [id]);
+
+  // Track initial load and slide changes
+  const lastTrackedSlide = useRef<number>(-1);
+  useEffect(() => {
+    if (studentId && subject && slides.length > 0 && current !== lastTrackedSlide.current) {
+      lastTrackedSlide.current = current;
+      trackSlide(id, title);
+    }
+  }, [studentId, subject, slides, current, id, title, trackSlide]);
 
   const theme = getTheme(subject);
   const slide = slides[current] || "";

@@ -8,6 +8,8 @@ import { SkeletonStudentPage } from "@/components/Skeleton";
 import { QuoteRotator } from "@/components/QuoteRotator";
 import { RecommendationCarousel } from "@/components/RecommendationCarousel";
 import { getYouTubeForTopic } from "@/data/youtube";
+import { DashboardTracker } from "@/components/DashboardTracker";
+import { TrackedSubjectCircle } from "@/components/TrackedSubjectCircle";
 
 const STUDENT_JWT_SECRET = new TextEncoder().encode(
   process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
@@ -256,7 +258,7 @@ async function RecommendationSection() {
   const finalRecs = recommendations.sort(() => Math.random() - 0.5);
 
   return (
-    <div className="mb-5">
+    <div className="mb-5" data-recs-section="true">
       <h3
         className="text-base font-bold mb-3 px-1"
         style={{ fontFamily: "var(--font-st-display)" }}
@@ -552,7 +554,7 @@ async function SubjectGridSection() {
           {subjects.map((subject) => {
             const meta = SUBJECT_META[subject] ?? { emoji: "📚", color: "#94a3b8" };
             return (
-              <SubjectCircle
+              <TrackedSubjectCircle
                 key={subject}
                 name={subject}
                 emoji={meta.emoji}
@@ -564,52 +566,6 @@ async function SubjectGridSection() {
         </div>
       </div>
     </div>
-  );
-}
-
-function SubjectCircle({
-  name,
-  emoji,
-  color,
-  progress,
-}: {
-  name: string;
-  emoji: string;
-  color: string;
-  progress: number;
-}) {
-  const r = 28;
-  const circumference = 2 * Math.PI * r;
-  const offset = circumference - (progress / 100) * circumference;
-
-  return (
-    <Link
-      href={`/student/subject/${encodeURIComponent(name)}`}
-      className="flex flex-col items-center gap-1.5"
-    >
-      <div className="relative w-16 h-16 flex items-center justify-center">
-        <svg className="absolute inset-0 w-16 h-16 -rotate-90">
-          <circle
-            cx="32" cy="32" r={r}
-            fill="none" stroke="#e5e7eb" strokeWidth="5"
-          />
-          <circle
-            cx="32" cy="32" r={r}
-            fill="none" stroke={color} strokeWidth="5"
-            strokeDasharray={circumference}
-            strokeDashoffset={offset}
-            strokeLinecap="round"
-          />
-        </svg>
-        <span className="text-2xl relative z-10">{emoji}</span>
-      </div>
-      <span
-        className="text-xs font-medium text-center"
-        style={{ color: "var(--st-text)" }}
-      >
-        {name}
-      </span>
-    </Link>
   );
 }
 
@@ -702,6 +658,7 @@ function SkeletonSchedule() {
 /* ── Page ── */
 export default function StudentHomePage() {
   return (
+    <DashboardTracker>
     <>
       {/* Rekomendasi Hari Ini */}
       <Suspense fallback={<SkeletonRecs />}>
@@ -745,6 +702,7 @@ export default function StudentHomePage() {
       {/* Pengaturan */}
       <SettingsSection />
     </>
+    </DashboardTracker>
   );
 }
 

@@ -4,6 +4,7 @@ import { unstable_noStore as noStore } from "next/cache";
 import Link from "next/link";
 import { ReactFlowMindmap } from "./ReactFlowMindmap";
 import { parseMindmapFromMarkdown, type MindmapNode } from "@/lib/mindmap-template";
+import { MindmapTracker } from "@/components/MindmapTracker";
 
 async function MindmapContent({ materialId }: { materialId: string }) {
   noStore();
@@ -71,6 +72,7 @@ export default async function MindmapPage({
   const id = searchParams ? (await searchParams).id : undefined;
 
   return (
+    <MindmapTracker subject={decodeURIComponent(subject)} materialId={id}>
     <div className="min-h-0 flex-1 flex flex-col" style={{ background: "linear-gradient(135deg, #fef9ef, #fdf2e9, #fef7e6)" }}>
       <div className="px-6 py-3 flex items-center justify-between shrink-0 border-b border-amber-200/50 bg-white/60 backdrop-blur-sm z-10">
         <Link href={`/student/subject/${subject}`} className="text-sm text-amber-700 hover:text-amber-900 transition-colors">← Kembali</Link>
@@ -92,5 +94,6 @@ export default async function MindmapPage({
         <p className="text-xs text-amber-300" style={{ fontFamily: "'Nunito', sans-serif" }}>🧠 Peta Konsep interaktif — scroll, zoom, & drag</p>
       </div>
     </div>
+    </MindmapTracker>
   );
 }
