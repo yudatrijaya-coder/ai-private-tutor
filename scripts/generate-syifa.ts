@@ -23,7 +23,7 @@ interface CheckpointEntry {
   materialId: string;
   subject: string;
   topic: string;
-  subTopic: string;
+  subTopic: string | null;
   weekOrder: number;
   status: "done" | "error" | "parsing_failed";
   error?: string;
@@ -52,6 +52,10 @@ function loadCheckpoint(): Checkpoint {
 
 function saveCheckpoint(checkpoint: Checkpoint): void {
   checkpoint.updatedAt = new Date().toISOString();
+  const dir = path.dirname(CHECKPOINT_PATH);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
   fs.writeFileSync(CHECKPOINT_PATH, JSON.stringify(checkpoint, null, 2), "utf-8");
   console.log(`[checkpoint] Saved: ${checkpoint.processed.length} entries`);
 }
