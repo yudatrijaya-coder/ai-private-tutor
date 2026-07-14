@@ -151,7 +151,9 @@ export default function DocsPage() {
             <tbody>
               {([
                 ['ai-rules/', '🔒 IMMUTABLE', 'Template & aturan kerja AI — hanya dibaca, tidak boleh diubah'],
-                ['dev-docs/', '📝 OUTPUT', 'Device documentation: START_HERE, PROJECT_CONTEXT, MODULE_MAP, CURRENT_STATE, architecture, module docs'],
+                ['dev-docs/ai/', '📝 OUTPUT', 'Panduan AI: START_HERE, PROJECT_CONTEXT, MODULE_MAP, CURRENT_STATE, HANDOVER'],
+                ['dev-docs/architecture/', '📝 OUTPUT', 'Arsitektur: api-flow, database, frontend-structure, backend-structure'],
+                ['dev-docs/modules/', '📝 OUTPUT', 'Peta modul detail: 7 agents + bot + API + LLM client (11 file)'],
                 ['prod-docs/', '🚀 OUTPUT', 'Production server docs: deployment, monitoring, backup, security, troubleshooting'],
                 ['backup/', '📦 OUTPUT', 'Backup dokumentasi legacy sebelum migrasi'],
                 ['src/app/docs/', '🌐 Web', 'Halaman docs online: architecture, mindmap, peta fungsional, getting-started'],
@@ -164,6 +166,32 @@ export default function DocsPage() {
               ))}
             </tbody>
           </table>
+
+          <h3 className="font-semibold text-slate-800 mt-6 mb-2">📦 dev-docs/modules/ — 11 Modul</h3>
+          <p className="mb-3">
+            Dokumentasi mendalam untuk setiap modul besar dalam codebase, termasuk arsitektur, data flow, 
+            queue definitions, dan file mapping. Cocok untuk onboarding developer baru dan referensi cepat.
+          </p>
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 mb-4">
+            {([
+              ['🤖 Curriculum Agent', 'Generate kurikulum dari data statis'],
+              ['📄 Content Agent', 'Scrape materi dari internet'],
+              ['📝 Assessment Agent', 'Quiz & exam generator'],
+              ['🎬 Media Agent', 'Render video pembelajaran'],
+              ['👨‍👩‍👧 Guardian Agent', 'Admission & weekly report'],
+              ['💬 Tutor Agent', 'Chat LLM dengan 3 persona'],
+              ['⏰ Scheduler Agent', 'Jadwal & reminder otomatis'],
+              ['📡 Bot Handlers', 'Router pesan Telegram'],
+              ['🔌 API Routes', 'Semua endpoint HTTP'],
+              ['🧠 LLM Client', '9Router gateway client'],
+              ['⚙️ Queue System', 'BullMQ + in-memory'],
+            ] as const).map(([modul, desc]) => (
+              <div key={modul} className="p-2.5 rounded-lg border border-slate-200 bg-white text-sm">
+                <span className="font-semibold text-slate-900">{modul}</span>
+                <p className="text-xs text-slate-500 mt-0.5">{desc}</p>
+              </div>
+            ))}
+          </div>
 
           <p className="text-sm text-slate-500">
             Prinsip: <code className="bg-slate-100 px-1 py-0.5 rounded text-xs font-mono">ai-rules/</code> = satu-satunya source kebenaran.

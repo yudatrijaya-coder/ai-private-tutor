@@ -589,6 +589,30 @@ Scheduler ──► reminder & jadwal harian`}
             </tbody>
           </table>
         </Section>
+
+        <Section title="📁 Structured Documentation System">
+          <p className="mb-3">
+            Dokumentasi project sudah dimigrasi ke format <strong>docs-ai</strong> — struktur terstandarisasi
+            untuk AI-assisted development. Halaman ini adalah ringkasan web; detail lengkap ada di file markdown.
+          </p>
+
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {([
+              ['📂 dev-docs/ai/', 'Panduan AI system', 'START_HERE, PROJECT_CONTEXT, MODULE_MAP, CURRENT_STATE, FINAL_SYSTEM_HANDOVER, DOCS_MIGRATION_REPORT'],
+              ['📂 dev-docs/architecture/', 'Arsitektur detail', 'api-flow.md, database.md, frontend-structure.md, backend-structure.md'],
+              ['📂 dev-docs/modules/', 'Peta modul (11 file)', 'Curriculum, Content, Assessment, Media, Guardian, Tutor, Scheduler, Bot Handlers, API Routes, LLM Client, Queue System'],
+              ['📂 prod-docs/', 'Production docs', 'Deployment, monitoring, backup, security, troubleshooting'],
+              ['🔒 ai-rules/', 'IMMUTABLE', 'Template docs-ai — source kebenaran, tidak boleh diubah'],
+              ['🌐 src/app/docs/', 'Web docs', 'Halaman ini, mindmap guide, peta fungsional, getting-started'],
+            ] as const).map(([folder, title, desc]) => (
+              <div key={folder} className="p-3 rounded-lg border border-slate-200 bg-white">
+                <h4 className="font-semibold text-slate-800 text-sm">{folder}</h4>
+                <p className="text-xs font-medium text-indigo-600 mt-0.5">{title}</p>
+                <p className="text-xs text-slate-500 mt-1">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
       </div>
     </div>
   )
