@@ -1,0 +1,618 @@
+{
+  "version": 1,
+  "studentId": "a80cbfa5-9e21-42fa-a0e2-69943d9a2161",
+  "processed": [
+    {
+      "materialId": "e31d70ef-9544-479e-9fa8-2208c9f4cc9e",
+      "subject": "Bahasa Indonesia",
+      "topic": "Buku Jendela Dunia",
+      "subTopic": "Mengenal Bagian-Bagian Buku",
+      "weekOrder": 4,
+      "status": "done"
+    },
+    {
+      "materialId": "34355721-0dfa-4dac-b615-eaf98529206b",
+      "subject": "IPAS",
+      "topic": "Indonesia Kaya",
+      "subTopic": "Peta dan Wilayah Indonesia",
+      "weekOrder": 5,
+      "status": "done"
+    },
+    {
+      "materialId": "4e4fa58d-a8cd-4ef5-862f-4d0288221116",
+      "subject": "Bahasa Indonesia",
+      "topic": "Buku Jendela Dunia",
+      "subTopic": "Cara Memahami Bacaan",
+      "weekOrder": 5,
+      "status": "done"
+    },
+    {
+      "materialId": "18f5542d-d957-4ff0-9e05-31f999fff58b",
+      "subject": "Bahasa Inggris",
+      "topic": "Direction",
+      "subTopic": "Places in Town",
+      "weekOrder": 5,
+      "status": "done"
+    },
+    {
+      "materialId": "65e0aab3-0860-44a3-aa90-8281d4e8c541",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Norma",
+      "subTopic": "Macam-Macam Norma",
+      "weekOrder": 5,
+      "status": "done"
+    },
+    {
+      "materialId": "b875207d-fab2-4fff-ba82-316c3a81f743",
+      "subject": "PJOK",
+      "topic": "Permainan Bola",
+      "subTopic": "Permainan Bola Besar",
+      "weekOrder": 5,
+      "status": "done"
+    },
+    {
+      "materialId": "acfc08c5-c277-486a-940f-6aaea0539d16",
+      "subject": "Informatika",
+      "topic": "Teknologi Digital",
+      "subTopic": "Perangkat Digital",
+      "weekOrder": 5,
+      "status": "done"
+    },
+    {
+      "materialId": "aab6a6b6-9265-4c38-ad2d-dc43ad822c24",
+      "subject": "IPAS",
+      "topic": "Ekonomi",
+      "subTopic": "Kebutuhan dan Keinginan",
+      "weekOrder": 6,
+      "status": "done"
+    },
+    {
+      "materialId": "3f7c6e4a-e242-4c35-9235-436c4ff5c5e7",
+      "subject": "Bahasa Inggris",
+      "topic": "Direction",
+      "subTopic": "Reading a Map",
+      "weekOrder": 6,
+      "status": "done"
+    },
+    {
+      "materialId": "99e590cf-8179-46e7-a99a-012794ccd6f9",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Norma",
+      "subTopic": "Penerapan Norma dalam Kehidupan",
+      "weekOrder": 6,
+      "status": "error",
+      "error": "Empty LLM response"
+    },
+    {
+      "materialId": "f5ce7855-e25e-43bc-b304-6b1f6274b42a",
+      "subject": "Bahasa Indonesia",
+      "topic": "Buku Jendela Dunia",
+      "subTopic": "Ide Pokok dan Kesimpulan",
+      "weekOrder": 6,
+      "status": "error",
+      "error": "Empty LLM response"
+    },
+    {
+      "materialId": "695d2a30-942a-457d-9e9e-723665254724",
+      "subject": "PJOK",
+      "topic": "Permainan Bola",
+      "subTopic": "Permainan Bola Kecil",
+      "weekOrder": 6,
+      "status": "error",
+      "error": "Empty LLM response"
+    },
+    {
+      "materialId": "3dbfb91c-2028-4512-84a6-94e38542f3c8",
+      "subject": "Informatika",
+      "topic": "Teknologi Digital",
+      "subTopic": "Internet dan Jaringan",
+      "weekOrder": 6,
+      "status": "done"
+    },
+    {
+      "materialId": "b55c0a24-fb72-425b-affe-35e8a051923b",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Norma",
+      "subTopic": "Hukum dan Aturan",
+      "weekOrder": 7,
+      "status": "done"
+    },
+    {
+      "materialId": "97378123-ae0d-47ad-a599-62c9b7ee8f20",
+      "subject": "Informatika",
+      "topic": "Teknologi Digital",
+      "subTopic": "Aplikasi dan Perangkat Lunak",
+      "weekOrder": 7,
+      "status": "done"
+    },
+    {
+      "materialId": "5cede978-1e0f-434e-a85a-8c62823c4b2b",
+      "subject": "IPAS",
+      "topic": "Ekonomi",
+      "subTopic": "Kegiatan Ekonomi di Daerah",
+      "weekOrder": 7,
+      "status": "done"
+    },
+    {
+      "materialId": "3ad3cfad-8da4-470e-b0a1-8f030a84a10b",
+      "subject": "Bahasa Indonesia",
+      "topic": "Ekspresi Diri",
+      "subTopic": "Mengenal Hobi dan Minat",
+      "weekOrder": 7,
+      "status": "done"
+    },
+    {
+      "materialId": "55c28f59-6f8e-47c0-bc05-c6b16a43099a",
+      "subject": "Bahasa Inggris",
+      "topic": "Daily Life",
+      "subTopic": "Daily Routines",
+      "weekOrder": 7,
+      "status": "done"
+    },
+    {
+      "materialId": "831d5644-e29e-476e-b5ae-6774616ebba6",
+      "subject": "PJOK",
+      "topic": "Permainan Bola",
+      "subTopic": "Teknik Melempar dan Menangkap",
+      "weekOrder": 7,
+      "status": "done"
+    },
+    {
+      "materialId": "cb6b27e4-b375-4d97-8505-b7b9ffb5cabe",
+      "subject": "Bahasa Indonesia",
+      "topic": "Ekspresi Diri",
+      "subTopic": "Menulis Pengalaman Pribadi",
+      "weekOrder": 8,
+      "status": "done"
+    },
+    {
+      "materialId": "c694ef89-6ac2-46a3-b3d4-228c797c146e",
+      "subject": "Bahasa Inggris",
+      "topic": "Daily Life",
+      "subTopic": "Helping at Home",
+      "weekOrder": 8,
+      "status": "done"
+    },
+    {
+      "materialId": "18d554f6-2f55-44e0-b73d-c7ac587c9cdb",
+      "subject": "Informatika",
+      "topic": "Teknologi Digital",
+      "subTopic": "Keamanan Digital",
+      "weekOrder": 8,
+      "status": "done"
+    },
+    {
+      "materialId": "1f1ce230-ae41-462d-a5e6-4e7e167e850e",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Budaya Daerah",
+      "subTopic": "Keberagaman Budaya",
+      "weekOrder": 8,
+      "status": "done"
+    },
+    {
+      "materialId": "86e26f87-8e69-4fa2-bdad-ba7ce435360c",
+      "subject": "IPAS",
+      "topic": "Ekonomi",
+      "subTopic": "Pelaku Ekonomi",
+      "weekOrder": 8,
+      "status": "done"
+    },
+    {
+      "materialId": "3fb6178a-2aac-4c9c-a35f-321ca502b323",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Budaya Daerah",
+      "subTopic": "Bhineka Tunggal Ika",
+      "weekOrder": 9,
+      "status": "done"
+    },
+    {
+      "materialId": "25d71be3-5b91-477e-9f91-fd9fcde7dccd",
+      "subject": "IPAS",
+      "topic": "Ekonomi",
+      "subTopic": "Produksi, Distribusi, Konsumsi",
+      "weekOrder": 9,
+      "status": "done"
+    },
+    {
+      "materialId": "3fd841bf-f0c4-40ce-afbf-fb0a94ea8f3f",
+      "subject": "Bahasa Indonesia",
+      "topic": "Ekspresi Diri",
+      "subTopic": "Puisi dan Ungkapan Perasaan",
+      "weekOrder": 9,
+      "status": "done"
+    },
+    {
+      "materialId": "c5e11352-ba2f-477f-b331-ef3ddeb04dd5",
+      "subject": "Bahasa Inggris",
+      "topic": "Daily Life",
+      "subTopic": "Cooking and Recipes",
+      "weekOrder": 9,
+      "status": "done"
+    },
+    {
+      "materialId": "7a6a1c15-2f8e-41d0-9b45-6dce185984d5",
+      "subject": "PJOK",
+      "topic": "Aktivitas Air",
+      "subTopic": "Renang Gaya Bebas",
+      "weekOrder": 9,
+      "status": "done"
+    },
+    {
+      "materialId": "6e996926-9ab1-442f-a842-fbf3295ce591",
+      "subject": "Informatika",
+      "topic": "Kecerdasan Artifisial",
+      "subTopic": "Apa Itu AI",
+      "weekOrder": 9,
+      "status": "done"
+    },
+    {
+      "materialId": "0ded7126-b08d-42f2-ada0-7979ee5c9e1c",
+      "subject": "IPAS",
+      "topic": "Ekosistem",
+      "subTopic": "Komponen Ekosistem",
+      "weekOrder": 10,
+      "status": "done"
+    },
+    {
+      "materialId": "512e5e95-1d28-4fc3-9588-78a9b425088c",
+      "subject": "Informatika",
+      "topic": "Kecerdasan Artifisial",
+      "subTopic": "AI dalam Kehidupan",
+      "weekOrder": 10,
+      "status": "done"
+    },
+    {
+      "materialId": "ae9a949b-6c8b-41a3-b69d-4e0657f9c0f7",
+      "subject": "Bahasa Inggris",
+      "topic": "Reading",
+      "subTopic": "Borrowing Books",
+      "weekOrder": 10,
+      "status": "done"
+    },
+    {
+      "materialId": "847cf5f0-2820-441f-9b50-21438843e50f",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Budaya Daerah",
+      "subTopic": "Melestarikan Budaya Daerah",
+      "weekOrder": 10,
+      "status": "done"
+    },
+    {
+      "materialId": "6f6684e0-0534-4698-877e-1e9d3e4bd75a",
+      "subject": "Bahasa Indonesia",
+      "topic": "Belajar Berwirausaha",
+      "subTopic": "Ide Kreatif dan Inovasi",
+      "weekOrder": 10,
+      "status": "done"
+    },
+    {
+      "materialId": "68920f8b-2d4b-4246-afa1-66e0f4adf6b0",
+      "subject": "PJOK",
+      "topic": "Aktivitas Air",
+      "subTopic": "Keamanan dan Keselamatan Air",
+      "weekOrder": 10,
+      "status": "done"
+    },
+    {
+      "materialId": "140ba99b-1ea1-40a9-a718-2cc18446b485",
+      "subject": "Bahasa Indonesia",
+      "topic": "Belajar Berwirausaha",
+      "subTopic": "Iklan dan Promosi",
+      "weekOrder": 11,
+      "status": "done"
+    },
+    {
+      "materialId": "dc587c95-79f4-4e76-a054-2a8490d9e20f",
+      "subject": "IPAS",
+      "topic": "Ekosistem",
+      "subTopic": "Rantai Makanan dan Jaring Makanan",
+      "weekOrder": 12,
+      "status": "done"
+    },
+    {
+      "materialId": "a309ee7f-8136-44ff-8453-9d033c96bdab",
+      "subject": "Bahasa Indonesia",
+      "topic": "Belajar Berwirausaha",
+      "subTopic": "Negosiasi dan Tawar Menawar",
+      "weekOrder": 12,
+      "status": "done"
+    },
+    {
+      "materialId": "f761f355-9f98-4968-a369-1fd71e5d7c67",
+      "subject": "PJOK",
+      "topic": "Kebugaran Jasmani",
+      "subTopic": "Latihan Kelenturan",
+      "weekOrder": 12,
+      "status": "done"
+    },
+    {
+      "materialId": "e7860a7e-e4f7-4f81-8d70-9ab0551e7019",
+      "subject": "Bahasa Inggris",
+      "topic": "Reading",
+      "subTopic": "Storytelling",
+      "weekOrder": 12,
+      "status": "done"
+    },
+    {
+      "materialId": "3f599613-b083-47e4-abde-557d9f2a1759",
+      "subject": "Informatika",
+      "topic": "Proyek Digital",
+      "subTopic": "Proyek Berpikir Komputasional",
+      "weekOrder": 12,
+      "status": "done"
+    },
+    {
+      "materialId": "01d09611-3a3c-483d-97c4-ec805747de28",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Gotong Royong",
+      "subTopic": "Keputusan Bersama",
+      "weekOrder": 12,
+      "status": "done"
+    },
+    {
+      "materialId": "d8ab9208-aebf-49b7-b7c8-d758fdef4c39",
+      "subject": "Informatika",
+      "topic": "Proyek Digital",
+      "subTopic": "Presentasi Digital",
+      "weekOrder": 13,
+      "status": "done"
+    },
+    {
+      "materialId": "4ead4a5f-e3c7-46ab-9b38-92fb33641139",
+      "subject": "PJOK",
+      "topic": "Kebugaran Jasmani",
+      "subTopic": "Daya Tahan Tubuh",
+      "weekOrder": 13,
+      "status": "done"
+    },
+    {
+      "materialId": "b84b7cc6-d4b7-4575-a289-dac4ecd21cd6",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Gotong Royong",
+      "subTopic": "Kegiatan Sosial di Lingkungan",
+      "weekOrder": 13,
+      "status": "done"
+    },
+    {
+      "materialId": "4231af92-e5ba-439c-87eb-ce0ebfcb09f1",
+      "subject": "Bahasa Inggris",
+      "topic": "Culture",
+      "subTopic": "Indonesian Folktales",
+      "weekOrder": 13,
+      "status": "done"
+    },
+    {
+      "materialId": "400ee300-be4b-4f5f-b252-31b8220e1d7c",
+      "subject": "Bahasa Indonesia",
+      "topic": "Cinta Indonesia",
+      "subTopic": "Keberagaman Budaya",
+      "weekOrder": 13,
+      "status": "done"
+    },
+    {
+      "materialId": "06036bed-d621-4e3e-b41f-74c432296454",
+      "subject": "IPAS",
+      "topic": "Ekosistem",
+      "subTopic": "Pelestarian Ekosistem",
+      "weekOrder": 13,
+      "status": "done"
+    },
+    {
+      "materialId": "cb1d85df-6a58-4439-aa48-f08b8c0c3d87",
+      "subject": "IPAS",
+      "topic": "Air Sumber Kehidupan",
+      "subTopic": "Siklus Air",
+      "weekOrder": 14,
+      "status": "done"
+    },
+    {
+      "materialId": "1b2a00a9-0a6b-4e06-ba6a-c36984c2d7c9",
+      "subject": "PJOK",
+      "topic": "Kebugaran Jasmani",
+      "subTopic": "Pola Makan Sehat",
+      "weekOrder": 14,
+      "status": "done"
+    },
+    {
+      "materialId": "335bbaea-f692-4db6-94fb-19933583d9c4",
+      "subject": "Pendidikan Pancasila",
+      "topic": "NKRI",
+      "subTopic": "Wilayah Negara Kesatuan RI",
+      "weekOrder": 14,
+      "status": "done"
+    },
+    {
+      "materialId": "88a453ad-2b45-430e-b72e-595788f94948",
+      "subject": "Bahasa Inggris",
+      "topic": "Culture",
+      "subTopic": "Fables and Moral Values",
+      "weekOrder": 14,
+      "status": "done"
+    },
+    {
+      "materialId": "55b675d6-101f-423e-89c8-2941686f93cc",
+      "subject": "Bahasa Indonesia",
+      "topic": "Cinta Indonesia",
+      "subTopic": "Pahlawan dan Tokoh Nasional",
+      "weekOrder": 14,
+      "status": "done"
+    },
+    {
+      "materialId": "44ca5273-a4b4-49b1-805b-18a3cfeebd54",
+      "subject": "Informatika",
+      "topic": "Proyek Digital",
+      "subTopic": "Kolaborasi Online",
+      "weekOrder": 14,
+      "status": "done"
+    },
+    {
+      "materialId": "c8e5e704-e508-4eb7-9aa4-f382e1d8a338",
+      "subject": "PJOK",
+      "topic": "Permainan Tradisional",
+      "subTopic": "Aturan dan Sportivitas",
+      "weekOrder": 15,
+      "status": "done"
+    },
+    {
+      "materialId": "35365085-383d-4a17-a941-f77f33bbbbe6",
+      "subject": "IPAS",
+      "topic": "Air Sumber Kehidupan",
+      "subTopic": "Sumber Air Bersih",
+      "weekOrder": 15,
+      "status": "done"
+    },
+    {
+      "materialId": "8dd083f6-e003-4751-b98a-4f71f2ebcb0d",
+      "subject": "Bahasa Indonesia",
+      "topic": "Cinta Indonesia",
+      "subTopic": "Bahasa Daerah di Indonesia",
+      "weekOrder": 15,
+      "status": "done"
+    },
+    {
+      "materialId": "8b874637-6cec-4412-99c0-5eb64a885207",
+      "subject": "Pendidikan Pancasila",
+      "topic": "NKRI",
+      "subTopic": "Menjaga Keutuhan NKRI",
+      "weekOrder": 15,
+      "status": "done"
+    },
+    {
+      "materialId": "ca02e85f-2233-48ea-80a6-844f6c22e3c3",
+      "subject": "Informatika",
+      "topic": "Proyek Digital",
+      "subTopic": "Kreasi Konten Digital",
+      "weekOrder": 15,
+      "status": "done"
+    },
+    {
+      "materialId": "7549b2e8-55d0-4718-b6b7-39ba6aebca20",
+      "subject": "Bahasa Indonesia",
+      "topic": "Sayangi Bumi",
+      "subTopic": "Lingkungan Hidup",
+      "weekOrder": 16,
+      "status": "done"
+    },
+    {
+      "materialId": "0d6c3603-084a-4c14-954b-fa5a39b6645e",
+      "subject": "PJOK",
+      "topic": "Permainan Tradisional",
+      "subTopic": "Kerja Sama dalam Tim",
+      "weekOrder": 16,
+      "status": "done"
+    },
+    {
+      "materialId": "b6401f97-20e2-41cc-a0d3-fca04f200e4d",
+      "subject": "IPAS",
+      "topic": "Air Sumber Kehidupan",
+      "subTopic": "Pencemaran Air",
+      "weekOrder": 16,
+      "status": "done"
+    },
+    {
+      "materialId": "3b89da42-fb4e-48f8-a5b7-ac170eab0dcc",
+      "subject": "IPAS",
+      "topic": "Air Sumber Kehidupan",
+      "subTopic": "Konservasi Air",
+      "weekOrder": 17,
+      "status": "done"
+    },
+    {
+      "materialId": "0c5d4247-5991-474c-b5c1-f3d255f18d3a",
+      "subject": "Bahasa Indonesia",
+      "topic": "Sayangi Bumi",
+      "subTopic": "Sampah dan Daur Ulang",
+      "weekOrder": 17,
+      "status": "done"
+    },
+    {
+      "materialId": "c0d5f105-a26e-42ad-8b09-e042db9d7dd7",
+      "subject": "PJOK",
+      "topic": "Permainan Tradisional",
+      "subTopic": "Modifikasi Permainan",
+      "weekOrder": 17,
+      "status": "done"
+    },
+    {
+      "materialId": "178afa73-8bee-415f-ad87-931482a19bb6",
+      "subject": "Bahasa Indonesia",
+      "topic": "Sayangi Bumi",
+      "subTopic": "Menulis Artikel Lingkungan",
+      "weekOrder": 18,
+      "status": "done"
+    },
+    {
+      "materialId": "79028cfd-69e2-4dda-bf89-d750a1dcb228",
+      "subject": "IPAS",
+      "topic": "Daerah Bersejarah",
+      "subTopic": "Peninggalan Sejarah",
+      "weekOrder": 18,
+      "status": "done"
+    },
+    {
+      "materialId": "e3d582ee-1680-4aa4-b554-05251385496b",
+      "subject": "IPAS",
+      "topic": "Daerah Bersejarah",
+      "subTopic": "Kerajaan Nusantara",
+      "weekOrder": 19,
+      "status": "done"
+    },
+    {
+      "materialId": "9d99a3e2-1df2-4596-800b-a7f1c0908aac",
+      "subject": "IPAS",
+      "topic": "Daerah Bersejarah",
+      "subTopic": "Nilai Sejarah dan Pelestarian",
+      "weekOrder": 20,
+      "status": "done"
+    },
+    {
+      "materialId": "58637707-a9f0-402c-9e30-ab4205af92b6",
+      "subject": "IPAS",
+      "topic": "Perubahan Fisik",
+      "subTopic": "Pubertas pada Manusia",
+      "weekOrder": 21,
+      "status": "done"
+    },
+    {
+      "materialId": "e0e9a16c-1a2f-4727-a620-06a39289da2b",
+      "subject": "IPAS",
+      "topic": "Perubahan Fisik",
+      "subTopic": "Kesehatan Reproduksi",
+      "weekOrder": 22,
+      "status": "done"
+    },
+    {
+      "materialId": "356d7706-6108-4f52-9029-a7d26770dc9c",
+      "subject": "IPAS",
+      "topic": "Perubahan Fisik",
+      "subTopic": "Perubahan Fisik dan Mental",
+      "weekOrder": 23,
+      "status": "done"
+    },
+    {
+      "materialId": "a6dde8f8-7454-46d4-a029-9292a0a77d46",
+      "subject": "IPAS",
+      "topic": "Bunyi",
+      "subTopic": "Sumber Bunyi",
+      "weekOrder": 27,
+      "status": "done"
+    },
+    {
+      "materialId": "a2c67d2b-2946-485b-959a-0f1cf8acf8b2",
+      "subject": "IPAS",
+      "topic": "Bunyi",
+      "subTopic": "Bunyi dan Pendengaran",
+      "weekOrder": 28,
+      "status": "done"
+    },
+    {
+      "materialId": "4fd1da67-e529-4974-8fd0-8ae073ed91ef",
+      "subject": "IPAS",
+      "topic": "Bunyi",
+      "subTopic": "Teknologi Bunyi",
+      "weekOrder": 29,
+      "status": "done"
+    }
+  ],
+  "updatedAt": "2026-07-14T04:35:56.081Z"
+}
