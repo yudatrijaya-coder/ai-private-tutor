@@ -32,7 +32,10 @@ export function useActivityTracker(studentId: string | null, subject: string) {
           type,
           metadata,
         }),
-      }).catch((err) => console.error("[ActivityTracker]", err));
+      }).then((res) => {
+        if (!res.ok)
+          console.error("[ActivityTracker] HTTP", res.status, type, subject);
+      }).catch((err) => console.error("[ActivityTracker] Network error:", err));
     },
     [studentId, subject]
   );
