@@ -10,6 +10,7 @@ import { RecommendationCarousel } from "@/components/RecommendationCarousel";
 import { getYouTubeForTopic } from "@/data/youtube";
 import { DashboardTracker } from "@/components/DashboardTracker";
 import { TrackedSubjectCircle } from "@/components/TrackedSubjectCircle";
+import SchoolScheduleSection from "@/components/SchoolScheduleSection";
 
 const STUDENT_JWT_SECRET = new TextEncoder().encode(
   process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
@@ -694,6 +695,11 @@ export default function StudentHomePage() {
         <SubjectGridSection />
       </Suspense>
 
+      {/* Jadwal Sekolah (dari SiKumbang) */}
+      <Suspense fallback={<SkeletonSchedule />}>
+        <SchoolScheduleServer />
+      </Suspense>
+
       {/* Jadwal Interaktif */}
       <Suspense fallback={<SkeletonSchedule />}>
         <ScheduleSection />
@@ -715,4 +721,16 @@ async function QuickActionsDynamic() {
     select: { gradeLevel: true },
   });
   return <QuickActionsSection gradeLevel={student?.gradeLevel} />;
+}
+
+/* ── School Schedule Server Wrapper ── */
+async function SchoolScheduleServer() {
+  const session = await getSessionStudent();
+  if (!session) return null;
+  return (
+    <SchoolScheduleSection
+      studentCode={session.identifier}
+      studentName={session.name}
+    />
+  );
 }
