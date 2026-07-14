@@ -8,6 +8,7 @@ export default function StudentLoginPage() {
   const searchParams = new URLSearchParams(typeof window !== "undefined" ? window.location.search : "");
   const redirectTo = searchParams.get("redirect") || "/student";
   const [studentId, setStudentId] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -20,7 +21,7 @@ export default function StudentLoginPage() {
       const res = await fetch("/api/auth/student-login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ studentId }),
+        body: JSON.stringify({ studentId, password: password || undefined }),
       });
 
       const data = await res.json();
@@ -70,7 +71,7 @@ export default function StudentLoginPage() {
             Masuk sebagai Siswa
           </h1>
           <p className="text-sm" style={{ color: "var(--st-text-dim, #94a3b8)" }}>
-            Masukkan ID siswa kamu
+            Masukkan ID siswa dan password kamu
           </p>
         </div>
 
@@ -90,9 +91,34 @@ export default function StudentLoginPage() {
               type="text"
               required
               autoComplete="off"
-              placeholder="Contoh: ANDI001"
+              placeholder="Contoh: STU_MRHLH4LX"
               value={studentId}
               onChange={(e) => setStudentId(e.target.value.toUpperCase())}
+              className="w-full px-3 py-2.5 rounded-lg text-sm outline-none transition-colors"
+              style={{
+                backgroundColor: "var(--st-bg, #f0f4ff)",
+                border: "1px solid #e5e7eb",
+                color: "var(--st-text, #1e293b)",
+              }}
+            />
+          </div>
+
+          {/* Password */}
+          <div className="space-y-1.5">
+            <label
+              htmlFor="password"
+              className="text-sm font-medium"
+              style={{ color: "var(--st-text-dim, #94a3b8)" }}
+            >
+              Password
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Password (kosongkan jika belum dibuat)"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full px-3 py-2.5 rounded-lg text-sm outline-none transition-colors"
               style={{
                 backgroundColor: "var(--st-bg, #f0f4ff)",
@@ -130,7 +156,15 @@ export default function StudentLoginPage() {
           </button>
         </form>
 
-        <div className="text-center">
+        <div className="text-center space-y-2">
+          <a
+            href="/login/student?reset=1"
+            className="text-xs"
+            style={{ color: "var(--st-text-dim, #94a3b8)" }}
+          >
+            Lupa password? →
+          </a>
+          <br />
           <a
             href="/login"
             className="text-xs underline"
