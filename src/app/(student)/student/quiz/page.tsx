@@ -271,6 +271,7 @@ function QuizInner() {
   const [phase, setPhase] = useState<"list" | "quiz" | "result">("quiz");
   const [answers, setAnswers] = useState<number[]>([]);
   const [studentId, setStudentId] = useState<string | null>(null);
+  const [subjects, setSubjects] = useState<string[]>([]);
 
   // Ambil studentId dari session
   useEffect(() => {
@@ -279,13 +280,27 @@ function QuizInner() {
       .then((data) => {
         if (data.student?.studentId) setStudentId(data.student.studentId);
         else setError("Sesi tidak valid. Login ulang.");
+        // Also fetch subjects
+        if (data.student?.studentId) {
+          fetch(`/api/students/subjects?studentId=${encodeURIComponent(data.student.studentId)}`)
+            .then(r => r.json())
+            .then(sd => { if (sd.subjects) setSubjects(sd.subjects); })
+            .catch(() => {});
+        }
       })
       .catch(() => setError("Gagal verifikasi sesi"));
   }, []);
 
-  // Fetch quiz list for subject
+  // Fetch quiz list for subject — or show subject picker when none selected
   useEffect(() => {
-    if (!subject || quizId || !studentId) return;
+    if (!studentId) return;
+    if (!subject) {
+      // No subject selected — show subject picker
+      setQuizList([]);
+      setLoading(false);
+      return;
+    }
+    if (quizId) return;
     setLoading(true);
     fetch(`/api/students/quizzes?studentId=${encodeURIComponent(studentId)}`)
       .then((r) => r.json())
@@ -300,7 +315,7 @@ function QuizInner() {
         setLoading(false);
       })
       .catch(() => { setLoading(false); setError("Gagal memuat quiz"); });
-  }, [subject, quizId, examMode]);
+  }, [subject, quizId, examMode, studentId]);
 
   // Fetch specific quiz by ID
   useEffect(() => {
@@ -373,8 +388,8 @@ function QuizInner() {
     );
   }
 
-  // Phase: show quiz picker list
-  if (phase === "list" && quizList.length > 0 && !quiz) {
+  // Phase: show quiz picker list (when subject selected and quizzes loaded)
+  if (!quiz && quizList.length > 0 && phase !== "result") {
     return (
       <QuizPicker
         quizzes={quizList}
@@ -419,13 +434,35 @@ function QuizInner() {
     );
   }
 
-  // Fallback — no quiz loaded
+  // Fallback — show subject picker
   return (
-    <div className="text-center py-20">
-      <div className="text-4xl mb-3">📝</div>
-      <p className="text-sm" style={{ color: "var(--st-text-dim)" }}>
-        Pilih quiz dari daftar mata pelajaran.
-      </p>
+    <div className="space-y-4">
+      <h2 className="text-lg font-bold" style={{ fontFamily: "var(--font-st-display)" }}>
+        📝 Pilih Mata Pelajaran
+      </h2>
+      {subjects.length === 0 ? (
+        <div className="text-center py-12">
+          <div className="text-4xl mb-3">📝</div>
+          <p className="text-sm" style={{ color: "var(--st-text-dim)" }}>
+            Tidak ada quiz tersedia.
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-3">
+          {subjects.map((s) => (
+            <button
+              key={s}
+              onClick={() => { window.location.href = `/student/quiz?subject=${encodeURIComponent(s)}`; }}
+              className="rounded-2xl p-5 text-left transition-all hover:scale-[1.02] active:scale-95 flex flex-col items-center gap-2"
+              style={{ backgroundColor: "var(--st-bg-card)" }}
+            >
+              <span className="text-3xl">{EMOJI_PER_SUBJECT[s] || "📚"}</span>
+              <span className="text-sm font-semibold text-center">{s}</span>
+              <span className="text-xs" style={{ color: "var(--st-text-dim)" }}>Lihat Quiz →</span>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
