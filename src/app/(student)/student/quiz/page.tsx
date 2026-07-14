@@ -1,7 +1,8 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { Suspense, useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { useActivityTracker } from "@/hooks/useActivityTracker";
 
 /* ── Types ── */
 interface Question {
@@ -28,11 +29,78 @@ interface QuizListItem {
 }
 
 const EMOJI_PER_SUBJECT: Record<string, string> = {
-  Matematika: "🔢", Bahasa: "📖", "Bahasa Indonesia": "📖",
-  IPA: "🔬", IPAS: "🔬", IPS: "🌍", Agama: "🕌",
-  PKN: "🤝", "Pendidikan Pancasila": "🤝",
-  PJOK: "⚽", Informatika: "💻", "Bahasa Inggris": "🌏",
+  Matematika: "🔢",
+  Bahasa: "📖",
+  "Bahasa Indonesia": "📖",
+  IPA: "🔬",
+  IPAS: "🔬",
+  IPS: "🌍",
+  Agama: "🕌",
+  PKN: "🤝",
+  "Pendidikan Pancasila": "🤝",
+  PJOK: "⚽",
+  Informatika: "💻",
+  "Bahasa Inggris": "🌏",
 };
+
+/* ── Confirmation Modal ── */
+function ConfirmModal({
+  open,
+  title,
+  message,
+  confirmLabel,
+  cancelLabel,
+  onConfirm,
+  onCancel,
+}: {
+  open: boolean;
+  title?: string;
+  message: string;
+  confirmLabel?: string;
+  cancelLabel?: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+}) {
+  if (!open) return null;
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center"
+      style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+    >
+      <div
+        className="rounded-2xl p-6 mx-4 max-w-sm w-full shadow-xl"
+        style={{ backgroundColor: "var(--st-bg-card, #1e1e2e)" }}
+      >
+        <h3 className="text-lg font-bold mb-2" style={{ fontFamily: "var(--font-st-display)" }}>
+          {title || "Konfirmasi"}
+        </h3>
+        <p className="text-sm mb-6" style={{ color: "var(--st-text-dim, #a0a0b0)" }}>
+          {message}
+        </p>
+        <div className="flex gap-3">
+          <button
+            onClick={onCancel}
+            className="flex-1 py-3 rounded-xl text-sm font-medium"
+            style={{
+              backgroundColor: "var(--st-bg, #2a2a3e)",
+              color: "var(--st-text, #e0e0f0)",
+              border: "1px solid var(--st-border, #3a3a50)",
+            }}
+          >
+            {cancelLabel || "Batal"}
+          </button>
+          <button
+            onClick={onConfirm}
+            className="flex-1 py-3 rounded-xl text-sm font-bold"
+            style={{ backgroundColor: "var(--st-danger, #ef4444)", color: "#fff" }}
+          >
+            {confirmLabel || "Ya, Keluar"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 /* ── Result screen ── */
 function QuizResult({
@@ -72,9 +140,10 @@ function QuizResult({
             key={i}
             className="rounded-xl p-4 text-sm"
             style={{
-              backgroundColor: answers[i] === q.correctIndex
-                ? "rgba(34,197,94,0.08)"
-                : "rgba(239,68,68,0.08)",
+              backgroundColor:
+                answers[i] === q.correctIndex
+                  ? "rgba(34,197,94,0.08)"
+                  : "rgba(239,68,68,0.08)",
             }}
           >
             <p className="font-medium mb-1">{q.question}</p>
@@ -272,6 +341,17 @@ function QuizInner() {
   const [answers, setAnswers] = useState<number[]>([]);
   const [studentId, setStudentId] = useState<string | null>(null);
   const [subjects, setSubjects] = useState<string[]>([]);
+  const [showExitModal, setShowExitModal] = useState(false);
+  const [showBackModal, setShowBackModal] = useState(false);
+
+  // Ref to store pending exit action
+  const pendingExitAction = useRef<(() => void) | null>(null);
+
+  // Determine if quiz is active (has answers selected)
+  const isQuizActive = phase === "quiz" && answers.some((a) => a >= 0);
+
+  // Activity tracker
+  const tracker = useActivityTracker(studentId, quiz?.material?.subject || subject || "");
 
   // Ambil studentId dari session
   useEffect(() => {
@@ -295,7 +375,6 @@ function QuizInner() {
   useEffect(() => {
     if (!studentId) return;
     if (!subject) {
-      // No subject selected — show subject picker
       setQuizList([]);
       setLoading(false);
       return;
@@ -368,6 +447,97 @@ function QuizInner() {
       .catch(() => { setLoading(false); setError("Gagal generate exam"); });
   }, [examMode, subject, quizId]);
 
+  // ── Track quiz/exam start when quiz loads ──
+  useEffect(() => {
+    if (!quiz || !studentId) return;
+    const isExam = quiz.type === "EXAM" || examMode;
+    const topic = quiz.material?.topic;
+    setTimeout(() => {
+      if (isExam) {
+        tracker.trackExamStart(quizId, topic);
+      } else {
+        tracker.trackQuizStart(quizId, topic);
+      }
+    }, 0);
+    // Only fire once on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [!!quiz, studentId]);
+
+  // ── beforeunload protection ──
+  useEffect(() => {
+    if (!isQuizActive) return;
+
+    const handler = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, [isQuizActive]);
+
+  // ── history.pushState trap (browser back guard) ──
+  useEffect(() => {
+    // Push an extra state so popstate fires when user presses back
+    window.history.pushState({ quizActive: true }, "");
+
+    const handler = () => {
+      if (isQuizActive) {
+        setShowBackModal(true);
+        // Re-push state to prevent back navigation
+        window.history.pushState({ quizActive: true }, "");
+      }
+    };
+
+    window.addEventListener("popstate", handler);
+    return () => window.removeEventListener("popstate", handler);
+  }, [isQuizActive]);
+
+  // ── Handle submit with activity tracking ──
+  const handleSubmit = useCallback(
+    (ans: number[]) => {
+      if (!quiz || !studentId) return;
+
+      const isExam = quiz.type === "EXAM" || examMode;
+      const score = ans.filter((a, i) => a === quiz.questions[i]?.correctIndex).length * 10;
+      const maxScore = quiz.questions.length * 10;
+      const topic = quiz.material?.topic;
+
+      // Track completion BEFORE setting phase to result
+      const trackPromise = isExam
+        ? tracker.trackExamComplete(quizId, topic, score, maxScore)
+        : tracker.trackQuizComplete(quizId, topic, score, maxScore);
+
+      setAnswers(ans);
+      setPhase("result");
+    },
+    [quiz, studentId, examMode, quizId, tracker]
+  );
+
+  // ── Handle exit (Keluar) with confirmation ──
+  const handleExit = useCallback(() => {
+    if (isQuizActive) {
+      setShowExitModal(true);
+    } else {
+      if (quizList.length > 0) setPhase("list");
+      else window.location.reload();
+    }
+  }, [isQuizActive, quizList.length]);
+
+  // ── Confirm exit ──
+  const confirmExit = useCallback(() => {
+    setShowExitModal(false);
+    setShowBackModal(false);
+    if (quizList.length > 0) setPhase("list");
+    else window.location.reload();
+  }, [quizList.length]);
+
+  // ── Cancel exit ──
+  const cancelExit = useCallback(() => {
+    setShowExitModal(false);
+    setShowBackModal(false);
+  }, []);
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
@@ -419,18 +589,25 @@ function QuizInner() {
   // Phase: quiz active
   if (quiz) {
     return (
-      <QuizScreen
-        questions={quiz.questions}
-        title={`${EMOJI_PER_SUBJECT[quiz.material?.subject || ""] || "📚"} ${quiz.material?.topic || "Quiz"}`}
-        onSubmit={(ans) => {
-          setAnswers(ans);
-          setPhase("result");
-        }}
-        onBack={() => {
-          if (quizList.length > 0) setPhase("list");
-          else window.location.reload();
-        }}
-      />
+      <>
+        <ConfirmModal
+          open={showExitModal || showBackModal}
+          title={showBackModal ? "Kembali?" : "Keluar dari Quiz?"}
+          message={
+            showBackModal
+              ? "Apakah kamu yakin ingin kembali? Progress quiz akan hilang."
+              : "Apakah kamu yakin ingin keluar? Progress quiz akan hilang."
+          }
+          onConfirm={confirmExit}
+          onCancel={cancelExit}
+        />
+        <QuizScreen
+          questions={quiz.questions}
+          title={`${EMOJI_PER_SUBJECT[quiz.material?.subject || ""] || "📚"} ${quiz.material?.topic || "Quiz"}`}
+          onSubmit={handleSubmit}
+          onBack={handleExit}
+        />
+      </>
     );
   }
 

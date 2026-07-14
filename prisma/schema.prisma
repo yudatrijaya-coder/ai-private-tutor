@@ -118,6 +118,8 @@ model Student {
   apiUsages      ApiUsage[]
   reminders      Reminder[]
   homeworkTasks  HomeworkTask[]
+  activityLogs   StudentActivity[]
+  subjectMastery StudentSubjectMastery[]
 }
 
 model Curriculum {
@@ -162,6 +164,7 @@ model Material {
   quizzes         Quiz[]
   prerequisites   Material[]     @relation("MaterialPrerequisites")
   prereqFor       Material[]     @relation("MaterialPrerequisites")
+  activityLogs    StudentActivity[]
 }
 
 model Quiz {
@@ -282,7 +285,59 @@ model ChatLog {
   @@index([studentId, createdAt])
 }
 
-/// Reminder — pengingat tugas / acara personal
+/// StudentActivity — real-time granular activity log
+model StudentActivity {
+  id          String   @id @default(uuid())
+  studentId   String
+  materialId  String?
+  type        String   // "slide_view", "mindmap_view", "video_click", "quiz_start", "quiz_complete", "exam_start", "exam_complete"
+  metadata    Json?    // {subject, topic, score?, maxScore?, timeSpent?, progress?, source?}
+  createdAt   DateTime @default(now())
+
+  student     Student  @relation(fields: [studentId], references: [id])
+  material    Material? @relation(fields: [materialId], references: [id])
+
+  @@index([studentId, type, createdAt])
+  @@index([studentId, createdAt])
+}
+
+/// StudentSubjectMastery — per-subject achievement snapshot
+model StudentSubjectMastery {
+  id          String   @id @default(uuid())
+  studentId   String
+  subject     String
+
+  // Quiz
+  quizCount      Int   @default(0)
+  quizTotalScore Int   @default(0)
+  quizTotalMax   Int   @default(0)
+  quizBestScore  Int   @default(0)
+  quizBestMax    Int   @default(0)
+
+  // Exam
+  examCount      Int   @default(0)
+  examTotalScore Int   @default(0)
+  examTotalMax   Int   @default(0)
+  examBestScore  Int   @default(0)
+  examBestMax    Int   @default(0)
+
+  // Activity counts
+  slidesRead    Int   @default(0)
+  mindmapsOpen  Int   @default(0)
+  videosWatched Int   @default(0)
+
+  // Computed
+  mastery       Float @default(0.0) // 0.0 - 1.0 based on quiz+exam performance
+  lastActiveAt  DateTime @default(now())
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  student       Student  @relation(fields: [studentId], references: [id])
+
+  @@unique([studentId, subject])
+  @@index([studentId])
+}
 model Reminder {
   id          String    @id @default(uuid())
   studentId   String

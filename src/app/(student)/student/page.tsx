@@ -274,6 +274,7 @@ function QuickActionsSection({ gradeLevel }: { gradeLevel?: string }) {
     { icon: "📝", label: "Quiz", href: "/student/quiz", color: "#6366f1" },
     { icon: "📋", label: "Exam", href: "/student/quiz?exam=true", color: "#f59e0b" },
     { icon: "🧠", label: "Mindmap", href: "/student/topic-tree", color: "#a78bfa" },
+    { icon: "🏆", label: "Pencapaian", href: "/student/achievement", color: "#22c55e" },
   ];
 
   return (
