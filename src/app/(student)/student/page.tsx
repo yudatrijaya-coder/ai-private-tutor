@@ -6,6 +6,7 @@ import { jwtVerify } from "jose";
 import Link from "next/link";
 import { SkeletonStudentPage } from "@/components/Skeleton";
 import { QuoteRotator } from "@/components/QuoteRotator";
+import { RecommendationCarousel } from "@/components/RecommendationCarousel";
 import { getYouTubeForTopic } from "@/data/youtube";
 
 const STUDENT_JWT_SECRET = new TextEncoder().encode(
@@ -251,45 +252,18 @@ async function RecommendationSection() {
     }
   }
 
-  // Shuffle final recs — ambil 6 random
-  const finalRecs = recommendations.sort(() => Math.random() - 0.5).slice(0, 6);
+  // Shuffle final recs — ambil banyak, nanti di-carousel 3 per halaman
+  const finalRecs = recommendations.sort(() => Math.random() - 0.5);
 
   return (
     <div className="mb-5">
       <h3
-        className="text-base font-bold mb-3"
+        className="text-base font-bold mb-3 px-1"
         style={{ fontFamily: "var(--font-st-display)" }}
       >
         ✨ Rekomendasi Hari Ini
       </h3>
-      <div className="space-y-2">
-        {finalRecs.map((rec, i) => (
-          <Link
-            key={`${rec.type}-${i}`}
-            href={rec.href}
-            target={rec.type === "video" || rec.type === "sibi" ? "_blank" : undefined}
-            rel={rec.type === "video" ? "noopener noreferrer" : undefined}
-            className="flex items-center gap-3 rounded-xl p-3.5 transition-all hover:scale-[1.01] active:scale-95"
-            style={{ backgroundColor: "var(--st-bg-card)" }}
-          >
-            <span
-              className="w-10 h-10 rounded-xl flex items-center justify-center text-lg shrink-0"
-              style={{ backgroundColor: `${rec.color}20` }}
-            >
-              {rec.icon}
-            </span>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold truncate">{rec.label}</p>
-              <p className="text-xs mt-0.5" style={{ color: "var(--st-text-dim)" }}>
-                {rec.subtitle}
-              </p>
-            </div>
-            <span className="text-lg" style={{ color: "var(--st-text-dim)" }}>
-              {rec.type === "video" || rec.type === "sibi" ? "↗" : "→"}
-            </span>
-          </Link>
-        ))}
-      </div>
+      <RecommendationCarousel items={finalRecs} />
     </div>
   );
 }
