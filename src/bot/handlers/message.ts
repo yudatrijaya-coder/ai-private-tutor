@@ -8,6 +8,7 @@ import { handleRegister } from "./register";
 import { handleReminderCommand, processPendingReminders } from "../agent/reminder";
 import { handleQuizStart } from "./quiz";
 import { handleSchedule } from "./schedule";
+import { handleSchoolSchedule, handleNextSubject } from "./school-schedule";
 import { handleMaterial } from "./material";
 import { handleYoutubeSummary, handleVideoRecommendation } from "./youtube";
 import {
@@ -165,15 +166,16 @@ export async function onMessage(ctx: Context): Promise<void> {
           const persona = getPersona(student.persona);
           await ctx.reply(
             `${persona.emoji} *Bantuan Perintah*\n\n` +
-              `/start — Mulai / daftar ulang\n` +
-              `/daftar _ID_ — Hubungkan akun Telegram dengan ID siswa\n` +
-              `/materi — Lihat materi pelajaran\n` +
-              `/quiz — Kerjakan kuis\n` +
-              `/jadwal — Cek jadwal belajar\n` +
-              `/web — Buka dashboard di browser\n` +
-              `/nilai — Lihat nilai dan progres\n` +
-              `/help — Tampilkan bantuan ini\n\n` +
-              `Atau cukup tanya aja langsung! 😊`,
+                          `/start — Mulai / daftar ulang\n` +
+                          `/daftar _ID_ — Hubungkan akun Telegram dengan ID siswa\n` +
+                          `/materi — Lihat materi pelajaran\n` +
+                          `/quiz — Kerjakan kuis\n` +
+                          `/jadwal — Cek jadwal belajar\n` +
+                          `/jadwal_sekolah — Cek jadwal sekolah asli 🏫\n` +
+                          `/web — Buka dashboard di browser\n` +
+                          `/nilai — Lihat nilai dan progres\n` +
+                          `/help — Tampilkan bantuan ini\n\n` +
+                          `Atau cukup tanya aja langsung! 😊`,
             { parse_mode: "Markdown" },
           );
           return;
@@ -219,6 +221,20 @@ export async function onMessage(ctx: Context): Promise<void> {
           }
           if (/\[SCHEDULE\]/i.test(respText)) {
             await handleSchedule(ctx, student, respText);
+            return;
+          }
+
+          // ── SCHOOL_SCHEDULE intent — jadwal sekolah asli ──
+          const schoolSchedMatch = respText.match(/\[SCHOOL_SCHEDULE(?::([^\]]+))?\]/i);
+          if (schoolSchedMatch) {
+            const subCmd = schoolSchedMatch[1] ?? "";
+            // Check for NEXT:subject
+            const nextMatch = subCmd.match(/^NEXT:(.+)$/i);
+            if (nextMatch) {
+              await handleNextSubject(ctx, student, nextMatch[1].trim());
+            } else {
+              await handleSchoolSchedule(ctx, student, respText);
+            }
             return;
           }
           if (/\[MATERIALS\]/i.test(respText)) {
