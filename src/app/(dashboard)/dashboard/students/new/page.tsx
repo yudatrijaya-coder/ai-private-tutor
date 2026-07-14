@@ -16,6 +16,7 @@ export default function NewStudentPage() {
     studentId: string;
     curriculumEnqueued: boolean;
     sessionCount: number;
+    copiedFromTemplate?: string;
   } | null>(null);
 
   const gradeOptions = [
@@ -104,6 +105,9 @@ export default function NewStudentPage() {
             </p>
             <p><span className="font-medium text-white">Kurikulum:</span> {result.curriculumEnqueued ? "Dibuat ✅" : "Gagal ❌"}</p>
             <p><span className="font-medium text-white">Jadwal:</span> {result.sessionCount} sesi</p>
+            {result.copiedFromTemplate && (
+              <p><span className="font-medium text-white">Template:</span> Dicopy dari siswa template ✅</p>
+            )}
           </div>
           <div className="flex gap-3 pt-2">
             <button
