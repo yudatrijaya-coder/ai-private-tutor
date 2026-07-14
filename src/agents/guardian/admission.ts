@@ -15,6 +15,7 @@
 import { prisma } from "@/lib/prisma";
 import { generateCurriculumDraft } from "@/agents/curriculum";
 import type { Prisma } from "@/generated/prisma/client";
+import bcrypt from "bcryptjs";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -180,6 +181,9 @@ export async function handleAdmission(input: AdmissionInput): Promise<AdmissionR
     SMA_2: "KAK_RAKA",
   };
 
+  const DEFAULT_PASSWORD = "belajar123";
+  const passwordHash = await bcrypt.hash(DEFAULT_PASSWORD, 10);
+
   // 1. Create student in DB
   const student = await prisma.student.create({
     data: {
@@ -191,6 +195,7 @@ export async function handleAdmission(input: AdmissionInput): Promise<AdmissionR
       characterPreference: characterPreference ?? null,
       interests: interests ?? null,
       scheduleConfig: scheduleConfig ? json(scheduleConfig) : undefined,
+      passwordHash,
     },
   });
 
@@ -220,7 +225,59 @@ export async function handleAdmission(input: AdmissionInput): Promise<AdmissionR
     console.log(`[guardian/admission] Created ${sessions.length} initial schedule session(s)`);
   }
 
-  // 4. Log to AgentLog
+  // 4. Kirim notif credentials ke Telegram (jika ada telegramId)
+  if (student.telegramId) {
+    try {
+      const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+      if (BOT_TOKEN) {
+        const gradeLabels: Record<string, string> = {
+          SD_5: "SD Kelas 5",
+          SMP_1: "SMP Kelas 1",
+          SMA_2: "SMA Kelas 2",
+        };
+        const label = gradeLabels[gradeLevel] ?? gradeLevel;
+        const msg = [
+          `🌐 *Dashboard Belajar Kamu!*`,
+          ``,
+          `Halo *${student.name}!*`,
+          `Admin sudah mendaftarkan kamu. Yuk cobain dashboard belajar online!`,
+          `[Buka Dashboard](https://senangbelajar.web.id/login/student)`,
+          ``,
+          `📋 *Data Login Kamu:*`,
+          `🆔 ID Siswa: \`${student.studentId}\``,
+          `🔑 Password: \`${DEFAULT_PASSWORD}\` (default)`,
+          `📖 Kelas: ${label}`,
+          ``,
+          `Di dashboard kamu bisa:`,
+          `📚 Baca materi pelajaran`,
+          `🧠 Lihat mindmap interaktif`,
+          `📝 Kerjakan quiz & latihan`,
+          `📅 Cek jadwal belajar`,
+          `📊 Lihat progress belajar`,
+          ``,
+          `*Jangan lupa ganti password setelah login pertama ya!* 🔐`,
+          ``,
+          `Semangat belajarnya! 💪🔥`,
+        ].join("\n");
+
+        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: student.telegramId,
+            text: msg,
+            parse_mode: "Markdown",
+          }),
+        });
+        console.log(`[guardian/admission] Sent credentials to ${student.name} (@${student.telegramId})`);
+      }
+    } catch (err) {
+      // Non-critical — don't fail admission for Telegram failure
+      console.error(`[guardian/admission] Failed to send credentials to ${student.name}:`, err);
+    }
+  }
+
+  // 5. Log to AgentLog
   await prisma.agentLog.create({
     data: {
       agentType: "GUARDIAN",

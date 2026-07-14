@@ -18,6 +18,7 @@ import { Markup } from "telegraf";
 import { prisma } from "@/lib/prisma";
 import { generateCurriculumDraft } from "@/agents/curriculum";
 import { bot } from "../bot";
+import bcrypt from "bcryptjs";
 
 // ─── Types ────────────────────────────────────────────────────
 
@@ -430,6 +431,8 @@ async function handleAdminApprove(ctx: Context, studentId: string): Promise<void
     return;
   }
 
+  const DEFAULT_PASSWORD = "belajar123";
+
   try {
     const student = await prisma.student.create({
       data: {
@@ -448,14 +451,25 @@ async function handleAdminApprove(ctx: Context, studentId: string): Promise<void
     if (student.telegramId) {
       await bot?.telegram.sendMessage(
         student.telegramId,
-        `🎉 *Selamat!* Kamu udah diterima!\n\n` +
-        `Halo *${student.name}*, admin sudah menyetujui pendaftaran kamu. Sekarang kamu bisa mulai belajar! 🚀\n\n` +
-        `Ketik /start untuk memulai!`,
+        `🎉 *Selamat!* Kamu udah diterima!\\n\\n` +
+        `Halo *${student.name}*, admin sudah menyetujui pendaftaran kamu. Sekarang kamu bisa mulai belajar! 🚀\\n\\n` +
+        `🌐 *Dashboard Online:* [Buka Dashboard](https://senangbelajar.web.id/login/student)\\n` +
+        `🆔 ID Siswa: \`${student.studentId}\`\\n` +
+        `🔑 Password: \`${DEFAULT_PASSWORD}\`\\n\\n` +
+        `*Jangan lupa ganti password setelah login pertama ya!* 🔐\\n\\n` +
+        `Ketik /start untuk mulai chatting, atau buka dashboard di atas! 💪🔥`,
         { parse_mode: "Markdown" },
       );
 
       await generateCurriculumDraft(student.id);
     }
+
+    // Kirim notif credentials
+    const passwordHash = await bcrypt.hash(DEFAULT_PASSWORD, 10);
+    await prisma.student.update({
+      where: { id: student.id },
+      data: { passwordHash },
+    });
 
     await ctx.editMessageText(
       `✅ *Pendaftaran Disetujui!*\n\n👤 ${student.name}\n📖 ${GRADE_LABELS[regData.grade] ?? regData.grade}\n🎯 ${regData.character.replace("KAK_", "Kak ")}`,

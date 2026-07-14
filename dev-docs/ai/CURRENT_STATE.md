@@ -35,6 +35,8 @@
 - **Student Web improvements**: Quiz page fixed — subject picker when no subject param, no more infinite loading
 - **Landing page revamp**: Motivational quote rotator (auto-roll 8s, 15 tokoh), recommendation carousel (3 cards/page, auto-roll 6s), quick action buttons (Quiz/Exam/Mindmap/Buku), interactive schedule with per-item action buttons
 - **Template system**: Syifa/Raihan/SHOFI marked as template. New student registered at same grade level gets deep-copied curriculum (materials, quizzes, slides, mindmaps) instead of generating from data banks
+- **Default password + credential notification**: New students get auto-generated password (belajar123) and receive Telegram notification with student ID, password, and dashboard link on registration
+- **Backfill credentials**: Exported script `scripts/send-credentials.ts` to send credentials to existing students
 
 ## Known Issues / Blockers
 
