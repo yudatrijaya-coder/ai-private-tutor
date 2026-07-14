@@ -14,10 +14,11 @@ interface Question {
 
 interface QuizData {
   id: string;
+  materialId?: string;
   type: string;
   maxScore: number;
   questions: Question[];
-  material?: { subject: string; topic: string; subTopic?: string };
+  material?: { subject: string; topic: string; subTopic?: string; id?: string };
   timeLimit?: number;
 }
 
@@ -406,6 +407,7 @@ function QuizInner() {
         if (data.quiz) {
           setQuiz({
             id: data.quiz.id,
+            materialId: data.quiz.materialId,
             type: data.quiz.type,
             maxScore: data.quiz.maxScore,
             questions: data.quiz.questions || [],
@@ -452,11 +454,12 @@ function QuizInner() {
     if (!quiz || !studentId) return;
     const isExam = quiz.type === "EXAM" || examMode;
     const topic = quiz.material?.topic;
+    const matId = quiz.material?.id || quiz.materialId;
     setTimeout(() => {
       if (isExam) {
-        tracker.trackExamStart(quizId, topic);
+        tracker.trackExamStart(matId || quizId, topic);
       } else {
-        tracker.trackQuizStart(quizId, topic);
+        tracker.trackQuizStart(matId || quizId, topic);
       }
     }, 0);
     // Only fire once on mount
@@ -502,11 +505,12 @@ function QuizInner() {
       const score = ans.filter((a, i) => a === quiz.questions[i]?.correctIndex).length * 10;
       const maxScore = quiz.questions.length * 10;
       const topic = quiz.material?.topic;
+      const matId = quiz.material?.id || quiz.materialId;
 
       // Track completion BEFORE setting phase to result
       const trackPromise = isExam
-        ? tracker.trackExamComplete(quizId, topic, score, maxScore)
-        : tracker.trackQuizComplete(quizId, topic, score, maxScore);
+        ? tracker.trackExamComplete(matId || quizId, topic, score, maxScore)
+        : tracker.trackQuizComplete(matId || quizId, topic, score, maxScore);
 
       setAnswers(ans);
       setPhase("result");

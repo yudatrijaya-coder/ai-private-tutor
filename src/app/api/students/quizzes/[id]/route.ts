@@ -29,6 +29,7 @@ export async function GET(
   return NextResponse.json({
     quiz: {
       id: quiz.id,
+      materialId: quiz.materialId,
       type: quiz.type,
       maxScore: quiz.maxScore,
       questions: questions.map((q) => ({
