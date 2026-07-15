@@ -11,6 +11,7 @@ import { getYouTubeForTopic } from "@/data/youtube";
 import { DashboardTracker } from "@/components/DashboardTracker";
 import { TrackedSubjectCircle } from "@/components/TrackedSubjectCircle";
 import SchoolScheduleSection from "@/components/SchoolScheduleSection";
+import { MoodleQuickLink } from "@/components/MoodleQuickLink";
 
 const STUDENT_JWT_SECRET = new TextEncoder().encode(
   process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
@@ -303,6 +304,8 @@ function QuickActionsSection({ gradeLevel }: { gradeLevel?: string }) {
         ))}
         {/* Buku SIBI - pilih subject random yang punya PDF */}
         <SibiQuickLink gradeLevel={gradeLevel} />
+        {/* Modul Moodle */}
+        <MoodleQuickLink gradeLevel={gradeLevel} />
       </div>
     </div>
   );
