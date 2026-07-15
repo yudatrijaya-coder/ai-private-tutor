@@ -213,12 +213,36 @@ export function getYouTubeForTopic(
         : gradeLevel === "SMA_2"
           ? YOUTUBE_SMA11
           : ALL_YOUTUBE;
-  // Fuzzy match
+
   const t = topic.toLowerCase();
-  return pool.filter(
+  
+  // 1) Exact / contains fuzzy match
+  let matches = pool.filter(
     (yt) =>
       yt.topic.toLowerCase() === t ||
       t.includes(yt.topic.toLowerCase()) ||
       yt.topic.toLowerCase().includes(t),
   );
+  
+  // 2) Fallback: token-level matching — split topic into words, find videos whose topic has ≥2 matching words
+  if (matches.length === 0) {
+    const tokens = t.split(/\s+/).filter(w => w.length > 3);
+    matches = pool.filter((yt) => {
+      const ytTokens = yt.topic.toLowerCase().split(/\s+/);
+      const common = tokens.filter(w => ytTokens.some(ytw => ytw.includes(w) || w.includes(ytw)));
+      return common.length >= 2;
+    });
+  }
+  
+  // 3) Fallback: subject-level — match by subject keywords in video title
+  if (matches.length === 0) {
+    const subjLower = _subject.toLowerCase();
+    const subjTokens = subjLower.split(/\s+/);
+    matches = pool.filter((yt) => {
+      const title = yt.title.toLowerCase();
+      return subjTokens.some(st => title.includes(st));
+    });
+  }
+  
+  return matches;
 }
