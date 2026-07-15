@@ -47,6 +47,8 @@ SUBJECTS = {
             "Pendidikan Pancasila": ["Hak Asasi", "Konstitusi", "NKRI"],
             "PJOK": ["Kebugaran", "Teknik Dasar", "Pola Hidup Sehat"],
             "Bahasa Mandarin": ["Hanzi Dasar", "Tata Bahasa", "Percakapan"],
+            "Matematika Tingkat Lanjut": ["Fungsi & Limit", "Turunan", "Integral"],
+            "Bahasa Inggris Tingkat Lanjut": ["Academic Writing", "Critical Reading", "Presentation Skills"],
         }
     },
     "Syifa": {
