@@ -17,6 +17,17 @@ export const MOODLE_MODULES: Record<string, Record<string, string[]>> = {
       "/moodle-files/Bahasa_Indonesia_BS_KLS_VII_Rev.pdf",
     ],
   },
+  SMA_2: {
+    "Bahasa Mandarin": [
+      "/moodle-files/sibi-books/Mandarin_BS_XI.pdf",
+    ],
+    "Matematika Tingkat Lanjut": [
+      "/moodle-files/sibi-books/Matematika_BS_KLS_XI_TL_Rev.pdf",
+    ],
+    "Bahasa Inggris Tingkat Lanjut": [
+      "/moodle-files/sibi-books/Inggris_BS_KLS_XI_TL_Rev.pdf",
+    ],
+  },
 };
 
 /**
