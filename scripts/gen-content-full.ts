@@ -198,37 +198,43 @@ async function main() {
       continue;
     }
 
-    // Get curriculum using student's UUID
-    const curriculum = await prisma.curriculum.findFirst({
+    // Get ALL curricula (Raihan has 2: template + Moodle)
+    const curricula = await prisma.curriculum.findMany({
       where: { studentId: studentRecord.id },
-      select: { id: true },
-      orderBy: { createdAt: "desc" }, // take newest (Moodle-generated)
+      select: { id: true, createdAt: true },
+      orderBy: { createdAt: "desc" },
     });
-    if (!curriculum) {
+    if (curricula.length === 0) {
       console.log(`  ❌ No curriculum found for ${student.name}`);
       continue;
     }
+    console.log(`  📚 ${curricula.length} curriculum found for ${student.name}`);
 
-    // Get empty materials
-    const materials = await prisma.material.findMany({
-      where: {
-        curriculumId: curriculum.id,
-        OR: [
-          { rawContent: null },
-          { rawContent: { equals: "" } },
-        ],
-      },
-      select: {
-        id: true,
-        subject: true,
-        topic: true,
-        subTopic: true,
-        weekOrder: true,
-        sourceUrls: true,
-        metadata: true,
-      },
-      orderBy: [{ subject: "asc" }, { weekOrder: "asc" }],
-    });
+    // Gather empty materials from ALL curricula
+    const materials: MaterialItem[] = [];
+    for (const curriculum of curricula) {
+      const curMats = await prisma.material.findMany({
+        where: {
+          curriculumId: curriculum.id,
+          OR: [
+            { rawContent: null },
+            { rawContent: { equals: "" } },
+          ],
+        },
+        select: {
+          id: true,
+          subject: true,
+          topic: true,
+          subTopic: true,
+          weekOrder: true,
+          sourceUrls: true,
+          metadata: true,
+        },
+        orderBy: [{ subject: "asc" }, { weekOrder: "asc" }],
+      });
+      console.log(`    - Curriculum ${curriculum.id.slice(0, 8)}...: ${curMats.length} empty materials`);
+      materials.push(...curMats);
+    }
 
     if (materials.length === 0) {
       console.log(`  ✅ Semua materi sudah punya konten!`);
