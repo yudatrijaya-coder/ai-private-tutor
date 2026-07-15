@@ -45,7 +45,7 @@ async function MindmapContent({ subject }: { subject: string }) {
   const decoded = decodeURIComponent(subject);
   const theme = THEMES[decoded] ?? { gradient: "from-slate-500/30 via-gray-600/20 to-zinc-700/30", accent: "#94a3b8", emoji: "📚" };
 
-  const curriculum = await prisma.curriculum.findFirst({
+  const curricula = await prisma.curriculum.findMany({
     where: { studentId: sessionId },
     include: {
       materials: {
@@ -57,11 +57,18 @@ async function MindmapContent({ subject }: { subject: string }) {
     orderBy: { createdAt: "desc" },
   });
 
-  const materials = curriculum?.materials ?? [];
+  const materials = curricula.flatMap(c => c.materials);
+  // Dedup by id
+  const seen = new Set<string>();
+  const uniqueMaterials = materials.filter(m => {
+    if (seen.has(m.id)) return false;
+    seen.add(m.id);
+    return true;
+  });
 
   // Group by topic
   const groups = new Map<string, { subTopics: string[]; id: string }>();
-  for (const m of materials) {
+  for (const m of uniqueMaterials) {
     if (!groups.has(m.topic)) {
       groups.set(m.topic, { subTopics: [], id: m.id });
     }
