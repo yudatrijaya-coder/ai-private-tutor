@@ -237,12 +237,12 @@ async function SubjectContent({ subject }: { subject: string }) {
           <span className="text-xs font-medium text-center">Exam</span>
         </Link>
         <Link
-          href={`/student/topic-tree/${encodeURIComponent(decodedSubject)}`}
+          href={`/student/big-mindmap/${encodeURIComponent(decodedSubject)}`}
           className="flex flex-col items-center gap-1.5 rounded-2xl p-4 transition-all hover:scale-105 active:scale-95"
           style={{ backgroundColor: "var(--st-bg-card)" }}
         >
-          <span className="text-2xl">🌳</span>
-          <span className="text-xs font-medium text-center">Topic Tree</span>
+          <span className="text-2xl">🗺️</span>
+          <span className="text-xs font-medium text-center">Big Map</span>
         </Link>
       </div>
 
