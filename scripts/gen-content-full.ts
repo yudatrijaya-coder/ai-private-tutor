@@ -6,9 +6,27 @@
  */
 import { prisma } from "../src/lib/prisma";
 
-// Load .env for standalone scripts
-import { config } from "dotenv";
-config(); // auto-loads .env from cwd (~/ai-private-tutor)
+// Load .env for standalone scripts — manual read (dotenv unreliable from npx tsx)
+import * as fs from "fs";
+import * as path from "path";
+function loadEnv() {
+  const envPath = path.resolve(process.cwd(), ".env");
+  const raw = fs.readFileSync(envPath, "utf-8");
+  for (const line of raw.split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const eqIdx = trimmed.indexOf("=");
+    if (eqIdx === -1) continue;
+    let key = trimmed.slice(0, eqIdx).trim();
+    let val = trimmed.slice(eqIdx + 1).trim();
+    // Strip surrounding quotes
+    if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+      val = val.slice(1, -1);
+    }
+    process.env[key] = val;
+  }
+}
+loadEnv();
 
 const SUMOPOD_KEY = process.env.SUMOPOD_API_KEY;
 const API_URL = "https://ai.sumopod.com/v1/chat/completions";
