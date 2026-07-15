@@ -88,7 +88,8 @@ async function VideoContent() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {subjects.map((s) => {
             const meta = SUBJECT_META[s.subject] ?? { emoji: "📚" };
-            const videoFile = s.subject.toLowerCase().replace(/\s+/g, "_");
+            const studentKeyLower = studentKey.toLowerCase();
+            const videoFile = `${studentKeyLower}_${s.subject.toLowerCase().replace(/\\s+/g, "_")}`;
             return (
               <div
                 key={s.subject}
