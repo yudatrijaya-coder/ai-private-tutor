@@ -122,6 +122,16 @@ model Student {
   subjectMastery StudentSubjectMastery[]
 }
 
+model CharacterImage {
+  id        String   @id @default(uuid())
+  name      String   // e.g. "Mbappe Action", "Lisa Full Body"
+  theme     String   // "football", "kpop"
+  fileName  String   // e.g. "football-mbappe-action-nobg.png"
+  urlPath   String   // "/characters/football-mbappe-action-nobg.png"
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
 model Curriculum {
   id            String        @id @default(uuid())
   studentId     String
