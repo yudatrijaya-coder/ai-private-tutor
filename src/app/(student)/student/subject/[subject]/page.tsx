@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { jwtVerify } from "jose";
 import Link from "next/link";
 import { getYouTubeForTopic } from "@/data/youtube";
+import { getMoodleModule } from "@/data/moodle-modules";
 import { SubjectTracker } from "@/components/SubjectTracker";
 
 const STUDENT_JWT_SECRET = new TextEncoder().encode(
@@ -182,7 +183,7 @@ async function SubjectContent({ subject }: { subject: string }) {
       </div>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-5 gap-2">
         {getPdfUrl(decodedSubject, studentData?.gradeLevel) ? (
           <Link
             href={getPdfUrl(decodedSubject, studentData?.gradeLevel)!}
@@ -203,6 +204,22 @@ async function SubjectContent({ subject }: { subject: string }) {
             <span className="text-xs font-medium text-center">Buku SIBI</span>
           </span>
         )}
+        
+        {/* Modul Moodle — internal PDFs from Moodle */}
+        {(() => {
+          const moduls = getMoodleModule(decodedSubject, studentData?.gradeLevel);
+          return moduls && moduls.length > 0 ? (
+            <Link
+              href={moduls[0].url}
+              target="_blank"
+              className="flex flex-col items-center gap-1.5 rounded-2xl p-4 transition-all hover:scale-105 active:scale-95"
+              style={{ backgroundColor: "var(--st-bg-card)" }}
+            >
+              <span className="text-2xl">📄</span>
+              <span className="text-xs font-medium text-center">Modul</span>
+            </Link>
+          ) : null;
+        })()}
         <Link
           href={`/student/quiz?subject=${encodeURIComponent(decodedSubject)}`}
           className="flex flex-col items-center gap-1.5 rounded-2xl p-4 transition-all hover:scale-105 active:scale-95"
@@ -286,6 +303,34 @@ async function SubjectContent({ subject }: { subject: string }) {
                 >
                   📖 Baca
                 </Link>
+
+                {/* Modul Moodle — if available */}
+                {(() => {
+                  const moduls = getMoodleModule(decodedSubject, studentData?.gradeLevel);
+                  return moduls && moduls.length > 0 ? (
+                    <Link
+                      href={moduls[0].url}
+                      target="_blank"
+                      className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-medium transition-all hover:opacity-80 active:scale-95"
+                      style={{
+                        backgroundColor: "rgba(34,197,94,0.1)",
+                        color: "#16a34a",
+                      }}
+                    >
+                      📄 Modul
+                    </Link>
+                  ) : (
+                    <span
+                      className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-medium opacity-40 cursor-not-allowed"
+                      style={{
+                        backgroundColor: "rgba(168,162,158,0.1)",
+                        color: "var(--st-text-dim)",
+                      }}
+                    >
+                      📄 Modul
+                    </span>
+                  );
+                })()}
 
                 {/* Quiz */}
                 {hasQuiz && quizId ? (
