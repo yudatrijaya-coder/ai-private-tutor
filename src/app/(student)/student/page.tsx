@@ -279,6 +279,7 @@ function QuickActionsSection({ gradeLevel }: { gradeLevel?: string }) {
     { icon: "📝", label: "Quiz", href: "/student/quiz", color: "#6366f1" },
     { icon: "📋", label: "Exam", href: "/student/quiz?exam=true", color: "#f59e0b" },
     { icon: "🗺️", label: "Big Map", href: "/student/big-mindmap", color: "#a78bfa" },
+    { icon: "🎬", label: "Video", href: "/student/videos", color: "#ef4444" },
     { icon: "🏆", label: "Pencapaian", href: "/student/achievement", color: "#22c55e" },
   ];
 
@@ -290,7 +291,7 @@ function QuickActionsSection({ gradeLevel }: { gradeLevel?: string }) {
       >
         🚀 Aktivitas Cepat
       </h3>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-4 gap-2">
         {actions.map((a) => (
           <Link
             key={a.label}
