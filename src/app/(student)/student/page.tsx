@@ -529,7 +529,7 @@ async function SubjectGridSection() {
   const session = await getSessionStudent();
   if (!session) return null;
 
-  const curriculum = await prisma.curriculum.findFirst({
+  const curricula = await prisma.curriculum.findMany({
     where: { studentId: session.id },
     select: {
       materials: {
@@ -541,7 +541,14 @@ async function SubjectGridSection() {
     orderBy: { createdAt: "desc" },
   });
 
-  const subjects = (curriculum?.materials || []).map((m) => m.subject);
+  // Collect unique subjects from ALL curricula
+  const subjectSet = new Set<string>();
+  for (const c of curricula) {
+    for (const m of c.materials) {
+      subjectSet.add(m.subject);
+    }
+  }
+  const subjects = Array.from(subjectSet).sort();
   if (subjects.length === 0) return null;
 
   return (
