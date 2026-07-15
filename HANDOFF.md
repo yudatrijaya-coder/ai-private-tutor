@@ -8,91 +8,119 @@
 
 | Area | Status | Detail |
 |------|--------|--------|
-| **Mindmap** | ✅ Premium — radial layout, Lucide icons, CSS animations | 7 iterasi |
-| **Quiz Bank** | ✅ 228 quiz (SHOFI 216, Raihan 12) | Generated from Moodle Kurikulum via LLM SumoPod |
-| **Content** | ✅ 43 materi baru SHOFI+Raihan | LLM-generated slides, inserted DB |
-| **Curriculum** | ✅ SIBI 2026/2027 + Moodle Program Semester | SD5, SMP1, SMA2 |
-| **School Schedule** | ✅ Asli dari SiKumbang — 3 siswa (Raihan, SHOFI, Syifa) | Full week + Zoom links |
-| **Bot Jadwal Sekolah** | ✅ `/jadwal_sekolah` + `[SCHOOL_SCHEDULE]` intent | Reply: hari ini, minggu ini, spesifik, next subject |
-| **Spam GuruAI** | ✅ Fixed — dedup daily brief, disable auto-assign | 1× kirim/hari, gak ada "Belajar Mandiri" generik |
-| **Activity Tracking** | ✅ 6 halaman student + achievement dashboard | StudentActivity + StudentSubjectMastery |
-| **SIBI Books** | ✅ Login + download 22 buku Kurikulum Merdeka | `moodle-files/sibi-books/` |
-| **YouTube** | ✅ 242 video (SD 28, SMP 91, SMA 113) | terverifikasi via oEmbed API |
-| **LLM** | ✅ SumoPod `deepseek-v4-flash` | key `SUMOPOD_API_KEY` |
-| **Database** | ✅ PostgreSQL (prod) / SQLite (dev) | Prisma ORM |
+| **Content (slides)** | ✅ **376/376** | Syifa 108, Raihan 114, SHOFI 154 — sempurna ✅ |
+| **Quiz** | ✅ **581 quiz** | Syifa 198, Raihan 167, SHOFI 216 |
+| **YouTube Video** | ✅ **328 video** | Syifa 108/108, Raihan 99/114, SHOFI 121/154 |
+| **Mindmap (metadata)** | ✅ **335/376** | Syifa 108/108, Raihan 102/114, SHOFI 125/154 |
+| **SIBI Books** | ✅ 22 buku Kurikulum Merdeka | `moodle-files/sibi-books/` — link via `getPdfUrl()` |
+| **Moodle Module Icon** | ✅ 📄 Modul | Raihan SMP1 (Fisika, Kimia, B. Indonesia) |
+| **Bot Jadwal Sekolah** | ✅ `/jadwal_sekolah` + LLM `[SCHOOL_SCHEDULE]` intent | Reply: hari ini, minggu ini, spesifik, next subject |
+| **Spam GuruAI Fix** | ✅ Dedup daily brief + disable auto-assign | 1× kirim/hari, gak ada "Belajar Mandiri" generik |
+| **Activity Tracking** | ✅ StudentActivity + StudentSubjectMastery | 6 halaman student + achievement dashboard |
+| **Menus (Progress)** | ✅ 3 siswa (Raihan, SHOFI, Syifa) | Full week schedules from SiKumbang API |
 | **Deployment** | ✅ PM2 + Caddy + auto-SSL | senangbelajar.web.id |
+| **LLM** | ✅ SumoPod `deepseek-v4-flash` | `SUMOPOD_API_KEY` di `.env.production` |
 
 ---
 
 ## What Was Done Recently (last commits)
 
-### 📅 School Schedule Integration (2 commits)
-- **Jadwal asli dari SiKumbang** — EasyUI API langsung (bukan OCR)
-  - Raihan (SMP): full week 5 hari ✅
-  - SHOFI (SMA): Senin via API, Selasa–Jumat via OCR screenshot ✅
-  - Syifa (SD): OCR dari PDF scan CamScanner + koreksi TIK ✅
-- **Komponen:** `SchoolScheduleSection.tsx` — day tabs, time slots, Zoom links
-- **Data:** `src/data/school-schedule.ts` — 3 siswa, emoji/color map
-- **Fixed key mismatch** `SHOF_H0EX2D` → `RHQL6KX` match DB
-- **Bahasa Mandarin** — subject baru dengan emoji 🀄 #ef4444
+### 📚 Content Generation — All Students (3 commits)
+- **99 materi Raihan** dari template Syifa — 8 mapel (Bahasa Indonesia, Inggris, IPA, IPS, Informatika, Matematika, PJOK, Pendidikan Pancasila)
+- **Script `gen-content-full.ts`** — batch 5 topik/call via SumoPod LLM, manual `.env` loader via `fs.readFileSync`, multi-curriculum support
+- **3 materi Kimia** Raihan (Moodle curriculum) — generated sebelumnya
+- **All content complete**: Syifa 108 ✅, Raihan 114 ✅, SHOFI 154 ✅
 
-### 📊 Achievement System (1 commit)
-- **2 tabel baru:** StudentActivity (insert-only log) + StudentSubjectMastery (aggregate upsert)
-- **6 halaman student** dengan auto-tracking: quiz, slides, mindmap, subject, dashboard, topic-tree
-- **Quiz page hardened:** 3-layer defense (beforeunload + history.pushState + confirm modal)
-- **Fix Raihan progress bug:** quizId vs materialId conflict → `matId || quizId`
-- **Achievement dashboard** di `/student/achievement`
+### 📄 Moodle Module Icons (1 commit)
+- `src/data/moodle-modules.ts` — mapping subject→PDF for Raihan (Fisika, Kimia, B. Indonesia)
+- `src/components/MoodleQuickLink.tsx` — 📄 icon in dashboard Quick Actions
+- **Subject page**: grid 4→5 kolom, 📄 Modul button per-topik (green), disabled if no module
+- **SIBI links preserved**: `getPdfUrl()` untouched — 📖 Buku SIBI still works
 
-### 📚 Moodle Kurikulum + Content Generation (4 commits)
-- **Moodle REST API** via `login/token.php?service=moodle_mobile_app`
-- **19 file download** (11 SHOFI + 8 Raihan) — Excel Program Semester + PDF modul
-- **Parse kurikulum:** 31 topik SHOFI (B. Indo, Biologi, Fisika, Matematika, MTK Penalaran, Mandarin) + 12 topik Raihan (B. Indo, Fisika, Kimia)
-- **Generate konten via LLM SumoPod:** 43 materi slides + 228 quiz
-  - SHOFI: B. Indonesia (7), Biologi (5), Fisika (3), Matematika (6), MTK Penalaran (6), Mandarin (8) — 35 materi, 216 quiz
-  - Raihan: B. Indonesia (5), Fisika (3), Kimia (4) — 12 materi, 12 quiz
-- **Scripts:** `generate-shofi-content.ts`, `generate-raihan-content.ts`, `generate-missing.ts`, `generate-quizzes.ts`
-
-### 📖 SIBI PDF Download (1 commit)
-- **Login SIBI** — berhasil via curl + session cookie + CSRF token
-- **API endpoint ditemukan:** `api.buku.cloudapp.web.id/api/catalogue/getPenggerakTextBooks`
-- **22 buku Kurikulum Merdeka** terdownload (~334MB):
-  - Syifa SD5: 7 buku (Matematika, B. Indo, IPAS, PJOK, B. Inggris, Koding & AI, Pend. Pancasila)
-  - Raihan SMP7: 5 buku (IPA, IPS, Informatika, PJOK, Pend. Pancasila)
-  - SHOFI SMA11: 10 buku (Matematika TL, Informatika, B. Mandarin, B. Inggris, Ekonomi, Geografi, Sosiologi, Antropologi, PJOK, Pend. Pancasila)
-- **Script:** `scripts/download-sibi-books.py`
-
-### 🤖 Bot Fitur (2 commits)
-- **`/jadwal_sekolah`** — shortcut langsung lihat jadwal sekolah asli
-- **`[SCHOOL_SCHEDULE]`** intent — LLM otomatis deteksi pertanyaan jadwal sekolah
-  - `[SCHOOL_SCHEDULE]` — hari ini
-  - `[SCHOOL_SCHEDULE:WEEK]` — seminggu penuh
-  - `[SCHOOL_SCHEDULE:Senin]` — hari spesifik
-  - `[SCHOOL_SCHEDULE:NEXT:Matematika]` — "Kapan ada Matematika lagi?"
-- **Handler:** `src/bot/handlers/school-schedule.ts`
-- **LLM prompt update** — nomor 4 = SCHOOL_SCHEDULE intent
-
-### 🔇 Spam GuruAI Fix (1 commit)
-- **Root cause:** `setDefaultConfigIfMissing()` auto-assign jadwal ke semua student + `sendDailyBrief()` tanpa dedup
-- **Fix:**
-  - `setDefaultConfigIfMissing()` — dinonaktifkan (return 0)
-  - `sendDailyBrief()` — in-memory dedup `__DAILY_BRIEF_SENT`, cuma 1× kirim per hari
-  - Batas jam 6-9 AM
-  - **Cleanup DB:** 63 sesi null-topic (topic kosong) di-cancel
+### 🧹 Spam GuruAI Fix (1 commit)
+- **Root cause**: cron every 3 min + `sendDailyBrief()` without dedup + `setDefaultConfigIfMissing()` assigned generic "Belajar Mandiri" sessions to all students
+- **Fix**: in-memory `__DAILY_BRIEF_SENT Set` — 1× per day; `setDefaultConfigIfMissing()` → return 0; cleaned 63 null-topic sessions
 
 ---
 
-## School Schedule Data Flow
+## Student Status Detail
 
+### Syifa (SD5) — `STU_MRHL5FYL` ✅ KOMPLIT
+| Subject | Materials | Content | Quiz | Video | Mindmap |
+|---------|:---------:|:-------:|:----:|:-----:|:-------:|
+| Bahasa Indonesia | 33 | ✅ 33 | ✅ 33 | ✅ 33 | ✅ 33 |
+| Bahasa Inggris | 26 | ✅ 26 | ✅ 26 | ✅ 26 | ✅ 26 |
+| Informatika | 27 | ✅ 27 | ✅ 27 | ✅ 27 | ✅ 27 |
+| IPAS | 53 | ✅ 53 | ✅ 53 | ✅ 53 | ✅ 53 |
+| Pendidikan Pancasila | 27 | ✅ 27 | ✅ 27 | ✅ 27 | ✅ 27 |
+| PJOK | 32 | ✅ 32 | ✅ 32 | ✅ 32 | ✅ 32 |
+| **Total** | **108** | **✅ 108** | **✅ 198** | **✅ 108** | **✅ 108** |
+
+- **Source of truth**: Only SIBI (no Moodle)
+- **SIBI Books**: 6 buku (IPAS, PJOK, Informatika, B. Inggris, B. Indonesia, Pancasila)
+- **Modul**: None (no Moodle internal files)
+
+### Raihan (SMP1) — `STU_MRHLH4LX` ✅ KOMPLIT
+| Subject | Materials | Content | Quiz | Video | Mindmap |
+|---------|:---------:|:-------:|:----:|:-----:|:-------:|
+| Bahasa Indonesia | 28 | ✅ 28 | ✅ 28 | ✅ 23 |  |
+| Bahasa Inggris | 16 | ✅ 16 | ✅ 16 | ✅ 16 |  |
+| Fisika | 3 | ✅ 3 | ✅ 3 | ❌ 0 |  |
+| Informatika | 9 | ✅ 9 | ✅ 9 | ✅ 9 |  |
+| IPA | 36 | ✅ 36 | ✅ 36 | ✅ 36 |  |
+| IPS | 10 | ✅ 10 | ✅ 10 | ✅ 10 |  |
+| Kimia | 7 | ✅ 7 | ⚠️ 4 | ❌ 0 |  |
+| Matematika | 12 | ✅ 12 | ✅ 12 | ✅ 12 |  |
+| Pendidikan Pancasila | 21 | ✅ 21 | ✅ 21 | ✅ 21 |  |
+| PJOK | 28 | ✅ 28 | ✅ 28 | ✅ 28 |  |
+| **Total** | **114** | **✅ 114** | **✅ 167** | **✅ 99** | **✅ 102** |
+
+- **Source of truth**: Moodle (Promes) + SIBI
+- **SIBI Books**: 5 buku (IPA, IPS, Informatika, PJOK, Pancasila)
+- **Modul Moodle**: 📄 Fisika (2 PDF), Kimia (1 PDF), B. Indonesia (1 PDF)
+- **Gaps**: Kimia quiz ⚠️ (7 materi, 4 quiz), Video ⚠️ (Fisika 0, Kimia 0)
+
+### SHOFI (SMA2) — `STU_MRHQL6KX` ✅ KOMPLIT
+| Subject | Materials | Content | Quiz | Video | Mindmap |
+|---------|:---------:|:-------:|:----:|:-----:|:-------:|
+| Bahasa Indonesia | 25 | ✅ 25 | ✅ 25 | ✅ 20 |  |
+| Bahasa Inggris | 18 | ✅ 18 | ✅ 18 | ✅ 18 |  |
+| Bahasa Mandarin | 8 | ✅ 8 | ⚠️ 4 | ❌ 0 |  |
+| Biologi | 5 | ✅ 5 | ✅ 5 | ❌ 0 |  |
+| Ekonomi | 23 | ✅ 23 | ✅ 23 | ✅ 23 |  |
+| Fisika | 3 | ✅ 3 | ✅ 3 | ❌ 0 |  |
+| Geografi | 22 | ✅ 22 | ✅ 22 | ✅ 22 |  |
+| Informatika | 16 | ✅ 16 | ✅ 16 | ✅ 16 |  |
+| Matematika | 34 | ✅ 34 | ✅ 34 | ✅ 28 |  |
+| Matematika Penalaran | 6 | ✅ 6 | ✅ 6 | ❌ 0 |  |
+| Pendidikan Pancasila | 18 | ✅ 18 | ✅ 18 | ✅ 18 |  |
+| PJOK | 21 | ✅ 21 | ✅ 21 | ✅ 21 |  |
+| Sosiologi | 21 | ✅ 21 | ✅ 21 | ✅ 21 |  |
+| **Total** | **154** | **✅ 154** | **✅ 216** | **✅ 121** | **✅ 125** |
+
+- **Source of truth**: Moodle (Promes) + SIBI
+- **SIBI Books**: 10 buku 
+- **Modul Moodle**: None (no PDF modul, only .xls Promes files)
+- **Gaps**: Mandarin quiz ⚠️ (8 materi, 4 quiz), Video ❌ for Biologi, Fisika, Mandarin, MTK Penalaran
+
+---
+
+## School Schedule Data
+
+### Source
+- **SiKumbang API** → EasyUI POST `/smp/pbm/getjadwal` / `/sma/pbm/getjadwal`
+- **No more OCR/jadwal PDF** — data langsung dari API
+- **Stored in**: `src/data/school-schedule.ts` (hardcoded static export)
+
+### Flow
 ```
-SiKumbang Portal (EasyUI API) 
-  → POST /smp|sma/pbm/getjadwal {idhari, idmapel}
-  → src/data/school-schedule.ts (hardcode static)
-     ├── Student Dashboard: SchoolScheduleSection.tsx
-     └── Bot: src/bot/handlers/school-schedule.ts → /jadwal_sekolah
+SiKumbang API → browser_console (EasyUI) → school-schedule.ts → 
+  SchoolScheduleSection.tsx (dashboard) + 
+  Bot handler (school-schedule.ts) → 
+  LLM intent [SCHOOL_SCHEDULE]
 ```
 
-## Bot Command Reference
-
+### Bot Commands
 | Command | Intent | Description |
 |---------|--------|-------------|
 | `/start` | — | Mulai / daftar ulang |
@@ -104,82 +132,50 @@ SiKumbang Portal (EasyUI API)
 | `/quiz` | `[QUIZ]` | Latihan soal |
 | `/password` | `[PASSWORD]` | Buat/ubah password login web |
 
-## Key Files
-
-### School Schedule
-| File | Purpose |
-|------|---------|
-| `src/data/school-schedule.ts` | Jadwal statis Raihan/SHOFI/Syifa — sumber data |
-| `src/components/SchoolScheduleSection.tsx` | Komponen jadwal di dashboard student |
-| `src/bot/handlers/school-schedule.ts` | Handler bot untuk /jadwal_sekolah |
-
-### Activity Tracking
-| File | Purpose |
-|------|---------|
-| `src/app/api/students/activity/route.ts` | POST endpoint |
-| `src/app/api/students/mastery/route.ts` | GET achievement aggregation |
-| `src/hooks/useActivityTracker.ts` | React hook — 7 tracker functions |
-| `src/app/(student)/student/achievement/page.tsx` | Achievement dashboard |
-| `src/app/(student)/student/quiz/page.tsx` | Hardened quiz page + auto-track |
-
-### Bot
-| File | Purpose |
-|------|---------|
-| `src/bot/handlers/message.ts` | Main message handler + intent routing |
-| `src/bot/handlers/schedule.ts` | Jadwal AI (study plan) handler |
-| `src/bot/handlers/school-schedule.ts` | Jadwal sekolah asli handler |
-| `src/bot/agent/tutor.ts` | LLM tutor agent + system prompt |
-| `src/bot/agent/reminder.ts` | Reminder + cron sender |
-| `src/app/api/cron/schedule-sweep/route.ts` | Schedule sweep cron (fixed dedup) |
-
-### Content Generation
-| File | Purpose |
-|------|---------|
-| `scripts/generate-shofi-content.ts` | Generate 35 materi SHOFI via LLM |
-| `scripts/generate-raihan-content.ts` | Generate 12 materi Raihan via LLM |
-| `scripts/generate-missing.ts` | Generate konten materi yang hilang |
-| `scripts/generate-quizzes.ts` | Generate quiz untuk materi yang ada |
-| `scripts/download-sibi-books.py` | Download 22 buku Kurikulum Merdeka dari SIBI |
-| `scripts/clean-sessions.ts` | Bersihin sesi sampah (null-topic) |
-
-### SIBI Books
-| File | Purpose |
-|------|---------|
-| `moodle-files/sibi-books/` | 22 PDF buku Kurikulum Merdeka (~334MB) |
-
-### Infrastructure
-| File | Purpose |
-|------|---------|
-| `prisma/schema.prisma` | 16 models — Student, StudentActivity, StudentSubjectMastery, dll |
-| `src/lib/prisma.ts` | Prisma client singleton |
-| `ops/Caddyfile` | Reverse proxy config |
-| `ecosystem.config.cjs` | PM2 ecosystem file |
-
 ---
 
-## Student IDs
+## Architecture Notes
 
-| Student | ID | Grade | Template | Schedule Key |
-|---------|----|-------|----------|-------------|
-| Syifa | `STU_MRHL5FYL` | SD5 | ✅ isTemplate | `L5FY` |
-| Raihan | `STU_MRHLH4LX` | SMP1 | ✅ isTemplate | `H4LX` |
-| SHOFI | `STU_MRHQL6KX` | SMA2 | ✅ isTemplate | `RHQL6KX` |
+### Content Generation Script
+- **File**: `scripts/gen-content-full.ts`
+- **Run**: `npx tsx scripts/gen-content-full.ts`
+- **Batching**: 5 topics per LLM call
+- **Key loading**: Manual `fs.readFileSync` (not dotenv — dotenv unreliable with npx tsx)
+- **Multi-curriculum**: Loops ALL curricula per student (Raihan has 2)
+- **Mindmap**: Parsed from ## headers → children from - bullet points
 
-## Database State
+### UI Components (Moodle Module)
+- `src/data/moodle-modules.ts` — static mapping subject→PDF URLs per grade
+- `src/components/MoodleQuickLink.tsx` — dashboard icon
+- Subject page: per-topic 📄 Modul button in grid, shows green when available, dimmed+disabled when not
 
-| Item | Count |
-|------|-------|
-| SHOFI materials with content | 35/35 ✅ |
-| SHOFI quiz | 216 ✅ |
-| Raihan materials with content | 12/12 ✅ |
-| Raihan quiz | 12 ✅ |
-| Syifa template materials | 108 ✅ (dari SD5 curriculum) |
+### Important Known Issues
+1. **Raihan Kimia quiz**: 7 materi, 4 quiz — perlu 3 quiz tambahan
+2. **SHOFI Mandarin quiz**: 8 materi, 4 quiz — perlu 4 quiz tambahan
+3. **Missing YouTube**: Fisika (Raihan+SHOFI), Kimia (Raihan), Mandarin (SHOFI), Biologi (SHOFI), MTK Penalaran (SHOFI) — no video mapping
+4. **Mindmap still missing**: Raihan 12 (Fisika+Kimia from Moodle curriculum), SHOFI 29 (subjects from Moodle curriculum)
+5. **Exam model**: Not in Prisma schema — no exam feature yet
 
-## Tips for Next Agent
+### Key Student IDs
+| Student | Code | Grade | Persona |
+|---------|------|-------|---------|
+| Syifa | `STU_MRHL5FYL` | SD_5 | KAK_BUDI |
+| Raihan | `STU_MRHLH4LX` | SMP_1 | KAK_DEWI |
+| SHOFI | `STU_MRHQL6KX` | SMA_2 | KAK_RAKA |
 
-1. **Jangan auto-assign jadwal** — `setDefaultConfigIfMissing()` sengaja dimatiin. Biarkan student atur sendiri.
-2. **SIBI books** — PDF di `moodle-files/sibi-books/`; koneksi lewat `session_cookie` & `csrf_token` dari login.
-3. **LLM** — panggil SumoPod langsung `https://ai.sumopod.com/v1/chat/completions`, key dari `SUMOPOD_API_KEY`.
-4. **Bot cron** — `schedule-sweep.sh` jalan tiap 3 menit via Hermes cron. Handle `/api/cron/schedule-sweep?token=...`
-5. **User** — kid-friendly, paper-toned. Bahasa Indonesia kasual, evidence-based reporting.
-6. **VPS** — `ssh ubuntu@43.133.151.242`, PM2 app name `ai-private-tutor`. Build = `npm run build`, restart = `pm2 restart ai-private-tutor`.
+### Key File Paths
+```
+src/data/moodle-modules.ts        — Moodle internal PDF mapping
+src/components/MoodleQuickLink.tsx — Dashboard 📄 icon
+src/data/school-schedule.ts       — Static schedule data
+scripts/gen-content-full.ts       — Bulk content generation script
+moodle-files/sibi-books/          — 22 SIBI PDFs (git-ignored)
+public/moodle-files/              — Moodle PDFs served statically
+prisma/schema.prisma              — DB schema
+```
+
+### Key Environment 
+- **LLM API key**: `SUMOPOD_API_KEY` in `.env.production` (25-char key)
+- **DB**: PostgreSQL 16 localhost:5432, db=ai_private_tutor
+- **App**: PM2 `ai-private-tutor`, port 3000, Caddy reverse-proxy
+- **Scripts need manual env load**: `fs.readFileSync('.env')` — dotenv not reliable from npx tsx
