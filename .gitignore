@@ -49,6 +49,9 @@ next-env.d.ts
 # backups
 backups/
 
+# SIBI downloaded books (large PDFs)
+moodle-files/sibi-books/
+
 /src/generated/prisma
 
 # logs

@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Private Tutor
 
-## Getting Started
+Platform pembelajaran interaktif berbasis AI — bot Telegram + web dashboard untuk siswa SD, SMP, dan SMA.
 
-First, run the development server:
+## Stack
+
+| Layer | Tech |
+|-------|------|
+| **Frontend** | Next.js 14 (App Router), Tailwind CSS, React Flow |
+| **Backend** | Next.js API routes, Prisma ORM (PostgreSQL/SQLite) |
+| **Bot** | Telegraf — @senangbelajar_bot (webhook mode) |
+| **LLM** | SumoPod `deepseek-v4-flash` via `https://ai.sumopod.com/v1` |
+| **Deploy** | PM2 + Caddy + auto-SSL (VPS SumoPod) |
+
+## Fitur Utama
+
+- **🤖 Tutor AI** — Chat via Telegram dengan persona Kak Budi (SD), Kak Dewi (SMP), Kak Raka (SMA)
+- **📚 Kurikulum Aktual** — Program Semester dari Moodle sekolah, insert konten & quiz via LLM
+- **📅 Jadwal Sekolah** — Jadwal asli dari SIKumbang (EasyUI API), bisa ditanya via bot: `/jadwal_sekolah`
+- **📊 Achievement** — Activity tracking + mastery dashboard di web
+- **🧠 Mindmap** — Radial layout premium dengan Lucide icons + CSS animations
+- **📝 Quiz Bank** — Auto-generated soal PG dengan grading otomatis
+- **📖 Buku Digital** — 22 buku Kurikulum Merdeka dari SIBI (PDF)
+
+## Quick Start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # Development (SQLite)
+npm run build      # Production build
 ```
 
-Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
+### Environment
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Buat `.env` dari `.env.example`:
+```
+DATABASE_URL="postgresql://..."
+SUMOPOD_API_KEY="sk-..."
+BOT_TOKEN="..."
+CRON_SECRET="..."
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Student IDs (Dev)
 
-## Learn More
+| Student | Grade | ID |
+|---------|-------|----|
+| Syifa | SD5 | STU_MRHL5FYL |
+| Raihan | SMP1 | STU_MRHLH4LX |
+| SHOFI | SMA2 | STU_MRHQL6KX |
 
-To learn more about Next.js, take a look at the following resources:
+## Bot Commands
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Command | Description |
+|---------|-------------|
+| `/start` | Daftar / mulai |
+| `/daftar ID` | Hubungkan Telegram ke akun siswa |
+| `/materi` | Lihat materi belajar |
+| `/jadwal` | Jadwal belajar AI |
+| `/jadwal_sekolah` | **Jadwal sekolah asli** |
+| `/quiz` | Latihan soal |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Struktur Proyek
 
-## Deploy on Vercel
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── (student)/          # Student dashboard
+│   └── api/               # REST API endpoints
+├── bot/                   # Telegraf bot handlers
+│   ├── handlers/          # Intent handlers
+│   └── agent/             # LLM tutor agent
+├── components/            # Shared components
+├── data/                  # Static data (jadwal, quiz, YouTube)
+├── lib/                   # Utilities
+├── agents/                # Background agents (scheduler, guardian, etc.)
+└── hooks/                 # React hooks
+scripts/                   # Utility scripts
+moodle-files/              # Downloaded curriculum files + SIBI books
+docs/                      # Documentation
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+pm2 restart ai-private-tutor
+```
+
+App live di: [senangbelajar.web.id](https://senangbelajar.web.id)
+
+---
+
+> Dibuat oleh [@yudatrijaya](https://github.com/yudatrijaya-coder)
