@@ -4,6 +4,7 @@ import { unstable_noStore as noStore } from "next/cache";
 import { cookies } from "next/headers";
 import { jwtVerify } from "jose";
 import Link from "next/link";
+import VideoPlayer from "@/components/VideoPlayer";
 
 const STUDENT_JWT_SECRET = new TextEncoder().encode(
   process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
@@ -83,13 +84,13 @@ async function VideoContent() {
           🧠 Video Peta Besar
         </h2>
         <p className="text-xs text-amber-500 mb-4">
-          Tonton penjelasan直升机 peta besar 1 mapel penuh
+          Tonton penjelasan peta besar 1 mapel penuh
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {subjects.map((s) => {
             const meta = SUBJECT_META[s.subject] ?? { emoji: "📚" };
             const studentKeyLower = studentKey.toLowerCase();
-            const videoFile = `${studentKeyLower}_${s.subject.toLowerCase().replace(/\\s+/g, "_")}`;
+            const videoFile = `${studentKeyLower}_${s.subject.toLowerCase().replace(/\s+/g, "_")}`;
             return (
               <div
                 key={s.subject}
@@ -98,13 +99,10 @@ async function VideoContent() {
               >
                 <Link href={`/student/big-mindmap/${encodeURIComponent(s.subject)}`}>
                   <div className="aspect-video bg-gradient-to-br from-amber-100 to-orange-200 flex items-center justify-center">
-                    <video
-                      className="w-full h-full object-cover"
-                      preload="none"
-                      controls
-                    >
-                      <source src={`/videos/mindmap/${videoFile}.mp4`} type="video/mp4" />
-                    </video>
+                    <VideoPlayer
+                      src={`/videos/mindmap/${videoFile}.mp4`}
+                      fallbackEmoji={meta.emoji}
+                    />
                   </div>
                 </Link>
                 <div className="p-3 flex items-center justify-between">
@@ -144,27 +142,11 @@ async function VideoContent() {
                 style={{ backgroundColor: "var(--st-bg-card)" }}
               >
                 <div className="aspect-video bg-gradient-to-br from-purple-100 to-indigo-200 flex items-center justify-center">
-                  <video
-                    className="w-full h-full object-cover"
-                    preload="none"
-                    controls
-                    onError={(e) => {
-                      const target = e.currentTarget;
-                      if (target) {
-                        target.style.display = 'none';
-                        const container = target.closest('.aspect-video');
-                        const fallback = container?.querySelector('.fallback') as HTMLElement | null;
-                        if (fallback) fallback.style.display = 'flex';
-                      }
-                    }}
-                  >
-                    <source src={videoSrc} type="video/mp4" />
-                  </video>
-                  <div className="fallback hidden items-center justify-center text-center p-4">
-                    <span className="text-4xl">{emojis[i]}</span>
-                    <p className="text-xs text-gray-500 mt-2">Video belum siap</p>
+                    <VideoPlayer
+                      src={videoSrc}
+                      fallbackEmoji={emojis[i]}
+                    />
                   </div>
-                </div>
                 <div className="p-3">
                   <span className="text-xs font-medium text-purple-700">{emojis[i]} Motivasi #{i + 1}</span>
                 </div>
