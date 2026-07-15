@@ -36,13 +36,26 @@ function studentHasScheduleConfig(
   );
 }
 
-/* ── Daily Brief ─────────────────────────────────────────────── */
+/* ── Daily Brief (with dedup) ─────────────────────────────────── */
 
 async function sendDailyBrief(): Promise<number> {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
+  const now = new Date();
+
+  // Only run between 6-9 AM once per process restart
+  const hour = now.getHours();
+  if (hour < 6 || hour > 9) return 0;
+
+  // In-memory dedup: reset every time today changes
+  const todayKey = today.toISOString().slice(0, 10);
+  if ((global as any).__DAILY_BRIEF_DATE === todayKey) return 0;
+  (global as any).__DAILY_BRIEF_DATE = todayKey;
+
+  if ((global as any).__DAILY_BRIEF_SENT) return 0;
+  (global as any).__DAILY_BRIEF_SENT = true;
 
   const sessions = await prisma.scheduleSession.findMany({
     where: {
@@ -168,33 +181,11 @@ async function assignSessionsIfNeeded(): Promise<number> {
 /* ── Set default schedule config for students without one ────── */
 
 async function setDefaultConfigIfMissing(): Promise<number> {
-  const students = await prisma.student.findMany({
-    where: { status: "ACTIVE" },
-    select: { id: true, name: true, scheduleConfig: true },
-  });
-
-  const defaults = {
-    sessionsPerDay: 1,
-    preferredTime: "16:00",
-    excludeDays: ["sunday"],
-  };
-
-  let updated = 0;
-  for (const s of students) {
-    if (!s.scheduleConfig) {
-      await prisma.student.update({
-        where: { id: s.id },
-        data: { scheduleConfig: defaults },
-      });
-      updated++;
-    }
-  }
-
-  if (updated > 0) {
-    console.log(`[schedule-sweep] Set default scheduleConfig for ${updated} student(s)`);
-  }
-
-  return updated;
+  // ⛔ Disabled: this was pushing generic "Belajar Mandiri" sessions
+  // to all students who never configured their schedule,
+  // causing spam. Only students who explicitly ask for study
+  // schedule via the bot will get sessions.
+  return 0;
 }
 
 /* ── Cron handler ────────────────────────────────────────────── */
