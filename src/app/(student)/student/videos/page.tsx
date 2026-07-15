@@ -28,6 +28,8 @@ const SUBJECT_META: Record<string, { emoji: string }> = {
   "Pendidikan Pancasila": { emoji: "🤝" },
   PJOK: { emoji: "⚽" },
   "Matematika Penalaran": { emoji: "🧮" },
+  "Matematika Tingkat Lanjut": { emoji: "📐" },
+  "Bahasa Inggris Tingkat Lanjut": { emoji: "🌏" },
 };
 
 async function getSessionStudent() {
