@@ -35,7 +35,7 @@ SUBJECTS = {
         "voice": "sma",
         "subjects": {
             "Fisika": ["Kinematika", "Dinamika", "Usaha & Energi"],
-            "Kimia": ["Struktur Atom", "Ikatan Kimia", "Stoikiometri"],
+            "Kimia": ["Kesetimbangan Kimia", "Larutan Elektrolit & Ion", "Reaksi Redoks & Elektrokimia"],
             "Biologi": ["Sel & Jaringan", "Sistem Pencernaan", "Evolusi"],
             "Matematika": ["Fungsi & Limit", "Turunan", "Integral"],
             "Bahasa Indonesia": ["Teks Argumentasi", "Teks Eksposisi", "Karya Ilmiah"],
