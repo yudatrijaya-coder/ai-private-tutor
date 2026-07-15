@@ -41,16 +41,16 @@ async function BigMindmapContent({ subjectName }: { subjectName: string }) {
   });
   if (!student) return <div className="text-center py-20 text-amber-400">Siswa tidak ditemukan</div>;
 
-  // Get all materials for this subject (latest curriculum)
-  const curriculum = await prisma.curriculum.findFirst({
+  // Get ALL curricula (Raihan & others may have multiple curricula)
+  const curricula = await prisma.curriculum.findMany({
     where: { studentId: student.id },
-    orderBy: { createdAt: "desc" },
     select: { id: true },
+    orderBy: { createdAt: "desc" },
   });
-  if (!curriculum) return <div className="text-center py-20 text-amber-400">Kurikulum belum tersedia</div>;
+  if (!curricula.length) return <div className="text-center py-20 text-amber-400">Kurikulum belum tersedia</div>;
 
   const materials = await prisma.material.findMany({
-    where: { curriculumId: curriculum.id, subject: subjectName },
+    where: { curriculumId: { in: curricula.map(c => c.id) }, subject: subjectName },
     select: { id: true, topic: true, rawContent: true, metadata: true },
     orderBy: { weekOrder: "asc" },
   });
