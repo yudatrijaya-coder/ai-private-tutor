@@ -35,7 +35,7 @@ async function getSessionStudent() {
     const token = cookieStore.get("student_session")?.value;
     if (!token) return null;
     const { payload } = await jwtVerify(token, STUDENT_JWT_SECRET);
-    return payload as { studentId: string; name: string; gradeLevel?: string };
+    return payload as { studentId: string; studentIdentifier: string; name: string; gradeLevel?: string };
   } catch { return null; }
 }
 
@@ -55,7 +55,7 @@ async function VideoContent() {
   if (!session) return <div className="text-center py-20 text-amber-400">Silakan login dulu</div>;
 
   const student = await prisma.student.findUnique({
-    where: { studentId: session.studentId },
+    where: { studentId: session.studentIdentifier },
     select: { id: true, name: true },
   });
   if (!student) return <div className="text-center py-20 text-amber-400">Siswa tidak ditemukan</div>;
