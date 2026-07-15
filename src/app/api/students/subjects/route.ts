@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
   const student = await prisma.student.findUnique({ where: { studentId } });
   if (!student) return NextResponse.json({ error: "Student not found" }, { status: 404 });
 
-  const curriculum = await prisma.curriculum.findFirst({
+  const curricula = await prisma.curriculum.findMany({
     where: { studentId: student.id },
     include: {
       materials: { select: { subject: true }, orderBy: { subject: "asc" } },
@@ -20,6 +20,6 @@ export async function GET(request: NextRequest) {
     orderBy: { createdAt: "desc" },
   });
 
-  const subjects = [...new Set((curriculum?.materials || []).map(m => m.subject))].sort();
+  const subjects = [...new Set(curricula.flatMap(c => c.materials.map(m => m.subject)))].sort();
   return NextResponse.json({ subjects });
 }

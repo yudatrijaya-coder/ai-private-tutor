@@ -104,8 +104,8 @@ async function SubjectContent({ subject }: { subject: string }) {
     select: { gradeLevel: true },
   });
 
-  // Cari curriculum student
-  const curriculum = await prisma.curriculum.findFirst({
+  // Cari semua curricula student
+  const curricula = await prisma.curriculum.findMany({
     where: { studentId: session.studentId },
     include: {
       materials: {
@@ -123,7 +123,16 @@ async function SubjectContent({ subject }: { subject: string }) {
     orderBy: { createdAt: "desc" },
   });
 
-  if (!curriculum || curriculum.materials.length === 0) {
+  // Flatten materials from all curricula, deduplicate by id
+  const allMaterials = curricula.flatMap(c => c.materials);
+  const seenIds = new Set<string>();
+  const materials = allMaterials.filter(m => {
+    if (seenIds.has(m.id)) return false;
+    seenIds.add(m.id);
+    return true;
+  });
+
+  if (materials.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-4">
         <span className="text-6xl">{meta.emoji}</span>
@@ -144,7 +153,7 @@ async function SubjectContent({ subject }: { subject: string }) {
     );
   }
 
-  const totalQuizCount = curriculum.materials.reduce(
+  const totalQuizCount = materials.reduce(
     (sum, m) => sum + m._count.quizzes, 0
   );
 
@@ -175,7 +184,7 @@ async function SubjectContent({ subject }: { subject: string }) {
             {decodedSubject}
           </h1>
           <p className="text-white/80 text-sm mt-1">
-            {curriculum.materials.length} topik · {totalQuizCount} quiz
+            {materials.length} topik · {totalQuizCount} quiz
           </p>
         </div>
         <div className="absolute -right-6 -bottom-6 w-28 h-28 rounded-full bg-white/10" />
@@ -255,7 +264,7 @@ async function SubjectContent({ subject }: { subject: string }) {
       </h2>
 
       <div className="space-y-3">
-        {curriculum.materials.map((material) => {
+        {materials.map((material) => {
           const hasQuiz = material._count.quizzes > 0;
           const quizId = material.quizzes[0]?.id;
 
