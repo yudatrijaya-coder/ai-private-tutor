@@ -1,7 +1,7 @@
 /**
  * Generate missing quizzes for: Raihan Kimia (3), SHOFI Mandarin (4)
  * Inserts directly into DB Quiz table via Prisma
- * 
+ *
  * Run: npx tsx scripts/gen-missing-quizzes.ts
  */
 import { prisma } from "../src/lib/prisma";
@@ -28,11 +28,31 @@ const API_URL = "https://ai.sumopod.com/v1/chat/completions";
 const MODEL = "deepseek-v4-flash";
 
 const MISSING: { studentId: string; studentUuid?: string; materialIds: string[]; subject: string; grade: string }[] = [
-  // Raihan Kimia — 3 materials without quizzes
   { studentId: "STU_MRHLH4LX", materialIds: [], subject: "Kimia", grade: "SMP Kelas 7" },
-  // SHOFI Mandarin — 4 materials without quizzes
   { studentId: "STU_MRHQL6KX", materialIds: [], subject: "Bahasa Mandarin", grade: "SMA Kelas 11" },
 ];
+
+/** Sanitasi JSON response dari LLM — anti-remuk buat Chinese characters */
+function sanitizeJSON(raw: string): string {
+  return raw
+    // Hapus ```json ... ``` wrapper
+    .replace(/```json\s*/gi, "")
+    .replace(/```\s*$/gm, "")
+    .trim()
+    // Smart double quotes → ASCII
+    .replace(/[\u201C\u201D\u201E\u201F\u2033]/g, '"')
+    // Smart single quotes → ASCII
+    .replace(/[\u2018\u2019\u201A\u201B\u2032]/g, "'")
+    // Full-width colon ： → ASCII :
+    .replace(/\uFF1A/g, ":")
+    // Full-width comma ， → ASCII ,
+    .replace(/\uFF0C/g, ",")
+    // Remove BOM / zero-width chars
+    .replace(/[\uFEFF\u200B\u200C\u200D]/g, "")
+    // Replace escaped Unicode line separators
+    .replace(/\\u2028/g, " ")
+    .replace(/\\u2029/g, " ");
+}
 
 async function callLLM(system: string, user: string): Promise<string | null> {
   for (let i = 0; i < 3; i++) {
@@ -54,19 +74,13 @@ async function callLLM(system: string, user: string): Promise<string | null> {
 async function main() {
   console.log(`🔑 Key: ${(process.env.SUMOPOD_API_KEY ?? "").slice(0, 10)}...`);
 
-  // Find student UUIDs and missing materials
   for (const entry of MISSING) {
     const stu = await prisma.student.findUnique({ where: { studentId: entry.studentId }, select: { id: true } });
     if (!stu) { console.log(`❌ Student not found: ${entry.studentId}`); continue; }
     entry.studentUuid = stu.id;
 
-    // Find materials without quizzes
     const mats = await prisma.material.findMany({
-      where: {
-        subject: entry.subject,
-        curriculum: { studentId: stu.id },
-        quizzes: { none: {} },
-      },
+      where: { subject: entry.subject, curriculum: { studentId: stu.id }, quizzes: { none: {} } },
       select: { id: true, topic: true, subTopic: true },
     });
     entry.materialIds = mats.map(m => m.id);
@@ -76,7 +90,6 @@ async function main() {
     }
   }
 
-  // Generate quizzes for each missing material
   let total = 0;
   for (const entry of MISSING) {
     if (!entry.materialIds.length || !entry.studentUuid) continue;
@@ -93,29 +106,37 @@ async function main() {
       const result = await callLLM(systemPrompt, `Buat 5 soal untuk: ${topicStr}. Bahasa Indonesia.`);
       if (!result) { console.log(`    ❌ Failed to generate`); continue; }
 
-      // Parse JSON
       const jsonMatch = result.match(/\[[\s\S]*\]/);
       if (!jsonMatch) { console.log(`    ❌ No JSON in response`); continue; }
 
-      try {
-        const questions = JSON.parse(jsonMatch[0]);
-        if (!Array.isArray(questions) || questions.length < 3) { console.log(`    ❌ Invalid quiz shape`); continue; }
-
-        // Create quiz in DB
-        await prisma.quiz.create({
-          data: {
-            materialId: matId,
-            studentId: entry.studentUuid,
-            type: "QUIZ",
-            questions: questions,
-            maxScore: questions.length,
-          },
-        });
-        total++;
-        console.log(`    ✅ ${questions.length} questions created`);
-      } catch (e) {
-        console.log(`    ❌ JSON parse error: ${e}`);
+      // Try normal parse first, then sanitized
+      let questions: any = null;
+      for (const raw of [jsonMatch[0], sanitizeJSON(jsonMatch[0])]) {
+        try {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length >= 3) {
+            questions = parsed;
+            break;
+          }
+        } catch (_) { /* try next */ }
       }
+
+      if (!questions) {
+        console.log(`    ❌ JSON parse error after sanitization`);
+        continue;
+      }
+
+      await prisma.quiz.create({
+        data: {
+          materialId: matId,
+          studentId: entry.studentUuid,
+          type: "QUIZ",
+          questions: questions,
+          maxScore: questions.length,
+        },
+      });
+      total++;
+      console.log(`    ✅ ${questions.length} questions created`);
 
       await new Promise(r => setTimeout(r, 500));
     }
