@@ -626,9 +626,8 @@ function QuizInner() {
   const confirmExit = useCallback(() => {
     setShowExitModal(false);
     setShowBackModal(false);
-    if (quizList.length > 0) setPhase("list");
-    else window.location.reload();
-  }, [quizList.length]);
+    window.location.href = "/student/quiz";
+  }, []);
 
   // ── Cancel exit ──
   const cancelExit = useCallback(() => {
@@ -680,7 +679,7 @@ function QuizInner() {
         answers={answers}
         questions={quiz.questions}
         onRetry={() => setPhase("quiz")}
-        onBack={() => window.location.reload()}
+        onBack={() => window.location.href = "/student/quiz"}
         quizType={quiz.type}
       />
     );
