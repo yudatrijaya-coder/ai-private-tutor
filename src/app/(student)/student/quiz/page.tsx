@@ -226,14 +226,10 @@ function QuizScreen({
 }) {
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<number[]>(new Array(questions.length).fill(-1));
-  const [showExitConfirm, setShowExitConfirm] = useState(false);
 
   const q = questions[current];
   const isLast = current === questions.length - 1;
-  const answered = answers.filter((a) => a >= 0).length;
   const allAnswered = answers.every((a) => a >= 0);
-  const answeredCount = answers.filter((a) => a >= 0).length;
-  const remaining = questions.length - answeredCount;
 
   function selectAnswer(idx: number) {
     const next = [...answers];
@@ -241,47 +237,15 @@ function QuizScreen({
     setAnswers(next);
   }
 
-  function handleExit() {
-    if (answeredCount === 0) {
-      onBack();
-    } else {
-      setShowExitConfirm(true);
-    }
-  }
-
   return (
     <div className="space-y-4">
-      {/* Exit confirmation modal */}
-      {showExitConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center px-4" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
-          <div className="rounded-2xl p-6 w-full max-w-sm text-center" style={{ backgroundColor: "var(--st-bg-card)" }}>
-            <div className="text-4xl mb-3">⚠️</div>
-            <h3 className="text-lg font-bold mb-1">Yakin keluar?</h3>
-            <p className="text-sm mb-4" style={{ color: "var(--st-text-dim)" }}>
-              Kamu sudah menjawab <strong>{answeredCount}</strong> dari {questions.length} soal.
-              {remaining > 0 && <> <strong>{remaining} soal</strong> belum terjawab.</>}
-              <br />
-              Progress akan <strong>hilang</strong> kalau keluar sekarang.
-            </p>
-            <div className="flex gap-3">
-              <button onClick={onBack} className="flex-1 py-3 rounded-xl text-sm font-bold" style={{ backgroundColor: "var(--st-danger, #ef4444)", color: "#fff" }}>
-                🚪 Keluar
-              </button>
-              <button onClick={() => setShowExitConfirm(false)} className="flex-1 py-3 rounded-xl text-sm font-bold" style={{ backgroundColor: "var(--st-bg)", color: "var(--st-text)", border: "1px solid var(--st-border, #e5e7eb)" }}>
-                ↩ Lanjut
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Header */}
       <div className="flex items-center justify-between">
-        <button onClick={handleExit} className="text-sm" style={{ color: "var(--st-text-dim)" }}>
+        <button onClick={onBack} className="text-sm" style={{ color: "var(--st-text-dim)" }}>
           ← Keluar
         </button>
         <span className="text-xs font-medium" style={{ color: "var(--st-text-dim)" }}>
-          {answered}/{questions.length} terjawab
+          {answers.filter(a => a >= 0).length}/{questions.length} terjawab
         </span>
       </div>
 
