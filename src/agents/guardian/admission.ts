@@ -4,6 +4,10 @@
  * Creates a PENDING student record (no content, no telegram).
  * Admin approves via /api/admin/students/approve → activates + copies template.
  *
+ * Reusable exports:
+ *   - tryCopyFromTemplate(studentId, gradeLevel) → copies from template student
+ *   - createInitialSchedule(studentId, intensiveDays?) → creates 7-day schedule
+ *
  * @module @/agents/guardian/admission
  */
 
@@ -278,4 +282,19 @@ function buildInitialSchedule(studentId: string): ScheduleRow[] {
   }
 
   return rows;
+}
+
+/**
+ * Create initial schedule for a student.
+ * Calls buildInitialSchedule then writes to DB.
+ * Used by admin approve endpoint and bot onboarding.
+ */
+export async function createInitialSchedule(
+  studentId: string,
+  _intensiveDays?: string[],
+): Promise<void> {
+  const rows = buildInitialSchedule(studentId);
+  if (rows.length > 0) {
+    await prisma.scheduleSession.createMany({ data: rows });
+  }
 }
