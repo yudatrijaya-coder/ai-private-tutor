@@ -101,16 +101,24 @@ export async function DELETE(
       });
       const matIds = materials.map((m) => m.id);
 
-      // Delete in order (respecting foreign keys)
+      // Get all quiz IDs for these materials
+      const quizzes = await prisma.quiz.findMany({
+        where: { materialId: { in: matIds } },
+        select: { id: true },
+      });
+      const quizIds = quizzes.map((q) => q.id);
+
+      // Delete in order (respecting foreign keys):
+      // 1. Delete ALL attempts pointing to any of these quizzes
+      await prisma.attempt.deleteMany({ where: { quizId: { in: quizIds } } });
+      // 2. Delete quizzes
+      await prisma.quiz.deleteMany({ where: { materialId: { in: matIds } } });
+      // 3. Delete materials
+      await prisma.material.deleteMany({ where: { curriculumId: { in: currIds } } });
+      // 4. Delete curriculums
+      await prisma.curriculum.deleteMany({ where: { studentId: id } });
+      // 5. Delete remaining student-scoped records
       await prisma.$transaction([
-        // Delete quizzes for these materials
-        prisma.quiz.deleteMany({ where: { materialId: { in: matIds } } }),
-        // Delete materials
-        prisma.material.deleteMany({ where: { curriculumId: { in: currIds } } }),
-        // Delete curriculums
-        prisma.curriculum.deleteMany({ where: { studentId: id } }),
-        // Delete student-related records (no FK back to Student, just studentId fields)
-        prisma.attempt.deleteMany({ where: { studentId: student.studentId } }),
         prisma.progressSnap.deleteMany({ where: { studentId: id } }),
         prisma.scheduleSession.deleteMany({ where: { studentId: id } }),
         prisma.sessionState.deleteMany({ where: { studentId: id } }),
@@ -121,7 +129,6 @@ export async function DELETE(
         prisma.homeworkTask.deleteMany({ where: { studentId: id } }),
         prisma.studentActivity.deleteMany({ where: { studentId: id } }),
         prisma.studentSubjectMastery.deleteMany({ where: { studentId: id } }),
-        // Finally delete the student
         prisma.student.delete({ where: { id } }),
       ]);
 

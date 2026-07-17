@@ -1,5 +1,5 @@
 /**
- * Generate quizzes for SHOFI (STU_MRHQL6KX)
+ * Generate quizzes for SHOFI (STU_MRHQL6KX) using raw SQL (pg)
  * Materials without quizzes:
  * - Kimia: Pengantar Kimia (5284a834-de1a-48a8-975c-1206f3f1d205)
  * - Kimia: Termokimia (df992341-3e3f-4a57-b44f-8f0dfa9dad0f)
@@ -7,14 +7,14 @@
  * - Matematika Tingkat Lanjut: Pengantar (b3464210-831e-49c2-854c-561105d14af5)
  */
 
-const { PrismaClient } = require('../src/generated/prisma/client');
+const { Client } = require('pg');
 
-const prisma = new PrismaClient({
-  datasources: {
-    db: {
-      url: process.env.DATABASE_URL || 'postgresql://tutor:tutor123@localhost:5432/ai_private_tutor'
-    }
-  }
+const client = new Client({
+  host: 'localhost',
+  port: 5432,
+  user: 'tutor',
+  password: 'tutor123',
+  database: 'ai_private_tutor'
 });
 
 const STUDENT_ID = 'e30b6559-1d33-4aa5-a39a-22102f29894d';
@@ -435,7 +435,8 @@ const quizzesData = [
 ];
 
 async function generateQuizzes() {
-  console.log('Starting quiz generation for SHOFI (STU_MRHQL6KX)...\n');
+  await client.connect();
+  console.log('Connected to database.\n');
 
   let successCount = 0;
   let failCount = 0;
@@ -444,18 +445,14 @@ async function generateQuizzes() {
     try {
       const maxScore = quizData.questions.length;
       
-      const quiz = await prisma.quiz.create({
-        data: {
-          materialId: quizData.materialId,
-          studentId: STUDENT_ID,
-          type: 'QUIZ',
-          questions: quizData.questions,
-          maxScore: maxScore,
-          timeLimit: null
-        }
-      });
+      const res = await client.query(
+        `INSERT INTO "Quiz" (id, "materialId", "studentId", type, questions, "maxScore", "timeLimit", "createdAt", "updatedAt")
+         VALUES (gen_random_uuid(), $1, $2, 'QUIZ', $3::jsonb, $4, NULL, NOW(), NOW())
+         RETURNING id`,
+        [quizData.materialId, STUDENT_ID, JSON.stringify(quizData.questions), maxScore]
+      );
 
-      console.log(`✅ ${quizData.subject} - ${quizData.topic}: Quiz created (${quizData.questions.length} questions)`);
+      console.log(`✅ ${quizData.subject} - ${quizData.topic}: Quiz created (${quizData.questions.length} questions, id=${res.rows[0].id})`);
       successCount++;
     } catch (err) {
       console.error(`❌ ${quizData.subject} - ${quizData.topic}: ${err.message}`);
@@ -463,8 +460,8 @@ async function generateQuizzes() {
     }
   }
 
-  console.log(`\n=== FINAL SUMMARY ===`);
-  console.log(`Quizzes created: ${successCount}`);
+  console.log(`\n=== SUMMARY ===`);
+  console.log(`Quizzes created successfully: ${successCount}`);
   console.log(`Failures: ${failCount}`);
 }
 
