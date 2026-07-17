@@ -144,6 +144,16 @@ export async function onMessage(ctx: Context): Promise<void> {
     });
 
     if (student) {
+      // ── Check if student is PAUSED ──
+      if (student.status === "PAUSED") {
+        const mode = (student as any).holdMode === "HARD" ? "🔒 *Hard Hold*" : "⏸️ *Hold/Pause*";
+        const msg = (student as any).holdMode === "HARD"
+          ? `${mode}\n\nAkun kamu diblokir sepenuhnya. Semua fitur belajar tidak bisa diakses.\nHubungi admin untuk info lebih lanjut.\n\nKalau kamu merasa ini salah, hubungi orang tua ya! 😊`
+          : `${mode}\n\nSaat ini kamu tidak bisa mengakses fitur belajar. Hubungi admin untuk info lebih lanjut.\n\nKalau kamu merasa ini salah, hubungi orang tua ya! 😊`;
+        await ctx.reply(msg, { parse_mode: "Markdown" });
+        return;
+      }
+
       const session = await getSession(student.id);
       const handled = await routeByState(ctx, session, student);
 

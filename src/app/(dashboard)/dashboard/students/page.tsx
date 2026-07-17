@@ -654,7 +654,100 @@ export default function StudentsPage() {
     } catch {
       showToast("❌ Failed to archive", "error");
     } finally {
-      setActionLoading(null);
+      setActionLoading(id);
+    }
+  }
+
+  async function handleDelete(id: string, name: string) {
+    if (!confirm(`⚠️ Yakin hapus permanen "${name}"?\n\nSemua data (kurikulum, quiz, progress) akan dihapus dari database.`)) return;
+    setActionLoading(id);
+    try {
+      const res = await fetch(`/api/admin/students/${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ hardDelete: true }),
+      });
+      if (res.ok) {
+        showToast(`🗑️ "${name}" dihapus permanen`, "success");
+        fetchStudents();
+        fetchStats();
+      } else {
+        const e = await res.json();
+        showToast(`❌ ${e.error}`, "error");
+      }
+    } catch {
+      showToast("❌ Gagal menghapus", "error");
+    } finally {
+      setActionLoading(id);
+    }
+  }
+
+  async function handleSoftHold(id: string, name: string) {
+    setActionLoading(id);
+    try {
+      const res = await fetch(`/api/admin/students/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "PAUSED", holdMode: "SOFT" }),
+      });
+      if (res.ok) {
+        showToast(`⏸️ "${name}" soft-hold (banner only)`, "info");
+        fetchStudents();
+        fetchStats();
+      } else {
+        const e = await res.json();
+        showToast(`❌ ${e.error}`, "error");
+      }
+    } catch {
+      showToast("❌ Gagal soft-hold", "error");
+    } finally {
+      setActionLoading(id);
+    }
+  }
+
+  async function handleHardHold(id: string, name: string) {
+    setActionLoading(id);
+    try {
+      const res = await fetch(`/api/admin/students/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "PAUSED", holdMode: "HARD" }),
+      });
+      if (res.ok) {
+        showToast(`🔒 "${name}" hard-hold (blokir semua fitur)`, "info");
+        fetchStudents();
+        fetchStats();
+      } else {
+        const e = await res.json();
+        showToast(`❌ ${e.error}`, "error");
+      }
+    } catch {
+      showToast("❌ Gagal hard-hold", "error");
+    } finally {
+      setActionLoading(id);
+    }
+  }
+
+  async function handleResume(id: string, name: string) {
+    setActionLoading(id);
+    try {
+      const res = await fetch(`/api/admin/students/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "ACTIVE" }),
+      });
+      if (res.ok) {
+        showToast(`▶️ "${name}" aktif kembali`, "success");
+        fetchStudents();
+        fetchStats();
+      } else {
+        const e = await res.json();
+        showToast(`❌ ${e.error}`, "error");
+      }
+    } catch {
+      showToast("❌ Gagal resume", "error");
+    } finally {
+      setActionLoading(id);
     }
   }
 
@@ -1379,6 +1472,49 @@ export default function StudentsPage() {
                               💬
                             </button>
 
+                            {/* Hold buttons (only for ACTIVE students) */}
+                            {s.status === "ACTIVE" ? (
+                              <>
+                                <button
+                                  onClick={() => handleSoftHold(s.id, s.name)}
+                                  disabled={isLoading}
+                                  className="p-1.5 rounded-lg text-xs cursor-pointer disabled:opacity-40 transition-colors hover:opacity-80"
+                                  style={{
+                                    backgroundColor: "rgba(245,158,11,0.12)",
+                                    color: "var(--su-warning)",
+                                  }}
+                                  title="Soft Hold — banner saja"
+                                >
+                                  {isLoading ? "..." : "⏸️"}
+                                </button>
+                                <button
+                                  onClick={() => handleHardHold(s.id, s.name)}
+                                  disabled={isLoading}
+                                  className="p-1.5 rounded-lg text-xs cursor-pointer disabled:opacity-40 transition-colors hover:opacity-80"
+                                  style={{
+                                    backgroundColor: "rgba(239,68,68,0.12)",
+                                    color: "var(--su-danger)",
+                                  }}
+                                  title="Hard Hold — blokir semua fitur"
+                                >
+                                  {isLoading ? "..." : "🔒"}
+                                </button>
+                              </>
+                            ) : s.status === "PAUSED" ? (
+                              <button
+                                onClick={() => handleResume(s.id, s.name)}
+                                disabled={isLoading}
+                                className="p-1.5 rounded-lg text-xs cursor-pointer disabled:opacity-40 transition-colors hover:opacity-80"
+                                style={{
+                                  backgroundColor: "rgba(34,197,94,0.12)",
+                                  color: "var(--su-success)",
+                                }}
+                                title="Resume / Aktifkan"
+                              >
+                                {isLoading ? "..." : "▶️"}
+                              </button>
+                            ) : null}
+
                             {/* Archive / Restore */}
                             {isArchived(s.status) ? (
                               <button
@@ -1399,14 +1535,28 @@ export default function StudentsPage() {
                                 disabled={isLoading}
                                 className="p-1.5 rounded-lg text-xs cursor-pointer disabled:opacity-40 transition-colors hover:opacity-80"
                                 style={{
-                                  backgroundColor: "rgba(239,68,68,0.12)",
-                                  color: "var(--su-danger)",
+                                  backgroundColor: "rgba(245,158,11,0.12)",
+                                  color: "var(--su-warning)",
                                 }}
                                 title="Archive"
                               >
                                 {isLoading ? "..." : "📦"}
                               </button>
                             )}
+
+                            {/* Delete permanent */}
+                            <button
+                              onClick={() => handleDelete(s.id, s.name)}
+                              disabled={isLoading}
+                              className="p-1.5 rounded-lg text-xs cursor-pointer disabled:opacity-40 transition-colors hover:opacity-80"
+                              style={{
+                                backgroundColor: "rgba(239,68,68,0.12)",
+                                color: "var(--su-danger)",
+                              }}
+                              title="Hapus Permanen"
+                            >
+                              {isLoading ? "..." : "🗑️"}
+                            </button>
                           </div>
                         </td>
                       </tr>

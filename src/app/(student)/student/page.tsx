@@ -12,6 +12,7 @@ import { DashboardTracker } from "@/components/DashboardTracker";
 import { TrackedSubjectCircle } from "@/components/TrackedSubjectCircle";
 import SchoolScheduleSection from "@/components/SchoolScheduleSection";
 import { MoodleQuickLink } from "@/components/MoodleQuickLink";
+import { MoodleBookQuickLink } from "@/components/MoodleQuickLink";
 
 const STUDENT_JWT_SECRET = new TextEncoder().encode(
   process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
@@ -84,12 +85,16 @@ const PDF_MAP: Record<string, Record<string, string>> = {
   },
   SMA_2: {
     "Bahasa Indonesia": "Indonesia_SMA11_BS.pdf",
+    Biologi: "Biologi_SMA11_BS.pdf",
+    Fisika: "Fisika_SMA11_BS.pdf",
+    Kimia: "Kimia_SMA11_BS.pdf",
     Geografi: "Geografi_SMA11_BS.pdf",
     Informatika: "Informatika_SMA11_BS.pdf",
-    PJOK: "PJOK_SMA11_BS.pdf",
-    Sosiologi: "Sosiologi_SMA11_BS.pdf",
-    Matematika: "Matematika_TL_SMA11_BS.pdf",
     Ekonomi: "Ekonomi_SMA11_BS.pdf",
+    Sosiologi: "Sosiologi_SMA11_BS.pdf",
+    PJOK: "PJOK_SMA11_BS.pdf",
+    Sejarah: "Sejarah_SMA11_BS.pdf",
+    Matematika: "Matematika_TL_SMA11_BS.pdf",
     "Pendidikan Pancasila": "Pancasila_SMA11_BS.pdf",
     "Bahasa Inggris": "Inggris_SMA11_BS.pdf",
   },
@@ -305,6 +310,8 @@ function QuickActionsSection({ gradeLevel }: { gradeLevel?: string }) {
         ))}
         {/* Buku SIBI - pilih subject random yang punya PDF */}
         <SibiQuickLink gradeLevel={gradeLevel} />
+        {/* Buku Moodle */}
+        <MoodleBookQuickLink gradeLevel={gradeLevel} />
         {/* Modul Moodle */}
         <MoodleQuickLink gradeLevel={gradeLevel} />
       </div>
@@ -668,11 +675,122 @@ function SkeletonSchedule() {
   );
 }
 
+/* ── Hold Banner — shown when student is PAUSED (SOFT or HARD) ── */
+async function HoldBanner() {
+  noStore();
+  const session = await getSessionStudent();
+  if (!session) return null;
+
+  const student = await prisma.student.findUnique({
+    where: { id: session.id },
+    select: { status: true, name: true, holdMode: true },
+  });
+
+  if (!student || student.status !== "PAUSED") return null;
+
+  const isHard = student.holdMode === "HARD";
+
+  return (
+    <div
+      className="mx-4 mb-4 flex items-center gap-3 rounded-2xl p-4"
+      style={{
+        background: isHard
+          ? "linear-gradient(135deg, rgba(239,68,68,0.15), rgba(127,29,29,0.1))"
+          : "linear-gradient(135deg, rgba(245,158,11,0.15), rgba(239,68,68,0.1))",
+        border: isHard
+          ? "1px solid rgba(239,68,68,0.4)"
+          : "1px solid rgba(245,158,11,0.3)",
+      }}
+    >
+      <span className="text-2xl">{isHard ? "🔒" : "⏸️"}</span>
+      <div>
+        <p className="text-sm font-semibold" style={{ color: "var(--st-text)" }}>
+          {isHard
+            ? `Akun kamu di-hard hold, ${student.name}! 🔒`
+            : `Akun kamu sedang di-hold/pause, ${student.name}!`}
+        </p>
+        <p className="text-xs mt-0.5" style={{ color: "var(--st-text-dim)" }}>
+          {isHard
+            ? "Semua fitur diblokir. Hubungi admin untuk mengaktifkan kembali."
+            : "Saat ini kamu tidak bisa mengakses fitur belajar. Hubungi admin untuk info lebih lanjut."}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* ── Hard Hold Guard — checks HARD mode, renders overlay if needed ── */
+async function HardHoldGuard() {
+  noStore();
+  const session = await getSessionStudent();
+  if (!session) return null;
+
+  const student = await prisma.student.findUnique({
+    where: { id: session.id },
+    select: { status: true, holdMode: true },
+  });
+
+  if (!student || student.status !== "PAUSED" || student.holdMode !== "HARD") return null;
+  return <HardHoldOverlay />;
+}
+
+/* ── Hard Hold Overlay — blocks ALL page content ── */
+function HardHoldOverlay() {
+  return (
+    <div
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 text-center"
+      style={{
+        background: "rgba(15,15,15,0.92)",
+        backdropFilter: "blur(8px)",
+      }}
+    >
+      <div
+        className="rounded-3xl p-8 max-w-sm w-full"
+        style={{
+          background: "var(--st-bg-card)",
+          border: "1px solid rgba(239,68,68,0.3)",
+        }}
+      >
+        <div className="text-5xl mb-4">🔒</div>
+        <h2 className="text-xl font-bold mb-2" style={{ color: "var(--st-text)" }}>
+          Akun di-Hard Hold
+        </h2>
+        <p className="text-sm mb-6" style={{ color: "var(--st-text-dim)" }}>
+          Saat ini akun kamu diblokir sepenuhnya.<br />
+          Semua fitur belajar tidak bisa diakses.<br />
+          <br />
+          Hubungi admin untuk informasi lebih lanjut atau<br />
+          untuk meminta aktivasi kembali.
+        </p>
+        <div
+          className="text-xs px-4 py-2 rounded-xl inline-block"
+          style={{
+            background: "rgba(239,68,68,0.1)",
+            color: "#f87171",
+          }}
+        >
+          🔒 Hard Hold Active
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ── Page ── */
 export default function StudentHomePage() {
   return (
     <DashboardTracker>
     <>
+      {/* Hard Hold Overlay — rendered first, blocks everything */}
+      <Suspense fallback={null}>
+        <HardHoldGuard />
+      </Suspense>
+
+      {/* Hold Banner */}
+      <Suspense fallback={null}>
+        <HoldBanner />
+      </Suspense>
+
       {/* Rekomendasi Hari Ini */}
       <Suspense fallback={<SkeletonRecs />}>
         <RecommendationSection />
