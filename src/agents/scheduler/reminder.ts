@@ -167,18 +167,24 @@ async function sendTelegramReminder(
 
   if (type === "h-1") {
     text =
-      `📚 *Pengingat Belajar!*\\n\\n` +
-      `Halo ${session.student.name}! Jangan lupa, besok ada sesi belajar ya! 🔥\\n\\n` +
-      `📖 Topik: ${session.topic ?? "Belajar Mandiri"}\\n` +
-      `⏰ Waktu: ${timeStr}\\n\\n` +
-      `Siapkan buku catatan dan semangat belajarnya! 💪`;
+      `📚 *Pengingat Belajar!*
+
+Halo ${session.student.name}! Jangan lupa, besok ada sesi belajar ya! 🔥
+
+📖 Topik: ${session.topic ?? "Belajar Mandiri"}
+⏰ Waktu: ${timeStr}
+
+Siapkan buku catatan dan semangat belajarnya! 💪`;
   } else {
     text =
-      `⏰ *Ayo belajar!*\\n\\n` +
-      `${session.student.name}, sesi kamu mulai *30 menit lagi*!\\n\\n` +
-      `📖 Topik: ${session.topic ?? "Belajar Mandiri"}\\n` +
-      `⏰ Waktu: ${timeStr}\\n\\n` +
-      `Jangan sampai ketinggalan ya! 🚀`;
+      `⏰ *Ayo belajar!*
+
+${session.student.name}, sesi kamu mulai *30 menit lagi*!
+
+📖 Topik: ${session.topic ?? "Belajar Mandiri"}
+⏰ Waktu: ${timeStr}
+
+Jangan sampai ketinggalan ya! 🚀`;
   }
 
   try {
