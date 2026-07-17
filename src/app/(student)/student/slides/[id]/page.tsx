@@ -119,13 +119,24 @@ export default function SlideViewerPage() {
   const [studentId, setStudentId] = useState<string | null>(null);
 
   const { trackSlide } = useActivityTracker(studentId, subject);
+  const [isRead, setIsRead] = useState(false);
 
-  // Fetch student ID
+  // Fetch student ID + check if already read
   useEffect(() => {
     fetch("/api/auth/me")
       .then((r) => r.json())
       .then((data) => {
-        if (data.student?.studentId) setStudentId(data.student.studentId);
+        const sid = data.student?.studentId || null;
+        setStudentId(sid);
+        // Also check if this slide was already read
+        if (sid) {
+          fetch(`/api/students/activity?studentId=${encodeURIComponent(sid)}`)
+            .then((r) => r.json())
+            .then((act) => {
+              if (act.readMaterials?.includes(id)) setIsRead(true);
+            })
+            .catch(() => {});
+        }
       })
       .catch(() => {});
   }, []);
@@ -196,9 +207,16 @@ export default function SlideViewerPage() {
         <span className="text-sm font-medium truncate mx-4" style={{ color: "rgba(255,255,255,0.8)" }}>
           {title}
         </span>
-        <span className="text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: `${theme.accent}30`, color: theme.accent }}>
-          {current + 1} / {slides.length}
-        </span>
+        <div className="flex items-center gap-2">
+          {isRead && (
+            <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/20 text-green-400 font-medium">
+              ✅ READ
+            </span>
+          )}
+          <span className="text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: `${theme.accent}30`, color: theme.accent }}>
+            {current + 1} / {slides.length}
+          </span>
+        </div>
       </header>
 
       {/* Slide */}
