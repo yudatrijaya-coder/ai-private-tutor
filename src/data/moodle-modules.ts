@@ -15,9 +15,6 @@ const MOODLE_BOOKS: Record<string, Record<string, string[]>> = {
       "/moodle-files/3975_NEW_HSK3_3.0_VOCABULARY.pdf",
       "/moodle-files/3975_NEW_HSK4_3.0_VOCABULARY.pdf",
     ],
-    "Pendidikan Agama Katolik": [
-      "/moodle-files/3582_Katolik-BS-KLS-XI.pdf",
-    ],
     "Matematika Tingkat Lanjut": [
       "https://moodle.kumbang.sch.id/mod/resource/view.php?id=53029",
     ],
