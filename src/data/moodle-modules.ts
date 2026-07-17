@@ -9,14 +9,20 @@ const MOODLE_BOOKS: Record<string, Record<string, string[]>> = {
     ],
   },
   SMA_2: {
-    "Fisika": [
-      "https://buku.kemendikdasmen.go.id/katalog/fisika-untuk-smama-kelas-xi",
+    "Bahasa Mandarin": [
+      "/moodle-files/sibi-books/Mandarin_BS_XI.pdf",
     ],
-    "Matematika": [
-      "https://buku.kemendikdasmen.go.id/katalog/matematika-untuk-smasmk-kelas-xi",
+    "Matematika Tingkat Lanjut": [
+      "/moodle-files/sibi-books/Matematika_BS_KLS_XI_TL_Rev.pdf",
     ],
-    "Bahasa Indonesia": [
-      "https://buku.kemendikdasmen.go.id/katalog/cerdas-cergas-berbahasa-dan-bersastra-indonesia-untuk-smasmk-kelas-xi",
+    "Bahasa Inggris Tingkat Lanjut": [
+      "/moodle-files/sibi-books/Inggris_BS_KLS_XI_TL_Rev.pdf",
+    ],
+    "Biologi": [
+      "/moodle-files/Biologi_Sistem_Pencernaan.pdf",
+    ],
+    "Kimia": [
+      "/moodle-files/Kimia_Termokimia.pdf",
     ],
   },
 };
