@@ -460,12 +460,12 @@ async function handleAdminApprove(ctx: Context, studentId: string): Promise<void
     if (student.telegramId) {
       await bot?.telegram.sendMessage(
         student.telegramId,
-        `🎉 *Selamat!* Kamu udah diterima!\\n\\n` +
-        `Halo *${student.name}*, admin sudah menyetujui pendaftaran kamu. Sekarang kamu bisa mulai belajar! 🚀\\n\\n` +
-        `🌐 *Dashboard Online:* [Buka Dashboard](https://senangbelajar.web.id/login/student)\\n` +
-        `🆔 ID Siswa: \`${student.studentId}\`\\n` +
-        `🔑 Password: \`${DEFAULT_PASSWORD}\`\\n\\n` +
-        `*Jangan lupa ganti password setelah login pertama ya!* 🔐\\n\\n` +
+        `🎉 *Selamat!* Kamu udah diterima!\n\n` +
+        `Halo *${student.name}*, admin sudah menyetujui pendaftaran kamu. Sekarang kamu bisa mulai belajar! 🚀\n\n` +
+        `🌐 *Dashboard Online:* [Buka Dashboard](https://senangbelajar.web.id/login/student)\n` +
+        `🆔 ID Siswa: \`${student.studentId}\`\n` +
+        `🔑 Password: \`${DEFAULT_PASSWORD}\`\n\n` +
+        `*Jangan lupa ganti password setelah login pertama ya!* 🔐\n\n` +
         `Ketik /start untuk mulai chatting, atau buka dashboard di atas! 💪🔥`,
         { parse_mode: "Markdown" },
       );
