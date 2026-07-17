@@ -22,6 +22,7 @@ export async function PATCH(
       "name",
       "gradeLevel",
       "status",
+      "holdMode",
       "persona",
       "telegramId",
       "parentTelegramId",
@@ -30,9 +31,16 @@ export async function PATCH(
     ];
 
     const data: Record<string, unknown> = {};
-    for (const field of allowedFields) {
-      if (body[field] !== undefined) {
-        data[field] = body[field];
+
+    // When status=ACTIVE, reset holdMode to NONE automatically
+    if (body.status === "ACTIVE") {
+      data.status = "ACTIVE";
+      data.holdMode = "NONE";
+    } else {
+      for (const field of allowedFields) {
+        if (body[field] !== undefined) {
+          data[field] = body[field];
+        }
       }
     }
 
@@ -60,34 +68,87 @@ export async function PATCH(
 
 /**
  * DELETE /api/admin/students/[id]
- * Archive (soft-delete) a student — set status = ARCHIVED
+ * Hard-delete student and ALL related data (cascade)
+ * OR soft-archive (status=ARCHIVED) if hardDelete !== true
  */
 export async function DELETE(
-  _request: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const { id } = await params;
+    const body = await request.json().catch(() => ({}));
+    const hardDelete = body.hardDelete === true;
 
     const student = await prisma.student.findUnique({ where: { id } });
     if (!student) {
       return NextResponse.json({ error: "Student not found" }, { status: 404 });
     }
 
-    await prisma.student.update({
-      where: { id },
-      data: { status: "ARCHIVED" },
-    });
+    if (hardDelete) {
+      // ── HARD DELETE: cascade delete all related data ──
+      // Get all curriculum IDs for this student
+      const curriculums = await prisma.curriculum.findMany({
+        where: { studentId: id },
+        select: { id: true },
+      });
+      const currIds = curriculums.map((c) => c.id);
 
-    return NextResponse.json({
-      ok: true,
-      studentId: student.studentId,
-      status: "ARCHIVED",
-    });
+      // Get all material IDs for these curriculums
+      const materials = await prisma.material.findMany({
+        where: { curriculumId: { in: currIds } },
+        select: { id: true },
+      });
+      const matIds = materials.map((m) => m.id);
+
+      // Delete in order (respecting foreign keys)
+      await prisma.$transaction([
+        // Delete quizzes for these materials
+        prisma.quiz.deleteMany({ where: { materialId: { in: matIds } } }),
+        // Delete materials
+        prisma.material.deleteMany({ where: { curriculumId: { in: currIds } } }),
+        // Delete curriculums
+        prisma.curriculum.deleteMany({ where: { studentId: id } }),
+        // Delete student-related records (no FK back to Student, just studentId fields)
+        prisma.attempt.deleteMany({ where: { studentId: student.studentId } }),
+        prisma.progressSnap.deleteMany({ where: { studentId: id } }),
+        prisma.scheduleSession.deleteMany({ where: { studentId: id } }),
+        prisma.sessionState.deleteMany({ where: { studentId: id } }),
+        prisma.intervention.deleteMany({ where: { studentId: id } }),
+        prisma.chatLog.deleteMany({ where: { studentId: id } }),
+        prisma.apiUsage.deleteMany({ where: { studentId: id } }),
+        prisma.reminder.deleteMany({ where: { studentId: id } }),
+        prisma.homeworkTask.deleteMany({ where: { studentId: id } }),
+        prisma.studentActivity.deleteMany({ where: { studentId: id } }),
+        prisma.studentSubjectMastery.deleteMany({ where: { studentId: id } }),
+        // Finally delete the student
+        prisma.student.delete({ where: { id } }),
+      ]);
+
+      console.log(`[admin/students/[id]] Hard-deleted student ${student.name} (${student.studentId})`);
+      return NextResponse.json({
+        ok: true,
+        studentId: student.studentId,
+        deleted: true,
+      });
+    } else {
+      // ── SOFT DELETE: archive ──
+      await prisma.student.update({
+        where: { id },
+        data: { status: "ARCHIVED" },
+      });
+
+      return NextResponse.json({
+        ok: true,
+        studentId: student.studentId,
+        status: "ARCHIVED",
+        archived: true,
+      });
+    }
   } catch (error) {
     console.error("[admin/students/[id]] DELETE error:", error);
     return NextResponse.json(
-      { error: "Failed to archive student" },
+      { error: "Failed to delete/archive student" },
       { status: 500 },
     );
   }
