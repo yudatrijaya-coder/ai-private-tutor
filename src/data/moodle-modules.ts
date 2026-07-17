@@ -5,7 +5,7 @@
 const MOODLE_BOOKS: Record<string, Record<string, string[]>> = {
   SMP_1: {
     "Bahasa Indonesia": [
-      "/moodle-files/Bahasa_Indonesia_BS_KLS_VII_Rev.pdf",
+      "/moodle-files/4164_Bahasa_Indonesia_BS_KLS_VII_Rev.pdf",
     ],
   },
   SMA_2: {
@@ -44,31 +44,48 @@ const MOODLE_BOOKS: Record<string, Record<string, string[]>> = {
  */
 const MOODLE_MODULES: Record<string, Record<string, string[]>> = {
   SMP_1: {
-    // Bahasa Indonesia
+    // Course 4166 — Bahasa Mandarin VII
+    "Bahasa Mandarin": [
+      "/moodle-files/4166_Program_Semester_Kelas_7_TP_20262027.xlsx",
+      "/moodle-files/4166_E-book_HSK_3.0_Level_1.pdf",
+    ],
+    // Course 4164 — Bahasa Indonesia VII
     "Bahasa Indonesia": [
-      "/moodle-files/Bahasa_Indonesia_BS_KLS_VII_Rev.pdf",
+      "/moodle-files/4164_Formulir_Program_Semester_2627_kelas_VII.xlsx",
     ],
-    // Biologi (course 4169) — BAB 1 Identifikasi Makhluk Hidup
+    // Course 4169 — Biologi VII
     Biologi: [
-      "/moodle-files/Biologi_Identifikasi_Makhluk_Hidup.pdf",
+      "/moodle-files/4169_PROGRAM_SEMESTER_BIOLOGI_7_2627_GANJIL.pdf",
+      "/moodle-files/4169_PROGRAM_SEMESTER_BIOLOGI_7_2627_GENAP.pdf",
+      "/moodle-files/4169_BAB_1_IDENTIFIKASI_MAKHLUK_HIDUP.pdf",
     ],
-    // Fisika (course 4171)
+    // Course 4171 — Fisika VII
     Fisika: [
-      "/moodle-files/Modul Physics VII semester ganjil (2).pdf",
-      "/moodle-files/bab-1-besaran-pengukuran 2.pdf",
+      "/moodle-files/4171_Formulir_Program_Semester_2627_kelas_VII_Fisika.pdf",
+      "/moodle-files/4171_Modul_Physics_VII_semester_ganjil.pdf",
+      "/moodle-files/4171_bab-1-besaran-pengukuran.pdf",
     ],
-    // Kimia (course 4174)
-    Kimia: [
-      "/moodle-files/MOODLE-Hakikat Ilmu Kimia dan Metode Ilmiah.pdf",
-    ],
-    // Informatika (course 4173) — PPT Hardware
+    // Course 4173 — Informatika VII
     Informatika: [
-      "/moodle-files/PPT-Pengenalan_Dasar_Komputer-Hardware.pdf",
+      "/moodle-files/4173_Program_Semester_2627_kelas_VII_Ganjil.pdf",
+      "/moodle-files/4173_PPT-Pengenalan_Dasar_Komputer-hardware.pdf",
     ],
-    // Sejarah (course 4179) — Masa Praaksara
+    // Course 4174 — Kimia VII
+    Kimia: [
+      "/moodle-files/4174_Progsem_kimia_kelas_7_tahun_20262027.xlsx",
+      "/moodle-files/4174_MOODLE-Hakikat_Ilmu_Kimia_dan_Metode_Ilmiah.pdf",
+    ],
+    // Course 4178 — PPKn VII
+    "Pendidikan Pancasila dan Kewarganegaraan": [
+      "/moodle-files/4178_PROGRAM_SEMESTER_PPKn_2627.xlsx",
+    ],
+    // Course 4179 — Sejarah VII
     Sejarah: [
-      "/moodle-files/Masa_Praaksara.pdf",
+      "/moodle-files/4179_Revisi_Formulir_Program_Semester_2627_kelas_VII.pdf",
+      "/moodle-files/4179_Masa_praaksara.pdf",
     ],
+    // Course 4460 — English Diagnostic Test (no content files)
+    "Bahasa Inggris": [],
   },
   SMA_2: {
     "Bahasa Mandarin": [
