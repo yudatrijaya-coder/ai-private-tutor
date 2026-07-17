@@ -16,7 +16,8 @@
 import type { Context } from "telegraf";
 import { Markup } from "telegraf";
 import { prisma } from "@/lib/prisma";
-import { generateCurriculumDraft } from "@/agents/curriculum";
+import { tryCopyFromTemplate } from "@/agents/guardian/admission";
+import { createInitialSchedule } from "@/agents/guardian/admission";
 import { bot } from "../bot";
 import bcrypt from "bcryptjs";
 
@@ -255,7 +256,15 @@ async function approveStudent(ctx: Context, data: RegistrationData): Promise<voi
     { parse_mode: "Markdown" },
   );
 
-  await generateCurriculumDraft(student.id);
+  // Try template copy first (fast, 99-157 topics ready), fallback to AI draft
+  const copied = await tryCopyFromTemplate(student.id, data.grade as any);
+  if (!copied) {
+    const { generateCurriculumDraft } = await import("@/agents/curriculum");
+    await generateCurriculumDraft(student.id);
+  }
+
+  // Create initial schedule
+  await createInitialSchedule(student.id, data.intensiveDays ?? []);
 
   await ctx.reply(
     `Siap! Sekarang kamu bisa:\n` +
@@ -461,7 +470,13 @@ async function handleAdminApprove(ctx: Context, studentId: string): Promise<void
         { parse_mode: "Markdown" },
       );
 
-      await generateCurriculumDraft(student.id);
+      // Try template copy first (fast), fallback to AI draft
+      const copied = await tryCopyFromTemplate(student.id, regData.grade as any);
+      if (!copied) {
+        const { generateCurriculumDraft } = await import("@/agents/curriculum");
+        await generateCurriculumDraft(student.id);
+      }
+      await createInitialSchedule(student.id, regData.intensiveDays ?? []);
     }
 
     // Kirim notif credentials
