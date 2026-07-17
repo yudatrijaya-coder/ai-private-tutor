@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import { jwtVerify } from "jose";
 import Link from "next/link";
 import { getYouTubeForTopic } from "@/data/youtube";
-import { getMoodleModule } from "@/data/moodle-modules";
+import { getMoodleModule, getMoodleBook } from "@/data/moodle-modules";
 import { SubjectTracker } from "@/components/SubjectTracker";
 
 const STUDENT_JWT_SECRET = new TextEncoder().encode(
@@ -34,6 +34,7 @@ const PDF_MAP: Record<string, Record<string, string>> = {
     "Bahasa Inggris": "Inggris_SD5_BS.pdf",
     "Bahasa Indonesia": "Indonesia_SD5_BS.pdf",
     "Pendidikan Pancasila": "Pancasila_SD5_BS.pdf",
+    Matematika: "Matematika_SD5_BS.pdf",
   },
   // SMP Kelas 7 — pdf-smp7
   SMP_1: {
@@ -49,12 +50,16 @@ const PDF_MAP: Record<string, Record<string, string>> = {
   // SMA Kelas 11 — pdf-sma11
   SMA_2: {
     "Bahasa Indonesia": "Indonesia_SMA11_BS.pdf",
+    Biologi: "Biologi_SMA11_BS.pdf",
+    Fisika: "Fisika_SMA11_BS.pdf",
+    Kimia: "Kimia_SMA11_BS.pdf",
     Geografi: "Geografi_SMA11_BS.pdf",
     Informatika: "Informatika_SMA11_BS.pdf",
-    PJOK: "PJOK_SMA11_BS.pdf",
-    Sosiologi: "Sosiologi_SMA11_BS.pdf",
-    Matematika: "Matematika_TL_SMA11_BS.pdf",
     Ekonomi: "Ekonomi_SMA11_BS.pdf",
+    Sosiologi: "Sosiologi_SMA11_BS.pdf",
+    PJOK: "PJOK_SMA11_BS.pdf",
+    Sejarah: "Sejarah_SMA11_BS.pdf",
+    Matematika: "Matematika_TL_SMA11_BS.pdf",
     "Pendidikan Pancasila": "Pancasila_SMA11_BS.pdf",
     "Bahasa Inggris": "Inggris_SMA11_BS.pdf",
   },
@@ -213,6 +218,22 @@ async function SubjectContent({ subject }: { subject: string }) {
             <span className="text-xs font-medium text-center">Buku SIBI</span>
           </span>
         )}
+
+        {/* Buku Moodle — buku dari sekolah (setara SIBI) */}
+        {(() => {
+          const books = getMoodleBook(decodedSubject, studentData?.gradeLevel);
+          return books && books.length > 0 ? (
+            <Link
+              href={books[0].url}
+              target="_blank"
+              className="flex flex-col items-center gap-1.5 rounded-2xl p-4 transition-all hover:scale-105 active:scale-95"
+              style={{ backgroundColor: "var(--st-bg-card)" }}
+            >
+              <span className="text-2xl">📘</span>
+              <span className="text-xs font-medium text-center">Buku Moodle</span>
+            </Link>
+          ) : null;
+        })()}
         
         {/* Modul Moodle — internal PDFs from Moodle */}
         {(() => {

@@ -148,9 +148,16 @@ PENTING:
 
       // Find matching material
       const material = batch.find(
-        (m) =>
-          m.subject === (subjekMatch?.[1]?.trim() ?? m.subject) &&
-          m.subTopic === (subtopikMatch?.[1]?.trim() ?? m.subTopic)
+        (m) => {
+          const matchedSubject = m.subject === (subjekMatch?.[1]?.trim() ?? m.subject);
+          const matchedSubTopic = m.subTopic === (subtopikMatch?.[1]?.trim() ?? m.subTopic);
+          const matchedTopic = m.topic === (topikMatch?.[1]?.trim() ?? m.topic);
+          // If subTopic is null, fall back to topic match
+          if (!m.subTopic) {
+            return matchedSubject && matchedTopic;
+          }
+          return matchedSubject && matchedSubTopic;
+        }
       );
 
       if (material && content) {

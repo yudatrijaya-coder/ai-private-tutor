@@ -172,15 +172,39 @@ export const YOUTUBE_RECOMMENDATIONS: YouTubeResource[] = [
     topic: "Daerah Bersejarah",
   },
 
-  // ══════ MATEMATIKA (1 video) ══════
+  // ══════ MATEMATIKA (5 video) ══════
   {
     title: "Pecahan | Matematika SD",
     url: "https://www.youtube.com/watch?v=0hPRfqPFtt8",
     channel: "kejarcita",
     topic: "Pecahan",
   },
+  {
+    title: "Operasi Hitung Pecahan - Matematika Kelas 5",
+    url: "https://www.youtube.com/watch?v=9FMfIFSP_NI",
+    channel: "BIMBEL ONLINE",
+    topic: "Pecahan",
+  },
+  {
+    title: "Kecepatan dan Debit - Matematika Kelas 5 SD",
+    url: "https://www.youtube.com/watch?v=5J8s29WFjSE",
+    channel: "Guru Belajar86 Media",
+    topic: "Kecepatan dan Debit",
+  },
+  {
+    title: "Skala dan Perbandingan - Matematika Kelas 5",
+    url: "https://www.youtube.com/watch?v=FfGSC-yR-Hk",
+    channel: "BIMBEL ONLINE",
+    topic: "Skala",
+  },
+  {
+    title: "Volume Bangun Ruang - Matematika Kelas 5",
+    url: "https://www.youtube.com/watch?v=LvG5i5wG6iw",
+    channel: "BIMBEL ONLINE",
+    topic: "Bangun Ruang",
+  },
 
-  // ══════ BAHASA INDONESIA (1 video) ══════
+  // ══════ BAHASA INDONESIA (3 video) ══════
   {
     title: "Bahasa Indonesia Kelas 5 - Aku Yang Unik (Bab 1)",
     url: "https://youtu.be/EUoX5UYmvYw",
@@ -237,11 +261,23 @@ export function getYouTubeForTopic(
   // 3) Fallback: subject-level — match by subject keywords in video title
   if (matches.length === 0) {
     const subjLower = _subject.toLowerCase();
-    const subjTokens = subjLower.split(/\s+/);
+    
+    // Strategy A: full subject name appears in title (e.g. "bahasa indonesia")
     matches = pool.filter((yt) => {
       const title = yt.title.toLowerCase();
-      return subjTokens.some(st => title.includes(st));
+      return title.includes(subjLower);
     });
+    
+    // Strategy B: ALL significant tokens appear in title
+    if (matches.length === 0) {
+      const subjTokens = subjLower.split(/\s+/).filter(t => t.length > 2);
+      if (subjTokens.length >= 2) {
+        matches = pool.filter((yt) => {
+          const title = yt.title.toLowerCase();
+          return subjTokens.every(t => title.includes(t));
+        });
+      }
+    }
   }
   
   return matches;

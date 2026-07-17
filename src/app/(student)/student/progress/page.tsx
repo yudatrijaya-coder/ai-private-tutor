@@ -201,10 +201,21 @@ const ALL_BADGES = [
 const EMOJI_MAP: Record<string, string> = {
   Matematika: "🔢",
   Bahasa: "📖",
+  "Bahasa Indonesia": "📖",
+  "Bahasa Inggris": "🌏",
   IPA: "🔬",
+  IPAS: "🔬",
   IPS: "🌍",
   Agama: "🕌",
   PKN: "🤝",
+  "Pendidikan Pancasila": "🤝",
+  PJOK: "⚽",
+  Informatika: "💻",
+  Fisika: "⚛️",
+  Kimia: "🧪",
+  Geografi: "🌏",
+  Ekonomi: "💰",
+  Sosiologi: "👥",
 };
 
 /* ── Progress content ── */
