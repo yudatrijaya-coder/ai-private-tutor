@@ -149,9 +149,13 @@ function QuizResult({
           >
             <p className="font-medium mb-1">{q.question}</p>
             <p className="text-xs" style={{ color: "var(--st-text-dim)" }}>
+              {answers[i] === q.correctIndex ? "✅" : "❌"}{" "}
               Jawabanmu: <strong>{q.options[answers[i]]}</strong>
               {answers[i] !== q.correctIndex && (
                 <> · Benar: <strong style={{ color: "var(--st-success)" }}>{q.options[q.correctIndex]}</strong></>
+              )}
+              {answers[i] === q.correctIndex && (
+                <> · <strong style={{ color: "var(--st-success)" }}>Benar! 🎯</strong></>
               )}
             </p>
             {q.explanation && (
@@ -509,8 +513,8 @@ function QuizInner() {
 
       // Track completion BEFORE setting phase to result
       const trackPromise = isExam
-        ? tracker.trackExamComplete(matId || quizId, topic, score, maxScore)
-        : tracker.trackQuizComplete(matId || quizId, topic, score, maxScore);
+        ? tracker.trackExamComplete(matId || quizId, topic, score, maxScore, quiz?.id)
+        : tracker.trackQuizComplete(matId || quizId, topic, score, maxScore, quiz?.id);
 
       setAnswers(ans);
       setPhase("result");

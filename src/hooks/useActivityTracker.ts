@@ -15,7 +15,7 @@ type Metadata = {
 
 export function useActivityTracker(studentId: string | null, subject: string) {
   const postActivity = useCallback(
-    (type: string, materialId?: string | null, extraMetadata: Partial<Metadata> = {}) => {
+    (type: string, materialId?: string | null, extraMetadata: Partial<Metadata> = {}, quizId?: string | null) => {
       if (!studentId) return;
 
       const metadata: Metadata = {
@@ -29,6 +29,7 @@ export function useActivityTracker(studentId: string | null, subject: string) {
         body: JSON.stringify({
           studentId,
           materialId: materialId || undefined,
+          quizId: quizId || undefined,
           type,
           metadata,
         }),
@@ -69,8 +70,8 @@ export function useActivityTracker(studentId: string | null, subject: string) {
   );
 
   const trackQuizComplete = useCallback(
-    (materialId?: string | null, topic?: string, score?: number, maxScore?: number) => {
-      postActivity("quiz_complete", materialId, { topic, score, maxScore });
+    (materialId?: string | null, topic?: string, score?: number, maxScore?: number, quizId?: string | null) => {
+      postActivity("quiz_complete", materialId, { topic, score, maxScore }, quizId);
     },
     [postActivity]
   );
@@ -83,8 +84,8 @@ export function useActivityTracker(studentId: string | null, subject: string) {
   );
 
   const trackExamComplete = useCallback(
-    (materialId?: string | null, topic?: string, score?: number, maxScore?: number) => {
-      postActivity("exam_complete", materialId, { topic, score, maxScore });
+    (materialId?: string | null, topic?: string, score?: number, maxScore?: number, quizId?: string | null) => {
+      postActivity("exam_complete", materialId, { topic, score, maxScore }, quizId);
     },
     [postActivity]
   );

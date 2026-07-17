@@ -63,6 +63,9 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Extract quizId from body (optional — for assessment types)
+    const quizId: string | undefined = body?.quizId;
+
     // Create activity log
     await prisma.studentActivity.create({
       data: {
@@ -72,6 +75,31 @@ export async function POST(request: NextRequest) {
         metadata: metadata || {},
       },
     });
+
+    // If assessment type, also create Attempt record
+    if (ASSESSMENT_TYPES.has(type) && quizId) {
+      try {
+        const score: number = metadata?.score ?? 0;
+        const maxScore: number = metadata?.maxScore ?? 0;
+        const answers = typeof metadata?.answers === 'object' && Array.isArray(metadata.answers) 
+          ? metadata.answers 
+          : [];
+        
+        await prisma.attempt.create({
+          data: {
+            quizId,
+            studentId: student.id,
+            type: EXAM_TYPES.has(type) ? "EXAM" : "QUIZ",
+            answers: answers.length > 0 ? answers : [],
+            score,
+            maxScore,
+            createdAt: new Date(),
+          },
+        });
+      } catch (err) {
+        console.error("[api/students/activity] Failed to create Attempt:", err);
+      }
+    }
 
     // Update StudentSubjectMastery using the subject from metadata
     const subject: string | undefined = metadata?.subject;

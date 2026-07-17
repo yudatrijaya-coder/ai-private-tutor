@@ -47,7 +47,7 @@ async function SubjectGrid() {
   if (!session) return null;
 
   const student = await prisma.student.findUnique({
-    where: { studentId: session.studentId },
+    where: { id: session.studentId },
     select: { id: true },
   });
   if (!student) return null;

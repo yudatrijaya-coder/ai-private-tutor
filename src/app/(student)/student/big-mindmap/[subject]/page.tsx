@@ -36,7 +36,7 @@ async function BigMindmapContent({ subjectName }: { subjectName: string }) {
   if (!session) return <div className="text-center py-20 text-amber-400">Silakan login dulu</div>;
 
   const student = await prisma.student.findUnique({
-    where: { studentId: session.studentId },
+    where: { id: session.studentId },
     select: { id: true, gradeLevel: true },
   });
   if (!student) return <div className="text-center py-20 text-amber-400">Siswa tidak ditemukan</div>;
