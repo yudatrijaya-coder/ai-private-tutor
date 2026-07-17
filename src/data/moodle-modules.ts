@@ -10,7 +10,13 @@ const MOODLE_BOOKS: Record<string, Record<string, string[]>> = {
   },
   SMA_2: {
     "Bahasa Mandarin": [
-      "/moodle-files/sibi-books/Mandarin_BS_XI.pdf",
+      "/moodle-files/3975_NEW_HSK1_3.0_VOCABULARY.pdf",
+      "/moodle-files/3975_NEW_HSK2_3.0_VOCABULARY.pdf",
+      "/moodle-files/3975_NEW_HSK3_3.0_VOCABULARY.pdf",
+      "/moodle-files/3975_NEW_HSK4_3.0_VOCABULARY.pdf",
+    ],
+    "Pendidikan Agama Katolik": [
+      "/moodle-files/3582_Katolik-BS-KLS-XI.pdf",
     ],
     "Matematika Tingkat Lanjut": [
       "https://moodle.kumbang.sch.id/mod/resource/view.php?id=53029",
@@ -18,11 +24,17 @@ const MOODLE_BOOKS: Record<string, Record<string, string[]>> = {
     "Bahasa Inggris Tingkat Lanjut": [
       "/moodle-files/sibi-books/Inggris_BS_KLS_XI_TL_Rev.pdf",
     ],
-    "Biologi": [
-      "/moodle-files/Biologi_Sistem_Pencernaan.pdf",
+    Biologi: [
+      "/moodle-files/3664_BAB_1_-_SISTEM_PENCERNAAN.pdf",
     ],
-    "Kimia": [
-      "/moodle-files/Kimia_Termokimia.pdf",
+    Fisika: [
+      "/moodle-files/3666_MODUL_FISIKA_XI_SEMESTER_1_update.pdf",
+    ],
+    Kimia: [
+      "/moodle-files/3668_Termokimia_Update_2627.pdf",
+    ],
+    Informatika: [
+      "/moodle-files/3667_kelas_11.pdf",
     ],
   },
 };
@@ -60,11 +72,19 @@ const MOODLE_MODULES: Record<string, Record<string, string[]>> = {
   },
   SMA_2: {
     "Bahasa Mandarin": [
-      "/moodle-files/sibi-books/Mandarin_BS_XI.pdf",
-      "/moodle-files/NEW HSK1 3.0 VOCABULARY.pdf",
-      "/moodle-files/NEW HSK2 3.0 VOCABULARY.pdf",
-      "/moodle-files/NEW HSK3 3.0 VOCABULARY.pdf",
-      "/moodle-files/NEW HSK4 3.0 VOCABULARY.pdf",
+      "/moodle-files/3975_Program_Semester_Ganjil_Genap_XI_2627.pdf",
+      "/moodle-files/3975_SOP_MAPEL_BAHASA_MANDARIN.pdf",
+      "/moodle-files/3975_01_《新HSK教程2》第1课.pptx.pdf",
+      "/moodle-files/3975_02_《新HSK教程2》第2课.pptx.pdf",
+      "/moodle-files/3975_03_《新HSK教程2》第3课.pptx.pdf",
+      "/moodle-files/3975_04_《新HSK教程2》第4课.pptx.pdf",
+    ],
+    "Pendidikan Agama Katolik": [
+      "/moodle-files/3582_Katolik-BS-KLS-XI.pdf",
+    ],
+    "Bahasa Indonesia": [
+      "/moodle-files/3659_Program_Semester_2627_XI_Bahasa_Indonesia_Ganjil.pdf",
+      "/moodle-files/3659_Program_Semester_2627_XI_Bahasa_Indonesia_Genap.pdf",
     ],
     "Matematika Tingkat Lanjut": [
       "/moodle-files/sibi-books/Matematika_BS_KLS_XI_TL_Rev.pdf",
@@ -74,25 +94,46 @@ const MOODLE_MODULES: Record<string, Record<string, string[]>> = {
     "Bahasa Inggris Tingkat Lanjut": [
       "/moodle-files/sibi-books/Inggris_BS_KLS_XI_TL_Rev.pdf",
     ],
-    // --- MODUL BARU dari scraping Moodle ---
-    "Biologi": [
-      "/moodle-files/Biologi_Sistem_Pencernaan.pdf",
+    // --- MODUL dari scraping Moodle ---
+    Biologi: [
+      "/moodle-files/3664_Program_Semester_Biologi_2627_kelas_XI.pdf",
+      "/moodle-files/3664_BAB_1_-_SISTEM_PENCERNAAN.pdf",
     ],
-    "Kimia": [
-      "/moodle-files/Kimia_Termokimia.pdf",
+    Fisika: [
+      "/moodle-files/3666_Revisi_Formulir_Program_Semester_2627_kelas_XI_ganjil.pdf",
+      "/moodle-files/3666_MODUL_FISIKA_XI_SEMESTER_1_update.pdf",
     ],
-    "Informatika": [
-      "/moodle-files/Informatika_Logika_Algoritma.pptx",
+    Kimia: [
+      "/moodle-files/3668_Formulir_Program_Semester_2627_kimia_kelas_XI_1_.xlsx",
+      "/moodle-files/3668_Termokimia_Update_2627.pdf",
+    ],
+    Informatika: [
+      "/moodle-files/3667_Progsem_Ganjil_XI.pdf",
+      "/moodle-files/3667_Progsem_Genap_XI.pdf",
+      "/moodle-files/3667_kelas_11.pdf",
     ],
     "Matematika Penalaran": [
-      "/moodle-files/MTK_Penalaran_P1.pdf",
+      "/moodle-files/3673_Program_Semester_Matematika_Penalaran.xlsx",
+      "/moodle-files/3673_Penalaran_P1.pdf",
+    ],
+    Matematika: [
+      "/moodle-files/3675_Program_Semester_Matematika_Umum_2627_kelas_XI.xlsx",
+      "/moodle-files/3675_Matriks_Bagian_1-2_.pdf",
+    ],
+    "Pendidikan Pancasila": [
+      "/moodle-files/3676_Progsem_kelas_XI_2627.xlsx",
+    ],
+    Sejarah: [
+      "/moodle-files/3677_PROSEM_KELAS_XI_2627.xlsx",
     ],
     "Literasi dalam Bahasa Indonesia": [
-      "/moodle-files/Literasi_Bank_Soal.pdf",
+      "/moodle-files/3670_Program_Semester_2627_XI_Literasi.xlsx",
+      "/moodle-files/3670_1-15_Bank_Soal__Penalaran_Umum.pdf",
     ],
-    "Matematika": [
-      "/moodle-files/Matematika_Matriks.pdf",
-    ],
+    "English Literacy": [],
+    "Peminatan Ekonomi": [],
+    "Peminatan Bahasa Inggris Tingkat Lanjut": [],
+    "Literasi dalam Bahasa Inggris": [],
   },
 };
 
