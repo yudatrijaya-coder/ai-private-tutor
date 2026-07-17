@@ -1,19 +1,13 @@
 /**
  * Guardian — Admission Handler
  *
- * Called when a parent adds a new child to the system.
- * Orchestrates the full admission workflow:
- *   1. Create student in DB
- *   2. If template student exists for the same grade level → deep-copy entire curriculum
- *   3. Otherwise, fall back to generating curriculum from data banks
- *   4. Set up initial schedule (daily 06:30 + intensive Mon/Wed/Fri 16:00)
- *   5. Log to AgentLog
+ * Creates a PENDING student record (no content, no telegram).
+ * Admin approves via /api/admin/students/approve → activates + copies template.
  *
  * @module @/agents/guardian/admission
  */
 
 import { prisma } from "@/lib/prisma";
-import { generateCurriculumDraft } from "@/agents/curriculum";
 import type { Prisma } from "@/generated/prisma/client";
 import bcrypt from "bcryptjs";
 
@@ -211,7 +205,7 @@ export async function handleAdmission(input: AdmissionInput): Promise<AdmissionR
       agentType: "GUARDIAN",
       action: "admission_pending",
       studentId: student.id,
-      status: "PENDING",
+      status: "QUEUED",
       input: json({ parentUserId, name, gradeLevel, telegramId }),
       output: json({ id: student.id, studentId: student.studentId, status: "PENDING" }),
     },
