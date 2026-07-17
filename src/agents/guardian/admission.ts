@@ -72,7 +72,7 @@ function generateStudentId(name: string, _gradeLevel: string): string {
  *
  * Returns true if a template was copied, false if no template found.
  */
-async function tryCopyFromTemplate(
+export async function tryCopyFromTemplate(
   studentId: string,
   gradeLevel: string,
 ): Promise<string | null> {
@@ -184,13 +184,14 @@ export async function handleAdmission(input: AdmissionInput): Promise<AdmissionR
   const DEFAULT_PASSWORD = "belajar123";
   const passwordHash = await bcrypt.hash(DEFAULT_PASSWORD, 10);
 
-  // 1. Create student in DB
+  // 1. Create student in DB as PENDING (waiting for admin approval)
   const student = await prisma.student.create({
     data: {
       studentId: generateStudentId(name, gradeLevel),
       name,
       telegramId: telegramId ?? null,
       gradeLevel,
+      status: "PENDING",
       persona: personaMap[gradeLevel] as any ?? "KAK_BUDI",
       characterPreference: characterPreference ?? null,
       interests: interests ?? null,
@@ -199,107 +200,28 @@ export async function handleAdmission(input: AdmissionInput): Promise<AdmissionR
     },
   });
 
-  console.log(`[guardian/admission] Created student=${student.id} (${name}, ${gradeLevel})`);
+  console.log(`[guardian/admission] Created PENDING student=${student.id} (${name}, ${gradeLevel}) — awaiting admin approval`);
 
-  // 2. Try template copy first
-  let copiedFromTemplate: string | null = null;
-  let curriculumEnqueued = false;
+  // Content copy + schedule + telegram notification → handled by admin approve endpoint
+  // Student record is created but inactive until admin approves
 
-  copiedFromTemplate = await tryCopyFromTemplate(student.id, gradeLevel);
-
-  if (copiedFromTemplate) {
-    curriculumEnqueued = true;
-  } else {
-    // Fallback: generate curriculum from data banks
-    await generateCurriculumDraft(student.id);
-    curriculumEnqueued = true;
-    console.log(
-      `[guardian/admission] Generated curriculum draft for student=${student.id} (no template found)`,
-    );
-  }
-
-  // 3. Set up initial schedule
-  const sessions = buildInitialSchedule(student.id);
-  if (sessions.length > 0) {
-    await prisma.scheduleSession.createMany({ data: sessions });
-    console.log(`[guardian/admission] Created ${sessions.length} initial schedule session(s)`);
-  }
-
-  // 4. Kirim notif credentials ke Telegram (jika ada telegramId)
-  if (student.telegramId) {
-    try {
-      const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-      if (BOT_TOKEN) {
-        const gradeLabels: Record<string, string> = {
-          SD_5: "SD Kelas 5",
-          SMP_1: "SMP Kelas 1",
-          SMA_2: "SMA Kelas 2",
-        };
-        const label = gradeLabels[gradeLevel] ?? gradeLevel;
-        const msg = [
-          `🌐 *Dashboard Belajar Kamu!*`,
-          ``,
-          `Halo *${student.name}!*`,
-          `Admin sudah mendaftarkan kamu. Yuk cobain dashboard belajar online!`,
-          `[Buka Dashboard](https://senangbelajar.web.id/login/student)`,
-          ``,
-          `📋 *Data Login Kamu:*`,
-          `🆔 ID Siswa: \`${student.studentId}\``,
-          `🔑 Password: \`${DEFAULT_PASSWORD}\` (default)`,
-          `📖 Kelas: ${label}`,
-          ``,
-          `Di dashboard kamu bisa:`,
-          `📚 Baca materi pelajaran`,
-          `🧠 Lihat mindmap interaktif`,
-          `📝 Kerjakan quiz & latihan`,
-          `📅 Cek jadwal belajar`,
-          `📊 Lihat progress belajar`,
-          ``,
-          `*Jangan lupa ganti password setelah login pertama ya!* 🔐`,
-          ``,
-          `Semangat belajarnya! 💪🔥`,
-        ].join("\n");
-
-        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            chat_id: student.telegramId,
-            text: msg,
-            parse_mode: "Markdown",
-          }),
-        });
-        console.log(`[guardian/admission] Sent credentials to ${student.name} (@${student.telegramId})`);
-      }
-    } catch (err) {
-      // Non-critical — don't fail admission for Telegram failure
-      console.error(`[guardian/admission] Failed to send credentials to ${student.name}:`, err);
-    }
-  }
-
-  // 5. Log to AgentLog
+  // Log to AgentLog
   await prisma.agentLog.create({
     data: {
       agentType: "GUARDIAN",
-      action: "admission",
+      action: "admission_pending",
       studentId: student.id,
-      status: "COMPLETED",
-      input: json({ parentUserId, name, gradeLevel }),
-      output: json({
-        studentId: student.id,
-        curriculumDraftGenerated: true,
-        sessionCount: sessions.length,
-        copiedFromTemplate,
-      }),
+      status: "PENDING",
+      input: json({ parentUserId, name, gradeLevel, telegramId }),
+      output: json({ id: student.id, studentId: student.studentId, status: "PENDING" }),
     },
   });
 
   return {
     id: student.id,
     studentId: student.studentId,
-    curriculumEnqueued,
-    sessionCount: sessions.length,
-    copiedFromTemplate: copiedFromTemplate ?? undefined,
+    curriculumEnqueued: false, // not ready yet
+    sessionCount: 0,
   };
 }
 

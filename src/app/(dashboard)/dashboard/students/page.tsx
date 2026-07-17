@@ -751,6 +751,54 @@ export default function StudentsPage() {
     }
   }
 
+  async function handleApprove(id: string, name: string) {
+    setActionLoading(id);
+    try {
+      const res = await fetch(`/api/admin/students/approve`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "approve" }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        showToast(`✅ "${name}" disetujui! Content digenerate...`, "success");
+        fetchStudents();
+        fetchStats();
+      } else {
+        const e = await res.json();
+        showToast(`❌ ${e.error}`, "error");
+      }
+    } catch {
+      showToast("❌ Gagal approve", "error");
+    } finally {
+      setActionLoading(id);
+    }
+  }
+
+  async function handleReject(id: string, name: string) {
+    if (!confirm(`⚠️ Yakin tolak "${name}"?\n\nStudent akan dihapus permanen dari database.`)) return;
+    setActionLoading(id);
+    try {
+      const res = await fetch(`/api/admin/students/approve`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "reject" }),
+      });
+      if (res.ok) {
+        showToast(`❌ "${name}" ditolak & dihapus`, "success");
+        fetchStudents();
+        fetchStats();
+      } else {
+        const e = await res.json();
+        showToast(`❌ ${e.error}`, "error");
+      }
+    } catch {
+      showToast("❌ Gagal reject", "error");
+    } finally {
+      setActionLoading(id);
+    }
+  }
+
   async function handleRestore(id: string, name: string) {
     setActionLoading(id);
     try {
@@ -1513,6 +1561,33 @@ export default function StudentsPage() {
                               >
                                 {isLoading ? "..." : "▶️"}
                               </button>
+                            ) : s.status === "PENDING" ? (
+                              <>
+                                <button
+                                  onClick={() => handleApprove(s.id, s.name)}
+                                  disabled={isLoading}
+                                  className="p-1.5 rounded-lg text-xs cursor-pointer disabled:opacity-40 transition-colors hover:opacity-80"
+                                  style={{
+                                    backgroundColor: "rgba(34,197,94,0.12)",
+                                    color: "var(--su-success)",
+                                  }}
+                                  title="Approve — aktifkan + generate content"
+                                >
+                                  {isLoading ? "..." : "✅"}
+                                </button>
+                                <button
+                                  onClick={() => handleReject(s.id, s.name)}
+                                  disabled={isLoading}
+                                  className="p-1.5 rounded-lg text-xs cursor-pointer disabled:opacity-40 transition-colors hover:opacity-80"
+                                  style={{
+                                    backgroundColor: "rgba(239,68,68,0.12)",
+                                    color: "var(--su-danger)",
+                                  }}
+                                  title="Reject — hapus dari database"
+                                >
+                                  {isLoading ? "..." : "❌"}
+                                </button>
+                              </>
                             ) : null}
 
                             {/* Archive / Restore */}
