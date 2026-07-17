@@ -17,6 +17,111 @@ const ASSESSMENT_TYPES = new Set(["quiz_complete", "exam_complete"]);
 const EXAM_TYPES = new Set(["exam_complete", "exam_start"]);
 
 /**
+ * GET /api/students/activity
+ * Fetch activity state for a student — quiz attempts + slide views per material.
+ * Used by student pages to show "already done" indicators.
+ */
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const studentId = searchParams.get("studentId"); // login ID like "STU_MROL1SKX"
+
+  if (!studentId) {
+    return NextResponse.json({ error: "studentId required" }, { status: 400 });
+  }
+
+  const student = await prisma.student.findUnique({ where: { studentId } });
+  if (!student) {
+    return NextResponse.json({ error: "Student not found" }, { status: 404 });
+  }
+
+  const uid = student.id; // internal UUID
+
+  // Quiz attempts per material — latest attempt per quiz
+  const quizAttempts = await prisma.attempt.findMany({
+    where: { studentId: uid },
+    orderBy: { createdAt: "desc" },
+    select: {
+      id: true,
+      quizId: true,
+      type: true,
+      score: true,
+      maxScore: true,
+      createdAt: true,
+      timeSpent: true,
+      quiz: {
+        select: { materialId: true },
+      },
+    },
+  });
+
+  // Group by materialId → best score
+  const quizByMaterial = new Map<string, {
+    attempts: number;
+    bestScore: number;
+    bestMax: number;
+    lastScore: number;
+    lastMax: number;
+    lastAt: string;
+    lastAttemptId: string;
+  }>();
+
+  for (const a of quizAttempts) {
+    const mid = a.quiz?.materialId;
+    if (!mid) continue;
+    if (!quizByMaterial.has(mid)) {
+      quizByMaterial.set(mid, {
+        attempts: 0, bestScore: 0, bestMax: 0,
+        lastScore: 0, lastMax: 0,
+        lastAt: "", lastAttemptId: "",
+      });
+    }
+    const entry = quizByMaterial.get(mid)!;
+    entry.attempts++;
+    if (a.score > entry.bestScore) {
+      entry.bestScore = a.score;
+      entry.bestMax = a.maxScore;
+    }
+    // Track last attempt (already sorted desc)
+    if (!entry.lastAttemptId) {
+      entry.lastScore = a.score;
+      entry.lastMax = a.maxScore;
+      entry.lastAt = a.createdAt.toISOString();
+      entry.lastAttemptId = a.id;
+    }
+  }
+
+  // Slide views per materialId
+  const slideViews = await prisma.studentActivity.findMany({
+    where: { studentId: uid, type: "slide_view" },
+    orderBy: { createdAt: "desc" },
+    select: { materialId: true, createdAt: true },
+  });
+  const readMaterials = new Set(slideViews.map((v) => v.materialId).filter(Boolean));
+
+  // Mindmap views
+  const mindmapViews = await prisma.studentActivity.findMany({
+    where: { studentId: uid, type: "mindmap_view" },
+    select: { materialId: true },
+  });
+  const viewedMindmaps = new Set(mindmapViews.map((v) => v.materialId).filter(Boolean));
+
+  // Video clicks
+  const videoClicks = await prisma.studentActivity.findMany({
+    where: { studentId: uid, type: "video_click" },
+    select: { materialId: true },
+  });
+  const watchedVideos = new Set(videoClicks.map((v) => v.materialId).filter(Boolean));
+
+  return NextResponse.json({
+    studentId: uid,
+    byMaterial: Object.fromEntries(quizByMaterial),
+    readMaterials: Array.from(readMaterials),
+    viewedMindmaps: Array.from(viewedMindmaps),
+    watchedVideos: Array.from(watchedVideos),
+  });
+}
+
+/**
  * POST /api/students/activity
  * Log student activity and update subject mastery.
  */

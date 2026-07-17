@@ -25,8 +25,18 @@ interface QuizData {
 interface QuizListItem {
   id: string;
   type: string;
+  materialId?: string;
   material: { subject: string; topic: string };
   questions: number;
+}
+
+/** Activity state for a material — from GET /api/students/activity */
+interface MaterialActivity {
+  attempts: number;
+  bestScore: number;
+  bestMax: number;
+  lastScore: number;
+  lastMax: number;
 }
 
 const EMOJI_PER_SUBJECT: Record<string, string> = {
@@ -290,10 +300,12 @@ function QuizPicker({
   quizzes,
   onPick,
   onBack,
+  activityByMaterial,
 }: {
   quizzes: QuizListItem[];
   onPick: (id: string) => void;
   onBack: () => void;
+  activityByMaterial: Record<string, MaterialActivity>;
 }) {
   return (
     <div className="space-y-3">
@@ -308,24 +320,34 @@ function QuizPicker({
           Belum ada quiz untuk mata pelajaran ini.
         </p>
       ) : (
-        quizzes.map((q) => (
-          <button
-            key={q.id}
-            onClick={() => onPick(q.id)}
-            className="w-full text-left rounded-xl p-4 transition-all hover:scale-[1.01] active:scale-95"
-            style={{ backgroundColor: "var(--st-bg-card)" }}
-          >
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-semibold text-sm">{q.material.topic}</p>
-                <p className="text-xs mt-0.5" style={{ color: "var(--st-text-dim)" }}>
-                  {q.type === "EXAM" ? "📋 Exam" : "📝 Quiz"} · {q.questions} soal
-                </p>
-              </div>
-              <span className="text-lg">→</span>
-            </div>
-          </button>
-        ))
+        quizzes.map((q) => {
+            const act = q.materialId ? activityByMaterial[q.materialId] : null;
+            const isDone = !!act && act.attempts > 0;
+            const pct = act && act.bestMax > 0 ? Math.round((act.bestScore / act.bestMax) * 100) : null;
+            return (
+              <button
+                key={q.id}
+                onClick={() => onPick(q.id)}
+                className="w-full text-left rounded-xl p-4 transition-all hover:scale-[1.01] active:scale-95"
+                style={{ backgroundColor: "var(--st-bg-card)" }}
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-semibold text-sm">{q.material.topic}</p>
+                    <p className="text-xs mt-0.5" style={{ color: "var(--st-text-dim)" }}>
+                      {q.type === "EXAM" ? "📋 Exam" : "📝 Quiz"} · {q.questions} soal
+                      {isDone && act && (
+                        <span className="ml-2">
+                          {" "}✅ Sudah kerjain {act.attempts}x · Skor terbaik {pct}%
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                  <span className="text-lg">→</span>
+                </div>
+              </button>
+            );
+          })
       )}
     </div>
   );
@@ -348,6 +370,7 @@ function QuizInner() {
   const [subjects, setSubjects] = useState<string[]>([]);
   const [showExitModal, setShowExitModal] = useState(false);
   const [showBackModal, setShowBackModal] = useState(false);
+  const [activityByMaterial, setActivityByMaterial] = useState<Record<string, MaterialActivity>>({});
 
   // Ref to store pending exit action
   const pendingExitAction = useRef<(() => void) | null>(null);
@@ -375,6 +398,17 @@ function QuizInner() {
       })
       .catch(() => setError("Gagal verifikasi sesi"));
   }, []);
+
+  // Fetch activity state (quiz history per material) for indicator badges
+  useEffect(() => {
+    if (!studentId) return;
+    fetch(`/api/students/activity?studentId=${encodeURIComponent(studentId)}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.byMaterial) setActivityByMaterial(data.byMaterial);
+      })
+      .catch(() => {});
+  }, [studentId]);
 
   // Fetch quiz list for subject — or show subject picker when none selected
   useEffect(() => {
@@ -576,6 +610,7 @@ function QuizInner() {
           window.location.href = `/student/quiz?quizId=${id}`;
         }}
         onBack={() => window.history.back()}
+        activityByMaterial={activityByMaterial}
       />
     );
   }
