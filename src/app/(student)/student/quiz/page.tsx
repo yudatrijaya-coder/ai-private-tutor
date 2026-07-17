@@ -576,15 +576,10 @@ function QuizInner() {
     [quiz, studentId, examMode, quizId, tracker]
   );
 
-  // ── Handle exit (Keluar) with confirmation ──
+  // ── Handle exit (Keluar) — always show confirmation ──
   const handleExit = useCallback(() => {
-    if (isQuizActive) {
-      setShowExitModal(true);
-    } else {
-      if (quizList.length > 0) setPhase("list");
-      else window.location.reload();
-    }
-  }, [isQuizActive, quizList.length]);
+    setShowExitModal(true);
+  }, []);
 
   // ── Confirm exit ──
   const confirmExit = useCallback(() => {
