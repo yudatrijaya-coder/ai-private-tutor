@@ -13,7 +13,7 @@ const MOODLE_BOOKS: Record<string, Record<string, string[]>> = {
       "/moodle-files/sibi-books/Mandarin_BS_XI.pdf",
     ],
     "Matematika Tingkat Lanjut": [
-      "/moodle-files/sibi-books/Matematika_BS_KLS_XI_TL_Rev.pdf",
+      "https://moodle.kumbang.sch.id/mod/resource/view.php?id=53029",
     ],
     "Bahasa Inggris Tingkat Lanjut": [
       "/moodle-files/sibi-books/Inggris_BS_KLS_XI_TL_Rev.pdf",
@@ -68,6 +68,8 @@ const MOODLE_MODULES: Record<string, Record<string, string[]>> = {
     ],
     "Matematika Tingkat Lanjut": [
       "/moodle-files/sibi-books/Matematika_BS_KLS_XI_TL_Rev.pdf",
+      "https://moodle.kumbang.sch.id/mod/resource/view.php?id=53030",
+      "https://moodle.kumbang.sch.id/mod/resource/view.php?id=54390",
     ],
     "Bahasa Inggris Tingkat Lanjut": [
       "/moodle-files/sibi-books/Inggris_BS_KLS_XI_TL_Rev.pdf",

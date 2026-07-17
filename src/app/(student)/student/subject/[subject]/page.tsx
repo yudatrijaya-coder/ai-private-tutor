@@ -60,8 +60,10 @@ const PDF_MAP: Record<string, Record<string, string>> = {
     PJOK: "PJOK_SMA11_BS.pdf",
     Sejarah: "Sejarah_SMA11_BS.pdf",
     Matematika: "Matematika_TL_SMA11_BS.pdf",
+    "Matematika Tingkat Lanjut": "Matematika_TL_SMA11_BS.pdf",
     "Pendidikan Pancasila": "Pancasila_SMA11_BS.pdf",
     "Bahasa Inggris": "Inggris_SMA11_BS.pdf",
+    "Bahasa Inggris Tingkat Lanjut": "Inggris_SMA11_BS.pdf",
   },
 };
 
