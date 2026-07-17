@@ -60,7 +60,27 @@ export async function handleRegister(
     return;
   }
 
-  // 3. Link telegramId if not yet linked
+  // 3. Check approval status
+  if (student.status === "PENDING") {
+    await ctx.reply(
+      `⏳ *Pendaftaran kamu belum disetujui, ${student.name}!*\n\n` +
+        `Admin masih dalam proses review. Mohon tunggu sebentar ya!\n\n` +
+        `Biasanya tidak perlu lama — kalau sudah disetujui, kamu akan dapat notifikasi dari bot ini. 😊`,
+      { parse_mode: "Markdown" },
+    );
+    return;
+  }
+
+  if (student.status === "ARCHIVED") {
+    await ctx.reply(
+      `🚫 *Akun kamu sudah diarsipkan.*\n\n` +
+        `Hubungi admin untuk mengaktifkan kembali.`,
+      { parse_mode: "Markdown" },
+    );
+    return;
+  }
+
+  // 4. Link telegramId if not yet linked
   if (!student.telegramId) {
     await prisma.student.update({
       where: { id: student.id },
@@ -68,14 +88,19 @@ export async function handleRegister(
     });
   }
 
-  // 4. Generate curriculum if not yet created
+  // 5. Generate curriculum from template if not yet created
   const hasCurriculum = student.curriculums.length > 0;
   if (!hasCurriculum) {
     await ctx.reply(`📚 Lagi menyiapkan kurikulum dan materi untukmu...`);
-    await generateCurriculumDraft(student.id);
+    // Try template copy first, fallback to data banks
+    const { tryCopyFromTemplate } = await import("@/agents/guardian/admission");
+    const copied = await tryCopyFromTemplate(student.id, student.gradeLevel);
+    if (!copied) {
+      await generateCurriculumDraft(student.id);
+    }
   }
 
-  // 5. Welcome
+  // 6. Welcome
   const gradeLabels: Record<string, string> = {
     SD_5: "SD Kelas 5",
     SMP_1: "SMP Kelas 1",
