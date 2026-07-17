@@ -43,17 +43,21 @@ export const MODEL_ROUTES: Record<AgentRole, string> = {
 
 /**
  * Vision-capable models only — skips models that don't support image inputs.
- * Used by the vision handler to avoid wasting time on non-vision models.
+ * Used by the vision handler (handlePhoto) to ensure image messages get routed
+ * to a model that can actually process them.
  *
- * ai_tutor_agent (9Router combo) is tried first — the combo has auto-fallback
- * to a vision model internally when it detects image input. If the combo
- * doesn't support vision on the current route, fallback to direct models.
+ * ai_tutor_agent (9Router combo) is NOT included because the combo uses
+ * round-robin/priority routing and may pick a text-only model like deepseek.
+ * We want to hit a KNOWN vision-capable model directly.
+ *
+ * Kimi models first (fastest for vision), then GPT-4o/Gemini as fallback.
  */
 export const VISION_MODELS = [
-  "ai_tutor_agent",                    // 9Router combo — auto-fallback to vision internally
-  "sumopod/gpt-4o-mini",               // known good vision model
+  "sumopod/kimi-k2.6",                   // Kimi K2.6 — fastest vision support
+  "ocg/kimi-k2.6",                       // Kimi direct (9Router OCg route)
+  "sumopod/gpt-4o-mini",                 // known good vision model
   "sumopod/gemini/gemini-2.5-flash-lite", // Google Gemini vision
-  "sumopod/deepseek-v4-flash",         // SumoPod proxy — may support vision
+  "sumopod/deepseek-v4-flash",           // SumoPod proxy — may support vision
 ];
 
 /**
