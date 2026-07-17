@@ -121,6 +121,7 @@ function QuizResult({
   questions,
   onRetry,
   onBack,
+  quizType,
 }: {
   score: number;
   maxScore: number;
@@ -128,13 +129,18 @@ function QuizResult({
   questions: Question[];
   onRetry: () => void;
   onBack: () => void;
+  quizType: string;
 }) {
   const pct = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
   const emoji = pct >= 80 ? "🎉" : pct >= 50 ? "💪" : "📚";
   const msg = pct >= 80 ? "Luar biasa!" : pct >= 50 ? "Terus semangat!" : "Ayo belajar lagi!";
+  const correctCount = answers.filter((a, i) => a === questions[i]?.correctIndex).length;
+  const totalQuestions = questions.length;
+  const badges = questions.map((_, i) => answers[i] === questions[i]?.correctIndex ? "✅" : "❌");
 
   return (
     <div className="space-y-4">
+      {/* Score summary */}
       <div className="text-center py-6">
         <div className="text-6xl mb-2">{emoji}</div>
         <h2 className="text-2xl font-bold" style={{ fontFamily: "var(--font-st-display)" }}>
@@ -143,8 +149,19 @@ function QuizResult({
         <p className="text-lg mt-1">
           Skor: <strong>{score}</strong> / {maxScore} ({pct}%)
         </p>
+        <p className="text-xs mt-0.5" style={{ color: "var(--st-text-dim)" }}>
+          ✅ {correctCount}/{totalQuestions} soal benar · ❌ {totalQuestions - correctCount} salah
+        </p>
       </div>
 
+      {/* Quick summary badges row */}
+      <div className="flex flex-wrap gap-1 justify-center">
+        {badges.map((b, i) => (
+          <span key={i} className="text-sm" title={`Soal ${i + 1}`}>{b}</span>
+        ))}
+      </div>
+
+      {/* Per-question review */}
       <div className="space-y-3">
         {questions.map((q, i) => (
           <div
@@ -168,9 +185,13 @@ function QuizResult({
                 <> · <strong style={{ color: "var(--st-success)" }}>Benar! 🎯</strong></>
               )}
             </p>
-            {q.explanation && (
+            {q.explanation ? (
               <p className="text-xs mt-1" style={{ color: "var(--st-text-dim)" }}>
                 💡 {q.explanation}
+              </p>
+            ) : (
+              <p className="text-xs mt-1" style={{ color: "var(--st-text-dim)" }}>
+                💡 Jawaban benar: <strong>{q.options[q.correctIndex]}</strong>
               </p>
             )}
           </div>
@@ -625,6 +646,7 @@ function QuizInner() {
         questions={quiz.questions}
         onRetry={() => setPhase("quiz")}
         onBack={() => window.location.reload()}
+        quizType={quiz.type}
       />
     );
   }
