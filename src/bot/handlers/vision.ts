@@ -5,15 +5,12 @@ import { callLLM } from "@/llm/client";
 import { SYSTEM_PROMPTS } from "@/llm/prompts";
 import { setSession } from "../session";
 import { scanResponse } from "../safety";
+import { VISION_MODELS } from "@/llm/client";
 
 /**
  * Photo / vision handler.
- *
- * Strategy: call 9Router combo (ai_tutor_agent) which auto-detects image input
- * and internally falls back to a vision-capable model. No manual model list
- * needed — 9Router handles the routing.
- *
- * Timeout is generous (120s) because the combo may take time switching models.
+ * Uses VISION_MODELS chain — only vision-capable models.
+ * 9Router combo (ai_tutor_agent) is first — try it first.
  */
 export async function handlePhoto(ctx: Context, student: Student): Promise<void> {
   const msg = ctx.message;
@@ -36,6 +33,7 @@ export async function handlePhoto(ctx: Context, student: Student): Promise<void>
 
     const systemContent = `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${toneRules}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nGrade: ${student.gradeLevel}`;
 
+    // Use VISION_MODELS chain — try ai_tutor_agent combo first, fallback to direct vision models
     const response = await callLLM("tutor", [
       { role: "system", content: systemContent },
       {
@@ -50,7 +48,7 @@ export async function handlePhoto(ctx: Context, student: Student): Promise<void>
       maxTokens: 1024,
       timeoutMs: 120_000,
       studentId: student.id,
-      // Don't pass models override — let 9Router combo auto-detect vision
+      models: VISION_MODELS,
     });
 
     const safeResponse = await scanResponse(student.id, response ?? "");
