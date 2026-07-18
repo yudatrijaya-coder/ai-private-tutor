@@ -1,12 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-
-/** Generate a studentId from name + grade level + timestamp */
-function generateStudentId(name: string, _gradeLevel: string): string {
-  const prefix = name.substring(0, 4).toUpperCase();
-  const num = String(Date.now()).slice(-5);
-  return `${prefix}${num}`;
-}
+import { generateStudentId } from "@/lib/studentId";
 
 /**
  * GET /api/admin/students
@@ -115,7 +109,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const studentId = generateStudentId(name, gradeLevel);
+    const studentId = await generateStudentId(name);
 
     // Auto-assign persona based on grade level if not provided
     const personaMap: Record<string, string> = {

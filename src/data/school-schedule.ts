@@ -2,11 +2,9 @@
  * Jadwal sekolah asli dari portal SiKumbang.
  * Data di-scrape langsung dari https://si.kumbang.sch.id/
  *
- * Format: { [studentCode]: { [day]: { time: string, subject: string, room: string, teacher: string, linkZoom?: string }[] } }
+ * Format: { [studentId]: { [day]: { time: string, subject: string, room: string, teacher: string, linkZoom?: string }[] } }
  *
- * studentCode = kode unik yg ada di tabel Student (identifier)
- * Raihan → H4LX (dari STU_MRHLH4LX)
- * SHOFI → H0EX2D (dari SHOF_H0EX2D)
+ * studentId = kode unik yg ada di tabel Student
  */
 
 export type SchoolScheduleEntry = {
@@ -34,15 +32,15 @@ function normaliseDay(day: string): string {
 }
 
 /**
- * Ambil jadwal untuk student berdasarkan kode student.
- * Fallback ke studentId jika kode tidak dikenal.
+ * Ambil jadwal untuk student berdasarkan studentId.
+ * Fallback ke null jika tidak dikenal.
  */
 export function getSchoolSchedule(
   studentCode: string,
 ): WeekSchedule | null {
-  // Cari di map — cocokkan akhiran kode (case-insensitive)
+  // Cari di map dengan exact match (studentId sekarang NAMA001 format)
   const key = Object.keys(SCHEDULE_MAP).find((k) =>
-    studentCode.toUpperCase().includes(k.toUpperCase()),
+    studentCode.toUpperCase() === k.toUpperCase(),
   );
   if (!key) return null;
   return SCHEDULE_MAP[key];
@@ -90,7 +88,7 @@ export function getAvailableDays(studentCode: string): string[] {
 
 const SCHEDULE_MAP: SchoolScheduleMap = {
   // ─── Raihan (SMP VII A) ───
-  H4LX: {
+  RAIHAN001: {
     Senin: [
       { time: "07:00 - 07:40", subject: "Biologi", room: "Ruang Kelas", teacher: "Lucia Ermalina, S.Pd.", linkZoom: "https://meet.google.com/vvu-vato-sud" },
       { time: "07:40 - 08:20", subject: "Biologi", room: "Ruang Kelas", teacher: "Lucia Ermalina, S.Pd.", linkZoom: "https://meet.google.com/vvu-vato-sud" },
@@ -147,9 +145,8 @@ const SCHEDULE_MAP: SchoolScheduleMap = {
     ],
   },
 
-  // ─── SHOFI (SMA XI 4) — FULL WEEK ───
-  // ─── Syifa (SD Kelas 5 Abu Hurairah) — dari scan jadwal PDF ───
-  L5FY: { // DB: STU_MRHL5FYL → akhiran L5FY
+  // ─── Syifa (SD) ───
+  SYIFA001: {
     Senin: [
       { time: "07:00 - 07:15", subject: "Ikrar dan Dhuha", room: "Ruang Kelas", teacher: "Fety Cesilia, S.Pd.,Gr." },
       { time: "07:15 - 07:50", subject: "Tahfidz", room: "Ruang Kelas", teacher: "Fety Cesilia, S.Pd.,Gr." },
@@ -225,8 +222,8 @@ const SCHEDULE_MAP: SchoolScheduleMap = {
       { time: "13:00 - 13:30", subject: "Tamyiz", room: "Ruang Kelas", teacher: "Fety Cesilia, S.Pd.,Gr." },
     ],
   },
-
-  RHQL6KX: { // DB: STU_MRHQL6KX
+  // ─── SHOFI (SMA XI 4) — FULL WEEK ───
+  SHOFI001: {
     Senin: [
       { time: "07:00 - 07:40", subject: "Bahasa Inggris", room: "Ruang Kelas", teacher: "Tyani Alrizki, S.S." },
       { time: "07:40 - 08:20", subject: "Bahasa Inggris", room: "Ruang Kelas", teacher: "Tyani Alrizki, S.S." },

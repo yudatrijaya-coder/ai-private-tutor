@@ -14,6 +14,7 @@
 import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@/generated/prisma/client";
 import bcrypt from "bcryptjs";
+import { generateStudentId } from "@/lib/studentId";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -50,13 +51,6 @@ export interface AdmissionResult {
 /** Serialise arbitrary data for a Prisma Json field. */
 function json(value: unknown): Prisma.InputJsonValue {
   return JSON.parse(JSON.stringify(value ?? {})) as Prisma.InputJsonValue;
-}
-
-/** Generate a studentId from name + grade level. */
-function generateStudentId(name: string, _gradeLevel: string): string {
-  const prefix = name.substring(0, 4).toUpperCase();
-  const num = String(Date.now()).slice(-5);
-  return `${prefix}${num}`;
 }
 
 /* ------------------------------------------------------------------ */
@@ -185,7 +179,7 @@ export async function handleAdmission(input: AdmissionInput): Promise<AdmissionR
   // 1. Create student in DB as PENDING (waiting for admin approval)
   const student = await prisma.student.create({
     data: {
-      studentId: generateStudentId(name, gradeLevel),
+      studentId: await generateStudentId(name),
       name,
       telegramId: telegramId ?? null,
       gradeLevel,
