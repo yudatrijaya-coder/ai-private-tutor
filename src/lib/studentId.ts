@@ -1,13 +1,25 @@
 import { prisma } from "@/lib/prisma";
 
-/** Generate next studentId: e.g. RUDI001, SYIFA001 */
+/**
+ * Generate next studentId: e.g. RUDI001, RAIHAN001, SALSA001
+ *
+ * Rules:
+ * - Base = uppercase + only A-Z (angka/huruf lain dibuang)
+ * - Base max 6 chars — kalau nama > 6, dishortened ke 5 chars biar lebih natural
+ *   (contoh: SALSABILA → SALSA, bukan SALSAB)
+ * - Nomor urut 3 digit (001, 002, ...) — auto-increment per base
+ * - Full format: BASE + 3 digit = max 9 chars (RAIHAN001)
+ */
 export async function generateStudentId(name: string): Promise<string> {
-  const base = name
+  const cleaned = name
     .toUpperCase()
-    .replace(/[^A-Z0-9]/g, "")
-    .substring(0, 6)
-    .padEnd(3, "X");
-  
+    .replace(/[^A-Z0-9]/g, "");
+
+  // Shorten: if > 6 chars, ambil 5 huruf pertama (lebih natural)
+  const base = cleaned.length > 6
+    ? cleaned.substring(0, 5)
+    : cleaned.substring(0, 6).padEnd(3, "X");
+
   // Cari nomor counter tertinggi untuk base ini
   const existing = await prisma.student.findMany({
     where: { studentId: { startsWith: base } },
