@@ -802,4 +802,118 @@ export const YOUTUBE_SMA11: YouTubeResource[] = [
     channel: "Fuady education",
     topic: "Jaringan",
   },
+
+  // ══════ KIMIA ══════
+
+  // Termokimia
+  {
+    title: "Termokimia (1) | Entalpi dan Perubahan Entalpi | Persamaan Termokimia",
+    url: "https://www.youtube.com/watch?v=FjNThpLAkOY",
+    channel: "Kimatika",
+    topic: "Termokimia",
+  },
+  {
+    title: "Termokimia: Kalor dan Entalpi | Kimia | SMA",
+    url: "https://www.youtube.com/watch?v=9D6WGcLf7UU",
+    channel: "kejarcita",
+    topic: "Termokimia",
+  },
+
+  // Laju Reaksi
+  {
+    title: "Laju Reaksi (1) | Konsep Laju Reaksi | Kimia Kelas 11",
+    url: "https://www.youtube.com/watch?v=JWRH5mibIws",
+    channel: "Kimatika",
+    topic: "Laju Reaksi",
+  },
+  {
+    title: "Laju Reaksi - Kimia Kelas 11 (Quipper Video)",
+    url: "https://www.youtube.com/watch?v=lE3-HOasaU8",
+    channel: "Quipper Indonesia",
+    topic: "Laju Reaksi",
+  },
+
+  // Kesetimbangan Kimia
+  {
+    title: "Reaksi Kesetimbangan | Tetapan Kesetimbangan Kc | Kimia Kelas 11",
+    url: "https://www.youtube.com/watch?v=oDR1CJHEq9A",
+    channel: "Kimatika",
+    topic: "Kesetimbangan Kimia",
+  },
+  {
+    title: "KIMIA Kelas 11 - Kesetimbangan Kimia | GIA Academy",
+    url: "https://www.youtube.com/watch?v=xD8TFFL9TRA",
+    channel: "GIA Academy",
+    topic: "Kesetimbangan Kimia",
+  },
+
+  // Asam dan Basa
+  {
+    title: "Larutan Asam Basa (1) | Teori Asam dan Basa | Kimia Kelas 11",
+    url: "https://www.youtube.com/watch?v=e_0mceAEvks",
+    channel: "Kimatika",
+    topic: "Asam dan Basa",
+  },
+  {
+    title: "Larutan Asam Basa (2) | Indikator Asam dan Basa | Kimia Kelas 11",
+    url: "https://www.youtube.com/watch?v=4aJckRYT-mk",
+    channel: "Kimatika",
+    topic: "Asam dan Basa",
+  },
+
+  // Larutan Penyangga
+  {
+    title: "KIMIA Kelas 11 - Larutan Penyangga | GIA Academy",
+    url: "https://www.youtube.com/watch?v=b0xsz9Zrq20",
+    channel: "GIA Academy",
+    topic: "Larutan Penyangga",
+  },
+  {
+    title: "Larutan Penyangga (1) | Jenis-jenis Larutan Penyangga | Cara Kerja",
+    url: "https://www.youtube.com/watch?v=N-0aZuKpgzE",
+    channel: "Kimatika",
+    topic: "Larutan Penyangga",
+  },
+
+  // Hidrolisis Garam
+  {
+    title: "Hidrolisis Garam (1) | Sifat Garam | Reaksi Hidrolisis | Kimia XI",
+    url: "https://www.youtube.com/watch?v=w3VkBDgOadg",
+    channel: "Kimatika",
+    topic: "Hidrolisis Garam",
+  },
+  {
+    title: "HIDROLISIS GARAM - MATERI UTBK SBMPTN DAN SIMAK UI",
+    url: "https://www.youtube.com/watch?v=x8cItpmNLb0",
+    channel: "Edcent",
+    topic: "Hidrolisis Garam",
+  },
+
+  // Titrasi Asam-Basa
+  {
+    title: "Larutan Asam Basa (8) | Titrasi Asam Basa | Kimia Kelas 11",
+    url: "https://www.youtube.com/watch?v=EqMVS53UDNw",
+    channel: "Kimatika",
+    topic: "Titrasi Asam-Basa",
+  },
+  {
+    title: "Kimia Kelas 11 Semester 2 : Titrasi Asam Basa",
+    url: "https://www.youtube.com/watch?v=UoPKs_nCVSs",
+    channel: "Rumah Belajar Kamil",
+    topic: "Titrasi Asam-Basa",
+  },
+
+  // Hidrokarbon dan Minyak Bumi
+  {
+    title: "Hidrokarbon (3) | Tata Nama Senyawa Hidrokarbon | Alkana Alkena Alkuna",
+    url: "https://www.youtube.com/watch?v=22-S9htSXqU",
+    channel: "Kimatika",
+    topic: "Hidrokarbon dan Minyak Bumi",
+  },
+  {
+    title: "Hidrokarbon (4) | Isomer Senyawa Alkana | Kimia Kelas 11",
+    url: "https://www.youtube.com/watch?v=64Ns-OU0wnQ",
+    channel: "Kimatika",
+    topic: "Hidrokarbon dan Minyak Bumi",
+  },
 ];
