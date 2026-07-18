@@ -18,6 +18,7 @@ import { Markup } from "telegraf";
 import { prisma } from "@/lib/prisma";
 import { tryCopyFromTemplate } from "@/agents/guardian/admission";
 import { createInitialSchedule } from "@/agents/guardian/admission";
+import { generateStudentId } from "@/lib/studentId";
 import { bot } from "../bot";
 import bcrypt from "bcryptjs";
 
@@ -196,6 +197,9 @@ async function notifyAdmin(ctx: Context, data: RegistrationData): Promise<void> 
     ? data.intensiveDays.join(", ")
     : "Belum ditentukan";
 
+  // Generate new-style studentId upfront so admin sees it in the notification
+  const newStudentId = await generateStudentId(data.name);
+
   // Store in pending map so admin approval can pick it up
   pendingRegistrations.set(data.studentId, { ...data, messageId: ctx.message?.message_id });
 
@@ -207,6 +211,7 @@ async function notifyAdmin(ctx: Context, data: RegistrationData): Promise<void> 
       `📖 Kelas: *${GRADE_LABELS[data.grade] ?? data.grade}*\n` +
       `🎯 Karakter: *${data.character.replace("KAK_", "Kak ")}*\n` +
       `📅 Hari belajar: ${daysText}\n` +
+      `🆔 ID siswa: *${newStudentId}*\n` +
       `🆔 Telegram: @${ctx.from?.username ?? ctx.from?.id}\n\n` +
       `Setujui pendaftaran ini?`,
       {
@@ -235,9 +240,11 @@ async function approveStudent(ctx: Context, data: RegistrationData): Promise<voi
   // Clear registration data
   deleteSession(data.telegramId);
 
+  const newStudentId = await generateStudentId(data.name);
+
   const student = await prisma.student.create({
     data: {
-      studentId: data.studentId,
+      studentId: newStudentId,
       name: data.name,
       gradeLevel: data.grade as any,
       persona: data.character as any,
@@ -443,9 +450,12 @@ async function handleAdminApprove(ctx: Context, studentId: string): Promise<void
   const DEFAULT_PASSWORD = "belajar123";
 
   try {
+    // Generate studentId real-time supaya dapat format baru (NAMA001)
+    const newStudentId = await generateStudentId(regData.name);
+
     const student = await prisma.student.create({
       data: {
-        studentId: regData.studentId,
+        studentId: newStudentId,
         name: regData.name,
         gradeLevel: regData.grade as any,
         persona: regData.character as any,
