@@ -91,7 +91,7 @@ export default function StudentLoginPage() {
               type="text"
               required
               autoComplete="off"
-              placeholder="Contoh: STU_MRHLH4LX"
+              placeholder="Contoh: SYIFA001"
               value={studentId}
               onChange={(e) => setStudentId(e.target.value.toUpperCase())}
               className="w-full px-3 py-2.5 rounded-lg text-sm outline-none transition-colors"

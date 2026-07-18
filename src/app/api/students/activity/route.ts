@@ -23,7 +23,7 @@ const EXAM_TYPES = new Set(["exam_complete", "exam_start"]);
  */
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const studentId = searchParams.get("studentId"); // login ID like "STU_MROL1SKX"
+  const studentId = searchParams.get("studentId"); // e.g. "SYIFA001"
 
   if (!studentId) {
     return NextResponse.json({ error: "studentId required" }, { status: 400 });
