@@ -20,6 +20,7 @@ export async function GET(
         subject: true,
         metadata: true,
         processedContent: true,
+        videoUrl: true,
       },
     });
 
