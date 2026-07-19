@@ -6,7 +6,7 @@
  * 3. Searches YouTube Data API v3 for working video URLs
  * 4. Updates metadata->>'mindmap' and videoUrl in the database
  * 
- * YouTube Data API key: AIzaSyD_etQDR8vKkXU53IGopl7JY_VvzLq6VWg
+ * YouTube Data API key: AIzaSyDoLUc4CO2oeRTR-fd2iu_0Elb11htyx0Q
  * DB: localhost / tutor / tutor123 / ai_private_tutor
  */
 
@@ -19,7 +19,7 @@ const DB_CONFIG = {
   database: 'ai_private_tutor',
 };
 
-const YOUTUBE_API_KEY = 'AIzaSyD_etQDR8vKkXU53IGopl7JY_VvzLq6VWg';
+const YOUTUBE_API_KEY = 'AIzaSyDoLUc4CO2oeRTR-fd2iu_0Elb11htyx0Q';
 const YOUTUBE_API_BASE = 'https://www.googleapis.com/youtube/v3';
 
 const CURRICULUM_ID = '98f0274e-4e39-45f5-9c79-3632c5717b27';

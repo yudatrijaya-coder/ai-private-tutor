@@ -6,7 +6,7 @@
  * verifies via oEmbed, and updates videoUrl.
  * 
  * DB: PostgreSQL localhost, user=tutor, password=tutor123, database=ai_private_tutor
- * YouTube API: AIzaSyD_etQDR8vKkXU53IGopl7JY_VvzLq6VWg
+ * YouTube API: AIzaSyDoLUc4CO2oeRTR-fd2iu_0Elb11htyx0Q
  * oEmbed: https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v={id}&format=json
  */
 
@@ -28,7 +28,7 @@ const CURRICULUM_IDS = [
   'd4c8f21a-6e62-4553-be51-0b6df08eb960'  // Syifa SD_5
 ];
 
-const YOUTUBE_API_KEY = 'AIzaSyD_etQDR8vKkXU53IGopl7JY_VvzLq6VWg';
+const YOUTUBE_API_KEY = 'AIzaSyDoLUc4CO2oeRTR-fd2iu_0Elb11htyx0Q';
 
 // Grade-specific query templates for Indonesian SD curriculum
 const GRADE_QUERY_TEMPLATES = {

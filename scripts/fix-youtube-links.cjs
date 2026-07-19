@@ -3,7 +3,7 @@
  * Instead of real watch URLs (youtube.com/results?search_query=...)
  * 
  * DB: PostgreSQL at localhost:5432, user=tutor, password=tutor123, database=ai_private_tutor
- * YouTube API: AIzaSyD_etQDR8vKkXU53IGopl7JY_VvzLq6VWg
+ * YouTube API: AIzaSyDoLUc4CO2oeRTR-fd2iu_0Elb11htyx0Q
  */
 
 const { Client } = require('pg');
@@ -18,7 +18,7 @@ const DB_CONFIG = {
   database: 'ai_private_tutor'
 };
 
-const YOUTUBE_API_KEY = 'AIzaSyD_etQDR8vKkXU53IGopl7JY_VvzLq6VWg';
+const YOUTUBE_API_KEY = 'AIzaSyDoLUc4CO2oeRTR-fd2iu_0Elb11htyx0Q';
 
 // Subject to search query mappings (Indonesian curriculum)
 const SUBJECT_QUERY_MAP = {

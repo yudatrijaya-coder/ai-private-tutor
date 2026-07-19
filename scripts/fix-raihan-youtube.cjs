@@ -21,7 +21,7 @@ const DB_CONFIG = {
   database: 'ai_private_tutor',
 };
 
-const YOUTUBE_API_KEY = 'AIzaSyD_etQDR8vKkXU53IGopl7JY_VvzLq6VWg';
+const YOUTUBE_API_KEY = 'AIzaSyDoLUc4CO2oeRTR-fd2iu_0Elb11htyx0Q';
 const CURRICULUM_ID = 'a61bcc63-7c88-41bb-9425-658b5fbf3fa3';
 const PROGRESS_FILE = '/home/ubuntu/ai-private-tutor/scripts/fix-raihan-youtube-progress.json';
 
