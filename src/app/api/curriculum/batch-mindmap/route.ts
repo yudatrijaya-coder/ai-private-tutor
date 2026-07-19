@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
     // Find materials with slides but no mindmap yet
     const needMindmap = curriculum.materials.filter((m) => {
       const md = m.metadata as Record<string, any> | null;
-      return md?.slides && !md?.mindmap;
+      return md?.slide && !md?.mindmap;
     });
 
     if (needMindmap.length === 0) {
@@ -102,7 +102,7 @@ export async function POST(request: NextRequest) {
     for (const material of needMindmap) {
       try {
         const md = material.metadata as Record<string, any>;
-        const slides = md.slides as string;
+        const slides = md.slide as string;
         const rawNodes = slidesToMindmap(slides);
 
         if (rawNodes.length === 0) {
@@ -187,7 +187,7 @@ export async function GET(request: NextRequest) {
   }).length;
   const withSlides = curriculum.materials.filter((m) => {
     const md = m.metadata as Record<string, any> | null;
-    return md?.slides;
+    return md?.slide;
   }).length;
   const total = curriculum.materials.length;
 

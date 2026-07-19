@@ -28,7 +28,7 @@ async function MindmapContent({ materialId }: { materialId: string }) {
   }
 
   // Fallback: parse dari slides markdown
-  const raw = (metadata?.slides as string) || material.processedContent || "";
+  const raw = (metadata?.slide as string) || material.processedContent || "";
   if (!raw) return <div className="text-center py-20 text-amber-400">Konten belum tersedia</div>;
 
   rawNodes = parseMindmapFromMarkdown(raw);
