@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-07-19T00:31:28.682Z",
+  "curriculumIds": [
+    "04e06244-63ff-4a0c-8698-3610edf8d9cd",
+    "d4c8f21a-6e62-4553-be51-0b6df08eb960"
+  ],
+  "stats": {
+    "processed": 0,
+    "updated": 0,
+    "failed": 0,
+    "skipped": 0,
+    "results": [],
+    "failures": []
+  },
+  "summary": {
+    "topicsProcessed": 0,
+    "materialsUpdated": 0,
+    "materialsFailed": 0,
+    "materialsSkipped": 0
+  }
+}

@@ -1,0 +1,465 @@
+{
+  "timestamp": "2026-07-18T21:46:25.765Z",
+  "stats": {
+    "processed": 64,
+    "updated": 286,
+    "failed": 0,
+    "skipped": 0,
+    "results": [
+      {
+        "subject": "Bahasa Indonesia",
+        "topic": "Aku yang Unik",
+        "videoId": "G8D7R-42ni8",
+        "videoTitle": "Kunci Jawaban Bahasa Indonesia Kelas 4 Halaman 170 171 Menulis Kurikulum Merdeka",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "Bahasa Indonesia",
+        "topic": "Belajar Berwirausaha",
+        "videoId": "RC7FZIIwpSw",
+        "videoTitle": "BELAJAR BERWIRAUSAHA | Bahasa Indonesia kelas 5 SD BAB 4 Kurikulum Merdeka | Part 1",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "Bahasa Indonesia",
+        "topic": "Berita",
+        "videoId": "tWhL3gbQy2Q",
+        "videoTitle": "Teks Berita | Bahasa Indonesia SMP",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Bahasa Indonesia",
+        "topic": "Buku Jendela Dunia",
+        "videoId": "vh1ArU8OVPA",
+        "videoTitle": "UNSUR INTRINSIK CERITA Bahasa Indonesia Kelas 5 SD BAB 2 BUKU JENDELA DUNIA Kurikulum Merdeka",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "Bahasa Indonesia",
+        "topic": "Cerpen (Cerita Pendek)",
+        "videoId": "dCHxriGMCNM",
+        "videoTitle": "Kisah Kura-Kura Sombong | Dongeng Anak Bahasa Indonesia | Cerita Hewan | Fabel | Kartun Anak",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Bahasa Indonesia",
+        "topic": "Cinta Indonesia",
+        "videoId": "bnVbSubKBxg",
+        "videoTitle": "CINTA INDONESIA Bahasa Indonesia kelas 5 SD BAB 6 Kurikulum Merdeka Semester 2",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "Bahasa Indonesia",
+        "topic": "Ekspresi Diri",
+        "videoId": "CfhmEyvUKTo",
+        "videoTitle": "Teks Narasi | Bahasa Indonesia SD",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "Bahasa Indonesia",
+        "topic": "Fakta dan Opini dalam Teks Argumentasi",
+        "videoId": "Nop5TPNdwBg",
+        "videoTitle": "Teks Argumentasi | Bahasa Indonesia SMA",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Bahasa Indonesia",
+        "topic": "Membuat Poster",
+        "videoId": "x830Ei4AfUU",
+        "videoTitle": "Bahasa Indonesia Kelas 4 SD (membuat poster)",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Bahasa Indonesia",
+        "topic": "Poster sebagai Teks Persuasi",
+        "videoId": "jJZry8nzWeQ",
+        "videoTitle": "Kalimat Persuasif pada Poster",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Bahasa Indonesia",
+        "topic": "Sayangi Bumi",
+        "videoId": "jGIIzGZvlME",
+        "videoTitle": "Bahasa Indonesia Kelas 5 SD - Bab 7 Sayangi Bumi || Kurikulum Merdeka",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "Bahasa Inggris",
+        "topic": "Culture",
+        "videoId": "fXibXX9VkpM",
+        "videoTitle": "Latihan Soal SAT/ASAT BAHASA INGGRIS Kelas 4 Semester 2 Tahun 2026 Kurikulum Merdeka & Pembahasan",
+        "materialsUpdated": 4
+      },
+      {
+        "subject": "Bahasa Inggris",
+        "topic": "Daily Life",
+        "videoId": "Gs1wPRWTKck",
+        "videoTitle": "Percakapan Bahasa Inggris Cara Memperkenalan Diri untuk Anak disertai Kosakata | Kids Conversation",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "Bahasa Inggris",
+        "topic": "Direction",
+        "videoId": "KGTgjuZuiuA",
+        "videoTitle": "Directions - Video Pembelajaran Bahasa Inggris",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "Bahasa Inggris",
+        "topic": "Reading",
+        "videoId": "R517pM1mKr0",
+        "videoTitle": "Bahasa Inggris Kelas 4 SD — Lesson 11: Adjectives",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "Bahasa Inggris",
+        "topic": "Shopping",
+        "videoId": "sYpTfgDaIv4",
+        "videoTitle": "\"Shopping\"   [Bahasa Inggris]",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "Bahasa Inggris Tingkat Lanjut",
+        "topic": "Pengantar Bahasa Inggris Tingkat Lanjut",
+        "videoId": "dmvJRImSvNU",
+        "videoTitle": "Strategi & Kisi-Kisi TKA Bahasa Inggris 📚",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Bahasa Mandarin",
+        "topic": "Bangun Fondasi Bahasa Mandarin",
+        "videoId": "J6vwXoHAQQM",
+        "videoTitle": "Pengemis Dihina di Pesta, Ternyata Dia Jenderal Terkuat! Dendam Untuk Adiknya, Semua Orang Bersujud!",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Bahasa Mandarin",
+        "topic": "Kosakata HSK 3.0 Level 1",
+        "videoId": "U-IWaBoY41Y",
+        "videoTitle": "INI DIA CARA BELAJAR BAHASA MANDARIN UNTUK PEMULA",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Bahasa Mandarin",
+        "topic": "Kosakata HSK 3.0 Level 2",
+        "videoId": "araaFht0uIQ",
+        "videoTitle": "Basic Chinese Greetings | Kalimat sapaan dasar dalam bahasa Mandarin",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Bahasa Mandarin",
+        "topic": "Kosakata HSK 3.0 Level 3",
+        "videoId": "b5TpmLGw7sE",
+        "videoTitle": "Belajar Bahasa Mandarin Dasar | Cara Baca Huruf Vokal, Huruf Konsonan dan Nada Bahasa Mandarin",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Bahasa Mandarin",
+        "topic": "Kosakata HSK 3.0 Level 4",
+        "videoId": "U-IWaBoY41Y",
+        "videoTitle": "INI DIA CARA BELAJAR BAHASA MANDARIN UNTUK PEMULA",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Bahasa Mandarin",
+        "topic": "Materi Pembelajaran Ganjil",
+        "videoId": "YQP-uwnHYJM",
+        "videoTitle": "B. MANDARIN KELAS X (PERTEMUAN 1)",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Bahasa Mandarin",
+        "topic": "Program Semester Ganjil",
+        "videoId": "U-IWaBoY41Y",
+        "videoTitle": "INI DIA CARA BELAJAR BAHASA MANDARIN UNTUK PEMULA",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Bahasa Mandarin",
+        "topic": "SOP Mata Pelajaran Mandarin",
+        "videoId": "jt-7BvxYb1w",
+        "videoTitle": "TRIK MENGHAFAL CEPAT! #BackToSchool101 #Shorts",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Informatika",
+        "topic": "Berpikir Komputasional",
+        "videoId": "jCb9fpPrxLc",
+        "videoTitle": "Pengenalan Computational Thinking | Berpikir Komputasional",
+        "materialsUpdated": 8
+      },
+      {
+        "subject": "Informatika",
+        "topic": "Kecerdasan Artifisial",
+        "videoId": "X6Tj2PT41v8",
+        "videoTitle": "Kecerdasan Artifisial: Apa Itu AI (Artificial Intelligence)?",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "Informatika",
+        "topic": "Proyek Digital",
+        "videoId": "mToq5sg4ZLw",
+        "videoTitle": "Perangkat Lunak Komputer (Software) | Materi Informatika/TIK SMP Kelas 7",
+        "materialsUpdated": 8
+      },
+      {
+        "subject": "Informatika",
+        "topic": "Teknologi Digital",
+        "videoId": "7KeSiF2jL4M",
+        "videoTitle": "Literasi Digital | Materi Informatika/TIK SMP Kelas 7",
+        "materialsUpdated": 8
+      },
+      {
+        "subject": "IPAS",
+        "topic": "Air Sumber Kehidupan",
+        "videoId": "H9pSS_Po578",
+        "videoTitle": "Kelas 04 IPA Sumber Daya Air dan Tanah",
+        "materialsUpdated": 8
+      },
+      {
+        "subject": "IPAS",
+        "topic": "Bunyi",
+        "videoId": "654uXOx_S6A",
+        "videoTitle": "Bunyi | IPA SD",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "IPAS",
+        "topic": "Cahaya",
+        "videoId": "tEiTBJaGwPU",
+        "videoTitle": "Sifat-sifat Cahaya & Macam Cacat Mata | IPA | SayaBisa",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "IPAS",
+        "topic": "Daerah Bersejarah",
+        "videoId": "S7GVz-YGWrY",
+        "videoTitle": "Sejarah Kerajaan Hindu, Buddha, dan Islam",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "IPAS",
+        "topic": "Ekonomi",
+        "videoId": "3vT8VTMh1M8",
+        "videoTitle": "IPS Kelas 4 - Kegiatan Ekonomi (Produksi, Distribusi, dan Konsumsi)",
+        "materialsUpdated": 8
+      },
+      {
+        "subject": "IPAS",
+        "topic": "Ekosistem",
+        "videoId": "ThxJOMUCYds",
+        "videoTitle": "Ekosistem | IPA SD",
+        "materialsUpdated": 8
+      },
+      {
+        "subject": "IPAS",
+        "topic": "Indonesia Kaya",
+        "videoId": "RPi5qa-BXJ4",
+        "videoTitle": "Kenampakan Alam di Indonesia - Part 1 | IPS Kelas 4 SD | SayaBisa",
+        "materialsUpdated": 10
+      },
+      {
+        "subject": "IPAS",
+        "topic": "Perubahan Fisik",
+        "videoId": "YcYQDEh7I2w",
+        "videoTitle": "Perubahan Wujud Benda | Belajar IPA Kelas 4 SD dengan Animasi Seru!",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Bangun Ruang",
+        "videoId": "q50HvRP1n4E",
+        "videoTitle": "Materi lengkap Volume bangun ruang",
+        "materialsUpdated": 10
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Fungsi Komposisi dan Invers",
+        "videoId": "o-ESReWkrzw",
+        "videoTitle": "Fungsi komposisi dan fungsi invers",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Kecepatan dan Debit",
+        "videoId": "1ZIfPLWKclI",
+        "videoTitle": "Cara mudah mencari Jarak Kecepatan dan Waktu",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Limit Fungsi",
+        "videoId": "XdhZOzMSM0Y",
+        "videoTitle": "Limit Fungsi Aljabar : Metode Subtitusi Langsung dan Pemfaktoran",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Lingkaran",
+        "videoId": "kw-fJSUlvGk",
+        "videoTitle": "Cara menghitung panjang busur, luas Juring dan luas tembereng lingkaran",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Matriks",
+        "videoId": "HqssIxIg7T4",
+        "videoTitle": "Matriks Matematika Wajib Kelas 11 Bagian 1 - Pengenalan Matriks",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Pecahan",
+        "videoId": "mpSkjJE4f4Q",
+        "videoTitle": "Pecahan Campuran ( penjumlahan ,pengurangan,perkalian,pembagian pecahan campuran )",
+        "materialsUpdated": 12
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Pengukuran Data",
+        "videoId": "APDjLfxq6vY",
+        "videoTitle": "Statistika : Cara mudah menentukan nilai Mean, median dan modus data kelompok",
+        "materialsUpdated": 10
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Skala",
+        "videoId": "AEhPUCvsXCk",
+        "videoTitle": "SKALA (Menghitung Skala, Jarak pada Peta, dan Jarak Sebenarnya)",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Transformasi Geometri",
+        "videoId": "4ojT0jS_pR8",
+        "videoTitle": "(LENGKAP) TRANSFORMASI GEOMETRI - Translasi, Refleksi, Rotasi dan Dilatasi",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Turunan Fungsi",
+        "videoId": "-j-0duE7AhQ",
+        "videoTitle": "Turunan fungsi aljabar",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Matematika Penalaran",
+        "topic": "Bangun Datar",
+        "videoId": "0Z2f5yppJbo",
+        "videoTitle": "Luas dan keliling bangun datar (Lengkap Semua bangun datar)",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Matematika Penalaran",
+        "topic": "Bangun Ruang",
+        "videoId": "q50HvRP1n4E",
+        "videoTitle": "Materi lengkap Volume bangun ruang",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Matematika Penalaran",
+        "topic": "Bilangan & Operasi",
+        "videoId": "loud3G-Q28U",
+        "videoTitle": "Eps 01 | Teori dan Jenis Bilangan PK/PM UTBK - Matematika Super Dasar",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Matematika Penalaran",
+        "topic": "Himpunan",
+        "videoId": "YbEDNbMJnpo",
+        "videoTitle": "cara cepat himpunan | matematika",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Matematika Penalaran",
+        "topic": "Hubungan Garis & Sudut",
+        "videoId": "JmYFUdfhPVA",
+        "videoTitle": "GARIS DAN SUDUT || SOAL TKA SMP INI BELUM BANYAK YANG BISA MENJAWAB!",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Matematika Penalaran",
+        "topic": "Kesebangunan & Kekongruenan",
+        "videoId": "BzYhJfNOpiw",
+        "videoTitle": "Kesebangunan - soal dan pembahasan materi kesebangunan matematika tingkat SMP kelas ix",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Pendidikan Pancasila",
+        "topic": "Budaya Daerah",
+        "videoId": "Egam_63F108",
+        "videoTitle": "KERAGAMAN BUDAYA || PENDIDIKAN PANCASILA KELAS 4 SD",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "Pendidikan Pancasila",
+        "topic": "Gotong Royong",
+        "videoId": "mM-l8h3FH6E",
+        "videoTitle": "Pola Hidup Gotong Royong Bab 5 Kelas 4 Pelajaran Pendidikan Pancasila Semester 2 Kurikulum Merdeka",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "Pendidikan Pancasila",
+        "topic": "NKRI",
+        "videoId": "vY-PwiV9axY",
+        "videoTitle": "NKRI - Pendidikan Pancasila Kelas 4 Semester 2 Bab 4",
+        "materialsUpdated": 4
+      },
+      {
+        "subject": "Pendidikan Pancasila",
+        "topic": "Norma",
+        "videoId": "ooswPeoKfNA",
+        "videoTitle": "NORMA DAN PERATURAN  -  PENDIDIKAN PANCASILA KELAS 4",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "Pendidikan Pancasila",
+        "topic": "Pancasila",
+        "videoId": "Egam_63F108",
+        "videoTitle": "KERAGAMAN BUDAYA || PENDIDIKAN PANCASILA KELAS 4 SD",
+        "materialsUpdated": 8
+      },
+      {
+        "subject": "PJOK",
+        "topic": "Aktivitas Air",
+        "videoId": "f3w0wQqALHw",
+        "videoTitle": "Kelas 4 Semester 2 Pelajaran 8 Renang Pertemuan 1",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "PJOK",
+        "topic": "Eksplorasi Gerak",
+        "videoId": "5H-Bs0Q41f4",
+        "videoTitle": "PJOK KELAS 4 GERAK BERIRAMA - VARIASI GERAK LANGKAH",
+        "materialsUpdated": 8
+      },
+      {
+        "subject": "PJOK",
+        "topic": "Kebugaran Jasmani",
+        "videoId": "QV3ttVE9RpM",
+        "videoTitle": "PJOK KELAS 4 AKTIVITAS KEBUGARAN JASMANI",
+        "materialsUpdated": 8
+      },
+      {
+        "subject": "PJOK",
+        "topic": "Permainan Bola",
+        "videoId": "TN-ZMPlRG2o",
+        "videoTitle": "PJOK PERMAINAN KASTI",
+        "materialsUpdated": 6
+      },
+      {
+        "subject": "PJOK",
+        "topic": "Permainan Tradisional",
+        "videoId": "dJ1FJO9J85U",
+        "videoTitle": "Kelas 4 PJOK \"Variasi Gerak Dasar Melalui Permainan Tradisional\"",
+        "materialsUpdated": 6
+      }
+    ],
+    "failures": []
+  },
+  "summary": {
+    "topicsProcessed": 64,
+    "materialsUpdated": 286,
+    "materialsFailed": 0
+  }
+}
