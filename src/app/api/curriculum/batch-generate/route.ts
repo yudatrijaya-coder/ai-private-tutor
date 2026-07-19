@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
 
   // Find materials that still need content or slides
   const pending = curriculum.materials.filter(
-    (m) => !m.processedContent || m.processedContent.length < 50 || !(m.metadata as any)?.slides
+    (m) => !m.processedContent || m.processedContent.length < 50 || !(m.metadata as any)?.slide
   );
 
   if (pending.length === 0) {
