@@ -35,7 +35,9 @@ export async function GET(
       subTopic: material.subTopic,
       subject: material.subject,
       slides: metadata?.slide ?? null,
+      mindmap: metadata?.mindmap ?? null,
       script: metadata?.script ?? null,
+      videoUrl: material.videoUrl ?? null,
       content: material.processedContent,
     });
   } catch (error) {
