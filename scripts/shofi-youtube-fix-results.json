@@ -1,0 +1,313 @@
+{
+  "timestamp": "2026-07-19T00:32:11.469Z",
+  "curriculumId": "98f0274e-4e39-45f5-9c79-3632c5717b27",
+  "stats": {
+    "processed": 58,
+    "groupsTotal": 58,
+    "updated": 3,
+    "failed": 142,
+    "results": [
+      {
+        "subject": "Bahasa Indonesia",
+        "topic": "Drama",
+        "videoId": "1RkkM_fvlaA",
+        "videoTitle": "Gadis kurus didorong pembully,lalu mendapat mata tembus pandang,10 siswa tampan berebut jadi pacarny",
+        "materialsUpdated": 1
+      },
+      {
+        "subject": "Bahasa Indonesia",
+        "topic": "Karya Ilmiah",
+        "videoId": "SPiNQ6umGpU",
+        "videoTitle": "Materi Karya Ilmiah Bahasa Indonesia kelas 11 SMA/SMK",
+        "materialsUpdated": 2
+      }
+    ],
+    "failures": [
+      {
+        "subject": "Bahasa Indonesia",
+        "topic": "Cerita Pendek",
+        "materials": 3
+      },
+      {
+        "subject": "Bahasa Indonesia",
+        "topic": "Novel",
+        "materials": 2
+      },
+      {
+        "subject": "Bahasa Indonesia",
+        "topic": "Teks Argumentasi",
+        "materials": 3
+      },
+      {
+        "subject": "Bahasa Indonesia",
+        "topic": "Teks Eksposisi",
+        "materials": 3
+      },
+      {
+        "subject": "Bahasa Inggris",
+        "topic": "Academic",
+        "materials": 2
+      },
+      {
+        "subject": "Bahasa Inggris",
+        "topic": "Discussion",
+        "materials": 2
+      },
+      {
+        "subject": "Bahasa Inggris",
+        "topic": "Explanation",
+        "materials": 2
+      },
+      {
+        "subject": "Bahasa Inggris",
+        "topic": "Narrative",
+        "materials": 2
+      },
+      {
+        "subject": "Bahasa Inggris",
+        "topic": "Review",
+        "materials": 2
+      },
+      {
+        "subject": "Bahasa Inggris",
+        "topic": "Speech",
+        "materials": 2
+      },
+      {
+        "subject": "Ekonomi",
+        "topic": "Ilmu Ekonomi",
+        "materials": 3
+      },
+      {
+        "subject": "Ekonomi",
+        "topic": "Kebijakan Fiskal",
+        "materials": 2
+      },
+      {
+        "subject": "Ekonomi",
+        "topic": "Kebijakan Moneter",
+        "materials": 2
+      },
+      {
+        "subject": "Ekonomi",
+        "topic": "Pasar",
+        "materials": 3
+      },
+      {
+        "subject": "Ekonomi",
+        "topic": "Pembangunan",
+        "materials": 2
+      },
+      {
+        "subject": "Ekonomi",
+        "topic": "Permintaan dan Penawaran",
+        "materials": 3
+      },
+      {
+        "subject": "Geografi",
+        "topic": "Antroposfer",
+        "materials": 2
+      },
+      {
+        "subject": "Geografi",
+        "topic": "Atmosfer",
+        "materials": 2
+      },
+      {
+        "subject": "Geografi",
+        "topic": "Hidrosfer",
+        "materials": 2
+      },
+      {
+        "subject": "Geografi",
+        "topic": "Litosfer",
+        "materials": 3
+      },
+      {
+        "subject": "Geografi",
+        "topic": "Peta",
+        "materials": 3
+      },
+      {
+        "subject": "Geografi",
+        "topic": "Sumber Daya",
+        "materials": 2
+      },
+      {
+        "subject": "Informatika",
+        "topic": "Algoritma",
+        "materials": 2
+      },
+      {
+        "subject": "Informatika",
+        "topic": "Basis Data",
+        "materials": 2
+      },
+      {
+        "subject": "Informatika",
+        "topic": "Jaringan",
+        "materials": 2
+      },
+      {
+        "subject": "Informatika",
+        "topic": "Pemrograman",
+        "materials": 2
+      },
+      {
+        "subject": "Informatika",
+        "topic": "Struktur Data",
+        "materials": 2
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Fungsi",
+        "materials": 3
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Integral",
+        "materials": 2
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Limit",
+        "materials": 2
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Matriks",
+        "materials": 2
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Polinomial",
+        "materials": 3
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Trigonometri",
+        "materials": 3
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Turunan",
+        "materials": 2
+      },
+      {
+        "subject": "Matematika",
+        "topic": "Vektor",
+        "materials": 1
+      },
+      {
+        "subject": "Matematika Tingkat Lanjut",
+        "topic": "Fungsi dan Pemodelannya",
+        "materials": 5
+      },
+      {
+        "subject": "Matematika Tingkat Lanjut",
+        "topic": "Limit Fungsi Trigonometri",
+        "materials": 3
+      },
+      {
+        "subject": "Matematika Tingkat Lanjut",
+        "topic": "Polinomial",
+        "materials": 5
+      },
+      {
+        "subject": "Matematika Tingkat Lanjut",
+        "topic": "Trigonometri",
+        "materials": 8
+      },
+      {
+        "subject": "Matematika Tingkat Lanjut",
+        "topic": "Turunan Trigonometri",
+        "materials": 3
+      },
+      {
+        "subject": "Pendidikan Pancasila",
+        "topic": "Demokrasi",
+        "materials": 2
+      },
+      {
+        "subject": "Pendidikan Pancasila",
+        "topic": "Globalisasi",
+        "materials": 2
+      },
+      {
+        "subject": "Pendidikan Pancasila",
+        "topic": "HAM",
+        "materials": 2
+      },
+      {
+        "subject": "Pendidikan Pancasila",
+        "topic": "Hukum",
+        "materials": 3
+      },
+      {
+        "subject": "Pendidikan Pancasila",
+        "topic": "Pancasila",
+        "materials": 3
+      },
+      {
+        "subject": "PJOK",
+        "topic": "Atletik",
+        "materials": 2
+      },
+      {
+        "subject": "PJOK",
+        "topic": "Kebugaran",
+        "materials": 3
+      },
+      {
+        "subject": "PJOK",
+        "topic": "Permainan Bola Besar",
+        "materials": 3
+      },
+      {
+        "subject": "PJOK",
+        "topic": "Permainan Bola Kecil",
+        "materials": 2
+      },
+      {
+        "subject": "PJOK",
+        "topic": "Pola Hidup Sehat",
+        "materials": 3
+      },
+      {
+        "subject": "Sosiologi",
+        "topic": "Interaksi Sosial",
+        "materials": 2
+      },
+      {
+        "subject": "Sosiologi",
+        "topic": "Konflik",
+        "materials": 3
+      },
+      {
+        "subject": "Sosiologi",
+        "topic": "Lembaga Sosial",
+        "materials": 2
+      },
+      {
+        "subject": "Sosiologi",
+        "topic": "Perubahan Sosial",
+        "materials": 2
+      },
+      {
+        "subject": "Sosiologi",
+        "topic": "Sosiologi Dasar",
+        "materials": 2
+      },
+      {
+        "subject": "Sosiologi",
+        "topic": "Stratifikasi",
+        "materials": 2
+      }
+    ]
+  },
+  "summary": {
+    "topicsProcessed": 58,
+    "materialsUpdated": 3,
+    "materialsFailed": 142
+  }
+}
