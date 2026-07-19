@@ -34,7 +34,7 @@ export async function GET(
       topic: material.topic,
       subTopic: material.subTopic,
       subject: material.subject,
-      slides: metadata?.slides ?? null,
+      slides: metadata?.slide ?? null,
       script: metadata?.script ?? null,
       content: material.processedContent,
     });
