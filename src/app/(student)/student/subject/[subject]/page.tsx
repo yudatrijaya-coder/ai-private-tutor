@@ -240,9 +240,15 @@ async function SubjectContent({ subject }: { subject: string }) {
         {/* Modul Moodle — internal PDFs from Moodle */}
         {(() => {
           const moduls = getMoodleModule(decodedSubject, studentData?.gradeLevel);
+          // Skip file program semester — ambil modul konten yang paling relevan
+          const kontenModul = moduls?.filter(m => {
+            const name = m.label.toLowerCase();
+            return !name.includes('program') && !name.includes('progsem') && !name.includes('prosem') && !name.includes('formulir');
+          }) ?? [];
+          const modulUrl = kontenModul.length > 0 ? kontenModul[0].url : (moduls?.[0]?.url ?? '');
           return moduls && moduls.length > 0 ? (
             <Link
-              href={moduls[0].url}
+              href={modulUrl}
               target="_blank"
               className="flex flex-col items-center gap-1.5 rounded-2xl p-4 transition-all hover:scale-105 active:scale-95"
               style={{ backgroundColor: "var(--st-bg-card)" }}
