@@ -1,5 +1,5 @@
 /**
- * Fix YouTube URLs for SHOFI SMA Curriculum materials
+ * Fix YouTube URLs for SHOFI SMA Curriculum materials - V2
  * Finds materials where videoUrl IS NULL OR videoUrl NOT LIKE '%watch%'
  * Groups by (subject, topic) to minimize YouTube API calls
  * 
@@ -155,8 +155,9 @@ function sleep(ms) {
 
 // Main execution
 async function main() {
-  console.log('=== SHOFI SMA YouTube URL Fix Script ===\n');
-  console.log(`Curriculum: ${CURRICULUM_ID}\n`);
+  console.log('=== SHOFI SMA YouTube URL Fix Script V2 ===\n');
+  console.log(`Curriculum: ${CURRICULUM_ID}`);
+  console.log(`YouTube API Key: ${YOUTUBE_API_KEY.substring(0, 10)}...\n`);
   
   const db = new Client(DB_CONFIG);
   
@@ -339,10 +340,11 @@ async function main() {
     }
 
     // Save results to file
-    const outputPath = '/home/ubuntu/ai-private-tutor/scripts/shofi-youtube-fix-results.json';
+    const outputPath = '/home/ubuntu/ai-private-tutor/scripts/fix-shofi-youtube-v2-results.json';
     fs.writeFileSync(outputPath, JSON.stringify({
       timestamp: new Date().toISOString(),
       curriculumId: CURRICULUM_ID,
+      apiKeyUsed: YOUTUBE_API_KEY.substring(0, 10) + '...',
       stats,
       summary: {
         topicsProcessed: stats.processed,

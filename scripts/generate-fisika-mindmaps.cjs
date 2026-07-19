@@ -15,7 +15,7 @@ const DB_CONFIG = {
   database: 'ai_private_tutor',
 };
 
-const YOUTUBE_API_KEY = 'AIzaSyD_etQDR8vKkXU53IGopl7JY_VvzLq6VWg';
+const YOUTUBE_API_KEY = 'AIzaSyDoLUc4CO2oeRTR-fd2iu_0Elb11htyx0Q';
 
 // The two curriculum IDs for Fisika
 const SMP_CURRICULUM_ID = 'e94cf3dd-3fae-4fae-b28f-e7aa899d11e7';
