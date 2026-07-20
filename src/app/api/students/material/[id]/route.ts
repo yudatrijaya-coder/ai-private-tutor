@@ -5,10 +5,12 @@ import { prisma } from "@/lib/prisma";
  * GET /api/students/material/[id] — Get material with slide content
  */
 export async function GET(
-  _request: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
+  const searchParams = request.nextUrl.searchParams;
+  const source = searchParams.get("source"); // "sibi" or default
 
   try {
     const material = await prisma.material.findUnique({
@@ -29,14 +31,26 @@ export async function GET(
     }
 
     const metadata = material.metadata as Record<string, any> | null;
+    
+    // Pick content based on source
+    const slides = source === "sibi" 
+      ? (metadata?.slide_sibi ?? metadata?.slide) 
+      : source === "moodle" 
+        ? (metadata?.slide_moodle ?? metadata?.slide) 
+        : metadata?.slide;
+    const mindmap = source === "sibi" 
+      ? (metadata?.mindmap_sibi ?? metadata?.mindmap) 
+      : source === "moodle" 
+        ? (metadata?.mindmap_moodle ?? metadata?.mindmap) 
+        : metadata?.mindmap;
 
     return NextResponse.json({
       id: material.id,
       topic: material.topic,
       subTopic: material.subTopic,
       subject: material.subject,
-      slides: metadata?.slide ?? null,
-      mindmap: metadata?.mindmap ?? null,
+      slides: slides ?? null,
+      mindmap: mindmap ?? null,
       script: metadata?.script ?? null,
       videoUrl: material.videoUrl ?? null,
       content: material.processedContent,

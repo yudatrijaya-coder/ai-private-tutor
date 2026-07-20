@@ -1,411 +1,208 @@
 {
-  "timestamp": "2026-07-19T00:43:59.251Z",
+  "timestamp": "2026-07-19T10:32:46.322Z",
   "curriculumId": "98f0274e-4e39-45f5-9c79-3632c5717b27",
   "apiKeyUsed": "AIzaSyDoLU...",
   "stats": {
-    "processed": 56,
-    "groupsTotal": 56,
-    "updated": 142,
+    "processed": 27,
+    "groupsTotal": 27,
+    "updated": 52,
     "failed": 0,
     "results": [
       {
         "subject": "Bahasa Indonesia",
-        "topic": "Cerita Pendek",
-        "videoId": "1D5ASgUlHAU",
-        "videoTitle": "Materi Novel SMA Bahasa Indonesia (JENIS-JENIS NOVEL)",
-        "materialsUpdated": 3
+        "topic": "Drama",
+        "videoId": "MDGLwG45ZJE",
+        "videoTitle": "Materi Drama kelas XI Bahasa Indonesia",
+        "materialsUpdated": 1
       },
       {
         "subject": "Bahasa Indonesia",
-        "topic": "Novel",
-        "videoId": "Ooczzk1xPME",
-        "videoTitle": "Materi Teks Laporan Hasil Observasi Kelas 10 SMA/SMK | Bahasa Indonesia",
-        "materialsUpdated": 2
+        "topic": "Karya Ilmiah",
+        "videoId": "SPiNQ6umGpU",
+        "videoTitle": "Materi Karya Ilmiah Bahasa Indonesia kelas 11 SMA/SMK",
+        "materialsUpdated": 1
       },
       {
-        "subject": "Bahasa Indonesia",
-        "topic": "Teks Argumentasi",
-        "videoId": "Nop5TPNdwBg",
-        "videoTitle": "Teks Argumentasi | Bahasa Indonesia SMA",
-        "materialsUpdated": 3
-      },
-      {
-        "subject": "Bahasa Indonesia",
-        "topic": "Teks Eksposisi",
-        "videoId": "HgdtvYH_IeI",
-        "videoTitle": "Teks Eksposisi | Bahasa Indonesia SMP",
-        "materialsUpdated": 3
-      },
-      {
-        "subject": "Bahasa Inggris",
-        "topic": "Academic",
-        "videoId": "dGF772Pwv-4",
-        "videoTitle": "Suggestions and Offers Kelas 11 XI | Bahasa Inggris SMA SMK | Purpose, Structure, Language Feature",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Bahasa Inggris",
-        "topic": "Discussion",
-        "videoId": "ak4iRMHvIG4",
-        "videoTitle": "BAHASA INGGRIS PEMINATAN Kelas 12 - Discussion Text | GIA Academy",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Bahasa Inggris",
-        "topic": "Explanation",
-        "videoId": "v0F9CJ4yk5M",
-        "videoTitle": "BAHASA INGGRIS Kelas 10 - Fractured Story X Narrative Text | GIA Academy",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Bahasa Inggris",
-        "topic": "Narrative",
-        "videoId": "GRQm4x6GtAo",
-        "videoTitle": "BAHASA INGGRIS Kelas 10 - Narrative Text | GIA Academy",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Bahasa Inggris",
-        "topic": "Review",
-        "videoId": "Fdl8WLeTy3o",
-        "videoTitle": "BAHASA INGGRIS Kelas 10 - Descriptive Text | GIA Academy",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Bahasa Inggris",
-        "topic": "Speech",
-        "videoId": "NDsl1DpOYBg",
-        "videoTitle": "Arfiana Triandari - Juara 2 Erlangga English Speech Contest 2018 SMK/MAK",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Ekonomi",
-        "topic": "Ilmu Ekonomi",
-        "videoId": "KmOHoKzWrn8",
-        "videoTitle": "Quipper Video - Konsep Ilmu Ekonomi Bagian 1 - Ekonomi",
-        "materialsUpdated": 3
-      },
-      {
-        "subject": "Ekonomi",
-        "topic": "Kebijakan Fiskal",
-        "videoId": "JBNsV0eCzP8",
-        "videoTitle": "Kebijakan Fiskal: Pembahasan Soal Soal Ekonomi SMA",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Ekonomi",
-        "topic": "Kebijakan Moneter",
-        "videoId": "Z1Wp-SgYXws",
-        "videoTitle": "KEBIJAKAN FISKAL DAN MONETER",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Ekonomi",
-        "topic": "Pasar",
-        "videoId": "EO_9e2kcZm8",
-        "videoTitle": "Pasar dan Jenis Pasar  | Ekonomi Kelas 10 - KHATULISTIWA MENGAJAR",
-        "materialsUpdated": 3
-      },
-      {
-        "subject": "Ekonomi",
-        "topic": "Pembangunan",
-        "videoId": "LA2KFFgzn5E",
-        "videoTitle": "Sistem Ekonomi Indonesia | Ekonomi Kelas 10 - KHATULISTIWA MENGAJAR",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Ekonomi",
-        "topic": "Permintaan dan Penawaran",
-        "videoId": "aPEcHxQb5xg",
-        "videoTitle": "Memahami Hukum Penawaran dan Permintaan dengan Sederhana",
-        "materialsUpdated": 3
-      },
-      {
-        "subject": "Geografi",
-        "topic": "Antroposfer",
-        "videoId": "8GeRlzTmdHI",
-        "videoTitle": "Fenomena Geosfer: Antroposfer  | Geografi Kelas 10 - KHATULISTIWA MENGAJAR",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Geografi",
-        "topic": "Atmosfer",
-        "videoId": "hm7N4uQV8Fw",
-        "videoTitle": "Fenomena Geosfer: Atmosfer | Geografi Kelas 10 - KHATULISTIWA MENGAJAR",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Geografi",
-        "topic": "Hidrosfer",
-        "videoId": "kVdE-6l7_CA",
-        "videoTitle": "Fenomena Geosfer: Hidrosfer  | Geografi Kelas 10 - KHATULISTIWA MENGAJAR",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Geografi",
-        "topic": "Litosfer",
-        "videoId": "6Sju3Ek_0OY",
-        "videoTitle": "Fenomena Geosfer: Litosfer  | Geografi Kelas 10 - KHATULISTIWA MENGAJAR",
-        "materialsUpdated": 3
-      },
-      {
-        "subject": "Geografi",
-        "topic": "Peta",
-        "videoId": "l3YHB3afB5A",
-        "videoTitle": "Unsur Unsur Peta  | Geografi kelas 10 - KHATULISTIWA MENGAJAR",
-        "materialsUpdated": 3
-      },
-      {
-        "subject": "Geografi",
-        "topic": "Sumber Daya",
-        "videoId": "eU3ytlD1g0w",
-        "videoTitle": "Pengetahuan Geografi di Indonesia",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Informatika",
-        "topic": "Algoritma",
-        "videoId": "weLTo2pc4QE",
-        "videoTitle": "Algoritma dan Pemograman | Informatika X",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Informatika",
-        "topic": "Basis Data",
-        "videoId": "3RkNY3j9pvg",
-        "videoTitle": "Elemen Analisis Data | Koding dan Kecerdasan Artifisial SMA",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Informatika",
+        "subject": "Biologi",
         "topic": "Jaringan",
-        "videoId": "WPhjxoVDygk",
-        "videoTitle": "Jaringan Komputer: Pengertian, Jenis dan Modelnya",
+        "videoId": "f7uAhLJba6g",
+        "videoTitle": "BIOLOGI Kelas 11 - Struktur Jaringan Tumbuhan | GIA Academy",
         "materialsUpdated": 2
       },
       {
-        "subject": "Informatika",
-        "topic": "Pemrograman",
-        "videoId": "weLTo2pc4QE",
-        "videoTitle": "Algoritma dan Pemograman | Informatika X",
+        "subject": "Biologi",
+        "topic": "Sel",
+        "videoId": "Xxm6xtjsFx0",
+        "videoTitle": "BIOLOGI Kelas 11 - Struktur dan Organel Sel | GIA Academy",
         "materialsUpdated": 2
       },
       {
-        "subject": "Informatika",
-        "topic": "Struktur Data",
-        "videoId": "YzvWKMb1bgQ",
-        "videoTitle": "Informatika Kelas X Kurikulum Merdeka Bab 2: Struktur Data | Ngode with Kang Aldi",
+        "subject": "Biologi",
+        "topic": "Sistem Gerak",
+        "videoId": "sZFCYvLwsVk",
+        "videoTitle": "BIOLOGI Kelas 11 - Sistem Gerak Manusia (PART 1) | GIA Academy",
         "materialsUpdated": 2
       },
       {
-        "subject": "Matematika",
-        "topic": "Fungsi",
-        "videoId": "xarRzOrDGsM",
-        "videoTitle": "APA ITU FUNGSI F(x) DI MATEMATIKA?! GAMPANG BGT!! - Fungsi kelas 10 | Masterclass",
-        "materialsUpdated": 3
-      },
-      {
-        "subject": "Matematika",
-        "topic": "Integral",
-        "videoId": "T6e0NRTIQ0o",
-        "videoTitle": "LENGKAP Integral tak tentu, integral tertentu, integral subtitusi dan integral parsial",
+        "subject": "Biologi",
+        "topic": "Sistem Pencernaan",
+        "videoId": "N0PS9OpNgvo",
+        "videoTitle": "BIOLOGI SMA Kelas 11 - Sistem Pencernaan Manusia | GIA Academy",
         "materialsUpdated": 2
       },
       {
-        "subject": "Matematika",
-        "topic": "Limit",
-        "videoId": "HEbMs2zYoDw",
-        "videoTitle": "Episode 1: Memahami Konsep Limit Tak Pernah Semudah Ini!",
+        "subject": "Biologi",
+        "topic": "Sistem Pernapasan",
+        "videoId": "mqwj6eqIyuA",
+        "videoTitle": "BIOLOGI SMA Kelas 11 - Sistem Pernapasan | GIA Academy",
         "materialsUpdated": 2
       },
       {
-        "subject": "Matematika",
+        "subject": "Biologi",
+        "topic": "Sistem Sirkulasi",
+        "videoId": "dxRESjSNKV8",
+        "videoTitle": "BIOLOGI Kelas 11 - Sistem Peredaran Darah (PART 1) | GIA Academy",
+        "materialsUpdated": 2
+      },
+      {
+        "subject": "Fisika",
+        "topic": "Dinamika",
+        "videoId": "XZOGXrf2lx8",
+        "videoTitle": "Kelas 10 SMA - Fisika - Dinamika Gerak - Bimbel Tridaya Online",
+        "materialsUpdated": 2
+      },
+      {
+        "subject": "Fisika",
+        "topic": "Fluida",
+        "videoId": "cw6P-SxQM74",
+        "videoTitle": "FISIKA Kelas 11 - Konsep Tekanan dalam Fluida Statis | GIA Academy",
+        "materialsUpdated": 2
+      },
+      {
+        "subject": "Fisika",
+        "topic": "Kinematika",
+        "videoId": "6wQz4mDNYBY",
+        "videoTitle": "Tes Pengetahuan Fisika SMA. GLB dan GLBB. #belajarsemenit #itb #fisika",
+        "materialsUpdated": 2
+      },
+      {
+        "subject": "Fisika",
+        "topic": "Suhu dan Kalor",
+        "videoId": "6Wj9tEvVz68",
+        "videoTitle": "Suhu dan Kalor | Materi Fisika SMA",
+        "materialsUpdated": 2
+      },
+      {
+        "subject": "Fisika",
+        "topic": "Usaha dan Energi",
+        "videoId": "fKE_dXrypOs",
+        "videoTitle": "FISIKA Kelas 10 - Usaha & Energi | GIA Academy",
+        "materialsUpdated": 2
+      },
+      {
+        "subject": "Fisika",
+        "topic": "Vektor",
+        "videoId": "EoeePVoAdEo",
+        "videoTitle": "VEKTOR: PENGERTIAN DAN PENJUMLAHAN - MATERI FISIKA KELAS 10 | Edcent.id",
+        "materialsUpdated": 2
+      },
+      {
+        "subject": "Kimia",
+        "topic": "Asam Basa",
+        "videoId": "e_0mceAEvks",
+        "videoTitle": "Larutan Asam Basa (1) | Teori Asam dan Basa | Kimia Kelas 11",
+        "materialsUpdated": 2
+      },
+      {
+        "subject": "Kimia",
+        "topic": "Ikatan Kimia",
+        "videoId": "hifilq6pzGk",
+        "videoTitle": "Ikatan Kimia dan Jenis-Jenisnya | Kimia SMA",
+        "materialsUpdated": 2
+      },
+      {
+        "subject": "Kimia",
+        "topic": "Larutan",
+        "videoId": "84Va6Vf8L88",
+        "videoTitle": "Apa yang dimaksud dengan Larutan? | Kimia Dasar 2",
+        "materialsUpdated": 2
+      },
+      {
+        "subject": "Kimia",
+        "topic": "Stoikiometri",
+        "videoId": "TU2HplKBejo",
+        "videoTitle": "Stoikiometri",
+        "materialsUpdated": 2
+      },
+      {
+        "subject": "Kimia",
+        "topic": "Struktur Atom",
+        "videoId": "8X2ohD8LvuM",
+        "videoTitle": "(Video Ruangguru)- ruangbelajar - Kimia SMA - Struktur Atom| bimbel online",
+        "materialsUpdated": 2
+      },
+      {
+        "subject": "Kimia",
+        "topic": "Termokimia",
+        "videoId": "FjNThpLAkOY",
+        "videoTitle": "Termokimia (1) | Entalpi Dan Perubahan Entalpi | Persamaan Termokimia | Hukum Hess",
+        "materialsUpdated": 2
+      },
+      {
+        "subject": "Matematika Penalaran",
+        "topic": "Logika Matematika",
+        "videoId": "aMVQq1kshao",
+        "videoTitle": "Logika matematika",
+        "materialsUpdated": 2
+      },
+      {
+        "subject": "Matematika Tingkat Lanjut",
         "topic": "Matriks",
         "videoId": "HqssIxIg7T4",
         "videoTitle": "Matriks Matematika Wajib Kelas 11 Bagian 1 - Pengenalan Matriks",
         "materialsUpdated": 2
       },
       {
-        "subject": "Matematika",
-        "topic": "Polinomial",
-        "videoId": "2oPK0eMkwQg",
-        "videoTitle": "Polinomial (Bagian 1) - Pengertian dan Operasi Aljabar Polinomial Matematika Peminatan Kelas XI",
-        "materialsUpdated": 3
-      },
-      {
-        "subject": "Matematika",
-        "topic": "Trigonometri",
-        "videoId": "u_ciJpBlFJs",
-        "videoTitle": "Trigonometri Dasar: Sin Cos Tan | Depan Samping Miring | Matematika SMA",
-        "materialsUpdated": 3
-      },
-      {
-        "subject": "Matematika",
-        "topic": "Turunan",
-        "videoId": "UtTvAVOOD6U",
-        "videoTitle": "BELAJAR KONSEP DIFERENSIAL (TURUNAN) DALAM 10 MENIT !",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Matematika",
+        "subject": "Matematika Tingkat Lanjut",
         "topic": "Vektor",
-        "videoId": "kGRP6kECWjs",
-        "videoTitle": "Vektor (Definisi Vektor, Vektor Posisi, & Panjang Vektor) - Matematika Kelas 10 - Quipper Video",
-        "materialsUpdated": 1
-      },
-      {
-        "subject": "Matematika Tingkat Lanjut",
-        "topic": "Fungsi dan Pemodelannya",
-        "videoId": "ZHKHO4tR5NY",
-        "videoTitle": "Fungsi Rasional kelas XI Matematika Tingkat Lanjut (Kurikulum Merdeka)",
-        "materialsUpdated": 5
-      },
-      {
-        "subject": "Matematika Tingkat Lanjut",
-        "topic": "Limit Fungsi Trigonometri",
-        "videoId": "_nrLpuoZAgo",
-        "videoTitle": "Bahas Tuntas Limit Fungsi Trigonometri Matematika Peminatan Kelas XII",
-        "materialsUpdated": 3
-      },
-      {
-        "subject": "Matematika Tingkat Lanjut",
-        "topic": "Polinomial",
-        "videoId": "2oPK0eMkwQg",
-        "videoTitle": "Polinomial (Bagian 1) - Pengertian dan Operasi Aljabar Polinomial Matematika Peminatan Kelas XI",
-        "materialsUpdated": 5
-      },
-      {
-        "subject": "Matematika Tingkat Lanjut",
-        "topic": "Trigonometri",
-        "videoId": "JD0HBE5PDz8",
-        "videoTitle": "TRIGONOMETRI PART 1: DEFINISI, SUDUT, KUADRAN",
-        "materialsUpdated": 8
-      },
-      {
-        "subject": "Matematika Tingkat Lanjut",
-        "topic": "Turunan Trigonometri",
-        "videoId": "H8xkGfG1XHQ",
-        "videoTitle": "Tanda Fungsi Trigonometri Tiap Kuadran | Matematika Tingkat Lanjut SMA Kelas XI Kurikulum Merdeka",
-        "materialsUpdated": 3
-      },
-      {
-        "subject": "Pendidikan Pancasila",
-        "topic": "Demokrasi",
-        "videoId": "9umTRp9rLqk",
-        "videoTitle": "Rangkuman Materi Pancasila Kelas 10 Bab 3 Kurikulum Merdeka Rev 2023",
+        "videoId": "mOwCzeves20",
+        "videoTitle": "Konsep Vektor || Matematika Tingkat Lanjut Semester 2 Kelas XI",
         "materialsUpdated": 2
       },
       {
-        "subject": "Pendidikan Pancasila",
-        "topic": "Globalisasi",
-        "videoId": "q52WbOmAeTc",
-        "videoTitle": "GLOBALISASI (Pengertian, Faktor Penyebab,Contoh Globalisasi dalam Kehidupan Sehari-Hari & Dampaknya)",
+        "subject": "Sejarah",
+        "topic": "Kolonialisme",
+        "videoId": "o7x2vcUNh2c",
+        "videoTitle": "Sejarah Wajib Kelas XI: Lahirnya Kolonialisme dan Imperialisme",
         "materialsUpdated": 2
       },
       {
-        "subject": "Pendidikan Pancasila",
-        "topic": "HAM",
-        "videoId": "rt5G2j-675Y",
-        "videoTitle": "Rangkuman Materi Pendidikan Pancasila (PPKN) Kelas 12 Semester 1 & 2 dalam 10 menit (BAB 1 - 7)",
+        "subject": "Sejarah",
+        "topic": "Orde Lama",
+        "videoId": "AXNN3eqOXqI",
+        "videoTitle": "Masa Awal Kemerdekaan, Demokrasi Liberal, dan Demokrasi Terpimpin | IPS SMP",
         "materialsUpdated": 2
       },
       {
-        "subject": "Pendidikan Pancasila",
-        "topic": "Hukum",
-        "videoId": "v06kA02SRAc",
-        "videoTitle": "PKn Kelas 10 Bab 2 Bagian, D. Tata Urutan Peraturan Perundang undangan di Indonesia, Semester 1",
-        "materialsUpdated": 3
-      },
-      {
-        "subject": "Pendidikan Pancasila",
-        "topic": "Pancasila",
-        "videoId": "rt5G2j-675Y",
-        "videoTitle": "Rangkuman Materi Pendidikan Pancasila (PPKN) Kelas 12 Semester 1 & 2 dalam 10 menit (BAB 1 - 7)",
-        "materialsUpdated": 3
-      },
-      {
-        "subject": "PJOK",
-        "topic": "Atletik",
-        "videoId": "ZXIKvdrEq84",
-        "videoTitle": "Materi Pembelajaran Atletik -  Sejarah dan Pengertian Atletik",
+        "subject": "Sejarah",
+        "topic": "Pergerakan Nasional",
+        "videoId": "G-rWqpjX5EY",
+        "videoTitle": "Materi Sejarah: Pergerakan Nasional | Ciri, Faktor, dan Sikap Organisasi | Part 1",
         "materialsUpdated": 2
       },
       {
-        "subject": "PJOK",
-        "topic": "Kebugaran",
-        "videoId": "64VcB8X0JNo",
-        "videoTitle": "Pengertian Kebugaran Jasmani - Materi Pembelajaran PJOK",
-        "materialsUpdated": 3
-      },
-      {
-        "subject": "PJOK",
-        "topic": "Permainan Bola Besar",
-        "videoId": "kz4vppJu2XQ",
-        "videoTitle": "Materi Permainan Bola Besar dan Permainan Bola Kecil - Materi Pembelajaran PJOK",
-        "materialsUpdated": 3
-      },
-      {
-        "subject": "PJOK",
-        "topic": "Permainan Bola Kecil",
-        "videoId": "Xbs0E2wxyAs",
-        "videoTitle": "PJOK Home Learning || Permainan Bola Kecil \"Bulu Tangkis\" || Sds Taruna Bangsa",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "PJOK",
-        "topic": "Pola Hidup Sehat",
-        "videoId": "TzUGlfPqNFs",
-        "videoTitle": "Menjaga Pola Hidup Sehat",
-        "materialsUpdated": 3
-      },
-      {
-        "subject": "Sosiologi",
-        "topic": "Interaksi Sosial",
-        "videoId": "ushsEHIzvTY",
-        "videoTitle": "Interaksi sosial di masyarakat | Sosiologi Kelas 10 - EDURAYA MENGAJAR",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Sosiologi",
-        "topic": "Konflik",
-        "videoId": "-4KB_oTQeec",
-        "videoTitle": "Konflik Sosial: Faktor Penyebab, Jenis, dan Dampak | Sosiologi Kelas 11 - KHATULISTIWA MENGAJAR",
-        "materialsUpdated": 3
-      },
-      {
-        "subject": "Sosiologi",
-        "topic": "Lembaga Sosial",
-        "videoId": "LEWi4cdvePc",
-        "videoTitle": "Lembaga Sosial di Indonesia I Sosiologi KELAS 10 | KHATULISTIWA STUDIO",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Sosiologi",
-        "topic": "Perubahan Sosial",
-        "videoId": "YZWs4beCsRw",
-        "videoTitle": "ruangbelajar - Sosiologi XII SMA - Perubahan Sosial",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Sosiologi",
-        "topic": "Sosiologi Dasar",
-        "videoId": "NZDKDPifclY",
-        "videoTitle": "Sosiologi Kelas X: Apa Itu Sosiologi?",
-        "materialsUpdated": 2
-      },
-      {
-        "subject": "Sosiologi",
-        "topic": "Stratifikasi",
-        "videoId": "-Jb6lDpuW-k",
-        "videoTitle": "Stratifikasi Sosial | Sosiologi Kelas 11 - KHATULISTIWA MENGAJAR",
+        "subject": "Sejarah",
+        "topic": "Proklamasi",
+        "videoId": "1wqFa1DP6mk",
+        "videoTitle": "Tidak ada dibuku Pelajaran! Inilah 16 Fakta Dibalik Proklamasi Kemerdekaan Indonesia",
         "materialsUpdated": 2
       }
     ],
     "failures": []
   },
   "summary": {
-    "topicsProcessed": 56,
-    "materialsUpdated": 142,
+    "topicsProcessed": 27,
+    "materialsUpdated": 52,
     "materialsFailed": 0
   }
 }
