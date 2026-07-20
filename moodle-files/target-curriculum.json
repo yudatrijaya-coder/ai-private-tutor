@@ -1,0 +1,893 @@
+{
+  "SHOFI": {
+    "Bahasa Indonesia": {
+      "source": "prosem",
+      "topics": {
+        "Drama": [
+          "Perbedaan Puisi, Prosa, dan Drama",
+          "Unsur Pembangun Drama",
+          "Menulis Naskah Drama",
+          "Persiapan Pertunjukan Drama",
+          "Menampilkan Pertunjukan Drama"
+        ],
+        "Berita": [
+          "Informasi Aktual dan Akurat dalam Berita",
+          "Struktur dan Unsur Teks Berita",
+          "Membuat Vlog dari Teks Berita"
+        ],
+        "Fakta dan Opini dalam Teks Argumentasi": [
+          "Kalimat Opini dan Kalimat Fakta"
+        ],
+        "Poster sebagai Teks Persuasi": [
+          "Pengertian Poster, Ciri-ciri, dan Jenis Poster"
+        ],
+        "Membuat Poster": [
+          "Membuat Poster Tema Bersosial Media",
+          "Mempromosikan Ketahanan Pangan Lokal"
+        ],
+        "Karya Ilmiah": [
+          "Identifikasi Jurnal Karya Ilmiah",
+          "Sistematika Karya Ilmiah",
+          "Ragam Karya Ilmiah",
+          "Menulis Karya Ilmiah",
+          "Menyajikan Karya Ilmiah"
+        ],
+        "Cerpen (Cerita Pendek)": [
+          "Nilai-nilai dalam Cerpen",
+          "Unsur Intrinsik Cerpen",
+          "Menulis Cerpen Tema Kearifan Lokal"
+        ]
+      }
+    },
+    "Bahasa Inggris": {
+      "source": "db_keep",
+      "topics": {
+        "Academic": [
+          "Academic Writing",
+          "Essay Structure"
+        ],
+        "Discussion": [
+          "Discussion Text",
+          "For and Against"
+        ],
+        "Explanation": [
+          "Cause and Effect",
+          "Explanation Text"
+        ],
+        "Narrative": [
+          "Narrative Text",
+          "Struktur Narrative"
+        ],
+        "Review": [
+          "Book and Movie Review",
+          "Critical Review"
+        ],
+        "Speech": [
+          "Persuasive Speech",
+          "Public Speaking"
+        ]
+      }
+    },
+    "Bahasa Mandarin": {
+      "source": "prosem",
+      "topics": {
+        "Kosakata HSK 3.0 Level 1": [
+          "Hanzi Dasar",
+          "Pinyin dan Nada",
+          "Kosakata Sehari-hari"
+        ],
+        "Kosakata HSK 3.0 Level 2": [
+          "Kosakata Baru",
+          "Struktur Kalimat Dasar"
+        ],
+        "Kosakata HSK 3.0 Level 3": [
+          "Kosakata Lanjutan",
+          "Percakapan Sederhana"
+        ],
+        "Kosakata HSK 3.0 Level 4": [
+          "Kosakata Mahir",
+          "Karakter Kompleks"
+        ]
+      }
+    },
+    "Biologi": {
+      "source": "prosem",
+      "topics": {
+        "Sistem Pencernaan": [
+          "Makanan dan Zat Makanan",
+          "Air dan Zat Aditif",
+          "Praktikum Uji Zat Makanan",
+          "Struktur Organ Pencernaan",
+          "Mekanisme Pencernaan",
+          "Gangguan Sistem Pencernaan"
+        ],
+        "Sistem Sirkulasi": [
+          "Fungsi Sistem Sirkulasi",
+          "Struktur Jantung",
+          "Arteri dan Vena",
+          "Peredaran Darah Pulmonalis dan Sistemik",
+          "Sel Darah dan Golongan Darah",
+          "Penyakit Sistem Sirkulasi"
+        ],
+        "Sistem Respirasi": [
+          "Fungsi Sistem Respirasi",
+          "Organ Pernapasan",
+          "Mekanisme Pernapasan",
+          "Transport dan Pertukaran Gas",
+          "Volume Udara Pernapasan",
+          "Penyakit Sistem Respirasi"
+        ],
+        "Sistem Gerak": [
+          "Fungsi Sistem Gerak",
+          "Macam-macam Tulang",
+          "Struktur Osteon",
+          "Sendi",
+          "Macam-macam Otot",
+          "Gerak Antagonis dan Sinergis"
+        ],
+        "Sistem Eksresi": [
+          "Organ Eksresi",
+          "Mekanisme Pembentukan Urine",
+          "Faktor yang Memengaruhi Urine",
+          "Praktikum Uji Urin",
+          "Struktur dan Fungsi Hati",
+          "Struktur dan Fungsi Kulit"
+        ]
+      }
+    },
+    "Ekonomi": {
+      "source": "db_keep",
+      "topics": {
+        "Ilmu Ekonomi": [
+          "Kelangkaan dan Pilihan",
+          "Konsep Dasar Ekonomi",
+          "Pembagian Ilmu Ekonomi"
+        ],
+        "Kebijakan Fiskal": [
+          "APBN dan APBD",
+          "Pajak dan Retribusi"
+        ],
+        "Kebijakan Moneter": [
+          "Bank dan Lembaga Keuangan",
+          "Inflasi dan Deflasi"
+        ],
+        "Pasar": [
+          "Pasar Persaingan Sempurna",
+          "Pasar Persaingan Tidak Sempurna",
+          "Struktur Pasar"
+        ],
+        "Pembangunan": [
+          "Pembangunan Berkelanjutan",
+          "Pertumbuhan Ekonomi"
+        ],
+        "Permintaan dan Penawaran": [
+          "Hukum Penawaran",
+          "Hukum Permintaan",
+          "Keseimbangan Pasar"
+        ]
+      }
+    },
+    "Fisika": {
+      "source": "prosem",
+      "topics": {
+        "Dinamika Gerak": [
+          "Gaya Pemulih",
+          "Elastisitas Benda Padat",
+          "Konstanta Pegas Seri dan Paralel",
+          "Dinamika Rotasi",
+          "Kesetimbangan Benda Tegar",
+          "Praktikum Kesetimbangan Benda Tegar"
+        ],
+        "Fluida": [
+          "Tekanan Hidrostatika",
+          "Gaya ke Atas (Archimedes)",
+          "Praktikum Gaya Archimedes",
+          "Tegangan Permukaan dan Kapilaritas",
+          "Fluida Dinamis",
+          "Hukum Bernoulli"
+        ],
+        "Kalor": [
+          "Kalor dan Perubahan Suhu",
+          "Perubahan Wujud",
+          "Asas Black",
+          "Perpindahan Kalor",
+          "Konduksi, Konveksi, Radiasi"
+        ]
+      }
+    },
+    "Geografi": {
+      "source": "db_keep",
+      "topics": {
+        "Antroposfer": [
+          "Dinamika Penduduk",
+          "Persebaran Penduduk"
+        ],
+        "Atmosfer": [
+          "Cuaca dan Iklim",
+          "Perubahan Iklim Global"
+        ],
+        "Hidrosfer": [
+          "Perairan Darat dan Laut",
+          "Siklus Hidrologi"
+        ],
+        "Litosfer": [
+          "Batuan dan Tanah",
+          "Struktur Bumi",
+          "Tenaga Endogen dan Eksogen"
+        ],
+        "Peta": [
+          "Dasar Pemetaan",
+          "Penginderaan Jauh",
+          "SIG (Sistem Informasi Geografis)"
+        ],
+        "Sumber Daya": [
+          "Mitigasi Bencana",
+          "SDA dan Lingkungan"
+        ]
+      }
+    },
+    "Informatika": {
+      "source": "db_keep",
+      "topics": {
+        "Algoritma": [
+          "Algoritma Lanjutan",
+          "Flowchart dan Pseudocode"
+        ],
+        "Basis Data": [
+          "Konsep Basis Data",
+          "SQL Dasar"
+        ],
+        "Jaringan": [
+          "Jaringan Komputer",
+          "Topologi dan Protokol"
+        ],
+        "Pemrograman": [
+          "Debugging dan Testing",
+          "Pemrograman Lanjutan"
+        ],
+        "Struktur Data": [
+          "Array dan Matriks",
+          "Stack dan Queue"
+        ]
+      }
+    },
+    "Kimia": {
+      "source": "prosem",
+      "topics": {
+        "Termokimia": [
+          "Reaksi Eksoterm dan Reaksi Endoterm",
+          "Menentukan DH reaksi berdasarkan Hukum Hess, data perubahan entalpi pembentukan standar dan data ene"
+        ],
+        "Laju Reaksi": [
+          "Laju Reaksi dan Faktor Penentu Laju Reaksi",
+          "Teori Tumbukan untuk Menentukan Laju Reaksi dan Orde Reaksi"
+        ],
+        "Tetapan Kesetimbangan (Kp dan Kc)": [
+          "Proses Haber Bosch dan Proses Kontak",
+          "Kesetimbangan Dinamis",
+          "Pergeseran Arah Kesetimbangan"
+        ],
+        "Teori Asam Basa": [
+          "Sifat Asam Basa",
+          "Keasaman (pH) dari asam dan basa",
+          "Derajat ionisasi dan konstanta asam basa",
+          "Aplikasi keasaman dan konsep (pH) dalam polusi"
+        ],
+        "Larutan Penyangga": [
+          "pH Larutan Penyangga",
+          "Fungsi larutan Penyangga"
+        ],
+        "Stoikiometri Larutan": [
+          "Hidrolisis Garam",
+          "Sifat Hidrolisis Garam",
+          "pH Larutan Hidrolisis Garam"
+        ],
+        "Titrasi Asam": [
+          "Grafik Titrasi Asam Basa"
+        ],
+        "Kekhasan Atom Karbon": [
+          "Struktur Alkana, Alkena, dan Alkuna",
+          "Isomer dan Reaksi Hidrokarbon",
+          "Minyak Bumi dan Proses Penyulingan Minyak Bumi, Fraksi-fraksi Minyak Bumi, dan Bensin",
+          "Gas Hasil Pembakaran Minyak Bumi",
+          "Dampak Negatif Hasil Pembakaran Bagi Lingkungan dan Kesehatan"
+        ]
+      }
+    },
+    "Matematika": {
+      "source": "prosem",
+      "topics": {
+        "Matriks": [
+          "Konsep Matriks",
+          "Jenis-Jenis Matriks",
+          "Kesamaan Matriks",
+          "Operasi Matriks",
+          "Determinan Matriks",
+          "Invers Matriks",
+          "Aplikasi Matriks"
+        ],
+        "Transformasi Geometri": [
+          "Translasi",
+          "Refleksi",
+          "Rotasi",
+          "Dilatasi",
+          "Aplikasi Transformasi"
+        ],
+        "Fungsi Komposisi dan Invers": [
+          "Konsep Fungsi Komposisi",
+          "Sifat Fungsi Komposisi",
+          "Aplikasi Fungsi Komposisi",
+          "Fungsi Invers",
+          "Invers Fungsi Linear/Kuadrat/Eksponen"
+        ],
+        "Limit Fungsi": [
+          "Konsep Limit",
+          "Sifat Limit",
+          "Menentukan Nilai Limit"
+        ],
+        "Turunan Fungsi": [
+          "Konsep Turunan",
+          "Sifat Turunan",
+          "Aplikasi Turunan",
+          "Menggambar Grafik"
+        ],
+        "Lingkaran": [
+          "Persamaan Lingkaran",
+          "Jarak Titik ke Lingkaran",
+          "Kedudukan Garis",
+          "Garis Singgung Lingkaran"
+        ]
+      }
+    },
+    "Matematika Penalaran": {
+      "source": "prosem",
+      "topics": {
+        "Himpunan": [
+          "Definisi Himpunan",
+          "Cara Menyatakan Himpunan",
+          "Jenis Himpunan",
+          "Operasi Himpunan"
+        ],
+        "Hubungan Garis dan Sudut": [
+          "Garis dan Jenisnya",
+          "Sudut dan Jenisnya",
+          "Hubungan Antar Sudut"
+        ],
+        "Kesebangunan dan Kekongruenan": [
+          "Kekongruenan Bangun Datar",
+          "Kekongruenan Segitiga",
+          "Kesebangunan Bangun Datar",
+          "Kesebangunan Segitiga"
+        ],
+        "Bangun Datar": [
+          "Segitiga",
+          "Segiempat",
+          "Lingkaran",
+          "Garis Singgung"
+        ],
+        "Bangun Ruang": [
+          "Kubus dan Balok",
+          "Prisma dan Limas",
+          "Tabung, Kerucut, Bola"
+        ],
+        "Bilangan dan Operasi": [
+          "Operasi Dasar",
+          "Pecahan",
+          "FPB dan KPK",
+          "Pola Barisan",
+          "Skala",
+          "Perbandingan",
+          "Diskon"
+        ]
+      }
+    },
+    "Matematika Tingkat Lanjut": {
+      "source": "db_keep",
+      "topics": {
+        "Matriks": [
+          "Invers Matriks",
+          "Operasi Matriks"
+        ],
+        "Vektor": [
+          "Perkalian Titik dan Silang",
+          "Vektor di R2 dan R3"
+        ]
+      }
+    },
+    "PJOK": {
+      "source": "db_keep",
+      "topics": {
+        "Atletik": [
+          "Lari Jarak Pendek",
+          "Lompat Jauh"
+        ],
+        "Kebugaran": [
+          "Komposisi Tubuh Ideal",
+          "Latihan Kekuatan dan Daya Tahan",
+          "Program Kebugaran"
+        ],
+        "Permainan Bola Besar": [
+          "Bola Basket",
+          "Bola Voli",
+          "Sepak Bola"
+        ],
+        "Permainan Bola Kecil": [
+          "Bulutangkis",
+          "Tenis Meja"
+        ],
+        "Pola Hidup Sehat": [
+          "Bahaya NAPZA",
+          "Perilaku Hidup Bersih dan Sehat",
+          "Pola Makan Seimbang"
+        ]
+      }
+    },
+    "Pendidikan Pancasila": {
+      "source": "prosem",
+      "topics": {
+        "Keterkaitan Antarsila Pancasila": [
+          "Peluang penerapan Pancasila dalam kehidupan global",
+          "Tantangan penerapan Pancasila dalam kehidupan global"
+        ],
+        "Identifikasi potensi konflik dalam masyarakat": [
+          "Strategi mengatasi konflik dalam masyarakat yang beragam"
+        ],
+        "Periodeisasi pemberlakuaan UUD di Indonesia": [
+          "Perilaku demokratis berdasarkan UUD NRI Tahun 1945 pada era keterbukaan informasi"
+        ],
+        "Demokrasi dalam kehidupan berbangsa dan bernegara": [
+          "Ancaman, tantangan, hambatan dan gangguan terhadap ideologi Pancasila dan NKRI"
+        ]
+      }
+    },
+    "Sejarah": {
+      "source": "prosem",
+      "topics": {
+        "latar belakang kedatangan Bangsa Eropa ke Dunia Timur dan situasi yang terjadi d": [
+          "rute pelayaran bangsa Eropa sampai ke dunia Timur dan respons penduduk setempat (Palembang, perang J",
+          "dampak di negara koloni (VOC, Daendels, Raffless, Politik Etis)"
+        ],
+        "Kebangkitan bangsa-bangsa Asia  (India, Cina, dan Filipina) dan awal   munculnya": [
+          "faktor-faktor munculnya pergerakan nasional, menganalisis munculnya Organisasi Modern Pergerakan Nas",
+          "masa akhir pemerintah Belanda di Indonesia\n(terjadi PD II, detik-detik Belanda menyerah kepada Jepan"
+        ],
+        "masuknya Jepang dan Jatuhnya pemerintahan Hindia Belanda": [
+          "penjajahan Jepang dan transformasi Pemerintahan di Indonesia",
+          "dampak Penjajahan Jepang di berbagai Bidang dan strategi bangsa Indonesia menghadapai Tirani"
+        ],
+        "Menganalisis Kekalahan-Kekalahan     Jepang": [
+          "Menuju Proklamasi Kemerdekaan",
+          "Detik-detik Proklamasi dan sambutan terhadap proklamasi",
+          "Terbentuknya Perlengkapan negara"
+        ]
+      }
+    },
+    "Sosiologi": {
+      "source": "db_keep",
+      "topics": {
+        "Interaksi Sosial": [
+          "Bentuk Interaksi Sosial",
+          "Faktor Pendorong Interaksi"
+        ],
+        "Konflik": [
+          "Integrasi Sosial",
+          "Konflik Sosial",
+          "Resolusi Konflik"
+        ],
+        "Lembaga Sosial": [
+          "Fungsi Lembaga Sosial",
+          "Lembaga Kemasyarakatan"
+        ],
+        "Perubahan Sosial": [
+          "Globalisasi",
+          "Modernisasi"
+        ],
+        "Sosiologi Dasar": [
+          "Objek dan Ruang Lingkup",
+          "Teori-Teori Sosiologi"
+        ],
+        "Stratifikasi": [
+          "Diferensiasi Sosial",
+          "Stratifikasi Sosial"
+        ]
+      }
+    }
+  },
+  "RAIHAN": {
+    "Bahasa Indonesia": {
+      "source": "prosem",
+      "topics": {
+        "Teks Deskripsi": [
+          "Informasi Eksplisit",
+          "Gaya Penulisan",
+          "Kata Jarang Muncul",
+          "Analisis Teks dan Visual"
+        ],
+        "Menyajikan Teks Deskripsi": [
+          "Deskripsi Lisan",
+          "Menyunting Teks",
+          "Menulis Deskripsi"
+        ],
+        "Puisi Rakyat dan Cerita Naratif": [
+          "Puisi Rakyat",
+          "Elemen Naratif",
+          "Sifat Tokoh"
+        ],
+        "Menulis Cerita Fantasi": [
+          "Struktur Cerita",
+          "Amanat",
+          "Kreativitas"
+        ],
+        "Teks Prosedur": [
+          "Struktur Prosedur",
+          "Ciri Kebahasaan",
+          "Infografik",
+          "Menyajikan Prosedur"
+        ]
+      }
+    },
+    "Bahasa Inggris": {
+      "source": "db_keep",
+      "topics": {
+        "Daily Life": [
+          "Daily Routines",
+          "Telling Time"
+        ],
+        "Descriptive": [
+          "Describing People",
+          "Describing Places"
+        ],
+        "Hobbies": [
+          "Expressing Hobbies",
+          "Sports and Activities",
+          "Talking about Hobbies and Interests"
+        ],
+        "Introduction": [
+          "Greetings and Introductions",
+          "Personal Identity"
+        ],
+        "School": [
+          "School Facilities",
+          "Subjects and Schedules"
+        ],
+        "Animals": [
+          "Describing Animals"
+        ],
+        "Family": [
+          "Describing Family Members"
+        ],
+        "Food and Drink": [
+          "Expressing Likes and Dislikes"
+        ],
+        "Greetings": [
+          "Expression of Greeting and Self-Introduction"
+        ],
+        "School Life": [
+          "Daily Activities at School"
+        ],
+        "Time": [
+          "Telling Time and Daily Routine"
+        ]
+      }
+    },
+    "Bahasa Mandarin": {
+      "source": "prosem",
+      "topics": {
+        "Mandarin Dasar": [
+          "Pengenalan Bahasa Mandarin (pinyin dan nada). Vokal tunggal (a,i,u,e,o) dan konsonan, cara pelafalan",
+          "Nada Bahasa Mandarin (4 nada dan nada netral), latihan mendengar dan mengucapkan nada",
+          "Guratan Hanzi (guratan dasar, aturan urutan guratan, arah penulisan hanzi)"
+        ],
+        "Angka dan bilangan (数字 Shùzì）membaca dan menulis angka dalam hanzi sederhana": [
+          "Tanggal dan waktu (日期和时间 rìqí hé shíjiān) hari, bulan, tanggal, tahun, jam dan waktu sederhana.",
+          "Keluarga (家庭 jiātíng) kosakata anggota keluarga, memperkenalkan keluarga, penggunaan kata ganti oran",
+          "Memperkenalkan diri (自我介绍 Zìwǒ jièshào）Menyebutkan nama, umur, kelas, hobi secara sederhana"
+        ],
+        "Hello AI Xiaoyu! AI 小语，你好！": [
+          "Mendengarkan tentang cara menyebutkan kosakata dan kalimat tentang Hello AI Xiaoyu! AI 小语，你好！",
+          "Melafalkan tentang cara menyebutkan kosakata dan kalimat Hello AI Xiaoyu! AI 小语，你好！",
+          "Membacakan teks bacaan tentang Hello AI Xiaoyu! AI 小语，你好！",
+          "Menuliskan hanzi tentang Hello AI Xiaoyu! AI 小语，你好！"
+        ],
+        "我叫李文 - Wǒ jiào lǐ wén (My Name is Li Wen)": [
+          "Mendengarkan cara tentang menyebutkan 我叫李文 - Wǒ jiào lǐ wén",
+          "Melafalkan tentang cara menyebutkan 我叫李文 - Wǒ jiào lǐ wén",
+          "Membacakan teks bacaan 我叫李文 - Wǒ jiào lǐ wén"
+        ],
+        "Menulis teks bacaan dan kosakata 我叫李文 - Wǒ jiào lǐ wén": [
+          "我是中国人 - Wǒ shì zhōngguó rén (I'm Chinese)",
+          "Mendengarkan cara tentang menyebutkan 我是中国人 - Wǒ shì zhōngguó rén"
+        ],
+        "Melafalkan tentang cara menyebutkan 我是中国人 - Wǒ shì zhōngguó rén": [
+          "Membacakan teks bacaan 我是中国人 - Wǒ shì zhōngguó rén",
+          "Menuliskan hanzi tentang 我是中国人 - Wǒ shì zhōngguó rén"
+        ]
+      }
+    },
+    "Fisika": {
+      "source": "prosem",
+      "topics": {
+        "Besaran dan Pengukuran": [
+          "Besaran Pokok",
+          "Besaran Turunan",
+          "Satuan",
+          "Alat Ukur"
+        ],
+        "Gerak Lurus": [
+          "Jarak dan Perpindahan",
+          "Kecepatan",
+          "Percepatan",
+          "GLB dan GLBB"
+        ],
+        "Gaya dan Hukum Newton": [
+          "Hukum I Newton",
+          "Hukum II Newton",
+          "Hukum III Newton",
+          "Aplikasi"
+        ]
+      }
+    },
+    "IPA": {
+      "source": "db_keep",
+      "topics": {
+        "Bumi dan Tata Surya": [
+          "Rotasi dan Revolusi Bumi",
+          "Struktur Bumi",
+          "Tata Surya"
+        ],
+        "Ekologi": [
+          "Interaksi Antar Makhluk Hidup",
+          "Komponen Ekosistem",
+          "Pelestarian Lingkungan"
+        ],
+        "Gerak dan Gaya": [
+          "Gaya dan Hukum Newton",
+          "Gerak Benda",
+          "Pesawat Sederhana",
+          "Tekanan Zat"
+        ],
+        "Ilmu Sains": [
+          "Hakikat Ilmu Sains",
+          "Laboratorium IPA",
+          "Merancang Percobaan",
+          "Metode Ilmiah",
+          "Pelaporan Hasil Percobaan"
+        ],
+        "Makhluk Hidup": [
+          "Ciri-Ciri Makhluk Hidup",
+          "Keanekaragaman Hayati",
+          "Klasifikasi Makhluk Hidup"
+        ],
+        "Suhu dan Kalor": [
+          "Kalor dan Perpindahannya",
+          "Pemuaian",
+          "Suhu dan Termometer",
+          "Suhu dan Pemuaian"
+        ],
+        "Zat dan Perubahan": [
+          "Pemisahan Campuran",
+          "Perubahan Fisika dan Kimia",
+          "Wujud Zat dan Partikel"
+        ],
+        "Ekosistem": [
+          "Komponen Ekosistem dan Interaksi"
+        ],
+        "Gerak": [
+          "Gerak Lurus dan Gaya"
+        ],
+        "Klasifikasi Makhluk Hidup": [
+          "Ciri-Ciri Makhluk Hidup",
+          "Klasifikasi Makhluk Hidup"
+        ],
+        "Pengukuran": [
+          "Besaran dan Pengukuran"
+        ],
+        "Zat dan Wujudnya": [
+          "Unsur, Senyawa, dan Campuran"
+        ]
+      }
+    },
+    "IPS": {
+      "source": "db_keep",
+      "topics": {
+        "Ekonomi": [
+          "Kegiatan Ekonomi"
+        ],
+        "Interaksi Sosial": [
+          "Bentuk Interaksi Sosial",
+          "Sosialisasi dan Lembaga Sosial"
+        ],
+        "Keragaman Budaya": [
+          "Keragaman Suku dan Budaya"
+        ],
+        "Peninggalan Sejarah": [
+          "Masa Hindu-Buddha",
+          "Masa Islam"
+        ],
+        "Ruang dan Interaksi": [
+          "Ruang dan Sumber Daya"
+        ],
+        "Keadaan Alam": [
+          "Letak dan Kondisi Geografis Indonesia",
+          "Potensi Sumber Daya Alam"
+        ],
+        "Kegiatan Ekonomi": [
+          "Pasar dan Permintaan-Penawaran",
+          "Produksi, Distribusi, dan Konsumsi"
+        ],
+        "Sejarah Keluarga": [
+          "Kehidupan Masyarakat Praaksara",
+          "Kerajaan Hindu-Buddha di Indonesia",
+          "Kerajaan Islam di Indonesia"
+        ]
+      }
+    },
+    "Informatika": {
+      "source": "db_keep",
+      "topics": {
+        "Algoritma": [
+          "Algoritma dan Pemrograman",
+          "Dasar-Dasar Algoritma dan Flowchart"
+        ],
+        "Berpikir Komputasional": [
+          "Dasar Berpikir Komputasional"
+        ],
+        "Dampak Sosial": [
+          "Dampak Teknologi Informasi"
+        ],
+        "Internet": [
+          "Jaringan Internet",
+          "Jaringan Internet dan Keamanan"
+        ],
+        "Keamanan": [
+          "Keamanan Data dan Privasi"
+        ],
+        "Analisis Data": [
+          "Pengolahan Data Sederhana"
+        ],
+        "Hardware": [
+          "Pengenalan Perangkat Keras Komputer"
+        ],
+        "Pemrograman": [
+          "Pengantar Pemrograman Visual"
+        ],
+        "Pengantar Informatika": [
+          "Definisi dan Ruang Lingkup Informatika"
+        ],
+        "Software": [
+          "Perangkat Lunak Aplikasi"
+        ]
+      }
+    },
+    "Kimia": {
+      "source": "prosem",
+      "topics": {
+        "Objek IPA dan Pengenalan Kimia": [
+          "Mengklasifikasikan Materi",
+          "Unsur",
+          "Senyawa dan Campuran"
+        ],
+        "Asam, Basa, dan Garam": [],
+        "Pemisahan Campuran": [
+          "Perubahan Fisika dan Kimia",
+          "Filtrasi, Evaporasi, dan Sentrifugasi",
+          "Sublimasi, Kromatografi, dan Destilasi"
+        ],
+        "Pencemaran": []
+      }
+    },
+    "Matematika": {
+      "source": "db_keep",
+      "topics": {
+        "Aljabar": [
+          "Bentuk Aljabar",
+          "Persamaan Linear Satu Variabel"
+        ],
+        "Aritmatika Sosial": [
+          "Harga dan Diskon"
+        ],
+        "Bangun Datar": [
+          "Luas dan Keliling"
+        ],
+        "Bilangan": [
+          "Bilangan Bulat dan Operasi",
+          "Bilangan Pecahan",
+          "Bilangan Bulat dan Operasinya"
+        ],
+        "Perbandingan": [
+          "Skala dan Rasio"
+        ],
+        "Persamaan": [
+          "Persamaan Linear"
+        ],
+        "Statistika": [
+          "Penyajian Data",
+          "Ukuran Pemusatan Data"
+        ],
+        "Geometri": [
+          "Garis dan Sudut",
+          "Segitiga dan Segiempat"
+        ]
+      }
+    },
+    "PJOK": {
+      "source": "db_keep",
+      "topics": {
+        "Belajar Melalui Gerak": [
+          "Fase-Fase Gerak",
+          "Konsep Gerak",
+          "Koreksi Gerak"
+        ],
+        "Hidup Sehat": [
+          "Gizi Seimbang",
+          "Pencegahan Penyakit",
+          "Pola Makan Sehat"
+        ],
+        "Kebugaran": [
+          "Kebugaran Jasmani",
+          "Program Latihan",
+          "Tes Kebugaran"
+        ],
+        "Kerja Sama Tim": [
+          "Komunikasi dan Koordinasi",
+          "Peran dalam Tim",
+          "Sportivitas"
+        ],
+        "Keterampilan Gerak": [
+          "Gerak Lokomotor dan Non-Lokomotor",
+          "Hubungan Gerak Dasar dan Keterampilan",
+          "Umpan Balik Belajar Gerak"
+        ],
+        "Strategi Gerak": [
+          "Pertahanan dan Penyerangan",
+          "Taktik Permainan Bola Besar",
+          "Taktik Permainan Bola Kecil"
+        ],
+        "Atletik": [
+          "Lari Jarak Pendek",
+          "Lompat dan Lempar"
+        ],
+        "Kebugaran Jasmani": [
+          "Latihan Kebugaran"
+        ],
+        "Permainan Bola Besar": [
+          "Bola Basket",
+          "Sepak Bola"
+        ],
+        "Permainan Bola Kecil": [
+          "Bulu Tangkis"
+        ],
+        "Renang": [
+          "Pengenalan Renang"
+        ],
+        "Senam": [
+          "Senam Lantai"
+        ]
+      }
+    },
+    "Pendidikan Pancasila": {
+      "source": "prosem",
+      "topics": {
+        "latar sejarah kelahiran Pancasila": [
+          "kronologis lahirnya Pancasila",
+          "perumusan Pancasila",
+          "penetapan Pancasila"
+        ],
+        "sejarah dan fungsi Undang-Undang Dasar Negara Republik Indonesia Tahun 1945": [
+          "kedudukan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945",
+          "pengertian macam-macam norma",
+          "sikap yang sesuai dengan norma"
+        ],
+        "Keberagaman SARA": [
+          "Keragaman dan perubahan budaya Indonesia",
+          "Sikap menerima perubahan budaya sebagai suatu kenyataan yang ada di dalam kehidupan bermasyarakat,ti",
+          "Sejarah detik-detik proklamasi kemerdekaan Indonesia"
+        ],
+        "Makna proklamasi": [
+          "Makna teks proklamasi",
+          "Hubungan proklamasi dengan konstitusi pertama"
+        ]
+      }
+    }
+  }
+}
