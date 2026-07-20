@@ -339,8 +339,22 @@ async function SubjectContent({ subject }: { subject: string }) {
                     color: meta.color,
                   }}
                 >
-                  📖 Baca
+                  📖 LLM
                 </Link>
+
+                {/* SIBI Reader — if available */}
+                {material.metadata && (material.metadata as any).slide_sibi ? (
+                  <Link
+                    href={`/student/slides/${material.id}?source=sibi`}
+                    className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-medium transition-all hover:opacity-80 active:scale-95"
+                    style={{
+                      backgroundColor: "rgba(245,158,11,0.1)",
+                      color: "#d97706",
+                    }}
+                  >
+                    📚 SIBI
+                  </Link>
+                ) : null}
 
                 {/* Modul Moodle — if available */}
                 {(() => {

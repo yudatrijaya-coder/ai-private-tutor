@@ -103,8 +103,17 @@ export const GRADE_TOPICS_SMA11: Record<string, TopicEntry[]> = {
     { subject: "Sosiologi", topic: "Konflik", subTopic: "Resolusi Konflik", weekOrder: 9, priority: 6 },
     { subject: "Sosiologi", topic: "Perubahan Sosial", subTopic: "Modernisasi", weekOrder: 10, priority: 7 },
     { subject: "Sosiologi", topic: "Perubahan Sosial", subTopic: "Globalisasi", weekOrder: 11, priority: 7 },
-    { subject: "Sosiologi", topic: "Lembaga Sosial", subTopic: "Lembaga Kemasyarakatan", weekOrder: 12, priority: 6 },
-    { subject: "Sosiologi", topic: "Lembaga Sosial", subTopic: "Fungsi Lembaga Sosial", weekOrder: 13, priority: 6 },
+    { subject: "Sosiologi", topic: "Harmoni Sosial", subTopic: "Membangun Harmoni Sosial", weekOrder: 13, priority: 7 },
+
+    // ═══ Matematika Tingkat Lanjut — Restore ═══
+    { subject: "Matematika Tingkat Lanjut", topic: "Matriks", subTopic: "Operasi Matriks", weekOrder: 1, priority: 8 },
+    { subject: "Matematika Tingkat Lanjut", topic: "Matriks", subTopic: "Invers Matriks", weekOrder: 2, priority: 7 },
+    { subject: "Matematika Tingkat Lanjut", topic: "Vektor", subTopic: "Vektor di R2 dan R3", weekOrder: 3, priority: 8 },
+    { subject: "Matematika Tingkat Lanjut", topic: "Vektor", subTopic: "Perkalian Titik dan Silang", weekOrder: 4, priority: 7 },
+
+    // ═══ Matematika Penalaran — Restore ═══
+    { subject: "Matematika Penalaran", topic: "Logika Matematika", subTopic: "Pernyataan dan Negasi", weekOrder: 1, priority: 9 },
+    { subject: "Matematika Penalaran", topic: "Logika Matematika", subTopic: "Penarikan Kesimpulan", weekOrder: 2, priority: 8 },
 
     // ═══ PJOK — 5 Bab, 15 sub-topik ═══
     { subject: "PJOK", topic: "Permainan Bola Besar", subTopic: "Sepak Bola", weekOrder: 1, priority: 7 },
@@ -146,5 +155,57 @@ export const GRADE_TOPICS_SMA11: Record<string, TopicEntry[]> = {
     { subject: "Informatika", topic: "Basis Data", subTopic: "SQL Dasar", weekOrder: 8, priority: 6 },
     { subject: "Informatika", topic: "Jaringan", subTopic: "Jaringan Komputer", weekOrder: 9, priority: 6 },
     { subject: "Informatika", topic: "Jaringan", subTopic: "Topologi dan Protokol", weekOrder: 10, priority: 6 },
+
+    // ═══ Fisika — 6 Bab, 12 sub-topik ═══
+    { subject: "Fisika", topic: "Vektor", subTopic: "Operasi Vektor", weekOrder: 1, priority: 8 },
+    { subject: "Fisika", topic: "Vektor", subTopic: "Resultan dan Komponen Vektor", weekOrder: 2, priority: 7 },
+    { subject: "Fisika", topic: "Kinematika", subTopic: "Gerak Lurus Beraturan dan Berubah", weekOrder: 3, priority: 9 },
+    { subject: "Fisika", topic: "Kinematika", subTopic: "Gerak Parabola", weekOrder: 4, priority: 8 },
+    { subject: "Fisika", topic: "Dinamika", subTopic: "Hukum Newton", weekOrder: 5, priority: 9 },
+    { subject: "Fisika", topic: "Dinamika", subTopic: "Gaya Gesek dan Aplikasi", weekOrder: 6, priority: 7 },
+    { subject: "Fisika", topic: "Usaha dan Energi", subTopic: "Konsep Usaha dan Energi", weekOrder: 7, priority: 8 },
+    { subject: "Fisika", topic: "Usaha dan Energi", subTopic: "Kekekalan Energi Mekanik", weekOrder: 8, priority: 7 },
+    { subject: "Fisika", topic: "Fluida", subTopic: "Fluida Statis", weekOrder: 9, priority: 8 },
+    { subject: "Fisika", topic: "Fluida", subTopic: "Fluida Dinamis", weekOrder: 10, priority: 7 },
+    { subject: "Fisika", topic: "Suhu dan Kalor", subTopic: "Suhu dan Pemuaian", weekOrder: 11, priority: 9 },
+    { subject: "Fisika", topic: "Suhu dan Kalor", subTopic: "Kalor dan Perpindahannya", weekOrder: 12, priority: 8 },
+
+    // ═══ Biologi — 6 Bab, 12 sub-topik ═══
+    { subject: "Biologi", topic: "Sel", subTopic: "Struktur dan Fungsi Sel", weekOrder: 1, priority: 10 },
+    { subject: "Biologi", topic: "Sel", subTopic: "Organel Sel", weekOrder: 2, priority: 9 },
+    { subject: "Biologi", topic: "Jaringan", subTopic: "Jaringan Tumbuhan", weekOrder: 3, priority: 9 },
+    { subject: "Biologi", topic: "Jaringan", subTopic: "Jaringan Hewan", weekOrder: 4, priority: 8 },
+    { subject: "Biologi", topic: "Sistem Gerak", subTopic: "Tulang dan Otot", weekOrder: 5, priority: 9 },
+    { subject: "Biologi", topic: "Sistem Gerak", subTopic: "Mekanisme Gerak", weekOrder: 6, priority: 8 },
+    { subject: "Biologi", topic: "Sistem Sirkulasi", subTopic: "Jantung dan Pembuluh Darah", weekOrder: 7, priority: 9 },
+    { subject: "Biologi", topic: "Sistem Sirkulasi", subTopic: "Golongan Darah", weekOrder: 8, priority: 8 },
+    { subject: "Biologi", topic: "Sistem Pencernaan", subTopic: "Organ Pencernaan", weekOrder: 9, priority: 8 },
+    { subject: "Biologi", topic: "Sistem Pencernaan", subTopic: "Enzim dan Nutrisi", weekOrder: 10, priority: 7 },
+    { subject: "Biologi", topic: "Sistem Pernapasan", subTopic: "Organ Pernapasan", weekOrder: 11, priority: 9 },
+    { subject: "Biologi", topic: "Sistem Pernapasan", subTopic: "Mekanisme Pernapasan", weekOrder: 12, priority: 8 },
+
+    // ═══ Kimia — 6 Bab, 12 sub-topik ═══
+    { subject: "Kimia", topic: "Struktur Atom", subTopic: "Model Atom", weekOrder: 1, priority: 10 },
+    { subject: "Kimia", topic: "Struktur Atom", subTopic: "Konfigurasi Elektron", weekOrder: 2, priority: 9 },
+    { subject: "Kimia", topic: "Ikatan Kimia", subTopic: "Ikatan Ion dan Kovalen", weekOrder: 3, priority: 9 },
+    { subject: "Kimia", topic: "Ikatan Kimia", subTopic: "Ikatan Logam dan Antarmolekul", weekOrder: 4, priority: 8 },
+    { subject: "Kimia", topic: "Stoikiometri", subTopic: "Konsep Mol", weekOrder: 5, priority: 9 },
+    { subject: "Kimia", topic: "Stoikiometri", subTopic: "Rumus Kimia dan Persamaan", weekOrder: 6, priority: 8 },
+    { subject: "Kimia", topic: "Larutan", subTopic: "Larutan Elektrolit", weekOrder: 7, priority: 8 },
+    { subject: "Kimia", topic: "Larutan", subTopic: "Konsentrasi Larutan", weekOrder: 8, priority: 7 },
+    { subject: "Kimia", topic: "Asam Basa", subTopic: "Teori Asam Basa", weekOrder: 9, priority: 9 },
+    { subject: "Kimia", topic: "Asam Basa", subTopic: "pH dan Indikator", weekOrder: 10, priority: 8 },
+    { subject: "Kimia", topic: "Termokimia", subTopic: "Entalpi dan Perubahan", weekOrder: 11, priority: 8 },
+    { subject: "Kimia", topic: "Termokimia", subTopic: "Hukum Hess", weekOrder: 12, priority: 7 },
+
+    // ═══ Sejarah — 4 Bab, 8 sub-topik ═══
+    { subject: "Sejarah", topic: "Kolonialisme", subTopic: "Kedatangan Bangsa Eropa", weekOrder: 1, priority: 9 },
+    { subject: "Sejarah", topic: "Kolonialisme", subTopic: "Sistem Tanam Paksa", weekOrder: 2, priority: 8 },
+    { subject: "Sejarah", topic: "Pergerakan Nasional", subTopic: "Budi Utomo dan Sumpah Pemuda", weekOrder: 3, priority: 9 },
+    { subject: "Sejarah", topic: "Pergerakan Nasional", subTopic: "Organisasi Pergerakan", weekOrder: 4, priority: 8 },
+    { subject: "Sejarah", topic: "Proklamasi", subTopic: "Peristiwa Rengasdengklok", weekOrder: 5, priority: 10 },
+    { subject: "Sejarah", topic: "Proklamasi", subTopic: "Proklamasi Kemerdekaan", weekOrder: 6, priority: 10 },
+    { subject: "Sejarah", topic: "Orde Lama", subTopic: "Demokrasi Terpimpin", weekOrder: 7, priority: 7 },
+    { subject: "Sejarah", topic: "Orde Lama", subTopic: "Masa Revolusi", weekOrder: 8, priority: 7 },
   ],
 };
