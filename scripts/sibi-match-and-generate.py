@@ -78,9 +78,14 @@ def call_llm(system_prompt, user_prompt):
                         chunk = json.loads(line)
                         choices = chunk.get("choices", [])
                         if choices:
-                            c = choices[0].get("message", {}).get("content")
+                            msg = choices[0].get("message", {})
+                            c = msg.get("content") or ""
                             if c:
                                 content_parts.append(c)
+                            # 9Router routes to deepseek-v4-flash which puts content in reasoning_content
+                            rc = msg.get("reasoning_content") or ""
+                            if rc and not c:
+                                content_parts.append(rc)
                     except:
                         pass
             
