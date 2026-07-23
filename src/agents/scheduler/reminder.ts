@@ -161,6 +161,7 @@ async function sendTelegramReminder(
   const timeStr = session.scheduledAt.toLocaleTimeString("id-ID", {
     hour: "2-digit",
     minute: "2-digit",
+    timeZone: "Asia/Jakarta",
   });
 
   let text: string;

@@ -84,7 +84,7 @@ async function sendDailyBrief(): Promise<number> {
     if (!byStudent.has(key)) {
       byStudent.set(key, { name: s.student.name, telegramId: s.student.telegramId, sessions: [] });
     }
-    const timeStr = s.scheduledAt.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
+    const timeStr = s.scheduledAt.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Jakarta" });
     byStudent.get(key)!.sessions.push({
       time: timeStr,
       topic: s.topic ?? "Belajar Mandiri",

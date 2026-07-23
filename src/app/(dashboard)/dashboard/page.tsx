@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { StudentCard } from "./StudentCard";
 import { StatsBar } from "./StatsBar";
 import { SkeletonStatsBar, SkeletonCard } from "@/components/Skeleton";
+import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
@@ -167,13 +168,24 @@ function StudentGridFallback() {
 export default function DashboardPage() {
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>
-          🏠 Dashboard
-        </h1>
-        <p className="text-sm mt-1" style={{ color: "var(--su-text-dim)" }}>
-          Overview AI Private Tutor
-        </p>
+      <div className="flex items-center gap-4">
+        <div className="relative w-12 h-12 rounded-xl overflow-hidden border-2" style={{ borderColor: "var(--su-border)" }}>
+          <Image
+            src="/logo-senangbelajar.jpg"
+            alt="SenangBelajar"
+            fill
+            className="object-cover"
+            sizes="48px"
+          />
+        </div>
+        <div>
+          <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)" }}>
+            SenangBelajar
+          </h1>
+          <p className="text-sm mt-1" style={{ color: "var(--su-text-dim)" }}>
+            AI Private Tutor — Overview
+          </p>
+        </div>
       </div>
 
       <Suspense fallback={<StatsFallback />}>
