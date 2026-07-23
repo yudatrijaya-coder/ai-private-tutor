@@ -20,8 +20,13 @@ const RATIO_NEW = 0.6;
 const RATIO_WEAK = 0.3;
 const RATIO_RANDOM = 0.1;
 
-const MAX_SESSIONS_PER_DAY = 2;
-const DEFAULT_DURATION = 15;
+interface Slot {
+  start: Date;
+  dayType: "DAILY" | "INTENSIVE";
+  durationMin: number;
+}
+
+const DEFAULT_DURATION = 30;
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -54,10 +59,15 @@ export async function assignWeeklyTopics(
   studentId: string,
   weekStart: string,
 ): Promise<AssignResult> {
-  // 1. Load student
+  // 1. Load student + their curriculum IDs
   const student = await prisma.student.findUnique({
     where: { id: studentId },
-    select: { id: true, gradeLevel: true, scheduleConfig: true },
+    select: {
+      id: true,
+      gradeLevel: true,
+      scheduleConfig: true,
+      curriculums: { select: { id: true } },
+    },
   });
 
   if (!student) {
@@ -65,10 +75,16 @@ export async function assignWeeklyTopics(
     return { sessionsCreated: 0, summary: { new: [], weak: [], random: [] } };
   }
 
-  // 2. Gather available new-curriculum materials
+  const curriculumIds = student.curriculums.map((c) => c.id);
+  if (curriculumIds.length === 0) {
+    console.warn(`[scheduler/assigner] No curricula found for student=${studentId}`);
+    return { sessionsCreated: 0, summary: { new: [], weak: [], random: [] } };
+  }
+
+  // 2. Gather available materials scoped to student's curricula
   const availableMaterials = await prisma.material.findMany({
     where: {
-      gradeLevel: student.gradeLevel,
+      curriculumId: { in: curriculumIds },
       status: { in: ["READY" as const, "PROCESSED" as const, "VIDEO_READY" as const] },
     },
     orderBy: [{ weekOrder: "asc" }, { priority: "desc" }],
@@ -94,7 +110,7 @@ export async function assignWeeklyTopics(
   );
 
   // 3. Identify weak subjects (mastery < 50%)
-  const weakSubjects = await identifyWeakSubjects(studentId);
+  const weakSubjects = await identifyWeakSubjects(studentId, curriculumIds);
 
   // 4. Compute available session slots
   const slots = computeWeeklySlots(student.scheduleConfig, weekStartDate);
@@ -124,36 +140,39 @@ export async function assignWeeklyTopics(
 
   for (const mat of newTopics) {
     if (slotIdx >= totalSlots) break;
+    const slot = slots[slotIdx];
     sessions.push({
       topic: mat.topic,
       subject: mat.subject,
-      type: "DAILY",
-      scheduledAt: slots[slotIdx].start,
-      durationMin: DEFAULT_DURATION,
+      type: slot.dayType,
+      scheduledAt: slot.start,
+      durationMin: slot.durationMin,
     });
     slotIdx++;
   }
 
   for (const item of weakTopics) {
     if (slotIdx >= totalSlots) break;
+    const slot = slots[slotIdx];
     sessions.push({
       topic: item.topic,
       subject: item.subject ?? null,
-      type: "DAILY",
-      scheduledAt: slots[slotIdx].start,
-      durationMin: DEFAULT_DURATION,
+      type: slot.dayType,
+      scheduledAt: slot.start,
+      durationMin: slot.durationMin,
     });
     slotIdx++;
   }
 
   for (const item of randomTopics) {
     if (slotIdx >= totalSlots) break;
+    const slot = slots[slotIdx];
     sessions.push({
       topic: item.topic,
       subject: item.subject ?? null,
-      type: "INTENSIVE",
-      scheduledAt: slots[slotIdx].start,
-      durationMin: DEFAULT_DURATION + 5,
+      type: slot.dayType,
+      scheduledAt: slot.start,
+      durationMin: slot.durationMin,
     });
     slotIdx++;
   }
@@ -192,7 +211,7 @@ export async function assignWeeklyTopics(
 /**
  * Fetch subjects where the student's latest mastery is below 50%.
  */
-async function identifyWeakSubjects(studentId: string): Promise<Map<string, Material[]>> {
+async function identifyWeakSubjects(studentId: string, curriculumIds: string[]): Promise<Map<string, Material[]>> {
   const snaps = await prisma.progressSnap.findMany({
     where: { studentId },
     orderBy: { snapDate: "desc" },
@@ -204,7 +223,10 @@ async function identifyWeakSubjects(studentId: string): Promise<Map<string, Mate
   for (const snap of snaps) {
     if (snap.mastery < 0.5) {
       const materials = await prisma.material.findMany({
-        where: { subject: snap.subject },
+        where: {
+          subject: snap.subject,
+          curriculumId: { in: curriculumIds },
+        },
         orderBy: { weekOrder: "asc" },
         take: 3,
       });
@@ -268,37 +290,39 @@ function selectRandomTopics(
 function computeWeeklySlots(
   scheduleConfig: unknown,
   weekStart: Date,
-): Array<{ start: Date }> {
+): Slot[] {
   const config = (scheduleConfig ?? {}) as Record<string, unknown>;
-  const customTimes = config.customTimes as Record<string, string> | undefined;
-  const slots: Array<{ start: Date }> = [];
+  const days: Record<string, Record<string, unknown>> | undefined = config.days as any;
+  const slots: Slot[] = [];
 
   for (let dayOffset = 0; dayOffset < 7; dayOffset++) {
     const day = addDays(weekStart, dayOffset);
     const dayName = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][day.getDay()];
+    const dayConfig = days?.[dayName];
 
-    const exclude = config.excludeDays as string[] | undefined;
-    if (exclude?.some((d) => d === dayName || d === String(day.getDay()))) continue;
+    // Skip excluded days
+    if (dayConfig?.exclude === true) continue;
+    // Skip undefined days
+    if (!dayConfig) continue;
 
-    const sessionsPerDay = Math.min(
-      (config.sessionsPerDay as number) ?? 1,
-      MAX_SESSIONS_PER_DAY,
-    );
+    const startRaw = (dayConfig.start as string) ?? "19:00";
+    const [h, m] = startRaw.split(":").map(Number);
 
-    for (let i = 0; i < sessionsPerDay; i++) {
-      let hour = 16;
-      let minute = 0;
+    const slotTime = new Date(Date.UTC(
+      day.getFullYear(),
+      day.getMonth(),
+      day.getDate(),
+      (isNaN(h) ? 19 : h) - 7,  // WIB → UTC
+      isNaN(m) ? 0 : m,
+      0,
+      0,
+    ));
 
-      if (customTimes?.[dayName]) {
-        const [h, m] = customTimes[dayName].split(":").map(Number);
-        if (!isNaN(h)) hour = h;
-        if (!isNaN(m)) minute = m;
-      }
-
-      const slotTime = new Date(day);
-      slotTime.setHours(hour + i, minute + i * 30, 0, 0);
-      slots.push({ start: slotTime });
-    }
+    slots.push({
+      start: slotTime,
+      dayType: (dayConfig.type as "DAILY" | "INTENSIVE") ?? "DAILY",
+      durationMin: (dayConfig.duration as number) ?? 30,
+    });
   }
 
   return slots;

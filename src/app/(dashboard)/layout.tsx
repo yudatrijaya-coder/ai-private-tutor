@@ -1,5 +1,6 @@
 import { auth, signOut } from "@/lib/auth/auth";
 import Link from "next/link";
+import Image from "next/image";
 
 const navLinks = [
   { href: "/dashboard", label: "🏠 Dashboard" },
@@ -31,12 +32,20 @@ export default async function DashboardLayout({
         className="w-56 flex-shrink-0 border-r flex flex-col"
         style={{ borderColor: "var(--su-border)", backgroundColor: "var(--su-bg-card)" }}
       >
-        <div className="px-4 py-4 border-b" style={{ borderColor: "var(--su-border)" }}>
+        <div className="px-4 py-4 border-b flex items-center gap-2" style={{ borderColor: "var(--su-border)" }}>
+          <Image
+            src="/logo-senangbelajar.jpg"
+            alt="SenangBelajar"
+            width={32}
+            height={32}
+            className="rounded-lg"
+            style={{ objectFit: "cover" }}
+          />
           <span
             className="text-lg font-bold"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            🏠 AI Private Tutor
+            SenangBelajar
           </span>
         </div>
         <nav className="flex-1 px-2 py-4 space-y-1">

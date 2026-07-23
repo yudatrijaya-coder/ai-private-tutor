@@ -8,8 +8,12 @@ const fredoka = Fredoka({ subsets: ["latin"], variable: "--font-st-display" });
 const nunito = Nunito({ subsets: ["latin"], variable: "--font-st-body" });
 
 export const metadata: Metadata = {
-  title: "AI Private Tutor",
+  title: "SenangBelajar — AI Private Tutor",
   description: "Belajar seru bareng Kak Budi, Kak Dewi, dan Kak Raka",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({
