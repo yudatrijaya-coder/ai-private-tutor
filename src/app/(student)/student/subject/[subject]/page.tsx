@@ -275,6 +275,14 @@ async function SubjectContent({ subject }: { subject: string }) {
           <span className="text-xs font-medium text-center">Exam</span>
         </Link>
         <Link
+          href={`/student/videos`}
+          className="flex flex-col items-center gap-1.5 rounded-2xl p-4 transition-all hover:scale-105 active:scale-95"
+          style={{ backgroundColor: "var(--st-bg-card)" }}
+        >
+          <span className="text-2xl">🎬</span>
+          <span className="text-xs font-medium text-center">Video</span>
+        </Link>
+        <Link
           href={`/student/big-mindmap/${encodeURIComponent(decodedSubject)}`}
           className="flex flex-col items-center gap-1.5 rounded-2xl p-4 transition-all hover:scale-105 active:scale-95"
           style={{ backgroundColor: "var(--st-bg-card)" }}
@@ -342,17 +350,25 @@ async function SubjectContent({ subject }: { subject: string }) {
                   📖 LLM
                 </Link>
 
-                {/* SIBI Reader — if available */}
-                {material.metadata && (material.metadata as any).slide_sibi ? (
+                {/* YouTube Video — if available */}
+                {material.videoUrl ? (
                   <Link
-                    href={`/student/slides/${material.id}?source=sibi`}
-                    className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-medium transition-all hover:opacity-80 active:scale-95"
-                    style={{
-                      backgroundColor: "rgba(245,158,11,0.1)",
-                      color: "#d97706",
-                    }}
+                    href={material.videoUrl}
+                    target="_blank"
+                    className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-medium transition-all hover:opacity-80 active:scale-95 bg-red-50 text-red-600"
                   >
-                    📚 SIBI
+                    ▶️ YouTube
+                  </Link>
+                ) : null}
+
+                {material.metadata && (material.metadata as any).generatedVideoUrl ? (
+                  <Link
+                    href={(material.metadata as any).generatedVideoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl text-xs font-medium transition-all hover:opacity-80 active:scale-95 bg-amber-50 text-amber-600"
+                  >
+                    🎬 Video SIBI
                   </Link>
                 ) : null}
 
