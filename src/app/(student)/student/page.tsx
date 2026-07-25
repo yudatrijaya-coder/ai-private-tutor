@@ -168,7 +168,7 @@ async function RecommendationSection() {
 
   // Collect unique topics from today's sessions
   const topicKeys = new Set<string>();
-  const todayTopics: { subject: string; topic: string }[] = [];
+  const todayTopics: { subject: string; topic: string; generatedVideoUrl?: string | null }[] = [];
 
   for (const s of todaySessions) {
     const key = `${s.subject}|${s.topic}`;
@@ -186,7 +186,7 @@ async function RecommendationSection() {
           studentId: session.id,
         },
       },
-      select: { subject: true, topic: true },
+      select: { subject: true, topic: true, metadata: true },
       take: 20,
       orderBy: { weekOrder: "asc" },
     });
@@ -195,7 +195,11 @@ async function RecommendationSection() {
       const key = `${m.subject}|${m.topic}`;
       if (!seen.has(key)) {
         seen.add(key);
-        todayTopics.push({ subject: m.subject, topic: m.topic });
+        todayTopics.push({ 
+          subject: m.subject, 
+          topic: m.topic,
+          generatedVideoUrl: (m.metadata as any)?.generatedVideoUrl 
+        });
       }
     }
   }
@@ -257,6 +261,18 @@ async function RecommendationSection() {
         subtitle: videos[0].channel,
         href: videos[0].url,
         color: "#ef4444",
+      });
+    }
+
+    // 4b. Video SIBI Generated (if available)
+    if (t.generatedVideoUrl) {
+      recommendations.push({
+        type: "video_sibi",
+        icon: "🎬",
+        label: `Video SIBI: ${t.topic}`,
+        subtitle: `${t.subject} — Video Penjelasan Visual`,
+        href: t.generatedVideoUrl,
+        color: "#fbbf24",
       });
     }
 
@@ -398,9 +414,14 @@ async function ScheduleSection() {
       id: true,
       subject: true,
       topic: true,
-      quizzes: { select: { id: true }, take: 1 },
+      metadata: true,
+      _count: {
+        select: { quizzes: true },
+      },
     },
   });
+
+  // Build lookup map
   const matByKey = new Map(
     materials.map((m) => [`${m.subject}|${m.topic}`, m])
   );
@@ -426,7 +447,8 @@ async function ScheduleSection() {
             // Cari materialId dari matching subject+topic
             const mat = matByKey.get(`${subject}|${topic}`);
             const matId = mat?.id;
-            const quizId = mat?.quizzes[0]?.id;
+            const hasQuiz = (mat?._count?.quizzes ?? 0) > 0;
+            const generatedVideoUrl = (mat?.metadata as any)?.generatedVideoUrl;
 
             // YouTube videos
             const videos = getYouTubeForTopic(subject, topic, student?.gradeLevel);
@@ -479,9 +501,9 @@ async function ScheduleSection() {
                       📖 Baca
                     </Link>
                   )}
-                  {matId && (
+                  {matId && hasQuiz && (
                     <Link
-                      href={`/student/quiz?quizId=${quizId || matId}`}
+                      href={`/student/quiz?quizId=${matId}`}
                       className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all hover:opacity-80"
                       style={{
                         backgroundColor: "rgba(99,102,241,0.1)",
@@ -490,6 +512,20 @@ async function ScheduleSection() {
                     >
                       📝 Quiz
                     </Link>
+                  )}
+                  {generatedVideoUrl && (
+                    <a
+                      href={generatedVideoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all hover:opacity-80"
+                      style={{
+                        backgroundColor: "rgba(251,191,36,0.15)",
+                        color: "#b45309",
+                      }}
+                    >
+                      🎬 Video SIBI
+                    </a>
                   )}
                   {matId && (
                     <Link
