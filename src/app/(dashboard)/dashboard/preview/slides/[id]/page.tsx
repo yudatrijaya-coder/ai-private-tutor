@@ -32,6 +32,7 @@ export default function SlideViewerPage() {
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [generatedVideoUrl, setGeneratedVideoUrl] = useState<string | null>(null);
   const [rendering, setRendering] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
 
@@ -46,6 +47,7 @@ export default function SlideViewerPage() {
           setSubject(data.subject || "IPA");
           setAudioUrl(data.audioUrl || null);
           setVideoUrl(data.videoUrl || null);
+          setGeneratedVideoUrl(data.generatedVideoUrl || null);
         }
         setLoading(false);
       })
@@ -192,13 +194,13 @@ export default function SlideViewerPage() {
               {generating ? "⏳ Generate..." : "🎤 Buat Suara"}
             </button>
           )}
-          {videoUrl ? (
+          {generatedVideoUrl ? (
             <button
               onClick={() => setShowVideo(!showVideo)}
               className="px-3 py-1.5 rounded-lg text-xs font-medium transition-all hover:scale-105 flex items-center gap-1.5"
               style={{ backgroundColor: showVideo ? "rgba(239,68,68,0.3)" : "rgba(255,255,255,0.15)", color: "white" }}
             >
-              {showVideo ? "✕ Tutup Video" : "🎬 Tonton Video"}
+              {showVideo ? "✕ Tutup Video" : "🎬 Video Generasi"}
             </button>
           ) : (
             <button
@@ -207,8 +209,19 @@ export default function SlideViewerPage() {
               className="px-3 py-1.5 rounded-lg text-xs font-medium transition-all hover:scale-105 disabled:opacity-50 flex items-center gap-1.5"
               style={{ backgroundColor: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.7)" }}
             >
-              {rendering ? "⏳ Render..." : "🎬 Buat Video"}
+              {rendering ? "⏳ Render..." : "🎬 Generate Video"}
             </button>
+          )}
+          {videoUrl && videoUrl.includes('youtube.com') && (
+            <a
+              href={videoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 rounded-lg text-xs font-medium transition-all hover:scale-105 flex items-center gap-1.5"
+              style={{ backgroundColor: "rgba(255,0,0,0.2)", color: "white" }}
+            >
+              ▶️ YouTube
+            </a>
           )}
           <span className="text-white/40 text-xs">{current + 1}/{slides.length}</span>
         </div>
@@ -240,7 +253,7 @@ export default function SlideViewerPage() {
         </button>
 
         {/* Slide card or Video player */}
-        {showVideo && videoUrl ? (
+        {showVideo && generatedVideoUrl ? (
           <div className="relative max-w-4xl w-full rounded-3xl overflow-hidden" style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.3)" }}>
             <video
               controls
@@ -248,7 +261,7 @@ export default function SlideViewerPage() {
               className="w-full"
               style={{ maxHeight: "70vh" }}
             >
-              <source src={videoUrl} type="video/mp4" />
+              <source src={generatedVideoUrl} type="video/mp4" />
             </video>
           </div>
         ) : (

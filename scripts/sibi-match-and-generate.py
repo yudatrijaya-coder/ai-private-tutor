@@ -32,7 +32,7 @@ def db_exec(sql):
 
 # ---- LLM call (9Router always returns hybrid JSON+SSE; handle both) ----
 def call_llm(system_prompt, user_prompt):
-    for attempt in range(3):
+    for attempt in range(8):
         try:
             r = requests.post("http://localhost:20128/v1/chat/completions", json={
                 "model": "hermes",
@@ -43,10 +43,10 @@ def call_llm(system_prompt, user_prompt):
                 "temperature": 0.1,
                 "max_tokens": 2000,
                 "stream": False,
-            }, timeout=180)
+            }, timeout=300)
             
             if r.status_code == 429:
-                retry_after = int(r.headers.get("retry-after", 60))
+                retry_after = int(r.headers.get("retry-after", 30))
                 print(f"      ⚠️ Rate limited (429). Waiting {retry_after}s...")
                 time.sleep(retry_after + 5)
                 continue
@@ -68,7 +68,7 @@ def call_llm(system_prompt, user_prompt):
                         choices = chunk.get("choices", [])
                         if choices:
                             delta = choices[0].get("delta", {})
-                            c = delta.get("content")
+                            c = delta.get("content") or delta.get("reasoning_content")
                             if c:
                                 content_parts.append(c)
                     except:
@@ -79,29 +79,24 @@ def call_llm(system_prompt, user_prompt):
                         choices = chunk.get("choices", [])
                         if choices:
                             msg = choices[0].get("message", {})
-                            c = msg.get("content") or ""
+                            c = msg.get("content") or msg.get("reasoning_content")
                             if c:
                                 content_parts.append(c)
-                            # 9Router routes to deepseek-v4-flash which puts content in reasoning_content
-                            rc = msg.get("reasoning_content") or ""
-                            if rc and not c:
-                                content_parts.append(rc)
                     except:
                         pass
             
             content = "".join(content_parts)
             if not content:
-                if attempt == 2:
-                    print(f"      ⚠️ 9Router overload — waiting 30s...")
-                    time.sleep(30)
-                    continue
-                raise ValueError("Empty content")
+                delay = 30 + (attempt * 30)
+                print(f"      ⚠️ Empty content, wait {delay}s (attempt {attempt+1}/8)...")
+                time.sleep(delay)
+                continue
             return content.strip()
         except Exception as e:
-            print(f"      ⚠️ LLM Attempt {attempt+1} failed: {e}")
-            if attempt == 2:
-                raise
-            time.sleep(15)
+            delay = 30 + (attempt * 30)
+            print(f"      ⚠️ LLM Attempt {attempt+1}/8 failed: {e}, wait {delay}s...")
+            time.sleep(delay)
+
 def parse_outline_to_mindmap(text, main_label):
     lines = text.strip().split("\n")
     mindmap_nodes = [{'id': '0', 'label': main_label, 'children': []}]

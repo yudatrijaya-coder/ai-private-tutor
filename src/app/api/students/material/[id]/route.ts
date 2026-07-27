@@ -53,6 +53,7 @@ export async function GET(
       mindmap: mindmap ?? null,
       script: metadata?.script ?? null,
       videoUrl: material.videoUrl ?? null,
+      generatedVideoUrl: metadata?.generatedVideoUrl ?? null,
       content: material.processedContent,
     });
   } catch (error) {

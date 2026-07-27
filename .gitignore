@@ -1,2 +1,49 @@
 scripts/*-progress.json
 scripts/youtube-progress.json
+
+# Next.js
+.next/
+next-env.d.ts
+tsconfig.tsbuildinfo
+
+# Environment
+.env
+.env.production
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+
+# Media / generated assets
+media/
+public/videos/*.mp4
+public/videos/_audio_list.txt
+public/videos/_narasi.mp3
+public/videos/_narasi_trimmed.mp3
+data/.video-pipeline-checkpoint.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs
+logs/
+*.log
+/tmp/
+
+# Misc
+archive/
+docs-site/
+src/generated/
+
+# Moodle / temp
+moodle-files/
+public/moodle-files/
+parse_moodle.py
+query.ts
+query_raihan.js
+
+# Generated scripts (one-offs, not part of project)
+scripts/inject_subjects.cjs
