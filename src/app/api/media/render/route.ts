@@ -64,13 +64,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Video rendering failed" }, { status: 500 });
     }
 
-    // Save video URL to material metadata
+    // Save video URL to material metadata (keep existing videoUrl intact)
     await prisma.material.update({
       where: { id: materialId },
       data: {
         metadata: {
           ...metadata,
-          videoUrl,
+          generatedVideoUrl: videoUrl,
         } as any,
       },
     });

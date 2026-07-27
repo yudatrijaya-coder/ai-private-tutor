@@ -372,22 +372,61 @@ def make_srt(segments_with_dur, output_path):
     return output_path
 
 
+MUSIC_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets", "music")
+MUSIC_MANIFEST = os.path.join(MUSIC_DIR, "manifest.json")
+
 def make_bgm(output_dir, duration_sec):
-    """Generate musical ambient BGM (piano chord pad) with given duration."""
+    """Pick a random BGM track from the music library and loop to fit duration.
+    Returns path to a trimmed/looped mp3 ready for mixing."""
+    os.makedirs(output_dir, exist_ok=True)
+    target = os.path.join(output_dir, "_bgm.mp3")
+
+    # Load track list
+    tracks = []
+    if os.path.exists(MUSIC_MANIFEST):
+        with open(MUSIC_MANIFEST) as f:
+            import json
+            manifest = json.load(f)
+            tracks = [t for t in manifest if os.path.exists(t["path"])]
+    else:
+        # Fallback: scan directory
+        for fname in sorted(os.listdir(MUSIC_DIR)):
+            if fname.endswith(".mp3"):
+                tracks.append({"path": os.path.join(MUSIC_DIR, fname), "title": fname})
+
+    if not tracks:
+        # No music found — generate fallback sine
+        return _fallback_bgm(output_dir, duration_sec)
+
+    chosen = random.choice(tracks)
+    print(f"  🎵 BGM: {chosen.get('title', os.path.basename(chosen['path']))}")
+
+    # Loop and trim to exact duration
+    subprocess.run([
+        "ffmpeg", "-y", "-i", chosen["path"],
+        "-af", f"volume=0.8,aloop=loop=-1:size=441000,atrim=end={duration_sec:.1f}",
+        "-t", str(duration_sec),
+        "-c:a", "libmp3lame", "-q:a", "2",
+        target
+    ], check=True, capture_output=True, timeout=120)
+
+    return target
+
+def _fallback_bgm(output_dir, duration_sec):
+    """Fallback sinewave BGM if no music tracks available."""
+    import json
     bgm_path = os.path.join(output_dir, "_bgm_ambient.mp3")
-    # Piano chord C major (C4+E4+G4) with gentle attack+release, looped
-    # Using tremolo + sine to simulate soft piano pad
     chord_dur = min(4.0, duration_sec)
     subprocess.run(
         ["ffmpeg", "-y",
          "-f", "lavfi", "-i",
-         f"sine=frequency=261.63:duration={chord_dur}:samples_per_frame=1024,volume=0.15",   # C4
+         f"sine=frequency=261.63:duration={chord_dur}:samples_per_frame=1024,volume=0.15",
          "-f", "lavfi", "-i",
-         f"sine=frequency=329.63:duration={chord_dur}:samples_per_frame=1024,volume=0.10",   # E4
+         f"sine=frequency=329.63:duration={chord_dur}:samples_per_frame=1024,volume=0.10",
          "-f", "lavfi", "-i",
-         f"sine=frequency=392:duration={chord_dur}:samples_per_frame=1024,volume=0.07",      # G4
+         f"sine=frequency=392:duration={chord_dur}:samples_per_frame=1024,volume=0.07",
          "-f", "lavfi", "-i",
-         f"sine=frequency=196:duration={chord_dur}:samples_per_frame=1024,volume=0.12",      # G3 (bass)
+         f"sine=frequency=196:duration={chord_dur}:samples_per_frame=1024,volume=0.12",
          "-f", "lavfi", "-i", "anoisesrc=d=30:c=pink:a=0.015",
          "-filter_complex",
          "[0][1][2][3]amix=inputs=4:duration=first,"
