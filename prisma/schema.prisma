@@ -121,6 +121,7 @@ model Student {
   homeworkTasks  HomeworkTask[]
   activityLogs   StudentActivity[]
   subjectMastery StudentSubjectMastery[]
+  studySessions  StudySession[]
 }
 
 model CharacterImage {
@@ -302,7 +303,8 @@ model StudentActivity {
   studentId   String
   materialId  String?
   type        String   // "slide_view", "mindmap_view", "video_click", "quiz_start", "quiz_complete", "exam_start", "exam_complete"
-  metadata    Json?    // {subject, topic, score?, maxScore?, timeSpent?, progress?, source?}
+  timeSpent   Int?     // seconds spent on this activity
+  metadata    Json?    // {subject, topic, score?, maxScore?, progress?, source?, duration?}
   createdAt   DateTime @default(now())
 
   student     Student  @relation(fields: [studentId], references: [id])
@@ -310,6 +312,25 @@ model StudentActivity {
 
   @@index([studentId, type, createdAt])
   @@index([studentId, createdAt])
+}
+
+/// StudySession — student login/logout or page focus sessions
+model StudySession {
+  id              String   @id @default(uuid())
+  studentId       String
+  startTime       DateTime @default(now())
+  endTime         DateTime?
+  durationMinutes Int?
+  source          String   @default("web") // "web", "telegram"
+  subject         String?
+  topic           String?
+  metadata        Json?
+  createdAt       DateTime @default(now())
+
+  student         Student  @relation(fields: [studentId], references: [id])
+
+  @@index([studentId, startTime])
+  @@index([studentId, startTime, endTime])
 }
 
 /// StudentSubjectMastery — per-subject achievement snapshot
