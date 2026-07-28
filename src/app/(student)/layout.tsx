@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
+import StudyTracker from "@/components/StudyTracker";
 
 const NAV_ITEMS = [
   { href: "/student", label: "Beranda", icon: "🏠" },
@@ -136,7 +137,10 @@ export default function StudentLayout({
 }) {
   return (
     <Suspense fallback={<div className="min-h-screen" style={{ backgroundColor: "var(--st-bg)" }} />}>
-      <StudentLayoutInner>{children}</StudentLayoutInner>
+      <StudentLayoutInner>
+        <StudyTracker />
+        {children}
+      </StudentLayoutInner>
     </Suspense>
   );
 }
