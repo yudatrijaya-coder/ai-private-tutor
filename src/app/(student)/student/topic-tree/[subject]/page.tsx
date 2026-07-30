@@ -50,7 +50,16 @@ async function MindmapContent({ subject }: { subject: string }) {
     include: {
       materials: {
         where: { subject: decoded },
-        select: { topic: true, subTopic: true, id: true },
+        select: {
+          topic: true,
+          subTopic: true,
+          id: true,
+          quizzes: {
+            select: { id: true },
+            take: 1,
+            orderBy: { createdAt: "desc" },
+          },
+        },
         orderBy: { weekOrder: "asc" },
       },
     },
@@ -67,12 +76,15 @@ async function MindmapContent({ subject }: { subject: string }) {
   });
 
   // Group by topic
-  const groups = new Map<string, { subTopics: string[]; id: string }>();
+  const groups = new Map<string, { subTopics: string[]; id: string; quizId: string | null }>();
   for (const m of uniqueMaterials) {
     if (!groups.has(m.topic)) {
-      groups.set(m.topic, { subTopics: [], id: m.id });
+      groups.set(m.topic, { subTopics: [], id: m.id, quizId: m.quizzes[0]?.id ?? null });
     }
-    if (m.subTopic) groups.get(m.topic)!.subTopics.push(m.subTopic);
+    const group = groups.get(m.topic)!;
+    // A topic can span several materials — take the first quiz found in any of them
+    if (!group.quizId && m.quizzes[0]?.id) group.quizId = m.quizzes[0].id;
+    if (m.subTopic) group.subTopics.push(m.subTopic);
   }
 
   const topics = Array.from(groups.entries());
@@ -202,13 +214,23 @@ async function MindmapContent({ subject }: { subject: string }) {
                     >
                       📖 Baca
                     </Link>
-                    <Link
-                      href={`/student/quiz?quizId=${data.id}`}
-                      className="text-xs px-2.5 py-1 rounded-lg transition-opacity hover:opacity-70"
-                      style={{ background: `${color}20`, color }}
-                    >
-                      📝 Quiz
-                    </Link>
+                    {data.quizId ? (
+                      <Link
+                        href={`/student/quiz?quizId=${data.quizId}`}
+                        className="text-xs px-2.5 py-1 rounded-lg transition-opacity hover:opacity-70"
+                        style={{ background: `${color}20`, color }}
+                      >
+                        📝 Quiz
+                      </Link>
+                    ) : (
+                      <span
+                        className="text-xs px-2.5 py-1 rounded-lg cursor-not-allowed"
+                        style={{ background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.3)" }}
+                        title="Belum ada quiz untuk topik ini"
+                      >
+                        📝 Belum ada quiz
+                      </span>
+                    )}
                     <Link
                       href={`/student/quiz?subject=${encodeURIComponent(decoded)}&exam=true`}
                       className="text-xs px-2.5 py-1 rounded-lg transition-opacity hover:opacity-70"

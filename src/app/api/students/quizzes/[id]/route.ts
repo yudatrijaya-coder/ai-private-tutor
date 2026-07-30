@@ -32,6 +32,7 @@ export async function GET(
       materialId: quiz.materialId,
       type: quiz.type,
       maxScore: quiz.maxScore,
+      timeLimit: quiz.timeLimit,
       questions: questions.map((q) => ({
         question: q.question,
         options: q.options,

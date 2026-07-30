@@ -52,7 +52,10 @@ export async function processCurriculumReviewJob(
   const { materialId, topic, gradeLevel } = job.data;
 
   // 1. Load material
-  const material = await prisma.material.findUnique({ where: { id: materialId } });
+  const material = await prisma.material.findUnique({
+    where: { id: materialId },
+    include: { curriculum: { select: { studentId: true } } },
+  });
   if (!material) {
     console.error(`[curriculum/worker] Material not found: ${materialId}`);
     return;
@@ -86,6 +89,7 @@ export async function processCurriculumReviewJob(
     const raw = await callLLM("curriculum", messages, {
       temperature: 0.1,
       maxTokens: 512,
+      studentId: (material as any).curriculum?.studentId ?? "system",
     });
 
     if (!raw) {

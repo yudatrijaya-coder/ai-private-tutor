@@ -111,6 +111,87 @@ const MODEL_PRICING: Record<string, ModelPricing> = {
   "hermes":                                 { input: 0.05, output: 0.10 },
 };
 
+// ─── Daily Token Budget ───────────────────────────────────────
+
+/** Max total tokens a single student may consume per calendar day. */
+export const DAILY_TOKEN_CAP = 100_000;
+
+/** Friendly reply returned to the student once the daily cap is hit. */
+export const BUDGET_EXCEEDED_FALLBACK =
+  "Maaf, kuota belajar AI kamu untuk hari ini sudah habis 😴 " +
+  "Coba lagi besok ya — sementara ini kamu masih bisa baca slide, " +
+  "nonton video, dan kerjain quiz yang sudah tersedia.";
+
+/** Thrown by {@link checkBudget} when a student passes DAILY_TOKEN_CAP. */
+export class BudgetExceededError extends Error {
+  readonly studentId: string;
+  readonly used: number;
+  readonly cap: number;
+
+  constructor(studentId: string, used: number, cap: number) {
+    super(
+      `Daily token cap exceeded for student ${studentId}: ${used}/${cap} tokens used today`,
+    );
+    this.name = "BudgetExceededError";
+    this.studentId = studentId;
+    this.used = used;
+    this.cap = cap;
+  }
+}
+
+/** Start of the current local day — used as the aggregation window. */
+function startOfToday(): Date {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
+/**
+ * Sum today's `totalTokens` from ApiUsage for a student.
+ *
+ * @returns tokens consumed since local midnight (0 if the query fails).
+ */
+export async function getTodayTokenUsage(studentId: string): Promise<number> {
+  try {
+    const agg = await prisma.apiUsage.aggregate({
+      where: { studentId, createdAt: { gte: startOfToday() } },
+      _sum: { totalTokens: true },
+    });
+    return agg._sum.totalTokens ?? 0;
+  } catch (err) {
+    // Never block LLM calls because of a usage-table read failure.
+    console.warn(
+      "[LLM] Budget lookup failed:",
+      err instanceof Error ? err.message : String(err),
+    );
+    return 0;
+  }
+}
+
+/**
+ * Enforce the daily token cap for a student.
+ *
+ * @throws {BudgetExceededError} when today's usage is at or above DAILY_TOKEN_CAP.
+ */
+export async function checkBudget(studentId: string): Promise<void> {
+  if (!studentId) return;
+  const used = await getTodayTokenUsage(studentId);
+  if (used >= DAILY_TOKEN_CAP) {
+    throw new BudgetExceededError(studentId, used, DAILY_TOKEN_CAP);
+  }
+}
+
+/**
+ * Remaining tokens in a student's daily budget.
+ *
+ * @returns tokens left today (0 when the cap is reached or exceeded).
+ */
+export async function getRemainingBudget(studentId: string): Promise<number> {
+  if (!studentId) return DAILY_TOKEN_CAP;
+  const used = await getTodayTokenUsage(studentId);
+  return Math.max(0, DAILY_TOKEN_CAP - used);
+}
+
 // ─── Core: callLLM (non‑streaming, with fallback) ─────────────
 
 /**
@@ -125,6 +206,20 @@ export async function callLLM(
   messages: ChatMessage[],
   options?: LLMCallOptions,
 ): Promise<string | null> {
+  // Budget check before any model attempt
+  if (options?.studentId) {
+    try {
+      await checkBudget(options.studentId);
+    } catch (err) {
+      if (err instanceof BudgetExceededError) {
+        console.warn(`[LLM] Budget exceeded for ${options.studentId}. Returning fallback.`);
+        return BUDGET_EXCEEDED_FALLBACK;
+      }
+      // re-throw unexpected errors
+      throw err;
+    }
+  }
+
   const models = options?.models ?? FALLBACK_CHAIN[role];
   let lastError: Error | null = null;
 
@@ -189,6 +284,19 @@ export async function* callLLMStream(
   messages: ChatMessage[],
   options?: LLMCallOptions,
 ): AsyncGenerator<string> {
+  // Budget check before any model attempt
+  if (options?.studentId) {
+    try {
+      await checkBudget(options.studentId);
+    } catch (err) {
+      if (err instanceof BudgetExceededError) {
+        console.warn(`[LLM] Budget exceeded for ${options.studentId} on stream. Returning empty.`);
+        return;
+      }
+      throw err;
+    }
+  }
+
   const models = FALLBACK_CHAIN[role];
   let lastError: Error | null = null;
 
@@ -236,7 +344,9 @@ export function estimateCost(
 
 /** Estimate cost for a given model name (used internally + by ApiUsage logging). */
 function estimateCostRaw(model: string, inputTokens: number, outputTokens: number): number {
-  const rate = MODEL_PRICING[model];
+  // Normalize: response.model may come back with 'sumopod/' prefix; strip it.
+  const key = model.split("/").pop() ?? model;
+  const rate = MODEL_PRICING[key] ?? MODEL_PRICING[model];
   if (!rate) return 0;
   return (inputTokens / 1_000_000) * rate.input + (outputTokens / 1_000_000) * rate.output;
 }

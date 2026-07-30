@@ -24,9 +24,21 @@ export async function configureWebhook(): Promise<void> {
     return;
   }
 
+  const secretToken = process.env.TELEGRAM_WEBHOOK_SECRET;
+  if (!secretToken) {
+    console.warn(
+      "[bot] TELEGRAM_WEBHOOK_SECRET not set — webhook will be registered without a secret token. Anyone who learns the URL can post fake updates.",
+    );
+  }
+
   try {
-    await bot.telegram.setWebhook(`${url}/api/bot/webhook`);
-    console.log(`[bot] Webhook set to ${url}/api/bot/webhook`);
+    await bot.telegram.setWebhook(
+      `${url}/api/bot/webhook`,
+      secretToken ? { secret_token: secretToken } : undefined,
+    );
+    console.log(
+      `[bot] Webhook set to ${url}/api/bot/webhook${secretToken ? " (with secret token)" : ""}`,
+    );
   } catch (err) {
     console.error("[bot] Failed to set webhook:", err);
   }

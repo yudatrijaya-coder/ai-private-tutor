@@ -47,7 +47,7 @@ export async function generateQuiz(materialId: string): Promise<QuizData> {
         role: "user",
         content: `Generate 5 multiple choice quiz questions in Indonesian for this material. Return JSON array with: question, options (4 items), correctIndex (0-3), explanation.\n\n${material.processedContent.slice(0, 3000)}`,
       },
-    ]);
+    ], { studentId });
 
     if (questionsText) {
       const questions = parseLLMQuestions(questionsText);

@@ -53,6 +53,14 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  // ---- Admin API routes (NextAuth) ----
+  if (pathname.startsWith("/api/admin/")) {
+    const session = await auth();
+    if (!session?.user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+  }
+
   return NextResponse.next();
 }
 
