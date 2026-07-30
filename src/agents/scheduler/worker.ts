@@ -103,7 +103,7 @@ export async function processSchedulerReminder(
   console.log(
     `[scheduler/worker] Reminder sweep complete: ` +
     `H-1=${result.h1Sent}, T-30=${result.t30Sent}, ` +
-    `MISSED=${result.missedMarked}, errors=${result.errors.length}`,
+    `COMPLETED=${result.completedMarked}, MISSED=${result.missedMarked}, errors=${result.errors.length}`,
   );
 
   if (result.errors.length > 0) {

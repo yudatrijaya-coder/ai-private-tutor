@@ -141,12 +141,6 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <p
-          className="text-xs text-center"
-          style={{ color: "var(--su-text-dim)" }}
-        >
-          Phase 1 — demo credentials: admin@tutor.ai / admin123
-        </p>
       </div>
     </div>
   );

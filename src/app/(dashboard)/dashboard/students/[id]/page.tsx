@@ -23,6 +23,8 @@ async function StudentDetailContent({ id }: { id: string }) {
           take: 30,
         },
         subjectMastery: {
+          // "general" is a placeholder bucket, not a real subject.
+          where: { subject: { notIn: ["general", ""] } },
           orderBy: { mastery: "desc" },
         },
         interventions: {
@@ -55,6 +57,8 @@ async function StudentDetailContent({ id }: { id: string }) {
           take: 30,
         },
         subjectMastery: {
+          // "general" is a placeholder bucket, not a real subject.
+          where: { subject: { notIn: ["general", ""] } },
           orderBy: { mastery: "desc" },
         },
         interventions: {
