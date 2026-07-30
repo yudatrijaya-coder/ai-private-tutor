@@ -9,12 +9,28 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 
-const JWT_SECRET = new TextEncoder().encode(
-  process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
-);
-
 const COOKIE_NAME = "student_session";
 const SESSION_DURATION = "7d"; // 7 days
+
+/**
+ * Resolve the JWT signing secret at call time.
+ *
+ * Read inside a function, not at module scope: `next build` evaluates modules
+ * before PM2 injects the runtime environment, so a module-level constant would
+ * capture `undefined` permanently in production.
+ *
+ * Fails closed — there is deliberately no development fallback, because the old
+ * default string is public in git history and would let anyone forge a session.
+ */
+function jwtSecret(): Uint8Array {
+  const s = process.env.STUDENT_JWT_SECRET;
+  if (!s || s.length < 16) {
+    throw new Error(
+      "STUDENT_JWT_SECRET is not configured (must be >= 16 chars) — student sessions disabled",
+    );
+  }
+  return new TextEncoder().encode(s);
+}
 
 export interface StudentSession {
   studentId: string; // the DB uuid
@@ -34,7 +50,7 @@ export async function createStudentSession(
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime(SESSION_DURATION)
-    .sign(JWT_SECRET);
+    .sign(jwtSecret());
 
   const cookieStore = await cookies();
   cookieStore.set(COOKIE_NAME, token, {
@@ -58,7 +74,7 @@ export async function getStudentSession(): Promise<StudentSession | null> {
     const token = cookieStore.get(COOKIE_NAME)?.value;
     if (!token) return null;
 
-    const { payload } = await jwtVerify(token, JWT_SECRET);
+    const { payload } = await jwtVerify(token, jwtSecret());
     return payload as unknown as StudentSession;
   } catch {
     return null;

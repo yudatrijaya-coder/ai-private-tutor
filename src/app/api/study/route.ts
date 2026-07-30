@@ -9,6 +9,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getStudentSession } from "@/lib/auth/student";
+import { captureError } from "@/lib/monitoring";
 
 /* ------------------------------------------------------------------ */
 /*  Heartbeat (keeps session alive + tracks time)                      */
@@ -67,7 +68,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ ok: true, sessionId: session.id, minutes: 0 });
   } catch (err) {
-    console.error("[study] heartbeat error:", err);
+    await captureError(err, {
+      scope: "api/study",
+      meta: { phase: "heartbeat" },
+    });
     return NextResponse.json({ error: "internal error" }, { status: 500 });
   }
 }
