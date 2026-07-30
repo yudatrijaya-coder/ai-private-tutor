@@ -207,6 +207,7 @@ export async function GET(request: NextRequest) {
     result.reminderSweep = {
       h1Sent: sweep.h1Sent,
       t30Sent: sweep.t30Sent,
+      completedMarked: sweep.completedMarked,
       missedMarked: sweep.missedMarked,
       errors: sweep.errors.length,
     };
