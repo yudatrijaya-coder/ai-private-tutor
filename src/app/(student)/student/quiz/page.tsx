@@ -12,6 +12,24 @@ interface Question {
   explanation?: string;
 }
 
+/** Per-question grading result returned by POST /api/students/quizzes/[id]/grade */
+interface GradeDetail {
+  questionIndex: number;
+  correct: boolean;
+  correctIndex: number;
+  explanation: string;
+}
+
+/** Final (committed) grade payload from the server */
+interface GradeResult {
+  score: number;
+  maxScore: number;
+  correctCount: number;
+  incorrectCount: number;
+  masteryAfter?: number | null;
+  details: GradeDetail[];
+}
+
 interface QuizData {
   id: string;
   materialId?: string;
@@ -135,6 +153,8 @@ function QuizResult({
   onRetry,
   onBack,
   quizType,
+  materialId,
+  subject,
 }: {
   score: number;
   maxScore: number;
@@ -143,6 +163,8 @@ function QuizResult({
   onRetry: () => void;
   onBack: () => void;
   quizType: string;
+  materialId?: string;
+  subject?: string;
 }) {
   const pct = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
   const emoji = pct >= 80 ? "🎉" : pct >= 50 ? "💪" : "📚";
@@ -150,6 +172,9 @@ function QuizResult({
   const correctCount = answers.filter((a, i) => a === questions[i]?.correctIndex).length;
   const totalQuestions = questions.length;
   const badges = questions.map((_, i) => answers[i] === questions[i]?.correctIndex ? "✅" : "❌");
+
+  // Confetti emojis for high scores
+  const confetti = ["🎉", "⭐", "🌟", "✨", "🎊", "💯"];
 
   return (
     <div className="space-y-4">
@@ -166,6 +191,46 @@ function QuizResult({
           ✅ {correctCount}/{totalQuestions} soal benar · ❌ {totalQuestions - correctCount} salah
         </p>
       </div>
+
+      {/* Adaptive routing cards */}
+      {pct < 40 && materialId ? (
+        <a
+          href={`/student/slides/${materialId}`}
+          className="block w-full py-4 px-5 rounded-2xl text-center transition-all hover:scale-[1.01] active:scale-95"
+          style={{ backgroundColor: "rgba(99,102,241,0.12)", border: "1px solid rgba(99,102,241,0.3)" }}
+        >
+          <p className="text-2xl mb-1">📖</p>
+          <p className="font-semibold text-sm" style={{ color: "var(--st-primary)" }}>
+            Ayo baca slide dulu
+          </p>
+          <p className="text-xs mt-0.5" style={{ color: "var(--st-text-dim)" }}>
+            Pelajari materinya sebelum coba quiz lagi
+          </p>
+        </a>
+      ) : pct >= 40 && pct <= 70 && subject ? (
+        <a
+          href={`/student/quiz?subject=${encodeURIComponent(subject)}`}
+          className="block w-full py-4 px-5 rounded-2xl text-center transition-all hover:scale-[1.01] active:scale-95"
+          style={{ backgroundColor: "rgba(234,179,8,0.12)", border: "1px solid rgba(234,179,8,0.3)" }}
+        >
+          <p className="text-2xl mb-1">🔄</p>
+          <p className="font-semibold text-sm" style={{ color: "#eab308" }}>
+            Coba quiz lain dengan topik serupa
+          </p>
+          <p className="text-xs mt-0.5" style={{ color: "var(--st-text-dim)" }}>
+            Latihan lebih banyak biar makin paham
+          </p>
+        </a>
+      ) : pct > 80 ? (
+        <div className="text-center py-3">
+          <p className="text-2xl mb-1">
+            {confetti.map((c, i) => <span key={i}>{c} </span>)}
+          </p>
+          <p className="font-semibold text-sm" style={{ color: "var(--st-success)" }}>
+            🎉 Mantap! Terus pertahankan!
+          </p>
+        </div>
+      ) : null}
 
       {/* Quick summary badges row */}
       <div className="flex flex-wrap gap-1 justify-center">
@@ -231,14 +296,53 @@ function QuizScreen({
   title,
   onSubmit,
   onBack,
+  timeLimit,
+  quizId,
 }: {
   questions: Question[];
   title: string;
   onSubmit: (answers: number[]) => void;
   onBack: () => void;
+  timeLimit?: number; // minutes, null = no limit
+  quizId?: string;
 }) {
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<number[]>(new Array(questions.length).fill(-1));
+  const [timeLeft, setTimeLeft] = useState<number | null>(
+    timeLimit ? timeLimit * 60 : null,
+  );
+  const [questionFeedback, setQuestionFeedback] = useState<Record<number, { correct: boolean; correctIndex: number; explanation: string }>>({});
+  const [gradingIndex, setGradingIndex] = useState<number | null>(null);
+
+  // Countdown timer — ticks down every second, stops at 0
+  useEffect(() => {
+    if (timeLeft === null || timeLeft <= 0) return;
+    const id = setInterval(() => {
+      setTimeLeft((prev) => (prev === null ? null : Math.max(0, prev - 1)));
+    }, 1000);
+    return () => clearInterval(id);
+  }, [timeLeft]);
+
+  // Auto-submit whatever answers exist once the timer hits 0
+  const didAutoSubmit = useRef(false);
+  useEffect(() => {
+    if (timeLeft !== 0 || didAutoSubmit.current) return;
+    didAutoSubmit.current = true;
+    onSubmit(answers);
+  }, [timeLeft, answers, onSubmit]);
+
+  function formatTime(seconds: number): string {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+  }
+
+  const timerColor =
+    timeLeft !== null && timeLeft < 30
+      ? "#ef4444" // red
+      : timeLeft !== null && timeLeft < 120
+        ? "#eab308" // yellow
+        : "var(--st-primary)";
 
   const q = questions[current];
   const isLast = current === questions.length - 1;
@@ -248,6 +352,42 @@ function QuizScreen({
     const next = [...answers];
     next[current] = idx;
     setAnswers(next);
+
+    // Immediately grade this question on the server
+    if (!quizId) return;
+    setGradingIndex(current);
+    fetch(`/api/students/quizzes/${quizId}/grade`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        answers: [{ questionIndex: current, selectedIndex: idx }],
+        commit: false,
+      }),
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.details && data.details[0]) {
+          setQuestionFeedback((prev) => ({
+            ...prev,
+            [current]: data.details[0],
+          }));
+        }
+      })
+      .catch(() => {
+        // Fallback: grade client-side if server is unavailable
+        const q = questions[current];
+        if (q) {
+          setQuestionFeedback((prev) => ({
+            ...prev,
+            [current]: {
+              correct: idx === q.correctIndex,
+              correctIndex: q.correctIndex,
+              explanation: q.explanation || "",
+            },
+          }));
+        }
+      })
+      .finally(() => setGradingIndex(null));
   }
 
   return (
@@ -270,6 +410,24 @@ function QuizScreen({
       <div className="h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: "var(--st-bg-card)" }}>
         <div className="h-full rounded-full transition-all" style={{ width: `${((current + 1) / questions.length) * 100}%`, backgroundColor: "var(--st-primary)" }} />
       </div>
+
+      {/* Countdown timer */}
+      {timeLeft !== null && (
+        <div
+          className="text-center py-2 px-4 rounded-xl text-sm font-bold transition-colors"
+          style={{
+            backgroundColor:
+              timeLeft < 30
+                ? "rgba(239,68,68,0.15)"
+                : timeLeft < 120
+                  ? "rgba(234,179,8,0.15)"
+                  : "rgba(99,102,241,0.1)",
+            color: timerColor,
+          }}
+        >
+          ⏱ {formatTime(timeLeft)}
+        </div>
+      )}
 
       {/* Question */}
       <div className="rounded-2xl p-5" style={{ backgroundColor: "var(--st-bg-card)" }}>
@@ -295,7 +453,36 @@ function QuizScreen({
         </div>
       </div>
 
-      {/* Navigation */}
+        {/* Feedback after selecting an answer */}
+        {questionFeedback[current] && (
+          <div
+            className={`mt-4 p-4 rounded-xl text-sm ${
+              questionFeedback[current].correct ? "bg-green-500/10 border border-green-500/30" : "bg-red-500/10 border border-red-500/30"
+            }`}
+          >
+            <p className="font-bold mb-1">
+              {questionFeedback[current].correct ? "✅ Benar!" : "❌ Kurang tepat"}
+            </p>
+            <p className="text-xs" style={{ color: "var(--st-text-dim)" }}>
+              {questionFeedback[current].correct
+                ? "Jawabanmu tepat!"
+                : `Jawaban benar: ${q.options[questionFeedback[current].correctIndex]}`}
+            </p>
+            {questionFeedback[current].explanation && (
+              <p className="text-xs mt-2" style={{ color: "var(--st-text-dim)" }}>
+                💡 {questionFeedback[current].explanation}
+              </p>
+            )}
+          </div>
+        )}
+
+        {gradingIndex === current && (
+          <div className="mt-4 text-center text-xs" style={{ color: "var(--st-text-dim)" }}>
+            ⏳ Menilai...
+          </div>
+        )}
+
+        {/* Navigation */}
       <div className="flex gap-3">
         <button
           onClick={() => setCurrent((p) => Math.max(0, p - 1))}
@@ -483,6 +670,7 @@ function QuizInner() {
             maxScore: data.quiz.maxScore,
             questions: data.quiz.questions || [],
             material: data.quiz.material,
+            timeLimit: data.quiz.timeLimit ?? undefined,
           });
         } else {
           setError("Quiz tidak ditemukan");
@@ -569,19 +757,51 @@ function QuizInner() {
 
   // ── Handle submit with activity tracking ──
   const handleSubmit = useCallback(
-    (ans: number[]) => {
+    async (ans: number[]) => {
       if (!quiz || !studentId) return;
 
       const isExam = quiz.type === "EXAM" || examMode;
-      const score = ans.filter((a, i) => a === quiz.questions[i]?.correctIndex).length * 10;
-      const maxScore = quiz.questions.length * 10;
       const topic = quiz.material?.topic;
       const matId = quiz.material?.id || quiz.materialId;
 
+      // Grade on server — persist the attempt
+      let gradeData: any = null;
+      try {
+        const res = await fetch(`/api/students/quizzes/${quiz.id}/grade`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            answers: ans
+              .map((selectedIndex, questionIndex) => ({ questionIndex, selectedIndex }))
+              .filter((a) => a.selectedIndex >= 0),
+            commit: true,
+          }),
+        });
+        gradeData = await res.json();
+      } catch (e) {
+        // Fallback: client-side scoring if server unavailable
+        const score = ans.filter((a, i) => a === quiz.questions[i]?.correctIndex).length * 10;
+        const maxScore = quiz.questions.length * 10;
+        gradeData = {
+          score,
+          maxScore,
+          correctCount: score / 10,
+          incorrectCount: quiz.questions.length - score / 10,
+          details: quiz.questions.map((q, i) => ({
+            correct: ans[i] === q.correctIndex,
+            correctIndex: q.correctIndex,
+            explanation: q.explanation || "",
+          })),
+        };
+      }
+
+      const serverScore = gradeData?.score ?? 0;
+      const serverMaxScore = gradeData?.maxScore ?? quiz.questions.length * 10;
+
       // Track completion BEFORE setting phase to result
       const trackPromise = isExam
-        ? tracker.trackExamComplete(matId || quizId, topic, score, maxScore, quiz?.id)
-        : tracker.trackQuizComplete(matId || quizId, topic, score, maxScore, quiz?.id);
+        ? tracker.trackExamComplete(matId || quizId, topic, serverScore, serverMaxScore, quiz?.id)
+        : tracker.trackQuizComplete(matId || quizId, topic, serverScore, serverMaxScore, quiz?.id);
 
       setAnswers(ans);
       setPhase("result");
@@ -653,6 +873,8 @@ function QuizInner() {
         onRetry={() => setPhase("quiz")}
         onBack={() => window.location.href = "/student/quiz"}
         quizType={quiz.type}
+        materialId={quiz.material?.id || quiz.materialId}
+        subject={quiz.material?.subject}
       />
     );
   }
@@ -677,6 +899,8 @@ function QuizInner() {
           title={`${EMOJI_PER_SUBJECT[quiz.material?.subject || ""] || "📚"} ${quiz.material?.topic || "Quiz"}`}
           onSubmit={handleSubmit}
           onBack={handleExit}
+          timeLimit={quiz.timeLimit}
+          quizId={quiz.id}
         />
       </>
     );
