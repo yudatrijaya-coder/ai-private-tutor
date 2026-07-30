@@ -7,6 +7,7 @@ export function StatsBar({
   totalSessions,
   missedSessions,
   newToday = 0,
+  studyMinutes7d = 0,
 }: {
   totalStudents: number;
   activeStudents: number;
@@ -14,13 +15,20 @@ export function StatsBar({
   totalSessions: number;
   missedSessions: number;
   newToday?: number;
+  studyMinutes7d?: number;
 }) {
+  const studyLabel =
+    studyMinutes7d >= 60
+      ? `${Math.floor(studyMinutes7d / 60)}j ${studyMinutes7d % 60}m`
+      : `${studyMinutes7d}m`;
+
   const stats = [
     { label: "Total Murid", value: totalStudents, icon: "👥" },
     { label: "Aktif", value: activeStudents, icon: "🟢" },
     { label: "Pending", value: pendingStudents, icon: "⏳", warn: pendingStudents > 0 },
     { label: "Hari Ini", value: newToday, icon: "🆕" },
     { label: "Sesi Belajar", value: totalSessions, icon: "📅" },
+    { label: "Belajar 7h", value: studyLabel, icon: "⏱️" },
     {
       label: "Missed",
       value: missedSessions,
@@ -30,7 +38,7 @@ export function StatsBar({
   ];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
       {stats.map((stat) => (
         <div
           key={stat.label}

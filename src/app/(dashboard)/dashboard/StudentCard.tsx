@@ -11,6 +11,11 @@ export function StudentCard({
     status: string;
     characterPreference?: string | null;
     createdAt: Date;
+    subjectMastery?: Array<{
+      subject: string;
+      mastery: number;
+      quizCount: number;
+    }>;
   };
 }) {
   const gradeLabels: Record<string, string> = {
@@ -61,11 +66,22 @@ export function StudentCard({
         />
       </div>
 
-      {/* Dummy mastery bars (will be real in Phase 3) */}
+      {/* Real mastery bars from StudentSubjectMastery (top 3 by mastery) */}
       <div className="space-y-1.5">
-        <MasteryBar subject="Matematika" pct={71} color="var(--su-success)" />
-        <MasteryBar subject="Bahasa" pct={34} color="var(--su-danger)" />
-        <MasteryBar subject="IPA" pct={89} color="var(--su-success)" />
+        {!student.subjectMastery?.length ? (
+          <div className="text-xs py-2" style={{ color: "var(--su-text-dim)" }}>
+            Belum ada data quiz
+          </div>
+        ) : (
+          student.subjectMastery.map((m) => (
+            <MasteryBar
+              key={m.subject}
+              subject={m.subject}
+              pct={Math.round(m.mastery * 100)}
+              color={masteryColor(m.mastery)}
+            />
+          ))
+        )}
       </div>
 
       <div
@@ -79,6 +95,12 @@ export function StudentCard({
       </div>
     </a>
   );
+}
+
+function masteryColor(mastery: number): string {
+  if (mastery >= 0.75) return "var(--su-success)";
+  if (mastery >= 0.5) return "var(--su-warning)";
+  return "var(--su-danger)";
 }
 
 function MasteryBar({

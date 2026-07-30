@@ -8,6 +8,7 @@
  */
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { getStudentSession } from "@/lib/auth/student";
 
 /* ------------------------------------------------------------------ */
 /*  Heartbeat (keeps session alive + tracks time)                      */
@@ -15,12 +16,18 @@ import { prisma } from "@/lib/prisma";
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { studentId, source, subject, topic } = body;
+    const body = await request.json().catch(() => ({}));
+    const { source, subject, topic } = body;
 
-    if (!studentId) {
-      return NextResponse.json({ error: "studentId required" }, { status: 400 });
+    // studentId comes from the signed session cookie, never from the client.
+    // The old code trusted body.studentId which StudyTracker derived from the
+    // URL path (e.g. "quiz" from /student/quiz), so every insert failed the
+    // Student FK and was silently swallowed.
+    const authSession = await getStudentSession();
+    if (!authSession?.studentId) {
+      return NextResponse.json({ error: "not authenticated" }, { status: 401 });
     }
+    const studentId = authSession.studentId;
 
     // Find active session (started in last 2 hours, no endTime)
     const activeSession = await prisma.studySession.findFirst({

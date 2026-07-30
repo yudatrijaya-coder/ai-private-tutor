@@ -6,9 +6,16 @@ Robust with retries + raw HTTP fallback.
 
 import json, re, subprocess, time, sys, urllib.request, urllib.error
 
-def q(sql):
-    r = subprocess.run(["sudo", "-u", "postgres", "psql", "-d", "ai_private_tutor", "-t", "-A", "-c", sql], capture_output=True, text=True, timeout=10)
+SEP = "\x1f"  # ASCII unit separator — safe vs Markdown tables / LaTeX in content
+
+
+def q(sql, sep="|"):
+    r = subprocess.run(
+        ["sudo", "-u", "postgres", "psql", "-d", "ai_private_tutor",
+         "-t", "-A", "-F", sep, "-c", sql],
+        capture_output=True, text=True, timeout=10)
     return r.stdout.strip()
+
 
 def get_missing():
     sql = """
@@ -23,12 +30,24 @@ def get_missing():
            OR m.metadata->>'mindmap_sibi' = '[]')
     ORDER BY s.name, m.subject, m.topic, m."subTopic";
     """
+    # Rows are separated by newline, columns by SEP. slide_sibi can contain
+    # newlines AND pipes (Markdown tables, LaTeX), so only accept a line as a
+    # new row when it actually splits into >=5 SEP-delimited fields; otherwise
+    # it is a continuation of the previous row's slide text.
     mats = []
-    for line in q(sql).split("\n"):
-        if not line.strip(): continue
-        parts = line.split("|", 5)
+    for line in q(sql, SEP).split("\n"):
+        parts = line.split(SEP)
         if len(parts) >= 5:
-            mats.append({"id": parts[0], "student": parts[1], "subject": parts[2], "topic": parts[3], "subTopic": parts[4], "slide": parts[5] if len(parts) > 5 else ""})
+            mats.append({
+                "id": parts[0],
+                "student": parts[1],
+                "subject": parts[2],
+                "topic": parts[3],
+                "subTopic": parts[4],
+                "slide": SEP.join(parts[5:]) if len(parts) > 5 else "",
+            })
+        elif mats:
+            mats[-1]["slide"] += "\n" + line
     return mats
 
 def call_llm_raw(prompt):

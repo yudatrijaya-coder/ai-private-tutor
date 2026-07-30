@@ -26,6 +26,17 @@ async function StatsSection() {
     (s) => s.createdAt.toISOString().slice(0, 10) === new Date().toISOString().slice(0, 10)
   ).length;
 
+  // Study time from StudySession (last 7 days) — was tracked but never surfaced
+  const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+  const studySessions = await prisma.studySession.findMany({
+    where: { startTime: { gte: since } },
+    select: { durationMinutes: true },
+  });
+  const studyMinutes7d = studySessions.reduce(
+    (sum, s) => sum + (s.durationMinutes || 0),
+    0
+  );
+
   return (
     <div className="space-y-4">
       <StatsBar
@@ -35,6 +46,7 @@ async function StatsSection() {
         totalSessions={totalSessions}
         missedSessions={missedSessions}
         newToday={newToday}
+        studyMinutes7d={studyMinutes7d}
       />
     </div>
   );
@@ -105,6 +117,12 @@ async function StudentGridSection() {
     where: { status: "ACTIVE" },
     orderBy: { createdAt: "desc" },
     take: 12,
+    include: {
+      subjectMastery: {
+        orderBy: { mastery: "desc" },
+        take: 3,
+      },
+    },
   });
 
   return (

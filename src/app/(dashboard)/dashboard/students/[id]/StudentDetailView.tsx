@@ -98,6 +98,14 @@ type StudentData = {
     mastery: number;
     snapDate: Date;
   }>;
+  subjectMastery: Array<{
+    subject: string;
+    mastery: number;
+    quizCount: number;
+    examCount: number;
+    quizBestScore: number;
+    quizBestMax: number;
+  }>;
   interventions: Array<{
     id: string;
     issueType: string;
@@ -141,6 +149,23 @@ function getLatestMasteryBySubject(
     result[subject] = v.mastery;
   }
   return result;
+}
+
+/**
+ * Real mastery source. StudentSubjectMastery is the live per-subject
+ * aggregate written by quiz/exam submissions; ProgressSnap is the older
+ * daily-snapshot table and is currently empty. Prefer the live table and
+ * fall back to snapshots so old data still renders.
+ */
+function resolveMastery(student: StudentData): Record<string, number> {
+  if (student.subjectMastery?.length) {
+    const out: Record<string, number> = {};
+    for (const m of student.subjectMastery) {
+      out[m.subject] = m.mastery;
+    }
+    return out;
+  }
+  return getLatestMasteryBySubject(student.progressSnaps);
 }
 
 function getMasteryColor(pct: number): string {
@@ -254,7 +279,7 @@ function SectionCard({
 /* ------------------------------------------------------------------ */
 
 export function StudentDetailView({ student }: { student: StudentData }) {
-  const latestMastery = getLatestMasteryBySubject(student.progressSnaps);
+  const latestMastery = resolveMastery(student);
   const weekSchedule = student.scheduleSessions.slice(0, 7);
   const [regenerating, setRegenerating] = useState(false);
 
