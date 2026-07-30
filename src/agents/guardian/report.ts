@@ -123,6 +123,7 @@ export async function generateWeeklyReport(
 
   // 4. Generate recommendations
   const { recommendations, llmGenerated } = await generateRecommendations(
+    studentId,
     student.name,
     subjects,
     weakAreas,
@@ -155,6 +156,7 @@ export async function generateWeeklyReport(
  * Try LLM for personalised recommendation, fallback to template.
  */
 async function generateRecommendations(
+  studentId: string,
   studentName: string,
   subjects: SubjectSummary[],
   weakAreas: WeakArea[],
@@ -194,7 +196,7 @@ ATURAN:
 - Fokus pada actionable steps spesifik, bukan saran umum
 - Bahasa Indonesia hangat seperti orang tua bicara ke anaknya`,
         },
-      ]),
+      ], { studentId }),
       new Promise<null>((_, reject) =>
         setTimeout(() => reject(new Error("LLM timeout after 25s")), 25_000),
       ),

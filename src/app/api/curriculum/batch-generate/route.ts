@@ -110,6 +110,7 @@ PENTING:
         temperature: 0.7,
         maxTokens: 8192,
         timeoutMs: 180_000,
+        studentId,
       });
     } catch (err) {
       console.error(`[batch-generate] LLM failed for batch ${batchLabel}:`, err);

@@ -9,6 +9,9 @@ interface IncomingAnswer {
   selectedIndex: number;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type RouteContext = { params: Promise<{ id: string }> };
+
 /**
  * POST /api/students/quizzes/[id]/grade
  *
@@ -23,7 +26,7 @@ interface IncomingAnswer {
  */
 export async function POST(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: RouteContext,
 ) {
   const { id } = await params;
 

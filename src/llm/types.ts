@@ -25,7 +25,7 @@ export interface ModelPricing {
 export interface LLMCallOptions {
   temperature?: number;
   maxTokens?: number;
-  /** studentId untuk logging ApiUsage — jika disediakan, otomatis dicatat */
+  /** studentId for ApiUsage logging and budget enforcement */
   studentId?: string;
   /** timeout in milliseconds for the LLM request (default: none / SDK default) */
   timeoutMs?: number;

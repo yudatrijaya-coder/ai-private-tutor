@@ -204,7 +204,7 @@ Respond in Indonesian, warm, friendly.`;
   let fullResponse = "";
 
   try {
-    for await (const token of callLLMStream("tutor", messages)) {
+    for await (const token of callLLMStream("tutor", messages, { studentId: student.id })) {
       fullResponse += token;
       yield token;
     }
