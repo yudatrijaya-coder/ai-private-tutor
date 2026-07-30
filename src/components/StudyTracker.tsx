@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useCallback } from "react";
-import { useParams } from "next/navigation";
 
 /**
  * StudyTracker — client-side component that tracks student activity.
@@ -12,38 +11,30 @@ import { useParams } from "next/navigation";
  * Drop this component once in the student layout.
  */
 export default function StudyTracker() {
-  const params = useParams();
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const getContext = useCallback(() => {
     try {
-      // Try to extract studentId from URL params or sessionStorage
-      const url = window.location.pathname;
-      const match = url.match(/^\/student(?:\/([^/]+))?/);
       const pageSubjectEl = document.querySelector("[data-study-subject]");
       const pageTopicEl = document.querySelector("[data-study-topic]");
 
       return {
-        studentId: match?.[1] || sessionStorage.getItem("studentId") || "",
         source: "web",
         subject: pageSubjectEl?.getAttribute("data-study-subject") || undefined,
         topic: pageTopicEl?.getAttribute("data-study-topic") || undefined,
       };
     } catch {
-      return { studentId: "", source: "web" };
+      return { source: "web" };
     }
   }, []);
 
   const sendHeartbeat = useCallback(async () => {
-    const ctx = getContext();
-    if (!ctx.studentId) return;
-
     try {
+      // studentId is resolved server-side from the session cookie.
       await fetch("/api/study", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(ctx),
-        // No-cors or keep-alive — fire and forget
+        body: JSON.stringify(getContext()),
         keepalive: true,
       });
     } catch {
@@ -66,10 +57,7 @@ export default function StudyTracker() {
     // Send heartbeat before unload
     const handleBeforeUnload = () => {
       // Use sendBeacon for reliability
-      const ctx = getContext();
-      if (ctx.studentId) {
-        navigator.sendBeacon("/api/study", JSON.stringify(ctx));
-      }
+      navigator.sendBeacon("/api/study", JSON.stringify(getContext()));
     };
     window.addEventListener("beforeunload", handleBeforeUnload);
 

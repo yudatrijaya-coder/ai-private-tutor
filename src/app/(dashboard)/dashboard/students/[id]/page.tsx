@@ -22,6 +22,9 @@ async function StudentDetailContent({ id }: { id: string }) {
           orderBy: { snapDate: "desc" },
           take: 30,
         },
+        subjectMastery: {
+          orderBy: { mastery: "desc" },
+        },
         interventions: {
           orderBy: { createdAt: "desc" },
           take: 10,
@@ -50,6 +53,9 @@ async function StudentDetailContent({ id }: { id: string }) {
         progressSnaps: {
           orderBy: { snapDate: "desc" },
           take: 30,
+        },
+        subjectMastery: {
+          orderBy: { mastery: "desc" },
         },
         interventions: {
           orderBy: { createdAt: "desc" },
