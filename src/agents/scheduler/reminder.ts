@@ -19,6 +19,9 @@ import { bot } from "@/bot/bot";
 const H1_WINDOW = 2 * 60 * 60 * 1000;            // 2 hour window for H-1 (catches 22h-26h range)
 const T30_WINDOW = 30 * 60 * 1000;              // 30 min window
 const MISSED_GRACE = 5 * 60 * 1000;             // 5 min grace after session start
+/** Attendance window padding — activity inside it marks a session COMPLETED */
+const ATTENDANCE_PRE_WINDOW = 30 * 60 * 1000;   // 30 min before scheduled start
+const ATTENDANCE_POST_WINDOW = 30 * 60 * 1000;  // 30 min after scheduled end
 
 /** Labels used in reminder metadata to prevent double-sends */
 const REMINDER_META_KEY = "reminderSentAt";
@@ -31,6 +34,7 @@ const REMINDER_META_30 = "reminder30SentAt";
 export interface ReminderResult {
   h1Sent: number;
   t30Sent: number;
+  completedMarked: number;
   missedMarked: number;
   errors: string[];
 }
@@ -45,7 +49,7 @@ export interface ReminderResult {
  *   3. MISSED: sessions that started >5 min ago and are still SCHEDULED
  */
 export async function runReminderSweep(): Promise<ReminderResult> {
-  const result: ReminderResult = { h1Sent: 0, t30Sent: 0, missedMarked: 0, errors: [] };
+  const result: ReminderResult = { h1Sent: 0, t30Sent: 0, completedMarked: 0, missedMarked: 0, errors: [] };
   const now = Date.now();
 
   // ── 1. H-1 Reminders ────────────────────────────────────────────
@@ -108,7 +112,57 @@ export async function runReminderSweep(): Promise<ReminderResult> {
     }
   }
 
-  // ── 3. MISSED detection ─────────────────────────────────────────
+  // ── 3. COMPLETED detection ──────────────────────────────────────
+  // A session counts as attended when the student logged any activity
+  // inside its window (30 min before start → 30 min after end). Without
+  // this pass nothing ever left SCHEDULED, so every past session fell
+  // through to MISSED below and the dashboard showed 100% missed.
+  const completedThreshold = new Date(now - MISSED_GRACE);
+
+  const dueSessions = await prisma.scheduleSession.findMany({
+    where: {
+      status: "SCHEDULED",
+      scheduledAt: { lte: completedThreshold },
+    },
+  });
+
+  const attendedIds = new Set<string>();
+
+  for (const session of dueSessions) {
+    try {
+      const windowStart = new Date(
+        session.scheduledAt.getTime() - ATTENDANCE_PRE_WINDOW,
+      );
+      const windowEnd = new Date(
+        session.scheduledAt.getTime() +
+          session.durationMin * 60 * 1000 +
+          ATTENDANCE_POST_WINDOW,
+      );
+
+      const activity = await prisma.studentActivity.findFirst({
+        where: {
+          studentId: session.studentId,
+          createdAt: { gte: windowStart, lte: windowEnd },
+        },
+        select: { id: true, createdAt: true },
+      });
+
+      if (!activity) continue;
+
+      await prisma.scheduleSession.update({
+        where: { id: session.id },
+        data: { status: "COMPLETED", completedAt: activity.createdAt },
+      });
+      attendedIds.add(session.id);
+      result.completedMarked++;
+    } catch (err) {
+      result.errors.push(
+        `COMPLETED session=${session.id}: ${err instanceof Error ? err.message : String(err)}`,
+      );
+    }
+  }
+
+  // ── 4. MISSED detection ─────────────────────────────────────────
   const missedThreshold = new Date(now - MISSED_GRACE);
 
   const missedSessions = await prisma.scheduleSession.findMany({
@@ -119,6 +173,7 @@ export async function runReminderSweep(): Promise<ReminderResult> {
   });
 
   for (const session of missedSessions) {
+    if (attendedIds.has(session.id)) continue;
     try {
       await prisma.scheduleSession.update({
         where: { id: session.id },

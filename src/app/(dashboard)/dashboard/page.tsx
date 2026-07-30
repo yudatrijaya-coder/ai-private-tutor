@@ -119,6 +119,9 @@ async function StudentGridSection() {
     take: 12,
     include: {
       subjectMastery: {
+        // "general" is a bucket DashboardTracker writes when it cannot detect
+        // a subject — not a real subject, so keep it out of the UI.
+        where: { subject: { notIn: ["general", ""] } },
         orderBy: { mastery: "desc" },
         take: 3,
       },
