@@ -134,6 +134,7 @@ model CharacterImage {
   createdAt DateTime @default(now())
 }
 
+
 model Curriculum {
   id            String        @id @default(uuid())
   studentId     String
@@ -144,11 +145,12 @@ model Curriculum {
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 
-  student       Student       @relation(fields: [studentId], references: [id])
+  student       Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
   materials     Material[]
 
   @@unique([studentId, version])
 }
+
 
 model Material {
   id              String         @id @default(uuid())
@@ -177,7 +179,10 @@ model Material {
   prerequisites   Material[]     @relation("MaterialPrerequisites")
   prereqFor       Material[]     @relation("MaterialPrerequisites")
   activityLogs    StudentActivity[]
+
+  @@index([curriculumId, subject, weekOrder])
 }
+
 
 model Quiz {
   id          String      @id @default(uuid())
@@ -191,9 +196,13 @@ model Quiz {
   updatedAt   DateTime    @updatedAt
 
   material    Material    @relation(fields: [materialId], references: [id])
-  student     Student     @relation(fields: [studentId], references: [id])
+  student     Student     @relation(fields: [studentId], references: [id], onDelete: Cascade)
   attempts    Attempt[]
+
+  @@index([materialId])
+  @@index([studentId])
 }
+
 
 model Attempt {
   id        String      @id @default(uuid())
@@ -208,8 +217,11 @@ model Attempt {
   createdAt DateTime    @default(now())
 
   quiz      Quiz        @relation(fields: [quizId], references: [id])
-  student   Student     @relation(fields: [studentId], references: [id])
+  student   Student     @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId, createdAt(sort: Desc)])
 }
+
 
 model ProgressSnap {
   id          String   @id @default(uuid())
@@ -223,10 +235,11 @@ model ProgressSnap {
   studyMinutes Int     @default(0)
   snapDate    DateTime @default(now())
 
-  student     Student  @relation(fields: [studentId], references: [id])
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
   @@index([studentId, subject, snapDate])
 }
+
 
 model ScheduleSession {
   id          String        @id @default(uuid())
@@ -242,10 +255,12 @@ model ScheduleSession {
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
 
-  student     Student       @relation(fields: [studentId], references: [id])
+  student     Student       @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
   @@index([studentId, scheduledAt])
+  @@index([status, scheduledAt])
 }
+
 
 model SessionState {
   id          String   @id @default(uuid())
@@ -254,8 +269,9 @@ model SessionState {
   context     Json?    // {lastTopic, lastMaterialId, currentQuizId, currentQuestionIdx, answers[], lastPhotoFileId, lastIntent, adHoc, etc}
   updatedAt   DateTime @updatedAt
 
-  student     Student  @relation(fields: [studentId], references: [id])
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
 }
+
 
 model Persona {
   id          String      @id @default(uuid())
@@ -267,6 +283,7 @@ model Persona {
   forbiddenTopics Json?   // topics this persona cannot discuss
   createdAt   DateTime    @default(now())
 }
+
 
 model Intervention {
   id          String              @id @default(uuid())
@@ -280,8 +297,9 @@ model Intervention {
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
 
-  student     Student             @relation(fields: [studentId], references: [id])
+  student     Student             @relation(fields: [studentId], references: [id], onDelete: Cascade)
 }
+
 
 model ChatLog {
   id          String   @id @default(uuid())
@@ -292,10 +310,11 @@ model ChatLog {
   metadata    Json?
   createdAt   DateTime @default(now())
 
-  student     Student  @relation(fields: [studentId], references: [id])
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
   @@index([studentId, createdAt])
 }
+
 
 /// StudentActivity — real-time granular activity log
 model StudentActivity {
@@ -307,12 +326,13 @@ model StudentActivity {
   metadata    Json?    // {subject, topic, score?, maxScore?, progress?, source?, duration?}
   createdAt   DateTime @default(now())
 
-  student     Student  @relation(fields: [studentId], references: [id])
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
   material    Material? @relation(fields: [materialId], references: [id])
 
   @@index([studentId, type, createdAt])
   @@index([studentId, createdAt])
 }
+
 
 /// StudySession — student login/logout or page focus sessions
 model StudySession {
@@ -327,11 +347,12 @@ model StudySession {
   metadata        Json?
   createdAt       DateTime @default(now())
 
-  student         Student  @relation(fields: [studentId], references: [id])
+  student         Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
   @@index([studentId, startTime])
   @@index([studentId, startTime, endTime])
 }
+
 
 /// StudentSubjectMastery — per-subject achievement snapshot
 model StudentSubjectMastery {
@@ -365,11 +386,12 @@ model StudentSubjectMastery {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  student       Student  @relation(fields: [studentId], references: [id])
+  student       Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
   @@unique([studentId, subject])
   @@index([studentId])
 }
+
 model Reminder {
   id          String    @id @default(uuid())
   studentId   String
@@ -381,11 +403,12 @@ model Reminder {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
-  student     Student   @relation(fields: [studentId], references: [id])
+  student     Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
   @@index([studentId, remindAt, status])
   @@index([remindAt, status])
 }
+
 
 /// HomeworkTask — tugas PR dari sekolah dengan deadline
 model HomeworkTask {
@@ -399,11 +422,12 @@ model HomeworkTask {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
-  student     Student   @relation(fields: [studentId], references: [id])
+  student     Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
   @@index([studentId, deadlineAt, status])
   @@index([studentId, status])
 }
+
 
 model ApiUsage {
   id               String   @id @default(uuid())
@@ -424,6 +448,7 @@ model ApiUsage {
   @@index([createdAt])
 }
 
+
 model AgentLog {
   id        String    @id @default(uuid())
   agentType AgentType
@@ -442,6 +467,7 @@ model AgentLog {
   @@index([agentType, status])
   @@index([createdAt])
 }
+
 
 model Account {
   id                String  @id @default(cuid())
@@ -462,6 +488,7 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
@@ -469,6 +496,7 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
 
 model User {
   id            String    @id @default(cuid())
@@ -489,3 +517,4 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
