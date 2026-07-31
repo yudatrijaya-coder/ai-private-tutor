@@ -8,8 +8,7 @@ import { useActivityTracker } from "@/hooks/useActivityTracker";
 interface Question {
   question: string;
   options: string[];
-  correctIndex: number;
-  explanation?: string;
+  difficulty?: string;
 }
 
 /** Per-question grading result returned by POST /api/students/quizzes/[id]/grade */
@@ -144,12 +143,21 @@ function ConfirmModal({
   );
 }
 
+/** Per-question grading detail returned by the server */
+interface QuestionDetail {
+  questionIndex: number;
+  correct: boolean;
+  correctIndex: number;
+  explanation?: string;
+}
+
 /* ── Result screen ── */
 function QuizResult({
   score,
   maxScore,
   answers,
   questions,
+  details,
   onRetry,
   onBack,
   quizType,
@@ -160,6 +168,7 @@ function QuizResult({
   maxScore: number;
   answers: number[];
   questions: Question[];
+  details: QuestionDetail[];
   onRetry: () => void;
   onBack: () => void;
   quizType: string;
@@ -169,9 +178,9 @@ function QuizResult({
   const pct = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
   const emoji = pct >= 80 ? "🎉" : pct >= 50 ? "💪" : "📚";
   const msg = pct >= 80 ? "Luar biasa!" : pct >= 50 ? "Terus semangat!" : "Ayo belajar lagi!";
-  const correctCount = answers.filter((a, i) => a === questions[i]?.correctIndex).length;
+  const correctCount = details.filter((d) => d.correct).length;
   const totalQuestions = questions.length;
-  const badges = questions.map((_, i) => answers[i] === questions[i]?.correctIndex ? "✅" : "❌");
+  const badges = details.map((d) => d.correct ? "✅" : "❌");
 
   // Confetti emojis for high scores
   const confetti = ["🎉", "⭐", "🌟", "✨", "🎊", "💯"];
@@ -241,39 +250,44 @@ function QuizResult({
 
       {/* Per-question review */}
       <div className="space-y-3">
-        {questions.map((q, i) => (
+        {questions.map((q, i) => {
+          const detail = details[i];
+          const isCorrect = detail?.correct ?? false;
+          const correctIdx = detail?.correctIndex ?? 0;
+          return (
           <div
             key={i}
             className="rounded-xl p-4 text-sm"
             style={{
               backgroundColor:
-                answers[i] === q.correctIndex
+                isCorrect
                   ? "rgba(34,197,94,0.08)"
                   : "rgba(239,68,68,0.08)",
             }}
           >
             <p className="font-medium mb-1">{q.question}</p>
             <p className="text-xs" style={{ color: "var(--st-text-dim)" }}>
-              {answers[i] === q.correctIndex ? "✅" : "❌"}{" "}
+              {isCorrect ? "✅" : "❌"}{" "}
               Jawabanmu: <strong>{q.options[answers[i]]}</strong>
-              {answers[i] !== q.correctIndex && (
-                <> · Benar: <strong style={{ color: "var(--st-success)" }}>{q.options[q.correctIndex]}</strong></>
+              {!isCorrect && (
+                <> · Benar: <strong style={{ color: "var(--st-success)" }}>{q.options[correctIdx]}</strong></>
               )}
-              {answers[i] === q.correctIndex && (
+              {isCorrect && (
                 <> · <strong style={{ color: "var(--st-success)" }}>Benar! 🎯</strong></>
               )}
             </p>
-            {q.explanation ? (
+            {detail?.explanation ? (
               <p className="text-xs mt-1" style={{ color: "var(--st-text-dim)" }}>
-                💡 {q.explanation}
+                💡 {detail.explanation}
               </p>
-            ) : (
+            ) : !isCorrect ? (
               <p className="text-xs mt-1" style={{ color: "var(--st-text-dim)" }}>
-                💡 Jawaban benar: <strong>{q.options[q.correctIndex]}</strong>
+                💡 Jawaban benar: <strong>{q.options[correctIdx]}</strong>
               </p>
-            )}
+            ) : null}
           </div>
-        ))}
+          );
+        })}
       </div>
 
       <div className="flex gap-3">
@@ -374,18 +388,15 @@ function QuizScreen({
         }
       })
       .catch(() => {
-        // Fallback: grade client-side if server is unavailable
-        const q = questions[current];
-        if (q) {
-          setQuestionFeedback((prev) => ({
-            ...prev,
-            [current]: {
-              correct: idx === q.correctIndex,
-              correctIndex: q.correctIndex,
-              explanation: q.explanation || "",
-            },
-          }));
-        }
+        // No client-side fallback: the answer key is server-only by design.
+        setQuestionFeedback((prev) => ({
+          ...prev,
+          [current]: {
+            correct: false,
+            correctIndex: -1,
+            explanation: "",
+          },
+        }));
       })
       .finally(() => setGradingIndex(null));
   }
@@ -586,6 +597,7 @@ function QuizInner() {
   const [error, setError] = useState<string | null>(null);
   const [phase, setPhase] = useState<"list" | "quiz" | "result">("quiz");
   const [answers, setAnswers] = useState<number[]>([]);
+  const [gradeResult, setGradeResult] = useState<{ score: number; maxScore: number; details: QuestionDetail[] } | null>(null);
   const [studentId, setStudentId] = useState<string | null>(null);
   const [subjects, setSubjects] = useState<string[]>([]);
   const [showExitModal, setShowExitModal] = useState(false);
@@ -764,7 +776,8 @@ function QuizInner() {
       const topic = quiz.material?.topic;
       const matId = quiz.material?.id || quiz.materialId;
 
-      // Grade on server — persist the attempt
+      // Grade on server — persist the attempt. Server is the only source of truth:
+      // the quiz detail API no longer ships correctIndex/explanation to the client.
       let gradeData: any = null;
       try {
         const res = await fetch(`/api/students/quizzes/${quiz.id}/grade`, {
@@ -777,26 +790,19 @@ function QuizInner() {
             commit: true,
           }),
         });
+        if (!res.ok) throw new Error(`grade failed: ${res.status}`);
         gradeData = await res.json();
       } catch (e) {
-        // Fallback: client-side scoring if server unavailable
-        const score = ans.filter((a, i) => a === quiz.questions[i]?.correctIndex).length * 10;
-        const maxScore = quiz.questions.length * 10;
-        gradeData = {
-          score,
-          maxScore,
-          correctCount: score / 10,
-          incorrectCount: quiz.questions.length - score / 10,
-          details: quiz.questions.map((q, i) => ({
-            correct: ans[i] === q.correctIndex,
-            correctIndex: q.correctIndex,
-            explanation: q.explanation || "",
-          })),
-        };
+        // No client-side fallback: the answer key is server-only by design.
+        setError("Gagal menilai quiz. Cek koneksi lalu coba submit lagi.");
+        return;
       }
 
       const serverScore = gradeData?.score ?? 0;
       const serverMaxScore = gradeData?.maxScore ?? quiz.questions.length * 10;
+      const serverDetails: QuestionDetail[] = Array.isArray(gradeData?.details)
+        ? gradeData.details
+        : [];
 
       // Track completion BEFORE setting phase to result
       const trackPromise = isExam
@@ -804,6 +810,7 @@ function QuizInner() {
         : tracker.trackQuizComplete(matId || quizId, topic, serverScore, serverMaxScore, quiz?.id);
 
       setAnswers(ans);
+      setGradeResult({ score: serverScore, maxScore: serverMaxScore, details: serverDetails });
       setPhase("result");
     },
     [quiz, studentId, examMode, quizId, tracker]
@@ -866,10 +873,11 @@ function QuizInner() {
   if (phase === "result" && quiz) {
     return (
       <QuizResult
-        score={answers.filter((a, i) => a === quiz.questions[i]?.correctIndex).length * 10}
-        maxScore={quiz.questions.length * 10}
+        score={gradeResult?.score ?? 0}
+        maxScore={gradeResult?.maxScore ?? quiz.questions.length * 10}
         answers={answers}
         questions={quiz.questions}
+        details={gradeResult?.details ?? []}
         onRetry={() => setPhase("quiz")}
         onBack={() => window.location.href = "/student/quiz"}
         quizType={quiz.type}

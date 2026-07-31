@@ -36,9 +36,7 @@ export async function GET(
       questions: questions.map((q) => ({
         question: q.question,
         options: q.options,
-        correctIndex: q.correctIndex,
         difficulty: q.difficulty || "medium",
-        explanation: q.explanation,
       })),
       material: quiz.material,
       createdAt: quiz.createdAt,
