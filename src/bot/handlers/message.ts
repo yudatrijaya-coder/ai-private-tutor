@@ -20,6 +20,7 @@ import {
 import { handleOnboardingStart } from "./onboarding";
 import { hasActiveRegistration, cancelRegistration, handleOnboardingMessage } from "./onboarding";
 import { routeCallback } from "../state-machine";
+import { routeCommand, registerCommandMenu } from "../commands";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 
@@ -211,6 +212,12 @@ export async function onMessage(ctx: Context): Promise<void> {
           ];
           await ctx.reply(parts.join("\n"), { parse_mode: "Markdown" });
           return;
+        }
+
+        // New command router: /badge /review /nilai /pr /help
+        if ("text" in msg && msg.text?.startsWith("/")) {
+          const routed = await routeCommand(ctx as any, student, msg.text);
+          if (routed) return;
         }
 
         // Fall through to LLM-powered tutor

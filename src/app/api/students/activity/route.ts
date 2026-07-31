@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { handleActivity } from "@/lib/gamification";
+import { addToReviewQueue } from "@/lib/spaced-repetition";
 
 const ALLOWED_TYPES = [
   "slide_view",
@@ -171,25 +173,23 @@ export async function POST(request: NextRequest) {
     // Extract quizId from body (optional — for assessment types)
     const quizId: string | undefined = body?.quizId;
 
-    // Create activity log
-    await prisma.studentActivity.create({
-      data: {
-        studentId: student.id,
-        materialId: materialId || null,
-        type,
-        metadata: metadata || {},
-      },
+    // Wire gamification: handleActivity logs activity, awards XP, updates streak, checks badges
+    const activityResult = await handleActivity({
+      studentId: student.id,
+      materialId: materialId || undefined,
+      type,
+      metadata,
     });
 
-    // If assessment type, also create Attempt record
+    // If assessment type, also create Attempt record + spaced repetition for wrong answers
     if (ASSESSMENT_TYPES.has(type) && quizId) {
       try {
         const score: number = metadata?.score ?? 0;
         const maxScore: number = metadata?.maxScore ?? 0;
-        const answers = typeof metadata?.answers === 'object' && Array.isArray(metadata.answers) 
-          ? metadata.answers 
+        const answers = typeof metadata?.answers === "object" && Array.isArray(metadata.answers)
+          ? metadata.answers
           : [];
-        
+
         await prisma.attempt.create({
           data: {
             quizId,
@@ -201,6 +201,24 @@ export async function POST(request: NextRequest) {
             createdAt: new Date(),
           },
         });
+
+        // Spaced repetition: add wrong answers to review queue
+        const quiz = await prisma.quiz.findUnique({ where: { id: quizId } });
+        const questions = (quiz?.questions as Array<{ correctAnswer?: string }>) ?? [];
+        for (const [idx, ans] of answers.entries()) {
+          const question = questions[idx];
+          if (!question) continue;
+          const isCorrect = String(ans).trim().toUpperCase() === String(question.correctAnswer).trim().toUpperCase();
+          if (!isCorrect) {
+            await addToReviewQueue(
+              student.id,
+              quizId,
+              idx,
+              metadata?.subject as string ?? "",
+              metadata?.topic as string | undefined,
+            );
+          }
+        }
       } catch (err) {
         console.error("[api/students/activity] Failed to create Attempt:", err);
       }
@@ -319,7 +337,12 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({
+      success: true,
+      gamification: activityResult.newBadges.length > 0
+        ? { newBadges: activityResult.newBadges, xpAwarded: activityResult.xpAwarded }
+        : undefined,
+    });
   } catch (error) {
     console.error("[api/students/activity] Error:", error);
     return NextResponse.json(

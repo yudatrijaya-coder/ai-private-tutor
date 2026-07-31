@@ -105,6 +105,13 @@ model Student {
   status              StudentStatus @default(ACTIVE)
   holdMode            String        @default("NONE") // "NONE" | "SOFT" | "HARD"
   isTemplate          Boolean       @default(false)
+
+  // Gamification
+  xp                  Int           @default(0)
+  currentStreak       Int           @default(0)
+  longestStreak       Int           @default(0)
+  lastActivityDate    DateTime?     // date-only semantics, used for streak calc
+
   createdAt           DateTime      @default(now())
   updatedAt           DateTime      @updatedAt
 
@@ -122,6 +129,8 @@ model Student {
   activityLogs   StudentActivity[]
   subjectMastery StudentSubjectMastery[]
   studySessions  StudySession[]
+  badges         StudentBadge[]
+  reviewQueue    ReviewQueue[]
 }
 
 model CharacterImage {
@@ -198,9 +207,73 @@ model Quiz {
   material    Material    @relation(fields: [materialId], references: [id])
   student     Student     @relation(fields: [studentId], references: [id], onDelete: Cascade)
   attempts    Attempt[]
+  reviewItems ReviewQueue[]
 
   @@index([materialId])
   @@index([studentId])
+}
+
+/// Gamification: badge catalogue. Seeded, not user-generated.
+model Badge {
+  id          String   @id @default(uuid())
+  code        String   @unique // "first_quiz", "streak_7", "subject_master_matematika"
+  name        String
+  description String
+  icon        String   // lucide icon name or emoji
+  category    String   // "milestone" | "streak" | "mastery" | "consistency"
+  xpReward    Int      @default(0)
+  /// Threshold the rule engine compares against (meaning depends on category).
+  threshold   Int?
+  createdAt   DateTime @default(now())
+
+  students    StudentBadge[]
+
+  @@index([category])
+}
+
+/// Gamification: badge unlocked by a student. One row per (student, badge).
+model StudentBadge {
+  id         String   @id @default(uuid())
+  studentId  String
+  badgeId    String
+  unlockedAt DateTime @default(now())
+
+  student    Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  badge      Badge    @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, badgeId])
+  @@index([studentId, unlockedAt(sort: Desc)])
+}
+
+/// Spaced repetition queue (SM-2). One row per (student, quiz, questionIdx)
+/// that the student answered incorrectly at least once.
+model ReviewQueue {
+  id           String   @id @default(uuid())
+  studentId    String
+  quizId       String
+  questionIdx  Int
+  subject      String
+  topic        String?
+
+  /// SM-2 state
+  easeFactor   Float    @default(2.5)
+  intervalDays Int      @default(1)
+  repetitions  Int      @default(0)
+  lapses       Int      @default(0)
+
+  dueAt        DateTime
+  lastReviewAt DateTime?
+  mastered     Boolean  @default(false)
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  student      Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  quiz         Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, quizId, questionIdx])
+  @@index([studentId, dueAt])
+  @@index([studentId, mastered, dueAt])
 }
 
 
