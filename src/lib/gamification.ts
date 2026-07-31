@@ -26,53 +26,67 @@ export async function awardXp(studentId: string, amount: number): Promise<void> 
 /**
  * Update streak based on lastActivityDate.
  * Called once per day per student (on first activity of the day).
+ *
+ * Uses UTC for day-boundary comparisons so that a student who studies at
+ * 23:55 CST (15:55 UTC) and again at 00:05 CST (16:05 UTC) is treated as
+ * the same calendar day — preventing phantom streak breaks across timezones.
+ *
+ * The comparison uses UTC to avoid a known issue where the DB stores
+ * lastActivityDate as timestamp-without-timezone in the server's TZ (CST/+8),
+ * but new Date() creates a UTC-based Date object. Normalising to UTC days
+ * keeps the logic consistent regardless of server timezone.
  */
 export async function updateStreak(studentId: string, activityDate: Date): Promise<void> {
   const student = await prisma.student.findUnique({ where: { id: studentId } });
   if (!student) return;
 
-  const today = new Date(activityDate);
-  today.setHours(0, 0, 0, 0);
+  // Normalise to UTC calendar-day for comparison
+  const todayUTC = Date.UTC(
+    activityDate.getUTCFullYear(),
+    activityDate.getUTCMonth(),
+    activityDate.getUTCDate(),
+  );
 
-  // If lastActivityDate is today, no streak update needed
   if (student.lastActivityDate) {
-    const lastDay = new Date(student.lastActivityDate);
-    lastDay.setHours(0, 0, 0, 0);
-    const diffDays = Math.round((today.getTime() - lastDay.getTime()) / 86400000);
+    const lastUTC = Date.UTC(
+      student.lastActivityDate.getUTCFullYear(),
+      student.lastActivityDate.getUTCMonth(),
+      student.lastActivityDate.getUTCDate(),
+    );
+    const diffDays = Math.round((todayUTC - lastUTC) / 86_400_000);
 
-    if (diffDays === 0) return; // same day, no change
+    if (diffDays === 0) return; // same UTC calendar day — no change
 
     if (diffDays === 1) {
-      // consecutive day
+      // Consecutive UTC calendar day — increment streak, award streak XP
       const newStreak = student.currentStreak + 1;
       await prisma.student.update({
         where: { id: studentId },
         data: {
           currentStreak: newStreak,
           longestStreak: Math.max(newStreak, student.longestStreak),
-          lastActivityDate: today,
+          lastActivityDate: new Date(activityDate), // preserve original timestamp
         },
       });
-      // Award streak XP every day
       await awardXp(studentId, XP_RULES.streak_day);
     } else {
-      // streak broken
+      // Gap of 2+ UTC days — streak broken, reset to 1 (no streak XP)
       await prisma.student.update({
         where: { id: studentId },
         data: {
           currentStreak: 1,
-          lastActivityDate: today,
+          lastActivityDate: new Date(activityDate),
         },
       });
     }
   } else {
-    // First activity ever
+    // First activity ever — streak = 1, award first-day streak XP
     await prisma.student.update({
       where: { id: studentId },
       data: {
         currentStreak: 1,
         longestStreak: 1,
-        lastActivityDate: today,
+        lastActivityDate: new Date(activityDate),
       },
     });
     await awardXp(studentId, XP_RULES.streak_day);
@@ -201,11 +215,18 @@ export async function handleActivity(params: {
   const xp = getXpFor(type, isPerfect);
   if (xp > 0) await awardXp(studentId, xp);
 
-  // Update streak on first activity of the day
+  // Guard: only call updateStreak once per UTC calendar day.
+  // Must use UTC to match updateStreak()'s internal UTC-day comparison.
+  const now = new Date();
   const lastDate = await prisma.student.findUnique({ where: { id: studentId } }).then(s => s?.lastActivityDate);
-  const today = new Date(); today.setHours(0, 0, 0, 0);
-  if (!lastDate || lastDate.getTime() < today.getTime()) {
-    await updateStreak(studentId, new Date());
+  const todayUTC = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  if (!lastDate) {
+    await updateStreak(studentId, now);
+  } else {
+    const lastUTC = Date.UTC(lastDate.getUTCFullYear(), lastDate.getUTCMonth(), lastDate.getUTCDate());
+    if (lastUTC < todayUTC) {
+      await updateStreak(studentId, now);
+    }
   }
 
   const newBadges = await checkBadges(studentId);
