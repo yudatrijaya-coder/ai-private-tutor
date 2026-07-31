@@ -186,6 +186,23 @@ async function finishQuiz(
     console.error("[quiz] Failed to save attempt:", dbErr);
   }
 
+  // Build per-question feedback
+  const feedbackLines: string[] = [];
+  for (const a of answers) {
+    const q = questions[a.questionIndex];
+    if (!q) continue;
+    const isCorrect = a.answer?.trim().toLowerCase() === q.correctAnswer?.trim().toLowerCase();
+    if (isCorrect) {
+      feedbackLines.push(`✅ Soal ${a.questionIndex + 1}: ${q.question.slice(0, 60)}…`);
+    } else {
+      feedbackLines.push(
+        `❌ Soal ${a.questionIndex + 1}: ${q.question.slice(0, 80)}…\n` +
+        `   Jawabanmu: *${a.answer}* | Jawaban benar: *${q.correctAnswer}*\n` +
+        `   💡 ${(q as any).explanation ?? "Coba baca materinya lagi ya!"}`,
+      );
+    }
+  }
+
   // Reset session
   await clearSession(student.id);
   console.log("[quiz] Session cleared");
@@ -195,6 +212,8 @@ async function finishQuiz(
   const resultText =
     `${persona.emoji} *Selesai!* ${gradeEmoji}\n\n` +
     `Skor kamu: *${score}/${maxScore}* (${Math.round(mastery)}%)\n\n` +
+    feedbackLines.join("\n\n") +
+    "\n\n" +
     (mastery >= 80
       ? "Keren banget! Kamu udah paham banget! 🎉"
       : mastery >= 60
