@@ -8,6 +8,7 @@ import { callLLM, callLLMStream } from "@/llm/client";
 import { SYSTEM_PROMPTS } from "@/llm/prompts";
 import { scanResponse } from "../safety";
 import { setSession } from "../session";
+import { buildCapabilitiesPrompt } from "./capabilities";
 
 const GRADE_LABELS: Record<string, string> = {
   SD_5: "SD Kelas 5",
@@ -30,15 +31,83 @@ function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise
 }
 
 /**
+ * Build the tutor system prompt.
+ *
+ * Single source of truth — the capability list comes from `capabilities.ts`
+ * so `handleMessage` and `streamMessage` can never drift apart.
+ */
+function buildSystemPrompt(student: Student): string {
+  const persona = getPersona(student.persona);
+  const personaPrompt =
+    persona.prompt ?? `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}`;
+
+  return [
+    SYSTEM_PROMPTS.tutor,
+    "",
+    `Persona: ${persona.displayName}`,
+    `Tone: ${persona.toneRules.join(", ")}`,
+    "",
+    personaPrompt,
+    "",
+    `Student name: ${student.name}`,
+    `Student ID: ${student.studentId}`,
+    `Grade: ${getGradeLabel(student.gradeLevel)}`,
+    "",
+    buildCapabilitiesPrompt(),
+    "",
+    "Respond in Indonesian, warm, friendly.",
+  ].join("\n");
+}
+
+function getRecentHistory(session: BotSession) {
+  const chatHistory =
+    (session.context?.chatHistory as Array<{ role: string; content: string }>) ?? [];
+  return { chatHistory, recentHistory: chatHistory.slice(-10) };
+}
+
+function buildMessages(
+  student: Student,
+  recentHistory: Array<{ role: string; content: string }>,
+  userText: string,
+): ChatMessage[] {
+  return [
+    { role: "system", content: buildSystemPrompt(student) },
+    ...recentHistory.map((m) => ({
+      role: m.role === "assistant" ? ("assistant" as const) : ("user" as const),
+      content: m.content,
+    })),
+    { role: "user", content: userText },
+  ];
+}
+
+async function persistHistory(
+  session: BotSession,
+  studentId: string,
+  chatHistory: Array<{ role: string; content: string }>,
+  userText: string,
+  reply: string,
+): Promise<void> {
+  const updatedHistory = [
+    ...chatHistory,
+    { role: "user", content: userText },
+    { role: "assistant", content: reply },
+  ];
+
+  await setSession(studentId, {
+    currentMode: session.currentMode,
+    context: {
+      ...session.context,
+      chatHistory: updatedHistory.slice(-50), // keep last 50
+    },
+  });
+}
+
+/**
  * LLM-powered tutor message handler.
  *
- * Replaces the old keyword-based intent detection with LLM chat.
- * The LLM detects intent AND generates a response.
- * If the LLM wraps a command in [QUIZ], [SCHEDULE], or [MATERIALS],
- * the response is returned and the caller routes accordingly.
- *
- * Supports streaming — returns the full response string for now,
- * callers can use the streaming variant separately.
+ * The LLM detects intent AND generates a response. If it wraps a command in
+ * [QUIZ], [SCHEDULE], [MATERIALS], etc., the response is returned and the
+ * caller (handlers/message.ts) routes accordingly.
  */
 export async function handleMessage(
   ctx: Context,
@@ -49,50 +118,15 @@ export async function handleMessage(
   if (!msg || !("text" in msg)) return null;
 
   const persona = getPersona(student.persona);
-  const personaPrompt = persona.prompt ?? `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}`;
+  const { chatHistory, recentHistory } = getRecentHistory(session);
+  console.log(
+    "[tutor] chatHistory length:",
+    chatHistory.length,
+    "session mode:",
+    session.currentMode,
+  );
 
-  const systemMessage = `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${persona.toneRules.join(", ")}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nStudent ID: ${student.studentId}\nGrade: ${getGradeLabel(student.gradeLevel)}\n\nCAPABILITIES — You can now do the following when the student asks:
-1. [QUIZ] — Generate or start a quiz
-2. [SCHEDULE] — Show today's study schedule. Available sub-commands:
-   - [SCHEDULE:WEEK] — Show this week's full schedule
-   - [SCHEDULE:SET:{"sessionsPerDay":N,"preferredTime":"HH:MM","excludeDays":["sunday"]}] — Set study preferences
-   - [SCHEDULE:ASSIGN] — Generate sessions for upcoming days
-   When the student says "Atur jadwal" or "Aku mau belajar jam 4 sore", ask their preference then use [SCHEDULE:SET].
-3. [MATERIALS] — Show learning materials
-4. [SCHOOL_SCHEDULE] — Show today's school schedule (real timetable). Use when student asks "jadwal sekolah", "mapel hari ini", "sekolah". Sub-commands:
-   - [SCHOOL_SCHEDULE] — Today's schedule
-   - [SCHOOL_SCHEDULE:WEEK] — Full week
-   - [SCHOOL_SCHEDULE:Senin] / :Selasa / :Rabu / :Kamis / :Jumat — Specific day
-   - [SCHOOL_SCHEDULE:NEXT:Matematika] — Next subject class
-   IMPORTANT: "jadwal" alone = [SCHEDULE]. "sekolah" = [SCHOOL_SCHEDULE].
-5. [REMINDER:CREATE:{"title":"...","remindAt":"ISO_DATE","category":"exam|homework|event|study|general","description":"..."}] — Set a reminder
-6. [REMINDER:LIST] — Show all reminders
-7. [REMINDER:DELETE:{"all":true}] — Delete all reminders
-8. [HOMEWORK:CREATE:{"subject":"...","description":"...","deadlineAt":"ISO_DATE"}] — Record a homework
-9. [HOMEWORK:LIST] — Show pending homework
-10. [HOMEWORK:SUBMIT:{"subject":"..."}] — Mark homework as done
-11. [PASSWORD] — When the student asks to create or change their web login password, respond with their Student ID and ask them to type a new password (min 6 characters). Then call [PASSWORD:SET:{"password":"the_new_password"}] — This will update their password. Do NOT reveal existing passwords.
-12. [VIDEOS:topic] — When the student asks about a topic, you can recommend YouTube learning videos from our curated database. Use this to fetch and share video links. Example: [VIDEOS:Cahaya] or [VIDEOS:Hakikat Ilmu Sains] or [VIDEOS:Zat dan Perubahan]
-13. [YOUTUBE:VIDEO_ID] — When the student specifically shares a YouTube link and asks you to explain it. You'll get the transcript and can explain. Example: [YOUTUBE:dQw4w9WgXcQ]
-14. [DASHBOARD] — When the student asks about their web dashboard, learning portal, or web login. Respond with their dashboard link: https://senangbelajar.web.id/student
-
-When the student asks about reminders, homework, or deadlines, respond naturally AND append the appropriate command at the end.
-Example: "Baik Andi, aku catat ulangan matematikanya ya! 😊 [REMINDER:CREATE:{"title":"Ulangan Matematika","remindAt":"2026-07-14T08:00:00","category":"exam"}]"
-Respond in Indonesian, warm, friendly.`;
-
-  // Build message history — last 10 from session context
-  const chatHistory = (session.context?.chatHistory as Array<{ role: string; content: string }>) ?? [];
-  const recentHistory = chatHistory.slice(-10);
-  console.log("[tutor] chatHistory length:", chatHistory.length, "session mode:", session.currentMode);
-
-  const messages: ChatMessage[] = [
-    { role: "system", content: systemMessage },
-    ...recentHistory.map((m) => ({
-      role: m.role === "assistant" ? ("assistant" as const) : ("user" as const),
-      content: m.content,
-    })),
-    { role: "user", content: msg.text },
-  ];
+  const messages = buildMessages(student, recentHistory, msg.text);
 
   // Call LLM with 30s timeout
   let response: string | null;
@@ -105,7 +139,10 @@ Respond in Indonesian, warm, friendly.`;
     );
     console.log("[tutor] LLM response:", response?.substring(0, 100));
   } catch (err) {
-    console.warn("[tutor] LLM call failed, using persona fallback:", err instanceof Error ? err.message : String(err));
+    console.warn(
+      "[tutor] LLM call failed, using persona fallback:",
+      err instanceof Error ? err.message : String(err),
+    );
     response = persona.greeting;
   }
 
@@ -121,33 +158,37 @@ Respond in Indonesian, warm, friendly.`;
       data: { studentId: student.id, role: "user", content: msg.text, source: "telegram" },
     }),
     prisma.chatLog.create({
-      data: { studentId: student.id, role: "assistant", content: finalResponse, source: "telegram" },
+      data: {
+        studentId: student.id,
+        role: "assistant",
+        content: finalResponse,
+        source: "telegram",
+      },
     }),
   ]).catch((err) =>
-    console.warn("[tutor] Failed to log chat:", err instanceof Error ? err.message : String(err)),
+    console.warn(
+      "[tutor] Failed to log chat:",
+      err instanceof Error ? err.message : String(err),
+    ),
   );
 
-  // Save to chat history in session
-  const updatedHistory = [
-    ...chatHistory,
-    { role: "user", content: msg.text },
-    { role: "assistant", content: finalResponse },
-  ];
-
-  await setSession(student.id, {
-    currentMode: session.currentMode,
-    context: {
-      ...session.context,
-      chatHistory: updatedHistory.slice(-50), // keep last 50
-    },
-  });
+  await persistHistory(session, student.id, chatHistory, msg.text, finalResponse);
 
   return finalResponse;
 }
 
+/** Paragraph/sentence boundary used to decide when a buffered chunk can be released. */
+const FLUSH_BOUNDARY = /(\n\n|[.!?…]\s|\n)$/;
+/** Hard cap so a run-on response still gets flushed periodically. */
+const MAX_BUFFER_CHARS = 400;
+
 /**
- * Stream an LLM response character by character (simulates typing).
- * Yields tokens as they arrive from the LLM.
+ * Stream an LLM response in safety-scanned chunks.
+ *
+ * SAFETY: tokens are buffered until a sentence/paragraph boundary and each chunk
+ * is scanned by `scanResponse` BEFORE it is yielded. Raw tokens are never
+ * forwarded to a child unscanned. If any chunk trips the safety filter the
+ * generator yields the safe fallback and stops immediately.
  */
 export async function* streamMessage(
   ctx: Context,
@@ -158,55 +199,43 @@ export async function* streamMessage(
   if (!msg || !("text" in msg)) return;
 
   const persona = getPersona(student.persona);
-  const personaPrompt = persona.prompt ?? `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}`;
+  const { chatHistory, recentHistory } = getRecentHistory(session);
+  const messages = buildMessages(student, recentHistory, msg.text);
 
-  const systemMessage = `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}\nTone: ${persona.toneRules.join(", ")}\n\n${personaPrompt}\n\nStudent name: ${student.name}\nStudent ID: ${student.studentId}\nGrade: ${getGradeLabel(student.gradeLevel)}\n\nCAPABILITIES — You can now do the following when the student asks:
-1. [QUIZ] — Generate or start a quiz
-2. [SCHEDULE] — Show today's study schedule. Available sub-commands:
-   - [SCHEDULE:WEEK] — Show this week's full schedule
-   - [SCHEDULE:SET:{"sessionsPerDay":N,"preferredTime":"HH:MM","excludeDays":["sunday"]}] — Set study preferences
-   - [SCHEDULE:ASSIGN] — Generate sessions for upcoming days
-   When the student says "Atur jadwal" or "Aku mau belajar jam 4 sore", ask their preference then use [SCHEDULE:SET].
-3. [MATERIALS] — Show learning materials
-4. [SCHOOL_SCHEDULE] — Show today's school schedule (real timetable). Use when student asks "jadwal sekolah", "mapel hari ini", "sekolah". Sub-commands:
-   - [SCHOOL_SCHEDULE] — Today's schedule
-   - [SCHOOL_SCHEDULE:WEEK] — Full week
-   - [SCHOOL_SCHEDULE:Senin] / :Selasa / :Rabu / :Kamis / :Jumat — Specific day
-   - [SCHOOL_SCHEDULE:NEXT:Matematika] — Next subject class
-   IMPORTANT: "jadwal" alone = [SCHEDULE]. "sekolah" = [SCHOOL_SCHEDULE].
-5. [REMINDER:CREATE:{"title":"...","remindAt":"ISO_DATE","category":"exam|homework|event|study|general","description":"..."}] — Set a reminder
-6. [REMINDER:LIST] — Show all reminders
-7. [REMINDER:DELETE:{"all":true}] — Delete all reminders
-8. [HOMEWORK:CREATE:{"subject":"...","description":"...","deadlineAt":"ISO_DATE"}] — Record a homework
-9. [HOMEWORK:LIST] — Show pending homework
-10. [HOMEWORK:SUBMIT:{"subject":"..."}] — Mark homework as done
-11. [PASSWORD] — When the student asks to create or change their web login password, respond with their Student ID and ask them to type a new password (min 6 characters). Then call [PASSWORD:SET:{"password":"the_new_password"}] — This will update their password. Do NOT reveal existing passwords.
-12. [VIDEOS:topic] — When the student asks about a topic, you can recommend YouTube learning videos from our curated database. Use this to fetch and share video links. Example: [VIDEOS:Cahaya] or [VIDEOS:Hakikat Ilmu Sains] or [VIDEOS:Zat dan Perubahan]
-13. [YOUTUBE:VIDEO_ID] — When the student specifically shares a YouTube link and asks you to explain it. You'll get the transcript and can explain. Example: [YOUTUBE:dQw4w9WgXcQ]
-14. [DASHBOARD] — When the student asks about their web dashboard, learning portal, or web login. Respond with their dashboard link: https://senangbelajar.web.id/student
+  let buffer = "";
+  let emitted = "";
+  let blocked = false;
 
-When the student asks about reminders, homework, or deadlines, respond naturally AND append the appropriate command at the end.
-Example: "Baik Andi, aku catat ulangan matematikanya ya! 😊 [REMINDER:CREATE:{"title":"Ulangan Matematika","remindAt":"2026-07-14T08:00:00","category":"exam"}]"
-Respond in Indonesian, warm, friendly.`;
-
-  const chatHistory = (session.context?.chatHistory as Array<{ role: string; content: string }>) ?? [];
-  const recentHistory = chatHistory.slice(-10);
-
-  const messages: ChatMessage[] = [
-    { role: "system", content: systemMessage },
-    ...recentHistory.map((m) => ({
-      role: m.role === "assistant" ? ("assistant" as const) : ("user" as const),
-      content: m.content,
-    })),
-    { role: "user", content: msg.text },
-  ];
-
-  let fullResponse = "";
+  /** Scan a completed chunk and yield it only when safe. */
+  async function* flush(chunk: string): AsyncGenerator<string> {
+    if (!chunk) return;
+    const verdict = await scanResponse(student.id, chunk);
+    if (verdict) {
+      // Blocked — emit the safe fallback instead of the offending chunk.
+      blocked = true;
+      emitted = verdict;
+      yield verdict;
+      return;
+    }
+    emitted += chunk;
+    yield chunk;
+  }
 
   try {
     for await (const token of callLLMStream("tutor", messages, { studentId: student.id })) {
-      fullResponse += token;
-      yield token;
+      buffer += token;
+
+      if (FLUSH_BOUNDARY.test(buffer) || buffer.length >= MAX_BUFFER_CHARS) {
+        yield* flush(buffer);
+        buffer = "";
+        if (blocked) break;
+      }
+    }
+
+    // Flush whatever is left in the buffer.
+    if (!blocked && buffer) {
+      yield* flush(buffer);
+      buffer = "";
     }
   } catch (err) {
     console.error("[tutor] LLM stream failed:", err);
@@ -214,26 +243,9 @@ Respond in Indonesian, warm, friendly.`;
     return;
   }
 
-  // Safety scan the full assembled response
-  const safeResponse = await scanResponse(student.id, fullResponse);
-  if (safeResponse) {
-    // If blocked, we can't undo yielded tokens — log and return
-    // In practice, the caller should handle this by checking before streaming
-    console.warn("[tutor] Blocked content detected in streamed response");
+  if (blocked) {
+    console.warn("[tutor] Blocked content detected mid-stream — stream truncated");
   }
 
-  // Save to chat history
-  const updatedHistory = [
-    ...chatHistory,
-    { role: "user", content: msg.text },
-    { role: "assistant", content: safeResponse ?? fullResponse },
-  ];
-
-  await setSession(student.id, {
-    currentMode: session.currentMode,
-    context: {
-      ...session.context,
-      chatHistory: updatedHistory.slice(-50),
-    },
-  });
+  await persistHistory(session, student.id, chatHistory, msg.text, emitted);
 }
