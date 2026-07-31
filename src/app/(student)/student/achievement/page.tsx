@@ -4,6 +4,32 @@ import { use, useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 
 /* ── Types ── */
+interface GamificationData {
+  xp: number;
+  currentStreak: number;
+  longestStreak: number;
+  lastActivityDate: string | null;
+  rank: number;
+  totalStudents: number;
+  dueReviews: number;
+  badges: {
+    unlocked: BadgeRow[];
+    locked: BadgeRow[];
+    unlockedCount: number;
+    totalCount: number;
+  };
+}
+
+interface BadgeRow {
+  code: string;
+  name: string;
+  description: string;
+  icon: string;
+  category: string;
+  xpReward: number;
+  unlockedAt?: string;
+}
+
 interface SubjectMastery {
   subject: string;
   quizCount: number;
@@ -12,10 +38,6 @@ interface SubjectMastery {
   quizBestScore: number;
   quizBestMax: number;
   examCount: number;
-  examTotalScore: number;
-  examTotalMax: number;
-  examBestScore: number;
-  examBestMax: number;
   slidesRead: number;
   mindmapsOpen: number;
   videosWatched: number;
@@ -47,10 +69,16 @@ const ACTIVITY_EMOJI: Record<string, string> = {
   quiz_start: "🎯", exam_start: "🎯",
 };
 
+const CATEGORY_LABEL: Record<string, string> = {
+  milestone: "🏆 Pencapaian",
+  streak: "🔥 Konsistensi",
+  mastery: "📚 Penguasaan",
+  consistency: "💪 Rajin",
+};
+
 function MasteryBar({ value, label }: { value: number; label: string }) {
   const pct = Math.round(value * 100);
-  const color =
-    pct >= 80 ? "#22c55e" : pct >= 50 ? "#f59e0b" : "#ef4444";
+  const color = pct >= 80 ? "#22c55e" : pct >= 50 ? "#f59e0b" : "#ef4444";
   return (
     <div className="space-y-1">
       <div className="flex justify-between text-xs">
@@ -58,71 +86,44 @@ function MasteryBar({ value, label }: { value: number; label: string }) {
         <span style={{ color }}>{pct}%</span>
       </div>
       <div className="h-2 rounded-full overflow-hidden" style={{ backgroundColor: "var(--st-bg-card)" }}>
-        <div
-          className="h-full rounded-full transition-all duration-1000"
-          style={{ width: `${pct}%`, backgroundColor: color }}
-        />
+        <div className="h-full rounded-full transition-all duration-1000" style={{ width: `${pct}%`, backgroundColor: color }} />
       </div>
     </div>
   );
 }
 
 export default function AchievementPage() {
-  const [data, setData] = useState<ActivitySummary | null>(null);
+  const [gamification, setGamification] = useState<GamificationData | null>(null);
+  const [mastery, setMastery] = useState<ActivitySummary | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [studentId, setStudentId] = useState<string | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>("all");
+  const [badgeFilter, setBadgeFilter] = useState<string>("all");
 
-  // Fetch student session
   useEffect(() => {
-    fetch("/api/auth/me")
-      .then((r) => r.json())
-      .then((d) => {
-        if (d.student?.studentId) setStudentId(d.student.studentId);
-        else setError("Sesi tidak valid");
+    Promise.all([
+      fetch("/api/students/gamification").then((r) => r.json()),
+      fetch("/api/students/mastery").then((r) => r.json()),
+    ])
+      .then(([g, m]) => {
+        if (g.error) { setError(g.error); return; }
+        setGamification(g);
+        setMastery(m);
       })
-      .catch(() => setError("Gagal verifikasi sesi"));
+      .catch(() => setError("Gagal memuat data"))
+      .finally(() => setLoading(false));
   }, []);
 
-  // Fetch mastery data
-  const fetchData = useCallback(async () => {
-    if (!studentId) return;
-    try {
-      const r = await fetch(`/api/students/mastery?studentId=${encodeURIComponent(studentId)}`);
-      const d = await r.json();
-      setData(d);
-    } catch {
-      setError("Gagal memuat data pencapaian");
-    } finally {
-      setLoading(false);
-    }
-  }, [studentId]);
+  if (loading) return <div className="flex items-center justify-center py-20"><div className="animate-spin text-4xl">🏆</div></div>;
+  if (error) return <div className="text-center py-20"><div className="text-4xl mb-3">😅</div><p className="text-sm" style={{ color: "var(--st-text-dim)" }}>{error}</p></div>;
+  if (!gamification || !mastery) return null;
 
-  useEffect(() => { fetchData(); }, [fetchData]);
+  const filtered = activeFilter === "all" ? mastery.subjects : mastery.subjects.filter((s) => s.subject === activeFilter);
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center py-20">
-        <div className="animate-spin text-4xl">🏆</div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="text-center py-20">
-        <div className="text-4xl mb-3">😅</div>
-        <p className="text-sm" style={{ color: "var(--st-text-dim)" }}>{error}</p>
-      </div>
-    );
-  }
-
-  if (!data) return null;
-
-  const filtered = activeFilter === "all"
-    ? data.subjects
-    : data.subjects.filter((s) => s.subject === activeFilter);
+  const badgeCategories = [...new Set(gamification.badges.unlocked.map((b) => b.category))];
+  const filteredBadges = badgeFilter === "all"
+    ? gamification.badges.unlocked
+    : gamification.badges.unlocked.filter((b) => b.category === badgeFilter);
 
   return (
     <div className="space-y-5 pb-8">
@@ -134,54 +135,102 @@ export default function AchievementPage() {
         </h1>
       </div>
 
-      {/* Overall Stats Card */}
+      {/* Gamification Hero Card */}
       <div className="rounded-2xl p-5" style={{ backgroundColor: "var(--st-primary)", color: "#fff" }}>
-        <p className="text-xs font-medium opacity-80 mb-1">Penguasaan Keseluruhan</p>
-        <p className="text-4xl font-bold" style={{ fontFamily: "var(--font-st-display)" }}>
-          {Math.round(data.overallMastery * 100)}%
-        </p>
-        <div className="grid grid-cols-4 gap-3 mt-4 text-center">
+        <div className="flex items-center justify-between mb-4">
           <div>
-            <p className="text-lg font-bold">{data.totalQuizzes}</p>
-            <p className="text-xs opacity-80">Quiz</p>
+            <p className="text-3xl font-bold" style={{ fontFamily: "var(--font-st-display)" }}>
+              ⭐ {gamification.xp.toLocaleString()} XP
+            </p>
+            <p className="text-xs opacity-80 mt-1">
+              Peringkat #{gamification.rank} dari {gamification.totalStudents} siswa
+            </p>
+          </div>
+          <div className="text-right">
+            <p className="text-lg">🔥 {gamification.currentStreak} hari</p>
+            <p className="text-xs opacity-80">Terpanjang: {gamification.longestStreak} hari</p>
+          </div>
+        </div>
+        <div className="grid grid-cols-4 gap-3 text-center">
+          <div>
+            <p className="text-lg font-bold">{gamification.badges.unlockedCount}</p>
+            <p className="text-xs opacity-80">🏅 Badge</p>
           </div>
           <div>
-            <p className="text-lg font-bold">{data.totalExams}</p>
-            <p className="text-xs opacity-80">Exam</p>
+            <p className="text-lg font-bold">{mastery.totalQuizzes}</p>
+            <p className="text-xs opacity-80">📝 Quiz</p>
           </div>
           <div>
-            <p className="text-lg font-bold">{data.totalSlides + data.totalMindmaps}</p>
-            <p className="text-xs opacity-80">Materi</p>
+            <p className="text-lg font-bold">{mastery.totalSlides + mastery.totalMindmaps}</p>
+            <p className="text-xs opacity-80">📄 Materi</p>
           </div>
           <div>
-            <p className="text-lg font-bold">{data.totalVideos}</p>
-            <p className="text-xs opacity-80">Video</p>
+            <p className="text-lg font-bold">{gamification.dueReviews}</p>
+            <p className="text-xs opacity-80">🔄 Review</p>
           </div>
         </div>
       </div>
 
+      {/* Badge Section */}
+      {gamification.badges.unlockedCount > 0 && (
+        <div className="rounded-2xl p-5 space-y-3" style={{ backgroundColor: "var(--st-bg-card)" }}>
+          <div className="flex items-center justify-between">
+            <h2 className="font-bold">🏅 Badge</h2>
+            <span className="text-xs" style={{ color: "var(--st-text-dim)" }}>
+              {gamification.badges.unlockedCount}/{gamification.badges.totalCount}
+            </span>
+          </div>
+          {badgeCategories.length > 1 && (
+            <div className="flex gap-2 overflow-x-auto pb-1">
+              <button onClick={() => setBadgeFilter("all")}
+                className="shrink-0 px-3 py-1.5 rounded-full text-xs font-bold transition-all"
+                style={{ backgroundColor: badgeFilter === "all" ? "var(--st-primary)" : "var(--st-bg)", color: badgeFilter === "all" ? "#fff" : "var(--st-text)" }}>
+                Semua
+              </button>
+              {badgeCategories.map((c) => (
+                <button key={c} onClick={() => setBadgeFilter(c)}
+                  className="shrink-0 px-3 py-1.5 rounded-full text-xs font-bold transition-all"
+                  style={{ backgroundColor: badgeFilter === c ? "var(--st-primary)" : "var(--st-bg)", color: badgeFilter === c ? "#fff" : "var(--st-text)" }}>
+                  {CATEGORY_LABEL[c] || c}
+                </button>
+              ))}
+            </div>
+          )}
+          <div className="grid grid-cols-3 gap-2">
+            {filteredBadges.map((b) => (
+              <div key={b.code} className="text-center p-2 rounded-xl" style={{ backgroundColor: "var(--st-bg)" }}>
+                <div className="text-2xl mb-1">{b.icon}</div>
+                <p className="text-xs font-bold leading-tight">{b.name}</p>
+                {b.unlockedAt && (
+                  <p className="text-[10px]" style={{ color: "var(--st-text-dim)" }}>
+                    {new Date(b.unlockedAt).toLocaleDateString("id-ID")}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Overall Mastery */}
+      <div className="rounded-2xl p-5" style={{ backgroundColor: "var(--st-primary)", color: "#fff" }}>
+        <p className="text-xs font-medium opacity-80 mb-1">Penguasaan Keseluruhan</p>
+        <p className="text-4xl font-bold" style={{ fontFamily: "var(--font-st-display)" }}>
+          {Math.round(mastery.overallMastery * 100)}%
+        </p>
+      </div>
+
       {/* Subject Filter */}
       <div className="flex gap-2 overflow-x-auto pb-1">
-        <button
-          onClick={() => setActiveFilter("all")}
+        <button onClick={() => setActiveFilter("all")}
           className="shrink-0 px-4 py-2 rounded-full text-xs font-bold transition-all"
-          style={{
-            backgroundColor: activeFilter === "all" ? "var(--st-primary)" : "var(--st-bg-card)",
-            color: activeFilter === "all" ? "#fff" : "var(--st-text)",
-          }}
-        >
+          style={{ backgroundColor: activeFilter === "all" ? "var(--st-primary)" : "var(--st-bg-card)", color: activeFilter === "all" ? "#fff" : "var(--st-text)" }}>
           📊 Semua
         </button>
-        {data.subjects.map((s) => (
-          <button
-            key={s.subject}
-            onClick={() => setActiveFilter(s.subject)}
+        {mastery.subjects.map((s) => (
+          <button key={s.subject} onClick={() => setActiveFilter(s.subject)}
             className="shrink-0 px-4 py-2 rounded-full text-xs font-bold transition-all"
-            style={{
-              backgroundColor: activeFilter === s.subject ? "var(--st-primary)" : "var(--st-bg-card)",
-              color: activeFilter === s.subject ? "#fff" : "var(--st-text)",
-            }}
-          >
+            style={{ backgroundColor: activeFilter === s.subject ? "var(--st-primary)" : "var(--st-bg-card)", color: activeFilter === s.subject ? "#fff" : "var(--st-text)" }}>
             {EMOJI[s.subject] || "📚"} {s.subject}
           </button>
         ))}
@@ -189,42 +238,23 @@ export default function AchievementPage() {
 
       {/* Subject Mastery Cards */}
       {filtered.map((s) => (
-        <div
-          key={s.subject}
-          className="rounded-2xl p-5 space-y-3"
-          style={{ backgroundColor: "var(--st-bg-card)" }}
-        >
+        <div key={s.subject} className="rounded-2xl p-5 space-y-3" style={{ backgroundColor: "var(--st-bg-card)" }}>
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="font-bold">
-                {EMOJI[s.subject] || "📚"} {s.subject}
-              </h2>
+              <h2 className="font-bold">{EMOJI[s.subject] || "📚"} {s.subject}</h2>
               <p className="text-xs" style={{ color: "var(--st-text-dim)" }}>
                 Terakhir: {new Date(s.lastActiveAt).toLocaleDateString("id-ID")}
               </p>
             </div>
-            <span
-              className="text-lg font-bold"
-              style={{
-                color: s.mastery >= 0.8 ? "#22c55e" : s.mastery >= 0.5 ? "#f59e0b" : "#ef4444",
-              }}
-            >
+            <span className="text-lg font-bold" style={{ color: s.mastery >= 0.8 ? "#22c55e" : s.mastery >= 0.5 ? "#f59e0b" : "#ef4444" }}>
               {Math.round(s.mastery * 100)}%
             </span>
           </div>
-
           <MasteryBar value={s.mastery} label="Penguasaan" />
-
-          {/* Stat grid */}
           <div className="grid grid-cols-3 gap-2 mt-3">
             <div className="text-center p-2 rounded-xl" style={{ backgroundColor: "var(--st-bg)" }}>
               <p className="text-sm font-bold">{s.quizCount}</p>
               <p className="text-[10px]" style={{ color: "var(--st-text-dim)" }}>Quiz</p>
-              {s.quizCount > 0 && (
-                <p className="text-[10px] font-medium" style={{ color: "var(--st-primary)" }}>
-                  {s.quizTotalScore}/{s.quizTotalMax}
-                </p>
-              )}
             </div>
             <div className="text-center p-2 rounded-xl" style={{ backgroundColor: "var(--st-bg)" }}>
               <p className="text-sm font-bold">{s.slidesRead}</p>
@@ -251,21 +281,16 @@ export default function AchievementPage() {
       ))}
 
       {/* Recent Activity */}
-      {data.recentActivity.length > 0 && (
+      {mastery.recentActivity.length > 0 && (
         <div className="rounded-2xl p-5 space-y-2" style={{ backgroundColor: "var(--st-bg-card)" }}>
           <h3 className="font-bold text-sm">⚡ Aktivitas Terbaru</h3>
-          {data.recentActivity.slice(0, 10).map((a, i) => (
+          {mastery.recentActivity.slice(0, 10).map((a, i) => (
             <div key={i} className="flex items-center gap-3 text-xs py-1.5">
               <span>{ACTIVITY_EMOJI[a.type] || "📌"}</span>
               <div className="flex-1 min-w-0">
-                <p className="truncate">
-                  {EMOJI[a.subject] || ""} {a.subject}
-                  {a.topic ? ` · ${a.topic}` : ""}
-                </p>
+                <p className="truncate">{EMOJI[a.subject] || ""} {a.subject}{a.topic ? ` · ${a.topic}` : ""}</p>
               </div>
-              <span style={{ color: "var(--st-text-dim)" }}>
-                {formatRelativeTime(a.createdAt)}
-              </span>
+              <span style={{ color: "var(--st-text-dim)" }}>{formatRelativeTime(a.createdAt)}</span>
             </div>
           ))}
         </div>
@@ -273,11 +298,7 @@ export default function AchievementPage() {
 
       {/* Back */}
       <div className="text-center pt-2">
-        <Link
-          href="/student"
-          className="inline-block text-xs underline"
-          style={{ color: "var(--st-text-dim)" }}
-        >
+        <Link href="/student" className="inline-block text-xs underline" style={{ color: "var(--st-text-dim)" }}>
           ← Kembali ke Dashboard
         </Link>
       </div>

@@ -8,9 +8,9 @@ import StudyTracker from "@/components/StudyTracker";
 const NAV_ITEMS = [
   { href: "/student", label: "Beranda", icon: "🏠" },
   { href: "/student/quiz", label: "Quiz", icon: "📝" },
-  { href: "/student/progress", label: "Progres", icon: "📊" },
-  { href: "/student/profile-link", label: "Profil", icon: "🔑" },
-  { href: "/student/profile", label: "Karakter", icon: "⭐" },
+  { href: "/student/achievement", label: "Pencapaian", icon: "🏆" },
+  { href: "/student/review", label: "Review", icon: "🔄" },
+  { href: "/student/leaderboard", label: "Peringkat", icon: "📊" },
 ];
 
 function getStudentName(searchParams: URLSearchParams): string {
