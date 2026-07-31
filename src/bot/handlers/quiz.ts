@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma";
 import { getPersona } from "../personas";
 import type { BotSession } from "../session";
 import { setSession, clearSession } from "../session";
+import { handleActivity } from "@/lib/gamification";
+import { addToReviewQueue } from "@/lib/spaced-repetition";
 
 /**
  * /quiz — fetch next available quiz, send first question.
@@ -58,6 +60,7 @@ export async function handleQuizAnswer(
 
   const quiz = await prisma.quiz.findUnique({
     where: { id: ctxData.quizId },
+    include: { material: true },
   });
 
   if (!quiz) {
@@ -118,10 +121,11 @@ async function sendQuestion(ctx: Context, quiz: Quiz, index: number): Promise<vo
   await ctx.reply(text, { parse_mode: "Markdown" });
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function finishQuiz(
   ctx: Context,
   student: Student,
-  quiz: Quiz,
+  quiz: Quiz & { material?: any },
   questions: Array<{ question: string; options?: string[]; correctAnswer: string }>,
   answers: { questionIndex: number; answer: string }[],
 ): Promise<void> {
@@ -139,8 +143,9 @@ async function finishQuiz(
   const mastery = maxScore > 0 ? (score / maxScore) * 100 : 0;
 
   // Save attempt to DB
+  let savedAttempt: { id: string } | null = null;
   try {
-    await prisma.attempt.create({
+    savedAttempt = await prisma.attempt.create({
       data: {
         quizId: quiz.id,
         studentId: student.id,
@@ -152,6 +157,31 @@ async function finishQuiz(
       },
     });
     console.log("[quiz] Attempt saved:", quiz.id, score, "/", maxScore);
+
+    // Gamification: award XP, update streak, check badges
+    await handleActivity({
+      studentId: student.id,
+      materialId: undefined,
+      type: "quiz_complete",
+      metadata: { score, maxScore, subject: (quiz as any).material?.subject },
+    }).catch((err) => console.warn("[quiz] handleActivity error:", err));
+
+    // Spaced repetition: add wrong answers to review queue
+    const questions = quiz.questions as Array<{ correctAnswer: string }>;
+    for (const a of answers) {
+      const q = questions[a.questionIndex];
+      if (!q) continue;
+      const isCorrect = a.answer?.trim().toLowerCase() === q.correctAnswer?.trim().toLowerCase();
+      if (!isCorrect) {
+        await addToReviewQueue(
+          student.id,
+          quiz.id,
+          a.questionIndex,
+          (quiz.material as any)?.subject ?? "",
+          undefined,
+        ).catch((err) => console.warn("[quiz] addToReviewQueue error:", err));
+      }
+    }
   } catch (dbErr) {
     console.error("[quiz] Failed to save attempt:", dbErr);
   }

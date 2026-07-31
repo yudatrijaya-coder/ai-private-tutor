@@ -169,7 +169,7 @@ export async function checkBadges(studentId: string): Promise<string[]> {
     }
 
     if (earned) {
-      await prisma.studentBadge.create({ data: { studentId, badgeId: badge.code } });
+      await prisma.studentBadge.create({ data: { studentId, badgeId: badge.id } });
       await awardXp(studentId, badge.xpReward);
       justUnlocked.push(badge.code);
     }
