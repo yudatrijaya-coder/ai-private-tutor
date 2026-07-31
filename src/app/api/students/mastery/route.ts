@@ -1,16 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { getStudentSession } from "@/lib/auth/student";
 
 /**
  * GET /api/students/mastery?studentId=XXX
  *
- * Returns aggregated achievement data for a student:
- * - Per-subject mastery (quiz + exam scores, activity counts)
- * - Overall mastery
- * - Recent activity log
+ * Returns aggregated achievement data for a student.
+ * Supports both query-param (public studentId) and JWT-cookie auth.
+ * If no studentId param, falls back to the logged-in student's id.
  */
 export async function GET(req: NextRequest) {
-  const studentId = req.nextUrl.searchParams.get("studentId");
+  let studentId = req.nextUrl.searchParams.get("studentId");
+
+  if (!studentId) {
+    // Try JWT session
+    const session = await getStudentSession();
+    if (!session) {
+      return NextResponse.json({ error: "studentId required" }, { status: 400 });
+    }
+    studentId = session.studentIdentifier;
+  }
+
   if (!studentId) {
     return NextResponse.json({ error: "studentId required" }, { status: 400 });
   }
