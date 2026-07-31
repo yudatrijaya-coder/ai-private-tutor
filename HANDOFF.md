@@ -31,6 +31,33 @@ All gaps resolved. Full coverage across all students.
   - 3-pass pipeline via 9Router (`gen-quizzes-missing.js` → `-retry` → `-final`)
   - All 59/59 success, 1,180 total quizzes in DB
 - **Docs:** `docs-ai/quiz-generation.md`, `docs-ai/slide-sync.md`
+- **Gamification:** XP, streak, badge engine (14 badges seeded via `scripts/seed-badges.ts`)
+  - `src/lib/gamification.ts` — `handleActivity()`, `awardXp()`, `updateStreak()`, `checkBadges()`
+  - Wired to `POST /api/students/activity`
+- **Spaced repetition:** SM-2 algorithm on wrong answers
+  - `src/lib/spaced-repetition.ts` — `computeSM2()`, `addToReviewQueue()`, `gradeReviewItem()`, `getDueReviews()`
+  - Wrong answers auto-added to queue from `activity/route.ts` at attempt creation
+- **ProgressSnap weekly cron:** 7 snaps created per student per subject
+  - `GET /api/cron/progress-snap` — weekly snapshot per student (ACTIVE only)
+- **Daily nudge + parent digest:**
+  - `GET /api/cron/daily-nudge` — Telegram reminder if gap >= 2 days
+  - `GET /api/cron/guardian-report` — enhanced parent weekly digest with XP/streak/badge
+- **Bot:** 6 new commands (`/badge`, `/review`, `/nilai`, `/pr`, `/help` + aliases)
+  - Prompt refactored to single source of truth (`src/bot/agent/capabilities.ts`)
+  - Safety fix: buffer-and-scan per paragraph in `streamMessage()`
+  - Command routing in webhook mode via `routeCommand()` from `message.ts`
+- **New files:**
+  - `src/lib/gamification.ts`
+  - `src/lib/spaced-repetition.ts`
+  - `src/bot/agent/capabilities.ts`
+  - `src/bot/commands.ts`
+  - `src/app/api/cron/progress-snap/route.ts`
+  - `src/app/api/cron/daily-nudge/route.ts`
+  - `scripts/seed-badges.ts`
+  - `docs-ai/gamification-engine.md`
+  - `docs-ai/spaced-repetition.md`
+  - `docs-ai/bot-enhancements.md`
+  - `docs-ai/cron-endpoints.md`
 
 ## SIBI Content Pipeline
 
