@@ -9,6 +9,14 @@ import { SYSTEM_PROMPTS } from "@/llm/prompts";
 import { scanResponse } from "../safety";
 import { setSession } from "../session";
 import { buildCapabilitiesPrompt } from "./capabilities";
+import {
+  getStudentTimezone,
+  getTimezoneLabel,
+  formatLocal,
+  hourIn,
+  partOfDay,
+  isOffHours,
+} from "@/lib/student-time";
 
 const GRADE_LABELS: Record<string, string> = {
   SD_5: "SD Kelas 5",
@@ -41,28 +49,42 @@ function buildSystemPrompt(student: Student): string {
   const personaPrompt =
     persona.prompt ?? `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}`;
 
-  // WIB (UTC+7) — the student's timezone, regardless of server TZ.
-  const nowWIB = new Date();
-  const wibDate = nowWIB.toLocaleString("id-ID", {
-    timeZone: "Asia/Jakarta",
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-  const wibHour = parseInt(
-    nowWIB.toLocaleString("id-ID", { timeZone: "Asia/Jakarta", hour: "2-digit", hour12: false }),
-    10,
-  );
-  const partOfDay =
-    wibHour < 6 ? "malam (larut)" : wibHour < 11 ? "pagi" : wibHour < 15 ? "siang" : wibHour < 18 ? "sore" : "malam";
+  // Student-local time — timezone from Student.scheduleConfig, fallback WIB.
+  const tz = getStudentTimezone(student);
+  const tzLabel = getTimezoneLabel(tz);
+  const localDate = formatLocal(tz);
+  const localHour = hourIn(tz);
+  const dayPart = partOfDay(localHour);
+
+  // Night guard: don't narrate "you're still up at 1am" unless truly recent activity.
+  const lastActivity = student.lastActivityDate
+    ? new Date(student.lastActivityDate)
+    : null;
+  const hoursSinceActivity = lastActivity
+    ? (Date.now() - lastActivity.getTime()) / 3_600_000
+    : null;
+  const isRecentlyActive = hoursSinceActivity !== null && hoursSinceActivity < 2;
+
+  const offHoursNote = isOffHours(localHour)
+    ? [
+        "",
+        "ATURAN JAM MALAM (penting):",
+        `- Sekarang ${localHour}:00 ${tzLabel}, di luar jam belajar normal (06:00–22:00).`,
+        isRecentlyActive
+          ? `- Siswa baru aktif ${hoursSinceActivity!.toFixed(1)} jam lalu, jadi wajar dia masih online. Jawab hangat dan normal.`
+          : `- Siswa TIDAK sedang online terus-menerus${hoursSinceActivity !== null ? ` (terakhir aktif ${hoursSinceActivity.toFixed(1)} jam lalu)` : ""}. JANGAN menulis narasi seperti "masih di sini?", "semua anak udah bobo", atau ASCII/emoji art suasana malam.`,
+        "- Jangan pernah menebak jam sendiri. Pakai jam yang tertulis di atas.",
+        localHour >= 23 || localHour < 5
+          ? "- Jawab pertanyaannya dulu dengan singkat, baru tutup dengan satu kalimat ajakan tidur. Maksimal satu kalimat."
+          : "- Jawab pertanyaannya seperti biasa, tanpa ceramah soal jam.",
+      ].join("\n")
+    : "";
 
   return [
     SYSTEM_PROMPTS.tutor,
     "",
-    `Waktu sekarang: ${wibDate} WIB (bagian ${partOfDay} hari). Gunakan waktu ini jika siswa bertanya soal jam/hari.`,
+    `Waktu sekarang: ${localDate} ${tzLabel} (bagian ${dayPart} hari). Gunakan waktu ini jika siswa bertanya soal jam/hari.`,
+    offHoursNote,
     "",
     `Persona: ${persona.displayName}`,
     `Tone: ${persona.toneRules.join(", ")}`,
@@ -147,6 +169,12 @@ export async function handleMessage(
   );
 
   const messages = buildMessages(student, recentHistory, msg.text);
+
+  // ── Off-hours observability (tutor-session-time-limit rule) ──
+  const localHour = hourIn(getStudentTimezone(student));
+  if (isOffHours(localHour)) {
+    console.log(`[tutor] Off-hours request (local ${localHour}:00) for ${student.name}`);
+  }
 
   // Call LLM with 30s timeout
   let response: string | null;
