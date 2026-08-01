@@ -41,8 +41,28 @@ function buildSystemPrompt(student: Student): string {
   const personaPrompt =
     persona.prompt ?? `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}`;
 
+  // WIB (UTC+7) — the student's timezone, regardless of server TZ.
+  const nowWIB = new Date();
+  const wibDate = nowWIB.toLocaleString("id-ID", {
+    timeZone: "Asia/Jakarta",
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const wibHour = parseInt(
+    nowWIB.toLocaleString("id-ID", { timeZone: "Asia/Jakarta", hour: "2-digit", hour12: false }),
+    10,
+  );
+  const partOfDay =
+    wibHour < 6 ? "malam (larut)" : wibHour < 11 ? "pagi" : wibHour < 15 ? "siang" : wibHour < 18 ? "sore" : "malam";
+
   return [
     SYSTEM_PROMPTS.tutor,
+    "",
+    `Waktu sekarang: ${wibDate} WIB (bagian ${partOfDay} hari). Gunakan waktu ini jika siswa bertanya soal jam/hari.`,
     "",
     `Persona: ${persona.displayName}`,
     `Tone: ${persona.toneRules.join(", ")}`,
