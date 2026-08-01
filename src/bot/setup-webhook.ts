@@ -22,12 +22,15 @@ async function main() {
   console.log("Current webhook:", info.url || "(none)");
   console.log("Pending updates:", info.pending_update_count);
 
-  // Set new webhook
+  const secretToken = process.env.TELEGRAM_WEBHOOK_SECRET;
+
+  // Set new webhook with secret token (matches the route's header check)
   await bot.telegram.setWebhook(fullUrl, {
     drop_pending_updates: true,
+    ...(secretToken ? { secret_token: secretToken } : {}),
   });
 
-  console.log(`✅ Webhook set to: ${fullUrl}`);
+  console.log(`✅ Webhook set to: ${fullUrl}${secretToken ? " (with secret token)" : " (no secret)"}`);
   console.log("ℹ️  Bot will now receive updates via webhook.");
   console.log("   Stop any local polling instance first!");
 }
