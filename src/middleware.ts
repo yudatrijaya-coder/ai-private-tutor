@@ -36,7 +36,16 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(loginUrl);
     }
     try {
-      await jwtVerify(token, secret);
+      const { payload } = await jwtVerify(token, secret);
+      const status = payload.status as string | undefined;
+      const trialEndsAt = payload.trialEndsAt as string | undefined;
+
+      if (status === "TRIAL" && trialEndsAt) {
+        if (new Date(trialEndsAt) < new Date()) {
+          const expiredUrl = new URL("/login/student?expired=trial", request.url);
+          return NextResponse.redirect(expiredUrl);
+        }
+      }
     } catch {
       const loginUrl = new URL("/login/student", request.url);
       loginUrl.searchParams.set("redirect", pathname + request.nextUrl.search);

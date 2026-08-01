@@ -38,6 +38,8 @@ export interface StudentSession {
   name: string;
   gradeLevel?: string;
   character?: string | null;
+  status?: string;
+  trialEndsAt?: string | null;
 }
 
 /**

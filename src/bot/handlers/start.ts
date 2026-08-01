@@ -32,6 +32,13 @@ export async function handleStart(ctx: Context, student: Student): Promise<void>
     return;
   }
 
+  // Deep-link: t.me/senangbelajar_bot?start=trial → start 7-day trial onboarding
+  if (/^trial$/i.test(startPayload)) {
+    const { handleTrialStart } = await import("./onboarding");
+    await handleTrialStart(ctx);
+    return;
+  }
+
   await ctx.reply(
     `${persona.emoji} *${persona.greeting}*\n\n` +
       `Aku siap bantu kamu belajar! Berikut yang bisa kamu lakukan:\n\n` +
