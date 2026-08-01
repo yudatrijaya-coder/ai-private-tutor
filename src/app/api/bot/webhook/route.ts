@@ -7,6 +7,19 @@ import { bot } from "@/bot/bot";
 // ── In-memory dedupe: update_id → expiry timestamp ───────────────────────────
 const dedupe = new Map<number, number>();
 const DEDUPE_TTL_MS = 60 * 60 * 1000; // 1 hour
+let commandMenuRegistered = false;
+
+/** Register the "/" command menu once per process (cheap, idempotent). */
+async function ensureCommandMenu(): Promise<void> {
+  if (commandMenuRegistered) return;
+  commandMenuRegistered = true;
+  try {
+    const { registerCommandMenu } = await import("@/bot/commands");
+    await registerCommandMenu(bot as any);
+  } catch (err) {
+    console.error("[webhook] registerCommandMenu failed:", err);
+  }
+}
 
 function dedupeCheck(updateId: number): boolean {
   const now = Date.now();
@@ -56,6 +69,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   if (update.update_id !== undefined && dedupeCheck(update.update_id)) {
     return NextResponse.json({ ok: true }); // already processed
   }
+
+  // ── 3.5 Register "/" command menu once per process ─────────────────────────
+  ensureCommandMenu().catch(() => {});
 
   // ── 4. Ack-first: always return 200 immediately ─────────────────────────────
   const ackResponse = NextResponse.json({ ok: true });

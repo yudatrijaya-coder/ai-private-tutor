@@ -2,7 +2,16 @@ import type { Context } from "telegraf";
 import type { Student } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import type { BotSession } from "./session";
-import { handleQuizAnswer, handleQuizCallback, QUIZ_ANS_PREFIX, QUIZ_EXIT_PREFIX } from "./handlers/quiz";
+import {
+  handleQuizAnswer,
+  handleQuizCallback,
+  handleSubjectCallback,
+  handleQuizPick,
+  QUIZ_ANS_PREFIX,
+  QUIZ_EXIT_PREFIX,
+  QUIZ_SUBJECT_PREFIX,
+  QUIZ_PICK_PREFIX,
+} from "./handlers/quiz";
 import { handlePhoto } from "./handlers/vision";
 import {
   handleOnboardingMessage,
@@ -56,13 +65,48 @@ export async function routeCallback(
   const data = ctx.callbackQuery.data;
 
   // Quiz answer/exit callbacks
-  if (data.startsWith(QUIZ_ANS_PREFIX) || data.startsWith(QUIZ_EXIT_PREFIX)) {
+  if (
+    data.startsWith(QUIZ_ANS_PREFIX) ||
+    data.startsWith(QUIZ_EXIT_PREFIX)
+  ) {
     const student = await findStudentByTelegramId(ctx);
     if (!student) {
       await ctx.answerCbQuery("Sesi tidak ditemukan. Ketik /start ya!").catch(() => {});
       return true;
     }
     return await handleQuizCallback(ctx, student);
+  }
+
+  // Subject picker callbacks
+  if (data.startsWith(QUIZ_SUBJECT_PREFIX)) {
+    const student = await findStudentByTelegramId(ctx);
+    if (!student) {
+      await ctx.answerCbQuery("Sesi tidak ditemukan.").catch(() => {});
+      return true;
+    }
+    const subject = data.slice(QUIZ_SUBJECT_PREFIX.length);
+    return await handleSubjectCallback(ctx, student, subject);
+  }
+
+  // Quiz pick callbacks
+  if (data.startsWith(QUIZ_PICK_PREFIX)) {
+    const student = await findStudentByTelegramId(ctx);
+    if (!student) {
+      await ctx.answerCbQuery("Sesi tidak ditemukan.").catch(() => {});
+      return true;
+    }
+    const quizId = data.slice(QUIZ_PICK_PREFIX.length);
+    return await handleQuizPick(ctx, student, quizId);
+  }
+
+  // Back to subject list
+  if (data === "quiz:back:subjects") {
+    const student = await findStudentByTelegramId(ctx);
+    if (!student) return true;
+    // Re-send the subject picker by calling handleQuizStart
+    const { handleQuizStart } = await import("./handlers/quiz");
+    await handleQuizStart(ctx as any, student);
+    return true;
   }
 
   // Onboarding callbacks

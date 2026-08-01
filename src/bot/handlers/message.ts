@@ -167,7 +167,7 @@ export async function onMessage(ctx: Context): Promise<void> {
           return;
         }
 
-        if ("text" in msg && msg.text?.trim() === "/start") {
+        if ("text" in msg && /^\/start(\s+|@\w+|$)/i.test(msg.text?.trim() ?? "")) {
           await handleStart(ctx, student);
           return;
         }

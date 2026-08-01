@@ -11,6 +11,10 @@ import { gradeAttempt } from "@/agents/assessment/grader";
 /** Callback data prefix for quiz answer buttons. */
 export const QUIZ_ANS_PREFIX = "quiz:ans:";
 export const QUIZ_EXIT_PREFIX = "quiz:exit";
+/** Callback data prefix for subject picker buttons. */
+export const QUIZ_SUBJECT_PREFIX = "quiz:subject:";
+/** Callback data prefix for quiz pick buttons. */
+export const QUIZ_PICK_PREFIX = "quiz:pick:";
 /** Minutes a quiz session stays alive without input. */
 const QUIZ_TIMEOUT_MIN = 10;
 
@@ -23,7 +27,10 @@ interface QuizQuestion {
 }
 
 /**
- * /quiz — find due quizzes for the student, pick one, start quiz session.
+ * /quiz — subject picker with spaced-repetition priority.
+ * Step 1: Show inline buttons per subject (due reviews first).
+ * Step 2: Show quiz list for selected subject.
+ * Step 3: Start selected quiz.
  */
 export async function handleQuizStart(
   ctx: Context,
@@ -31,14 +38,20 @@ export async function handleQuizStart(
 ): Promise<void> {
   const persona = getPersona(student.persona);
 
-  // Pick a quiz — prefer one not yet mastered (recent quiz order), else oldest
-  const quiz = await prisma.quiz.findFirst({
-    where: { studentId: student.id },
-    orderBy: { createdAt: "desc" },
-    include: { material: true },
-  });
+  // ── Step 1: Build subject list with due-review count ──
+  const [quizzes, dueReviews] = await Promise.all([
+    prisma.quiz.findMany({
+      where: { studentId: student.id },
+      include: { material: true },
+      orderBy: { createdAt: "desc" },
+    }),
+    prisma.reviewQueue.findMany({
+      where: { studentId: student.id, mastered: false },
+      select: { subject: true, id: true },
+    }),
+  ]);
 
-  if (!quiz) {
+  if (quizzes.length === 0) {
     await ctx.reply(
       `${persona.emoji} Wah, belum ada kuis untuk kamu nih, ${student.name}! ` +
         `Coba /materi dulu ya 📚`,
@@ -46,7 +59,125 @@ export async function handleQuizStart(
     return;
   }
 
-  // Start quiz session with timeout tracking
+  // Group by subject; annotate with due review count
+  const subjectMap = new Map<string, { dueCount: number; quizCount: number }>();
+  const quizSubjectMap = new Map<string, typeof quizzes>();
+
+  for (const q of quizzes) {
+    const subj = (q.material as any)?.subject || "Lainnya";
+    if (!quizSubjectMap.has(subj)) quizSubjectMap.set(subj, []);
+    quizSubjectMap.get(subj)!.push(q);
+    const cur = subjectMap.get(subj) ?? { dueCount: 0, quizCount: 0 };
+    subjectMap.set(subj, { ...cur, quizCount: cur.quizCount + 1 });
+  }
+
+  for (const r of dueReviews) {
+    const subj = r.subject || "Lainnya";
+    const cur = subjectMap.get(subj) ?? { dueCount: 0, quizCount: 0 };
+    subjectMap.set(subj, { ...cur, dueCount: cur.dueCount + 1 });
+  }
+
+  // Show subject picker
+  const subjectLines = [...subjectMap.entries()].sort((a, b) => b[1].dueCount - a[1].dueCount);
+  const subjectEmoji = (subj: string) => {
+    if (/matematika/i.test(subj)) return "🔢";
+    if (/indonesia|bahasa/i.test(subj)) return "📖";
+    if (/inggris/i.test(subj)) return "🌍";
+    if (/ipa|sains|biolog|fisika|kimia/i.test(subj)) return "🔬";
+    if (/ips|geografi|sosiologi|ekonomi|sejarah/i.test(subj)) return "🌏";
+    if (/pancasila/i.test(subj)) return "🇮🇩";
+    if (/pjok|olahraga/i.test(subj)) return "⚽";
+    if (/informatika/i.test(subj)) return "💻";
+    return "📚";
+  };
+
+  const keyboard: { text: string; callback_data: string }[][] = subjectLines.map(([subj, meta]) => {
+    const label = `${subjectEmoji(subj)} ${subj}${meta.dueCount > 0 ? ` 🔁(${meta.dueCount})` : ""}`;
+    return [{ text: label, callback_data: `${QUIZ_SUBJECT_PREFIX}${subj}` }];
+  });
+  keyboard.push([{ text: "🚪 Keluar", callback_data: QUIZ_EXIT_PREFIX }]);
+
+  const totalDue = dueReviews.length;
+  const intro = totalDue > 0
+    ? `🔁 *Pilih Mapel* — Ada *${totalDue}* soal yang perlu diulang!`
+    : `📚 *Pilih Mapel*`;
+
+  await ctx.reply(
+    intro + "\n\nPilih mapel yang mau dikerjakan:",
+    { parse_mode: "Markdown", reply_markup: { inline_keyboard: keyboard } },
+  );
+}
+
+/**
+ * Handle subject picker callback — show quiz list for that subject.
+ */
+export async function handleSubjectCallback(
+  ctx: Context,
+  student: Student,
+  subject: string,
+): Promise<boolean> {
+  const persona = getPersona(student.persona);
+
+  const quizzes = await prisma.quiz.findMany({
+    where: {
+      studentId: student.id,
+      material: { subject },
+    },
+    include: { material: true },
+    orderBy: { createdAt: "desc" },
+  });
+
+  if (quizzes.length === 0) {
+    await ctx.answerCbQuery(`Tidak ada kuis untuk ${subject}`);
+    return true;
+  }
+
+  // Check which quizzes have due reviews
+  const dueReviewQuizIds = new Set(
+    (
+      await prisma.reviewQueue.findMany({
+        where: { studentId: student.id, subject, mastered: false },
+        select: { quizId: true },
+      })
+    ).map((r) => r.quizId)
+  );
+
+  const keyboard: { text: string; callback_data: string }[][] = quizzes.slice(0, 10).map((q) => {
+    const dueBadge = dueReviewQuizIds.has(q.id) ? " 🔁" : "";
+    const topic = ((q.material as any)?.topic as string) || "";
+    const label = `${topic.slice(0, 40) || "Kuis " + q.id.slice(0, 6)}${dueBadge}`;
+    return [{ text: label, callback_data: `${QUIZ_PICK_PREFIX}${q.id}` }];
+  });
+  keyboard.push([{ text: "⬅️ Kembali", callback_data: "quiz:back:subjects" }]);
+  keyboard.push([{ text: "🚪 Keluar", callback_data: QUIZ_EXIT_PREFIX }]);
+
+  await ctx.answerCbQuery();
+  await ctx.editMessageText(
+    `📖 *${subject}* — pilih kuis:\n(🔁 = ada soal untuk diulang)`,
+    { parse_mode: "Markdown", reply_markup: { inline_keyboard: keyboard } },
+  );
+  return true;
+}
+
+/**
+ * Handle quiz pick callback — start the selected quiz.
+ */
+export async function handleQuizPick(
+  ctx: Context,
+  student: Student,
+  quizId: string,
+): Promise<boolean> {
+  const quiz = await prisma.quiz.findUnique({
+    where: { id: quizId, studentId: student.id },
+    include: { material: true },
+  });
+
+  if (!quiz) {
+    await ctx.answerCbQuery("Kuis tidak ditemukan");
+    return true;
+  }
+
+  // Start session
   await setSession(student.id, {
     currentMode: "quiz_active",
     context: {
@@ -54,10 +185,13 @@ export async function handleQuizStart(
       currentIndex: 0,
       answers: [],
       startedAt: Date.now(),
+      lastActivityAt: Date.now(),
     },
   });
 
+  await ctx.answerCbQuery("Mulai! 🎉");
   await sendQuestion(ctx, quiz, 0);
+  return true;
 }
 
 /**
@@ -74,10 +208,12 @@ export async function handleQuizAnswer(
     currentIndex: number;
     answers: { questionIndex: number; selectedIndex: number }[];
     startedAt?: number;
+    lastActivityAt?: number;
   };
 
-  // Timeout check
-  if (ctxData.startedAt && Date.now() - ctxData.startedAt > QUIZ_TIMEOUT_MIN * 60_000) {
+  // Idle timeout — 10 min since LAST answer (not since quiz start)
+  const idleMs = Date.now() - (ctxData.lastActivityAt ?? ctxData.startedAt ?? 0);
+  if (idleMs > QUIZ_TIMEOUT_MIN * 60_000) {
     await clearSession(student.id);
     await ctx.reply("⏰ Waktu kuis habis (10 menit tanpa jawaban). Ketik /quiz kalau mau lanjut lagi ya! 😊");
     return;
@@ -168,11 +304,20 @@ export async function handleQuizCallback(
     currentIndex: number;
     answers: { questionIndex: number; selectedIndex: number }[];
     startedAt?: number;
+    lastActivityAt?: number;
   };
 
   // Stale callback — session not in quiz
   if (session.currentMode !== "quiz_active" || !ctxData.quizId) {
     await ctx.answerCbQuery("Sesi kuis sudah berakhir. Ketik /quiz untuk mulai baru ya!");
+    return true;
+  }
+
+  // Idle timeout — 10 min since LAST answer (not since quiz start)
+  const idleMs = Date.now() - (ctxData.lastActivityAt ?? ctxData.startedAt ?? 0);
+  if (idleMs > QUIZ_TIMEOUT_MIN * 60_000) {
+    await clearSession(student.id);
+    await ctx.answerCbQuery("⏰ Sesi kuis berakhir (10 menit tanpa jawaban). Ketik /quiz lagi ya!");
     return true;
   }
 
@@ -216,6 +361,7 @@ async function recordAnswer(
     currentIndex: number;
     answers: { questionIndex: number; selectedIndex: number }[];
     startedAt?: number;
+    lastActivityAt?: number;
   },
   questionIndex: number,
   selectedIndex: number,
@@ -226,6 +372,7 @@ async function recordAnswer(
 
   // Persist answer
   ctxData.answers.push({ questionIndex, selectedIndex });
+  ctxData.lastActivityAt = Date.now();
   const isCorrect = selectedIndex === q.correctIndex;
   const correctText = q.options?.[q.correctIndex ?? -1] ?? q.correctAnswer ?? "?";
 
