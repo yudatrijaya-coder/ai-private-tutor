@@ -7,6 +7,7 @@ export default function StudentLoginPage() {
   const router = useRouter();
   const searchParams = new URLSearchParams(typeof window !== "undefined" ? window.location.search : "");
   const redirectTo = searchParams.get("redirect") || "/student";
+  const expired = searchParams.get("expired") === "trial";
   const [studentId, setStudentId] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -74,6 +75,19 @@ export default function StudentLoginPage() {
             Masukkan ID siswa dan password kamu
           </p>
         </div>
+
+        {expired && (
+          <div
+            className="text-sm px-3 py-2 rounded-lg"
+            style={{
+              backgroundColor: "#fff7ed",
+              color: "#c2410c",
+              border: "1px solid #fdba74",
+            }}
+          >
+            Masa trial 7 hari kamu sudah habis. Hubungi admin untuk upgrade ke akun penuh.
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Student ID */}

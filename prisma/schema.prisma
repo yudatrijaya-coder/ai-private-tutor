@@ -16,6 +16,7 @@ enum GradeLevel {
 enum StudentStatus {
   PENDING
   ACTIVE
+  TRIAL
   PAUSED
   ARCHIVED
 }
@@ -111,6 +112,9 @@ model Student {
   currentStreak       Int           @default(0)
   longestStreak       Int           @default(0)
   lastActivityDate    DateTime?     // date-only semantics, used for streak calc
+
+  // Trial
+  trialEndsAt         DateTime?     // set when status = TRIAL (7-day trial)
 
   createdAt           DateTime      @default(now())
   updatedAt           DateTime      @updatedAt

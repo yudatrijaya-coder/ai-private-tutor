@@ -42,6 +42,8 @@ export async function POST(request: Request) {
         gradeLevel: true,
         characterPreference: true,
         passwordHash: true,
+        status: true,
+        trialEndsAt: true,
       },
     });
 
@@ -81,6 +83,8 @@ export async function POST(request: Request) {
       name: student.name,
       gradeLevel: student.gradeLevel,
       character: student.characterPreference,
+      status: student.status,
+      trialEndsAt: student.trialEndsAt?.toISOString() ?? null,
     });
 
     return NextResponse.json({

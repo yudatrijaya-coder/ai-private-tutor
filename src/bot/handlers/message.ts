@@ -1,6 +1,6 @@
 import type { Context } from "telegraf";
 import { prisma } from "@/lib/prisma";
-import { getSession } from "../session";
+import { getSession, setSession } from "../session";
 import { routeByState } from "../state-machine";
 import { handleMessage } from "../agent/tutor";
 import { handleStart } from "./start";
@@ -77,6 +77,13 @@ export async function onMessage(ctx: Context): Promise<void> {
     const telegramId = String(ctx.from.id);
     const msg = ctx.message;
     const text = msg && "text" in msg ? (msg.text?.trim() ?? "") : "";
+
+    // ── Step 0: Deep-link onboarding (before any lookup) ──
+    if (text && /^\/start\s+trial$/i.test(text)) {
+      const { handleTrialStart } = await import("./onboarding");
+      await handleTrialStart(ctx);
+      return;
+    }
 
     // ── Step 1: Registration commands ──
     if (text) {
@@ -156,6 +163,29 @@ export async function onMessage(ctx: Context): Promise<void> {
       }
 
       const session = await getSession(student.id);
+
+      // ── Trial status check ──
+      if (student.status === "TRIAL" && student.trialEndsAt) {
+        const hoursLeft = (student.trialEndsAt.getTime() - Date.now()) / 36e5;
+        if (hoursLeft <= 0) {
+          await ctx.reply(
+            `⏰ Masa trial kamu sudah habis. Hubungi admin untuk upgrade ke akun penuh ya! 🙏`,
+          );
+          return;
+        }
+        if (hoursLeft <= 72 && !session.context?._trialWarned) {
+          await ctx.reply(
+            `⏰ Trial kamu tinggal *${Math.max(1, Math.ceil(hoursLeft / 24))} hari lagi*. ` +
+              `Kalau suka, hubungi admin untuk upgrade ke akun penuh! 🚀`,
+            { parse_mode: "Markdown" },
+          );
+          await setSession(student.id, {
+            currentMode: session.currentMode,
+            context: { ...session.context, _trialWarned: true },
+          });
+        }
+      }
+
       const handled = await routeByState(ctx, session, student);
 
       if (!handled) {

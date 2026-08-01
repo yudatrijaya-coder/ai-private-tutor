@@ -40,6 +40,7 @@ interface RegistrationData {
   intensiveDays: string[];
   interests?: string;
   studentId: string;
+  isTrial?: boolean;
 }
 
 // ─── In-memory store ──────────────────────────────────────────
@@ -174,11 +175,17 @@ async function stepConfirm(ctx: Context, data: RegistrationData): Promise<void> 
     `👤 Nama: *${data.name}*\n` +
     `📖 Kelas: *${GRADE_LABELS[data.grade] ?? data.grade}*\n` +
     `🎯 Karakter: *${data.character.replace("KAK_", "Kak ")}*\n` +
-    `📅 Hari belajar: ${daysText}\n\n` +
-    `Udah bener? Kalau iya, aku kirim ke admin buat disetujui ya! 🫶\n\n` +
+    `📅 Hari belajar: ${daysText}\n` +
+    `${data.isTrial ? "\n🎁 *Aktifkan trial 7 hari*\n" : ""}` +
+    `\nUdah bener? ${data.isTrial ? "Kamu bisa langsung mulai belajar!" : "Kirim ke admin buat disetujui ya!"} 🫶\n\n` +
     `Atau ketik /batal untuk ulang dari awal.`,
     { parse_mode: "Markdown" },
   );
+
+  if (data.isTrial) {
+    await approveTrialStudent(ctx, data);
+    return;
+  }
 
   await notifyAdmin(ctx, data);
 }
@@ -280,6 +287,54 @@ async function approveStudent(ctx: Context, data: RegistrationData): Promise<voi
   );
 }
 
+/**
+ * Auto-approve trial student (7 days) without admin intervention.
+ */
+async function approveTrialStudent(ctx: Context, data: RegistrationData): Promise<void> {
+  deleteSession(data.telegramId);
+
+  const trialEndsAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+  const newStudentId = await generateStudentId(data.name);
+
+  const student = await prisma.student.create({
+    data: {
+      studentId: newStudentId,
+      name: data.name,
+      gradeLevel: data.grade as any,
+      persona: data.character as any,
+      interests: data.interests,
+      scheduleConfig: { intensiveDays: data.intensiveDays, timezone: "Asia/Jakarta" },
+      telegramId: data.telegramId,
+      status: "TRIAL",
+      trialEndsAt,
+    },
+  });
+
+  await ctx.reply(
+    `🎉 *Selamat datang, ${data.name}!*\n\n` +
+    `Kamu sekarang bisa *coba gratis 7 hari*! 📚\n\n` +
+    `📖 Kelas: *${GRADE_LABELS[data.grade] ?? data.grade}*\n` +
+    `🎯 Tutor: *${data.character.replace("KAK_", "Kak ")}*\n` +
+    `⏰ Trial aktif sampai: *${trialEndsAt.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}*\n\n` +
+    `Lagi nyiapin kurikulum untukmu...`,
+    { parse_mode: "Markdown" },
+  );
+
+  const copied = await tryCopyFromTemplate(student.id, data.grade as any);
+  if (!copied) {
+    const { generateCurriculumDraft } = await import("@/agents/curriculum");
+    await generateCurriculumDraft(student.id);
+  }
+
+  await createInitialSchedule(student.id, data.intensiveDays ?? []);
+
+  await ctx.reply(
+    `Siap! Sekarang kamu bisa:\n` +
+    `📚 /materi — Lihat materi\n📝 /quiz — Kerjakan kuis\n📅 /jadwal — Jadwal belajar\n❓ /help — Bantuan\n\n` +
+    `Kalau suka, nanti admin bisa bantu upgrade ke akun penuh ya! 💪🔥`,
+  );
+}
+
 // ─── Entry point: /daftar ─────────────────────────────────────
 
 export async function handleOnboardingStart(ctx: Context): Promise<void> {
@@ -289,7 +344,7 @@ export async function handleOnboardingStart(ctx: Context): Promise<void> {
   const existing = await prisma.student.findFirst({
     where: {
       telegramId,
-      status: { in: ["ACTIVE", "PENDING"] as any },
+      status: { in: ["ACTIVE", "PENDING", "TRIAL"] as any },
     },
   });
 
@@ -313,6 +368,45 @@ export async function handleOnboardingStart(ctx: Context): Promise<void> {
   });
 
   await stepName(ctx);
+}
+
+/**
+ * /start trial — auto-approve 7-day trial after same onboarding questions.
+ */
+export async function handleTrialStart(ctx: Context): Promise<void> {
+  const telegramId = String(ctx.from!.id);
+
+  const existing = await prisma.student.findFirst({
+    where: {
+      telegramId,
+      status: { in: ["ACTIVE", "PENDING", "TRIAL"] as any },
+    },
+  });
+
+  if (existing) {
+    await ctx.reply(
+      `Kamu sudah terdaftar sebagai *${existing.name}* 🙋\n\nKetik /start untuk mulai belajar.`,
+      { parse_mode: "Markdown" },
+    );
+    return;
+  }
+
+  setSession(telegramId, {
+    state: "registering_name",
+    telegramId,
+    name: "",
+    grade: "",
+    character: "",
+    intensiveDays: [],
+    studentId: `STU_${Date.now().toString(36).toUpperCase()}`,
+    isTrial: true,
+  });
+
+  await ctx.reply(
+    `🎁 *Coba 7 Hari Gratis!*\n\n` +
+      `Ayo kenalan dulu. Siapa nama kamu? 🧒`,
+    { parse_mode: "Markdown" },
+  );
 }
 
 // ─── Route text messages during registration ──────────────────
