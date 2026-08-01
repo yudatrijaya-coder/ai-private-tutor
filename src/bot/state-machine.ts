@@ -1,7 +1,8 @@
 import type { Context } from "telegraf";
 import type { Student } from "@/generated/prisma/client";
+import { prisma } from "@/lib/prisma";
 import type { BotSession } from "./session";
-import { handleQuizAnswer } from "./handlers/quiz";
+import { handleQuizAnswer, handleQuizCallback, QUIZ_ANS_PREFIX, QUIZ_EXIT_PREFIX } from "./handlers/quiz";
 import { handlePhoto } from "./handlers/vision";
 import {
   handleOnboardingMessage,
@@ -54,10 +55,34 @@ export async function routeCallback(
 
   const data = ctx.callbackQuery.data;
 
+  // Quiz answer/exit callbacks
+  if (data.startsWith(QUIZ_ANS_PREFIX) || data.startsWith(QUIZ_EXIT_PREFIX)) {
+    const student = await findStudentByTelegramId(ctx);
+    if (!student) {
+      await ctx.answerCbQuery("Sesi tidak ditemukan. Ketik /start ya!").catch(() => {});
+      return true;
+    }
+    return await handleQuizCallback(ctx, student);
+  }
+
   // Onboarding callbacks
   if (data.startsWith("onboard_") || data.startsWith("approve:") || data.startsWith("reject:")) {
     return await handleOnboardingCallback(ctx);
   }
 
   return false;
+}
+
+/** Resolve the student behind a callback query (message sender or inline message). */
+async function findStudentByTelegramId(ctx: Context): Promise<Student | null> {
+  const from = ctx.callbackQuery?.from;
+  if (!from) return null;
+  try {
+    return await prisma.student.findUnique({
+      where: { telegramId: String(from.id) },
+    });
+  } catch (err) {
+    console.error("[state-machine] findStudentByTelegramId error:", err);
+    return null;
+  }
 }
