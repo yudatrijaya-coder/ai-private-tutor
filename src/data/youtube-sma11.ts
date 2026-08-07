@@ -218,13 +218,13 @@ export const YOUTUBE_SMA11: YouTubeResource[] = [
     title: "Materi Cerpen Kelas XI Kurikulum Merdeka",
     url: "https://www.youtube.com/watch?v=RgYiIAkq7D8",
     channel: "AnggaraPM",
-    topic: "Novel",
+    topic: "Cerita Pendek",
   },
   {
     title: "Unsur Intrinsik & Ekstrinsik Drama",
     url: "https://www.youtube.com/watch?v=JXygZE1VcIg",
     channel: "Galeri Bahasa",
-    topic: "Novel",
+    topic: "Drama",
   },
 
   // Bahasa Indonesia — Drama (2 video)
@@ -299,9 +299,9 @@ export const YOUTUBE_SMA11: YouTubeResource[] = [
     topic: "Discussion",
   },
   {
-    title: "Bahasa Inggris Kelas 11: Analytical Exposition Text - Definition and Purpose",
-    url: "https://www.youtube.com/watch?v=IFfqduemQV4",
-    channel: "Pahamify",
+    title: "DISCUSSION TEXT: Bahasa Inggris Peminatan SMA",
+    url: "https://www.youtube.com/watch?v=Tofk2V03mI4",
+    channel: "JustSpeak English Club",
     topic: "Discussion",
   },
 
@@ -337,9 +337,9 @@ export const YOUTUBE_SMA11: YouTubeResource[] = [
 
   // Ekonomi — Permintaan dan Penawaran (2 video)
   {
-    title: "Permintaan dan Penawaran | Ekonomi Kelas X SMA/MA | EDURAYA MENGAJAR",
-    url: "https://www.youtube.com/watch?v=JYp70RQnDwM",
-    channel: "Eduraya Teknologi",
+    title: "Permintaan dan Penawaran | Ekonomi Kelas XI SMA Kurikulum Merdeka",
+    url: "https://www.youtube.com/watch?v=nA5b6cxd0mA",
+    channel: "eco.project",
     topic: "Permintaan dan Penawaran",
   },
   {
@@ -509,7 +509,7 @@ export const YOUTUBE_SMA11: YouTubeResource[] = [
 
   // Sosiologi — Interaksi Sosial (2 video)
   {
-    title: "Interaksi sosial di masyarakat | Sosiologi Kelas 10 - EDURAYA MENGAJAR",
+    title: "Interaksi Sosial di Masyarakat | Sosiologi SMA - Eduraya Mengajar",
     url: "https://www.youtube.com/watch?v=ushsEHIzvTY",
     channel: "Eduraya Teknologi",
     topic: "Interaksi Sosial",
@@ -543,15 +543,15 @@ export const YOUTUBE_SMA11: YouTubeResource[] = [
     topic: "Konflik",
   },
   {
-    title: "Sosiologi Kelas 11 - Bab 3 Konflik Sosial Kurikulum Merdeka",
-    url: "https://www.youtube.com/watch?v=cTE992WmsOc",
-    channel: "Edu Kelas",
+    title: "Materi Sosiologi SMA Kelas XI Bab 3 Konflik Sosial (Kurikulum Merdeka)",
+    url: "https://www.youtube.com/watch?v=I6i3Mrs1T5o",
+    channel: "Sosiologi 79",
     topic: "Konflik",
   },
   {
-    title: "Integrasi Sosial - Sosiologi Kelas 11 (Quipper Video)",
-    url: "https://www.youtube.com/watch?v=95MWVOIcekQ",
-    channel: "Quipper Indonesia",
+    title: "Materi Konflik Sosial Kelas XI Kurikulum Merdeka",
+    url: "https://www.youtube.com/watch?v=V02y9eB2ZfY",
+    channel: "Literasi untuk Indonesia",
     topic: "Konflik",
   },
 
@@ -563,9 +563,9 @@ export const YOUTUBE_SMA11: YouTubeResource[] = [
     topic: "Perubahan Sosial",
   },
   {
-    title: "Apa itu Globalisasi | Sosiologi Kelas 12 - EDURAYA MENGAJAR",
-    url: "https://www.youtube.com/watch?v=eUBRVWQIF2s",
-    channel: "Eduraya Teknologi",
+    title: "Bentuk Bentuk Perubahan Sosial - Sosiologi",
+    url: "https://www.youtube.com/watch?v=TEKY6bqsf1w",
+    channel: "Channel Edukasi EKSIS",
     topic: "Perubahan Sosial",
   },
 
@@ -635,9 +635,9 @@ export const YOUTUBE_SMA11: YouTubeResource[] = [
 
   // PJOK — Pola Hidup Sehat (2 video)
   {
-    title: "Jenis-jenis Napza (narkotika, psikotropika, zat adiktif)",
-    url: "https://www.youtube.com/watch?v=j4XKhD2DzyE",
-    channel: "Biologi Tv",
+    title: "Materi Pola Hidup Sehat - Mapel PJOK Kelas XI Semester 2 SMA Negeri 4 Pekalongan",
+    url: "https://www.youtube.com/watch?v=G8aJshNNYuE",
+    channel: "SMA Negeri 4 Pekalongan",
     topic: "Pola Hidup Sehat",
   },
   {
