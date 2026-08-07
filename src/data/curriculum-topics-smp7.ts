@@ -84,7 +84,7 @@ export const GRADE_TOPICS_SMP7: Record<string, TopicEntry[]> = {
     { subject: "Informatika", topic: "Berpikir Komputasional", subTopic: "Dasar Berpikir Komputasional", weekOrder: 1, priority: 9 },
     { subject: "Informatika", topic: "Algoritma", subTopic: "Algoritma dan Pemrograman", weekOrder: 2, priority: 8 },
     { subject: "Informatika", topic: "Internet", subTopic: "Jaringan Internet", weekOrder: 3, priority: 7 },
-    { subject: "Informatika", topic: "Keamanan", subTopic: "Keamanan Data dan Privasi", weekOrder: 4, priority: 6 },
+    { subject: "Informatika", topic: "Keamanan Digital", subTopic: "Keamanan Data dan Privasi", weekOrder: 4, priority: 6 },
     { subject: "Informatika", topic: "Dampak Sosial", subTopic: "Dampak Teknologi Informasi", weekOrder: 5, priority: 6 },
 
     // ═══ Pendidikan Pancasila — 5 Bab, 20 sub-topik ═══

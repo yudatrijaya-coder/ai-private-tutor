@@ -199,23 +199,23 @@ export const YOUTUBE_SMP7: YouTubeResource[] = [
     topic: "Hal Baik bagi Tubuh",
   },
   {
-    title: "Teks Prosedur Bahasa Indonesia Kelas 7 SMP Kurikulum Merdeka",
-    url: "https://www.youtube.com/watch?v=OZAdSVoMnh4",
-    channel: "Dian Sri Utami",
+    title: "Materi PJOK Kelas 7 Kebugaran Untuk Kesehatan Kurikulum Merdeka",
+    url: "https://www.youtube.com/watch?v=P4fukAAGeuQ",
+    channel: "Pak Okta OK",
     topic: "Hal Baik bagi Tubuh",
   },
 
   // Bahasa Indonesia — Pelindung Bumi (2 video)
   {
-    title: "Kurikulum Merdeka Rangkuman Bahasa Indonesia Kelas 7 Bab 4 Teks Berita",
-    url: "https://www.youtube.com/watch?v=3DWxApUbrD4",
-    channel: "Portal Edukasi",
+    title: "Atmosfer || Lapisan Bumi || IPA SMP Kelas 7",
+    url: "https://www.youtube.com/watch?v=6j0DN7U_6Og",
+    channel: "Belajar online bersama Bu Fitri",
     topic: "Pelindung Bumi",
   },
   {
-    title: "Materi Teks Berita | Bahasa Indonesia Kelas 7 Kurikulum Merdeka",
-    url: "https://www.youtube.com/watch?v=j5rVVM_55z4",
-    channel: "Literasi untuk Indonesia",
+    title: "LAPISAN BUMI ATMOSFER IPA KELAS 7 SMP",
+    url: "https://www.youtube.com/watch?v=Px2Pn9XpBJU",
+    channel: "Mentor ASN",
     topic: "Pelindung Bumi",
   },
 
@@ -453,18 +453,18 @@ export const YOUTUBE_SMP7: YouTubeResource[] = [
     topic: "Internet",
   },
 
-  // Informatika — Keamanan (2 video)
+  // Informatika — Keamanan Digital / Dampak Sosial (2 video)
   {
     title: "Informasi Pribadi dan Data Privasi Pada Media Sosial - Informatika",
     url: "https://www.youtube.com/watch?v=9JmAZeURp3o",
     channel: "Channel Edukasi EKSIS",
-    topic: "Keamanan",
+    topic: "Keamanan Digital",
   },
   {
     title: "Informatika Kelas 7 - Bab 5 | Koneksi Aman & Enkripsi",
     url: "https://www.youtube.com/watch?v=I6YHzi5m1oY",
     channel: "Belajar Ngelmu",
-    topic: "Keamanan",
+    topic: "Keamanan Digital",
   },
 
   // Informatika — Dampak Sosial (2 video)
