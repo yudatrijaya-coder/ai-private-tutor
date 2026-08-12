@@ -13,6 +13,7 @@ import type {
 
 import { generateQuiz } from "./generator";
 import { gradeAttempt } from "./grader";
+import { analyzeExamAttempt } from "@/services/improvement-analysis";
 
 /* ------------------------------------------------------------------ */
 /*  assessment:generate — creates a quiz or exam for a student          */
@@ -107,4 +108,24 @@ export async function processAssessmentEvaluate(
       `score=${result.score}/${result.maxScore} ` +
       `mastery=${result.masteryAfter?.toFixed(2) ?? "N/A"}`,
   );
+}
+
+/* ------------------------------------------------------------------ */
+/*  improvement:analyze — runs AI analysis for an exam attempt         */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Process an improvement analysis job.
+ *
+ * Payload:
+ *   - attemptId — the completed exam attempt
+ */
+export async function processImprovementAnalysis(
+  job: Job<any, unknown, string>,
+): Promise<void> {
+  const { attemptId } = job.data;
+
+  console.log(`[assessment/worker] Analyzing attempt=${attemptId}`);
+  await analyzeExamAttempt(attemptId);
+  console.log(`[assessment/worker] Analysis complete for attempt=${attemptId}`);
 }

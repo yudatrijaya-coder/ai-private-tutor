@@ -17,7 +17,7 @@ export async function register() {
   const { processCurriculumReviewJob } = await import(
     "@/agents/curriculum/worker"
   );
-  const { processAssessmentGenerate, processAssessmentEvaluate } =
+  const { processAssessmentGenerate, processAssessmentEvaluate, processImprovementAnalysis } =
     await import("@/agents/assessment/worker");
   const { processMediaRender, processMediaYtFallback } = await import(
     "@/agents/media/worker"
@@ -34,6 +34,7 @@ export async function register() {
     "curriculum-review": processCurriculumReviewJob as any,
     "assessment-generate": processAssessmentGenerate as any,
     "assessment-evaluate": processAssessmentEvaluate as any,
+    "improvement-analysis": processImprovementAnalysis as any,
     "media-render": processMediaRender as any,
     "media-yt-fallback": processMediaYtFallback as any,
     "guardian-report": processGuardianReportJob as any,
@@ -54,6 +55,7 @@ export async function register() {
       "curriculum-review": (data) => processCurriculumReviewJob({ data, id: "local", name: "curriculum-review" } as any),
       "assessment-generate": (data) => processAssessmentGenerate({ data, id: "local", name: "assessment-generate" } as any),
       "assessment-evaluate": (data) => processAssessmentEvaluate({ data, id: "local", name: "assessment-evaluate" } as any),
+      "improvement-analysis": (data) => processImprovementAnalysis({ data, id: "local", name: "improvement-analysis" } as any),
       "media-render": (data) => processMediaRender({ data, id: "local", name: "media-render" } as any),
       "media-yt-fallback": (data) => processMediaYtFallback({ data, id: "local", name: "media-yt-fallback" } as any),
       "guardian-report": (data) => processGuardianReportJob({ data, id: "local", name: "guardian-report" } as any),

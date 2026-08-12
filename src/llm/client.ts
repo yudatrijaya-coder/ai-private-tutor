@@ -114,7 +114,7 @@ const MODEL_PRICING: Record<string, ModelPricing> = {
 // ─── Daily Token Budget ───────────────────────────────────────
 
 /** Max total tokens a single student may consume per calendar day. */
-export const DAILY_TOKEN_CAP = 100_000;
+export const DAILY_TOKEN_CAP = 1_000_000;
 
 /** Friendly reply returned to the student once the daily cap is hit. */
 export const BUDGET_EXCEEDED_FALLBACK =

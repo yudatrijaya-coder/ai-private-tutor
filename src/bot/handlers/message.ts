@@ -192,6 +192,16 @@ export async function onMessage(ctx: Context): Promise<void> {
         const msg = ctx.message;
         if (!msg) return;
 
+        if ("text" in msg && /^(apa id saya\??|id saya berapa\??|mana id saya\??)$/i.test(msg.text?.trim() ?? "")) {
+          await ctx.reply(
+            `Halo, *${student.name}!* ID siswa kamu adalah: \`${student.studentId}\`\n\n` +
+              `Kamu bisa gunakan ID ini untuk login ke dashboard belajar di ` +
+              `[senangbelajar.web.id/student](https://senangbelajar.web.id/student) ya!`,
+            { parse_mode: "Markdown" },
+          );
+          return;
+        }
+
         if ("text" in msg && /^\/(quiz|kuis)$/i.test(msg.text?.trim() ?? "")) {
           await handleQuizStart(ctx, student);
           return;
