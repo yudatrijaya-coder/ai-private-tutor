@@ -17,6 +17,7 @@ import { getStudentSession } from "@/lib/auth/student";
 export async function GET() {
   const session = await getStudentSession();
   if (!session) {
+    console.error("[Gamification] No session:", { cookies: "received" });
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

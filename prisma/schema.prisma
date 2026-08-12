@@ -135,6 +135,9 @@ model Student {
   studySessions  StudySession[]
   badges         StudentBadge[]
   reviewQueue    ReviewQueue[]
+  examAttempts   ExamAttempt[]
+  improvementPlans ImprovementPlan[]
+  topicMasteries TopicMastery[]
 }
 
 model CharacterImage {
@@ -469,6 +472,44 @@ model StudentSubjectMastery {
   @@index([studentId])
 }
 
+model TopicMastery {
+  id          String   @id @default(uuid())
+
+  studentId   String
+  subject     String
+  topic       String
+  subTopic    String?  // optional granular sub-topic
+
+  // Quiz stats
+  quizAttempts   Int @default(0)
+  quizScoreSum   Int @default(0)
+  quizScoreMax   Int @default(0)
+
+  // Exam stats
+  examAttempts   Int @default(0)
+  examScoreSum   Int @default(0)
+  examScoreMax   Int @default(0)
+
+  // Computed scores (0-100)
+  mastery         Float @default(0.0)  // Overall mastery %
+  confidenceScore Float @default(0.0)  // Speed × accuracy index
+  weaknessLevel   String @default("none") // "none" | "mild" | "moderate" | "severe"
+
+  lastAttemptAt DateTime @default(now())
+  streakDays    Int      @default(0)   // Consecutive days practiced
+  streakUpdatedAt DateTime?
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  student      Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, subject, topic, subTopic])
+  @@index([studentId])
+  @@index([studentId, subject])
+  @@index([weaknessLevel])
+}
+
 model Reminder {
   id          String    @id @default(uuid())
   studentId   String
@@ -587,6 +628,7 @@ model User {
   sessions Session[]
 }
 
+
 model VerificationToken {
   identifier String
   token      String   @unique
@@ -595,3 +637,74 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+
+// NEW MODELS FOR EXAM SYSTEM
+
+model Exam {
+  id          String    @id @default(uuid())
+  title       String    // e.g., "Post-test Modul Tata Surya" atau "Pre-test IPA SMP 1"
+  type        String    // "PRE_TEST" | "POST_TEST"
+  subject     String    // "IPA", "Matematika"
+  gradeLevel  GradeLevel
+  materialId  String?   // Jika POST_TEST, terikat ke material tertentu
+  maxScore    Int       @default(100) // cached, computed as questions.length * 100
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  questions   ExamQuestion[]
+  attempts    ExamAttempt[]
+
+  @@index([gradeLevel, subject])
+}
+
+model ExamQuestion {
+  id            String   @id @default(uuid())
+  examId        String
+  topic         String   // e.g., "Tata Surya" -> Untuk mapping kelemahan
+  subTopic      String?
+  question      String
+  options       Json     // Array string
+  correctAnswer String
+  explanation   String
+  difficulty    String   // "EASY" | "MEDIUM" | "HARD"
+  createdAt     DateTime @default(now())
+
+  exam          Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+
+  @@index([examId])
+}
+
+model ExamAttempt {
+  id              String         @id @default(uuid())
+  studentId       String
+  examId          String
+  score           Float
+  maxScore        Float          @default(100)
+  details         Json           // { answered: [...], timeSpentMs: [...], weaknesses: { "Rotasi Bumi": "HARD_FAILED" } }
+  timeSpent       Int?           // total seconds spent on the exam
+  status          String         // "IN_PROGRESS" | "COMPLETED" | "ANALYZED"
+  createdAt       DateTime       @default(now())
+
+  student         Student        @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  exam            Exam           @relation(fields: [examId], references: [id], onDelete: Cascade)
+  improvementPlan ImprovementPlan?
+
+  @@index([studentId])
+  @@index([examId])
+}
+
+model ImprovementPlan {
+  id             String   @id @default(uuid())
+  attemptId      String   @unique
+  studentId      String
+  aiNarrative    String   // Evaluasi deskriptif dari LLM
+  recommendedSch Json     // Rekomendasi jadwal baru terstruktur
+  status         String   // "DRAFT" | "APPLIED" (Bisa di-review dulu jika perlu)
+  createdAt      DateTime @default(now())
+
+  attempt        ExamAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  student        Student     @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+}
