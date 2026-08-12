@@ -145,7 +145,7 @@ async function main() {
   const fileData = [];
   for (const f of files) {
     try {
-      const content = fs.readFileSync(path.join(dir, f), 'utf8');
+      const content = fs.readFileSync(path.join(__dirname, '..', dir, f), 'utf8');
       const matches = [...content.matchAll(/https?:\/\/(?:www\.)?(?:youtu\.be\/|youtube\.com\/watch\?v=)([a-zA-Z0-9_-]{11})/g)];
       for (const m of matches) {
         urlEntries.set(m[0], { url: m[0], vidId: m[1], file: f });

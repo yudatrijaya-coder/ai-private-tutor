@@ -109,7 +109,7 @@ PENTING:
       ], {
         temperature: 0.7,
         maxTokens: 8192,
-        timeoutMs: 180_000,
+        timeoutMs: 600_000,
         studentId,
       });
     } catch (err) {

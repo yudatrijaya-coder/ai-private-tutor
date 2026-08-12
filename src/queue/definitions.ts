@@ -14,6 +14,7 @@ export const QUEUES = {
   GUARDIAN_REPORT: { name: "guardian-report", concurrency: 1 },
   SCHEDULER_ASSIGN: { name: "scheduler-assign", concurrency: 1 },
   SCHEDULER_REMINDER: { name: "scheduler-reminder", concurrency: 3 },
+  IMPROVEMENT_ANALYSIS: { name: "improvement-analysis", concurrency: 1 },
 } as const;
 
 /** Union type of all queue name strings. */
@@ -81,6 +82,10 @@ export interface SchedulerReminderJobPayload {
   sessionId: string;
 }
 
+export interface ImprovementAnalysisJobPayload {
+  attemptId: string;
+}
+
 /** Discriminated union of every job payload — used for type-safe processors. */
 export type JobPayload =
   | { queue: typeof QUEUES.CONTENT_SCRAPE; data: ScrapeJobPayload }
@@ -91,7 +96,8 @@ export type JobPayload =
   | { queue: typeof QUEUES.ASSESSMENT_EVALUATE; data: AssessmentEvaluateJobPayload }
   | { queue: typeof QUEUES.GUARDIAN_REPORT; data: GuardianReportJobPayload }
   | { queue: typeof QUEUES.SCHEDULER_ASSIGN; data: SchedulerAssignJobPayload }
-  | { queue: typeof QUEUES.SCHEDULER_REMINDER; data: SchedulerReminderJobPayload };
+  | { queue: typeof QUEUES.SCHEDULER_REMINDER; data: SchedulerReminderJobPayload }
+  | { queue: typeof QUEUES.IMPROVEMENT_ANALYSIS; data: ImprovementAnalysisJobPayload };
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
@@ -112,6 +118,7 @@ export function queueNameToAgentType(queueName: QueueName): AgentType {
     "guardian-report": "GUARDIAN" as AgentType,
     "scheduler-assign": "SCHEDULER" as AgentType,
     "scheduler-reminder": "SCHEDULER" as AgentType,
+    "improvement-analysis": "ASSESSMENT" as AgentType,
   };
   return map[queueName];
 }

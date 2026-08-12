@@ -199,7 +199,7 @@ export const YOUTUBE_SMA11: YouTubeResource[] = [
     topic: "Teks Argumentasi",
   },
 
-  // Bahasa Indonesia — Cerita Pendek (2 video)
+  // Bahasa Indonesia — Cerita Pendek (3 video)
   {
     title: "Materi Teks Cerita Pendek SMA/SMK Kelas 11 | Bahasa Indonesia",
     url: "https://www.youtube.com/watch?v=kiuspGbe5S4",
@@ -212,19 +212,11 @@ export const YOUTUBE_SMA11: YouTubeResource[] = [
     channel: "Bestari-id",
     topic: "Cerita Pendek",
   },
-
-  // Bahasa Indonesia — Novel (2 video)
-  {
-    title: "Materi Cerpen Kelas XI Kurikulum Merdeka",
-    url: "https://www.youtube.com/watch?v=RgYiIAkq7D8",
-    channel: "AnggaraPM",
-    topic: "Cerita Pendek",
-  },
   {
     title: "Unsur Intrinsik & Ekstrinsik Drama",
     url: "https://www.youtube.com/watch?v=JXygZE1VcIg",
     channel: "Galeri Bahasa",
-    topic: "Drama",
+    topic: "Cerita Pendek",
   },
 
   // Bahasa Indonesia — Drama (2 video)
@@ -507,18 +499,18 @@ export const YOUTUBE_SMA11: YouTubeResource[] = [
     topic: "Sosiologi Dasar",
   },
 
-  // Sosiologi — Interaksi Sosial (2 video)
+  // Sosiologi — Masalah Sosial (2 video)
   {
-    title: "Interaksi Sosial di Masyarakat | Sosiologi SMA - Eduraya Mengajar",
-    url: "https://www.youtube.com/watch?v=ushsEHIzvTY",
-    channel: "Eduraya Teknologi",
-    topic: "Interaksi Sosial",
+    title: "Rangkuman Materi Sosiologi Kelas 11 SMA Kurikulum Merdeka | BAB 1 Masalah Sosial (Edisi Revisi 2024)",
+    url: "https://www.youtube.com/watch?v=e-OzEccWDFA",
+    channel: "Indra Edu",
+    topic: "Masalah Sosial",
   },
   {
-    title: "Tindakan & Interaksi Sosial : Pengertian Interaksi Sosial - Sosiologi",
-    url: "https://www.youtube.com/watch?v=KYd-glb289s",
-    channel: "Edcent",
-    topic: "Interaksi Sosial",
+    title: "Pengertian Masalah Sosial, Faktor Penyebab & Kriteria untuk Menentukannya | Sosiologi Kelas 11",
+    url: "https://www.youtube.com/watch?v=Xi0DR2GGs4o",
+    channel: "Eduraya Teknologi",
+    topic: "Masalah Sosial",
   },
 
   // Sosiologi — Stratifikasi (2 video)

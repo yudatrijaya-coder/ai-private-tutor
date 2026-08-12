@@ -6,7 +6,7 @@ import { handleQuizStart } from "./quiz";
 /**
  * /start — admission check.
  * If the student's telegramId is in DB they can proceed;
- * otherwise ask them to register via a parent.
+ * otherwise show welcome screen.
  *
  * Deep links: /start quiz → auto-open the quiz picker.
  */
@@ -15,9 +15,13 @@ export async function handleStart(ctx: Context, student: Student): Promise<void>
 
   if (!student.telegramId) {
     await ctx.reply(
-      `Halo! Sepertinya kamu belum terdaftar. 🤔\n\n` +
-        `Minta orang tua / wali kamu untuk mendaftarkan kamu dulu ya. ` +
-        `Kakak ${persona.displayName} tunggu! 🫶`,
+      `👋 *Halo! Selamat Datang di GuruAI Senang Belajar!*\n\n` +
+      `Aku siap menemani kamu belajar dengan cara yang asyik dan personal. ` +
+      `Kita punya kurikulum khusus yang disesuaikan buat kamu.\n\n` +
+      `Untuk mulai belajar, silakan daftar dulu ya:\n` +
+      `👉 Ketik /daftar untuk mendaftar akun baru\n\n` +
+      `Sudah punya akun? Hubungi admin untuk aktivasi. 🫶`,
+      { parse_mode: "Markdown" },
     );
     return;
   }

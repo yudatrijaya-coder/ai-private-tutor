@@ -248,6 +248,8 @@ async function approveStudent(ctx: Context, data: RegistrationData): Promise<voi
   deleteSession(data.telegramId);
 
   const newStudentId = await generateStudentId(data.name);
+  const DEFAULT_PASSWORD = "belajar123";
+  const passwordHash = await bcrypt.hash(DEFAULT_PASSWORD, 10);
 
   const student = await prisma.student.create({
     data: {
@@ -259,13 +261,18 @@ async function approveStudent(ctx: Context, data: RegistrationData): Promise<voi
       scheduleConfig: { intensiveDays: data.intensiveDays },
       telegramId: data.telegramId,
       status: "ACTIVE",
+      passwordHash,
     },
   });
 
   await ctx.reply(
-    `🎉 *Selamat datang, ${data.name}!* Kamu udah terdaftar!\n\n` +
+    `🎉 *Selamat datang, ${data.name}!* Akun kamu sudah aktif!\n\n` +
     `📖 Kelas: *${GRADE_LABELS[data.grade] ?? data.grade}*\n` +
     `🎯 Tutor: *${data.character.replace("KAK_", "Kak ")}*\n\n` +
+    `🔑 *Kredensial Login Dashboard Kamu:*\n` +
+    `🆔 ID Siswa: \`${newStudentId}\`\n` +
+    `🔒 Password: \`belajar123\`\n\n` +
+    `🌐 *Link Dashboard:* https://senangbelajar.web.id/student\n\n` +
     `Lagi nyiapin kurikulum untukmu... 📚`,
     { parse_mode: "Markdown" },
   );
@@ -286,15 +293,13 @@ async function approveStudent(ctx: Context, data: RegistrationData): Promise<voi
     `Semangat belajarnya! 💪🔥`,
   );
 }
-
-/**
- * Auto-approve trial student (7 days) without admin intervention.
- */
 async function approveTrialStudent(ctx: Context, data: RegistrationData): Promise<void> {
   deleteSession(data.telegramId);
 
   const trialEndsAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
   const newStudentId = await generateStudentId(data.name);
+  const DEFAULT_PASSWORD = "belajar123";
+  const passwordHash = await bcrypt.hash(DEFAULT_PASSWORD, 10);
 
   const student = await prisma.student.create({
     data: {
@@ -307,15 +312,19 @@ async function approveTrialStudent(ctx: Context, data: RegistrationData): Promis
       telegramId: data.telegramId,
       status: "TRIAL",
       trialEndsAt,
+      passwordHash,
     },
   });
 
   await ctx.reply(
-    `🎉 *Selamat datang, ${data.name}!*\n\n` +
-    `Kamu sekarang bisa *coba gratis 7 hari*! 📚\n\n` +
+    `🎉 *Selamat datang, ${data.name}!* Akun trial 7 hari kamu sudah aktif! 📚\n\n` +
     `📖 Kelas: *${GRADE_LABELS[data.grade] ?? data.grade}*\n` +
     `🎯 Tutor: *${data.character.replace("KAK_", "Kak ")}*\n` +
     `⏰ Trial aktif sampai: *${trialEndsAt.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}*\n\n` +
+    `🔑 *Kredensial Login Dashboard Kamu:*\n` +
+    `🆔 ID Siswa: \`${newStudentId}\`\n` +
+    `🔒 Password: \`belajar123\`\n\n` +
+    `🌐 *Link Dashboard:* https://senangbelajar.web.id/student\n\n` +
     `Lagi nyiapin kurikulum untukmu...`,
     { parse_mode: "Markdown" },
   );
@@ -327,6 +336,21 @@ async function approveTrialStudent(ctx: Context, data: RegistrationData): Promis
   }
 
   await createInitialSchedule(student.id, data.intensiveDays ?? []);
+
+  // Notify admin
+  const adminId = process.env.ADMIN_TELEGRAM_ID;
+  if (adminId) {
+    await bot?.telegram.sendMessage(
+      adminId,
+      `🆕 *Trial Baru Terdaftar!*\n\n` +
+      `👤 Nama: *${data.name}*\n` +
+      `📖 Kelas: *${GRADE_LABELS[data.grade] ?? data.grade}*\n` +
+      `🆔 ID Siswa: \`${newStudentId}\`\n` +
+      `⏰ Trial s/d: *${trialEndsAt.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}*\n\n` +
+      `Siswa sudah langsung aktif — tidak perlu approval.`,
+      { parse_mode: "Markdown" }
+    ).catch((e: Error) => console.warn("[onboarding] admin notify failed:", e.message));
+  }
 
   await ctx.reply(
     `Siap! Sekarang kamu bisa:\n` +
