@@ -324,16 +324,16 @@ function QuickActionsSection({ gradeLevel }: { gradeLevel?: string }) {
       >
         🚀 Aktivitas Cepat
       </h3>
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-3">
         {actions.map((a) => (
           <Link
             key={a.label}
             href={a.href}
-            className="flex flex-col items-center gap-1.5 rounded-2xl p-4 transition-all hover:scale-105 active:scale-95"
+            className="flex flex-col items-center justify-between gap-2 rounded-2xl p-4 transition-all hover:scale-105 active:scale-95 text-center min-h-[100px]"
             style={{ backgroundColor: "var(--st-bg-card)" }}
           >
             <span className="text-3xl">{a.icon}</span>
-            <span className="text-xs font-semibold text-center">{a.label}</span>
+            <span className="text-xs font-semibold">{a.label}</span>
           </Link>
         ))}
         {/* Buku SIBI - pilih subject random yang punya PDF */}
@@ -360,11 +360,11 @@ async function SibiQuickLink({ gradeLevel }: { gradeLevel?: string }) {
       href={`/${dir}/${randomEntry[1]}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex flex-col items-center gap-1.5 rounded-2xl p-4 transition-all hover:scale-105 active:scale-95"
+      className="flex flex-col items-center justify-between gap-2 rounded-2xl p-4 transition-all hover:scale-105 active:scale-95 text-center min-h-[100px]"
       style={{ backgroundColor: "var(--st-bg-card)" }}
     >
       <span className="text-3xl">📚</span>
-      <span className="text-xs font-semibold text-center">Buku SIBI</span>
+      <span className="text-xs font-semibold">Buku SIBI</span>
     </a>
   );
 }
@@ -615,10 +615,10 @@ async function SubjectGridSection() {
         📚 Mata Pelajaran
       </h3>
       <div
-        className="rounded-2xl p-4"
+        className="rounded-2xl p-4 md:p-6"
         style={{ backgroundColor: "var(--st-bg-card)" }}
       >
-        <div className="grid grid-cols-3 gap-y-4 gap-x-2">
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-y-6 gap-x-4">
           {subjects.map((subject) => {
             const meta = SUBJECT_META[subject] ?? { emoji: "📚", color: "#94a3b8" };
             return (
@@ -828,7 +828,7 @@ function HardHoldOverlay() {
 export default function StudentHomePage() {
   return (
     <DashboardTracker>
-    <>
+    <div className="max-w-4xl mx-auto px-4 py-6 md:py-10 space-y-6">
       {/* Hard Hold Overlay — rendered first, blocks everything */}
       <Suspense fallback={null}>
         <HardHoldGuard />
@@ -878,14 +878,9 @@ export default function StudentHomePage() {
         <SchoolScheduleServer />
       </Suspense>
 
-      {/* Jadwal Interaktif */}
-      <Suspense fallback={<SkeletonSchedule />}>
-        <ScheduleSection />
-      </Suspense>
-
       {/* Pengaturan */}
       <SettingsSection />
-    </>
+    </div>
     </DashboardTracker>
   );
 }

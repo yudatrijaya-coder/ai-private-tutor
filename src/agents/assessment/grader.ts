@@ -6,6 +6,7 @@
  */
 
 import { prisma } from "@/lib/prisma";
+import { updateTopicMastery } from "@/services/topic-mastery";
 import type {
   QuestionData,
   StudentAnswer,
@@ -95,6 +96,18 @@ export async function gradeAttempt(params: {
 
   // 5. Update ProgressSnap
   await upsertProgressSnap(studentId, quiz.materialId, score, maxScore, masteryAfter);
+
+  // 6. Update per-topic mastery
+  await updateTopicMastery({
+    studentId,
+    subject: quiz.material.subject,
+    topic: quiz.material.topic || quiz.material.subject,
+    subTopic: (quiz.material.metadata as any)?.subTopic || null,
+    score,
+    maxScore,
+    attemptType: "quiz",
+    timeSpentMs: timeSpent ?? undefined,
+  });
 
   return {
     attemptId: attempt.id,
