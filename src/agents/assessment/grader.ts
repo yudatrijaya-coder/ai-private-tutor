@@ -37,13 +37,19 @@ export async function gradeAttempt(params: {
 }): Promise<AttemptResult> {
   const { quizId, studentId, answers, timeSpent } = params;
 
-  // 1. Load quiz
+  // 1. Load quiz + material (needed for topicMastery update)
   const quiz = await prisma.quiz.findUnique({
     where: { id: quizId },
+    include: { material: true },
   });
 
   if (!quiz) {
     throw new Error(`Quiz not found: ${quizId}`);
+  }
+
+  // Guard: material must exist for topicMastery tracking
+  if (!quiz.material) {
+    throw new Error(`Quiz ${quizId} has no associated material`);
   }
 
   const questions = (quiz.questions as unknown as QuestionData[]) ?? [];

@@ -1,5 +1,4 @@
 import { prisma } from "@/lib/prisma";
-import { Exam, ExamQuestion, Prisma, Material, Student, Curriculum, GradeLevel } from "@prisma/client";
 import { callLLM } from "@/llm/client";
 import { ChatMessage } from "@/llm/types";
 
@@ -69,7 +68,7 @@ const getLLMQuestions = async (prompt: string, studentId: string): Promise<LLMQu
   }
 };
 
-export async function generatePreTest(studentId: string, subject: string): Promise<Exam> {
+export async function generatePreTest(studentId: string, subject: string) {
   const student = await prisma.student.findUnique({ where: { id: studentId }, include: { curriculums: true } });
   if (!student) throw new Error("Student not found");
 
@@ -106,7 +105,7 @@ export async function generatePreTest(studentId: string, subject: string): Promi
   return exam;
 }
 
-export async function generatePostTest(studentId: string, materialId: string): Promise<Exam> {
+export async function generatePostTest(studentId: string, materialId: string) {
   const student = await prisma.student.findUnique({ where: { id: studentId } });
   if (!student) throw new Error("Student not found");
 
