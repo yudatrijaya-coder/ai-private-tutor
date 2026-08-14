@@ -30,6 +30,15 @@ async function main() {
 
     for (const g of groups) {
       if (existingSubjects.has(g.subject)) continue; // already done or failed → skip
+      // Skip placeholder-only subjects (week 999 only, no real content)
+      const placeholderOnly = await prisma.material.count({
+        where: { curriculumId: cur.id, subject: g.subject, weekOrder: { lt: 999 } },
+      });
+      if (placeholderOnly === 0) {
+        console.log(`[${s.studentId}] SKIP ${g.subject} — placeholder-only (no real weeks)`);
+        existingSubjects.add(g.subject);
+        continue;
+      }
       console.log(`[${s.studentId}] RETRY ${g.subject}...`);
       try {
         const res = await generateWeeklyExam({ studentId: s.id, subject: g.subject });
