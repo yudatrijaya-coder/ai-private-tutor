@@ -1,0 +1,9 @@
+{
+  "startedAt": "2026-08-02T02:44:39.280Z",
+  "total": 130,
+  "done": 130,
+  "applied": 114,
+  "errors": 38,
+  "highSev": 18,
+  "running": false
+}

@@ -254,6 +254,13 @@ export async function onMessage(ctx: Context): Promise<void> {
           return;
         }
 
+        // /weeklyexam command — weekly exam schedule confirmation
+        if ("text" in msg && /^\/weeklyexam$/i.test(msg.text?.trim() ?? "")) {
+          const { handleWeeklyExamStart } = await import("./weekly-exam");
+          await handleWeeklyExamStart(ctx, student);
+          return;
+        }
+
         // New command router: /badge /review /nilai /pr /help
         if ("text" in msg && msg.text?.startsWith("/")) {
           const routed = await routeCommand(ctx as any, student, msg.text);

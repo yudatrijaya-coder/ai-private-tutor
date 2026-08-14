@@ -1,0 +1,565 @@
+{
+  "genericQuizIds": [],
+  "materialIds": [
+    "36399687-ce77-4025-8ce9-b3d20df1b201",
+    "542965b3-e868-48e8-85c3-fcb0a2ed503c",
+    "6fab0bcb-e573-4797-a28b-7a6077e06a78",
+    "92b8cc4b-80e0-46cf-b02b-aad0c82146be",
+    "2345b660-ce28-4fe3-b839-16306bcf9d47",
+    "0d294191-286b-4b80-8ce6-ca13f5d8bf03",
+    "1e08b491-2d54-4350-abe6-8dcd5f2b645a",
+    "2639ac8e-573d-48f8-8d24-f2d9ecb14f0c",
+    "90287397-8b76-437b-b23f-d7fbc4728d06",
+    "94730dc2-2370-4a7a-b7da-2d7054e2bf0c",
+    "ff2514f6-2b90-4d0b-ba8b-b66da3552679",
+    "5a8cc808-3832-481f-9ecd-2680851c8f3b",
+    "7d97bf3e-f7a7-4609-8c3d-cac2cf4a125a",
+    "3847c80f-6d95-4ecf-b55b-384a387c658c",
+    "3b96a943-2063-41a3-8c07-0a520900954d",
+    "3f19071f-8c9a-40b9-8c1d-3b1600e9af72",
+    "dca5f9da-606b-498d-ab23-88caad19a227",
+    "e8d9f223-e410-4a7b-89c3-6665d7068dfe",
+    "298d0cae-ec78-46f4-bbee-49eea14f5d46",
+    "624d45d8-d084-4b5e-8692-c34492681abd",
+    "84c82768-c3f4-441e-a2fb-68be092c2e9a",
+    "a6337ae9-73dd-428d-b793-f8597d95057a",
+    "22965020-87e0-4745-b5ce-b6ce43488a25",
+    "b70498e0-c017-4a4c-b2af-cce3ddd5c895",
+    "5b01f015-8afd-465d-894a-f21ff46a65b7",
+    "5b950d06-8e4a-4686-bdad-a19dc60755ba",
+    "8bdce7b2-7f30-44e8-ade2-349070c2e58b",
+    "1da3ebe6-c302-4c4f-9846-cb9c071c998d",
+    "ac9fc259-f965-49fc-a62f-1bbc562e9e29",
+    "f5d73a60-7cb9-4ed3-a90f-97a961b34391",
+    "259e9c55-fd70-4996-bbbc-40caa1a06e85",
+    "431a8762-059b-4249-b9b9-d004ea3f9f9c",
+    "e066521b-a12a-45f1-9838-b224724efadd",
+    "198cf992-37ca-4e4e-b6c0-09f816ad2538",
+    "58257d2d-047d-4272-a8cd-d4aebe2866cd",
+    "5c35fe8c-e5be-4ceb-b0cc-95a7771b9f7d",
+    "474a9501-abe8-4bb1-92bb-04062bed249e",
+    "0de4fb27-f6fa-4f86-ae6c-81aff539d12d",
+    "c1ee352e-e4ab-4af4-a00b-18c77a05485c",
+    "8bc3b8ab-2dfa-46eb-8933-c0b8c68b9abb",
+    "ba14c7e4-d128-45b9-9abf-4b154ad5b124",
+    "bf39dad0-2874-4f05-8e71-8c6ea57a8e88",
+    "e32756b5-1399-4c67-9a63-029fa07e4ef9",
+    "ce0ed96c-be76-4879-befa-7e221be9143e",
+    "8280beeb-1257-48d6-99af-ed384edc812d",
+    "25f99b51-fd8f-4a90-b513-70f269c43c7c",
+    "a2494ae7-c21e-4074-9bf3-766592daa7e2",
+    "a5571bb7-07e0-4e2a-9de8-f4d00d883ee1",
+    "3a66557e-0e78-4822-b05c-852029eb0c6b",
+    "d216047c-7fd0-43bb-88af-dced7ab57047",
+    "6b62f41c-eeca-426d-a195-3ac741edfec1",
+    "a5ed74ba-a597-4972-8db4-4c453fe5266a",
+    "f2724be3-f18a-4446-b717-289b29badeb9",
+    "8019ce75-189e-49b3-9083-ff3958ac89fc",
+    "1b388d7e-d461-4e37-b93e-d2b0c9383a75",
+    "13e1f285-02c5-497f-8f1c-c2c30d05b4f8",
+    "8807cf81-3f19-416c-91c9-bc87594ed9fb",
+    "1f7df22c-cc3b-4c01-a946-d5bbe62a175b",
+    "66322d7e-0b11-4094-a968-3ac823610526",
+    "ac5ada3b-a656-49d4-a173-d05addb7ef7e",
+    "216ff359-8fe4-4f98-909c-30d8f623e669",
+    "51cea16c-e911-48d1-9efd-5c466304c19a",
+    "1bd88139-3176-4821-9731-94a020f8f048",
+    "6f37fcfb-41b8-44e2-96d0-4618349d83cd",
+    "68395193-2f5f-432b-9b11-0624633f32f2",
+    "894aeda3-705f-4bb7-a4cb-dc37f2b1819f",
+    "3a300ba3-f287-412e-a282-58f45ab62ab5",
+    "e612dbf9-9af3-4d72-84bd-16974e2271e2",
+    "c4677710-be21-41f8-ba21-cb4227367c13",
+    "fcc472ce-fe12-40a8-947f-621fa1f484fa",
+    "efbdf63e-ff19-4447-9d6a-6cc79e93ed7d",
+    "047ec8df-bc4b-4819-9123-2002594999e3",
+    "125afd1b-b02c-41a5-8f1f-a31dcba88aec",
+    "1abd656a-8e9d-4cef-90ac-077b37a3b873",
+    "4ca2d0e0-5172-47d5-9e16-8e96f9830c8d",
+    "e74155a3-081a-40b9-a946-8f6048769329",
+    "f8c7ba5e-7d8f-4d11-9623-893a24822806",
+    "d8a7c890-7c85-4144-b3f1-e89147163f05",
+    "04711638-2e37-4191-9069-b889678b7ca4",
+    "9a2c3147-4b02-45fa-8696-c435715279b3",
+    "b83b5fd5-8741-4b68-820a-03617397915f",
+    "a35a3446-54c0-47d8-90cb-436af9c34bbc",
+    "50c3a135-8805-4063-8066-51392c4a58b4",
+    "91d46d93-b93e-4b33-bf28-f873142bec5b",
+    "5a6da260-e13f-46cb-9b93-c7dcace317b2",
+    "d217f3bd-d10f-48cb-b66a-44ed065810e2",
+    "e7654634-5f95-474b-b208-e34e4d50a516",
+    "dc40bfac-976e-40ed-aa84-44e7a4943cdb",
+    "702d97ab-627d-44cd-b72c-6e0f3f27ab80",
+    "bf43ea96-8805-41ab-b560-3bc4e2f90675",
+    "6b0a1572-5a5e-44ea-ac59-da6c24d10f5f",
+    "9ad022e7-e2f9-496f-8cd7-c86ee1ba9534",
+    "2da5abd1-4481-490f-9c37-67d5ad50c223"
+  ],
+  "materialMap": {
+    "36399687-ce77-4025-8ce9-b3d20df1b201": {
+      "topic": "Dunia Imajinasi",
+      "subTopic": "Unsur Puisi Rakyat",
+      "subject": "Bahasa Indonesia"
+    },
+    "542965b3-e868-48e8-85c3-fcb0a2ed503c": {
+      "topic": "Dunia Imajinasi",
+      "subTopic": "Menulis Puisi",
+      "subject": "Bahasa Indonesia"
+    },
+    "6fab0bcb-e573-4797-a28b-7a6077e06a78": {
+      "topic": "Hal Baik bagi Tubuh",
+      "subTopic": "Teks Prosedur",
+      "subject": "Bahasa Indonesia"
+    },
+    "92b8cc4b-80e0-46cf-b02b-aad0c82146be": {
+      "topic": "Hal Baik bagi Tubuh",
+      "subTopic": "Struktur dan Kebahasaan",
+      "subject": "Bahasa Indonesia"
+    },
+    "2345b660-ce28-4fe3-b839-16306bcf9d47": {
+      "topic": "Jelajah Nusantara",
+      "subTopic": "Menganalisis Teks Deskripsi",
+      "subject": "Bahasa Indonesia"
+    },
+    "0d294191-286b-4b80-8ce6-ca13f5d8bf03": {
+      "topic": "Jelajah Nusantara",
+      "subTopic": "Menyajikan Teks Deskripsi",
+      "subject": "Bahasa Indonesia"
+    },
+    "1e08b491-2d54-4350-abe6-8dcd5f2b645a": {
+      "topic": "Jelajah Nusantara",
+      "subTopic": "Unsur Bahasa dalam Teks Deskripsi",
+      "subject": "Bahasa Indonesia"
+    },
+    "2639ac8e-573d-48f8-8d24-f2d9ecb14f0c": {
+      "topic": "Membuka Gerbang",
+      "subTopic": "Literasi Visual",
+      "subject": "Bahasa Indonesia"
+    },
+    "90287397-8b76-437b-b23f-d7fbc4728d06": {
+      "topic": "Membuka Gerbang",
+      "subTopic": "Buku Bergambar",
+      "subject": "Bahasa Indonesia"
+    },
+    "94730dc2-2370-4a7a-b7da-2d7054e2bf0c": {
+      "topic": "Membuka Gerbang",
+      "subTopic": "Membedah Buku",
+      "subject": "Bahasa Indonesia"
+    },
+    "ff2514f6-2b90-4d0b-ba8b-b66da3552679": {
+      "topic": "Pelindung Bumi",
+      "subTopic": "Unsur-Unsur Berita",
+      "subject": "Bahasa Indonesia"
+    },
+    "5a8cc808-3832-481f-9ecd-2680851c8f3b": {
+      "topic": "Pelindung Bumi",
+      "subTopic": "Menulis Teks Berita",
+      "subject": "Bahasa Indonesia"
+    },
+    "7d97bf3e-f7a7-4609-8c3d-cac2cf4a125a": {
+      "topic": "Pelindung Bumi",
+      "subTopic": "Teks Berita",
+      "subject": "Bahasa Indonesia"
+    },
+    "3847c80f-6d95-4ecf-b55b-384a387c658c": {
+      "topic": "Daily Life",
+      "subTopic": "Daily Routines",
+      "subject": "Bahasa Inggris"
+    },
+    "3b96a943-2063-41a3-8c07-0a520900954d": {
+      "topic": "Daily Life",
+      "subTopic": "Telling Time",
+      "subject": "Bahasa Inggris"
+    },
+    "3f19071f-8c9a-40b9-8c1d-3b1600e9af72": {
+      "topic": "Descriptive",
+      "subTopic": "Describing People",
+      "subject": "Bahasa Inggris"
+    },
+    "dca5f9da-606b-498d-ab23-88caad19a227": {
+      "topic": "Descriptive",
+      "subTopic": "Describing Places",
+      "subject": "Bahasa Inggris"
+    },
+    "e8d9f223-e410-4a7b-89c3-6665d7068dfe": {
+      "topic": "Hobbies",
+      "subTopic": "Sports and Activities",
+      "subject": "Bahasa Inggris"
+    },
+    "298d0cae-ec78-46f4-bbee-49eea14f5d46": {
+      "topic": "Hobbies",
+      "subTopic": "Expressing Hobbies",
+      "subject": "Bahasa Inggris"
+    },
+    "624d45d8-d084-4b5e-8692-c34492681abd": {
+      "topic": "Introduction",
+      "subTopic": "Personal Identity",
+      "subject": "Bahasa Inggris"
+    },
+    "84c82768-c3f4-441e-a2fb-68be092c2e9a": {
+      "topic": "Introduction",
+      "subTopic": "Greetings and Introductions",
+      "subject": "Bahasa Inggris"
+    },
+    "a6337ae9-73dd-428d-b793-f8597d95057a": {
+      "topic": "School",
+      "subTopic": "School Facilities",
+      "subject": "Bahasa Inggris"
+    },
+    "22965020-87e0-4745-b5ce-b6ce43488a25": {
+      "topic": "School",
+      "subTopic": "Subjects and Schedules",
+      "subject": "Bahasa Inggris"
+    },
+    "b70498e0-c017-4a4c-b2af-cce3ddd5c895": {
+      "topic": "Algoritma",
+      "subTopic": "Algoritma dan Pemrograman",
+      "subject": "Informatika"
+    },
+    "5b01f015-8afd-465d-894a-f21ff46a65b7": {
+      "topic": "Berpikir Komputasional",
+      "subTopic": "Dasar Berpikir Komputasional",
+      "subject": "Informatika"
+    },
+    "5b950d06-8e4a-4686-bdad-a19dc60755ba": {
+      "topic": "Dampak Sosial",
+      "subTopic": "Dampak Teknologi Informasi",
+      "subject": "Informatika"
+    },
+    "8bdce7b2-7f30-44e8-ade2-349070c2e58b": {
+      "topic": "Internet",
+      "subTopic": "Jaringan Internet",
+      "subject": "Informatika"
+    },
+    "1da3ebe6-c302-4c4f-9846-cb9c071c998d": {
+      "topic": "Keamanan",
+      "subTopic": "Keamanan Data dan Privasi",
+      "subject": "Informatika"
+    },
+    "ac9fc259-f965-49fc-a62f-1bbc562e9e29": {
+      "topic": "Bumi dan Tata Surya",
+      "subTopic": "Rotasi dan Revolusi Bumi",
+      "subject": "IPA"
+    },
+    "f5d73a60-7cb9-4ed3-a90f-97a961b34391": {
+      "topic": "Bumi dan Tata Surya",
+      "subTopic": "Struktur Bumi",
+      "subject": "IPA"
+    },
+    "259e9c55-fd70-4996-bbbc-40caa1a06e85": {
+      "topic": "Bumi dan Tata Surya",
+      "subTopic": "Tata Surya",
+      "subject": "IPA"
+    },
+    "431a8762-059b-4249-b9b9-d004ea3f9f9c": {
+      "topic": "Ekologi",
+      "subTopic": "Interaksi Antar Makhluk Hidup",
+      "subject": "IPA"
+    },
+    "e066521b-a12a-45f1-9838-b224724efadd": {
+      "topic": "Ekologi",
+      "subTopic": "Pelestarian Lingkungan",
+      "subject": "IPA"
+    },
+    "198cf992-37ca-4e4e-b6c0-09f816ad2538": {
+      "topic": "Ekologi",
+      "subTopic": "Komponen Ekosistem",
+      "subject": "IPA"
+    },
+    "58257d2d-047d-4272-a8cd-d4aebe2866cd": {
+      "topic": "Gerak dan Gaya",
+      "subTopic": "Tekanan Zat",
+      "subject": "IPA"
+    },
+    "5c35fe8c-e5be-4ceb-b0cc-95a7771b9f7d": {
+      "topic": "Gerak dan Gaya",
+      "subTopic": "Gerak Benda",
+      "subject": "IPA"
+    },
+    "474a9501-abe8-4bb1-92bb-04062bed249e": {
+      "topic": "Gerak dan Gaya",
+      "subTopic": "Gaya dan Hukum Newton",
+      "subject": "IPA"
+    },
+    "0de4fb27-f6fa-4f86-ae6c-81aff539d12d": {
+      "topic": "Gerak dan Gaya",
+      "subTopic": "Pesawat Sederhana",
+      "subject": "IPA"
+    },
+    "c1ee352e-e4ab-4af4-a00b-18c77a05485c": {
+      "topic": "Ilmu Sains",
+      "subTopic": "Laboratorium IPA",
+      "subject": "IPA"
+    },
+    "8bc3b8ab-2dfa-46eb-8933-c0b8c68b9abb": {
+      "topic": "Ilmu Sains",
+      "subTopic": "Merancang Percobaan",
+      "subject": "IPA"
+    },
+    "ba14c7e4-d128-45b9-9abf-4b154ad5b124": {
+      "topic": "Ilmu Sains",
+      "subTopic": "Hakikat Ilmu Sains",
+      "subject": "IPA"
+    },
+    "bf39dad0-2874-4f05-8e71-8c6ea57a8e88": {
+      "topic": "Ilmu Sains",
+      "subTopic": "Metode Ilmiah",
+      "subject": "IPA"
+    },
+    "e32756b5-1399-4c67-9a63-029fa07e4ef9": {
+      "topic": "Makhluk Hidup",
+      "subTopic": "Ciri-Ciri Makhluk Hidup",
+      "subject": "IPA"
+    },
+    "ce0ed96c-be76-4879-befa-7e221be9143e": {
+      "topic": "Makhluk Hidup",
+      "subTopic": "Klasifikasi Makhluk Hidup",
+      "subject": "IPA"
+    },
+    "8280beeb-1257-48d6-99af-ed384edc812d": {
+      "topic": "Makhluk Hidup",
+      "subTopic": "Keanekaragaman Hayati",
+      "subject": "IPA"
+    },
+    "25f99b51-fd8f-4a90-b513-70f269c43c7c": {
+      "topic": "Suhu dan Kalor",
+      "subTopic": "Pemuaian",
+      "subject": "IPA"
+    },
+    "a2494ae7-c21e-4074-9bf3-766592daa7e2": {
+      "topic": "Suhu dan Kalor",
+      "subTopic": "Kalor dan Perpindahannya",
+      "subject": "IPA"
+    },
+    "a5571bb7-07e0-4e2a-9de8-f4d00d883ee1": {
+      "topic": "Suhu dan Kalor",
+      "subTopic": "Suhu dan Termometer",
+      "subject": "IPA"
+    },
+    "3a66557e-0e78-4822-b05c-852029eb0c6b": {
+      "topic": "Zat dan Perubahan",
+      "subTopic": "Perubahan Fisika dan Kimia",
+      "subject": "IPA"
+    },
+    "d216047c-7fd0-43bb-88af-dced7ab57047": {
+      "topic": "Zat dan Perubahan",
+      "subTopic": "Wujud Zat dan Partikel",
+      "subject": "IPA"
+    },
+    "6b62f41c-eeca-426d-a195-3ac741edfec1": {
+      "topic": "Zat dan Perubahan",
+      "subTopic": "Pemisahan Campuran",
+      "subject": "IPA"
+    },
+    "a5ed74ba-a597-4972-8db4-4c453fe5266a": {
+      "topic": "Ekonomi",
+      "subTopic": "Kegiatan Ekonomi",
+      "subject": "IPS"
+    },
+    "f2724be3-f18a-4446-b717-289b29badeb9": {
+      "topic": "Interaksi Sosial",
+      "subTopic": "Bentuk Interaksi Sosial",
+      "subject": "IPS"
+    },
+    "8019ce75-189e-49b3-9083-ff3958ac89fc": {
+      "topic": "Keragaman Budaya",
+      "subTopic": "Keragaman Suku dan Budaya",
+      "subject": "IPS"
+    },
+    "1b388d7e-d461-4e37-b93e-d2b0c9383a75": {
+      "topic": "Peninggalan Sejarah",
+      "subTopic": "Masa Islam",
+      "subject": "IPS"
+    },
+    "13e1f285-02c5-497f-8f1c-c2c30d05b4f8": {
+      "topic": "Peninggalan Sejarah",
+      "subTopic": "Masa Hindu-Buddha",
+      "subject": "IPS"
+    },
+    "8807cf81-3f19-416c-91c9-bc87594ed9fb": {
+      "topic": "Ruang dan Interaksi",
+      "subTopic": "Ruang dan Sumber Daya",
+      "subject": "IPS"
+    },
+    "1f7df22c-cc3b-4c01-a946-d5bbe62a175b": {
+      "topic": "Aritmatika Sosial",
+      "subTopic": "Harga dan Diskon",
+      "subject": "Matematika"
+    },
+    "66322d7e-0b11-4094-a968-3ac823610526": {
+      "topic": "Bangun Datar",
+      "subTopic": "Luas dan Keliling",
+      "subject": "Matematika"
+    },
+    "ac5ada3b-a656-49d4-a173-d05addb7ef7e": {
+      "topic": "Bilangan",
+      "subTopic": "Bilangan Pecahan",
+      "subject": "Matematika"
+    },
+    "216ff359-8fe4-4f98-909c-30d8f623e669": {
+      "topic": "Bilangan",
+      "subTopic": "Bilangan Bulat dan Operasi",
+      "subject": "Matematika"
+    },
+    "51cea16c-e911-48d1-9efd-5c466304c19a": {
+      "topic": "Perbandingan",
+      "subTopic": "Skala dan Rasio",
+      "subject": "Matematika"
+    },
+    "1bd88139-3176-4821-9731-94a020f8f048": {
+      "topic": "Persamaan",
+      "subTopic": "Persamaan Linear",
+      "subject": "Matematika"
+    },
+    "6f37fcfb-41b8-44e2-96d0-4618349d83cd": {
+      "topic": "Statistika",
+      "subTopic": "Penyajian Data",
+      "subject": "Matematika"
+    },
+    "68395193-2f5f-432b-9b11-0624633f32f2": {
+      "topic": "Keberagaman",
+      "subTopic": "Makna Persatuan",
+      "subject": "Pendidikan Pancasila"
+    },
+    "894aeda3-705f-4bb7-a4cb-dc37f2b1819f": {
+      "topic": "Keberagaman",
+      "subTopic": "Tantangan Keberagaman",
+      "subject": "Pendidikan Pancasila"
+    },
+    "3a300ba3-f287-412e-a282-58f45ab62ab5": {
+      "topic": "Keberagaman",
+      "subTopic": "Bhineka Tunggal Ika",
+      "subject": "Pendidikan Pancasila"
+    },
+    "e612dbf9-9af3-4d72-84bd-16974e2271e2": {
+      "topic": "NKRI",
+      "subTopic": "Menjaga Keutuhan Wilayah",
+      "subject": "Pendidikan Pancasila"
+    },
+    "c4677710-be21-41f8-ba21-cb4227367c13": {
+      "topic": "NKRI",
+      "subTopic": "Unsur-Unsur Negara",
+      "subject": "Pendidikan Pancasila"
+    },
+    "fcc472ce-fe12-40a8-947f-621fa1f484fa": {
+      "topic": "NKRI",
+      "subTopic": "Wilayah Negara Kesatuan",
+      "subject": "Pendidikan Pancasila"
+    },
+    "efbdf63e-ff19-4447-9d6a-6cc79e93ed7d": {
+      "topic": "Norma",
+      "subTopic": "Hukum dan Keadilan",
+      "subject": "Pendidikan Pancasila"
+    },
+    "047ec8df-bc4b-4819-9123-2002594999e3": {
+      "topic": "Norma",
+      "subTopic": "Penerapan Norma",
+      "subject": "Pendidikan Pancasila"
+    },
+    "125afd1b-b02c-41a5-8f1f-a31dcba88aec": {
+      "topic": "Norma",
+      "subTopic": "Macam-Macam Norma",
+      "subject": "Pendidikan Pancasila"
+    },
+    "1abd656a-8e9d-4cef-90ac-077b37a3b873": {
+      "topic": "Pancasila",
+      "subTopic": "Sejarah Kelahiran Pancasila",
+      "subject": "Pendidikan Pancasila"
+    },
+    "4ca2d0e0-5172-47d5-9e16-8e96f9830c8d": {
+      "topic": "Pancasila",
+      "subTopic": "Penerapan Pancasila",
+      "subject": "Pendidikan Pancasila"
+    },
+    "e74155a3-081a-40b9-a946-8f6048769329": {
+      "topic": "Pancasila",
+      "subTopic": "Makna Sila-Sila Pancasila",
+      "subject": "Pendidikan Pancasila"
+    },
+    "f8c7ba5e-7d8f-4d11-9623-893a24822806": {
+      "topic": "Pancasila",
+      "subTopic": "Nilai-Nilai Pancasila",
+      "subject": "Pendidikan Pancasila"
+    },
+    "d8a7c890-7c85-4144-b3f1-e89147163f05": {
+      "topic": "Belajar Melalui Gerak",
+      "subTopic": "Konsep Gerak",
+      "subject": "PJOK"
+    },
+    "04711638-2e37-4191-9069-b889678b7ca4": {
+      "topic": "Belajar Melalui Gerak",
+      "subTopic": "Koreksi Gerak",
+      "subject": "PJOK"
+    },
+    "9a2c3147-4b02-45fa-8696-c435715279b3": {
+      "topic": "Belajar Melalui Gerak",
+      "subTopic": "Fase-Fase Gerak",
+      "subject": "PJOK"
+    },
+    "b83b5fd5-8741-4b68-820a-03617397915f": {
+      "topic": "Hidup Sehat",
+      "subTopic": "Pencegahan Penyakit",
+      "subject": "PJOK"
+    },
+    "a35a3446-54c0-47d8-90cb-436af9c34bbc": {
+      "topic": "Hidup Sehat",
+      "subTopic": "Pola Makan Sehat",
+      "subject": "PJOK"
+    },
+    "50c3a135-8805-4063-8066-51392c4a58b4": {
+      "topic": "Kebugaran",
+      "subTopic": "Tes Kebugaran",
+      "subject": "PJOK"
+    },
+    "91d46d93-b93e-4b33-bf28-f873142bec5b": {
+      "topic": "Kebugaran",
+      "subTopic": "Program Latihan",
+      "subject": "PJOK"
+    },
+    "5a6da260-e13f-46cb-9b93-c7dcace317b2": {
+      "topic": "Kerja Sama Tim",
+      "subTopic": "Peran dalam Tim",
+      "subject": "PJOK"
+    },
+    "d217f3bd-d10f-48cb-b66a-44ed065810e2": {
+      "topic": "Kerja Sama Tim",
+      "subTopic": "Sportivitas",
+      "subject": "PJOK"
+    },
+    "e7654634-5f95-474b-b208-e34e4d50a516": {
+      "topic": "Kerja Sama Tim",
+      "subTopic": "Komunikasi dan Koordinasi",
+      "subject": "PJOK"
+    },
+    "dc40bfac-976e-40ed-aa84-44e7a4943cdb": {
+      "topic": "Keterampilan Gerak",
+      "subTopic": "Gerak Lokomotor dan Non-Lokomotor",
+      "subject": "PJOK"
+    },
+    "702d97ab-627d-44cd-b72c-6e0f3f27ab80": {
+      "topic": "Keterampilan Gerak",
+      "subTopic": "Umpan Balik Belajar Gerak",
+      "subject": "PJOK"
+    },
+    "bf43ea96-8805-41ab-b560-3bc4e2f90675": {
+      "topic": "Keterampilan Gerak",
+      "subTopic": "Hubungan Gerak Dasar dan Keterampilan",
+      "subject": "PJOK"
+    },
+    "6b0a1572-5a5e-44ea-ac59-da6c24d10f5f": {
+      "topic": "Strategi Gerak",
+      "subTopic": "Taktik Permainan Bola Kecil",
+      "subject": "PJOK"
+    },
+    "9ad022e7-e2f9-496f-8cd7-c86ee1ba9534": {
+      "topic": "Strategi Gerak",
+      "subTopic": "Taktik Permainan Bola Besar",
+      "subject": "PJOK"
+    },
+    "2da5abd1-4481-490f-9c37-67d5ad50c223": {
+      "topic": "Strategi Gerak",
+      "subTopic": "Pertahanan dan Penyerangan",
+      "subject": "PJOK"
+    }
+  }
+}

@@ -1,0 +1,1535 @@
+{
+  "generated": "2026-08-05",
+  "summary": {
+    "total_links_processed": 220,
+    "total_unique_links_audited": 220,
+    "smp7_links": 91,
+    "sma11_links": 129,
+    "dead_or_failed_links": 16,
+    "potential_topic_mismatches": 176
+  },
+  "dead_links": [
+    {
+      "grade": "SMP_7",
+      "topic": "Ilmu Sains",
+      "url": "https://www.youtube.com/watch?v=v8BWLWGP68M",
+      "file_title": "Hakikat Ilmu Sains dan Metode Ilmiah Part 1 - IPA Kelas 7 SMP Kurikulum Merdeka",
+      "error": "Error fetching content"
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Ilmu Sains",
+      "url": "https://www.youtube.com/watch?v=uOu6XAW5eCg",
+      "file_title": "Bab 1 Hakikat Ilmu Sains dan Metode Ilmiah #1 (Apa Itu Sains) | IPA SMP Kelas 7",
+      "error": "Error fetching content"
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Peninggalan Sejarah",
+      "url": "https://www.youtube.com/watch?v=DeJVQ9zA0cE",
+      "file_title": "Aktivitas Kehidupan Masyarakat Masa Hindu Buddha | IPS SMP Kelas 7",
+      "error": "Error fetching content"
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Keterampilan Gerak",
+      "url": "https://www.youtube.com/watch?v=Lp8VKWCmi6c",
+      "file_title": "Perbedaan Gerak Lokomotor, Nonlokomotor dan Manipulatif | Materi PJOK",
+      "error": "Failed to fetch url"
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Limit",
+      "url": "https://www.youtube.com/watch?v=RVOwigzA9y4",
+      "file_title": "Materi Lengkap Limit Fungsi Aljabar Matematika Kelas 11 SMA",
+      "error": "Failed to fetch url"
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Turunan",
+      "url": "https://www.youtube.com/watch?v=TE1BqPXXX7E",
+      "file_title": "Konsep Dasar Turunan Fungsi Aljabar Matematika Wajib Kelas 11",
+      "error": "Error fetching content"
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Turunan",
+      "url": "https://www.youtube.com/watch?v=xES12YqwsPA",
+      "file_title": "Turunan Fungsi Aljabar - Matematika Kelas 11 (Quipper Video)",
+      "error": "Error fetching content"
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Karya Ilmiah",
+      "url": "https://www.youtube.com/watch?v=SPiNQ6umGpU",
+      "file_title": "Materi Karya Ilmiah Bahasa Indonesia kelas 11 SMA/SMK",
+      "error": "Error fetching content"
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Narrative",
+      "url": "https://www.youtube.com/watch?v=6SjjAbuNl-8",
+      "file_title": "Narrative Text - Pembahasan Lengkap (Definisi, Struktur, Contoh)",
+      "error": "Error fetching content"
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Narrative",
+      "url": "https://www.youtube.com/watch?v=91AFuEc5fp8",
+      "file_title": "Narrative Text (materi bahasa inggris kelas XI SMA)",
+      "error": "Error fetching content"
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Hidrosfer",
+      "url": "https://www.youtube.com/watch?v=MjwSjl0_hLE",
+      "file_title": "Siklus Hidrologi | Geografi",
+      "error": "Error fetching content"
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Atmosfer",
+      "url": "https://www.youtube.com/watch?v=ekQwOK6viYU",
+      "file_title": "Atmosfer : Unsur - Unsur Cuaca dan Iklim",
+      "error": "Error fetching content"
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Kebugaran",
+      "url": "https://www.youtube.com/watch?v=_Rhg8WD_pkw",
+      "file_title": "Materi PJOK Aktivitas Kebugaran Jasmani Latihan Kekuatan",
+      "error": "Error fetching content"
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Basis Data",
+      "url": "https://www.youtube.com/watch?v=rKaq-WeHRqE",
+      "file_title": "Apa Itu Database? Tonton ini 5 Menit Langsung Bisa Dijamin",
+      "error": "Error fetching content"
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Jaringan",
+      "url": "https://www.youtube.com/watch?v=usnVxO6duJE",
+      "file_title": "Topologi Jaringan - Jaringan Komputer dan Internet | Informatika XI",
+      "error": "Error fetching content"
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Jaringan",
+      "url": "https://www.youtube.com/watch?v=w8CW9HaE8ZM",
+      "file_title": "Topologi Jaringan Komputer || Materi Informatika SMA",
+      "error": "Error fetching content"
+    }
+  ],
+  "potential_topic_mismatches": [
+    {
+      "grade": "SMP_7",
+      "topic": "Zat dan Perubahan",
+      "url": "https://www.youtube.com/watch?v=CfwPsKdC5w8",
+      "file_title": "Macam-macam Zat dan Perubahannya Disertai Contoh-contohnya - IPA Kelas 7",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Suhu dan Kalor",
+      "url": "https://www.youtube.com/watch?v=JHcNJ94kFPg",
+      "file_title": "Suhu, Kalor, dan Pemuaian | IPA Kelas 7 Bab 3 Kurikulum Merdeka - Lengkap",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Suhu dan Kalor",
+      "url": "https://www.youtube.com/watch?v=_S8r-k-a4NQ",
+      "file_title": "Kurikulum Merdeka Rangkuman IPA Kelas 7 Bab 3 Suhu Kalor Pemuaian",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Suhu dan Kalor",
+      "url": "https://www.youtube.com/watch?v=9D0x-u9LegE",
+      "file_title": "Suhu, Kalor, dan Pemuaian: IPA SMP Kelas 7",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Gerak dan Gaya",
+      "url": "https://www.youtube.com/watch?v=Ys0qe5PXFx4",
+      "file_title": "Kurikulum Merdeka Rangkuman Materi IPA Kelas 7 Bab 4 Gerak dan Gaya",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Gerak dan Gaya",
+      "url": "https://www.youtube.com/watch?v=ngJgEHjBtjw",
+      "file_title": "Gerak dan Gaya Kelas 7 - Konsep Gerak | IPA Bab 4 Kurikulum Merdeka",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Gerak dan Gaya",
+      "url": "https://www.youtube.com/watch?v=jhaWIopRmLg",
+      "file_title": "BAB 4 GERAK DAN GAYA | IPA KELAS 7 KURIKULUM MERDEKA",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Makhluk Hidup",
+      "url": "https://www.youtube.com/watch?v=PCBVUfe-dBo",
+      "file_title": "Kurikulum Merdeka Rangkuman Materi IPA Kelas 7 Bab 5 Klasifikasi Makhluk Hidup",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Makhluk Hidup",
+      "url": "https://www.youtube.com/watch?v=Lyiwj0_0gXE",
+      "file_title": "Klasifikasi Makhluk Hidup: IPA Kelas 7 SMP",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Makhluk Hidup",
+      "url": "https://www.youtube.com/watch?v=wdNgLUFSJOc",
+      "file_title": "IPA Kelas 7 Semester 1 : Klasifikasi Makhluk Hidup (Part 1 : Ciri-ciri Makhluk Hidup)",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Ekologi",
+      "url": "https://www.youtube.com/watch?v=1T7r3l-6irQ",
+      "file_title": "Ekologi dan Keanekaragaman Hayati: IPA Kelas 7 SMP",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Ekologi",
+      "url": "https://www.youtube.com/watch?v=Xw7QQZR4N_Q",
+      "file_title": "Kurikulum Merdeka Rangkuman Materi IPA Kelas 7 Bab 6 Ekologi dan Keanekaragaman Hayati",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Ekologi",
+      "url": "https://www.youtube.com/watch?v=GQGRXwXZAYg",
+      "file_title": "Ekologi dan Keanekaragaman Hayati Indonesia | IPA Kelas 7 Bab 6 Kurikulum Merdeka",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Bumi dan Tata Surya",
+      "url": "https://www.youtube.com/watch?v=Bo6ZRipKWFo",
+      "file_title": "Kurikulum Merdeka Rangkuman Materi IPA Kelas 7 Bab 7 Bumi dan Tata Surya",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Bumi dan Tata Surya",
+      "url": "https://www.youtube.com/watch?v=FwZH1JD08SQ",
+      "file_title": "Sistem Tata Surya: IPA Kelas 7 SMP",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Bumi dan Tata Surya",
+      "url": "https://www.youtube.com/watch?v=p3wUQLSzbgo",
+      "file_title": "Tata Surya Kelas 7",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Jelajah Nusantara",
+      "url": "https://www.youtube.com/watch?v=1TmKOLKq6Qc",
+      "file_title": "Materi Teks Deskripsi kelas 7 Bahasa Indonesia Semester 1",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Jelajah Nusantara",
+      "url": "https://www.youtube.com/watch?v=5REd8MgJ4gw",
+      "file_title": "Materi Teks Deskripsi | Bahasa Indonesia Kelas 7 Kurikulum Merdeka",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Jelajah Nusantara",
+      "url": "https://www.youtube.com/watch?v=PE2HGnUn59o",
+      "file_title": "Kurikulum Merdeka Rangkuman Bahasa Indonesia Kelas 7 Bab 1 Teks Deskripsi",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Dunia Imajinasi",
+      "url": "https://www.youtube.com/watch?v=j46PDNbujwo",
+      "file_title": "Materi Puisi Rakyat | Bahasa Indonesia Kelas 7 Kurikulum Merdeka",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Dunia Imajinasi",
+      "url": "https://www.youtube.com/watch?v=2KVki---MQg",
+      "file_title": "Rangkuman Bahasa Indonesia Kelas 7 Bab 5: Puisi Rakyat | Gurindam, Pantun, Syair",
+      "actual_title": "Rangkuman Bahasa Indonesia Kelas 7 Bab 5: Puisi Rakyat | Gurindam, Pantun, Syair",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Pelindung Bumi",
+      "url": "https://www.youtube.com/watch?v=j5rVVM_55z4",
+      "file_title": "Materi Teks Berita | Bahasa Indonesia Kelas 7 Kurikulum Merdeka",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Bilangan",
+      "url": "https://www.youtube.com/watch?v=j3-vxTMQlXM",
+      "file_title": "Kurikulum Merdeka Matematika Kelas 7 Bab 1 Bilangan Bulat",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Bilangan",
+      "url": "https://www.youtube.com/watch?v=cQAwIhfC6Dg",
+      "file_title": "20 Menit Bahas Tuntas Bilangan Bulat Kelas 7",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Bilangan",
+      "url": "https://www.youtube.com/watch?v=Rc6vjXtS70Q",
+      "file_title": "Bilangan Bulat dan Bilangan Rasional | Matematika SMP",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Aljabar",
+      "url": "https://www.youtube.com/watch?v=KTbI7v7SfQA",
+      "file_title": "Kurikulum Merdeka Matematika Kelas 7 Bab 4 Bentuk Aljabar",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Aljabar",
+      "url": "https://www.youtube.com/watch?v=tQGWlesGYG0",
+      "file_title": "Aljabar | Matematika Kelas 7 Kurikulum Merdeka - Lengkap",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Aljabar",
+      "url": "https://www.youtube.com/watch?v=xoHt137BXJE",
+      "file_title": "Aljabar Itu Gampang & Seru! | Bahas Aljabar Kelas 7 SMP - MasterClass",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Persamaan",
+      "url": "https://www.youtube.com/watch?v=ZzIaRdq5kws",
+      "file_title": "Menyelesaikan Persamaan Linear Satu Variabel (PLSV)",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Persamaan",
+      "url": "https://www.youtube.com/watch?v=Z3xl0VF7gy4",
+      "file_title": "Materi Matematika Kelas 7: Persamaan Linear Satu Variabel",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Perbandingan",
+      "url": "https://www.youtube.com/watch?v=d_pu3O6xKig",
+      "file_title": "Kurikulum Merdeka Matematika Kelas 7 Bab 3 Rasio",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Perbandingan",
+      "url": "https://www.youtube.com/watch?v=6JA1o6UYtaU",
+      "file_title": "Skala - Bab Rasio Subbab Skala Matematika Kelas 7",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Aritmatika Sosial",
+      "url": "https://www.youtube.com/watch?v=m79K1rDInl4",
+      "file_title": "Matematika Kelas 7: Aritmatika Sosial",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Aritmatika Sosial",
+      "url": "https://www.youtube.com/watch?v=csdhlielqhY",
+      "file_title": "Aritmatika Sosial: Matematika Kelas 7 SMP",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Bangun Datar",
+      "url": "https://www.youtube.com/watch?v=0Z2f5yppJbo",
+      "file_title": "Luas dan Keliling Bangun Datar (Lengkap Semua Bangun Datar)",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Bangun Datar",
+      "url": "https://www.youtube.com/watch?v=bhrniJHL0mg",
+      "file_title": "KELILING DAN LUAS BANGUN DATAR",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Statistika",
+      "url": "https://www.youtube.com/watch?v=q8p2QrWzWLs",
+      "file_title": "Penyajian Data - Statistika - Kelas 7 SMP",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Statistika",
+      "url": "https://www.youtube.com/watch?v=t3O3AeBnELs",
+      "file_title": "Matematika Kelas 7: Penyajian Data",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Ruang dan Interaksi",
+      "url": "https://www.youtube.com/watch?v=KVA3tOIlwB0",
+      "file_title": "Video Pembelajaran Animasi, Ruang dan Interaksi Antarruang IPS Kelas 7",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Ruang dan Interaksi",
+      "url": "https://www.youtube.com/watch?v=_H75Hw0ghsU",
+      "file_title": "Materi IPS Kelas 7 Bab 1: Ruang dan Interaksi Antarruang",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Interaksi Sosial",
+      "url": "https://www.youtube.com/watch?v=qW-7jPfGZrs",
+      "file_title": "Interaksi Sosial dan Lembaga Sosial | IPS SMP",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Ekonomi IPS",
+      "url": "https://www.youtube.com/watch?v=xIB4ZxpMs3k",
+      "file_title": "Kegiatan Ekonomi - Materi IPS SMP Kelas 7",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Ekonomi IPS",
+      "url": "https://www.youtube.com/watch?v=S1xHhqlhaL0",
+      "file_title": "Kurikulum Merdeka IPS Kelas 7 Tema 3 Bagian B Aktivitas Kegiatan Ekonomi",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Berpikir Komputasional",
+      "url": "https://www.youtube.com/watch?v=wMvb7VZPVME",
+      "file_title": "Kurikulum Merdeka Materi Informatika Kelas 7 Bab 2 Berpikir Komputasional",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Berpikir Komputasional",
+      "url": "https://www.youtube.com/watch?v=jCb9fpPrxLc",
+      "file_title": "Pengenalan Computational Thinking | Berpikir Komputasional",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Berpikir Komputasional",
+      "url": "https://www.youtube.com/watch?v=umfcvkLdUgg",
+      "file_title": "Materi Informatika SMP Kelas 7 | Berpikir Komputasi (Computational Thinking)",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Algoritma Informatika",
+      "url": "https://www.youtube.com/watch?v=_pmt1sMOY8U",
+      "file_title": "Kurikulum Merdeka Materi Informatika Kelas 7 Bab 7 Algoritma dan Pemrograman",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Algoritma Informatika",
+      "url": "https://www.youtube.com/watch?v=BYg5QC_QGZ8",
+      "file_title": "Algoritma dan Pemrograman | Materi Informatika Jenjang SMP Kelas 7",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Internet",
+      "url": "https://www.youtube.com/watch?v=x5aERTeEYrI",
+      "file_title": "Jaringan Komputer dan Internet (Pengantar dan Koneksi Internet) - Informatika",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Internet",
+      "url": "https://www.youtube.com/watch?v=c-t-zY75tJY",
+      "file_title": "Kurikulum Merdeka Materi Informatika Kelas 7 Bab 5 Jaringan Komputer dan Internet",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Keamanan",
+      "url": "https://www.youtube.com/watch?v=9JmAZeURp3o",
+      "file_title": "Informasi Pribadi dan Data Privasi Pada Media Sosial - Informatika",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Keamanan",
+      "url": "https://www.youtube.com/watch?v=I6YHzi5m1oY",
+      "file_title": "Informatika Kelas 7 - Bab 5 | Koneksi Aman & Enkripsi",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Dampak Sosial",
+      "url": "https://www.youtube.com/watch?v=JqKwUJR06mk",
+      "file_title": "Dampak Sosial Informatika | Informatika Kelas 7 Kurikulum Merdeka",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Dampak Sosial",
+      "url": "https://www.youtube.com/watch?v=qrYGtIE5eGo",
+      "file_title": "Kurikulum Merdeka Materi Informatika Kelas 7 Bab 8 Dampak Sosial Informatika",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Pancasila",
+      "url": "https://www.youtube.com/watch?v=xyIGA9vejAI",
+      "file_title": "Kurikulum Merdeka Rangkuman PPKN Kelas 7 Bab 1: Sejarah Kelahiran Pancasila",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Pancasila",
+      "url": "https://www.youtube.com/watch?v=U_ll6n4iRcY",
+      "file_title": "FULL - Rangkuman Materi Sejarah Kelahiran Pancasila - Pendidikan Pancasila",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Pancasila",
+      "url": "https://www.youtube.com/watch?v=att2vZad9c8",
+      "file_title": "Rangkuman Materi PPKN Kelas 7 Bab 1 Sejarah Kelahiran Pancasila (Kurikulum Merdeka)",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Norma",
+      "url": "https://www.youtube.com/watch?v=cEWG4Msg948",
+      "file_title": "Kurikulum Merdeka PPKN Kelas 7 Bab 2 Norma dan UUD NRI Tahun 1945",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Norma",
+      "url": "https://www.youtube.com/watch?v=TAbRx_n6sO8",
+      "file_title": "PPKn Kelas 7 | BAB 2 - Macam Macam Norma",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Keberagaman",
+      "url": "https://www.youtube.com/watch?v=4kJovN532as",
+      "file_title": "Rangkuman Materi Pancasila Kelas 7 Bab 4 Kurikulum Merdeka Rev 2023",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Keberagaman",
+      "url": "https://www.youtube.com/watch?v=9B7_WJuM6hY",
+      "file_title": "Keberagaman Bangsa Indonesia dalam Bingkai Bhinneka Tunggal Ika",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Kebugaran",
+      "url": "https://www.youtube.com/watch?v=1LM5z2ZVAyg",
+      "file_title": "Materi PJOK Kelas 7 Kebugaran Untuk Kesehatan Kurikulum Merdeka",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Introduction",
+      "url": "https://www.youtube.com/watch?v=idA7m0xUMVo",
+      "file_title": "Greeting and Introduction - Bahasa Inggris",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Introduction",
+      "url": "https://www.youtube.com/watch?v=wZN1yU9vHCE",
+      "file_title": "Materi Greeting kelas 7 | Sapaan",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Daily Life",
+      "url": "https://www.youtube.com/watch?v=E1q56pZNswE",
+      "file_title": "Bahasa Inggris Kelas 7 - Daily Activities (Simple Present Tense)",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Daily Life",
+      "url": "https://www.youtube.com/watch?v=CMDxNcwp4zg",
+      "file_title": "Cara Mudah Bercerita Daily Activity Dalam Bahasa Inggris",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "School",
+      "url": "https://www.youtube.com/watch?v=J3GZ93MrHgQ",
+      "file_title": "Class Schedule - Bahasa Inggris",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "School",
+      "url": "https://www.youtube.com/watch?v=l9q8F8ZnTOM",
+      "file_title": "Bahasa Inggris SMP Kelas 7: School Subjects (Nama Mata Pelajaran)",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Hobbies",
+      "url": "https://www.youtube.com/watch?v=ktuFc7s08cU",
+      "file_title": "Bahasa Inggris Kelas 7 Chapter 2: Telling Hobby",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Hobbies",
+      "url": "https://www.youtube.com/watch?v=82gL0o6--lo",
+      "file_title": "Bahasa Inggris Kelas 7 Bab 2 - Hobbies and What We Like",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Descriptive",
+      "url": "https://www.youtube.com/watch?v=0hQArH479FU",
+      "file_title": "Materi Descriptive Text Terlengkap",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMP_7",
+      "topic": "Descriptive",
+      "url": "https://www.youtube.com/watch?v=-7kTaDdGFfs",
+      "file_title": "Materi Inggris Kelas 7 Bab 7: Descriptive Text",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Fungsi",
+      "url": "https://www.youtube.com/watch?v=o-ESReWkrzw",
+      "file_title": "Fungsi komposisi dan fungsi invers",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Fungsi",
+      "url": "https://www.youtube.com/watch?v=wIVQKtO2T4s",
+      "file_title": "Komposisi Fungsi - Matematika Wajib Kelas XI Kurikulum Merdeka",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Fungsi",
+      "url": "https://www.youtube.com/watch?v=BbwvwIcImMI",
+      "file_title": "Komposisi Fungsi Part 1 - Operasi Aljabar Pada Fungsi [Matematika Wajib]",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Polinomial",
+      "url": "https://www.youtube.com/watch?v=2oPK0eMkwQg",
+      "file_title": "Polinomial (Bagian 1) - Pengertian dan Operasi Aljabar Polinomial Matematika",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Polinomial",
+      "url": "https://www.youtube.com/watch?v=v01krYoVY9M",
+      "file_title": "Penjumlahan dan Pengurangan Polinomial Suku Banyak | Matematika SMA",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Polinomial",
+      "url": "https://www.youtube.com/watch?v=yiJ9LEBL5vc",
+      "file_title": "Suku Banyak - Kesamaan Suku Banyak (Polinom)",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Trigonometri",
+      "url": "https://www.youtube.com/watch?v=1t_KJ5Gyrh0",
+      "file_title": "Grafik fungsi trigonometri, grafik trigonometri",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Trigonometri",
+      "url": "https://www.youtube.com/watch?v=NhVq5N5K2-w",
+      "file_title": "Matematika Dasar: Trigonometri | Pengertian, Fungsi Trigonometri & Sudut",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Trigonometri",
+      "url": "https://www.youtube.com/watch?v=8A6pMt553rI",
+      "file_title": "Identitas Trigonometri Penjumlahan dan Selisih Dua Sudut Matematika Peminatan",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Turunan",
+      "url": "https://www.youtube.com/watch?v=UtTvAVOOD6U",
+      "file_title": "Belajar Konsep Diferensial (Turunan) Dalam 10 Menit!",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Integral",
+      "url": "https://www.youtube.com/watch?v=E86ckq8yLUU",
+      "file_title": "Belajar Integral Dari Dasar Dalam 12 Menit!",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Integral",
+      "url": "https://www.youtube.com/watch?v=T6e0NRTIQ0o",
+      "file_title": "LENGKAP Integral tak tentu, integral tertentu, integral subtitusi",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Integral",
+      "url": "https://www.youtube.com/watch?v=1gG1Md4EV3U",
+      "file_title": "Konsep Dasar Integral Fungsi Aljabar (Integral Part 1) M4THLAB",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Matriks",
+      "url": "https://www.youtube.com/watch?v=HqssIxIg7T4",
+      "file_title": "Matriks Matematika Wajib Kelas 11 Bagian 1 - Pengenalan Matriks",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Matriks",
+      "url": "https://www.youtube.com/watch?v=lMmIcZSFEew",
+      "file_title": "Matriks (1) | Matematika Kelas 11",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Vektor",
+      "url": "https://www.youtube.com/watch?v=WsOfCoLlHj4",
+      "file_title": "Vektor dimensi dua | Vektor",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Vektor",
+      "url": "https://www.youtube.com/watch?v=FqaZq0Cxjx4",
+      "file_title": "Matematika Kelas XI: Vektor di Dimensi Dua dan Dimensi Tiga",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Teks Eksposisi",
+      "url": "https://www.youtube.com/watch?v=pVis-QzP1g0",
+      "file_title": "Teks Eksposisi",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Teks Eksposisi",
+      "url": "https://www.youtube.com/watch?v=5N8tbKKFYZU",
+      "file_title": "Teks Eksposisi (Definisi, Ciri-Ciri, Struktur, Fakta dan Opini)",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Teks Eksposisi",
+      "url": "https://www.youtube.com/watch?v=Fu4A--IDNDo",
+      "file_title": "Teks Eksposisi Beserta Contohnya",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Teks Argumentasi",
+      "url": "https://www.youtube.com/watch?v=Nop5TPNdwBg",
+      "file_title": "Teks Argumentasi | Bahasa Indonesia SMA",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Teks Argumentasi",
+      "url": "https://www.youtube.com/watch?v=igqsmkmUfd0",
+      "file_title": "Materi Pembelajaran Teks Argumentasi Kurikulum Merdeka Kelas XI SMA",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Teks Argumentasi",
+      "url": "https://www.youtube.com/watch?v=5Ldn0X09gjM",
+      "file_title": "Materi Teks Argumentasi Kelas 11 | Bahasa Indonesia",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Cerita Pendek",
+      "url": "https://www.youtube.com/watch?v=kiuspGbe5S4",
+      "file_title": "Materi Teks Cerita Pendek SMA/SMK Kelas 11 | Bahasa Indonesia",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Cerita Pendek",
+      "url": "https://www.youtube.com/watch?v=c2Ngqfp_Thc",
+      "file_title": "Teks Cerpen (Definisi, Ciri-Ciri, Manfaat Cerpen)",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Cerita Pendek",
+      "url": "https://www.youtube.com/watch?v=RgYiIAkq7D8",
+      "file_title": "Materi Cerpen Kelas XI Kurikulum Merdeka",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Drama",
+      "url": "https://www.youtube.com/watch?v=JXygZE1VcIg",
+      "file_title": "Unsur Intrinsik & Ekstrinsik Drama",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Drama",
+      "url": "https://www.youtube.com/watch?v=MDGLwG45ZJE",
+      "file_title": "Materi Drama kelas XI Bahasa Indonesia",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Drama",
+      "url": "https://www.youtube.com/watch?v=BVAn2WqwjYU",
+      "file_title": "Teks Drama Kelas 11 SMA ~ Bahasa Indonesia",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Explanation",
+      "url": "https://www.youtube.com/watch?v=aVzJ8zHy908",
+      "file_title": "Bahasa Inggris Kelas 11 - Explanation Text | GIA Academy",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Explanation",
+      "url": "https://www.youtube.com/watch?v=m_GUSXGtjoI",
+      "file_title": "Explanation Text Lengkap | Kelas 11 | Social Functions - Types - Structure",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Discussion",
+      "url": "https://www.youtube.com/watch?v=u7ZCSPFwSGQ",
+      "file_title": "Discussion Text — Madam English YouTube Channel",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Discussion",
+      "url": "https://www.youtube.com/watch?v=IFfqduemQV4",
+      "file_title": "Bahasa Inggris Kelas 11: Analytical Exposition Text - Definition and Purpose",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Speech",
+      "url": "https://www.youtube.com/watch?v=bgPQAbQXLo4",
+      "file_title": "Tips Public Speaking Presentasi Bahasa Inggris",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Speech",
+      "url": "https://www.youtube.com/watch?v=PCRC2MgazCg",
+      "file_title": "Public Speaking Jadi Lancar & Meyakinkan Setelah Nonton Video Ini!",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Ilmu Ekonomi",
+      "url": "https://www.youtube.com/watch?v=6siz7jSeJIw",
+      "file_title": "Ekonomi Kelas XI: Konsep Pendapatan Nasional",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Ilmu Ekonomi",
+      "url": "https://www.youtube.com/watch?v=KmOHoKzWrn8",
+      "file_title": "Quipper Video - Konsep Ilmu Ekonomi Bagian 1 - Ekonomi",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Permintaan dan Penawaran",
+      "url": "https://www.youtube.com/watch?v=JYp70RQnDwM",
+      "file_title": "Permintaan dan Penawaran | Ekonomi Kelas X SMA/MA | EDURAYA MENGAJAR",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Permintaan dan Penawaran",
+      "url": "https://www.youtube.com/watch?v=VMiJ0fRytE8",
+      "file_title": "Permintaan, Penawaran, dan Keseimbangan Pasar - Materi Ekonomi SMA",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Pasar",
+      "url": "https://www.youtube.com/watch?v=VbBHbXjbECU",
+      "file_title": "Struktur Pasar : Pasar Persaingan Sempurna vs Pasar Persaingan Tidak Sempurna",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Pasar",
+      "url": "https://www.youtube.com/watch?v=5Do_GCBigkU",
+      "file_title": "Mengenal 4 Jenis Pasar dalam Ekonomi: Persaingan Sempurna, Monopoli, Oligopoli",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Kebijakan Moneter",
+      "url": "https://www.youtube.com/watch?v=_Nej9RgC7Mk",
+      "file_title": "Kebijakan Moneter - Kebijakan Moneter dan Kebijakan Fiskal Part 1",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Kebijakan Moneter",
+      "url": "https://www.youtube.com/watch?v=KMPnVroI2vE",
+      "file_title": "Mengenal Kebijakan Moneter Bank Indonesia",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Kebijakan Fiskal",
+      "url": "https://www.youtube.com/watch?v=Vd1bAkXZvaY",
+      "file_title": "APBN dan APBD Part 1 - Materi Ekonomi Kelas XI SMA",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Kebijakan Fiskal",
+      "url": "https://www.youtube.com/watch?v=WQ6Ps4szBmc",
+      "file_title": "APBN (Part 1) | Ekonomi Kelas 11 | EDURAYA MENGAJAR",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Pembangunan",
+      "url": "https://www.youtube.com/watch?v=zFxZP1Vlopg",
+      "file_title": "Pertumbuhan dan Pembangunan Ekonomi 1 - Pengertian, Teori, dan Menghitung",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Pembangunan",
+      "url": "https://www.youtube.com/watch?v=Rc2KVM0Ie7w",
+      "file_title": "Ekonomi Kelas 11 - Pertumbuhan dan Pembangunan Ekonomi",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Peta",
+      "url": "https://www.youtube.com/watch?v=N2pJsgv9sQ8",
+      "file_title": "Pengetahuan Peta, Pengindraan Jauh, dan Sistem Informasi Geografi (SIG)",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Peta",
+      "url": "https://www.youtube.com/watch?v=TuWiDYzMNN0",
+      "file_title": "Kartografi, Penginderaan Jauh, SIG - Materi Geografi SMA",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Atmosfer",
+      "url": "https://www.youtube.com/watch?v=tyq4G69eNmU",
+      "file_title": "Dinamika Atmosfer : Pengertian, Komposisi, Lapisan Atmosfer - Geografi",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Antroposfer",
+      "url": "https://www.youtube.com/watch?v=MifLG8ICvz8",
+      "file_title": "Dinamika Penduduk | Geografi SMA",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Antroposfer",
+      "url": "https://www.youtube.com/watch?v=ocLLmoXiRVQ",
+      "file_title": "Dinamika Penduduk - Geografi Kelas XI Semester 2",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Sumber Daya",
+      "url": "https://www.youtube.com/watch?v=zEjSKAeDIDQ",
+      "file_title": "Mitigasi Bencana Alam - Geografi Kelas 11 (Quipper Video)",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Sumber Daya",
+      "url": "https://www.youtube.com/watch?v=PooZ0B9myUE",
+      "file_title": "Klasifikasi Sumber Daya Alam | Geografi Kelas 11 - EDURAYA MENGAJAR",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Sosiologi Dasar",
+      "url": "https://www.youtube.com/watch?v=551gHFtki_A",
+      "file_title": "Diferensiasi Sosial | Sosiologi Kelas 11 | EDURAYA MENGAJAR",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Sosiologi Dasar",
+      "url": "https://www.youtube.com/watch?v=QVFvRiwVvQo",
+      "file_title": "Sosiologi Kelas XI: Pembentukan Kelompok Sosial",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Interaksi Sosial",
+      "url": "https://www.youtube.com/watch?v=ushsEHIzvTY",
+      "file_title": "Interaksi sosial di masyarakat | Sosiologi Kelas 10 - EDURAYA MENGAJAR",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Interaksi Sosial",
+      "url": "https://www.youtube.com/watch?v=KYd-glb289s",
+      "file_title": "Tindakan & Interaksi Sosial : Pengertian Interaksi Sosial - Sosiologi",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Stratifikasi",
+      "url": "https://www.youtube.com/watch?v=-Jb6lDpuW-k",
+      "file_title": "Stratifikasi Sosial | Sosiologi Kelas 11 - KHATULISTIWA MENGAJAR",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Stratifikasi",
+      "url": "https://www.youtube.com/watch?v=Wdvy8e5ElEA",
+      "file_title": "Stratifikasi Sosial Dalam Masyarakat || Sosiologi Kelas XI",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Konflik",
+      "url": "https://www.youtube.com/watch?v=rhb7oQfdO7c",
+      "file_title": "Chapter 11: Konflik Sosial | Sosiologi | Alternatifa",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Konflik",
+      "url": "https://www.youtube.com/watch?v=cTE992WmsOc",
+      "file_title": "Sosiologi Kelas 11 - Bab 3 Konflik Sosial Kurikulum Merdeka",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Konflik",
+      "url": "https://www.youtube.com/watch?v=95MWVOIcekQ",
+      "file_title": "Integrasi Sosial - Sosiologi Kelas 11 (Quipper Video)",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Perubahan Sosial",
+      "url": "https://www.youtube.com/watch?v=dD1TrddgQPg",
+      "file_title": "Materi Sosiologi SMA | Globalisasi | Pengertian dan Ciri-Ciri Globalisasi",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Perubahan Sosial",
+      "url": "https://www.youtube.com/watch?v=eUBRVWQIF2s",
+      "file_title": "Apa itu Globalisasi | Sosiologi Kelas 12 - EDURAYA MENGAJAR",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Permainan Bola Besar",
+      "url": "https://www.youtube.com/watch?v=lPqPfLz3ppY",
+      "file_title": "Materi Permainan Bola Besar - Pembelajaran Daring PJOK",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Permainan Bola Besar",
+      "url": "https://www.youtube.com/watch?v=sF8H7b8kyNk",
+      "file_title": "Semua Materi Bola Voli Dijelaskan - Sejarah, Teknik dasar, Peraturan",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Permainan Bola Besar",
+      "url": "https://www.youtube.com/watch?v=crh89E2Aya0",
+      "file_title": "Materi Penjas Kelas 11 Bola Basket",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Permainan Bola Kecil",
+      "url": "https://www.youtube.com/watch?v=1aMU8Njprnc",
+      "file_title": "Semua Materi Bulutangkis Dijelaskan - Sejarah, Teknik Dasar, Peraturan",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Pola Hidup Sehat",
+      "url": "https://www.youtube.com/watch?v=j4XKhD2DzyE",
+      "file_title": "Jenis-jenis Napza (narkotika, psikotropika, zat adiktif)",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Pola Hidup Sehat",
+      "url": "https://www.youtube.com/watch?v=ZhYszcLbDIo",
+      "file_title": "Apa Itu Narkoba? Mengapa Narkoba Berbahaya? Bagaimana Agar Terhindar?",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Pancasila",
+      "url": "https://www.youtube.com/watch?v=XQN2P0wC6LM",
+      "file_title": "PKN Kelas XI - BAB 1. Menjiwai Pancasila - Pancasila sebagai Ideologi",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Pancasila",
+      "url": "https://www.youtube.com/watch?v=y2LUKrMfC6g",
+      "file_title": "Rangkuman Materi Pancasila Kelas 11 Bab 1 Kurikulum Merdeka",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Pancasila",
+      "url": "https://www.youtube.com/watch?v=OCsvY1IGSgc",
+      "file_title": "Pancasila sebagai Ideologi Negara || Pendidikan Pancasila Fase F",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Hukum",
+      "url": "https://www.youtube.com/watch?v=wt2uHXro_ws",
+      "file_title": "Rangkuman Materi Pancasila Kelas 11 Bab 2 Kurikulum Merdeka",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Hukum",
+      "url": "https://www.youtube.com/watch?v=hG4zR3F3nEQ",
+      "file_title": "Pendidikan Pancasila Kelas 11: Sistem Hukum di Indonesia",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "HAM",
+      "url": "https://www.youtube.com/watch?v=E-fpHsnggKE",
+      "file_title": "Materi PKn Kelas 11 Harmonisasi Hak Asasi dan Kewajiban Asasi Manusia",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "HAM",
+      "url": "https://www.youtube.com/watch?v=7TqevT9IOS0",
+      "file_title": "Bagaimana HAM Terbentuk? | Sejarah Singkat Hak Asasi Manusia",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Demokrasi",
+      "url": "https://www.youtube.com/watch?v=sulsr6DPC6g",
+      "file_title": "Materi PKn Kelas 11 Bab 2 Sistem dan Dinamika Demokrasi Pancasila",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Demokrasi",
+      "url": "https://www.youtube.com/watch?v=KuVtsR7QYZk",
+      "file_title": "Video Pembelajaran #21 || Hakikat Demokrasi PPKn",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Globalisasi",
+      "url": "https://www.youtube.com/watch?v=XGmbaH4DQHs",
+      "file_title": "Kita dan Masyarakat Global",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Globalisasi",
+      "url": "https://www.youtube.com/watch?v=pEo61hZoULo",
+      "file_title": "Kita dan Masyarakat Global - Elemen Bhinneka Tunggal Ika",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Algoritma",
+      "url": "https://www.youtube.com/watch?v=zrz6_ifc6b0",
+      "file_title": "Algoritma dan Pemrograman - Informatika Fase F Kelas XI",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Algoritma",
+      "url": "https://www.youtube.com/watch?v=u1huXRBkSbE",
+      "file_title": "Notasi Flowchart pada Algoritma | Dasar-Dasar Pemrograman",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Algoritma",
+      "url": "https://www.youtube.com/watch?v=IGPY6B3De_U",
+      "file_title": "Strategi Algoritmik dan Pemrograman | Informatika Kelas XI",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Struktur Data",
+      "url": "https://www.youtube.com/watch?v=q04buHDFT6M",
+      "file_title": "Struktur Data dalam Pemrograman",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Struktur Data",
+      "url": "https://www.youtube.com/watch?v=E_IplykMZH0",
+      "file_title": "Array pada Programming",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Pemrograman",
+      "url": "https://www.youtube.com/watch?v=uqVJc9lLknA",
+      "file_title": "Algoritma dalam Pemrograman",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Pemrograman",
+      "url": "https://www.youtube.com/watch?v=SdEdeNCANuM",
+      "file_title": "Informatika Analisis Data - Pengenalan Bahasa Python Pada Google Colab",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Termokimia",
+      "url": "https://www.youtube.com/watch?v=9D6WGcLf7UU",
+      "file_title": "Termokimia: Kalor dan Entalpi | Kimia | SMA",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Laju Reaksi",
+      "url": "https://www.youtube.com/watch?v=JWRH5mibIws",
+      "file_title": "Laju Reaksi (1) | Konsep Laju Reaksi | Kimia Kelas 11",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Laju Reaksi",
+      "url": "https://www.youtube.com/watch?v=lE3-HOasaU8",
+      "file_title": "Laju Reaksi - Kimia Kelas 11 (Quipper Video)",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Kesetimbangan Kimia",
+      "url": "https://www.youtube.com/watch?v=oDR1CJHEq9A",
+      "file_title": "Reaksi Kesetimbangan | Tetapan Kesetimbangan Kc | Kimia Kelas 11",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Kesetimbangan Kimia",
+      "url": "https://www.youtube.com/watch?v=xD8TFFL9TRA",
+      "file_title": "KIMIA Kelas 11 - Kesetimbangan Kimia | GIA Academy",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Asam dan Basa",
+      "url": "https://www.youtube.com/watch?v=e_0mceAEvks",
+      "file_title": "Larutan Asam Basa (1) | Teori Asam dan Basa | Kimia Kelas 11",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Asam dan Basa",
+      "url": "https://www.youtube.com/watch?v=4aJckRYT-mk",
+      "file_title": "Larutan Asam Basa (2) | Indikator Asam dan Basa | Kimia Kelas 11",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Larutan Penyangga",
+      "url": "https://www.youtube.com/watch?v=b0xsz9Zrq20",
+      "file_title": "KIMIA Kelas 11 - Larutan Penyangga | GIA Academy",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Larutan Penyangga",
+      "url": "https://www.youtube.com/watch?v=N-0aZuKpgzE",
+      "file_title": "Larutan Penyangga (1) | Jenis-jenis Larutan Penyangga | Cara Kerja",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Hidrolisis Garam",
+      "url": "https://www.youtube.com/watch?v=w3VkBDgOadg",
+      "file_title": "Hidrolisis Garam (1) | Sifat Garam | Reaksi Hidrolisis | Kimia XI",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Hidrolisis Garam",
+      "url": "https://www.youtube.com/watch?v=x8cItpmNLb0",
+      "file_title": "HIDROLISIS GARAM - MATERI UTBK SBMPTN DAN SIMAK UI",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Titrasi Asam-Basa",
+      "url": "https://www.youtube.com/watch?v=EqMVS53UDNw",
+      "file_title": "Larutan Asam Basa (8) | Titrasi Asam Basa | Kimia Kelas 11",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Titrasi Asam-Basa",
+      "url": "https://www.youtube.com/watch?v=UoPKs_nCVSs",
+      "file_title": "Kimia Kelas 11 Semester 2 : Titrasi Asam Basa",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Hidrokarbon dan Minyak Bumi",
+      "url": "https://www.youtube.com/watch?v=22-S9htSXqU",
+      "file_title": "Hidrokarbon (3) | Tata Nama Senyawa Hidrokarbon | Alkana Alkena Alkuna",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    },
+    {
+      "grade": "SMA_11",
+      "topic": "Hidrokarbon dan Minyak Bumi",
+      "url": "https://www.youtube.com/watch?v=64Ns-OU0wnQ",
+      "file_title": "Hidrokarbon (4) | Isomer Senyawa Alkana | Kimia Kelas 11",
+      "actual_title": "N/A",
+      "reason": "Topic keywords absent from video title or description (lenient check)."
+    }
+  ]
+}

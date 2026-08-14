@@ -1,0 +1,95 @@
+{
+  "date": "2026-08-09",
+  "total": 219,
+  "smp7": 91,
+  "sma11": 128,
+  "live": 219,
+  "ok": 158,
+  "grade_mismatches": 0,
+  "false_positives": 48,
+  "genuine_issues": 13,
+  "dead": 0,
+  "fixed_from_prior_audit": [
+    "FH-GCEiGk-Y",
+    "ushsEHIzvTY",
+    "lPqPfLz3ppY",
+    "OZAdSVoMnh4"
+  ],
+  "false_positive_examples": [
+    {
+      "vid": "x4dPya-ynyY",
+      "topic": "Ilmu Sains",
+      "reason": "semantic alias"
+    },
+    {
+      "vid": "Lyiwj0_0gXE",
+      "topic": "Makhluk Hidup",
+      "reason": "semantic alias"
+    },
+    {
+      "vid": "1TmKOLKq6Qc",
+      "topic": "Jelajah Nusantara",
+      "reason": "semantic alias"
+    },
+    {
+      "vid": "5REd8MgJ4gw",
+      "topic": "Jelajah Nusantara",
+      "reason": "semantic alias"
+    },
+    {
+      "vid": "PE2HGnUn59o",
+      "topic": "Jelajah Nusantara",
+      "reason": "semantic alias"
+    },
+    {
+      "vid": "j46PDNbujwo",
+      "topic": "Dunia Imajinasi",
+      "reason": "semantic alias"
+    },
+    {
+      "vid": "lYhibfLXc2s",
+      "topic": "Dunia Imajinasi",
+      "reason": "semantic alias"
+    },
+    {
+      "vid": "2KVki---MQg",
+      "topic": "Dunia Imajinasi",
+      "reason": "semantic alias"
+    },
+    {
+      "vid": "ilf4sWe6IRo",
+      "topic": "Hal Baik bagi Tubuh",
+      "reason": "semantic alias"
+    },
+    {
+      "vid": "P4fukAAGeuQ",
+      "topic": "Hal Baik bagi Tubuh",
+      "reason": "semantic alias"
+    },
+    {
+      "vid": "6j0DN7U_6Og",
+      "topic": "Pelindung Bumi",
+      "reason": "semantic alias"
+    },
+    {
+      "vid": "Px2Pn9XpBJU",
+      "topic": "Pelindung Bumi",
+      "reason": "semantic alias"
+    },
+    {
+      "vid": "d_pu3O6xKig",
+      "topic": "Perbandingan",
+      "reason": "semantic alias"
+    },
+    {
+      "vid": "6JA1o6UYtaU",
+      "topic": "Perbandingan",
+      "reason": "semantic alias"
+    },
+    {
+      "vid": "t3O3AeBnELs",
+      "topic": "Statistika",
+      "reason": "semantic alias"
+    }
+  ]
+}

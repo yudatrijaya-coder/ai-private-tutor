@@ -1,0 +1,2487 @@
+{
+  "grade": "SMP_1",
+  "template": "RAIHAN001",
+  "dryRun": false,
+  "apply": true,
+  "count": 82,
+  "flaggedHigh": 35,
+  "appliedFixes": 71,
+  "results": [
+    {
+      "materialId": "bf39dad0-2874-4f05-8e71-8c6ea57a8e88",
+      "subject": "IPA",
+      "topic": "Ilmu Sains",
+      "slideIssueCount": 1,
+      "quizIssueCount": 2,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'Tujuh Langkah' pada tabel kurang tepat secara akademis karena standar kurikulum SMP umumnya menggunakan 5-6 langkah utama.",
+          "suggestedFix": "Ubah judul menjadi 'Langkah-Langkah Metode Ilmiah' tanpa angka spesifik atau gabungkan 'Mengumpulkan informasi' ke dalam tahap observasi/studi literatur."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "medium",
+          "issue": "Question is vague; options do not provide a definition, only labels.",
+          "suggestedFix": "Change question to 'Manakah pernyataan yang tepat mengenai Metode Ilmiah?' and provide actual definitions in options."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "low",
+          "issue": "Question is subjective and lacks academic rigor for SMP level.",
+          "suggestedFix": "Change to 'Apa langkah pertama dalam Metode Ilmiah?' with options: Observasi, Eksperimen, Kesimpulan, Analisis Data."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "8bc3b8ab-2dfa-46eb-8933-c0b8c68b9abb",
+      "subject": "IPA",
+      "topic": "Ilmu Sains",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Pada bagian 'Contoh Praktis', variabel kontrol menyebutkan 'volume air (200 ml)' namun pada poin 'cara mengaduk' tertulis 'tidak diaduk'. Jika tidak diaduk, pelarutan akan sangat lambat dan sulit diukur secara akurat untuk siswa SMP.",
+          "suggestedFix": "Tambahkan instruksi 'aduk dengan kecepatan konstan' atau 'biarkan tanpa pengadukan' secara konsisten sebagai variabel kontrol."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "medium",
+          "issue": "The option at `correctIndex` (0) does not provide a definition for 'Merancang Percobaan' but rather states 'Definisi Merancang Percobaan'. This makes the question unanswerable as it asks for a definition but the correct option is not a definition itself. The explanation is also generic and does not elaborate on the definition.",
+          "suggestedFix": "Replace the options with actual definitions or characteristics of 'Merancang Percobaan'. Ensure the correct option provides an accurate definition. Update the explanation to directly support the chosen definition."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "ce0ed96c-be76-4879-befa-7e221be9143e",
+      "subject": "IPA",
+      "topic": "Makhluk Hidup",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "8280beeb-1257-48d6-99af-ed384edc812d",
+      "subject": "IPA",
+      "topic": "Makhluk Hidup",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "198cf992-37ca-4e4e-b6c0-09f816ad2538",
+      "subject": "IPA",
+      "topic": "Ekologi",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "36399687-ce77-4025-8ce9-b3d20df1b201",
+      "subject": "Bahasa Indonesia",
+      "topic": "Dunia Imajinasi",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "a6337ae9-73dd-428d-b793-f8597d95057a",
+      "subject": "Bahasa Inggris",
+      "topic": "School",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "8807cf81-3f19-416c-91c9-bc87594ed9fb",
+      "subject": "IPS",
+      "topic": "Ruang dan Interaksi",
+      "slideIssueCount": 1,
+      "quizIssueCount": 5,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'Sumber daya modal' kurang umum dalam kurikulum IPS SMP kelas 7 terkait materi ruang.",
+          "suggestedFix": "Ganti 'Sumber daya modal' dengan 'Sumber daya buatan' agar lebih relevan dengan konteks geografi dan lingkungan."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Pertanyaan tidak memberikan definisi, hanya menanyakan judul topik.",
+          "suggestedFix": "Ubah pertanyaan menjadi: 'Apa yang dimaksud dengan ruang dalam konteks geografi?'"
+        },
+        {
+          "questionIndex": 1,
+          "severity": "medium",
+          "issue": "Pilihan jawaban subjektif dan kurang akademis.",
+          "suggestedFix": "Ubah pilihan menjadi alasan berbasis konsep geografi seperti ketergantungan antarruang."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "medium",
+          "issue": "Pertanyaan terlalu umum, tidak menguji pemahaman materi.",
+          "suggestedFix": "Ubah menjadi contoh spesifik seperti perbedaan komoditas antar wilayah."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Pertanyaan tidak relevan dengan tujuan pembelajaran IPS SMP.",
+          "suggestedFix": "Ubah menjadi pertanyaan tentang interaksi antarruang."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "low",
+          "issue": "Pilihan jawaban kurang variatif.",
+          "suggestedFix": "Ubah pilihan menjadi metode belajar yang lebih spesifik seperti observasi lingkungan."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "4ca2d0e0-5172-47d5-9e16-8e96f9830c8d",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Pancasila",
+      "slideIssueCount": 1,
+      "quizIssueCount": 2,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Contoh penerapan sila ke-5 pada slide pertama kurang tepat. Membuang sampah pada tempatnya lebih relevan dengan sila ke-2 (kebersihan sebagai bagian dari adab) atau sila ke-3 (kepentingan bersama), bukan sila ke-5.",
+          "suggestedFix": "Ganti contoh sila ke-5 menjadi: 'Bersikap hemat dan tidak bergaya hidup mewah'."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Pertanyaan dan pilihan jawaban tidak mendefinisikan Pancasila secara substansial, melainkan hanya meta-diskusi tentang istilah tersebut.",
+          "suggestedFix": "Ubah pertanyaan menjadi definisi Pancasila sebagai dasar negara dan sesuaikan pilihan jawaban dengan nilai-nilai Pancasila."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "medium",
+          "issue": "Pertanyaan ambigu dan tidak memberikan contoh konkret, hanya pernyataan umum.",
+          "suggestedFix": "Ganti pertanyaan menjadi contoh penerapan sila tertentu, misalnya sila pertama, dan berikan opsi tindakan nyata."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "125afd1b-b02c-41a5-8f1f-a31dcba88aec",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Norma",
+      "slideIssueCount": 0,
+      "quizIssueCount": 5,
+      "slideIssues": [],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Pertanyaan dan pilihan jawaban bersifat placeholder dan tidak memberikan definisi materi yang sebenarnya.",
+          "suggestedFix": "Ganti dengan definisi norma yang sesuai kurikulum SMP Kelas 7."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "high",
+          "issue": "Pilihan jawaban terlalu umum dan tidak menguji pemahaman spesifik tentang fungsi norma.",
+          "suggestedFix": "Fokuskan pada fungsi norma dalam menciptakan ketertiban masyarakat."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "high",
+          "issue": "Pilihan jawaban tidak memberikan contoh konkret penerapan norma.",
+          "suggestedFix": "Berikan contoh nyata seperti mematuhi aturan lalu lintas atau menghormati orang tua."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "high",
+          "issue": "Pertanyaan bersifat trivial dan tidak menguji kompetensi materi Pendidikan Pancasila.",
+          "suggestedFix": "Ganti dengan pertanyaan mengenai klasifikasi empat macam norma (Agama, Kesusilaan, Kesopanan, Hukum)."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "high",
+          "issue": "Pertanyaan mengenai cara belajar, bukan konten materi norma.",
+          "suggestedFix": "Ganti dengan pertanyaan mengenai sanksi atau sumber dari salah satu jenis norma."
+        }
+      ],
+      "fixedSlide": false,
+      "fixedQuestions": true,
+      "regenerateRecommended": true
+    },
+    {
+      "materialId": "2da5abd1-4481-490f-9c37-67d5ad50c223",
+      "subject": "PJOK",
+      "topic": "Strategi Gerak",
+      "slideIssueCount": 1,
+      "quizIssueCount": 5,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Kesalahan faktual pada strategi pertahanan zona 2-3 dalam bola basket. Pertahanan zona 2-3 justru lemah terhadap tembakan jarak jauh karena pemain menumpuk di area dalam (paint area).",
+          "suggestedFix": "Ubah penjelasan menjadi: 'Cocok untuk melindungi area bawah ring dan memaksa lawan melakukan tembakan dari luar.'"
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Opsi jawaban bersifat tautologi dan tidak memberikan definisi faktual. Opsi A hanya mengulang kata kunci soal.",
+          "suggestedFix": "Ubah pertanyaan dan opsi untuk mendefinisikan strategi pertahanan dan penyerangan dalam konteks olahraga."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "medium",
+          "issue": "Pertanyaan dan opsi terlalu umum/vague. Tidak menguji pemahaman materi PJOK secara spesifik.",
+          "suggestedFix": "Fokuskan pada tujuan taktis dalam permainan beregu."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "high",
+          "issue": "Opsi jawaban tidak memberikan contoh nyata, melainkan deskripsi abstrak tentang keberadaan contoh.",
+          "suggestedFix": "Berikan contoh cabang olahraga yang relevan dengan strategi tersebut."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Pertanyaan tidak memiliki nilai edukasi akademis (siapa yang mempelajari).",
+          "suggestedFix": "Ganti dengan pertanyaan mengenai peran pemain dalam strategi (misal: bek atau penyerang)."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Pertanyaan mengenai cara belajar bersifat generik dan bukan materi inti PJOK.",
+          "suggestedFix": "Ganti dengan pertanyaan mengenai elemen penting dalam menyusun strategi gerak (misal: kerja sama tim)."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": true
+    },
+    {
+      "materialId": "50c3a135-8805-4063-8066-51392c4a58b4",
+      "subject": "PJOK",
+      "topic": "Kebugaran",
+      "slideIssueCount": 1,
+      "quizIssueCount": 3,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Prosedur push-up dan sit-up untuk siswa SMP (TKJI) umumnya menggunakan durasi 60 detik, bukan 30 detik.",
+          "suggestedFix": "Ubah durasi push-up dan sit-up menjadi 60 detik agar sesuai dengan standar Tes Kebugaran Jasmani Indonesia (TKJI) untuk usia 13-15 tahun."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Pertanyaan tidak memberikan definisi yang jelas pada opsi jawaban, hanya merujuk pada istilah itu sendiri.",
+          "suggestedFix": "Ubah pertanyaan menjadi definisi teknis kebugaran jasmani dan berikan opsi jawaban berupa komponen kebugaran."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "medium",
+          "issue": "Opsi jawaban tidak spesifik dan tidak memberikan contoh nyata yang edukatif.",
+          "suggestedFix": "Ganti opsi dengan contoh nyata seperti 'Lari 12 menit', 'Push-up', 'Sit-up', dan 'Loncat tegak'."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "low",
+          "issue": "Pertanyaan terlalu umum dan kurang relevan dengan kurikulum PJOK SMP.",
+          "suggestedFix": "Ubah menjadi pertanyaan tentang tujuan utama tes kebugaran bagi siswa."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "2c2cd02c-4893-4520-acdd-1819fb4aab7c",
+      "subject": "Bahasa Indonesia",
+      "topic": "Teks Naratif",
+      "slideIssueCount": 2,
+      "quizIssueCount": 5,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Contoh alur campuran pada Harry Potter kurang akurat untuk tingkat SMP.",
+          "suggestedFix": "Ganti contoh alur campuran dengan contoh yang lebih umum seperti 'cerita yang dimulai dengan kilas balik masa lalu tokoh utama, lalu kembali ke masa kini'."
+        },
+        {
+          "severity": "low",
+          "issue": "Penjelasan koda sebagai 'resolusi' pada tabel Malin Kundang kurang tepat.",
+          "suggestedFix": "Pindahkan 'Tuhan mengutuk Malin menjadi batu' ke bagian resolusi, dan gunakan kalimat 'Jangan durhaka kepada orang tua' sebagai koda."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Pertanyaan tidak menanyakan definisi, melainkan menanyakan apa itu definisi. Pilihan jawaban tidak memberikan definisi yang benar.",
+          "suggestedFix": "Ubah pertanyaan menjadi: 'Apa yang dimaksud dengan alur dalam teks naratif?' dan berikan pilihan jawaban berupa definisi alur."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "medium",
+          "issue": "Pertanyaan terlalu subjektif dan tidak menguji pemahaman materi teks naratif.",
+          "suggestedFix": "Ubah pertanyaan menjadi: 'Apa fungsi alur dalam sebuah teks naratif?'"
+        },
+        {
+          "questionIndex": 2,
+          "severity": "medium",
+          "issue": "Pertanyaan tidak relevan dengan materi teks naratif di tingkat SMP.",
+          "suggestedFix": "Ubah pertanyaan menjadi: 'Bagian teks naratif yang berisi pengenalan tokoh dan latar disebut...'"
+        },
+        {
+          "questionIndex": 3,
+          "severity": "high",
+          "issue": "Pertanyaan tidak menguji kompetensi akademik siswa.",
+          "suggestedFix": "Ubah pertanyaan menjadi: 'Apa yang dimaksud dengan penokohan dalam teks naratif?'"
+        },
+        {
+          "questionIndex": 4,
+          "severity": "low",
+          "issue": "Pertanyaan bersifat umum, bukan spesifik materi.",
+          "suggestedFix": "Ubah pertanyaan menjadi: 'Tahapan alur yang menunjukkan puncak konflik dalam teks naratif disebut...'"
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "fb4f7f45-6643-4fb8-aeda-6d7843139637",
+      "subject": "Bahasa Indonesia",
+      "topic": "Teks Berita",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "3cf62f08-b759-438c-bf2a-6cebfa3c587d",
+      "subject": "Bahasa Inggris",
+      "topic": "Time",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "3c1c5be8-115d-40ea-a368-f7f62538d97d",
+      "subject": "Bahasa Inggris",
+      "topic": "Food and Drink",
+      "slideIssueCount": 1,
+      "quizIssueCount": 5,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Pada Slide 2, tabel 'Intensitas' mencantumkan 'I prefer' di bawah kategori 'Agak suka (netral)'. Secara tata bahasa, 'prefer' bukan ungkapan intensitas suka, melainkan ungkapan perbandingan pilihan.",
+          "suggestedFix": "Pindahkan 'I prefer' ke bagian catatan atau buat kategori terpisah untuk perbandingan (comparison) agar tidak membingungkan siswa."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Question is vague and options are not distinct or academic.",
+          "suggestedFix": "Change question to a specific example of expressing likes/dislikes related to food."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "medium",
+          "issue": "Question is subjective and lacks pedagogical value.",
+          "suggestedFix": "Replace with a question testing the correct grammatical structure (e.g., 'I like...' vs 'I likes...')."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "medium",
+          "issue": "Question is too abstract and lacks specific context.",
+          "suggestedFix": "Replace with a situational question: 'Which sentence expresses a preference for food?'"
+        },
+        {
+          "questionIndex": 3,
+          "severity": "high",
+          "issue": "Question is irrelevant to the subject matter.",
+          "suggestedFix": "Replace with a question identifying a dislike expression."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "low",
+          "issue": "Question is meta-cognitive rather than content-based.",
+          "suggestedFix": "Replace with a question about vocabulary (e.g., 'Which word indicates a strong dislike?')."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "a5de7d1b-da6d-43dc-8d55-eac4885dd44d",
+      "subject": "Matematika",
+      "topic": "Bilangan",
+      "slideIssueCount": 2,
+      "quizIssueCount": 3,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Slide 5 terpotong di tengah pembahasan soal cerita.",
+          "suggestedFix": "Lengkapi pembahasan Soal 11 dan tambahkan ringkasan materi sesuai judul slide."
+        },
+        {
+          "severity": "low",
+          "issue": "Istilah 'KABATAKU' pada Slide 4 mencantumkan 'Akar' yang tidak relevan dengan materi bilangan bulat dasar SMP.",
+          "suggestedFix": "Ganti 'Akar' dengan 'Pangkat' atau cukup gunakan 'Kali, Bagi, Tambah, Kurang' agar sesuai kurikulum SMP."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Question is circular and lacks mathematical substance. It asks for a definition but provides the term itself as the answer.",
+          "suggestedFix": "Change question to: 'Manakah yang termasuk dalam himpunan bilangan bulat?' and options to: 'A. 0,5; B. -2; C. 1/3; D. √2'."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "medium",
+          "issue": "Question is vague. It asks for examples but provides generic options instead of specific mathematical scenarios.",
+          "suggestedFix": "Change question to: 'Jika suhu di puncak gunung adalah -5°C dan di kaki gunung 20°C, berapakah selisih suhunya?' and options to: 'A. 15°C; B. 25°C; C. -15°C; D. -25°C'."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "low",
+          "issue": "Question is subjective and irrelevant to mathematical competency.",
+          "suggestedFix": "Change question to: 'Hasil dari -10 + (-5) - (-8) adalah...' and options to: 'A. -7; B. -23; C. 7; D. 23'."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "cd94c6f9-abc5-40fd-9ade-3d5b38b408e7",
+      "subject": "Matematika",
+      "topic": "Bilangan",
+      "slideIssueCount": 1,
+      "quizIssueCount": 5,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Contoh Soal 2 pada Slide 3 terpotong dan tidak memiliki penyelesaian.",
+          "suggestedFix": "Lengkapi Contoh Soal 2 pada Slide 3 dengan soal dan penyelesaian yang relevan."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Pilihan jawaban pertama bukan merupakan definisi konkret dari bilangan pecahan melainkan hanya teks meta.",
+          "suggestedFix": "Ubah pilihan jawaban menjadi definisi matematika yang tepat."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "high",
+          "issue": "Pertanyaan bersifat meta dan tidak menguji pemahaman matematika siswa SMP kelas 7 tentang pecahan.",
+          "suggestedFix": "Ganti dengan soal yang menguji pemahaman jenis-jenis pecahan."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "high",
+          "issue": "Pilihan jawaban tidak menyajikan contoh nyata penerapan pecahan melainkan hanya pernyataan umum.",
+          "suggestedFix": "Ganti dengan soal cerita penerapan pecahan dalam kehidupan sehari-hari."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "high",
+          "issue": "Pertanyaan tidak relevan dengan kompetensi dasar matematika SMP.",
+          "suggestedFix": "Ganti dengan soal penyederhanaan pecahan."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "high",
+          "issue": "Pertanyaan bersifat meta dan tidak menguji kemampuan kognitif matematika siswa.",
+          "suggestedFix": "Ganti dengan soal operasi hitung penjumlahan pecahan sederhana."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": true
+    },
+    {
+      "materialId": "836a30c4-a743-42c2-a186-09b4887f3c86",
+      "subject": "Matematika",
+      "topic": "Statistika",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "d7a78505-6364-4747-8995-a56672973b55",
+      "subject": "IPA",
+      "topic": "Pengukuran",
+      "slideIssueCount": 3,
+      "quizIssueCount": 5,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Ketelitian jangka sorong pada materi tertulis 0,1 mm, namun standar umum adalah 0,05 mm atau 0,02 mm. 0,1 mm adalah ketelitian mistar/penggaris yang lebih presisi.",
+          "suggestedFix": "Ubah ketelitian jangka sorong menjadi 0,05 mm atau 0,01 cm."
+        },
+        {
+          "severity": "low",
+          "issue": "Ketidakjelasan istilah 'ons' dalam konversi massa dapat membingungkan siswa.",
+          "suggestedFix": "Hapus referensi 'ons' atau jelaskan secara eksplisit bahwa 1 ons (hektogram) = 100 gram."
+        },
+        {
+          "severity": "low",
+          "issue": "Contoh soal 2 menggunakan satuan jam untuk durasi pelajaran, padahal diminta satuan SI.",
+          "suggestedFix": "Ubah jawaban menjadi 5400 sekon agar konsisten dengan instruksi satuan SI."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "low",
+          "issue": "Explanation is redundant. It states the obvious without adding value.",
+          "suggestedFix": "Explanation: Besaran adalah segala sesuatu yang dapat diukur, sedangkan pengukuran adalah proses membandingkan suatu besaran dengan alat ukur standar."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "low",
+          "issue": "Explanation is vague. It does not specify *how* it is useful.",
+          "suggestedFix": "Explanation: Besaran dan Pengukuran penting karena digunakan dalam berbagai aktivitas sehari-hari, seperti memasak, membangun, dan berbelanja."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "low",
+          "issue": "Explanation is vague. It does not provide specific examples.",
+          "suggestedFix": "Explanation: Contohnya termasuk mengukur panjang bahan saat menjahit, menimbang bahan makanan saat memasak, atau mengukur jarak saat bepergian."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "low",
+          "issue": "Explanation is vague. It does not explain *why* everyone can learn it.",
+          "suggestedFix": "Explanation: Konsepnya mendasar dan aplikasinya luas, sehingga bermanfaat bagi siapa saja yang berinteraksi dengan dunia fisik."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "low",
+          "issue": "Explanation is slightly vague. It could be more specific about *why* practice is needed.",
+          "suggestedFix": "Explanation: Pemahaman mendalam diperoleh melalui penerapan konsep dalam berbagai skenario dan penyelesaian masalah terkait pengukuran."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "42e132a6-b93a-4cf3-b60b-1d38c8692d0b",
+      "subject": "IPA",
+      "topic": "Klasifikasi Makhluk Hidup",
+      "slideIssueCount": 5,
+      "quizIssueCount": 5,
+      "slideIssues": [
+        {
+          "severity": "high",
+          "issue": "Slide 3 is incomplete. It abruptly ends after defining 'Pertumbuhan' and 'Perkembangan' and listing influencing factors, without covering 'Berkembang Biak', 'Peka terhadap Rangsangan', and 'Mengeluarkan Zat Sisa' as stated in the learning objectives and the slide title.",
+          "suggestedFix": "Complete Slide 3 by adding detailed explanations and examples for 'Berkembang Biak', 'Peka terhadap Rangsangan', and 'Mengeluarkan Zat Sisa', including learning objectives, core material, and example problems for these sections."
+        },
+        {
+          "severity": "medium",
+          "issue": "The definition of 'irreversibel' for growth is technically correct but might be too advanced or require further clarification for SMP students. The term 'tidak bisa kembali' is a good start, but a more direct explanation of why growth is irreversible (e.g., cell division and differentiation leading to permanent structural changes) could be beneficial.",
+          "suggestedFix": "Clarify 'irreversibel' for growth. For example, state: 'Pertumbuhan adalah perubahan ukuran yang bersifat permanen dan tidak dapat kembali ke ukuran semula, seperti bertambahnya tinggi badan.' Consider adding a brief note on why it's irreversible, e.g., 'karena melibatkan penambahan jumlah sel dan ukuran sel secara permanen.'"
+        },
+        {
+          "severity": "low",
+          "issue": "The learning objective 'Menjelaskan berbagai cara reproduksi makhluk hidup' is listed for Slide 3, but the material for 'Berkembang Biak' is missing.",
+          "suggestedFix": "Add content on 'Berkembang Biak' (reproduction) to Slide 3, covering different methods like sexual and asexual reproduction, with examples relevant to SMP students."
+        },
+        {
+          "severity": "low",
+          "issue": "The learning objective 'Menjelaskan mekanisme iritabilitas pada hewan dan tumbuhan' is listed for Slide 3, but the material for 'Peka terhadap Rangsangan' is missing.",
+          "suggestedFix": "Add content on 'Peka terhadap Rangsangan' (irritability) to Slide 3, explaining how living things respond to stimuli, with examples for both animals and plants."
+        },
+        {
+          "severity": "low",
+          "issue": "The learning objective 'Menjelaskan pentingnya ekskresi' is listed for Slide 3, but the material for 'Mengeluarkan Zat Sisa' is missing.",
+          "suggestedFix": "Add content on 'Mengeluarkan Zat Sisa' (excretion) to Slide 3, explaining its importance and how it occurs in different organisms."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Pertanyaan dan pilihan jawaban bersifat umum/meta dan tidak menguji konsep IPA SMP Kelas 7 tentang Ciri-Ciri Makhluk Hidup.",
+          "suggestedFix": "Ubah pertanyaan untuk menguji definisi atau contoh konkret dari ciri makhluk hidup seperti iritabilitas."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "high",
+          "issue": "Pertanyaan tidak relevan dengan materi akademis IPA dan hanya menanyakan opini tentang pentingnya belajar.",
+          "suggestedFix": "Ganti dengan pertanyaan tentang konsep ekskresi pada makhluk hidup."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "high",
+          "issue": "Pilihan jawaban bersifat umum dan tidak menyajikan contoh nyata klasifikasi atau ciri makhluk hidup.",
+          "suggestedFix": "Ganti dengan pertanyaan tentang kemampuan autotrof pada tumbuhan."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "high",
+          "issue": "Pertanyaan tidak menguji kompetensi IPA melainkan aspek sosial pembelajaran.",
+          "suggestedFix": "Ganti dengan pertanyaan mengenai tujuan reproduksi pada makhluk hidup."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "high",
+          "issue": "Pertanyaan menanyakan metode belajar, bukan materi IPA Klasifikasi Makhluk Hidup.",
+          "suggestedFix": "Ganti dengan pertanyaan tentang perbedaan tumbuh dan berkembang."
+        }
+      ],
+      "fixedSlide": false,
+      "fixedQuestions": true,
+      "regenerateRecommended": true
+    },
+    {
+      "materialId": "3b80a2ab-14a1-423b-bdd7-cc73818dbf4c",
+      "subject": "IPS",
+      "topic": "Kegiatan Ekonomi",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "976032bd-066f-491b-830b-60ff95278502",
+      "subject": "IPS",
+      "topic": "Interaksi Sosial",
+      "slideIssueCount": 3,
+      "quizIssueCount": 5,
+      "slideIssues": [
+        {
+          "severity": "high",
+          "issue": "Slide 5 is incomplete. The list of types of social institutions is cut off mid-sentence.",
+          "suggestedFix": "Complete the sentence for 'Jenis lembaga sosial' and ensure all points are fully elaborated."
+        },
+        {
+          "severity": "medium",
+          "issue": "The explanation for 'Fungsi Lembaga Sosial' in Slide 3 is brief. The 'Memberi pedoman' function could be clearer by specifying what kind of guidance is provided.",
+          "suggestedFix": "Expand the explanation for 'Memberi pedoman' to clarify it provides moral, ethical, or behavioral guidance."
+        },
+        {
+          "severity": "low",
+          "issue": "The 'Poin Penting' in Slide 3 states 'Lembaga sosial bukanlah bangunan fisik, melainkan pola perilaku yang diakui masyarakat.' This is a good point but could be slightly rephrased for better flow, perhaps by saying 'Lembaga sosial merujuk pada pola perilaku...' instead of 'melainkan'.",
+          "suggestedFix": "Rephrase 'melainkan' to 'merujuk pada' for smoother reading."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Opsi jawaban bersifat sirkular. Opsi A hanya mengulang kata 'Definisi' tanpa memberikan penjelasan materi yang nyata.",
+          "suggestedFix": "Ganti pertanyaan dan opsi dengan definisi sosiologis yang tepat tentang sosialisasi."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "medium",
+          "issue": "Pertanyaan terlalu umum dan tidak menguji pemahaman materi IPS SMP Kelas 7 secara spesifik.",
+          "suggestedFix": "Fokuskan pada tujuan sosialisasi dalam membentuk kepribadian atau norma sosial."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "high",
+          "issue": "Opsi jawaban tidak memberikan contoh konkret (seperti keluarga atau sekolah), melainkan hanya deskripsi abstrak.",
+          "suggestedFix": "Berikan contoh nyata lembaga sosial seperti keluarga, sekolah, atau lembaga agama."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Pertanyaan bersifat trivial dan tidak mengukur kompetensi kognitif siswa mengenai interaksi sosial.",
+          "suggestedFix": "Ganti dengan pertanyaan mengenai syarat terjadinya interaksi sosial (kontak dan komunikasi)."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "high",
+          "issue": "Pertanyaan mengenai cara belajar, bukan konten materi pelajaran IPS.",
+          "suggestedFix": "Ganti dengan pertanyaan mengenai fungsi lembaga sosial dalam masyarakat."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": true
+    },
+    {
+      "materialId": "11da9343-5a2d-4fad-b61d-5287d18bff8c",
+      "subject": "Informatika",
+      "topic": "Pengantar Informatika",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "9d8effe5-218d-4322-ac07-1d5a7cecedc9",
+      "subject": "Informatika",
+      "topic": "Internet",
+      "slideIssueCount": 1,
+      "quizIssueCount": 4,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Klasifikasi malware kurang tepat secara teknis. Virus, Trojan, dan Ransomware adalah jenis malware, bukan entitas yang setara.",
+          "suggestedFix": "Ubah tabel 2.1 agar Malware menjadi kategori utama, dengan Virus, Trojan, dan Ransomware sebagai sub-jenis."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Pertanyaan tidak memberikan definisi teknis yang jelas; pilihan jawaban tidak edukatif.",
+          "suggestedFix": "Ubah pertanyaan menjadi definisi teknis internet dan berikan opsi jawaban yang relevan dengan infrastruktur jaringan."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "medium",
+          "issue": "Pertanyaan terlalu subjektif dan kurang menguji pemahaman materi informatika.",
+          "suggestedFix": "Ubah pertanyaan menjadi fokus pada risiko keamanan siber atau fungsi protokol internet."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "medium",
+          "issue": "Pertanyaan terlalu umum dan tidak spesifik pada materi informatika SMP.",
+          "suggestedFix": "Ubah menjadi contoh konkret seperti enkripsi data atau penggunaan firewall."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "low",
+          "issue": "Pertanyaan tidak relevan dengan kurikulum informatika.",
+          "suggestedFix": "Ganti dengan pertanyaan tentang komponen jaringan seperti router atau switch."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "14f74b85-af77-49a6-ade3-bd66e53f1c72",
+      "subject": "PJOK",
+      "topic": "Permainan Bola Besar",
+      "slideIssueCount": 1,
+      "quizIssueCount": 5,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Penjelasan 'Traveling' kurang akurat secara teknis untuk tingkat SMP.",
+          "suggestedFix": "Ubah menjadi: 'Traveling terjadi jika pemain melangkah lebih dari 2 langkah tanpa mendribel bola atau menggerakkan kaki tumpu saat melakukan pivot.'"
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Question is vague and options are not distinct or academic.",
+          "suggestedFix": "Change question to 'Apa tujuan utama permainan bola basket?' and provide technical options like 'Memasukkan bola ke keranjang lawan'."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "medium",
+          "issue": "Question is subjective and lacks pedagogical value for PJOK.",
+          "suggestedFix": "Change question to 'Teknik dasar dalam bola basket yang digunakan untuk mengoper bola adalah...' with options like 'Dribbling, Shooting, Passing, Pivot'."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "medium",
+          "issue": "Question is vague and lacks technical relevance.",
+          "suggestedFix": "Change question to 'Berapa jumlah pemain dalam satu tim bola basket di lapangan?' with options like '5, 7, 11, 12'."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Question is irrelevant to the subject matter.",
+          "suggestedFix": "Change question to 'Apa sebutan untuk gerakan membawa bola dengan memantulkannya ke lantai?' with options like 'Dribbling, Lay-up, Rebound, Pivot'."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "low",
+          "issue": "Question is meta-cognitive rather than subject-specific.",
+          "suggestedFix": "Change question to 'Gerakan memasukkan bola ke keranjang dengan melompat disebut...' with options like 'Lay-up, Dribbling, Chest pass, Pivot'."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "963460d0-9891-4a85-b787-f3a96cb19e2e",
+      "subject": "PJOK",
+      "topic": "Permainan Bola Kecil",
+      "slideIssueCount": 3,
+      "quizIssueCount": 5,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Slide 1: Deskripsi berat raket 85-100 gram terlalu berat untuk standar modern (umumnya 70-95 gram).",
+          "suggestedFix": "Ubah berat raket menjadi 70–95 gram."
+        },
+        {
+          "severity": "medium",
+          "issue": "Slide 3: Penjelasan sistem poin membingungkan terkait jumlah game.",
+          "suggestedFix": "Hapus keraguan tentang jumlah game. Tulis: 'Setiap pertandingan menggunakan sistem best of three games (pemenang 2 dari 3 game) hingga 21 poin'."
+        },
+        {
+          "severity": "low",
+          "issue": "Slide 3: Penjelasan soal uraian nomor 2 ambigu.",
+          "suggestedFix": "Perjelas pembahasan: 'Jika pemain yang memegang servis memiliki poin 8 (genap), maka servis dilakukan dari sisi kanan. Jika pemain tersebut memiliki poin 5 (ganjil), maka servis dari sisi kiri'."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Opsi jawaban berupa deskripsi meta, bukan definisi aktual bulu tangkis.",
+          "suggestedFix": "Ganti opsi dengan definisi teknis permainan bulu tangkis."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "high",
+          "issue": "Pertanyaan dan opsi terlalu umum dan tidak menguji kompetensi PJOK.",
+          "suggestedFix": "Ganti dengan pertanyaan mengenai tujuan utama permainan atau teknik dasar."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "high",
+          "issue": "Opsi jawaban tidak memberikan contoh nyata penerapan bulu tangkis.",
+          "suggestedFix": "Ganti dengan pertanyaan mengenai alat yang digunakan dalam bulu tangkis."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Pertanyaan bersifat trivial dan tidak edukatif untuk level SMP.",
+          "suggestedFix": "Ganti dengan pertanyaan mengenai induk organisasi atau aturan servis."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Pertanyaan mengenai cara belajar, bukan materi bulu tangkis.",
+          "suggestedFix": "Ganti dengan pertanyaan mengenai teknik pegangan raket atau jenis pukulan."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": true
+    },
+    {
+      "materialId": "d475034f-6acb-46b1-97c7-449482b4f883",
+      "subject": "PJOK",
+      "topic": "Atletik",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "91bd57030d1547ba8262c9d8",
+      "subject": "Fisika",
+      "topic": "Gaya dan Hukum Newton",
+      "slideIssueCount": 0,
+      "quizIssueCount": 1,
+      "slideIssues": [],
+      "quizIssues": [
+        {
+          "questionIndex": 5,
+          "severity": "medium",
+          "issue": "Option 1 mixes two different interaction pairs (rifle-shoulder and bullet-rifle). Newton's third law applies strictly to the interacting bodies (rifle and bullet).",
+          "suggestedFix": "Change correct option to state the force of the rifle on the bullet equals the force of the bullet on the rifle. Update other options and explanation accordingly."
+        }
+      ],
+      "fixedSlide": false,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "7447face33654de8ad0303f5",
+      "subject": "Kimia",
+      "topic": "Reaksi Kimia",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "54949bea94474c09bfdaf107",
+      "subject": "Fisika",
+      "topic": "Gerak Lurus",
+      "slideIssueCount": 2,
+      "quizIssueCount": 2,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Missing variable definitions and SI units.",
+          "suggestedFix": "Add legend for s, v, t, a and their units (m, m/s, s, m/s²)."
+        },
+        {
+          "severity": "low",
+          "issue": "Graph description for GLBB is incomplete.",
+          "suggestedFix": "Specify that the slope represents acceleration (percepatan)."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "medium",
+          "issue": "Opsi 'Percepatan nol' juga merupakan ciri GLB, sehingga terdapat dua jawaban benar.",
+          "suggestedFix": "Ubah opsi 'Percepatan nol' menjadi 'Percepatan berubah'."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "low",
+          "issue": "Opsi 's = ½ a t²' adalah rumus jarak GLBB untuk kondisi awal diam (v₀=0), berpotensi membingungkan.",
+          "suggestedFix": "Ubah opsi 's = ½ a t²' menjadi 's = v₀ + a t' agar jelas salah untuk kategori rumus jarak."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "15a2e7997f2b440c80407624",
+      "subject": "Fisika",
+      "topic": "Gerak Lurus",
+      "slideIssueCount": 3,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Materi Kelajuan (Speed) belum dicantumkan. Kurikulum SMP Kelas 7 mewajibkan pembedaan antara Kelajuan (skalar) dan Kecepatan (vektor).",
+          "suggestedFix": "Tambahkan definisi Kelajuan dan perbedaannya dengan Kecepatan."
+        },
+        {
+          "severity": "low",
+          "issue": "Simbol 's' sering membingungkan antara jarak dan perpindahan pada tingkat SMP.",
+          "suggestedFix": "Berikan keterangan eksplisit bahwa s = perpindahan untuk Kecepatan dan s = jarak untuk Kelajuan."
+        },
+        {
+          "severity": "low",
+          "issue": "Belum ada contoh konversi satuan dari km/jam ke m/s yang merupakan kompetensi dasar SMP 1.",
+          "suggestedFix": "Tambahkan catatan singkat mengenai konversi satuan (1 km/jam = 1/3,6 m/s)."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Hasil perhitungan 32/7 adalah 4,57, bukan 2,9. Pilihan jawaban tidak mencakup hasil yang benar.",
+          "suggestedFix": "Ubah soal menjadi jarak 20 m dalam 5 s dan 15 m dalam 5 s, atau sesuaikan pilihan jawaban dengan hasil 4,57."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "8fd461242a8e41228bbdbd77",
+      "subject": "Bahasa Mandarin",
+      "topic": "Mandarin Dasar",
+      "slideIssueCount": 2,
+      "quizIssueCount": 4,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Pinyin untuk guratan 'héng' salah. Seharusnya 'héng'. Namun, daftar guratan dasar sering kali mencakup 8 guratan standar (Bā Fǎ), tetapi simbol yang digunakan pada poin 5, 6, dan 8 kurang tepat secara tipografi standar.",
+          "suggestedFix": "Gunakan pinyin yang tepat dan pastikan simbol guratan sesuai dengan standar penulisan kaligrafi Tiongkok."
+        },
+        {
+          "severity": "low",
+          "issue": "Aturan urutan guratan (Bǐshùn) kurang lengkap untuk tingkat SMP.",
+          "suggestedFix": "Tambahkan aturan 'Tengah dulu, baru sisi kiri dan kanan' untuk karakter simetris."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "low",
+          "issue": "Missing character in question and explanation.",
+          "suggestedFix": "Insert '一' in the question and explanation."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "low",
+          "issue": "Missing character in question and explanation.",
+          "suggestedFix": "Insert '竖' in the question and '十' in the explanation."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "high",
+          "issue": "Question is ambiguous and explanation contradicts the correctIndex.",
+          "suggestedFix": "Rewrite question to focus on standard stroke order rules for horizontal strokes."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Factual inaccuracy regarding 'basic strokes'.",
+          "suggestedFix": "Change to '8' as there are 8 fundamental strokes (bǐhuà) in standard Mandarin pedagogy."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "5c2e3cc52f4c4260a65bc236",
+      "subject": "Fisika",
+      "topic": "Tekanan",
+      "slideIssueCount": 2,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Penjelasan Prinsip Archimedes tidak relevan dengan topik tekanan secara langsung dan berpotensi membingungkan siswa SMP.",
+          "suggestedFix": "Ganti Prinsip Archimedes dengan contoh penerapan tekanan zat cair seperti bejana berhubungan atau pipa U."
+        },
+        {
+          "severity": "low",
+          "issue": "Kurangnya keterangan variabel pada rumus tekanan zat cair.",
+          "suggestedFix": "Tambahkan keterangan: ρ = massa jenis (kg/m³), g = gravitasi (m/s²), h = kedalaman (m)."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Opsi jawaban tidak konsisten dan penjelasan kurang tepat secara terminologi fisika SMP.",
+          "suggestedFix": "Ubah opsi agar lebih relevan dengan prinsip Archimedes dan perbaiki penjelasan mengenai massa jenis udara."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "6c5c762baead4d49b8e2e9ee",
+      "subject": "Bahasa Mandarin",
+      "topic": "Mandarin Dasar",
+      "slideIssueCount": 2,
+      "quizIssueCount": 3,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Penjelasan vokal 'e' kurang akurat untuk standar Mandarin (e dalam 'enak' lebih mirip 'ê', sedangkan 'e' Mandarin lebih mirip bunyi 'eu' dalam bahasa Sunda atau 'uh' dalam bahasa Inggris).",
+          "suggestedFix": "Ubah penjelasan 'e' menjadi: 'seperti bunyi 'eu' dalam kata 'euy' atau suara 'uh' yang tertahan'."
+        },
+        {
+          "severity": "low",
+          "issue": "Tidak ada penjelasan mengenai 4 nada dasar Mandarin yang krusial bagi pemula.",
+          "suggestedFix": "Tambahkan poin mengenai 4 nada (nada datar, naik, turun-naik, dan turun tajam) agar materi dasar lengkap."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "medium",
+          "issue": "Vokal tunggal (danmǔyīn) dalam Mandarin berjumlah 6, bukan 5. Huruf 'ü' tertinggal.",
+          "suggestedFix": "Tambahkan 'ü' ke dalam daftar vokal tunggal."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "high",
+          "issue": "Pertanyaan menanyakan konsonan awal, tetapi kunci jawaban (index 1) berisi vokal (a, i, u, e).",
+          "suggestedFix": "Ubah pertanyaan menjadi 'Manakah yang BUKAN merupakan konsonan awal?'"
+        },
+        {
+          "questionIndex": 4,
+          "severity": "high",
+          "issue": "Vokal 'e' dalam 'wei' dilafalkan sebagai /e/ (seperti 'ei' dalam 'hey'), bukan schwa /ə/. Bunyi /ə/ muncul pada vokal tunggal 'e' (seperti 'he' atau 'me').",
+          "suggestedFix": "Ubah contoh kata menjadi 'he' atau 'me' agar sesuai dengan pelafalan /ə/."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "818b998239544f428467a6ab",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Bhinneka Tunggal Ika",
+      "slideIssueCount": 2,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "The core motto 'Bhinneka Tunggal Ika' is the topic but its definition and origin are missing.",
+          "suggestedFix": "Add a slide explaining the meaning (Berbeda-beda tetapi tetap satu) and its origin (Kitab Sutasoma by Mpu Tantular)."
+        },
+        {
+          "severity": "low",
+          "issue": "Spelling error: 'Budha' should be 'Buddha' according to KBBI and official religious terminology.",
+          "suggestedFix": "Change 'Budha' to 'Buddha'."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "64278b41b3bf464d87663b19",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Keberagaman",
+      "slideIssueCount": 4,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Definisi 'Radikalisme' tidak tepat: 'mengubah secara paksaan' terlalu kabur dan tidak akurat secara konseptual. Radikalisme merujuk pada paham yang menginginkan perubahan mendasar secara drastis, sering disertai kekerasan atau cara-cara ekstrem, bukan sekadar 'paksaan'.",
+          "suggestedFix": "Ubah menjadi: 'Paham ekstrem yang menginginkan perubahan mendasar dengan cara-cara kekerasan atau di luar hukum.'"
+        },
+        {
+          "severity": "low",
+          "issue": "'Politisasi identitas' terlalu abstrak untuk siswa SMP. Istilah ini lazim di wacana akademik/politik dewasa, bukan level SMP.",
+          "suggestedFix": "Sederhanakan menjadi: 'Penggunaan perbedaan suku, agama, atau ras untuk memecah belah masyarakat demi kepentingan kelompok tertentu.'"
+        },
+        {
+          "severity": "low",
+          "issue": "Poin solusi 'Dialog antaragama dan budaya: Saling memahami' terlalu singkat dan tidak informatif. Tidak menjelaskan bentuk konkret dialog tersebut.",
+          "suggestedFix": "Ubah menjadi: 'Dialog antaragama dan budaya: Membangun komunikasi terbuka antar kelompok untuk saling mengenal dan menghormati.'"
+        },
+        {
+          "severity": "low",
+          "issue": "'Sikap toleran dan nasionalisme' menggabungkan dua konsep berbeda dalam satu poin tanpa penjelasan keterkaitan keduanya.",
+          "suggestedFix": "Pisahkan menjadi dua poin: 'Sikap toleran: Menghormati perbedaan dan tidak memaksakan kehendak kepada orang lain.' dan 'Nasionalisme: Mengutamakan persatuan bangsa di atas kepentingan kelompok.'"
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 2,
+          "severity": "high",
+          "issue": "Pertanyaan menanyakan kondisi 'jika' perbedaan menjadi pemecah belah, tetapi correctIndex 2 ('Ditonjolkan secara berlebihan') benar secara logika. Namun susunan kalimat soal membingungkan: 'dapat menjadi pemecah belah bangsa jika...' — jawaban yang dipilih harus melengkapi kalimat tersebut sebagai syarat/kondisi negatif. Opsi 0 ('Ditangani dengan bijaksana'), 1 ('Disyukuri sebagai kekayaan'), dan 3 ('Dijadikan dasar musyawarah') adalah kondisi POSITIF yang justru mencegah perpecahan, bukan menyebabkannya. Hanya opsi 2 yang benar sebagai kondisi penyebab perpecahan. correctIndex sudah benar, tetapi opsi lain berpotensi membingungkan siswa SMP karena tidak paralel secara gramatikal dengan stem soal.",
+          "suggestedFix": "Ubah opsi agar semua melengkapi kalimat 'dapat menjadi pemecah belah bangsa jika...' secara gramatikal konsisten dan logis sebagai kondisi negatif. Contoh: ['Ditangani dengan penuh kebijaksanaan','Disikapi dengan rasa syukur','Ditonjolkan secara berlebihan dan memicu konflik','Dijadikan bahan musyawarah bersama']. correctIndex tetap 2."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "91e8f8b8665f49d9b0ebfe54",
+      "subject": "Bahasa Mandarin",
+      "topic": "Angka dan bilangan (数字 Shùzì）membaca dan menulis angka dalam hanzi sederhana",
+      "slideIssueCount": 4,
+      "quizIssueCount": 5,
+      "slideIssues": [
+        {
+          "severity": "high",
+          "issue": "Topik slide (Keluarga / 家庭) sama sekali tidak sesuai dengan topik yang ditentukan: Angka dan Bilangan (数字 Shùzì). Seluruh konten slide salah topik.",
+          "suggestedFix": "Ganti seluruh slide dengan materi angka 0–10 (atau 1–100 sesuai silabus SMP kelas 7), mencakup hanzi, pinyin, dan cara membaca/menulis angka dalam bahasa Mandarin."
+        },
+        {
+          "severity": "high",
+          "issue": "Tidak ada satu pun konten tentang angka/bilangan: tidak ada hanzi angka (一二三四五六七八九十零), tidak ada pinyin angka, tidak ada contoh penulisan atau pembacaan bilangan.",
+          "suggestedFix": "Tambahkan tabel atau daftar angka 0–10 beserta hanzi, pinyin, dan padanan angka Arab. Sertakan contoh kalimat sederhana seperti 我有三本书 (Wǒ yǒu sān běn shū) — Saya punya tiga buku."
+        },
+        {
+          "severity": "high",
+          "issue": "Slide tidak memiliki struktur yang sesuai topik: tidak ada penjelasan cara menulis hanzi angka, tidak ada latihan membaca bilangan, tidak ada konteks penggunaan angka dalam kalimat.",
+          "suggestedFix": "Tambahkan seksi: (1) Daftar angka 零到十, (2) Cara membaca bilangan puluhan (十一, 二十, dst.), (3) Contoh kalimat penggunaan angka dalam konteks sehari-hari."
+        },
+        {
+          "severity": "medium",
+          "issue": "Kosakata 妈妈 (māma) digunakan dalam contoh kalimat, tetapi daftar kosakata mencantumkan 母亲 (mǔqīn) untuk ibu. Inkonsistensi register: 母亲 adalah bentuk formal/tulisan, 妈妈 adalah bentuk informal/lisan. Untuk SMP kelas 7, perlu dijelaskan perbedaannya.",
+          "suggestedFix": "Konsistenkan pilihan kosakata. Untuk pemula SMP, gunakan 妈妈 (māma) sebagai kosakata utama dan 母亲 (mǔqīn) sebagai catatan tambahan, atau sebaliknya — pilih satu register dan jelaskan."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Topic mismatch: semua soal membahas anggota keluarga (家庭成员), bukan angka/bilangan (数字 Shùzì). Tidak ada satu pun soal yang relevan dengan topic yang ditetapkan.",
+          "suggestedFix": "Ganti seluruh batch dengan soal tentang membaca dan menulis angka dalam hanzi, contoh: 一、二、三、四、五、六、七、八、九、十."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "high",
+          "issue": "Topic mismatch: soal tentang 姐姐 (jiějie) tidak berkaitan dengan angka/bilangan.",
+          "suggestedFix": "Ganti dengan soal angka, misal: '四 (sì) berarti angka berapa?'"
+        },
+        {
+          "questionIndex": 2,
+          "severity": "high",
+          "issue": "Topic mismatch: soal tentang kata ganti orang (pronoun) tidak berkaitan dengan angka/bilangan.",
+          "suggestedFix": "Ganti dengan soal angka, misal: '十 (shí) berarti angka berapa?'"
+        },
+        {
+          "questionIndex": 3,
+          "severity": "high",
+          "issue": "Topic mismatch: soal tentang 爷爷 (yéye) tidak berkaitan dengan angka/bilangan. Selain itu correctIndex=1 salah; 爷爷 adalah kakek dari pihak ayah, yang seharusnya correctIndex=1 (opsi 'Kakek dari pihak ayah') — ini benar, tapi soal tetap harus diganti karena topic mismatch.",
+          "suggestedFix": "Ganti dengan soal angka, misal: '七 (qī) berarti angka berapa?'"
+        },
+        {
+          "questionIndex": 4,
+          "severity": "high",
+          "issue": "Topic mismatch: soal tentang 哥哥 (gēge) tidak berkaitan dengan angka/bilangan.",
+          "suggestedFix": "Ganti dengan soal angka, misal: '三 (sān) berarti angka berapa?'"
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": true
+    },
+    {
+      "materialId": "7c220db3a97546608dd0c66c",
+      "subject": "Kimia",
+      "topic": "Pemisahan Campuran",
+      "slideIssueCount": 1,
+      "quizIssueCount": 2,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Penjelasan prinsip utama pada bagian bawah slide kurang sinkron dengan urutan metode di atasnya.",
+          "suggestedFix": "Urutkan prinsip utama agar sesuai dengan urutan metode (Filtrasi: ukuran partikel, Evaporasi: titik didih, Sentrifugasi: massa jenis)."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 2,
+          "severity": "low",
+          "issue": "Typo pada opsi kedua 'putarandan'.",
+          "suggestedFix": "Ubah menjadi 'putaran'."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Format opsi tidak konsisten (menggunakan label A, B, C, D di dalam string).",
+          "suggestedFix": "Hapus label A, B, C, D dari string opsi."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "142b9691db2f4271879b3c0f",
+      "subject": "Fisika",
+      "topic": "Gerak Lurus",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Notasi rumus v = s/t sering disalahartikan sebagai jarak (skalar) padahal s dalam konteks vektor adalah perpindahan (displacement).",
+          "suggestedFix": "Gunakan notasi Δx atau Δs untuk perpindahan agar membedakan dengan jarak (d)."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 1,
+          "severity": "medium",
+          "issue": "Definisi rumus v = s/t merujuk pada kelajuan, bukan kecepatan. Kecepatan didefinisikan sebagai perpindahan dibagi waktu (v = Δx/t).",
+          "suggestedFix": "Ubah pertanyaan menjadi 'Rumus kelajuan rata-rata adalah...' atau sesuaikan penjelasan dengan konsep perpindahan."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "549acdd4089f418fb9afdd99",
+      "subject": "Bahasa Mandarin",
+      "topic": "Melafalkan tentang cara menyebutkan 我是中国人 - Wǒ shì zhōngguó rén",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Kesalahan identifikasi nada pada 'rén'. 'rén' (人) adalah nada 2, namun dalam konteks ini, nada tersebut adalah nada 2 (naik). Namun, penjelasan nada untuk 'zhōngguó' kurang akurat karena 'guó' adalah nada 2 (naik), bukan nada 2 (rata).",
+          "suggestedFix": "Koreksi deskripsi nada: 'zhōng' (nada 1: datar/tinggi), 'guó' (nada 2: naik), 'rén' (nada 2: naik)."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 1,
+          "severity": "high",
+          "issue": "The correctIndex is 0, but the options provided do not contain the correct breakdown of the characters '中国' and '人'. Option 0 is factually incorrect based on the question.",
+          "suggestedFix": "Update options to reflect the components: 'Tiongkok dan orang', 'Saya dan Tiongkok', 'Orang dan negara', 'Saya dan orang'."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "a5e9c614fe294739ad3ad7b5",
+      "subject": "Kimia",
+      "topic": "Pemisahan Campuran",
+      "slideIssueCount": 3,
+      "quizIssueCount": 4,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Sublimasi: deskripsi prinsip kerja menyebut 'uapnya didinginkan kembali menjadi padat murni'. Proses pendinginan uap kembali menjadi padat disebut deposisi (pengkristalan), bukan bagian dari sublimasi itu sendiri. Untuk SMP kelas 7 sebaiknya disebutkan bahwa uap ditampung dan mengkristal kembali agar tidak menimbulkan miskonsepsi.",
+          "suggestedFix": "Ubah menjadi: 'zat yang dapat menyublim dipanaskan hingga menjadi gas, lalu uapnya ditampung dan mengkristal kembali menjadi padatan murni (deposisi)'"
+        },
+        {
+          "severity": "low",
+          "issue": "Destilasi: kalimat 'uap komponen dengan titik didih rendah mengembun lebih dulu' kurang tepat. Pada destilasi sederhana, komponen bertitik didih rendah menguap lebih dulu, lalu uapnya dikondensasikan (diembunkan) di kondensor. Bukan soal 'mengembun lebih dulu' melainkan 'menguap lebih dulu'.",
+          "suggestedFix": "Ubah menjadi: 'campuran dipanaskan, komponen dengan titik didih lebih rendah menguap lebih dulu, lalu uapnya diembunkan (dikondensasikan) di kondensor'"
+        },
+        {
+          "severity": "low",
+          "issue": "Tidak ada ringkasan perbandingan ketiga metode (misal tabel sederhana) yang akan membantu siswa SMP membedakan ketiganya dengan lebih jelas.",
+          "suggestedFix": "Tambahkan tabel ringkasan: Metode | Dasar Pemisahan | Contoh"
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 1,
+          "severity": "medium",
+          "issue": "Option B ('Memisahkan campuran berdasarkan perbedaan warna') kurang tepat sebagai jawaban. Kromatografi memisahkan berdasarkan perbedaan kecepatan merambat (laju migrasi) komponen pada fase diam, bukan berdasarkan 'perbedaan warna'. Warna hanya indikator visual, bukan dasar pemisahan. Explanation sudah benar menyebut 'perbedaan kecepatan merambat', tapi opsi jawaban menyederhanakan secara keliru.",
+          "suggestedFix": "Ubah option index 1 menjadi 'Memisahkan komponen campuran berdasarkan perbedaan kecepatan merambat pada medium' agar sesuai dengan prinsip kromatografi yang sebenarnya."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "high",
+          "issue": "correctIndex 1 menunjuk ke 'Padat dari cairan berdasarkan titik didih', yang tidak tepat. Destilasi memisahkan cairan dari cairan (atau cairan dari zat terlarut) berdasarkan perbedaan titik didih, bukan padat dari cairan. Opsi C ('Cairan dari cairan yang tidak dapat bercampur') juga kurang tepat karena itu lebih cocok untuk corong pisah. Tidak ada opsi yang benar-benar tepat mendeskripsikan destilasi.",
+          "suggestedFix": "Ganti opsi agar ada jawaban yang tepat, misalnya: 'Cairan dari campurannya berdasarkan perbedaan titik didih'. Sesuaikan correctIndex."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "high",
+          "issue": "Soal menyebutkan 4 contoh (1–4) tetapi opsi jawaban hanya berisi 3 angka. Selain itu, butir 2 tidak lengkap: 'Memisahkan dari campuran serbuk' — tidak menyebutkan zat apa yang dipisahkan (seharusnya misalnya 'kapur barus' atau 'iodin'). Jawaban benar '1, 2, 3' sesuai logika (kromatografi=1, sublimasi=2, destilasi=3), tapi soal cacat karena kalimat butir 2 terpotong.",
+          "suggestedFix": "Perbaiki butir 2 menjadi 'Memisahkan kapur barus dari campuran serbuk' agar konteks sublimasi jelas. Soal sudah menyebut 4 contoh; pastikan butir 4 tetap ada sebagai pengecoh."
+        },
+        {
+          "questionIndex": 5,
+          "severity": "high",
+          "issue": "Soal tidak menyebutkan zat yang ingin dimurnikan. Kalimat: '...ingin memurnikan yang tercampur sedikit pasir' — kata benda (objek) hilang. Dari penjelasan, objek seharusnya 'kamper (kamfer)'. Selain itu, penjelasan menyebut sublimasi, tetapi alat 'cawan penguap dan penangas air' lebih identik dengan penguapan/evaporasi. Sublimasi kamper umumnya menggunakan cawan penguap yang ditutup corong terbalik (bukan penangas air). Meski demikian, jawaban A masih paling mendekati benar di antara opsi yang ada, jadi correctIndex 0 dipertahankan.",
+          "suggestedFix": "Perbaiki soal: tambahkan kata 'kamper (kamfer)' sebagai objek. Perbaiki penjelasan: sebutkan bahwa cawan penguap ditutup corong terbalik yang dilapisi kapas basah, bukan sekadar penangas air."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "bfa07aa1043d49df88176a7b",
+      "subject": "Bahasa Mandarin",
+      "topic": "Angka dan bilangan (数字 Shùzì）membaca dan menulis angka dalam hanzi sederhana",
+      "slideIssueCount": 5,
+      "quizIssueCount": 4,
+      "slideIssues": [
+        {
+          "severity": "high",
+          "issue": "Topic is 'Angka dan bilangan (数字 Shùzì) — membaca dan menulis angka dalam hanzi sederhana', but both slides cover Hari/Bulan and Jam/Waktu instead of core number writing/reading. This is off-topic; the slides should teach angka 0-10 (or beyond) in hanzi, pinyin, and cara menulis, not calendar/clock applications.",
+          "suggestedFix": "Replace both slides with content directly teaching angka dalam hanzi: 一 (yī) 1, 二 (èr) 2, 三 (sān) 3, … 十 (shí) 10, including stroke order awareness and reading practice. Hari/bulan/jam topics can appear in a later slide as application, not as the main content."
+        },
+        {
+          "severity": "medium",
+          "issue": "Pinyin 'xīngqīyī' and 'xīngqī'èr' spacing/formatting incorrect. Standard pinyin: xīngqī yī (two words) or xīngqīyī is acceptable but the apostrophe in xīngqī'èr is misplaced — apostrophe in pinyin separates syllables starting with a/o/e after another syllable, so it should be xīngqí'èr — but actually the second 期 is qī (first tone), making it xīngqīèr with no apostrophe needed, or spaced xīngqī èr.",
+          "suggestedFix": "Use xīngqī yī, xīngqī èr (spaced) or xīngqīyī, xīngqīèr (no apostrophe). Remove the erroneous apostrophe."
+        },
+        {
+          "severity": "medium",
+          "issue": "Slide 1 uses '...' and 'dst.' — incomplete content. SMP students need the full list or at least a representative, complete subset to study from. Ellipsis is not educational content.",
+          "suggestedFix": "Either list all seven days (星期一 through 星期日) and at least a few months, or restructure the slide to show a clear, complete set."
+        },
+        {
+          "severity": "low",
+          "issue": "Slide 2 lists 刻 (kè) as 'seperempat' — factually correct but may confuse SMP 1 students without example sentences showing 一刻 (yī kè) = 15 menit.",
+          "suggestedFix": "Add a brief example: 三点一刻 (sān diǎn yī kè) = jam 3 lewat 15 menit."
+        },
+        {
+          "severity": "low",
+          "issue": "No learning objectives (tujuan pembelajaran) stated on either slide, which is expected for SMP-level educational material.",
+          "suggestedFix": "Add a brief tujuan pembelajaran at the top of the first slide."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "medium",
+          "issue": "Topik menyimpang dari 'Angka dan bilangan (数字 Shùzì)' ke 'Hari dalam seminggu'.",
+          "suggestedFix": "Ganti pertanyaan menjadi angka dasar, misalnya: 'Hanzi untuk angka 1 adalah...'"
+        },
+        {
+          "questionIndex": 1,
+          "severity": "medium",
+          "issue": "Topik menyimpang ke 'Waktu/Jam'.",
+          "suggestedFix": "Ganti pertanyaan menjadi angka dasar, misalnya: 'Hanzi untuk angka 3 adalah...'"
+        },
+        {
+          "questionIndex": 2,
+          "severity": "high",
+          "issue": "Opsi jawaban identik (duplikat).",
+          "suggestedFix": "Berikan opsi yang berbeda seperti: '一月', '二月', '三月', '四月'."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "high",
+          "issue": "Opsi jawaban identik (duplikat).",
+          "suggestedFix": "Berikan opsi yang berbeda seperti: '八号', '九号', '十号', '十一号'."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "9795376e5b514ed8a2759680",
+      "subject": "Bahasa Indonesia",
+      "topic": "Teks Deskripsi",
+      "slideIssueCount": 1,
+      "quizIssueCount": 4,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Materi kurang memberikan contoh penerapan langkah-langkah dalam konteks teks deskripsi yang utuh.",
+          "suggestedFix": "Tambahkan contoh paragraf deskripsi singkat agar siswa dapat mempraktikkan langkah identifikasi secara langsung."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "low",
+          "issue": "Penggunaan istilah bahasa Inggris 'stated explicitly' dalam penjelasan kurang sesuai untuk standar materi SMP.",
+          "suggestedFix": "Ganti penjelasan menjadi: 'Informasi eksplisit adalah informasi yang dinyatakan secara tersurat dan dapat ditemukan langsung dalam teks tanpa perlu interpretasi.'"
+        },
+        {
+          "questionIndex": 1,
+          "severity": "low",
+          "issue": "Penggunaan istilah bahasa Inggris 'stated' dalam penjelasan.",
+          "suggestedFix": "Ganti penjelasan menjadi: 'Luas taman (2 hektar) adalah informasi eksplisit karena tertulis langsung dalam teks, tidak perlu ditafsirkan.'"
+        },
+        {
+          "questionIndex": 2,
+          "severity": "low",
+          "issue": "Penggunaan istilah bahasa Inggris 'stated' dalam penjelasan.",
+          "suggestedFix": "Ganti penjelasan menjadi: 'Informasi eksplisit dapat ditemukan dengan membaca teks secara cermat karena informasinya tertulis secara langsung.'"
+        },
+        {
+          "questionIndex": 3,
+          "severity": "low",
+          "issue": "Penggunaan istilah bahasa Inggris 'stated' dalam penjelasan.",
+          "suggestedFix": "Ganti penjelasan menjadi: 'Informasi eksplisit tertulis secara jelas dalam teks, sedangkan informasi implisit tidak tertulis langsung dan perlu disimpulkan oleh pembaca.'"
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "47a9adda1cfb4256a8147fd9",
+      "subject": "Bahasa Indonesia",
+      "topic": "Teks Deskripsi",
+      "slideIssueCount": 2,
+      "quizIssueCount": 2,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Langkah penulisan kurang lengkap untuk standar kurikulum SMP. Tidak mencantumkan tahap pengembangan kerangka dan penyuntingan.",
+          "suggestedFix": "Tambahkan langkah menyusun kerangka dan menyunting teks agar sesuai kaidah kebahasaan."
+        },
+        {
+          "severity": "low",
+          "issue": "Contoh terlalu singkat dan kurang menunjukkan penggunaan kata indra secara eksplisit.",
+          "suggestedFix": "Perluas contoh dengan melibatkan panca indra (penglihatan, pendengaran, peraba) agar siswa lebih paham."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Pilihan jawaban kurang tepat secara kebahasaan. Teks deskripsi lebih dominan menggunakan kata sifat (adjektiva) daripada kata kerja (verba).",
+          "suggestedFix": "Ubah pertanyaan menjadi fokus pada penggunaan kata sifat dan sesuaikan pilihan jawaban."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "low",
+          "issue": "Pilihan jawaban tidak konsisten. Tiga pilihan adalah jenis teks, satu pilihan adalah contoh kalimat.",
+          "suggestedFix": "Ubah pilihan jawaban agar semuanya berupa jenis teks atau kategori kalimat."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "fd1d83943d20472e983dd216",
+      "subject": "Bahasa Indonesia",
+      "topic": "Teks Deskripsi",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Materi terlalu abstrak untuk tingkat SMP. Perlu contoh konkret agar siswa memahami hubungan teks dan visual dalam teks deskripsi.",
+          "suggestedFix": "Tambahkan contoh spesifik seperti deskripsi pemandangan alam atau objek wisata."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "63168a92e2a24c2582f9c082",
+      "subject": "Bahasa Indonesia",
+      "topic": "Teks Deskripsi",
+      "slideIssueCount": 3,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Definisi kurang mendalam untuk level SMP 1. Kurikulum menekankan keterlibatan pancaindra.",
+          "suggestedFix": "Tambahkan frasa 'seolah-olah pembaca melihat, mendengar, dan merasakan sendiri objek tersebut'."
+        },
+        {
+          "severity": "medium",
+          "issue": "Klasifikasi jenis teks deskripsi tidak lengkap. Deskripsi spasial sering muncul dalam materi SMP 1.",
+          "suggestedFix": "Tambahkan kategori 'Spasial' pada pembagian berdasarkan objek/cara."
+        },
+        {
+          "severity": "low",
+          "issue": "Tujuan 'persuasif' kurang tepat untuk klasifikasi utama teks deskripsi di tingkat ini.",
+          "suggestedFix": "Ganti klasifikasi tujuan menjadi 'Eksplanatori' (informasi fakta) dan 'Sugestif' (imajinasi/kesan)."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "576e0a748b4e4388be7c7d5d",
+      "subject": "Bahasa Mandarin",
+      "topic": "我叫李文 - Wǒ jiào lǐ wén (My Name is Li Wen)",
+      "slideIssueCount": 2,
+      "quizIssueCount": 5,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Missing character meanings for educational completeness.",
+          "suggestedFix": "Add Indonesian translations for each character (wǒ, jiào, lǐ, wén)."
+        },
+        {
+          "severity": "low",
+          "issue": "Lack of cultural context regarding Chinese name structure.",
+          "suggestedFix": "Explain that 'Li' is the surname and 'Wen' is the given name."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Missing Hanzi characters in the question and explanation.",
+          "suggestedFix": "Add '我叫李文' to the question and define each character in the explanation."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "high",
+          "issue": "Missing Hanzi in question and duplicate options (Option 2 and 4 are both 'lǐ wén').",
+          "suggestedFix": "Add '李文' to the question and change Option 4 to 'lǐ wèn'."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "high",
+          "issue": "Missing Hanzi in question and explanation.",
+          "suggestedFix": "Add '叫' to the question and provide examples like '去, 看, 大' in the explanation."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "high",
+          "issue": "Factually incorrect. The tone pattern for '我叫李文' (Wǒ jiào Lǐ Wén) is 3-4-3-2, not 2-4-1-2-2-2. Missing Hanzi.",
+          "suggestedFix": "Update question to 'Pola nada pada kalimat 我叫李文 adalah...' and set options to reflect 3-4-3-2."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "high",
+          "issue": "Missing Hanzi in question and explanation.",
+          "suggestedFix": "Add '文' to the question and '文化' to the explanation."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "58df53070d2744a8a60d7736",
+      "subject": "Bahasa Inggris",
+      "topic": "Introduction",
+      "slideIssueCount": 2,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "The phrase 'We greet people in different times' is grammatically incorrect.",
+          "suggestedFix": "Change to 'We use different greetings depending on the time of day.'"
+        },
+        {
+          "severity": "low",
+          "issue": "The greetings list lacks context on when to use each greeting, which is important for SMP_1 introductory level.",
+          "suggestedFix": "Add time ranges for Good morning, Good afternoon, and Good evening."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 1,
+          "severity": "high",
+          "issue": "Multiple correct options. Both 'meet' (index 0) and 'see' (index 2) are grammatically correct and common greeting phrases ('Nice to meet you' / 'Nice to see you').",
+          "suggestedFix": "Change option at index 2 to 'seen' and set correctIndex to 0."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "3af709556f9a4635abe04e34",
+      "subject": "Bahasa Mandarin",
+      "topic": "Hello AI Xiaoyu! AI 小语，你好！",
+      "slideIssueCount": 2,
+      "quizIssueCount": 4,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Tidak ada penjelasan mengenai perubahan nada (Tone Sandhi) untuk nada 3 yang berurutan seperti pada '你好' (nǐ hǎo) dan '小语' (xiǎo yǔ), yang penting untuk pemula SMP_1 agar tidak salah melafalkan.",
+          "suggestedFix": "Tambahkan catatan aturan perubahan nada 3 + nada 3 menjadi nada 2 + nada 3."
+        },
+        {
+          "severity": "medium",
+          "issue": "Bagian praktik kalimat tidak dilengkapi dengan Pinyin, menyulitkan siswa SMP_1 untuk membaca kalimat lengkap secara mandiri.",
+          "suggestedFix": "Tambahkan Pinyin di bawah kalimat Mandarin pada slide praktik."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Karakter Mandarin hilang pada teks pertanyaan dan penjelasan.",
+          "suggestedFix": "Tambahkan karakter '你好' pada pertanyaan dan jelaskan komponen '你' dan '好' pada penjelasan."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "high",
+          "issue": "Karakter Mandarin hilang pada pertanyaan, pilihan jawaban, dan penjelasan.",
+          "suggestedFix": "Lengkapi karakter '小语' pada pertanyaan, buat pilihan jawaban yang membedakan karakter penyusunnya (misal: '小 dan 语'), dan lengkapi penjelasan."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "high",
+          "issue": "Karakter Mandarin hilang pada pertanyaan dan penjelasan. Penjelasan salah menyebutkan 'nǐ' sebagai nada ke-2 (seharusnya nada ke-3).",
+          "suggestedFix": "Lengkapi karakter '你好' dan perbaiki penjelasan nada menjadi 'nǐ (nada ke-3)'."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "high",
+          "issue": "Pertanyaan tidak lengkap/tidak logis ('AI menggunakan nada pada...') dan karakter Mandarin hilang pada penjelasan.",
+          "suggestedFix": "Ubah pertanyaan menjadi 'Karakter '小' (xiǎo) menggunakan nada...' dan lengkapi penjelasan dengan karakter '小'."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "f6e1ed158bff48e6b21c2148",
+      "subject": "Bahasa Inggris",
+      "topic": "Descriptive",
+      "slideIssueCount": 0,
+      "quizIssueCount": 3,
+      "slideIssues": [],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "low",
+          "issue": "The phrase 'long eyes' is semantically unnatural in English.",
+          "suggestedFix": "Swap the nouns to 'long hair and brown eyes'."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "high",
+          "issue": "Both 'is' and 'measures' are grammatically correct for describing height, creating two correct answers.",
+          "suggestedFix": "Change option 'is' to 'does' to make 'measures' the only valid choice."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Both 'thin' and 'slim' are antonyms for 'fat', making the options not distinct.",
+          "suggestedFix": "Replace 'thin' with an unrelated adjective like 'heavy'."
+        }
+      ],
+      "fixedSlide": false,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "7fcef236c19c41e5a3b89c2f",
+      "subject": "Bahasa Indonesia",
+      "topic": "Teks Prosedur",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Ciri kebahasaan kurang lengkap untuk level SMP 1. Kata kerja aktif dan kata keterangan (adverbia) biasanya diajarkan sebagai bagian integral teks prosedur.",
+          "suggestedFix": "Tambahkan poin mengenai kata kerja aktif dan kata keterangan (cara, alat, atau waktu) pada daftar ciri kebahasaan dan contohnya."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 3,
+          "severity": "low",
+          "issue": "Redundansi kata 'pastikan' pada pilihan jawaban kedua.",
+          "suggestedFix": "Ubah pilihan jawaban menjadi 'Panduan seperti 'pastikan', 'perhatikan', 'hindari''."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "0b221251cccb4f40934fc722",
+      "subject": "IPA",
+      "topic": "Ilmu Sains",
+      "slideIssueCount": 0,
+      "quizIssueCount": 1,
+      "slideIssues": [],
+      "quizIssues": [
+        {
+          "questionIndex": 1,
+          "severity": "low",
+          "issue": "The term 'Pembanding' (Comparator) is not the most precise description for the function of a control variable itself, although control variables enable valid comparisons. The primary function of a control variable is to be kept constant to isolate the effect of the independent variable.",
+          "suggestedFix": "Consider rephrasing the question or options to be more precise about the role of a control variable, e.g., 'Variabel yang dibuat sama (dikontrol) dalam percobaan berfungsi untuk memastikan apa?' (The variable kept the same (controlled) in an experiment functions to ensure what?) with options like 'validitas perbandingan' (validity of comparison) or 'menghilangkan faktor pengganggu' (eliminating confounding factors). Alternatively, if keeping the current options, the explanation should clarify that it's 'pembanding' in the sense of enabling a fair comparison."
+        }
+      ],
+      "fixedSlide": false,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "a247abc3e5be4781a3b5650d",
+      "subject": "IPA",
+      "topic": "Ilmu Sains",
+      "slideIssueCount": 1,
+      "quizIssueCount": 2,
+      "slideIssues": [
+        {
+          "severity": "high",
+          "issue": "Invalid slide content provided. The input `[object Object],[object Object],...` is not valid markdown.",
+          "suggestedFix": "Provide the actual markdown content for the slides."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "The question refers to 'simbol di bawah ini' but no image is provided, and the description of the symbol is ambiguous.",
+          "suggestedFix": "Change the question to text-based description: 'Manakah simbol yang menunjukkan bahan mudah terbakar (flammable)?' and ensure options describe the symbol clearly."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "high",
+          "issue": "The explanation contradicts standard safety protocols. For a small fire, the first step is usually to use a fire extinguisher or fire blanket, not just sound an alarm.",
+          "suggestedFix": "Update the correct answer to 'Menggunakan alat pemadam api (APAR) atau kain basah' and adjust the explanation accordingly."
+        }
+      ],
+      "fixedSlide": false,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "ec539b290c084819a2b83326",
+      "subject": "IPA",
+      "topic": "Zat dan Wujudnya",
+      "slideIssueCount": 2,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Klasifikasi zat kurang sistematis karena melewatkan pengelompokan 'Zat Tunggal' yang menaungi unsur dan senyawa.",
+          "suggestedFix": "Ubah struktur menjadi klasifikasi Materi/Zat yang terbagi menjadi Zat Tunggal (Unsur, Senyawa) dan Campuran."
+        },
+        {
+          "severity": "low",
+          "issue": "Judul slide kedua 'Perbedaan Campuran' kurang representatif karena memuat materi pemisahan campuran.",
+          "suggestedFix": "Ubah judul slide kedua menjadi 'Jenis & Pemisahan Campuran' dan tambahkan metode pemisahan yang umum di SMP seperti evaporasi."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Pertanyaan 4 merupakan duplikasi konsep dari Pertanyaan 3 (keduanya menanyakan pemisahan pasir dari air dengan filtrasi).",
+          "suggestedFix": "Ganti dengan pertanyaan mengenai karakteristik wujud zat untuk memperluas cakupan materi."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "a1f99e2a866149f385a1d552",
+      "subject": "IPA",
+      "topic": "Ilmu Sains",
+      "slideIssueCount": 0,
+      "quizIssueCount": 0,
+      "slideIssues": [],
+      "quizIssues": [],
+      "fixedSlide": false,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "64c2be8a729344a090a5e52b",
+      "subject": "IPA",
+      "topic": "Klasifikasi Makhluk Hidup",
+      "slideIssueCount": 1,
+      "quizIssueCount": 2,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Penjelasan contoh pada slide kedua kurang akurat secara biologis.",
+          "suggestedFix": "Ubah contoh 'Tumbuhan bergerak menuju cahaya' menjadi 'Tumbuhan melakukan fototropisme' agar lebih spesifik. Tambahkan penjelasan singkat bahwa metabolisme memerlukan nutrisi dan oksigen untuk menghasilkan energi."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 3,
+          "severity": "high",
+          "issue": "Question is ambiguous. Photosynthesis is a metabolic process, but 'Bernapas' (Respiration) is also a specific process. The logic that photosynthesis is not a general characteristic is correct, but the question structure is confusing for SMP level.",
+          "suggestedFix": "Change question to 'Berikut yang bukan merupakan ciri umum makhluk hidup adalah?' and ensure options are clearly distinct, e.g., 'Fotosintesis', 'Bergerak', 'Bernapas', 'Tumbuh'."
+        },
+        {
+          "questionIndex": 5,
+          "severity": "low",
+          "issue": "Opsi jawaban kurang paralel dan kurang tepat secara terminologi biologi.",
+          "suggestedFix": "Ubah opsi menjadi: 'Terhadap cara makan', 'Terhadap ancaman predator', 'Terhadap habitat terbang', 'Terhadap regulasi suhu tubuh'."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "dc990225715d4237aee4c850",
+      "subject": "IPA",
+      "topic": "Suhu dan Kalor",
+      "slideIssueCount": 2,
+      "quizIssueCount": 2,
+      "slideIssues": [
+        {
+          "severity": "high",
+          "issue": "Rumus konversi Celcius ke Reamur salah. (5/4)R adalah rumus untuk mencari Celcius dari Reamur, namun penulisan variabel tidak konsisten.",
+          "suggestedFix": "Ubah menjadi C = (5/4) * R."
+        },
+        {
+          "severity": "medium",
+          "issue": "Kurangnya penjelasan variabel pada rumus pemuaian untuk tingkat SMP.",
+          "suggestedFix": "Tambahkan keterangan singkat untuk ΔL, L₀, α, dan ΔT agar siswa memahami simbol."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 2,
+          "severity": "medium",
+          "issue": "Rentang anomali air yang tepat adalah 0°C hingga 4°C, namun pilihan jawaban 0°C dan 4°C kurang presisi secara terminologi.",
+          "suggestedFix": "Ubah pilihan jawaban menjadi rentang yang lebih jelas atau perbaiki deskripsi agar tidak ambigu."
+        },
+        {
+          "questionIndex": 5,
+          "severity": "high",
+          "issue": "Kontradiksi antara pernyataan soal dan penjelasan. Soal menyatakan air menyusut, padahal fakta ilmiahnya air memuai (volume meningkat) saat didinginkan dari 4°C ke 0°C.",
+          "suggestedFix": "Ubah pernyataan soal menjadi: 'Air memiliki keunikan bahwa volumenya justru meningkat saat didinginkan dari 4°C ke 0°C. Perilaku ini disebut...'"
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "e0825ac7f97a466782e42be6",
+      "subject": "IPA",
+      "topic": "Gerak dan Gaya",
+      "slideIssueCount": 1,
+      "quizIssueCount": 3,
+      "slideIssues": [
+        {
+          "severity": "high",
+          "issue": "Input provided is a list of [object Object] placeholders instead of actual slide content.",
+          "suggestedFix": "Provide the actual text content for each slide so it can be audited for factual correctness and grade-level appropriateness."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "low",
+          "issue": "Options contain formulas and concepts mixed with the definition, which is inconsistent.",
+          "suggestedFix": "Change options to be consistent definitions or examples of Newton's laws."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "low",
+          "issue": "Options include letter prefixes (A., B., etc.) while other questions do not.",
+          "suggestedFix": "Remove letter prefixes from options for consistency."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "low",
+          "issue": "Options include letter prefixes (A., B., etc.) while other questions do not.",
+          "suggestedFix": "Remove letter prefixes from options for consistency."
+        }
+      ],
+      "fixedSlide": false,
+      "fixedQuestions": true,
+      "regenerateRecommended": true
+    },
+    {
+      "materialId": "6d83f8190e4d43e38333ac7b",
+      "subject": "IPS",
+      "topic": "Keragaman Budaya",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "high",
+          "issue": "Factual error: Tari Kecak is a traditional dance from Bali, not Java.",
+          "suggestedFix": "Replace 'Tari Kecak' with 'Tari Serimpi' or 'Tari Gambyong' for the Java row."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 4,
+          "severity": "high",
+          "issue": "Factual error in question and explanation. Honai is a traditional house of the Dani/Papuan tribes, not Nias.",
+          "suggestedFix": "Change the question to ask for the tribe associated with Honai or change the correct option to 'Dani' and update the explanation."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "5d0a1b902ba44affbfc90870",
+      "subject": "IPA",
+      "topic": "Gerak dan Gaya",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "e12e80227a76428a96888e24",
+      "subject": "IPS",
+      "topic": "Ruang dan Interaksi",
+      "slideIssueCount": 0,
+      "quizIssueCount": 1,
+      "slideIssues": [],
+      "quizIssues": [
+        {
+          "questionIndex": 2,
+          "severity": "medium",
+          "issue": "Pertanyaan tidak relevan dengan topik utama 'Ruang dan Interaksi'.",
+          "suggestedFix": "Ganti pertanyaan dengan konsep interaksi antarruang, misalnya tentang 'Komplementaritas' atau 'Transferabilitas'."
+        }
+      ],
+      "fixedSlide": false,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "97ca7940a0084cda8f43276b",
+      "subject": "PJOK",
+      "topic": "Renang",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Deskripsi teknik pernapasan gaya dada tidak akurat; napas dilakukan saat tangan menekan ke bawah/samping, bukan saat tangan diayun ke depan.",
+          "suggestedFix": "Ubah deskripsi gaya dada menjadi: 'Kedua tangan dan kaki bergerak simetris, napas dilakukan saat kepala muncul ke permukaan saat tangan menekan ke bawah'."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Question is redundant and circular; it asks for the name of the butterfly stroke by describing it as resembling a butterfly.",
+          "suggestedFix": "Change question to: 'Gaya renang yang gerakannya dilakukan dengan mengayunkan kedua lengan secara bersamaan ke atas dan ke depan, serta gerakan kaki seperti lumba-lumba disebut...?'"
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "bbef976906204c76b0ae8fea",
+      "subject": "PJOK",
+      "topic": "Senam",
+      "slideIssueCount": 2,
+      "quizIssueCount": 4,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Definisi senam lantai kurang akurat karena beberapa gerakan (seperti handstand) memerlukan teknik spesifik dan risiko cedera tinggi bagi siswa SMP jika tidak ditekankan aspek pengawasan.",
+          "suggestedFix": "Tambahkan poin penting mengenai pengawasan guru atau pendamping saat melakukan gerakan."
+        },
+        {
+          "severity": "low",
+          "issue": "Handstand tercantum dalam daftar gerakan dasar namun tidak dijelaskan langkah-langkahnya di slide kedua.",
+          "suggestedFix": "Tambahkan langkah singkat handstand atau hapus dari daftar jika hanya fokus pada gerakan dasar pemula."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 1,
+          "severity": "medium",
+          "issue": "Question description for 'Kayang' is inaccurate; Kayang forms an arch, not a straight line.",
+          "suggestedFix": "Change question to: 'Gerakan senam lantai dengan posisi tubuh melengkung ke belakang dengan tangan dan kaki sebagai tumpuan disebut...?'"
+        },
+        {
+          "questionIndex": 2,
+          "severity": "medium",
+          "issue": "Question asks about 'senam lantai' but 'Vaulting horse' is categorized under 'senam alat' (artistic gymnastics), not 'senam lantai'.",
+          "suggestedFix": "Change question to: 'Gerakan melompati peti lompat dalam senam alat disebut...?'"
+        },
+        {
+          "questionIndex": 3,
+          "severity": "low",
+          "issue": "Explanation contains a typo 'forward' and redundant text.",
+          "suggestedFix": "Change explanation to: 'Guling depan dimulai dari posisi jongkok dengan kedua tangan di depan, siap untuk berguling dengan dagu menempel di dada.'"
+        },
+        {
+          "questionIndex": 4,
+          "severity": "low",
+          "issue": "Explanation contains a typo '(stabil)' and unnecessary parentheses.",
+          "suggestedFix": "Change explanation to: 'Keseimbangan adalah kemampuan mempertahankan posisi tubuh pada satu kaki atau kombinasi posisi yang stabil, melatih fokus dan kontrol otot.'"
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "7d1f8b90e66446dbb701abb3",
+      "subject": "PJOK",
+      "topic": "Belajar Melalui Gerak",
+      "slideIssueCount": 1,
+      "quizIssueCount": 3,
+      "slideIssues": [
+        {
+          "severity": "high",
+          "issue": "Konten slide rusak. Input menampilkan array '[object Object]' alih-alih teks markdown.",
+          "suggestedFix": "Perbaiki pipeline data untuk mengirimkan string markdown yang valid."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 2,
+          "severity": "low",
+          "issue": "Typo in explanation 'menyentu ball'. Awkward phrasing in option 1 'menusuk bola'.",
+          "suggestedFix": "Change option 1 to 'Mengayunkan kaki untuk menendang bola'. Fix typo to 'menyentuh bola'."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Options contain prefix letters (A, B, C, D). Breaks shuffling.",
+          "suggestedFix": "Remove prefix letters. Capitalize first letters for consistency."
+        },
+        {
+          "questionIndex": 5,
+          "severity": "low",
+          "issue": "Options contain letter prefixes.",
+          "suggestedFix": "Remove letter prefixes."
+        }
+      ],
+      "fixedSlide": false,
+      "fixedQuestions": true,
+      "regenerateRecommended": true
+    },
+    {
+      "materialId": "039b6455c52e45d78353db9e",
+      "subject": "PJOK",
+      "topic": "Strategi Gerak",
+      "slideIssueCount": 2,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Penggunaan istilah asing ('small-sided games', 'counter-attack') tanpa padanan bahasa Indonesia menyulitkan pemahaman siswa SMP kelas 7.",
+          "suggestedFix": "Gunakan atau tambahkan istilah bahasa Indonesia: 'permainan dengan jumlah pemain kecil' dan 'serangan balik'."
+        },
+        {
+          "severity": "low",
+          "issue": "Format '1v1' dan '2v2' kurang baku untuk teks pelajaran bahasa Indonesia.",
+          "suggestedFix": "Ubah menjadi '1 lawan 1 (1v1)' dan '2 lawan 2 (2v2)'."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "b6eac063b41549a0b784b918",
+      "subject": "PJOK",
+      "topic": "Kebugaran",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "high",
+          "issue": "Konten slide kosong dan tidak relevan dengan kurikulum PJOK SMP.",
+          "suggestedFix": "Isi slide dengan materi kebugaran jasmani yang sesuai untuk siswa SMP, seperti komponen kebugaran (kekuatan, kelenturan, daya tahan) dan contoh latihannya."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 4,
+          "severity": "high",
+          "issue": "Factual error in explanation and acronym definition. PPPKJ is not the standard for Indonesian schools, and the expansion provided is incorrect.",
+          "suggestedFix": "Change the question to refer to TKJI (Tes Kebugaran Jasmani Indonesia) and update the explanation accordingly."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "68ef1cc3d6e04f689653bef3",
+      "subject": "PJOK",
+      "topic": "Kerja Sama Tim",
+      "slideIssueCount": 1,
+      "quizIssueCount": 2,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Lack of actionable examples for students.",
+          "suggestedFix": "Add specific examples of verbal cues (e.g., 'screen left', 'switch') to make the content more practical for SMP students."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Redundant question. Question 4 is identical in concept to Question 1 (regarding communication types).",
+          "suggestedFix": "Replace Question 4 with a question about the importance of trust or role division in team sports."
+        },
+        {
+          "questionIndex": 5,
+          "severity": "medium",
+          "issue": "Opsi B dan C memiliki makna yang tumpang tindih (redundant) dengan opsi A, sehingga pilihan jawaban tidak cukup distingtif.",
+          "suggestedFix": "Ganti opsi B dan C dengan faktor teknis lain seperti 'Dominasi ego individu yang tinggi' dan 'Kurangnya pemahaman terhadap taktik pelatih'."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "9d627b47df64422386d550ba",
+      "subject": "Informatika",
+      "topic": "Analisis Data",
+      "slideIssueCount": 2,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Definisi terlalu abstrak untuk tingkat SMP. Kurang menekankan pada aspek praktis pengolahan data.",
+          "suggestedFix": "Tambahkan poin tentang tujuan analisis data agar siswa memahami relevansinya."
+        },
+        {
+          "severity": "low",
+          "issue": "Struktur slide kurang mencakup aspek 'Penyajian Data' yang merupakan bagian dari kurikulum Informatika SMP.",
+          "suggestedFix": "Tambahkan poin mengenai pentingnya menyajikan data agar mudah dipahami."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "e2dfdaf85ee0407e9e059f0c",
+      "subject": "Matematika",
+      "topic": "Persamaan",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Inconsistency between slide title (Persamaan Linear Satu Variabel) and content (includes two-variable linear equations).",
+          "suggestedFix": "Separate the content into two distinct sections or clarify the transition between one-variable and two-variable equations."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "f27ed84f54eb45dead7b89f3",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Keberagaman",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "be9ae967499f4d0ea008f716",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Makna proklamasi",
+      "slideIssueCount": 1,
+      "quizIssueCount": 2,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Pernyataan 'Proklamasi merupakan pernyataan kemerdekaan secara de facto dan de jure' kurang tepat secara hukum internasional.",
+          "suggestedFix": "Ubah menjadi 'Proklamasi merupakan pernyataan kemerdekaan secara de facto, sedangkan pengakuan de jure diperoleh melalui proses diplomasi dan pengakuan negara lain'."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "low",
+          "issue": "Pilihan jawaban kurang spesifik dan ambigu.",
+          "suggestedFix": "Ubah pilihan menjadi: 'Penyusunan UUD 1945', 'Pembentukan negara serikat', 'Pemilihan presiden pertama', 'Pembubaran parlemen kolonial'."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Penjelasan kurang tepat. Alinea ketiga Pembukaan UUD 1945 yang secara eksplisit memuat pernyataan proklamasi.",
+          "suggestedFix": "Ubah pilihan jawaban agar mencakup alinea ketiga dan perbarui penjelasan bahwa alinea ketiga adalah penjabaran proklamasi."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "8e0b5b9d0330487489f34bb9",
+      "subject": "Pendidikan Pancasila",
+      "topic": "NKRI",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Istilah 'Bela Negara' pada poin ketiga slide kedua terlalu umum untuk siswa SMP tanpa penjelasan konteks konstitusional (Pasal 27 ayat 3 UUD 1945).",
+          "suggestedFix": "Tambahkan referensi singkat mengenai kewajiban bela negara sesuai konstitusi agar siswa memahami dasar hukumnya."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 4,
+          "severity": "low",
+          "issue": "Format opsi jawaban tidak konsisten dengan soal lainnya (menggunakan huruf A, B, C, D).",
+          "suggestedFix": "Hapus label huruf (A., B., C., D.) pada opsi jawaban agar seragam dengan soal nomor 1-4."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "9d522772e9954e6e88ba4181",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Keberagaman SARA",
+      "slideIssueCount": 2,
+      "quizIssueCount": 2,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Penyebutan 'Papua' sebagai bahasa daerah tidak akurat karena Papua merupakan wilayah dengan ratusan bahasa daerah yang berbeda.",
+          "suggestedFix": "Ganti 'Papua' dengan contoh bahasa daerah spesifik seperti 'Asmat' atau 'Dani'."
+        },
+        {
+          "severity": "low",
+          "issue": "Topik utama adalah 'Keberagaman SARA', namun konten slide hanya fokus pada aspek budaya.",
+          "suggestedFix": "Tambahkan poin singkat mengenai SARA (Suku, Agama, Ras, Antargolongan) agar relevan dengan judul topik."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "medium",
+          "issue": "Option 3 ('Kesenian dan tradisional') is grammatically awkward and redundant with Option 0.",
+          "suggestedFix": "Change option 3 to 'Sistem kepercayaan yang beragam'."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "low",
+          "issue": "Option 3 ('Bahasa daerah tanpa perubahan') is factually incorrect as a concept, but the question asks for an example of akulturasi.",
+          "suggestedFix": "Change option 3 to 'Wayang kulit dengan lakon Mahabharata'."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "c706d792848f47f081f8f6f6",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Keberagaman SARA",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "high",
+          "issue": "Topik slide tidak relevan dengan judul materi 'Keberagaman SARA'. Konten saat ini fokus pada sejarah Proklamasi, bukan analisis keberagaman SARA.",
+          "suggestedFix": "Ubah konten untuk menjelaskan konsep SARA (Suku, Agama, Ras, Antargolongan) dan pentingnya toleransi dalam bingkai Bhinneka Tunggal Ika sesuai kurikulum SMP."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "medium",
+          "issue": "Question topic mismatch. The subject is 'Keberagaman SARA', but the questions are about 'Sejarah Proklamasi'.",
+          "suggestedFix": "Replace all questions with content relevant to SARA (Suku, Agama, Ras, dan Antargolongan) in Indonesia."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": true
+    },
+    {
+      "materialId": "c4cf8c11-358f-4317-a159-349a653d3793",
+      "subject": "Biologi",
+      "topic": "Klasifikasi Makhluk Hidup",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "f76c10d5-a597-448f-a787-f9a033407eae",
+      "subject": "Biologi",
+      "topic": "Ekologi",
+      "slideIssueCount": 3,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Typo pada istilah 'Simbiosi' di tabel Istilah Kunci.",
+          "suggestedFix": "Ubah 'Simbiosi' menjadi 'Simbiosis'."
+        },
+        {
+          "severity": "low",
+          "issue": "Format tabel pada bagian 'Tingkatan Trofik' kurang rapi dan berpotensi membingungkan siswa.",
+          "suggestedFix": "Gunakan daftar poin atau format yang lebih bersih untuk menjelaskan tingkatan trofik."
+        },
+        {
+          "severity": "medium",
+          "issue": "Predasi dikategorikan sebagai simbiosis pada tabel bagian C.1.a.",
+          "suggestedFix": "Pindahkan Predasi keluar dari tabel Simbiosis karena predasi bukan merupakan bentuk simbiosis (hubungan erat jangka panjang)."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "low",
+          "issue": "Leading space in option 1.",
+          "suggestedFix": "Remove leading space from ' Biotik' to 'Biotik'."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "77789834-511d-49b2-a8fb-042494767ac1",
+      "subject": "Biologi",
+      "topic": "Sel dan Jaringan",
+      "slideIssueCount": 2,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Pernyataan 'Semua organisme, dari bakteri hingga manusia, tersusun dari sel' kurang akurat karena virus tidak dianggap sebagai sel (aseluler).",
+          "suggestedFix": "Ubah menjadi 'Sebagian besar makhluk hidup tersusun dari sel, kecuali virus yang bersifat aseluler.'"
+        },
+        {
+          "severity": "low",
+          "issue": "Poin 'Tiga Bagian Utama Semua Sel' menyebutkan nukleus, padahal sel prokariotik (bakteri) tidak memiliki nukleus sejati.",
+          "suggestedFix": "Ubah menjadi 'Tiga bagian utama sel eukariotik' atau beri catatan bahwa nukleus hanya ada pada sel eukariotik."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Pilihan jawaban 'Osmosis' dan 'Difusi' keduanya benar secara teknis karena keduanya adalah transpor pasif, namun pertanyaan merujuk pada definisi umum difusi.",
+          "suggestedFix": "Ubah pertanyaan menjadi lebih spesifik atau pastikan pilihan jawaban tidak tumpang tindih secara konsep."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "5c587c03-83ef-45f1-9488-99116c8683f6",
+      "subject": "Sejarah",
+      "topic": "Masa Kolonial",
+      "slideIssueCount": 2,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Penyebutan 'Emigrasi' pada Politik Etis kurang tepat secara terminologi sejarah untuk tingkat SMP.",
+          "suggestedFix": "Ganti menjadi 'Transmigrasi' agar sesuai dengan istilah yang digunakan dalam kurikulum sejarah Indonesia."
+        },
+        {
+          "severity": "low",
+          "issue": "Penjelasan mengenai Perang Banjar (1859-1905) perlu klarifikasi bahwa tahun tersebut mencakup fase gerilya panjang.",
+          "suggestedFix": "Tambahkan catatan singkat bahwa tahun 1905 adalah akhir perlawanan fisik secara sporadis."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Opsi B menyatakan masa sewa 5 tahun, padahal UU Agraria 1870 menetapkan masa sewa tanah hingga 75 tahun.",
+          "suggestedFix": "Ubah opsi B menjadi 'Perusahaan swasta boleh menyewa tanah pemerintah untuk perkebunan selama maksimal 75 tahun'."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "82640bbf-c1bd-4258-9756-c7c214394c04",
+      "subject": "Geografi",
+      "topic": "Kepulauan Indonesia",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "d49c1062-28c9-4694-8c15-fed148e1c33a",
+      "subject": "Biologi",
+      "topic": "Protista dan Jamur",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "high",
+          "issue": "Slide content is incomplete. The markdown ends abruptly mid-sentence.",
+          "suggestedFix": "Provide the full slide markdown for a comprehensive audit."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": false,
+      "fixedQuestions": false,
+      "regenerateRecommended": true
+    },
+    {
+      "materialId": "e56d9030-d612-469c-a9f9-616e8aec5d9a",
+      "subject": "Geografi",
+      "topic": "Peta dan Atlas",
+      "slideIssueCount": 2,
+      "quizIssueCount": 2,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Konten tidak relevan dengan topik 'Peta dan Atlas'. Slide berisi daftar pustaka, sumber gambar, dan profil penulis yang mencakup bidang sejarah, ekonomi, dan sosiologi, bukan geografi spesifik.",
+          "suggestedFix": "Hapus referensi yang tidak relevan dengan materi Peta dan Atlas. Pastikan daftar pustaka hanya mencakup literatur kartografi atau geografi yang digunakan dalam modul."
+        },
+        {
+          "severity": "low",
+          "issue": "Format daftar pustaka tidak konsisten (penulisan nama, tahun, dan judul).",
+          "suggestedFix": "Standardisasi format daftar pustaka menggunakan gaya APA atau standar Kemendikbud yang seragam."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 2,
+          "severity": "high",
+          "issue": "Explanation contains a mathematical error and contradicts the correctIndex.",
+          "suggestedFix": "Change correctIndex to 3 (5.000.000 cm is incorrect, it should be 500.000 cm). Update explanation to: 'Skala 1:500.000 berarti 1 cm di peta mewakili 500.000 cm di lapangan.'"
+        },
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Correct index is ambiguous; globe's primary advantage is lack of distortion, not direction finding.",
+          "suggestedFix": "Change options to focus on distortion. Correct index should reflect that globe represents the earth's true shape without distortion."
+        }
+      ],
+      "fixedSlide": false,
+      "fixedQuestions": true,
+      "regenerateRecommended": true
+    }
+  ]
+}

@@ -14,6 +14,7 @@ import type {
 import { generateQuiz } from "./generator";
 import { gradeAttempt } from "./grader";
 import { analyzeExamAttempt } from "@/services/improvement-analysis";
+import { prisma } from "@/lib/prisma";
 
 /* ------------------------------------------------------------------ */
 /*  assessment:generate — creates a quiz or exam for a student          */
@@ -128,4 +129,28 @@ export async function processImprovementAnalysis(
   console.log(`[assessment/worker] Analyzing attempt=${attemptId}`);
   await analyzeExamAttempt(attemptId);
   console.log(`[assessment/worker] Analysis complete for attempt=${attemptId}`);
+
+  // ── Weekly exam recap: notify student (and parent) once analysis is done ──
+  try {
+    const { sendExamRecap, enforceImprovementPlan } = await import(
+      "@/services/exam-scheduler"
+    );
+    const attempt = await prisma.examAttempt.findUnique({
+      where: { id: attemptId },
+      select: { exam: { select: { type: true } } },
+    });
+    if (attempt?.exam?.type === "WEEKLY") {
+      // 1. Turn the plan's recommended topics into INTENSIVE sessions
+      const created = await enforceImprovementPlan(attemptId);
+      if (created > 0) {
+        console.log(
+          `[assessment/worker] Enforced improvement plan: ${created} INTENSIVE session(s) scheduled`,
+        );
+      }
+      // 2. Send recap to student + parent
+      await sendExamRecap(attemptId);
+    }
+  } catch (err) {
+    console.error("[assessment/worker] sendExamRecap error:", err);
+  }
 }

@@ -1,0 +1,2719 @@
+{
+  "grade": "SD_5",
+  "template": "SYIFA001",
+  "dryRun": false,
+  "apply": true,
+  "count": 130,
+  "flaggedHigh": 18,
+  "appliedFixes": 114,
+  "results": [
+    {
+      "materialId": "7ce3c4ec-085e-465e-b9f0-14558d0305df",
+      "subject": "IPAS",
+      "topic": "Air Sumber Kehidupan",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "f59473b8-903c-4dee-8e13-8da9f21f5b42",
+      "subject": "IPAS",
+      "topic": "Air Sumber Kehidupan",
+      "slideIssueCount": 1,
+      "quizIssueCount": 11,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'reuse' pada poin kedua slide kedua perlu dijelaskan dalam konteks bahasa Indonesia yang lebih mudah dipahami siswa kelas 5.",
+          "suggestedFix": "Ubah menjadi: 'Gunakan air bekas cucian sayur atau beras untuk menyiram tanaman. Ini disebut penggunaan kembali (reuse) agar air tidak terbuang sia-sia.'"
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Question topic mismatch. Topic is 'Air Sumber Kehidupan', but question is about 'Kerajaan Islam'.",
+          "suggestedFix": "Replace with a question about water conservation or the water cycle."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "high",
+          "issue": "Question topic mismatch. Topic is 'Air Sumber Kehidupan', but question is about 'Situs Bersejarah'.",
+          "suggestedFix": "Replace with a question about the importance of water for living things."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "high",
+          "issue": "Question topic mismatch. Topic is 'Air Sumber Kehidupan', but question is about 'Candi Borobudur'.",
+          "suggestedFix": "Replace with a question about water pollution or water sources."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "high",
+          "issue": "Question topic mismatch. Topic is 'Air Sumber Kehidupan', but question is about 'Kerajaan Majapahit'.",
+          "suggestedFix": "Replace with a question about the properties of water or water usage."
+        },
+        {
+          "questionIndex": 5,
+          "severity": "high",
+          "issue": "Topik tidak relevan. Pertanyaan mengenai candi Hindu/Buddha tidak berkaitan dengan topik 'Air Sumber Kehidupan'.",
+          "suggestedFix": "Ganti dengan pertanyaan tentang siklus air atau pentingnya air bagi kehidupan."
+        },
+        {
+          "questionIndex": 6,
+          "severity": "high",
+          "issue": "Topik tidak relevan. Pertanyaan mengenai Kerajaan Mataram Kuno tidak berkaitan dengan topik 'Air Sumber Kehidupan'.",
+          "suggestedFix": "Ganti dengan pertanyaan tentang sumber air atau cara menjaga kebersihan air."
+        },
+        {
+          "questionIndex": 10,
+          "severity": "high",
+          "issue": "Question topic mismatch. The subject is 'Air Sumber Kehidupan', but the question asks about 'benda bersejarah'.",
+          "suggestedFix": "Replace with a question relevant to water conservation or the water cycle."
+        },
+        {
+          "questionIndex": 11,
+          "severity": "high",
+          "issue": "Question topic mismatch. Kerajaan Sriwijaya is history, not related to 'Air Sumber Kehidupan'.",
+          "suggestedFix": "Replace with a question about water sources or water pollution."
+        },
+        {
+          "questionIndex": 12,
+          "severity": "high",
+          "issue": "Question topic mismatch. Candi Borobudur is history, not related to 'Air Sumber Kehidupan'.",
+          "suggestedFix": "Replace with a question about water usage or water cycle."
+        },
+        {
+          "questionIndex": 13,
+          "severity": "high",
+          "issue": "Question topic mismatch. Naskah kuno is history, not related to 'Air Sumber Kehidupan'.",
+          "suggestedFix": "Replace with a question about water treatment or water saving methods."
+        },
+        {
+          "questionIndex": 15,
+          "severity": "high",
+          "issue": "Topic mismatch. The subject is 'IPAS: Air Sumber Kehidupan', but the questions are about 'Sejarah Kerajaan di Indonesia'.",
+          "suggestedFix": "Replace all questions with content related to the water cycle, water conservation, or the importance of water for life."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "496655cf-6310-486c-916e-4a63647541d8",
+      "subject": "IPAS",
+      "topic": "Daerah Bersejarah",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'Warisan Budaya Takbenda' mungkin terlalu teknis untuk siswa kelas 5 SD.",
+          "suggestedFix": "Gunakan istilah 'Tradisi atau Budaya Takbenda' agar lebih mudah dipahami."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 3,
+          "severity": "high",
+          "issue": "Factual error. Keraton Yogyakarta bukan peninggalan Kerajaan Mataram Islam (abad ke-16/17), melainkan Kesultanan Ngayogyakarta Hadiningrat yang berdiri tahun 1755 setelah Perjanjian Giyanti.",
+          "suggestedFix": "Ubah pertanyaan menjadi menanyakan peninggalan Kesultanan Mataram Islam atau ganti opsi jawaban agar akurat."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "0bba7fb0-6ea0-479d-bddd-1b25d3235ab4",
+      "subject": "IPAS",
+      "topic": "Daerah Bersejarah",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Instruksi garis waktu (timeline) pada slide terakhir terlalu kompleks untuk level SD kelas 5 karena memerlukan pemahaman kronologi lintas abad yang panjang.",
+          "suggestedFix": "Ganti instruksi garis waktu dengan tugas mengurutkan tiga kerajaan berdasarkan masa berdirinya saja."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "ebee84f7-39b9-4cab-91ca-a445c5b12454",
+      "subject": "IPAS",
+      "topic": "Daerah Bersejarah",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Factual error on Slide 2 regarding Monas and the Proclamation.",
+          "suggestedFix": "Change the example to: 'Jika kita mengunjungi Monas, kita bisa membayangkan semangat perjuangan kemerdekaan Indonesia.' (Proclamation occurred at Pegangsaan Timur 56, not Monas)."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "76c51cab-9cf6-444c-8d5d-dd5a81ef25b6",
+      "subject": "IPAS",
+      "topic": "Perubahan Fisik",
+      "slideIssueCount": 2,
+      "quizIssueCount": 6,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Penjelasan mengenai menstruasi pada slide 3 kurang akurat secara biologis untuk anak kelas 5 SD.",
+          "suggestedFix": "Ubah penjelasan menstruasi menjadi peluruhan dinding rahim yang tidak dibuahi, bukan sekadar 'bersiap untuk fungsi reproduksi'."
+        },
+        {
+          "severity": "low",
+          "issue": "Istilah 'organ reproduksi' pada slide 2 mungkin terlalu teknis tanpa penjelasan sederhana.",
+          "suggestedFix": "Tambahkan penjelasan singkat bahwa itu adalah bagian tubuh yang berfungsi untuk memiliki keturunan di masa depan."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "medium",
+          "issue": "Topik pertanyaan tentang sifat cahaya tidak relevan dengan topik utama 'Perubahan Fisik' (Pubertas) untuk kelas 5 SD.",
+          "suggestedFix": "Ganti dengan pertanyaan tentang perubahan fisik pubertas, misalnya perubahan suara atau pertumbuhan rambut halus."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Topik pertanyaan tentang pembiasan cahaya tidak relevan dengan topik utama 'Perubahan Fisik' (Pubertas).",
+          "suggestedFix": "Ganti dengan pertanyaan tentang perubahan fisik sekunder pada laki-laki atau perempuan."
+        },
+        {
+          "questionIndex": 8,
+          "severity": "high",
+          "issue": "Topik tidak relevan. Pertanyaan mengenai sifat cahaya (fisika) tidak sesuai dengan topik utama Perubahan Fisik (biologi/pubertas).",
+          "suggestedFix": "Ganti dengan pertanyaan tentang perubahan fisik pubertas lainnya, misalnya pertumbuhan rambut halus atau jerawat."
+        },
+        {
+          "questionIndex": 12,
+          "severity": "high",
+          "issue": "Topik pertanyaan tidak relevan dengan materi 'Perubahan Fisik' (Pubertas).",
+          "suggestedFix": "Ganti pertanyaan dengan topik perubahan fisik pada masa pubertas, misalnya tentang perubahan sekunder pada laki-laki."
+        },
+        {
+          "questionIndex": 18,
+          "severity": "high",
+          "issue": "Pertanyaan menanyakan perubahan fisik pada perempuan, namun opsi 'Dada menjadi lebih bidang', 'Tumbuh kumis', dan 'Suara menjadi lebih berat' adalah ciri laki-laki. Ini membingungkan siswa.",
+          "suggestedFix": "Ubah pertanyaan menjadi 'Berikut ini yang termasuk perubahan fisik pada perempuan saat pubertas adalah...' dan ganti opsi yang salah agar hanya ada satu jawaban benar."
+        },
+        {
+          "questionIndex": 19,
+          "severity": "low",
+          "issue": "Pertanyaan redundan dengan soal nomor 3 (keduanya menanyakan perubahan fisik perempuan).",
+          "suggestedFix": "Ganti pertanyaan nomor 4 dengan topik lain terkait pubertas, misalnya tentang kebersihan diri atau kesehatan reproduksi."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "21ebf231-22f4-4264-b6da-d7d4d00225fe",
+      "subject": "IPAS",
+      "topic": "Perubahan Fisik",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Pertanyaan nomor 3 pada Slide 4 terlalu bersifat pribadi dan sensitif untuk diskusi kelompok di kelas 5 SD.",
+          "suggestedFix": "Ganti pertanyaan nomor 3 dengan pertanyaan yang lebih umum tentang cara menyikapi perubahan fisik secara positif."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "low",
+          "issue": "Opsi 'Suara menjadi semakin melengking' kurang tepat untuk laki-laki karena suara laki-laki justru menjadi lebih berat/dalam.",
+          "suggestedFix": "Ganti opsi 'Suara menjadi semakin melengking' dengan 'Suara menjadi lebih berat'."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "fadcc362-3771-471e-86a8-d37c2457ce20",
+      "subject": "IPAS",
+      "topic": "Perubahan Fisik",
+      "slideIssueCount": 1,
+      "quizIssueCount": 4,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'mimpi basah' dan 'menstruasi' perlu disampaikan dengan kehati-hatian ekstra untuk siswa kelas 5 SD agar tidak menimbulkan kebingungan atau ketidaknyamanan.",
+          "suggestedFix": "Tambahkan kalimat pengantar singkat bahwa ini adalah proses alami reproduksi yang sehat."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Question is null.",
+          "suggestedFix": "Provide a valid question object."
+        },
+        {
+          "questionIndex": 1,
+          "severity": "high",
+          "issue": "Question is null.",
+          "suggestedFix": "Provide a valid question object."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "high",
+          "issue": "Question is null.",
+          "suggestedFix": "Provide a valid question object."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "high",
+          "issue": "Question is null.",
+          "suggestedFix": "Provide a valid question object."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": true
+    },
+    {
+      "materialId": "f5392ee5-49c9-46c2-8d31-44e4cf8954d8",
+      "subject": "IPAS",
+      "topic": "Cahaya",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "2f4e3853-f209-482b-8c17-18c8df9fca8c",
+      "subject": "IPAS",
+      "topic": "Cahaya",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "c2d4be14-bf7d-4e74-97f5-6c584b704727",
+      "subject": "IPAS",
+      "topic": "Cahaya",
+      "slideIssueCount": 2,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Penjelasan 'foton' terlalu teknis untuk siswa kelas 5 SD.",
+          "suggestedFix": "Ganti 'foton (partikel cahaya)' menjadi 'energi dari cahaya matahari'."
+        },
+        {
+          "severity": "low",
+          "issue": "Instruksi praktik serat optik menggunakan selang air kurang efektif karena indeks bias air dan udara tidak cukup tinggi untuk pemantulan sempurna yang jelas.",
+          "suggestedFix": "Sarankan penggunaan batang kaca atau akrilik bening yang lebih solid untuk hasil lebih baik."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "low",
+          "issue": "Question phrasing is slightly redundant as 'serat optik' is mentioned in the options.",
+          "suggestedFix": "Change question to: 'Teknologi komunikasi yang menggunakan cahaya untuk mengirimkan data melalui serat kaca tipis disebut...'"
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "1a451309-62fa-4453-9ce8-a13776ee752f",
+      "subject": "IPAS",
+      "topic": "Bunyi",
+      "slideIssueCount": 2,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Istilah 'amplitudo' mungkin terlalu teknis untuk siswa kelas 5 SD tanpa penjelasan sederhana.",
+          "suggestedFix": "Tambahkan penjelasan bahwa amplitudo adalah jarak getaran."
+        },
+        {
+          "severity": "low",
+          "issue": "Pernyataan 'suara kita saat berbicara' dikategorikan sebagai sumber bunyi buatan manusia kurang tepat secara biologis.",
+          "suggestedFix": "Pindahkan ke kategori sumber bunyi alami atau buat kategori khusus 'makhluk hidup'."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Opsi jawaban kurang tepat secara teknis karena bunyi merambat melalui medium perantara (udara) untuk sampai ke telinga pendengar.",
+          "suggestedFix": "Ubah opsi jawaban agar lebih fokus pada medium perambatan bunyi secara umum."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "89f45ae1-c6fa-4ba0-a04f-e96772c7810d",
+      "subject": "IPAS",
+      "topic": "Bunyi",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Kalimat 'jika, gunakan pelindung telinga' pada bagian cara merawat telinga tidak lengkap secara tata bahasa.",
+          "suggestedFix": "Ubah menjadi 'jika berada di lingkungan bising, gunakan pelindung telinga.'"
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Istilah 'Bunyi pantul yang memperkuat' kurang tepat secara terminologi fisika untuk SD kelas 5; fenomena tersebut lebih dikenal sebagai gaung.",
+          "suggestedFix": "Ubah opsi menjadi 'Gaung' dan perbaiki penjelasan bahwa gaung terjadi karena bunyi pantul terdengar hampir bersamaan dengan bunyi asli."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "ac3fa867-38f2-4c95-b3ff-21e81adee52d",
+      "subject": "IPAS",
+      "topic": "Bunyi",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Penjelasan sonar pada bagian 'Bagaimana Teknologi Bunyi Bekerja' mencampuradukkan teknologi manusia dengan kemampuan biologis paus tanpa pemisahan yang cukup jelas.",
+          "suggestedFix": "Berikan penekanan bahwa sonar adalah adaptasi teknologi dari prinsip ekolokasi hewan."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 5,
+          "severity": "low",
+          "issue": "Penjelasan kurang eksplisit mengenai rumus jarak (s = v * t / 2).",
+          "suggestedFix": "Tambahkan rumus s = (v * t) / 2 pada penjelasan agar siswa lebih mudah memahami perhitungan."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "bbc7aaab-c309-46db-986b-88b6e0a1d47f",
+      "subject": "Bahasa Indonesia",
+      "topic": "Aku yang Unik",
+      "slideIssueCount": 1,
+      "quizIssueCount": 4,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'Ciri kesukaan' kurang lazim dalam tata bahasa Indonesia formal untuk SD.",
+          "suggestedFix": "Gunakan istilah 'Kegemaran' atau 'Minat' agar lebih tepat secara kebahasaan."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Klasifikasi kata 'cepat' dalam kalimat 'Dia berlari dengan cepat' adalah kata keterangan (adverbia), bukan kata sifat (adjektiva).",
+          "suggestedFix": "Ubah penjelasan menjadi 'kata keterangan' atau ganti kalimat contoh menjadi 'Dia anak yang cepat' agar 'cepat' berfungsi sebagai kata sifat."
+        },
+        {
+          "questionIndex": 9,
+          "severity": "medium",
+          "issue": "Redundansi materi dengan pertanyaan nomor 2.",
+          "suggestedFix": "Ganti pertanyaan nomor 4 dengan materi lain yang relevan dengan topik 'Aku yang Unik', misalnya tentang menghargai perbedaan fisik atau hobi."
+        },
+        {
+          "questionIndex": 15,
+          "severity": "medium",
+          "issue": "Definisi 'Kata pengantar' sering tertukar dengan 'Prakata' dalam konteks buku sekolah. Istilah yang lebih tepat untuk tulisan orang lain adalah 'Sambutan' atau 'Kata Pengantar', namun 'Prakata' secara teknis ditulis penulis. Pilihan jawaban membingungkan.",
+          "suggestedFix": "Ubah pertanyaan menjadi: 'Bagian buku yang berisi tulisan dari tokoh lain untuk memberikan apresiasi atau pengantar terhadap isi buku adalah...'"
+        },
+        {
+          "questionIndex": 24,
+          "severity": "low",
+          "issue": "Pertanyaan bertanya 'apa yang dilakukan' tetapi jawaban 'Bangga dan percaya diri' mendeskripsikan perasaan, bukan tindakan. Ketidakcocokan antara pertanyaan dan jawaban.",
+          "suggestedFix": "Ubah pertanyaan menjadi 'Setelah menyadari keunikannya, bagaimana perasaan tokoh utama?' agar sesuai dengan jawaban."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "190c226e-f431-43a6-83a1-1cbc0d81bb80",
+      "subject": "Bahasa Indonesia",
+      "topic": "Aku yang Unik",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "22cbe059-bcfd-4bec-b68b-14e612b016cf",
+      "subject": "Bahasa Indonesia",
+      "topic": "Aku yang Unik",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "c7e6a86d-e295-449f-9909-07aefe4d670b",
+      "subject": "Bahasa Indonesia",
+      "topic": "Buku Jendela Dunia",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "1298ecce-0cfa-41fc-9884-19df8889be61",
+      "subject": "Bahasa Indonesia",
+      "topic": "Buku Jendela Dunia",
+      "slideIssueCount": 0,
+      "quizIssueCount": 4,
+      "slideIssues": [],
+      "quizIssues": [
+        {
+          "questionIndex": 10,
+          "severity": "low",
+          "issue": "Question about general definition of 'hobi' is loosely related to the topic 'Buku Jendela Dunia'. While reading can be a hobby, the question is not specific to books or reading.",
+          "suggestedFix": "Rephrase the question to explicitly link 'hobi' with reading or books, or replace it with a question more directly related to the topic of books and their role."
+        },
+        {
+          "questionIndex": 12,
+          "severity": "medium",
+          "issue": "Question about 'kalimat utama' in a paragraph is a general Bahasa Indonesia grammar concept, not specifically aligned with the topic 'Buku Jendela Dunia'.",
+          "suggestedFix": "Replace this question with one that directly relates to books, reading comprehension, types of books, or the benefits of reading, as per the topic 'Buku Jendela Dunia'."
+        },
+        {
+          "questionIndex": 13,
+          "severity": "low",
+          "issue": "Question about the importance of recognizing hobbies and interests is loosely related to the topic 'Buku Jendela Dunia'. Similar to question 0, it's a general life skill question.",
+          "suggestedFix": "Rephrase the question to explicitly link the importance of hobbies/interests with reading or exploring knowledge through books, or replace it with a question more directly related to the topic."
+        },
+        {
+          "questionIndex": 14,
+          "severity": "medium",
+          "issue": "Question about the writing structure of personal experiences is a general Bahasa Indonesia writing skill, not specifically aligned with the topic 'Buku Jendela Dunia'.",
+          "suggestedFix": "Replace this question with one that directly relates to books, reading comprehension, types of books, or the benefits of reading, as per the topic 'Buku Jendela Dunia'."
+        }
+      ],
+      "fixedSlide": false,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "73d95860-01c6-4f50-9bda-62784b69dc8c",
+      "subject": "Bahasa Indonesia",
+      "topic": "Buku Jendela Dunia",
+      "slideIssueCount": 0,
+      "quizIssueCount": 0,
+      "slideIssues": [],
+      "quizIssues": [],
+      "fixedSlide": false,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "946a0571-04f0-48e2-8a10-e748554a000b",
+      "subject": "Bahasa Indonesia",
+      "topic": "Ekspresi Diri",
+      "slideIssueCount": 0,
+      "quizIssueCount": 0,
+      "slideIssues": [],
+      "quizIssues": [],
+      "fixedSlide": false,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "bde97cd6-3e86-4dc9-b2bf-e63cbfe47e4a",
+      "subject": "Bahasa Indonesia",
+      "topic": "Ekspresi Diri",
+      "slideIssueCount": 0,
+      "quizIssueCount": 0,
+      "slideIssues": [],
+      "quizIssues": [],
+      "fixedSlide": false,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "dba10444-9b21-4493-b1b9-c3a0f668e20c",
+      "subject": "Bahasa Indonesia",
+      "topic": "Ekspresi Diri",
+      "slideIssueCount": 1,
+      "quizIssueCount": 2,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Contoh rima pada bagian 'Unsur-Unsur dalam Puisi' salah secara teknis. 'Pagi' dan 'singgah' tidak memiliki persamaan bunyi akhir yang tepat untuk rima puisi.",
+          "suggestedFix": "Ganti contoh rima menjadi kata yang memiliki persamaan bunyi akhir yang jelas, seperti 'pagi' dan 'lagi' atau 'indah' dan 'cerah'."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 11,
+          "severity": "medium",
+          "issue": "Definisi puisi menyebutkan 'terikat aturan', namun puisi modern (puisi bebas) tidak selalu terikat aturan rima atau bait.",
+          "suggestedFix": "Ubah menjadi: 'Karya sastra yang mengungkapkan perasaan dan pikiran penulisnya dengan bahasa yang indah dan penuh makna.'"
+        },
+        {
+          "questionIndex": 19,
+          "severity": "medium",
+          "issue": "Opsi jawaban 'Harga dan promosi' kurang spesifik karena iklan tersebut memang fokus pada harga dan promosi, namun pilihan lain seperti 'Merek produk' tidak ada di teks.",
+          "suggestedFix": "Ubah opsi agar lebih kontras atau perjelas pertanyaan agar siswa tidak bingung memilih antara harga atau promosi."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "6a8255b4-4da2-498a-a9d9-96f3f5c530e1",
+      "subject": "Bahasa Indonesia",
+      "topic": "Belajar Berwirausaha",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'inovasi' mungkin terlalu abstrak untuk siswa kelas 5 SD jika tidak dikaitkan langsung dengan nilai ekonomi atau manfaat praktis.",
+          "suggestedFix": "Tambahkan penekanan bahwa inovasi membuat produk lebih mudah digunakan atau lebih menarik bagi pembeli."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "abe96435-eaba-4c4b-910d-e1745ae94449",
+      "subject": "Bahasa Indonesia",
+      "topic": "Belajar Berwirausaha",
+      "slideIssueCount": 0,
+      "quizIssueCount": 0,
+      "slideIssues": [],
+      "quizIssues": [],
+      "fixedSlide": false,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "55527fa9-0549-47f5-88e5-48fd90ef9024",
+      "subject": "Bahasa Indonesia",
+      "topic": "Belajar Berwirausaha",
+      "slideIssueCount": 0,
+      "quizIssueCount": 0,
+      "slideIssues": [],
+      "quizIssues": [],
+      "fixedSlide": false,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "14264326-038f-4cb0-8f99-c7bd30474a40",
+      "subject": "Bahasa Indonesia",
+      "topic": "Cinta Indonesia",
+      "slideIssueCount": 0,
+      "quizIssueCount": 2,
+      "slideIssues": [],
+      "quizIssues": [
+        {
+          "questionIndex": 12,
+          "severity": "low",
+          "issue": "Question about organic waste processing is more aligned with Science (IPA) or Civic Education (PPKn) than Bahasa Indonesia, even under a broad 'Cinta Indonesia' topic.",
+          "suggestedFix": "Consider rephrasing the question to relate to language or cultural aspects of 'Cinta Indonesia', or move it to a more appropriate subject/topic."
+        },
+        {
+          "questionIndex": 14,
+          "severity": "low",
+          "issue": "Question about environmental preservation activities is more aligned with Science (IPA) or Civic Education (PPKn) than Bahasa Indonesia, even under a broad 'Cinta Indonesia' topic.",
+          "suggestedFix": "Consider rephrasing the question to relate to language or cultural aspects of 'Cinta Indonesia', or move it to a more appropriate subject/topic."
+        }
+      ],
+      "fixedSlide": false,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "2c7da1b7-fed2-428e-a226-d74160510e84",
+      "subject": "Bahasa Indonesia",
+      "topic": "Cinta Indonesia",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Penyertaan kosakata bahasa Inggris tidak relevan dengan kurikulum Bahasa Indonesia SD kelas 5 dan mengalihkan fokus materi.",
+          "suggestedFix": "Hapus bagian kosakata bahasa Inggris dari setiap slide."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 1,
+          "severity": "high",
+          "issue": "correctIndex points to Mohammad Hatta (index 0), but the question asks for Ki Hajar Dewantara (index 1).",
+          "suggestedFix": "Change correctIndex to 1."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "b98316ac-d23c-4fbf-ba39-a9bacd817385",
+      "subject": "Bahasa Indonesia",
+      "topic": "Cinta Indonesia",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "The table in the 'Contoh Soal' section contains the answers directly, which defeats the purpose of an exercise.",
+          "suggestedFix": "Remove the answers from the table or move them to a separate 'Kunci Jawaban' section at the end of the slide."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "7e7e1306-9757-453a-b236-606a8b407dc2",
+      "subject": "Bahasa Indonesia",
+      "topic": "Sayangi Bumi",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'organik dan anorganik' pada tabel kosakata mungkin terlalu teknis untuk siswa kelas 5 SD tanpa penjelasan tambahan.",
+          "suggestedFix": "Ganti contoh kalimat 'sampah' menjadi yang lebih umum, misalnya: 'Jangan membuang sampah sembarangan agar lingkungan tidak bau.'"
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "a6b004a1-c418-425c-abff-4f2d42465e7c",
+      "subject": "Bahasa Indonesia",
+      "topic": "Sayangi Bumi",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "6abe8ac2-04da-45f8-9741-9dd35a3af940",
+      "subject": "Bahasa Indonesia",
+      "topic": "Sayangi Bumi",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'Artikel Lingkungan' kurang lazim dalam kurikulum SD kelas 5; lebih tepat menggunakan 'Artikel Persuasif' atau 'Teks Persuasi' agar selaras dengan materi Bahasa Indonesia kelas 5.",
+          "suggestedFix": "Ubah judul dan penjelasan menjadi 'Teks Persuasi Lingkungan' agar siswa memahami bahwa tujuan utamanya adalah mengajak pembaca."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "186b6e59-0b35-48b8-b579-6b20c46f189d",
+      "subject": "Bahasa Inggris",
+      "topic": "Shopping",
+      "slideIssueCount": 2,
+      "quizIssueCount": 19,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Inconsistent capitalization in Slide 1 examples.",
+          "suggestedFix": "Capitalize the first letter of each sentence in the price examples for consistency."
+        },
+        {
+          "severity": "low",
+          "issue": "Grammar in Slide 4: '2 apples – Rp4.000' implies plural, but the price calculation example uses singular phrasing.",
+          "suggestedFix": "Ensure the total calculation example matches the plural items listed."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 4,
+          "severity": "low",
+          "issue": "Explanation is in Indonesian while the rest of the quiz is in English.",
+          "suggestedFix": "Translate the explanation to English to maintain consistency."
+        },
+        {
+          "questionIndex": 7,
+          "severity": "high",
+          "issue": "Question topic mismatch. The topic is 'Shopping', but the question is about 'Giving Directions'.",
+          "suggestedFix": "Replace with a question related to shopping, such as asking about the price or quantity of items."
+        },
+        {
+          "questionIndex": 9,
+          "severity": "high",
+          "issue": "Question topic mismatch. The question is about 'Giving Directions' instead of 'Shopping'.",
+          "suggestedFix": "Replace with a question related to shopping, such as identifying a shop assistant's dialogue."
+        },
+        {
+          "questionIndex": 12,
+          "severity": "medium",
+          "issue": "Question is about directions, not shopping.",
+          "suggestedFix": "Change question to a shopping-related context, such as locating an item in a store."
+        },
+        {
+          "questionIndex": 16,
+          "severity": "high",
+          "issue": "Question is off-topic. The subject is 'Shopping', but this question is about navigation/directions.",
+          "suggestedFix": "Replace with a shopping-related question, such as calculating change or identifying a shop item."
+        },
+        {
+          "questionIndex": 26,
+          "severity": "medium",
+          "issue": "Question topic 'Giving directions' does not align with the subject 'Shopping'.",
+          "suggestedFix": "Replace with a shopping-related question, such as asking for the price of an item."
+        },
+        {
+          "questionIndex": 28,
+          "severity": "medium",
+          "issue": "Question topic 'Location/Directions' does not align with the subject 'Shopping'.",
+          "suggestedFix": "Replace with a question about shopping locations or store items."
+        },
+        {
+          "questionIndex": 34,
+          "severity": "high",
+          "issue": "Question is off-topic. The subject is 'Shopping', but this question is about navigating a school.",
+          "suggestedFix": "Replace with a shopping-related question, such as asking for the location of an item in a store."
+        },
+        {
+          "questionIndex": 35,
+          "severity": "low",
+          "issue": "The question phrasing is slightly redundant.",
+          "suggestedFix": "Change question to: 'Which sentence correctly states the price of the oranges?'"
+        },
+        {
+          "questionIndex": 38,
+          "severity": "medium",
+          "issue": "The question is ambiguous; other fruits like strawberries or cherries are also red and sweet.",
+          "suggestedFix": "Change question to: 'Which of these fruits is typically red and crunchy?'"
+        },
+        {
+          "questionIndex": 42,
+          "severity": "high",
+          "issue": "Question topic is 'Directions', not 'Shopping'.",
+          "suggestedFix": "Replace with a question related to shopping, such as asking for the price of an item."
+        },
+        {
+          "questionIndex": 44,
+          "severity": "medium",
+          "issue": "Question topic is 'Directions', not 'Shopping'.",
+          "suggestedFix": "Replace with a question related to shopping, such as asking where the cashier is."
+        },
+        {
+          "questionIndex": 48,
+          "severity": "medium",
+          "issue": "Question topic mismatch. The prompt specifies 'Shopping', but this question asks about location/directions.",
+          "suggestedFix": "Replace with a shopping-related question, e.g., 'Where can you buy vegetables?'"
+        },
+        {
+          "questionIndex": 49,
+          "severity": "medium",
+          "issue": "Question topic mismatch. The prompt specifies 'Shopping', but this question asks about directions.",
+          "suggestedFix": "Replace with a shopping-related question, e.g., 'What do you say to pay for your items?'"
+        },
+        {
+          "questionIndex": 51,
+          "severity": "high",
+          "issue": "Question topic is 'Directions', not 'Shopping'.",
+          "suggestedFix": "Replace with a shopping-related question, e.g., 'How much is this shirt?'"
+        },
+        {
+          "questionIndex": 55,
+          "severity": "low",
+          "issue": "Difficulty level 'hard' is inaccurate for a simple multiplication problem suitable for SD_5.",
+          "suggestedFix": "Change difficulty to 'medium'."
+        },
+        {
+          "questionIndex": 59,
+          "severity": "medium",
+          "issue": "The question 'What fruit is red and sweet?' is ambiguous as other fruits like cherries or strawberries also fit this description.",
+          "suggestedFix": "Change question to 'Which of these fruits is typically red and crunchy?'"
+        },
+        {
+          "questionIndex": 61,
+          "severity": "medium",
+          "issue": "Question is about directions, not shopping.",
+          "suggestedFix": "Replace with a shopping-related question, e.g., 'Where do you go to buy groceries?'"
+        },
+        {
+          "questionIndex": 63,
+          "severity": "medium",
+          "issue": "Question is about directions, not shopping.",
+          "suggestedFix": "Replace with a shopping-related question, e.g., 'What do you say when you want to pay for your items?'"
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "cdea4c9e-037c-4a16-be85-cdc514bef3b3",
+      "subject": "Bahasa Inggris",
+      "topic": "Shopping",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Penjelasan 'How many' pada Slide 3 kurang tepat untuk tingkat SD kelas 5 karena belum diberikan contoh penggunaan yang membedakan countable dan uncountable noun secara eksplisit.",
+          "suggestedFix": "Tambahkan catatan singkat bahwa 'How many' digunakan untuk benda yang bisa dihitung (seperti eggs) dan 'How much' untuk harga atau benda yang tidak bisa dihitung (seperti rice/sugar)."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "5ef82fa2-48d9-475f-8fef-b6eb815ab0fa",
+      "subject": "Bahasa Inggris",
+      "topic": "Shopping",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Kosakata 'Here you are' pada bagian 'Kosakata Penting' didefinisikan sebagai 'Ini, silakan', namun pada dialog 1 dan 2, frasa tersebut digunakan saat memberikan barang, bukan uang.",
+          "suggestedFix": "Perjelas definisi 'Here you are' sebagai ungkapan saat memberikan barang kepada orang lain."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "5ad17f21-1f8b-43ca-afe7-25e1228541df",
+      "subject": "Bahasa Inggris",
+      "topic": "Direction",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "410731e7-b357-44e1-9ad2-c690cbf234d4",
+      "subject": "Bahasa Inggris",
+      "topic": "Direction",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "e375a1df-d62b-4bdd-bb23-f21d122de378",
+      "subject": "Bahasa Inggris",
+      "topic": "Direction",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "7c05bac4-f9d7-4ad8-a6d1-de090510eba6",
+      "subject": "Bahasa Inggris",
+      "topic": "Daily Life",
+      "slideIssueCount": 2,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Inconsistent grammar in the 'Contoh' section (mixing English and Indonesian).",
+          "suggestedFix": "Change 'Setiap pagi saya wake up at 5 o'clock' to 'Every morning, I wake up at 5 o'clock' to maintain language consistency."
+        },
+        {
+          "severity": "low",
+          "issue": "Missing 's' in the answer key for question 2.",
+          "suggestedFix": "Update answer key for number 2 to 'brushes' (already present, but ensure consistency with the exercise prompt)."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "The question 'After dinner, I usually ___' is ambiguous as multiple options could be correct depending on the student's routine.",
+          "suggestedFix": "Change the question to 'After school, I usually ___' or provide a more specific context to ensure 'do my homework' is the clear intended answer."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "c33bdb58-1ffa-45b0-a984-239501b6b3b0",
+      "subject": "Bahasa Inggris",
+      "topic": "Daily Life",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Contoh kalimat pada slide 'Kosakata Membantu di Rumah' mencampur Bahasa Indonesia dan Inggris secara tidak konsisten.",
+          "suggestedFix": "Gunakan kalimat Bahasa Inggris penuh agar siswa terbiasa dengan struktur kalimat target."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "4c81108e-3f3b-4d45-af98-0486577ced58",
+      "subject": "Bahasa Inggris",
+      "topic": "Daily Life",
+      "slideIssueCount": 1,
+      "quizIssueCount": 5,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Slide 3: 'Spread' is introduced in the steps but not defined in the vocabulary section, potentially confusing students.",
+          "suggestedFix": "Add 'Spread' (mengolesi) to the vocabulary list in Slide 2 or Slide 3."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "The question asks 'When can Rina borrow books?' based on a text that does not mention a character named Rina.",
+          "suggestedFix": "Change the question to 'When can students borrow books?' or include Rina in the text."
+        },
+        {
+          "questionIndex": 8,
+          "severity": "high",
+          "issue": "The correctIndex is 1, which points to 'Ate breakfast', but the question asks what she did first. The logic is correct, but the index 1 refers to the second option. Wait, index 1 is 'Ate breakfast'. The index is correct, but the explanation says 'Ate breakfast first', which matches index 1. Actually, index 0 is 'Went to school'. Index 1 is 'Ate breakfast'. The index is correct.",
+          "suggestedFix": "No fix needed, but ensure consistency in option ordering."
+        },
+        {
+          "questionIndex": 9,
+          "severity": "medium",
+          "issue": "The question is too vague for a general 'sandwich' recipe as steps vary.",
+          "suggestedFix": "Specify the context or provide a short text to base the steps on."
+        },
+        {
+          "questionIndex": 10,
+          "severity": "low",
+          "issue": "The moral of the story is abstract for SD_5 students.",
+          "suggestedFix": "Keep the question but ensure the explanation uses simpler language to define 'sour grapes' as a common idiom."
+        },
+        {
+          "questionIndex": 19,
+          "severity": "medium",
+          "issue": "The question references a text that is not provided in the prompt.",
+          "suggestedFix": "Include the source text or rephrase the question to be self-contained."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "44e4f8cc-1226-4f0e-af6f-5d6915f8ee83",
+      "subject": "Bahasa Inggris",
+      "topic": "Reading",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "a468a485-d94e-44f1-8438-5485ef40a1dc",
+      "subject": "Bahasa Inggris",
+      "topic": "Reading",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "5b2b5082-c33c-492c-b405-b2c6e77592da",
+      "subject": "Bahasa Inggris",
+      "topic": "Reading",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "2e0f61e6-18c1-4562-b9cb-f466a9cf9850",
+      "subject": "Bahasa Inggris",
+      "topic": "Culture",
+      "slideIssueCount": 1,
+      "quizIssueCount": 2,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Putri Tangguk is a legend about wasting rice, not laziness. The moral is about respecting food/blessings.",
+          "suggestedFix": "Update the moral for Putri Tangguk to 'Respect the food we have' or 'Do not waste blessings'."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 5,
+          "severity": "low",
+          "issue": "The question asks about 'Sangkuriang', but the explanation mentions a scar, which is a specific detail often debated in versions; however, the core plot point is accurate.",
+          "suggestedFix": "Keep as is, but ensure the explanation emphasizes the 'impossible tasks' as the primary reason for refusal."
+        },
+        {
+          "questionIndex": 12,
+          "severity": "medium",
+          "issue": "The question asks for the main character, but lists Dayang Sumbi as the only correct option while Sangkuriang is equally central to the story.",
+          "suggestedFix": "Change the question to 'Who is the son of Dayang Sumbi in the legend of Tangkuban Perahu?' and update options to include Sangkuriang."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "1c9b0f7b-cea9-4c5d-873d-bbaac190f98b",
+      "subject": "Bahasa Inggris",
+      "topic": "Culture",
+      "slideIssueCount": 2,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Typographical error in apostrophes (double single quotes used instead of standard single quotes).",
+          "suggestedFix": "Replace all double single quotes ('') with standard single quotes (')."
+        },
+        {
+          "severity": "medium",
+          "issue": "The exercise in point 1 is incomplete as it lacks the corresponding options for 'The Fox and the Grapes'.",
+          "suggestedFix": "Ensure all items in the matching exercise have clear, distinct answers provided or implied."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "46e51786-c388-479b-80ee-00bd68b14abd",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Pancasila",
+      "slideIssueCount": 1,
+      "quizIssueCount": 3,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Penyebutan anggota BPUPKI kurang akurat karena Drs. Mohammad Hatta bukan anggota BPUPKI.",
+          "suggestedFix": "Hapus Drs. Mohammad Hatta dari daftar anggota BPUPKI pada slide kedua."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 5,
+          "severity": "high",
+          "issue": "Incorrect correctIndex. Saling menghormati antar suku dan agama lebih tepat dikaitkan dengan sila ke-3 (Persatuan Indonesia) atau sila ke-1 (Ketuhanan Yang Maha Esa) dalam konteks toleransi beragama.",
+          "suggestedFix": "Ubah correctIndex menjadi 2 (sila ke-3) dan sesuaikan penjelasan bahwa menghargai perbedaan suku dan agama adalah wujud persatuan bangsa."
+        },
+        {
+          "questionIndex": 11,
+          "severity": "medium",
+          "issue": "Penjelasan kurang tepat secara terminologi. Padi dan kapas melambangkan pangan dan sandang sebagai syarat kemakmuran, bukan langsung berarti keadilan sosial.",
+          "suggestedFix": "Ubah penjelasan menjadi: Padi dan kapas melambangkan pangan dan sandang, yang merupakan kebutuhan pokok rakyat Indonesia untuk mencapai kemakmuran dan kesejahteraan."
+        },
+        {
+          "questionIndex": 15,
+          "severity": "low",
+          "issue": "Redundant with question 1.",
+          "suggestedFix": "Replace with a question about Sila ke-1 or Sila ke-2 to ensure topic coverage."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "b16a0cd1-8adf-4659-8e8a-44e762e2bd7a",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Pancasila",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Penjelasan sila ke-4 kurang akurat karena pemilihan ketua kelas dengan suara terbanyak lebih merujuk pada pemungutan suara (voting), bukan musyawarah mufakat.",
+          "suggestedFix": "Ubah contoh sila ke-4 menjadi diskusi kelompok untuk menentukan pembagian tugas piket atau jadwal kegiatan kelas."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 1,
+          "severity": "high",
+          "issue": "Incorrect correctIndex and explanation. Sila ke-2 (Kemanusiaan) berfokus pada martabat manusia, sedangkan menghormati perbedaan suku/agama lebih tepat dikaitkan dengan Sila ke-3 (Persatuan).",
+          "suggestedFix": "Ubah correctIndex menjadi 2 (Sila ke-3) dan perbarui penjelasan agar merujuk pada Persatuan Indonesia."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "75e62c21-78d5-4a6a-a38c-bcbedd03ea8e",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Pancasila",
+      "slideIssueCount": 1,
+      "quizIssueCount": 2,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Penjelasan simbol rantai pada sila kedua kurang akurat secara historis/filosofis untuk tingkat SD.",
+          "suggestedFix": "Ubah penjelasan rantai menjadi: 'Mata rantai yang saling berkaitan melambangkan hubungan antarmanusia yang saling membantu dan bersatu'."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 1,
+          "severity": "medium",
+          "issue": "Pertanyaan menanyakan makna lambang, namun opsi jawaban berisi bunyi sila, bukan makna lambang.",
+          "suggestedFix": "Ubah pertanyaan menjadi 'Bunyi sila kedua Pancasila adalah...' atau ubah opsi jawaban menjadi makna lambang rantai."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Opsi jawaban tidak konsisten. Opsi B adalah bunyi sila, sedangkan opsi lainnya adalah makna.",
+          "suggestedFix": "Ubah opsi jawaban agar seragam, fokus pada makna lambang padi dan kapas yaitu kemakmuran dan kesejahteraan."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "4efd645c-6e81-48a2-b29b-5a81a5f40fe0",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Pancasila",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Penulisan sila ke-4 kurang tepat secara formal.",
+          "suggestedFix": "Gunakan teks resmi sila ke-4: 'Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan/Perwakilan'."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "a1ee4e72-f14b-4416-810c-f8c132e766a3",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Norma",
+      "error": "LLM returned null on quiz batch 3"
+    },
+    {
+      "materialId": "a336479b-3bf7-4f2e-8d69-1262e858d773",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Norma",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "8fab39f6-e3f2-4302-aa14-4b6b241b5926",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Norma",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "7eff5286-a740-4a9a-9e2e-d76b8553ec42",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Budaya Daerah",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'Baju Bodo' kurang spesifik karena merupakan pakaian adat suku Bugis/Makassar (Sulawesi Selatan), bukan Sulawesi secara umum.",
+          "suggestedFix": "Ubah 'Sulawesi' menjadi 'Sulawesi Selatan'."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "c8585a2a-1967-480b-a0eb-0d79c2e7de93",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Budaya Daerah",
+      "slideIssueCount": 2,
+      "quizIssueCount": 15,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Typo in Slide 1: 'beraneka ragu' should be 'beraneka ragam'.",
+          "suggestedFix": "Change 'beraneka ragu' to 'beraneka ragam'."
+        },
+        {
+          "severity": "low",
+          "issue": "Slide 2: 'Sumatera – rumah gadang' is technically Minangkabau (West Sumatra).",
+          "suggestedFix": "Change to 'Sumatera Barat – rumah gadang' for geographical accuracy."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 2,
+          "severity": "medium",
+          "issue": "Pertanyaan tidak relevan dengan topik 'Budaya Daerah'. Musyawarah lebih tepat masuk ke topik 'Nilai Pancasila' atau 'Gotong Royong'.",
+          "suggestedFix": "Ganti pertanyaan menjadi yang berkaitan dengan pelestarian budaya, misalnya: 'Apa manfaat mempelajari budaya daerah lain?'"
+        },
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Pertanyaan tidak relevan dengan topik 'Budaya Daerah'.",
+          "suggestedFix": "Ganti pertanyaan menjadi: 'Sikap yang benar saat melihat teman dari daerah lain memakai pakaian adat adalah...'"
+        },
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Pertanyaan tidak relevan dengan topik 'Budaya Daerah'.",
+          "suggestedFix": "Ganti pertanyaan menjadi: 'Apa yang harus dilakukan jika ada perbedaan pendapat mengenai jenis tarian yang akan ditampilkan dalam acara sekolah?'"
+        },
+        {
+          "questionIndex": 6,
+          "severity": "low",
+          "issue": "Pertanyaan mengenai gotong royong kurang relevan dengan topik utama 'Budaya Daerah'.",
+          "suggestedFix": "Ubah pertanyaan menjadi fokus pada pelestarian budaya daerah atau keberagaman budaya."
+        },
+        {
+          "questionIndex": 7,
+          "severity": "low",
+          "issue": "Pertanyaan mengenai keputusan bersama kurang relevan dengan topik utama 'Budaya Daerah'.",
+          "suggestedFix": "Ubah pertanyaan menjadi fokus pada contoh nyata pelestarian budaya daerah."
+        },
+        {
+          "questionIndex": 9,
+          "severity": "low",
+          "issue": "Pertanyaan mengenai musyawarah kurang relevan dengan topik utama 'Budaya Daerah'.",
+          "suggestedFix": "Ubah pertanyaan menjadi fokus pada sikap terhadap keragaman budaya daerah."
+        },
+        {
+          "questionIndex": 11,
+          "severity": "medium",
+          "issue": "Pertanyaan kurang relevan dengan topik 'Budaya Daerah'.",
+          "suggestedFix": "Ubah pertanyaan agar berkaitan dengan pelestarian budaya atau sikap terhadap keberagaman budaya."
+        },
+        {
+          "questionIndex": 16,
+          "severity": "low",
+          "issue": "Pertanyaan kurang spesifik terkait topik 'Budaya Daerah'.",
+          "suggestedFix": "Ubah pertanyaan menjadi: 'Dalam musyawarah pemilihan tarian daerah untuk pentas seni, ada teman yang mengusulkan tarian dari daerah lain. Sikap yang tepat adalah...'"
+        },
+        {
+          "questionIndex": 17,
+          "severity": "low",
+          "issue": "Pertanyaan kurang spesifik terkait topik 'Budaya Daerah'.",
+          "suggestedFix": "Ubah konteks musyawarah menjadi pemilihan pakaian adat atau kesenian daerah agar relevan dengan topik."
+        },
+        {
+          "questionIndex": 19,
+          "severity": "low",
+          "issue": "Pertanyaan kurang spesifik terkait topik 'Budaya Daerah'.",
+          "suggestedFix": "Ubah konteks musyawarah menjadi pemilihan jenis makanan tradisional atau permainan daerah untuk acara sekolah."
+        },
+        {
+          "questionIndex": 27,
+          "severity": "medium",
+          "issue": "Pertanyaan kurang relevan dengan topik 'Budaya Daerah'. Musyawarah adalah nilai Pancasila, bukan definisi budaya daerah.",
+          "suggestedFix": "Ubah pertanyaan menjadi fokus pada pelestarian budaya melalui musyawarah atau kerja sama."
+        },
+        {
+          "questionIndex": 51,
+          "severity": "medium",
+          "issue": "Pertanyaan tidak relevan dengan topik 'Budaya Daerah'. Musyawarah lebih tepat masuk ke topik 'Pancasila/Gotong Royong'.",
+          "suggestedFix": "Ganti pertanyaan menjadi tentang pelestarian budaya daerah agar konsisten dengan topik utama."
+        },
+        {
+          "questionIndex": 53,
+          "severity": "medium",
+          "issue": "Pertanyaan tidak relevan dengan topik 'Budaya Daerah'.",
+          "suggestedFix": "Ganti pertanyaan menjadi tentang contoh nyata pelestarian budaya daerah di lingkungan sekolah."
+        },
+        {
+          "questionIndex": 54,
+          "severity": "medium",
+          "issue": "Pertanyaan tidak relevan dengan topik 'Budaya Daerah'.",
+          "suggestedFix": "Ganti pertanyaan menjadi tentang sikap menghargai perbedaan budaya antar teman."
+        },
+        {
+          "questionIndex": 58,
+          "severity": "medium",
+          "issue": "Pertanyaan kurang relevan dengan topik 'Budaya Daerah' karena lebih fokus pada tata tertib musyawarah.",
+          "suggestedFix": "Ubah pertanyaan agar berkaitan dengan pelestarian budaya daerah melalui musyawarah, misalnya musyawarah pemilihan tari daerah untuk pentas seni."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "3e904a40-3324-4825-9fb7-5a41bc21543a",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Budaya Daerah",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Contoh pakaian adat 'Kebaya' terlalu umum karena digunakan di banyak daerah, bukan spesifik satu daerah.",
+          "suggestedFix": "Ganti 'Kebaya dari Jawa' dengan 'Baju Bodo dari Sulawesi Selatan' atau 'Ulos dari Sumatra Utara' agar lebih spesifik."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "70965c92-7f49-4725-8723-455c1baee498",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Gotong Royong",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Penjelasan sila ke-3 pada gotong royong kurang lengkap karena gotong royong juga mencerminkan sila ke-5 (Keadilan Sosial).",
+          "suggestedFix": "Tambahkan sila ke-5 sebagai cerminan gotong royong untuk memberikan pemahaman lebih komprehensif bagi siswa kelas 5."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "5a91bcb9-2c4f-4b84-bb6b-47a9c085ca7e",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Gotong Royong",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "f6390941-8b2b-450d-94a7-c623447942e0",
+      "subject": "Pendidikan Pancasila",
+      "topic": "Gotong Royong",
+      "slideIssueCount": 3,
+      "quizIssueCount": 8,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Gotong royong dikaitkan dengan sila ke-3 dan sila ke-5, tetapi sila ke-2 (Kemanusiaan yang Adil dan Beradab) juga sangat relevan karena gotong royong mencerminkan kepedulian antarmanusia. Menghilangkan sila ke-2 membuat kaitan nilai Pancasila tidak lengkap dan berpotensi menyesatkan siswa SD kelas 5.",
+          "suggestedFix": "Tambahkan sila ke-2 sebagai nilai Pancasila yang juga tercermin dalam gotong royong, misalnya: '...mencerminkan nilai Pancasila, terutama sila ke-2: Kemanusiaan yang Adil dan Beradab, sila ke-3: Persatuan Indonesia, dan sila ke-5: Keadilan Sosial bagi Seluruh Rakyat Indonesia.'"
+        },
+        {
+          "severity": "low",
+          "issue": "Frasa 'turun-temurun' mungkin kurang familiar bagi sebagian siswa SD kelas 5. Perlu penjelasan singkat atau sinonim yang lebih mudah dipahami.",
+          "suggestedFix": "Ganti atau tambahkan penjelasan: 'sudah menjadi kebiasaan turun-temurun (diwariskan dari generasi ke generasi)'."
+        },
+        {
+          "severity": "low",
+          "issue": "Contoh latihan praktis 'mencuci dan mengeringkan piring bergantian' adalah kegiatan individual bergiliran, bukan kerja sama simultan. Ini kurang tepat sebagai contoh gotong royong.",
+          "suggestedFix": "Ganti dengan contoh yang lebih jelas mencerminkan kerja sama, misalnya: 'bersama-sama memasak makanan untuk keluarga' atau 'bersama-sama membereskan ruang tamu'."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Topik tidak relevan dengan materi Gotong Royong.",
+          "suggestedFix": "Ganti pertanyaan menjadi contoh gotong royong di lingkungan sekolah atau masyarakat."
+        },
+        {
+          "questionIndex": 5,
+          "severity": "high",
+          "issue": "Fakta jumlah provinsi salah. Indonesia saat ini memiliki 38 provinsi.",
+          "suggestedFix": "Ubah pertanyaan atau perbarui data menjadi 38."
+        },
+        {
+          "questionIndex": 5,
+          "severity": "medium",
+          "issue": "Pertanyaan tidak relevan dengan topik Gotong Royong.",
+          "suggestedFix": "Ganti dengan pertanyaan tentang manfaat gotong royong."
+        },
+        {
+          "questionIndex": 6,
+          "severity": "medium",
+          "issue": "Pertanyaan tidak relevan dengan topik Gotong Royong.",
+          "suggestedFix": "Ganti dengan pertanyaan tentang contoh gotong royong di sekolah."
+        },
+        {
+          "questionIndex": 7,
+          "severity": "medium",
+          "issue": "Pertanyaan tidak relevan dengan topik Gotong Royong.",
+          "suggestedFix": "Ganti dengan pertanyaan tentang nilai gotong royong."
+        },
+        {
+          "questionIndex": 8,
+          "severity": "medium",
+          "issue": "Pertanyaan tidak relevan dengan topik Gotong Royong.",
+          "suggestedFix": "Ganti dengan pertanyaan tentang tujuan gotong royong."
+        },
+        {
+          "questionIndex": 10,
+          "severity": "medium",
+          "issue": "Pertanyaan tidak relevan dengan topik utama 'Gotong Royong'.",
+          "suggestedFix": "Ganti pertanyaan dengan perilaku yang mencerminkan gotong royong dalam menjaga keutuhan NKRI."
+        },
+        {
+          "questionIndex": 11,
+          "severity": "high",
+          "issue": "Pertanyaan tentang Deklarasi Djuanda tidak relevan dengan topik 'Gotong Royong' dan terlalu sulit untuk level SD kelas 5.",
+          "suggestedFix": "Ganti dengan pertanyaan tentang manfaat gotong royong bagi persatuan bangsa."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "4afc0947-fc96-487e-8813-fc4ee8104481",
+      "subject": "Pendidikan Pancasila",
+      "topic": "NKRI",
+      "slideIssueCount": 2,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Penyebutan 'Laut Cina Selatan' kurang akurat secara geopolitik nasional.",
+          "suggestedFix": "Ganti menjadi 'Laut Natuna Utara' sesuai kebijakan penamaan wilayah Indonesia."
+        },
+        {
+          "severity": "low",
+          "issue": "Penjelasan ZEE (Zona Ekonomi Eksklusif) 200 mil laut perlu diperjelas bahwa itu bukan wilayah kedaulatan penuh, melainkan hak berdaulat.",
+          "suggestedFix": "Tambahkan catatan bahwa ZEE adalah hak berdaulat untuk memanfaatkan sumber daya alam."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 1,
+          "severity": "high",
+          "issue": "Factual error regarding the number of provinces in Indonesia in 2024.",
+          "suggestedFix": "Update the number of provinces to 38 and correct the explanation to reflect the current total."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "694449c9-5c03-496a-ada2-042afb941705",
+      "subject": "Pendidikan Pancasila",
+      "topic": "NKRI",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'perundungan' mungkin terlalu teknis untuk siswa kelas 5 SD.",
+          "suggestedFix": "Gunakan istilah yang lebih umum seperti 'mengejek atau mengucilkan teman'."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "f71fbb5c-a9a0-4d12-9824-6b81454c58e7",
+      "subject": "PJOK",
+      "topic": "Eksplorasi Gerak",
+      "slideIssueCount": 1,
+      "quizIssueCount": 2,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Istilah 'Mengeriting' untuk gerakan berguling tidak lazim dalam terminologi PJOK SD.",
+          "suggestedFix": "Ganti 'Mengeriting' menjadi 'Berguling' agar sesuai dengan kurikulum PJOK."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 1,
+          "severity": "medium",
+          "issue": "Pilihan jawaban ambigu. Menangkap dan menggiring juga memerlukan koordinasi mata dan tangan.",
+          "suggestedFix": "Ubah pertanyaan menjadi lebih spesifik: 'Gerak manipulatif melepaskan bola ke arah sasaran dengan menggunakan tangan disebut...'"
+        },
+        {
+          "questionIndex": 16,
+          "severity": "medium",
+          "issue": "Opsi jawaban ambigu. 'Skipping' dan 'Lompat tali' sering dianggap sinonim dalam konteks pendidikan jasmani di Indonesia, dan 'Hopscotch' adalah nama lain dari Engklek yang juga melibatkan lompatan satu kaki.",
+          "suggestedFix": "Ganti opsi agar lebih spesifik atau ubah pertanyaan menjadi istilah yang lebih baku dalam kurikulum SD."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "6be0ed7b-4580-44d8-a644-edc6839fa6d1",
+      "subject": "PJOK",
+      "topic": "Eksplorasi Gerak",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Contoh 'menggelengkan badan' pada slide pertama tidak akurat secara anatomis dan biomekanika untuk anak SD kelas 5.",
+          "suggestedFix": "Ganti 'menggelengkan badan' menjadi 'menekuk lutut' atau 'menekuk leher' agar lebih relevan dengan definisi gerak non-lokomotor."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "17f23b41-607f-4c8c-999c-7f093c634145",
+      "subject": "PJOK",
+      "topic": "Eksplorasi Gerak",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Contoh praktis pada slide 'Manfaat Gerak Manipulatif' kurang akurat karena melempar bola ke lawan dalam kasti tidak sesuai aturan permainan (kasti adalah permainan tim, melempar ke teman satu tim).",
+          "suggestedFix": "Ubah kalimat menjadi: 'Saat bermain kasti, kamu harus melempar bola ke teman dan menangkap bola yang dilempar teman.'"
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "dc727489-bc8c-4ebf-93e4-d4b69ca0ffe1",
+      "subject": "PJOK",
+      "topic": "Eksplorasi Gerak",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "0cebcec9-34e6-4bed-9928-355ef88b3807",
+      "subject": "PJOK",
+      "topic": "Permainan Bola",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "9026ed77-7768-44e3-a85a-3dea210d7f4c",
+      "subject": "PJOK",
+      "topic": "Permainan Bola",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Penjelasan aturan kasti pada slide 4 kurang akurat mengenai cara mendapatkan poin.",
+          "suggestedFix": "Tambahkan penjelasan bahwa poin didapat dengan kembali ke ruang bebas setelah memukul bola."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Pertanyaan kurang spesifik karena kedua teknik (shakehand dan penhold) dapat digunakan untuk forehand.",
+          "suggestedFix": "Ubah pertanyaan menjadi: 'Teknik memegang bet dalam tenis meja yang menyerupai posisi berjabat tangan adalah...'"
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "ab140099-07b7-481f-8979-fe3216f163e6",
+      "subject": "PJOK",
+      "topic": "Permainan Bola",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Penyebutan bola voli sebagai permainan yang menggunakan teknik menangkap bola tidak tepat karena dalam bola voli bola harus dipantulkan (passing), bukan ditangkap.",
+          "suggestedFix": "Ganti contoh bola voli dengan permainan lain seperti bola tangan atau kasti."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Definisi overhead pass dalam basket umumnya menggunakan dua tangan, bukan satu tangan.",
+          "suggestedFix": "Ubah pertanyaan menjadi 'teknik melempar bola dengan dua tangan dari atas kepala' atau ganti opsi jawaban."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "082fa989-45b9-462b-a95d-ec5a3ece15fb",
+      "subject": "PJOK",
+      "topic": "Aktivitas Air",
+      "error": "LLM returned null on quiz batch 1"
+    },
+    {
+      "materialId": "6de5102c-cdc5-4f62-92b0-8c1e5130365b",
+      "subject": "PJOK",
+      "topic": "Aktivitas Air",
+      "slideIssueCount": 1,
+      "quizIssueCount": 9,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Kontradiksi dan ketidakjelasan pada bagian Tantangan: 'meluncur dengan gaya bebas' membingungkan karena meluncur biasanya pasif tanpa gerakan tangan/bernapas, dan 'ambil napas 2 kali' bertentangan dengan 'satu tarikan napas'.",
+          "suggestedFix": "Ubah kalimat menjadi: 'Coba berenang gaya bebas dan lakukan pengambilan napas sebanyak 2 kali. Ukur berapa meter jarak yang dapat ditempuh.'"
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "high",
+          "issue": "Pertanyaan tidak sesuai dengan topik Aktivitas Air (membahas latihan kekuatan beban tubuh).",
+          "suggestedFix": "Ganti dengan pertanyaan tentang persiapan sebelum berenang (pemanasan untuk mencegah kram)."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "high",
+          "issue": "Pertanyaan tidak sesuai dengan topik Aktivitas Air (membahas latihan kelenturan).",
+          "suggestedFix": "Ganti dengan pertanyaan tentang teknik pernapasan pada renang gaya dada."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "high",
+          "issue": "Pertanyaan tidak sesuai dengan topik Aktivitas Air (membahas latihan kekuatan otot punggung).",
+          "suggestedFix": "Ganti dengan pertanyaan tentang gerakan kaki renang gaya dada yang menyerupai katak."
+        },
+        {
+          "questionIndex": 6,
+          "severity": "high",
+          "issue": "Question does not directly relate to the topic 'Aktivitas Air'. It is a general physical fitness question.",
+          "suggestedFix": "Replace with a question directly related to water activities, e.g., about specific swimming strokes, water safety, or benefits of water activities."
+        },
+        {
+          "questionIndex": 7,
+          "severity": "high",
+          "issue": "Question does not directly relate to the topic 'Aktivitas Air'. It is a general physical fitness question.",
+          "suggestedFix": "Replace with a question directly related to water activities, e.g., about specific swimming strokes, water safety, or benefits of water activities."
+        },
+        {
+          "questionIndex": 9,
+          "severity": "high",
+          "issue": "Question does not directly relate to the topic 'Aktivitas Air'. It is a general physical fitness question.",
+          "suggestedFix": "Replace with a question directly related to water activities, e.g., about specific swimming strokes, water safety, or benefits of water activities."
+        },
+        {
+          "questionIndex": 11,
+          "severity": "medium",
+          "issue": "Question does not align with the specified topic 'Aktivitas Air'. It is a general fitness question.",
+          "suggestedFix": "Replace with a question directly related to 'Aktivitas Air', such as swimming techniques, water safety, or water-based exercises."
+        },
+        {
+          "questionIndex": 12,
+          "severity": "medium",
+          "issue": "Question does not align with the specified topic 'Aktivitas Air'. It is a general fitness question about flexibility.",
+          "suggestedFix": "Replace with a question directly related to 'Aktivitas Air', such as swimming techniques, water safety, or water-based exercises."
+        },
+        {
+          "questionIndex": 13,
+          "severity": "medium",
+          "issue": "Question does not align with the specified topic 'Aktivitas Air'. It is a general fitness question about push-up technique.",
+          "suggestedFix": "Replace with a question directly related to 'Aktivitas Air', such as swimming techniques, water safety, or water-based exercises."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": true
+    },
+    {
+      "materialId": "eaea90ed-bf16-4bb4-928c-55becae8841d",
+      "subject": "PJOK",
+      "topic": "Aktivitas Air",
+      "slideIssueCount": 0,
+      "quizIssueCount": 0,
+      "slideIssues": [],
+      "quizIssues": [],
+      "fixedSlide": false,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "3be721c4-249f-4886-ae24-e6edecf1b2e0",
+      "subject": "PJOK",
+      "topic": "Kebugaran Jasmani",
+      "slideIssueCount": 2,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Latihan 'Angkat kursi' dengan mengangkat kaki sejajar lantai saat duduk berisiko cedera punggung bawah jika otot inti belum kuat.",
+          "suggestedFix": "Ganti dengan latihan 'Wall Sit' (bersandar di dinding) yang lebih aman dan efektif untuk melatih otot kaki bagi siswa SD."
+        },
+        {
+          "severity": "low",
+          "issue": "Istilah 'Push-up sendi' kurang lazim dan berpotensi membingungkan.",
+          "suggestedFix": "Ganti menjadi 'Wall Push-up' (Push-up dinding)."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "b2c0e2ad-1292-4003-973d-0e6db3aa59d8",
+      "subject": "PJOK",
+      "topic": "Kebugaran Jasmani",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'Peregangan punggung kucing-sapi' kurang umum bagi siswa SD kelas 5.",
+          "suggestedFix": "Gunakan istilah 'Peregangan punggung (Cat-Cow stretch)' agar lebih mudah dikenali dalam literatur olahraga."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "e47010a7-47a3-45eb-8cb2-c692d1c3e865",
+      "subject": "PJOK",
+      "topic": "Kebugaran Jasmani",
+      "slideIssueCount": 2,
+      "quizIssueCount": 7,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Istilah 'Daya Tahan Tubuh' sering disalahartikan sebagai sistem imun (kekebalan tubuh), padahal dalam PJOK konteksnya adalah 'Daya Tahan Jantung dan Paru' (Cardiorespiratory Endurance).",
+          "suggestedFix": "Ganti judul dan penjelasan menjadi 'Daya Tahan Jantung dan Paru' agar tidak rancu dengan materi kesehatan/imunitas."
+        },
+        {
+          "severity": "low",
+          "issue": "Instruksi 'hitung napas' kurang akurat untuk anak SD karena sulit diukur secara objektif.",
+          "suggestedFix": "Ganti dengan menghitung denyut nadi sederhana atau menggunakan skala perasaan lelah (skala Borg sederhana)."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 6,
+          "severity": "medium",
+          "issue": "Permainan Engklek tradisional umumnya dimainkan secara individu, bukan beregu. Deskripsi 'beregu' dalam soal kurang lazim untuk materi SD kelas 5.",
+          "suggestedFix": "Ubah pertanyaan menjadi fokus pada aturan dasar Engklek atau ganti dengan permainan beregu yang lebih relevan seperti Bentengan."
+        },
+        {
+          "questionIndex": 10,
+          "severity": "medium",
+          "issue": "Pertanyaan membahas sikap sportif dalam permainan tradisional, kurang relevan dengan topik spesifik Kebugaran Jasmani SD kelas 5.",
+          "suggestedFix": "Ubah pertanyaan agar fokus pada komponen kebugaran jasmani seperti kelincahan (agility)."
+        },
+        {
+          "questionIndex": 12,
+          "severity": "medium",
+          "issue": "Pertanyaan membahas kerja sama dalam tarik tambang, kurang fokus pada aspek fisik kebugaran jasmani (kekuatan otot).",
+          "suggestedFix": "Ubah pertanyaan agar fokus pada latihan kekuatan otot seperti push-up atau pull-up."
+        },
+        {
+          "questionIndex": 14,
+          "severity": "medium",
+          "issue": "Pertanyaan membahas sikap sportif dalam permainan engklek, kurang relevan dengan topik Kebugaran Jasmani.",
+          "suggestedFix": "Ubah pertanyaan agar fokus pada pentingnya pemanasan sebelum latihan kebugaran jasmani."
+        },
+        {
+          "questionIndex": 19,
+          "severity": "medium",
+          "issue": "Pertanyaan mengenai permainan kasti dan sikap sportif kurang relevan dengan topik spesifik Kebugaran Jasmani.",
+          "suggestedFix": "Ganti dengan pertanyaan tentang komponen kebugaran jasmani seperti kelenturan (kelenturan otot)."
+        },
+        {
+          "questionIndex": 20,
+          "severity": "high",
+          "issue": "Pertanyaan dan pilihan jawaban masih berupa placeholder kosong (...)",
+          "suggestedFix": "Ganti dengan pertanyaan tentang kekuatan otot, misalnya latihan push-up."
+        },
+        {
+          "questionIndex": 21,
+          "severity": "high",
+          "issue": "Pertanyaan dan pilihan jawaban masih berupa placeholder kosong (...)",
+          "suggestedFix": "Ganti dengan pertanyaan tentang kelenturan tubuh."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "3932e3b4-102c-4644-bb3c-55dabd39a2c1",
+      "subject": "PJOK",
+      "topic": "Kebugaran Jasmani",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "23ac4d7d-434f-4274-a711-a077cd4e9342",
+      "subject": "PJOK",
+      "topic": "Permainan Tradisional",
+      "slideIssueCount": 1,
+      "quizIssueCount": 2,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Contoh aturan lompat tali kurang akurat secara teknis permainan.",
+          "suggestedFix": "Ubah contoh menjadi: 'Dalam permainan lompat tali, aturannya adalah tali harus diputar dengan irama yang konsisten agar pemain dapat melompat dengan aman.'"
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "medium",
+          "issue": "Konteks aturan permainan benteng-bentengan kurang tepat. Dalam benteng-bentengan, lawan menyentuh benteng berarti lawan menang, bukan sekadar poin atau kekalahan satu babak.",
+          "suggestedFix": "Ubah pertanyaan menjadi: 'Dalam permainan tradisional benteng-bentengan, apa yang terjadi jika lawan berhasil menyentuh benteng kita?'"
+        },
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Penjelasan tindakan sportif dalam kasti bertentangan dengan aturan kompetitif permainan. Membantu lawan bangkit saat permainan berlangsung aktif dapat mengganggu jalannya pertandingan.",
+          "suggestedFix": "Ubah menjadi: 'Tindakan sportif yang paling tepat adalah tetap bermain sesuai aturan namun menunjukkan empati setelah permainan selesai atau saat bola mati.'"
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "501494a7-dcf2-4a6d-9985-3e2762717463",
+      "subject": "PJOK",
+      "topic": "Permainan Tradisional",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'kapten' kurang umum dalam konteks permainan tradisional anak SD di Indonesia.",
+          "suggestedFix": "Ganti 'kapten' dengan 'pemimpin kelompok' atau 'koordinator' agar lebih sesuai dengan konteks permainan tradisional."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Engklek umumnya adalah permainan individu, bukan beregu. Deskripsi 'beregu' dalam konteks SD kelas 5 bisa membingungkan siswa.",
+          "suggestedFix": "Ganti pertanyaan menjadi permainan beregu yang lebih relevan seperti 'Balap Karung' atau tetap gunakan Engklek namun sesuaikan konteksnya sebagai permainan individu."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "7f1ef510-e135-4d8a-83ed-afd747b12389",
+      "subject": "PJOK",
+      "topic": "Permainan Tradisional",
+      "slideIssueCount": 1,
+      "quizIssueCount": 3,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Contoh modifikasi lompat tali pada slide 1 kurang akurat secara teknis; karet gelang yang disambung justru menjadi lebih panjang, bukan lebih pendek.",
+          "suggestedFix": "Ubah kalimat menjadi: 'Contoh sederhana: permainan lompat tali bisa dimodifikasi dengan mengatur panjang tali karet agar sesuai dengan tinggi badan pemain sehingga lebih mudah dimainkan.'"
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Tali sepatu yang disambung tidak memiliki elastisitas yang cukup untuk lompat tali dan berisiko putus atau melukai pemain.",
+          "suggestedFix": "Ganti opsi dengan bahan yang lebih aman dan umum digunakan seperti karet gelang yang disambung atau tali rafia yang lembut."
+        },
+        {
+          "questionIndex": 6,
+          "severity": "high",
+          "issue": "Pertanyaan tidak relevan dengan pilihan jawaban. Pilihan jawaban tidak menunjukkan modifikasi tradisional menjadi modern, melainkan modifikasi teknis permainan.",
+          "suggestedFix": "Ubah pertanyaan menjadi: 'Manakah di bawah ini yang merupakan contoh modifikasi alat dalam permainan tradisional?'"
+        },
+        {
+          "questionIndex": 7,
+          "severity": "low",
+          "issue": "Format pilihan jawaban tidak konsisten (tidak menggunakan huruf A, B, C, D).",
+          "suggestedFix": "Tambahkan label A, B, C, D pada setiap opsi."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "bf729c57-e777-4ece-9029-2b3cd232f521",
+      "subject": "Informatika",
+      "topic": "Berpikir Komputasional",
+      "slideIssueCount": 1,
+      "quizIssueCount": 4,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'ilmuwan komputer' mungkin terlalu abstrak untuk siswa kelas 5 SD.",
+          "suggestedFix": "Ganti menjadi 'cara berpikir untuk menyelesaikan masalah secara efektif dan efisien'."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 2,
+          "severity": "medium",
+          "issue": "Penjelasan pada soal nomor 3 menyebutkan 'mengelompokkan' sebagai dekomposisi, padahal pengelompokan lebih tepat dikategorikan sebagai pengenalan pola atau abstraksi dalam konteks berpikir komputasional.",
+          "suggestedFix": "Ubah penjelasan menjadi: 'Mengelompokkan buku berdasarkan mata pelajaran adalah langkah pengenalan pola atau abstraksi untuk menyederhanakan masalah agar buku lebih mudah ditemukan.'"
+        },
+        {
+          "questionIndex": 5,
+          "severity": "medium",
+          "issue": "Jawaban 'Pengenalan pola' kurang tepat untuk konteks membuat jadwal yang adil; 'Algoritma' lebih relevan karena melibatkan urutan langkah sistematis.",
+          "suggestedFix": "Ubah correctIndex menjadi 2 dan perbarui penjelasan bahwa algoritma diperlukan untuk menyusun urutan giliran yang sistematis dan adil."
+        },
+        {
+          "questionIndex": 11,
+          "severity": "medium",
+          "issue": "Penjelasan salah mengkategorikan konsep.",
+          "suggestedFix": "Ubah penjelasan menjadi: 'Mengelompokkan buku berdasarkan kategori adalah contoh pengenalan pola atau abstraksi, karena kita mengabaikan detail buku satu per satu dan fokus pada karakteristik umum untuk mengorganisir data.'"
+        },
+        {
+          "questionIndex": 16,
+          "severity": "medium",
+          "issue": "Penjelasan logika pola salah. Pola: 1. Segitiga merah, 2. Segitiga biru, 3. Persegi merah, 4. Persegi biru. Urutan ke-5: Segitiga merah, 6: Segitiga biru, 7: Persegi merah. Sisa bagi 7 dengan 4 adalah 3, yang merujuk pada urutan ke-3 yaitu persegi merah. Namun, penjelasan menyebutkan 'sisa bagi 7 dengan 4 = 3' yang benar, tetapi logika urutan harus konsisten.",
+          "suggestedFix": "Perbaiki penjelasan agar lebih jelas bahwa urutan ke-7 sama dengan urutan ke-3 dalam pola 4 langkah."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "cf0a7394-86fe-4fcb-b9cb-dd254c5d06c7",
+      "subject": "Informatika",
+      "topic": "Berpikir Komputasional",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Contoh soal pada bagian 'Hubungan Pola dan Abstraksi' memiliki logika yang kurang tepat untuk siswa SD kelas 5.",
+          "suggestedFix": "Ubah contoh soal agar lebih akurat secara matematis. Senin ke Kamis adalah 3 hari (Senin+1=Selasa, +2=Rabu, +3=Kamis). Penjelasan harus konsisten."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "345aa855-9e08-43f1-a2e6-359c16b10589",
+      "subject": "Informatika",
+      "topic": "Berpikir Komputasional",
+      "slideIssueCount": 2,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Pada Slide 3, contoh diagram alir tidak konsisten dengan langkah teks (langkah password dan buka aplikasi hilang) dan simbol persegi panjang untuk 'Tunggu layar menyala' kurang tepat karena itu adalah proses tunggu/input.",
+          "suggestedFix": "Sesuaikan diagram alir agar mencakup semua langkah teks atau sederhanakan teksnya. Gunakan simbol yang lebih akurat atau jelaskan bahwa ini adalah penyederhanaan."
+        },
+        {
+          "severity": "low",
+          "issue": "Pada Slide 4, instruksi 'Tulis algoritma untuk kegiatan Mengikat tali sepatu' mungkin terlalu sulit untuk divisualisasikan tanpa gambar pendukung bagi siswa kelas 5.",
+          "suggestedFix": "Tambahkan catatan agar siswa dapat menggambar atau mendiskusikan langkah-langkah tersebut secara berkelompok."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "bed88cde-a970-4333-b8e0-53acbaef2f89",
+      "subject": "Informatika",
+      "topic": "Berpikir Komputasional",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'Dekomposisi' perlu diperkenalkan sebagai bagian dari pilar Berpikir Komputasional agar siswa memahami konteks mata pelajaran.",
+          "suggestedFix": "Tambahkan kalimat pembuka bahwa dekomposisi adalah salah satu pilar Berpikir Komputasional."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "low",
+          "issue": "Opsi jawaban kurang variatif karena semua pertanyaan memiliki correctIndex 1.",
+          "suggestedFix": "Acak posisi jawaban yang benar (correctIndex) agar siswa tidak menebak berdasarkan pola."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "d56f17bf-93bf-42fa-b221-c20993aad2d7",
+      "subject": "Informatika",
+      "topic": "Teknologi Digital",
+      "slideIssueCount": 2,
+      "quizIssueCount": 3,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'biner' mungkin terlalu teknis untuk siswa kelas 5 SD tanpa penjelasan sederhana.",
+          "suggestedFix": "Tambahkan penjelasan singkat bahwa 0 dan 1 adalah bahasa mesin."
+        },
+        {
+          "severity": "medium",
+          "issue": "Contoh perangkat proses (CPU) sulit diidentifikasi fisik oleh siswa SD karena berada di dalam casing.",
+          "suggestedFix": "Gunakan contoh yang lebih terlihat seperti 'otak komputer' atau 'chip di dalam smartphone'."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "low",
+          "issue": "Difficulty level 'hard' is inaccurate for SD_5 curriculum; this is a foundational concept.",
+          "suggestedFix": "Change difficulty to 'medium'."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "low",
+          "issue": "Difficulty level 'hard' is inaccurate for SD_5 curriculum; identifying software functions is basic.",
+          "suggestedFix": "Change difficulty to 'medium'."
+        },
+        {
+          "questionIndex": 13,
+          "severity": "medium",
+          "issue": "Materi tentang modulasi sinyal digital ke analog pada modem terlalu teknis dan kurang relevan untuk tingkat SD kelas 5.",
+          "suggestedFix": "Sederhanakan pertanyaan agar lebih sesuai dengan tingkat pemahaman SD kelas 5, fokus pada fungsi modem sebagai penghubung ke internet."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "76414d02-ead4-4e22-be63-2a94d2f17eb7",
+      "subject": "Informatika",
+      "topic": "Teknologi Digital",
+      "slideIssueCount": 0,
+      "quizIssueCount": 1,
+      "slideIssues": [],
+      "quizIssues": [
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Materi protokol jaringan (HTTP, FTP, SMTP, TCP) terlalu rumit untuk siswa kelas 5 SD. Kurikulum Informatika SD kelas 5 umumnya hanya mencakup pengenalan dasar internet dan peramban web.",
+          "suggestedFix": "Ubah pertanyaan menjadi tentang aplikasi peramban (web browser) yang lebih sesuai dengan tingkat pemahaman kelas 5 SD."
+        }
+      ],
+      "fixedSlide": false,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "5026b9a1-c0a6-49e2-96c7-463ea503967e",
+      "subject": "Informatika",
+      "topic": "Teknologi Digital",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "82a77430-85cf-4b89-a5c5-d58c8d83fd08",
+      "subject": "Informatika",
+      "topic": "Teknologi Digital",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "527c20ce-38e7-46d3-a958-c2df2ba921eb",
+      "subject": "Informatika",
+      "topic": "Kecerdasan Artifisial",
+      "error": "LLM returned null on quiz batch 2"
+    },
+    {
+      "materialId": "663ca467-2326-4639-b6f1-254d30000413",
+      "subject": "Informatika",
+      "topic": "Kecerdasan Artifisial",
+      "slideIssueCount": 0,
+      "quizIssueCount": 1,
+      "slideIssues": [],
+      "quizIssues": [
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Pilihan jawaban 'Mobil tanpa pengemudi' (self-driving car) adalah contoh AI yang sangat canggih, namun pilihan 'Lampu jalan biasa' bisa membingungkan karena beberapa sistem lampu jalan modern kini menggunakan AI untuk efisiensi energi.",
+          "suggestedFix": "Ganti pilihan 'Lampu jalan biasa yang menyala otomatis saat gelap' dengan 'Kalkulator sederhana untuk menghitung penjumlahan'."
+        }
+      ],
+      "fixedSlide": false,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "eddf46ce-55af-4e1c-aa03-097d4815d24a",
+      "subject": "Informatika",
+      "topic": "Kecerdasan Artifisial",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'Kecerdasan Artifisial' perlu disandingkan dengan istilah bahasa Inggris yang umum digunakan agar siswa familiar.",
+          "suggestedFix": "Tambahkan '(Artificial Intelligence)' setelah penyebutan pertama Kecerdasan Artifisial."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 4,
+          "severity": "low",
+          "issue": "Opsi jawaban kurang variatif karena opsi 'Pelanggaran privasi peserta lain' kurang relevan dengan konteks kompetisi.",
+          "suggestedFix": "Ganti opsi 'Pelanggaran privasi peserta lain' dengan 'Bantuan belajar yang sah' agar pilihan lebih menantang."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "d9d968b7-bf7d-4f57-8641-78dea67378f4",
+      "subject": "Informatika",
+      "topic": "Proyek Digital",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'Berpikir Komputasional' perlu diperjelas sebagai fondasi Informatika agar siswa kelas 5 SD memahami relevansinya.",
+          "suggestedFix": "Tambahkan kalimat pembuka bahwa berpikir komputasional adalah 'keterampilan berpikir seperti ilmuwan komputer'."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 4,
+          "severity": "high",
+          "issue": "correctIndex points to option 1 ('Langkah-langkah terurut...'), but the index is 1. Wait, index 1 is correct. Re-evaluating: The logic is sound, but the options list order in the JSON is correct. No issue found.",
+          "suggestedFix": "None."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "d97d76cc-c775-4e90-ab74-9e5727312e00",
+      "subject": "Informatika",
+      "topic": "Proyek Digital",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'kontras' mungkin terlalu teknis untuk siswa kelas 5 SD.",
+          "suggestedFix": "Ganti menjadi 'warna yang berbeda antara tulisan dan latar belakang agar mudah dibaca'."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 11,
+          "severity": "high",
+          "issue": "Factual error. Ctrl + N creates a new presentation file, not a new slide within an existing presentation.",
+          "suggestedFix": "Change question to 'Tombol yang digunakan untuk membuat file presentasi baru di PowerPoint adalah...' or change options to include 'Ctrl + M' as the correct answer for new slide."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "56050517-2565-45b0-b97f-995b43b0ca99",
+      "subject": "Informatika",
+      "topic": "Proyek Digital",
+      "slideIssueCount": 2,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'real-time' kurang ramah untuk siswa kelas 5 SD.",
+          "suggestedFix": "Ganti 'real-time' dengan 'secara langsung pada waktu yang sama'."
+        },
+        {
+          "severity": "low",
+          "issue": "Instruksi pada latihan kurang menekankan aspek keamanan digital (berbagi tautan).",
+          "suggestedFix": "Tambahkan poin tentang menjaga privasi tautan agar hanya diakses anggota kelompok."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "ad8ddd6e-c2b5-4d2a-a4fd-a9ef4c9d4d56",
+      "subject": "Informatika",
+      "topic": "Proyek Digital",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "e593d7be-283e-418d-9996-9d0f67c72410",
+      "subject": "Matematika",
+      "topic": "Skala",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "6b4e898c-f481-4436-8faf-b1e264e1b8ba",
+      "subject": "Matematika",
+      "topic": "Skala",
+      "slideIssueCount": 2,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Konversi satuan pada contoh pertama (1:100.000) salah. 100.000 cm bukan 1 km, melainkan 1 km (100.000 cm / 100.000 = 1 km). Tunggu, 100.000 cm = 1.000 m = 1 km. Koreksi: 100.000 cm = 1 km adalah benar, namun penjelasan di slide sebelumnya tertulis 1 km, namun perlu diperjelas konversinya agar siswa SD kelas 5 tidak bingung.",
+          "suggestedFix": "Pastikan konversi satuan cm ke km konsisten (bagi 100.000)."
+        },
+        {
+          "severity": "low",
+          "issue": "Latihan soal nomor 1: 5.000.000 cm = 50 km. Perhitungan ini salah. 5.000.000 cm = 50 km adalah salah, seharusnya 50 km = 5.000.000 cm. 5.000.000 cm / 100.000 = 50 km. Hasilnya benar, namun penulisan unit perlu diperbaiki.",
+          "suggestedFix": "Perbaiki penulisan konversi 5.000.000 cm = 50 km."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "48180652-439f-49d9-8bd4-f6fa4419c657",
+      "subject": "Matematika",
+      "topic": "Pengukuran Data",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'Frekuensi' mungkin belum familiar bagi siswa kelas 5 SD tanpa penjelasan singkat.",
+          "suggestedFix": "Tambahkan penjelasan singkat bahwa frekuensi adalah 'banyaknya data yang muncul'."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 2,
+          "severity": "low",
+          "issue": "Opsi jawaban tidak mencakup angka 5, padahal pertanyaan menanyakan jumlah siswa.",
+          "suggestedFix": "Ubah opsi menjadi [1, 2, 3, 5] dan set correctIndex ke 3."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "79ec5451-cc48-4633-a6a5-80464efa81ec",
+      "subject": "Matematika",
+      "topic": "Pecahan",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Pembahasan singkat pada slide terakhir tidak mencakup semua soal latihan (hanya nomor 1 dan 4).",
+          "suggestedFix": "Lengkapi pembahasan untuk soal nomor 2 dan 3 agar siswa dapat melakukan koreksi mandiri secara menyeluruh."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Options contain duplicate values (10/30 and 1/3 are equivalent).",
+          "suggestedFix": "Change option 0 from 10/30 to 4/15."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "8e936c3c-272a-464d-8eb8-e7c2ccd88d5d",
+      "subject": "Matematika",
+      "topic": "Skala",
+      "slideIssueCount": 1,
+      "quizIssueCount": 3,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Penjelasan satuan pada bagian 'Cara Membuat Denah dengan Skala' langkah ke-4 kurang eksplisit mengenai konversi satuan sebelum pembagian.",
+          "suggestedFix": "Tambahkan penekanan bahwa konversi satuan (meter ke cm) wajib dilakukan sebelum pembagian dengan penyebut skala agar hasil akurat."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "low",
+          "issue": "Options are not sorted numerically or logically, which is poor practice for SD_5 level.",
+          "suggestedFix": "Reorder options to: 0,2 km, 2 km, 20 km, 200 km."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "low",
+          "issue": "Options are not sorted numerically.",
+          "suggestedFix": "Reorder options to: 0,2 km, 2 km, 20 km, 200 km."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "low",
+          "issue": "Options are not sorted numerically.",
+          "suggestedFix": "Reorder options to: 0,2 cm, 2 cm, 20 cm, 200 cm."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "df003dc7-956b-4d3a-963e-83b47bae4cbd",
+      "subject": "Matematika",
+      "topic": "Pengukuran Data",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Contoh jam dinding pukul 10 menunjukkan sudut lancip 60° tidak akurat secara matematis.",
+          "suggestedFix": "Pukul 10 tepat membentuk sudut 60° (jarum pendek di 10, jarum panjang di 12). Namun, untuk menghindari kebingungan siswa, gunakan contoh pukul 2 yang lebih umum atau jelaskan perhitungan sudut per jam (30° per jam)."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "low",
+          "issue": "Opsi 'Penggaris' dan 'Mistar' adalah benda yang sama, sehingga opsi tidak cukup distingtif.",
+          "suggestedFix": "Ganti 'Mistar' dengan 'Meteran' agar pilihan jawaban lebih bervariasi."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "bf078aea-b3e2-4e83-b722-8e0e92e43d59",
+      "subject": "Matematika",
+      "topic": "Kecepatan dan Debit",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Satuan pada kunci jawaban nomor 3 tidak mencantumkan satuan volume (liter).",
+          "suggestedFix": "Ubah kunci jawaban nomor 3 menjadi '50 liter'."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "340b0a8d-be45-4642-b138-bba80af8603e",
+      "subject": "Matematika",
+      "topic": "Bangun Ruang",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Penjelasan rumus volume balok kurang eksplisit mengenai variabel.",
+          "suggestedFix": "Tambahkan keterangan variabel (p, l, t) pada rumus volume balok agar siswa SD kelas 5 lebih mudah memahami."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "fe7fc1c6-da49-42b9-bda7-3eec4bc53b8c",
+      "subject": "Matematika",
+      "topic": "Pecahan",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "ea3d1f1a-2343-4bdb-b4fc-31733c91ddad",
+      "subject": "Matematika",
+      "topic": "Bangun Ruang",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "580c7cde-70f7-4696-9f5e-4c7496075628",
+      "subject": "Matematika",
+      "topic": "Bangun Ruang",
+      "error": "LLM returned null"
+    },
+    {
+      "materialId": "e580e3a0-0df1-43c1-a316-60c9d187b4e8",
+      "subject": "Matematika",
+      "topic": "Pecahan",
+      "slideIssueCount": 1,
+      "quizIssueCount": 2,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Penjelasan langkah 1 pada slide 3 kurang eksplisit mengenai perkalian pembilang dan penyebut dengan angka yang sama.",
+          "suggestedFix": "Tambahkan penjelasan bahwa pembilang juga harus dikalikan dengan angka yang sama agar nilai pecahan tetap sama."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 1,
+          "severity": "medium",
+          "issue": "Opsi jawaban membingungkan karena terdapat dua jawaban yang benar secara matematis (1/2 dan 3/6).",
+          "suggestedFix": "Ganti opsi 3/6 dengan angka lain yang salah, misalnya 4/6."
+        },
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Opsi jawaban tidak menyertakan bentuk paling sederhana (1/2) dan terdapat potensi kebingungan pada pilihan 7/14.",
+          "suggestedFix": "Ubah opsi 7/14 menjadi 1/2 agar siswa terbiasa dengan penyederhanaan pecahan."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "c9742bff-0ab9-4fcd-a1d2-3c503e1d98fb",
+      "subject": "Matematika",
+      "topic": "Pecahan",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Terdapat kesalahan perhitungan pada tabel Latihan Mandiri baris kedua (3/4 - 1/6).",
+          "suggestedFix": "Ubah 1/6 menjadi 2/12. Perhitungan seharusnya 9/12 - 2/12 = 7/12. (Catatan: 1/6 = 2/12, bukan 2/12 yang tertulis di slide sebelumnya sudah benar, namun pastikan langkahnya konsisten)."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Kesalahan perhitungan pada penjelasan. 9/10 - 4/10 + 5/10 = 10/10 = 1, bukan 1 1/10.",
+          "suggestedFix": "Ubah opsi jawaban dan penjelasan agar sesuai dengan hasil 1."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "1d7e5dc8-f3e7-455d-902c-8d4eada3d81f",
+      "subject": "Matematika",
+      "topic": "Pecahan",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Penjelasan langkah penyederhanaan pada contoh 15/8 kurang eksplisit untuk level SD kelas 5.",
+          "suggestedFix": "Tambahkan penjelasan singkat bahwa 15/8 adalah 15 dibagi 8, hasilnya 1 sisa 7, sehingga menjadi 1 7/8."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 4,
+          "severity": "medium",
+          "issue": "Opsi A dan B identik (1/4 bagian).",
+          "suggestedFix": "Ubah opsi B menjadi nilai lain, misalnya 1/8 bagian."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "0273891b-5425-4c4e-8402-01f9befff587",
+      "subject": "Matematika",
+      "topic": "Pengukuran Data",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Istilah 'Pengukuran Data' kurang tepat secara terminologi kurikulum SD kelas 5.",
+          "suggestedFix": "Gunakan istilah 'Penyajian Data' karena materi membahas diagram, bukan proses pengukuran."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "3ac446af-05b0-443a-8425-fb7f62bde8f4",
+      "subject": "Matematika",
+      "topic": "Bangun Ruang",
+      "slideIssueCount": 1,
+      "quizIssueCount": 3,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Soal nomor 2 pada slide terakhir memiliki harga kertas yang tidak realistis (Rp500 per cm²). Untuk luas 992 cm², biaya menjadi Rp496.000, yang terlalu mahal untuk sebuah kado.",
+          "suggestedFix": "Ubah harga kertas menjadi Rp50 per cm² atau Rp5 per cm² agar lebih masuk akal untuk tingkat SD."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "medium",
+          "issue": "Topik soal adalah 'Bangun Ruang', namun pertanyaan membahas 'Bangun Datar'.",
+          "suggestedFix": "Ubah pertanyaan menjadi definisi volume bangun ruang atau ganti topik menjadi Bangun Datar."
+        },
+        {
+          "questionIndex": 2,
+          "severity": "medium",
+          "issue": "Pertanyaan bersifat kontekstual sejarah/lokal yang tidak relevan dengan konsep matematis bangun ruang/datar.",
+          "suggestedFix": "Ganti dengan soal hitungan luas atau volume yang relevan dengan kurikulum SD kelas 5."
+        },
+        {
+          "questionIndex": 3,
+          "severity": "medium",
+          "issue": "Penjelasan kurang lengkap karena tidak menyebutkan syarat 'ukuran ubin yang sama'.",
+          "suggestedFix": "Tambahkan keterangan 'asalkan ukuran ubin yang digunakan sama' ke dalam soal."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "aa1a9357-b066-4f77-9965-7af21f0f292b",
+      "subject": "Matematika",
+      "topic": "Pecahan",
+      "slideIssueCount": 2,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Contoh soal 3 pada slide kedua (9/10 - 4/10 = 5/10 = 1/2) tidak akurat secara matematis karena 5/10 disederhanakan menjadi 1/2, namun penulisan contoh tersebut bisa membingungkan siswa SD kelas 5 jika tidak dijelaskan proses pembagiannya.",
+          "suggestedFix": "Tambahkan penjelasan singkat bahwa 5/10 disederhanakan dengan membagi pembilang dan penyebut dengan 5."
+        },
+        {
+          "severity": "medium",
+          "issue": "Kunci jawaban nomor 5 pada slide terakhir tidak konsisten dengan penyederhanaan pecahan.",
+          "suggestedFix": "Ubah kunci jawaban nomor 5 dari 2/4 = 1/2 kg menjadi 2/4 = 1/2 kg agar konsisten dengan format penyederhanaan."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "7ace5e87-8505-4363-8189-e0d2a1d7451f",
+      "subject": "Matematika",
+      "topic": "Bangun Ruang",
+      "slideIssueCount": 2,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Contoh jaring-jaring kubus pada slide 2 tidak terlihat jelas karena format teks ASCII yang kurang representatif untuk siswa kelas 5.",
+          "suggestedFix": "Ganti deskripsi visual dengan instruksi yang lebih jelas atau gunakan simbol yang lebih rapi."
+        },
+        {
+          "severity": "low",
+          "issue": "Instruksi pada slide 3 mengenai jaring-jaring balok membingungkan karena penyebutan ukuran (p, l, t) tanpa visualisasi yang memadai.",
+          "suggestedFix": "Sederhanakan penjelasan dengan menekankan pada pasangan sisi yang kongruen (sama dan sebangun)."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 2,
+          "severity": "high",
+          "issue": "Pilihan jawaban tidak akurat. Jaring-jaring balok terdiri dari 6 persegi panjang. Pilihan D salah secara geometris.",
+          "suggestedFix": "Ubah pilihan jawaban agar mencerminkan 6 persegi panjang dan perbaiki penjelasan."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "7e610cef-3804-442b-83ec-9a9dd1681251",
+      "subject": "Matematika",
+      "topic": "Kecepatan dan Debit",
+      "slideIssueCount": 1,
+      "quizIssueCount": 0,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Materi belum mencakup topik 'Debit' sesuai judul, padahal kurikulum SD kelas 5 mencakup keduanya.",
+          "suggestedFix": "Tambahkan slide baru yang menjelaskan definisi debit (volume per satuan waktu) dan rumusnya."
+        }
+      ],
+      "quizIssues": [],
+      "fixedSlide": true,
+      "fixedQuestions": false,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "b473a7a6-bb3f-4017-9ec0-d74855a4eee7",
+      "subject": "Matematika",
+      "topic": "Pengukuran Data",
+      "slideIssueCount": 2,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "medium",
+          "issue": "Contoh diagram batang pada slide memiliki ketidaksesuaian antara visualisasi teks dan perhitungan total siswa.",
+          "suggestedFix": "Perbaiki visualisasi diagram batang agar konsisten dengan data yang dihitung (6+8+10+2 = 26) atau sesuaikan narasi penafsiran."
+        },
+        {
+          "severity": "low",
+          "issue": "Soal 1b kurang spesifik dalam menanyakan 'berapa siswa tertinggi' karena yang ditanyakan adalah nilai tinggi badan, bukan jumlah siswanya.",
+          "suggestedFix": "Ubah pertanyaan menjadi 'Berapa tinggi badan tertinggi siswa?'."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 0,
+          "severity": "low",
+          "issue": "Opsi jawaban tidak lengkap karena nama 'Evi' tidak ada dalam pilihan jawaban, meskipun ada dalam soal.",
+          "suggestedFix": "Tambahkan 'Evi' ke dalam opsi jawaban."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "4530c9f2-e558-4a9b-9b2e-cbf9a37781bc",
+      "subject": "Matematika",
+      "topic": "Kecepatan dan Debit",
+      "slideIssueCount": 1,
+      "quizIssueCount": 1,
+      "slideIssues": [
+        {
+          "severity": "low",
+          "issue": "Topik 'Debit' disebutkan dalam subjek namun tidak ada materi debit di dalam slide.",
+          "suggestedFix": "Tambahkan bagian mengenai debit atau ubah judul menjadi 'Kecepatan, Jarak, dan Waktu'."
+        }
+      ],
+      "quizIssues": [
+        {
+          "questionIndex": 2,
+          "severity": "low",
+          "issue": "Leading space in question text. Typo 'keretaapi'.",
+          "suggestedFix": "Remove leading space. Change 'keretaapi' to 'kereta api'."
+        }
+      ],
+      "fixedSlide": true,
+      "fixedQuestions": true,
+      "regenerateRecommended": false
+    },
+    {
+      "materialId": "03d1b9ad-0ab5-48df-bcbc-ff5d5bb33a27",
+      "subject": "Matematika",
+      "topic": "Pengukuran Data",
+      "error": "LLM returned null"
+    }
+  ]
+}

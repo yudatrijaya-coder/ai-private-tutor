@@ -310,7 +310,7 @@ async function RecommendationSection() {
 function QuickActionsSection({ gradeLevel }: { gradeLevel?: string }) {
   const actions = [
     { icon: "📝", label: "Quiz", href: "/student/quiz", color: "#6366f1" },
-    { icon: "📋", label: "Exam", href: "/student/quiz?exam=true", color: "#f59e0b" },
+    { icon: "📋", label: "Exam", href: "/student/exam", color: "#f59e0b" },
     { icon: "🗺️", label: "Big Map", href: "/student/big-mindmap", color: "#a78bfa" },
     { icon: "🎬", label: "Video", href: "/student/videos", color: "#ef4444" },
     { icon: "🏆", label: "Pencapaian", href: "/student/achievement", color: "#22c55e" },
