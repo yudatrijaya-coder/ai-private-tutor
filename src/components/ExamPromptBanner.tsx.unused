@@ -1,0 +1,38 @@
+import { prisma } from "@/lib/prisma";
+
+export async function ExamPromptBanner({ studentId }: { studentId: string }) {
+  // Cek apakah ada subject yang belum ada PRE_TEST
+  const curriculum = await prisma.curriculum.findFirst({
+    where: { studentId },
+    include: { materials: { include: { exams: { where: { type: "PRE_TEST" } } } } }
+  });
+
+  if (!curriculum) return null;
+
+  // Temukan subject yang belum ada pre-test
+  const subjectsToTest = curriculum.materials
+    .filter(m => m.exams.length === 0)
+    .map(m => m.subject);
+  
+  const uniqueSubjects = [...new Set(subjectsToTest)];
+
+  if (uniqueSubjects.length === 0) return null;
+
+  return (
+    <div className="bg-amber-100 border border-amber-300 rounded-xl p-4 mb-4 flex items-center justify-between">
+      <div>
+        <h4 className="font-bold text-amber-900">📝 Ujian Diagnostik Perlu Diambil</h4>
+        <p className="text-sm text-amber-800">
+          Kamu belum mengambil Pre-test untuk: {uniqueSubjects.join(", ")}. 
+          Hasil ujian ini akan membantu AI membuat jadwal belajar yang lebih cocok buat kamu.
+        </p>
+      </div>
+      <a 
+        href={`/student/quiz?exam=true&type=PRE_TEST&subject=${uniqueSubjects[0]}`}
+        className="bg-amber-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-amber-700"
+      >
+        Mulai
+      </a>
+    </div>
+  );
+}

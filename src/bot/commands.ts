@@ -18,6 +18,7 @@ export const COMMAND_MENU = [
   { command: "quiz", description: "Kerjakan kuis" },
   { command: "review", description: "Ulangi soal yang pernah salah" },
   { command: "materi", description: "Lihat materi pelajaran" },
+  { command: "weeklyexam", description: "Weekly exam & jadwal" },
   { command: "jadwal", description: "Cek jadwal belajar" },
   { command: "jadwal_sekolah", description: "Cek jadwal sekolah" },
   { command: "pr", description: "Catat / lihat PR" },
@@ -45,6 +46,7 @@ export async function sendHelp(ctx: Context, student: Student): Promise<void> {
       `/quiz — Kerjakan kuis 🧠\n` +
       `/review — Ulangi soal yang pernah salah 🔁\n` +
       `/materi — Lihat materi pelajaran 📗\n` +
+      `/weeklyexam — Weekly exam & jadwal 📝\n` +
       `/jadwal — Cek jadwal belajar 📅\n` +
       `/jadwal_sekolah — Jadwal sekolah asli 🏫\n` +
       `/pr — Catat / lihat PR 📖\n` +

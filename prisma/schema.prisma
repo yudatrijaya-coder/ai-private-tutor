@@ -138,6 +138,7 @@ model Student {
   examAttempts   ExamAttempt[]
   improvementPlans ImprovementPlan[]
   topicMasteries TopicMastery[]
+  examSchedules  ExamSchedule[]
 }
 
 model CharacterImage {
@@ -643,10 +644,11 @@ model VerificationToken {
 model Exam {
   id          String    @id @default(uuid())
   title       String    // e.g., "Post-test Modul Tata Surya" atau "Pre-test IPA SMP 1"
-  type        String    // "PRE_TEST" | "POST_TEST"
+  type        String    // "PRE_TEST" | "POST_TEST" | "WEEKLY"
   subject     String    // "IPA", "Matematika"
   gradeLevel  GradeLevel
   materialId  String?   // Jika POST_TEST, terikat ke material tertentu
+  weekNumber  Int?      // Untuk WEEKLY: minggu kurikulum berjalan
   maxScore    Int       @default(100) // cached, computed as questions.length * 100
   isActive    Boolean   @default(true)
   createdAt   DateTime  @default(now())
@@ -654,8 +656,29 @@ model Exam {
 
   questions   ExamQuestion[]
   attempts    ExamAttempt[]
+  schedules   ExamSchedule[]
 
   @@index([gradeLevel, subject])
+}
+
+/// ExamSchedule — jadwal mingguan weekly exam per student (enforce layer)
+model ExamSchedule {
+  id           String     @id @default(uuid())
+  studentId    String
+  examId       String     // WEEKLY exam yang dijadwalkan
+  scheduledAt  DateTime   // kapan exam dimulai (enforced)
+  status       String     @default("PENDING") // "PENDING" | "CONFIRMED" | "COMPLETED" | "MISSED" | "CANCELLED"
+  confirmedAt  DateTime?  // kapan student konfirmasi
+  remindedH1   Boolean    @default(false) // reminder H-1 sudah dikirim
+  remindedH0   Boolean    @default(false) // reminder H-hour sudah dikirim
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  student      Student    @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  exam         Exam       @relation(fields: [examId], references: [id], onDelete: Cascade)
+
+  @@index([studentId, scheduledAt])
+  @@index([scheduledAt, status])
 }
 
 model ExamQuestion {
@@ -668,6 +691,7 @@ model ExamQuestion {
   correctAnswer String
   explanation   String
   difficulty    String   // "EASY" | "MEDIUM" | "HARD"
+  bloomLevel    String   // "C1" | "C2" | "C3" | "C4" | "C5" | "C6" (Anderson & Krathwohl)
   createdAt     DateTime @default(now())
 
   exam          Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
@@ -683,6 +707,7 @@ model ExamAttempt {
   maxScore        Float          @default(100)
   details         Json           // { answered: [...], timeSpentMs: [...], weaknesses: { "Rotasi Bumi": "HARD_FAILED" } }
   timeSpent       Int?           // total seconds spent on the exam
+  attemptNumber   Int            @default(1) // 1 = first, 2 = retake, dst
   status          String         // "IN_PROGRESS" | "COMPLETED" | "ANALYZED"
   createdAt       DateTime       @default(now())
 

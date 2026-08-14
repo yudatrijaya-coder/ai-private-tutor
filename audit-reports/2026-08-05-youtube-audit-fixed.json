@@ -1,0 +1,1784 @@
+{
+  "timestamp": "2026-08-05T09:20:26.225693",
+  "summary": {
+    "totalChecked": 250,
+    "ok": 193,
+    "mismatches": 57,
+    "byLevel": {
+      "SD_5": {
+        "total": 30,
+        "ok": 23,
+        "mismatch": 7
+      },
+      "SMP_1": {
+        "total": 91,
+        "ok": 68,
+        "mismatch": 23
+      },
+      "SMA_2": {
+        "total": 129,
+        "ok": 102,
+        "mismatch": 27
+      }
+    }
+  },
+  "details": {
+    "SD_5": [
+      {
+        "index": 1,
+        "topic": "Cahaya",
+        "url": "https://www.youtube.com/watch?v=hs1Cz1B7MVs",
+        "status": "OK",
+        "details": "Cahaya Dan Sifatnya - IPAS Bab 1 Kelas 5 Semester 1 Kurikulum Merdeka"
+      },
+      {
+        "index": 2,
+        "topic": "Cahaya",
+        "url": "https://www.youtube.com/watch?v=Trdcf34FSbw",
+        "status": "OK",
+        "details": "Menghafal Mudah dengan Lagu - tentang SIFAT-SIFAT CAHAYA - IPAS kelas 5 #sditannuurpurwosari"
+      },
+      {
+        "index": 3,
+        "topic": "Cahaya",
+        "url": "https://www.youtube.com/watch?v=tEiTBJaGwPU",
+        "status": "OK",
+        "details": "Sifat-sifat Cahaya & Macam Cacat Mata | IPA | SayaBisa"
+      },
+      {
+        "index": 4,
+        "topic": "Bunyi",
+        "url": "https://www.youtube.com/watch?v=zTehAP1I_uQ",
+        "status": "OK",
+        "details": "Bunyi dan Sifatnya - Materi IPAS Kelas 5 Kurikulum Merdeka"
+      },
+      {
+        "index": 5,
+        "topic": "Bunyi",
+        "url": "https://www.youtube.com/watch?v=gr8xb4NWHyg",
+        "status": "OK",
+        "details": "TOPIK D : MENDENGAR KARENA BUNYI | BAB 1 | KELAS 5 SD | MUATAN PELAJARAN IPAS | KURIKULUM MERDEKA"
+      },
+      {
+        "index": 6,
+        "topic": "Bunyi",
+        "url": "https://www.youtube.com/watch?v=654uXOx_S6A",
+        "status": "OK",
+        "details": "Bunyi | IPA SD"
+      },
+      {
+        "index": 7,
+        "topic": "Ekosistem",
+        "url": "https://www.youtube.com/watch?v=S5JxFmJgZyk",
+        "status": "TOPIC_MISMATCH",
+        "details": "Rantai Makanan - IPAS Bab 2 Kelas 5 Semester 1 Kurikulum Merdeka || Halaman 41-49"
+      },
+      {
+        "index": 8,
+        "topic": "Ekosistem",
+        "url": "https://www.youtube.com/watch?v=ThxJOMUCYds",
+        "status": "OK",
+        "details": "Ekosistem | IPA SD"
+      },
+      {
+        "index": 9,
+        "topic": "Ekosistem",
+        "url": "https://www.youtube.com/watch?v=mL-XRVugc1E",
+        "status": "OK",
+        "details": "Video PPT - Komponen Ekosistem dan Interaksi di Dalamnya"
+      },
+      {
+        "index": 10,
+        "topic": "Indonesia Kaya",
+        "url": "https://www.youtube.com/watch?v=KO-eLEWsifY",
+        "status": "TOPIC_MISMATCH",
+        "details": "Negara Maritim dan Agraris - Materi IPAS Kelas 5 Kurikulum Merdeka"
+      },
+      {
+        "index": 11,
+        "topic": "Indonesia Kaya",
+        "url": "https://www.youtube.com/watch?v=8Yi0rhvp5fo",
+        "status": "OK",
+        "details": "Karakteristik Geografis Wilayah Indonesia | IPS SD"
+      },
+      {
+        "index": 12,
+        "topic": "Indonesia Kaya",
+        "url": "https://www.youtube.com/watch?v=9oKfme81bH4",
+        "status": "OK",
+        "details": "IPAS Kelas 5 SD - Bab 6 Indonesiaku Kaya Raya | Topik A, B dan C | Kurikulum Merdeka"
+      },
+      {
+        "index": 13,
+        "topic": "Air Sumber Kehidupan",
+        "url": "https://www.youtube.com/watch?v=JsRRL8ajhWc",
+        "status": "OK",
+        "details": "Siklus Air - Materi IPAS Kelas 5 Kurikulum Merdeka"
+      },
+      {
+        "index": 14,
+        "topic": "Air Sumber Kehidupan",
+        "url": "https://www.youtube.com/watch?v=0qyFKIc3XTg",
+        "status": "OK",
+        "details": "AIR SUMBER KEHIDUPAN - Materi Pelajaran IPA kelas 5 Semester 2"
+      },
+      {
+        "index": 15,
+        "topic": "Air Sumber Kehidupan",
+        "url": "https://www.youtube.com/watch?v=qvLWHjx3_Tc",
+        "status": "OK",
+        "details": "Siklus Air | Kegiatan yang mempengaruhi | Cara Hemat Air - Materi Kelas 5 SD - Cawan Belajar Online"
+      },
+      {
+        "index": 16,
+        "topic": "Ekonomi",
+        "url": "https://www.youtube.com/watch?v=Sysh19KOjbM",
+        "status": "OK",
+        "details": "Aktivitas Ekonomi Masyarakat - Materi IPAS Kelas 5 Kurikulum Merdeka"
+      },
+      {
+        "index": 17,
+        "topic": "Ekonomi",
+        "url": "https://www.youtube.com/watch?v=CFGL1yVBPTk",
+        "status": "OK",
+        "details": "VIDEO PEMBELAJARAN KEGIATAN EKONOMI (PRODUKSI, DISTRIBUSI, KONSUMSI) | KELAS 5 SD"
+      },
+      {
+        "index": 18,
+        "topic": "Ekonomi",
+        "url": "https://www.youtube.com/watch?v=oQKT01sGtNE",
+        "status": "OK",
+        "details": "KEGIATAN EKONOMI || PRODUKSI-DISTRIBUSI-KONSUMSI"
+      },
+      {
+        "index": 19,
+        "topic": "Perubahan Fisik",
+        "url": "https://www.youtube.com/watch?v=gvocfmnZBao",
+        "status": "TOPIC_MISMATCH",
+        "details": "Bijak dalam Masa Pubertas - IPAS Kelas 5 SD - Kurikulum Merdeka"
+      },
+      {
+        "index": 20,
+        "topic": "Perubahan Fisik",
+        "url": "https://www.youtube.com/watch?v=uae4f_8xyW0",
+        "status": "TOPIC_MISMATCH",
+        "details": "Apa yang Terjadi pada Tubuh dan Diriku Saat Remaja?"
+      },
+      {
+        "index": 21,
+        "topic": "Perubahan Fisik",
+        "url": "https://www.youtube.com/watch?v=rRMnleVQzI8",
+        "status": "TOPIC_MISMATCH",
+        "details": "Yuuuuk, Kenali Pubertas Pada Remaja"
+      },
+      {
+        "index": 22,
+        "topic": "Daerah Bersejarah",
+        "url": "https://www.youtube.com/watch?v=zFszMem7eMk",
+        "status": "OK",
+        "details": "IPAS Bab 5 Topik A : Cerita Masa Lalu Daerahku | Benda Peninggalan Sejarah | Kelas 5 | EDISI REVISI"
+      },
+      {
+        "index": 23,
+        "topic": "Daerah Bersejarah",
+        "url": "https://www.youtube.com/watch?v=S7GVz-YGWrY",
+        "status": "TOPIC_MISMATCH",
+        "details": "Sejarah Kerajaan Hindu, Buddha, dan Islam"
+      },
+      {
+        "index": 24,
+        "topic": "Daerah Bersejarah",
+        "url": "https://www.youtube.com/watch?v=MfapNhdbLTc",
+        "status": "TOPIC_MISMATCH",
+        "details": "Kedatangan Bangsa-Bangsa Asing ke Nusantara - Materi IPAS Kelas 5 Kurikulum Merdeka"
+      },
+      {
+        "index": 25,
+        "topic": "Pecahan",
+        "url": "https://www.youtube.com/watch?v=0hPRfqPFtt8",
+        "status": "OK",
+        "details": "Pecahan | Matematika SD"
+      },
+      {
+        "index": 26,
+        "topic": "Pecahan",
+        "url": "https://www.youtube.com/watch?v=4VFsHwtJY30",
+        "status": "OK",
+        "details": "MATEMATIKA KELAS 5 PECAHAN | PENJUMLAHAN DAN PENGURANGAN PECAHAN"
+      },
+      {
+        "index": 27,
+        "topic": "Kecepatan dan Debit",
+        "url": "https://www.youtube.com/watch?v=XVGRdkoJrsU",
+        "status": "OK",
+        "details": "Perbandingan Dua Besaran | Kecepatan dan Debit | Matematika SD"
+      },
+      {
+        "index": 28,
+        "topic": "Skala",
+        "url": "https://www.youtube.com/watch?v=VE7cUXJ6vLQ",
+        "status": "OK",
+        "details": "Matematika Kelas 5: Perbandingan dan Skala (Perbandingan) Part. 2"
+      },
+      {
+        "index": 29,
+        "topic": "Bangun Ruang",
+        "url": "https://www.youtube.com/watch?v=MSaNs15yP6w",
+        "status": "OK",
+        "details": "Volume Bangun Ruang - Materi Matematika Kelas 5 Kurikulum Merdeka"
+      },
+      {
+        "index": 30,
+        "topic": "Aku yang Unik",
+        "url": "https://www.youtube.com/watch?v=fqBKoTROVe0",
+        "status": "OK",
+        "details": "Bab 1 Aku Yang Unik | Bahasa Indonesia Kelas 5 SD"
+      }
+    ],
+    "SMP_1": [
+      {
+        "index": 1,
+        "topic": "Ilmu Sains",
+        "url": "https://www.youtube.com/watch?v=v8BWLWGP68M",
+        "status": "OK",
+        "details": "HAKIKAT ILMU SAINS DAN METODE ILMIAH PART 1- IPA KELAS 7 SMP KURIKULUM MERDEKA"
+      },
+      {
+        "index": 2,
+        "topic": "Ilmu Sains",
+        "url": "https://www.youtube.com/watch?v=x4dPya-ynyY",
+        "status": "OK",
+        "details": "Kurikulum Merdeka Rangkuman IPA Kelas 7 Bab 1: Hakikat Sains dan Metode Ilmiah."
+      },
+      {
+        "index": 3,
+        "topic": "Ilmu Sains",
+        "url": "https://www.youtube.com/watch?v=uOu6XAW5eCg",
+        "status": "OK",
+        "details": "Bab 1 Hakikat Ilmu Sains dan Metode Ilmiah #1 (Apa Itu Sains) | IPA SMP Kelas 7 | Sekolah Penggerak"
+      },
+      {
+        "index": 4,
+        "topic": "Zat dan Perubahan",
+        "url": "https://www.youtube.com/watch?v=VEAY29HhPbc",
+        "status": "OK",
+        "details": "Zat dan Perubahannya | IPA Kelas 7 Bab 2 Kurikulum Merdeka - Lengkap"
+      },
+      {
+        "index": 5,
+        "topic": "Zat dan Perubahan",
+        "url": "https://www.youtube.com/watch?v=XiVCpXYwnKM",
+        "status": "OK",
+        "details": "Kurikulum Merdeka IPA Kelas 7 Bab 2 Zat dan Perubahannya"
+      },
+      {
+        "index": 6,
+        "topic": "Zat dan Perubahan",
+        "url": "https://www.youtube.com/watch?v=CfwPsKdC5w8",
+        "status": "OK",
+        "details": "Macam-macam Zat dan Perubahannya Disertai Contoh-contohnya - IPA Kelas 7"
+      },
+      {
+        "index": 7,
+        "topic": "Suhu dan Kalor",
+        "url": "https://www.youtube.com/watch?v=JHcNJ94kFPg",
+        "status": "OK",
+        "details": "Suhu, Kalor, dan Pemuaian | IPA Kelas 7 Bab 3 Kurikulum Merdeka - Lengkap"
+      },
+      {
+        "index": 8,
+        "topic": "Suhu dan Kalor",
+        "url": "https://www.youtube.com/watch?v=_S8r-k-a4NQ",
+        "status": "OK",
+        "details": "Kurikulum Merdeka Rangkuman IPA Kelas 7 Bab 3 Suhu Kalor Pemuaian"
+      },
+      {
+        "index": 9,
+        "topic": "Suhu dan Kalor",
+        "url": "https://www.youtube.com/watch?v=9D0x-u9LegE",
+        "status": "OK",
+        "details": "SUHU, KALOR, DAN PEMUAIAN: IPA SMP KELAS 7"
+      },
+      {
+        "index": 10,
+        "topic": "Gerak dan Gaya",
+        "url": "https://www.youtube.com/watch?v=Ys0qe5PXFx4",
+        "status": "OK",
+        "details": "Kurikulum Merdeka Rangkuman Materi IPA Kelas 7 Bab 4 Gerak dan Gaya"
+      },
+      {
+        "index": 11,
+        "topic": "Gerak dan Gaya",
+        "url": "https://www.youtube.com/watch?v=ngJgEHjBtjw",
+        "status": "OK",
+        "details": "Gerak dan Gaya Kelas 7 - Konsep Gerak | IPA Bab 4 Kurikulum Merdeka - Lengkap"
+      },
+      {
+        "index": 12,
+        "topic": "Gerak dan Gaya",
+        "url": "https://www.youtube.com/watch?v=jhaWIopRmLg",
+        "status": "OK",
+        "details": "BAB 4 GERAK DAN GAYA | GERAK IPA KELAS 7 KURIKULUM MERDEKA #gerak #ipakelas7"
+      },
+      {
+        "index": 13,
+        "topic": "Makhluk Hidup",
+        "url": "https://www.youtube.com/watch?v=PCBVUfe-dBo",
+        "status": "OK",
+        "details": "Kurikulum Merdeka Rangkuman Materi IPA Kelas 7 Bab 5 Klasifikasi Makhluk Hidup"
+      },
+      {
+        "index": 14,
+        "topic": "Makhluk Hidup",
+        "url": "https://www.youtube.com/watch?v=Lyiwj0_0gXE",
+        "status": "OK",
+        "details": "KLASIFIKASI MAHLUK HIDUP: IPA KELAS 7 SMP"
+      },
+      {
+        "index": 15,
+        "topic": "Makhluk Hidup",
+        "url": "https://www.youtube.com/watch?v=wdNgLUFSJOc",
+        "status": "OK",
+        "details": "IPA Kelas 7 Semester 1 : Klasifikasi Makhluk Hidup (Part 1 : Ciri-ciri Makhluk Hidup)"
+      },
+      {
+        "index": 16,
+        "topic": "Ekologi",
+        "url": "https://www.youtube.com/watch?v=1T7r3l-6irQ",
+        "status": "OK",
+        "details": "EKOLOGI DAN KEANEKARAGAMAN HAYATI : IPA KELAS 7 SMP"
+      },
+      {
+        "index": 17,
+        "topic": "Ekologi",
+        "url": "https://www.youtube.com/watch?v=Xw7QQZR4N_Q",
+        "status": "OK",
+        "details": "Kurikulum Merdeka Rangkuman Materi IPA Kelas 7 Bab 6 Ekologi dan Keanekaragaman Hayati Indonesia"
+      },
+      {
+        "index": 18,
+        "topic": "Ekologi",
+        "url": "https://www.youtube.com/watch?v=GQGRXwXZAYg",
+        "status": "OK",
+        "details": "Ekologi dan Keanekaragaman Hayati Indonesia  | IPA Kelas 7 Bab 6 Kurikulum Merdeka - Lengkap"
+      },
+      {
+        "index": 19,
+        "topic": "Bumi dan Tata Surya",
+        "url": "https://www.youtube.com/watch?v=Bo6ZRipKWFo",
+        "status": "OK",
+        "details": "Kurikulum Merdeka Rangkuman Materi IPA Kelas 7 Bab 7 Bumi dan Tata Surya"
+      },
+      {
+        "index": 20,
+        "topic": "Bumi dan Tata Surya",
+        "url": "https://www.youtube.com/watch?v=FwZH1JD08SQ",
+        "status": "OK",
+        "details": "SISTEM TATA SURYA : IPA KELAS 7 SMP"
+      },
+      {
+        "index": 21,
+        "topic": "Bumi dan Tata Surya",
+        "url": "https://www.youtube.com/watch?v=p3wUQLSzbgo",
+        "status": "OK",
+        "details": "Tata Surya Kelas 7"
+      },
+      {
+        "index": 22,
+        "topic": "Jelajah Nusantara",
+        "url": "https://www.youtube.com/watch?v=1TmKOLKq6Qc",
+        "status": "TOPIC_MISMATCH",
+        "details": "Materi Teks Deskripsi kelas 7 Bahasa Indonesia Semester 1"
+      },
+      {
+        "index": 23,
+        "topic": "Jelajah Nusantara",
+        "url": "https://www.youtube.com/watch?v=5REd8MgJ4gw",
+        "status": "TOPIC_MISMATCH",
+        "details": "Materi Teks Deskripsi \u2705 Bahasa Indonesia Kelas 7 Kurikulum Merdeka"
+      },
+      {
+        "index": 24,
+        "topic": "Jelajah Nusantara",
+        "url": "https://www.youtube.com/watch?v=PE2HGnUn59o",
+        "status": "TOPIC_MISMATCH",
+        "details": "Kurikulum Merdeka Rangkuman Bahasa Indonesia Kelas 7 Bab 1 Teks Deskripsi"
+      },
+      {
+        "index": 25,
+        "topic": "Dunia Imajinasi",
+        "url": "https://www.youtube.com/watch?v=j46PDNbujwo",
+        "status": "TOPIC_MISMATCH",
+        "details": "Materi Puisi Rakyat \u2705 Bahasa Indonesia Kelas 7 Kurikulum Merdeka"
+      },
+      {
+        "index": 26,
+        "topic": "Dunia Imajinasi",
+        "url": "https://www.youtube.com/watch?v=lYhibfLXc2s",
+        "status": "TOPIC_MISMATCH",
+        "details": "MATERI PUISI RAKYAT | BAHASA INDONESIA KELAS 7 | KURIKULUM MERDEKA TERBARU | FITRI RIZKY MUSLIFA"
+      },
+      {
+        "index": 27,
+        "topic": "Dunia Imajinasi",
+        "url": "https://www.youtube.com/watch?v=2KVki---MQg",
+        "status": "TOPIC_MISMATCH",
+        "details": "Rangkuman Bahasa Indonesia Kelas 7 Bab 5: Puisi Rakyat | Gurindam, Pantun, Syair"
+      },
+      {
+        "index": 28,
+        "topic": "Hal Baik bagi Tubuh",
+        "url": "https://www.youtube.com/watch?v=ilf4sWe6IRo",
+        "status": "OK",
+        "details": "Kurikulum Merdeka Rangkuman Bahasa Indonesia Kelas 7 Bab 3 Hal yang Baik Bagi Tubuh (Teks Prosedur)"
+      },
+      {
+        "index": 29,
+        "topic": "Hal Baik bagi Tubuh",
+        "url": "https://www.youtube.com/watch?v=OZAdSVoMnh4",
+        "status": "TOPIC_MISMATCH",
+        "details": "TEKS PROSEDUR BAHASA INDONESIA KELAS 7 SMP KURIKULUM MERDEKA"
+      },
+      {
+        "index": 30,
+        "topic": "Pelindung Bumi",
+        "url": "https://www.youtube.com/watch?v=3DWxApUbrD4",
+        "status": "TOPIC_MISMATCH",
+        "details": "Kurikulum Merdeka Rangkuman Bahasa Indonesia Kelas 7 Bab 4 Teks Berita"
+      },
+      {
+        "index": 31,
+        "topic": "Pelindung Bumi",
+        "url": "https://www.youtube.com/watch?v=j5rVVM_55z4",
+        "status": "TOPIC_MISMATCH",
+        "details": "Materi Teks Berita  \u2705 Bahasa Indonesia Kelas 7 Kurikulum Merdeka"
+      },
+      {
+        "index": 32,
+        "topic": "Bilangan",
+        "url": "https://www.youtube.com/watch?v=j3-vxTMQlXM",
+        "status": "OK",
+        "details": "Kurikulum Merdeka Matematika Kelas 7 Bab 1 Bilangan Bulat"
+      },
+      {
+        "index": 33,
+        "topic": "Bilangan",
+        "url": "https://www.youtube.com/watch?v=cQAwIhfC6Dg",
+        "status": "OK",
+        "details": "20 MENIT BAHAS TUNTAS BILANGAN BULAT KELAS 7"
+      },
+      {
+        "index": 34,
+        "topic": "Bilangan",
+        "url": "https://www.youtube.com/watch?v=Rc6vjXtS70Q",
+        "status": "OK",
+        "details": "Bilangan Bulat dan Bilangan Rasional | Matematika SMP"
+      },
+      {
+        "index": 35,
+        "topic": "Aljabar",
+        "url": "https://www.youtube.com/watch?v=KTbI7v7SfQA",
+        "status": "OK",
+        "details": "Kurikulum Merdeka Matematika Kelas 7 Bab 4 Bentuk Aljabar"
+      },
+      {
+        "index": 36,
+        "topic": "Aljabar",
+        "url": "https://www.youtube.com/watch?v=tQGWlesGYG0",
+        "status": "OK",
+        "details": "Aljabar | Matematika Kelas 7 Kurikulum Merdeka - Lengkap"
+      },
+      {
+        "index": 37,
+        "topic": "Aljabar",
+        "url": "https://www.youtube.com/watch?v=xoHt137BXJE",
+        "status": "OK",
+        "details": "ALJABAR ITU GAMPANG & SERU!! | Bahas Aljabar Kelas 7 SMP - MasterClass"
+      },
+      {
+        "index": 38,
+        "topic": "Persamaan",
+        "url": "https://www.youtube.com/watch?v=ZzIaRdq5kws",
+        "status": "OK",
+        "details": "MENYELESAIKAN PERSAMAAN LINEAR SATU VARIABEL (PLSV)"
+      },
+      {
+        "index": 39,
+        "topic": "Persamaan",
+        "url": "https://www.youtube.com/watch?v=Z3xl0VF7gy4",
+        "status": "OK",
+        "details": "Materi Matematika Kelas 7: Persamaan Linear Satu Variabel"
+      },
+      {
+        "index": 40,
+        "topic": "Perbandingan",
+        "url": "https://www.youtube.com/watch?v=d_pu3O6xKig",
+        "status": "TOPIC_MISMATCH",
+        "details": "Kurikulum Merdeka Matematika Kelas 7 Bab 3 Rasio"
+      },
+      {
+        "index": 41,
+        "topic": "Perbandingan",
+        "url": "https://www.youtube.com/watch?v=6JA1o6UYtaU",
+        "status": "TOPIC_MISMATCH",
+        "details": "Skala - Bab Rasio Subbab Skala Matematika Kelas 7"
+      },
+      {
+        "index": 42,
+        "topic": "Aritmatika Sosial",
+        "url": "https://www.youtube.com/watch?v=m79K1rDInl4",
+        "status": "OK",
+        "details": "Matematika Kelas 7: Aritmatika Sosial"
+      },
+      {
+        "index": 43,
+        "topic": "Aritmatika Sosial",
+        "url": "https://www.youtube.com/watch?v=csdhlielqhY",
+        "status": "OK",
+        "details": "ARITMATIKA SOSIAL : MATEMATIKA KELAS 7 SMP"
+      },
+      {
+        "index": 44,
+        "topic": "Bangun Datar",
+        "url": "https://www.youtube.com/watch?v=0Z2f5yppJbo",
+        "status": "OK",
+        "details": "Luas dan keliling bangun datar (Lengkap Semua bangun datar)"
+      },
+      {
+        "index": 45,
+        "topic": "Bangun Datar",
+        "url": "https://www.youtube.com/watch?v=bhrniJHL0mg",
+        "status": "OK",
+        "details": "KELILING DAN LUAS BANGUN DATAR"
+      },
+      {
+        "index": 46,
+        "topic": "Statistika",
+        "url": "https://www.youtube.com/watch?v=q8p2QrWzWLs",
+        "status": "OK",
+        "details": "1  PENYAJIAN DATA - STATISTIKA - KELAS 7 SMP"
+      },
+      {
+        "index": 47,
+        "topic": "Statistika",
+        "url": "https://www.youtube.com/watch?v=t3O3AeBnELs",
+        "status": "TOPIC_MISMATCH",
+        "details": "Matematika Kelas 7: Penyajian Data"
+      },
+      {
+        "index": 48,
+        "topic": "Ruang dan Interaksi",
+        "url": "https://www.youtube.com/watch?v=KVA3tOIlwB0",
+        "status": "OK",
+        "details": "Video Pembelajaran Animasi, Ruang dan Interaksi Antarruang IPS Kelas 7"
+      },
+      {
+        "index": 49,
+        "topic": "Ruang dan Interaksi",
+        "url": "https://www.youtube.com/watch?v=_H75Hw0ghsU",
+        "status": "OK",
+        "details": "Materi IPS Kelas 7 Bab 1: Ruang dan Interaksi Antarruang"
+      },
+      {
+        "index": 50,
+        "topic": "Interaksi Sosial",
+        "url": "https://www.youtube.com/watch?v=qW-7jPfGZrs",
+        "status": "OK",
+        "details": "Interaksi Sosial dan Lembaga Sosial | IPS SMP"
+      },
+      {
+        "index": 51,
+        "topic": "Interaksi Sosial",
+        "url": "https://www.youtube.com/watch?v=zt-AW2W9T2g",
+        "status": "OK",
+        "details": "Interaksi Sosial Dalam Kehidupan Sehari-Hari | IPS Kelas 7 | Kurikulum Merdeka"
+      },
+      {
+        "index": 52,
+        "topic": "Keragaman Budaya",
+        "url": "https://www.youtube.com/watch?v=6E-9e4LEzDc",
+        "status": "OK",
+        "details": "Keragaman Sosial Budaya di Masyarakat || IPS Kelas 7 || Kurikulum Merdeka"
+      },
+      {
+        "index": 53,
+        "topic": "Keragaman Budaya",
+        "url": "https://www.youtube.com/watch?v=Ovx9jrqdC5w",
+        "status": "OK",
+        "details": "Pengaruh Faktor Geografis terhadap Keragaman Budaya | IPS Kelas VII | Kurikulum Merdeka"
+      },
+      {
+        "index": 54,
+        "topic": "Peninggalan Sejarah",
+        "url": "https://www.youtube.com/watch?v=S7GVz-YGWrY",
+        "status": "OK",
+        "details": "Sejarah Kerajaan Hindu, Buddha, dan Islam"
+      },
+      {
+        "index": 55,
+        "topic": "Peninggalan Sejarah",
+        "url": "https://www.youtube.com/watch?v=DeJVQ9zA0cE",
+        "status": "TOPIC_MISMATCH",
+        "details": "AKTIVITAS KEHIDUPAN MASYARAKAT MASA HINDU BUDDHA | IPS SMP KELAS 7"
+      },
+      {
+        "index": 56,
+        "topic": "Ekonomi IPS",
+        "url": "https://www.youtube.com/watch?v=xIB4ZxpMs3k",
+        "status": "OK",
+        "details": "KEGIATAN EKONOMI - Materi IPS SMP Kelas 7"
+      },
+      {
+        "index": 57,
+        "topic": "Ekonomi IPS",
+        "url": "https://www.youtube.com/watch?v=S1xHhqlhaL0",
+        "status": "OK",
+        "details": "Kurikulum Merdeka IPS Kelas 7 Tema 3 Bagian B Aktivitas Kegiatan Ekonomi"
+      },
+      {
+        "index": 58,
+        "topic": "Berpikir Komputasional",
+        "url": "https://www.youtube.com/watch?v=wMvb7VZPVME",
+        "status": "OK",
+        "details": "Kurikulum Merdeka Materi Informatika Kelas 7 Bab 2 Berpikir Komputasional"
+      },
+      {
+        "index": 59,
+        "topic": "Berpikir Komputasional",
+        "url": "https://www.youtube.com/watch?v=jCb9fpPrxLc",
+        "status": "OK",
+        "details": "Pengenalan Computational Thinking | Berpikir Komputasional"
+      },
+      {
+        "index": 60,
+        "topic": "Berpikir Komputasional",
+        "url": "https://www.youtube.com/watch?v=umfcvkLdUgg",
+        "status": "OK",
+        "details": "Materi Informatika SMP Kelas 7 | \"Berpikir Komputasi (Computational Thingking)"
+      },
+      {
+        "index": 61,
+        "topic": "Algoritma Informatika",
+        "url": "https://www.youtube.com/watch?v=_pmt1sMOY8U",
+        "status": "OK",
+        "details": "Kurikulum Merdeka Materi Informatika Kelas 7 Bab 7 Algoritma dan Pemograman"
+      },
+      {
+        "index": 62,
+        "topic": "Algoritma Informatika",
+        "url": "https://www.youtube.com/watch?v=BYg5QC_QGZ8",
+        "status": "OK",
+        "details": "Algoritma dan Pemrograman | Materi Informatika Jenjang SMP Kelas 7 Fase D | Kurikulum Merdeka"
+      },
+      {
+        "index": 63,
+        "topic": "Internet",
+        "url": "https://www.youtube.com/watch?v=x5aERTeEYrI",
+        "status": "OK",
+        "details": "Jaringan Komputer dan Internet (Pengantar dan Koneksi Internet) - Informatika Kelas 7 SMP/ MTs"
+      },
+      {
+        "index": 64,
+        "topic": "Internet",
+        "url": "https://www.youtube.com/watch?v=c-t-zY75tJY",
+        "status": "OK",
+        "details": "Kurikulum Merdeka Materi Informatika Kelas 7 Bab 5 Jaringan Komputer dan Internet"
+      },
+      {
+        "index": 65,
+        "topic": "Keamanan",
+        "url": "https://www.youtube.com/watch?v=9JmAZeURp3o",
+        "status": "TOPIC_MISMATCH",
+        "details": "\"Informasi Pribadi dan Data Privasi Pada Media Sosial\" - Informatika"
+      },
+      {
+        "index": 66,
+        "topic": "Keamanan",
+        "url": "https://www.youtube.com/watch?v=I6YHzi5m1oY",
+        "status": "TOPIC_MISMATCH",
+        "details": "Informatika Kelas 7 - Bab 5 | Koneksi Aman & Enkripsi \ud83c\udf10\ud83d\udd10"
+      },
+      {
+        "index": 67,
+        "topic": "Dampak Sosial",
+        "url": "https://www.youtube.com/watch?v=JqKwUJR06mk",
+        "status": "OK",
+        "details": "Dampak Sosial Informatika | Informatika Kelas 7 Kurikulum Merdeka"
+      },
+      {
+        "index": 68,
+        "topic": "Dampak Sosial",
+        "url": "https://www.youtube.com/watch?v=qrYGtIE5eGo",
+        "status": "OK",
+        "details": "Kurikulum Merdeka Materi Informatika Kelas 7 Bab 8 Dampak Sosial Informatika"
+      },
+      {
+        "index": 69,
+        "topic": "Pancasila",
+        "url": "https://www.youtube.com/watch?v=xyIGA9vejAI",
+        "status": "OK",
+        "details": "Kurikulum Merdeka Rangkuman PPKN Kelas 7 Bab 1: Sejarah Kelahiran Pancasila"
+      },
+      {
+        "index": 70,
+        "topic": "Pancasila",
+        "url": "https://www.youtube.com/watch?v=U_ll6n4iRcY",
+        "status": "OK",
+        "details": "FULL - RANGKUMAN MATERI SEJARAH KELAHIRAN PANCASILA - PENDIDIKAN PANCASILA KELAS 7 KURIKULUM MERDEKA"
+      },
+      {
+        "index": 71,
+        "topic": "Pancasila",
+        "url": "https://www.youtube.com/watch?v=att2vZad9c8",
+        "status": "OK",
+        "details": "Rangkuman Materi PPKN KELAS 7 Bab 1 Sejarah kelahiran Pancasila (Kurikulum Merdeka)"
+      },
+      {
+        "index": 72,
+        "topic": "Norma",
+        "url": "https://www.youtube.com/watch?v=cEWG4Msg948",
+        "status": "OK",
+        "details": "Kurikulum Merdeka PPKN Kelas 7 Bab 2 Norma dan UUD NRI Tahun 1945"
+      },
+      {
+        "index": 73,
+        "topic": "Norma",
+        "url": "https://www.youtube.com/watch?v=TAbRx_n6sO8",
+        "status": "OK",
+        "details": "PPKn Kelas 7 | BAB 2 - Macam Macam Norma"
+      },
+      {
+        "index": 74,
+        "topic": "Keberagaman",
+        "url": "https://www.youtube.com/watch?v=4kJovN532as",
+        "status": "TOPIC_MISMATCH",
+        "details": "Rangkuman Materi Pancasila Kelas 7 Bab 4 Kurikulum Merdeka Rev 2023"
+      },
+      {
+        "index": 75,
+        "topic": "Keberagaman",
+        "url": "https://www.youtube.com/watch?v=9B7_WJuM6hY",
+        "status": "OK",
+        "details": "Keberagaman Bangsa Indonesia dalam bingkai Bhinneka Tunggal Ika #pancasila #pkn #ppkn #belajar #smp"
+      },
+      {
+        "index": 76,
+        "topic": "NKRI",
+        "url": "https://www.youtube.com/watch?v=e7CmFKKJ3tI",
+        "status": "TOPIC_MISMATCH",
+        "details": "Wilayah Negara Kesatuan Republik Indonesia | Pancasila SMP"
+      },
+      {
+        "index": 77,
+        "topic": "NKRI",
+        "url": "https://www.youtube.com/watch?v=4EX_I_rdwCM",
+        "status": "TOPIC_MISMATCH",
+        "details": "Bab 5 Wilayah Negara Kesatuan Republik Indonesia, Pancasila Kls 7, kurikulum Merdeka"
+      },
+      {
+        "index": 78,
+        "topic": "Keterampilan Gerak",
+        "url": "https://www.youtube.com/watch?v=Os_xLkaKlqU",
+        "status": "LEVEL_MISMATCH",
+        "details": "Materi Gerak Dasar Lokomotor, Non Lokomotor dan Manipulatif - Materi Pembelajaran PJOK SD"
+      },
+      {
+        "index": 79,
+        "topic": "Keterampilan Gerak",
+        "url": "https://www.youtube.com/watch?v=Lp8VKWCmi6c",
+        "status": "OK",
+        "details": "Perbedaan Gerak Lokomotor, Nonlokomotor dan Manipulatif | Materi PJOK"
+      },
+      {
+        "index": 80,
+        "topic": "Kebugaran",
+        "url": "https://www.youtube.com/watch?v=UHZ2ira4wGA",
+        "status": "LEVEL_MISMATCH",
+        "details": "MATERI PJOK KELAS 7 KEBUGARAN JASMANI"
+      },
+      {
+        "index": 81,
+        "topic": "Kebugaran",
+        "url": "https://www.youtube.com/watch?v=1LM5z2ZVAyg",
+        "status": "OK",
+        "details": "Materi PJOK Kelas 7 Kebugaran Untuk Kesehatan Kurikulum Merdeka"
+      },
+      {
+        "index": 82,
+        "topic": "Introduction",
+        "url": "https://www.youtube.com/watch?v=idA7m0xUMVo",
+        "status": "OK",
+        "details": "Greeting and Introduction - Bahasa Inggris"
+      },
+      {
+        "index": 83,
+        "topic": "Introduction",
+        "url": "https://www.youtube.com/watch?v=wZN1yU9vHCE",
+        "status": "TOPIC_MISMATCH",
+        "details": "Materi Greeting kelas 7 | sapaan"
+      },
+      {
+        "index": 84,
+        "topic": "Daily Life",
+        "url": "https://www.youtube.com/watch?v=E1q56pZNswE",
+        "status": "OK",
+        "details": "BAHASA INGGRIS Kelas 7 - Daily Activities (Penggunaan Simple Present Tense) | GIA Academy"
+      },
+      {
+        "index": 85,
+        "topic": "Daily Life",
+        "url": "https://www.youtube.com/watch?v=CMDxNcwp4zg",
+        "status": "OK",
+        "details": "CARA MUDAH BERCERITA DAILY ACTIVITY DALAM BAHASA INGGRIS"
+      },
+      {
+        "index": 86,
+        "topic": "School",
+        "url": "https://www.youtube.com/watch?v=J3GZ93MrHgQ",
+        "status": "TOPIC_MISMATCH",
+        "details": "\"Class Schedule\" - Bahasa Inggris"
+      },
+      {
+        "index": 87,
+        "topic": "School",
+        "url": "https://www.youtube.com/watch?v=l9q8F8ZnTOM",
+        "status": "OK",
+        "details": "BAHASA INGGRIS SMP/MTs KELAS 7: SCHOOL SUBJECTS (NAMA MATA PELAJARAN DI SEKOLAH)"
+      },
+      {
+        "index": 88,
+        "topic": "Hobbies",
+        "url": "https://www.youtube.com/watch?v=ktuFc7s08cU",
+        "status": "TOPIC_MISMATCH",
+        "details": "Bahasa Inggris Kelas 7 Chapter 2: Telling Hobby"
+      },
+      {
+        "index": 89,
+        "topic": "Hobbies",
+        "url": "https://www.youtube.com/watch?v=82gL0o6--lo",
+        "status": "OK",
+        "details": "(#6) Bahasa Inggris Kelas 7 Bab 2 - Menjawab Hobbies and What We Like(Hal 32)"
+      },
+      {
+        "index": 90,
+        "topic": "Descriptive",
+        "url": "https://www.youtube.com/watch?v=0hQArH479FU",
+        "status": "OK",
+        "details": "Materi Descriptive Text Terlengkap"
+      },
+      {
+        "index": 91,
+        "topic": "Descriptive",
+        "url": "https://www.youtube.com/watch?v=-7kTaDdGFfs",
+        "status": "OK",
+        "details": "Materi Inggris Kelas 7 Bab 7: Descriptive Text"
+      }
+    ],
+    "SMA_2": [
+      {
+        "index": 1,
+        "topic": "Fungsi",
+        "url": "https://www.youtube.com/watch?v=o-ESReWkrzw",
+        "status": "OK",
+        "details": "Fungsi komposisi dan fungsi invers"
+      },
+      {
+        "index": 2,
+        "topic": "Fungsi",
+        "url": "https://www.youtube.com/watch?v=wIVQKtO2T4s",
+        "status": "OK",
+        "details": "Komposisi Fungsi - Matematika Wajib Kelas XI Kurikulum Merdeka"
+      },
+      {
+        "index": 3,
+        "topic": "Fungsi",
+        "url": "https://www.youtube.com/watch?v=BbwvwIcImMI",
+        "status": "OK",
+        "details": "Komposisi Fungsi Part 1 - Operasi Aljabar Pada Fungsi [ Matematika Wajib Kelas X ]"
+      },
+      {
+        "index": 4,
+        "topic": "Polinomial",
+        "url": "https://www.youtube.com/watch?v=2oPK0eMkwQg",
+        "status": "OK",
+        "details": "Polinomial (Bagian 1) - Pengertian dan Operasi Aljabar Polinomial Matematika Peminatan Kelas XI"
+      },
+      {
+        "index": 5,
+        "topic": "Polinomial",
+        "url": "https://www.youtube.com/watch?v=v01krYoVY9M",
+        "status": "OK",
+        "details": "Penjumlahan dan Pengurangan Polinomial Suku Banyak | Matematika SMA"
+      },
+      {
+        "index": 6,
+        "topic": "Polinomial",
+        "url": "https://www.youtube.com/watch?v=yiJ9LEBL5vc",
+        "status": "TOPIC_MISMATCH",
+        "details": "#Suku banyak - Kesamaan suku banyak (POLINOM)"
+      },
+      {
+        "index": 7,
+        "topic": "Trigonometri",
+        "url": "https://www.youtube.com/watch?v=1t_KJ5Gyrh0",
+        "status": "OK",
+        "details": "Grafik fungsi trigonometri, grafik trigonometri"
+      },
+      {
+        "index": 8,
+        "topic": "Trigonometri",
+        "url": "https://www.youtube.com/watch?v=NhVq5N5K2-w",
+        "status": "OK",
+        "details": "Matematika Dasar: Trigonometri | Pengertian, Fungsi Trigonometri & Sudut Istimewa | Part 1"
+      },
+      {
+        "index": 9,
+        "topic": "Trigonometri",
+        "url": "https://www.youtube.com/watch?v=8A6pMt553rI",
+        "status": "OK",
+        "details": "Identitas Trigonometri Penjumlahan dan Selisih Dua Sudut Matematika Peminatan Kelas 11"
+      },
+      {
+        "index": 10,
+        "topic": "Limit",
+        "url": "https://www.youtube.com/watch?v=zE8m4xNizDY",
+        "status": "OK",
+        "details": "Konsep Dasar Limit Fungsi Aljabar Matematika Wajib Kelas 11 m4thlab"
+      },
+      {
+        "index": 11,
+        "topic": "Limit",
+        "url": "https://www.youtube.com/watch?v=XdhZOzMSM0Y",
+        "status": "OK",
+        "details": "Limit Fungsi Aljabar : Metode Subtitusi Langsung dan Pemfaktoran"
+      },
+      {
+        "index": 12,
+        "topic": "Limit",
+        "url": "https://www.youtube.com/watch?v=RVOwigzA9y4",
+        "status": "OK",
+        "details": "MATERI LENGKAP LIMIT FUNGSI ALJABAR MATEMATIKA KELAS 11 SMA"
+      },
+      {
+        "index": 13,
+        "topic": "Turunan",
+        "url": "https://www.youtube.com/watch?v=TE1BqPXXX7E",
+        "status": "OK",
+        "details": "Konsep Dasar Turunan Fungsi Aljabar Matematika Wajib Kelas 11 m4thlab"
+      },
+      {
+        "index": 14,
+        "topic": "Turunan",
+        "url": "https://www.youtube.com/watch?v=xES12YqwsPA",
+        "status": "OK",
+        "details": "Turunan Fungsi Aljabar - Matematika Kelas 11 (Quipper Video)"
+      },
+      {
+        "index": 15,
+        "topic": "Turunan",
+        "url": "https://www.youtube.com/watch?v=UtTvAVOOD6U",
+        "status": "OK",
+        "details": "BELAJAR KONSEP DIFERENSIAL (TURUNAN) DALAM 10 MENIT !"
+      },
+      {
+        "index": 16,
+        "topic": "Integral",
+        "url": "https://www.youtube.com/watch?v=E86ckq8yLUU",
+        "status": "OK",
+        "details": "BELAJAR INTEGRAL DARI DASAR DALAM 12 MENIT!"
+      },
+      {
+        "index": 17,
+        "topic": "Integral",
+        "url": "https://www.youtube.com/watch?v=T6e0NRTIQ0o",
+        "status": "OK",
+        "details": "LENGKAP Integral tak tentu, integral tertentu, integral subtitusi dan integral parsial"
+      },
+      {
+        "index": 18,
+        "topic": "Integral",
+        "url": "https://www.youtube.com/watch?v=1gG1Md4EV3U",
+        "status": "OK",
+        "details": "Konsep Dasar Integral Fungsi Aljabar (Integral Part 1) M4THLAB"
+      },
+      {
+        "index": 19,
+        "topic": "Matriks",
+        "url": "https://www.youtube.com/watch?v=HqssIxIg7T4",
+        "status": "OK",
+        "details": "Matriks Matematika Wajib Kelas 11 Bagian 1 - Pengenalan Matriks"
+      },
+      {
+        "index": 20,
+        "topic": "Matriks",
+        "url": "https://www.youtube.com/watch?v=lMmIcZSFEew",
+        "status": "OK",
+        "details": "MATRIKS (1) | MATEMATIKA KELAS 11"
+      },
+      {
+        "index": 21,
+        "topic": "Vektor",
+        "url": "https://www.youtube.com/watch?v=WsOfCoLlHj4",
+        "status": "OK",
+        "details": "Vektor dimensi dua | Vektor"
+      },
+      {
+        "index": 22,
+        "topic": "Vektor",
+        "url": "https://www.youtube.com/watch?v=FqaZq0Cxjx4",
+        "status": "OK",
+        "details": "Matematika Kelas XI: Vektor di Dimensi Dua dan Dimensi Tiga"
+      },
+      {
+        "index": 23,
+        "topic": "Teks Eksposisi",
+        "url": "https://www.youtube.com/watch?v=pVis-QzP1g0",
+        "status": "OK",
+        "details": "Teks Eksposisi"
+      },
+      {
+        "index": 24,
+        "topic": "Teks Eksposisi",
+        "url": "https://www.youtube.com/watch?v=5N8tbKKFYZU",
+        "status": "OK",
+        "details": "TEKS EKSPOSISI (DEFINISI, CIRI-CIRI, STRUKTUR, FAKTA DAN OPINI)"
+      },
+      {
+        "index": 25,
+        "topic": "Teks Eksposisi",
+        "url": "https://www.youtube.com/watch?v=Fu4A--IDNDo",
+        "status": "OK",
+        "details": "TEKS EKSPOSISI BESERTA CONTOHNYA"
+      },
+      {
+        "index": 26,
+        "topic": "Teks Argumentasi",
+        "url": "https://www.youtube.com/watch?v=Nop5TPNdwBg",
+        "status": "OK",
+        "details": "Teks Argumentasi | Bahasa Indonesia SMA"
+      },
+      {
+        "index": 27,
+        "topic": "Teks Argumentasi",
+        "url": "https://www.youtube.com/watch?v=igqsmkmUfd0",
+        "status": "OK",
+        "details": "MATERI PEMBELAJARAN TEKS ARGUMENTASI KURIKULUM MERDEKA KELAS XI SMA/SMK SEDERAJAT"
+      },
+      {
+        "index": 28,
+        "topic": "Teks Argumentasi",
+        "url": "https://www.youtube.com/watch?v=5Ldn0X09gjM",
+        "status": "OK",
+        "details": "Materi Teks Argumentasi Kelas 11 l Bahasa Indonesia"
+      },
+      {
+        "index": 29,
+        "topic": "Cerita Pendek",
+        "url": "https://www.youtube.com/watch?v=kiuspGbe5S4",
+        "status": "OK",
+        "details": "Materi Teks Cerita Pendek SMA/SMK Kelas 11 l Bahasa Indonesia"
+      },
+      {
+        "index": 30,
+        "topic": "Cerita Pendek",
+        "url": "https://www.youtube.com/watch?v=c2Ngqfp_Thc",
+        "status": "TOPIC_MISMATCH",
+        "details": "TEKS CERPEN (DEFINISI, CIRI-CIRI, MANFAAT CERPEN)"
+      },
+      {
+        "index": 31,
+        "topic": "Cerita Pendek",
+        "url": "https://www.youtube.com/watch?v=RgYiIAkq7D8",
+        "status": "TOPIC_MISMATCH",
+        "details": "Materi Cerpen Kelas XI Kurikulum Merdeka"
+      },
+      {
+        "index": 32,
+        "topic": "Drama",
+        "url": "https://www.youtube.com/watch?v=JXygZE1VcIg",
+        "status": "OK",
+        "details": "Unsur Intrinsik & Ekstrinsik Drama"
+      },
+      {
+        "index": 33,
+        "topic": "Drama",
+        "url": "https://www.youtube.com/watch?v=MDGLwG45ZJE",
+        "status": "OK",
+        "details": "Materi Drama kelas XI Bahasa Indonesia"
+      },
+      {
+        "index": 34,
+        "topic": "Drama",
+        "url": "https://www.youtube.com/watch?v=BVAn2WqwjYU",
+        "status": "OK",
+        "details": "Teks Drama Kelas 11 SMA ~ Bahasa Indonesia"
+      },
+      {
+        "index": 35,
+        "topic": "Karya Ilmiah",
+        "url": "https://www.youtube.com/watch?v=MTTUsOgzqQM",
+        "status": "OK",
+        "details": "Bahasa Indonesia Kelas 11: Pengertian dan Jenis-Jenis Karya Ilmiah"
+      },
+      {
+        "index": 36,
+        "topic": "Karya Ilmiah",
+        "url": "https://www.youtube.com/watch?v=SPiNQ6umGpU",
+        "status": "OK",
+        "details": "Materi Karya Ilmiah Bahasa Indonesia kelas 11 SMA/SMK"
+      },
+      {
+        "index": 37,
+        "topic": "Karya Ilmiah",
+        "url": "https://www.youtube.com/watch?v=tuNPuS5jtIU",
+        "status": "OK",
+        "details": "KARYA ILMIAH MATERI BAHASA INDONESIA KELAS 11 LENGKAP"
+      },
+      {
+        "index": 38,
+        "topic": "Narrative",
+        "url": "https://www.youtube.com/watch?v=6SjjAbuNl-8",
+        "status": "OK",
+        "details": "NARRATIVE TEXT - Pembahasan Lengkap Materi Narrative Text (Definisi, Struktur, dan Contoh)"
+      },
+      {
+        "index": 39,
+        "topic": "Narrative",
+        "url": "https://www.youtube.com/watch?v=91AFuEc5fp8",
+        "status": "OK",
+        "details": "Narrative Text  (materi bahasa inggris kelas XI SMA LINTAS MINAT)"
+      },
+      {
+        "index": 40,
+        "topic": "Explanation",
+        "url": "https://www.youtube.com/watch?v=aVzJ8zHy908",
+        "status": "OK",
+        "details": "BAHASA INGGRIS Kelas 11 - Explanation Text | GIA Academy"
+      },
+      {
+        "index": 41,
+        "topic": "Explanation",
+        "url": "https://www.youtube.com/watch?v=m_GUSXGtjoI",
+        "status": "OK",
+        "details": "Explanation Text Lengkap | Kelas 11 | Social Functions - Types - Structures - Language Features"
+      },
+      {
+        "index": 42,
+        "topic": "Discussion",
+        "url": "https://www.youtube.com/watch?v=u7ZCSPFwSGQ",
+        "status": "OK",
+        "details": "Discussion Text"
+      },
+      {
+        "index": 43,
+        "topic": "Discussion",
+        "url": "https://www.youtube.com/watch?v=IFfqduemQV4",
+        "status": "TOPIC_MISMATCH",
+        "details": "Bahasa Inggris Kelas 11: Analytical Exposition Text - Definiton and Purpose"
+      },
+      {
+        "index": 44,
+        "topic": "Speech",
+        "url": "https://www.youtube.com/watch?v=bgPQAbQXLo4",
+        "status": "TOPIC_MISMATCH",
+        "details": "Cara Pidato Bahasa Inggris (Tips Public Speaking)"
+      },
+      {
+        "index": 45,
+        "topic": "Speech",
+        "url": "https://www.youtube.com/watch?v=PCRC2MgazCg",
+        "status": "TOPIC_MISMATCH",
+        "details": "PUBLIC SPEAKING Jadi LANCAR & MEYAKINKAN Setelah Nonton Video Ini!"
+      },
+      {
+        "index": 46,
+        "topic": "Ilmu Ekonomi",
+        "url": "https://www.youtube.com/watch?v=6siz7jSeJIw",
+        "status": "OK",
+        "details": "Ekonomi Kelas XI: Konsep Pendapatan Nasional"
+      },
+      {
+        "index": 47,
+        "topic": "Ilmu Ekonomi",
+        "url": "https://www.youtube.com/watch?v=KmOHoKzWrn8",
+        "status": "OK",
+        "details": "Quipper Video - Konsep Ilmu Ekonomi Bagian 1 - Ekonomi"
+      },
+      {
+        "index": 48,
+        "topic": "Permintaan dan Penawaran",
+        "url": "https://www.youtube.com/watch?v=JYp70RQnDwM",
+        "status": "OK",
+        "details": "Permintaan dan Penawaran | Ekonomi Kelas X SMA/MA | EDURAYA MENGAJAR"
+      },
+      {
+        "index": 49,
+        "topic": "Permintaan dan Penawaran",
+        "url": "https://www.youtube.com/watch?v=VMiJ0fRytE8",
+        "status": "OK",
+        "details": "Permintaan, Penawaran, dan Keseimbangan Pasar - Materi Ekonomi SMA dan Ujian Mandiri"
+      },
+      {
+        "index": 50,
+        "topic": "Pasar",
+        "url": "https://www.youtube.com/watch?v=VbBHbXjbECU",
+        "status": "OK",
+        "details": "Struktur Pasar : Pasar Persaingan Sempurna vs Pasar Persaingan Tidak Sempurna | EKONOMI SMA Kelas XI"
+      },
+      {
+        "index": 51,
+        "topic": "Pasar",
+        "url": "https://www.youtube.com/watch?v=5Do_GCBigkU",
+        "status": "OK",
+        "details": "Mengenal 4 Jenis Pasar dalam Ekonomi: Pasar Persaingan Sempurna, Monopoli, Oligopoli, Monopolistik"
+      },
+      {
+        "index": 52,
+        "topic": "Kebijakan Moneter",
+        "url": "https://www.youtube.com/watch?v=_Nej9RgC7Mk",
+        "status": "OK",
+        "details": "KEBIJAKAN MONETER - Kebijakan Moneter dan Kebijakan Fiskal Part 1"
+      },
+      {
+        "index": 53,
+        "topic": "Kebijakan Moneter",
+        "url": "https://www.youtube.com/watch?v=KMPnVroI2vE",
+        "status": "OK",
+        "details": "Mengenal Kebijakan Moneter Bank Indonesia"
+      },
+      {
+        "index": 54,
+        "topic": "Kebijakan Fiskal",
+        "url": "https://www.youtube.com/watch?v=Vd1bAkXZvaY",
+        "status": "TOPIC_MISMATCH",
+        "details": "APBN dan APBD Part 1 - Materi Ekonomi Kelas XI SMA"
+      },
+      {
+        "index": 55,
+        "topic": "Kebijakan Fiskal",
+        "url": "https://www.youtube.com/watch?v=WQ6Ps4szBmc",
+        "status": "TOPIC_MISMATCH",
+        "details": "APBN (Part 1) | Ekonomi Kelas 11 | EDURAYA MENGAJAR"
+      },
+      {
+        "index": 56,
+        "topic": "Pembangunan",
+        "url": "https://www.youtube.com/watch?v=zFxZP1Vlopg",
+        "status": "OK",
+        "details": "Pertumbuhan dan Pembangunan Ekonomi 1 - Pengertian, Teori, dan Menghitung Pertumbuhan Ekonomi"
+      },
+      {
+        "index": 57,
+        "topic": "Pembangunan",
+        "url": "https://www.youtube.com/watch?v=Rc2KVM0Ie7w",
+        "status": "OK",
+        "details": "Ekonomi Kelas 11 - Pertumbuhan dan Pembangunan Ekonomi - SMA Doa Bangsa | Meri Merliana"
+      },
+      {
+        "index": 58,
+        "topic": "Peta",
+        "url": "https://www.youtube.com/watch?v=N2pJsgv9sQ8",
+        "status": "OK",
+        "details": "Pengetahuan Peta, Pengindraan Jauh, dan Sistem Informasi Geografi (SIG) X SMA/MA"
+      },
+      {
+        "index": 59,
+        "topic": "Peta",
+        "url": "https://www.youtube.com/watch?v=TuWiDYzMNN0",
+        "status": "TOPIC_MISMATCH",
+        "details": "KARTOGRAFI, PENGINDERAAN JAUH, SIG : Kartografi - Materi Geografi SMA, TKA SMA | Part.1"
+      },
+      {
+        "index": 60,
+        "topic": "Litosfer",
+        "url": "https://www.youtube.com/watch?v=eR5OXHNJyLc",
+        "status": "OK",
+        "details": "LITOSFER : TENAGA ENDOGEN DAN EKSOGEN"
+      },
+      {
+        "index": 61,
+        "topic": "Litosfer",
+        "url": "https://www.youtube.com/watch?v=A4QsQUDIY1Q",
+        "status": "OK",
+        "details": "Materi Dinamika Litosfer (Lapisan Bumi) : Materi Geografi SMA dan SIMAK UI | Part 1"
+      },
+      {
+        "index": 62,
+        "topic": "Hidrosfer",
+        "url": "https://www.youtube.com/watch?v=MjwSjl0_hLE",
+        "status": "TOPIC_MISMATCH",
+        "details": "Siklus Hidrologi | Geografi"
+      },
+      {
+        "index": 63,
+        "topic": "Hidrosfer",
+        "url": "https://www.youtube.com/watch?v=m-Mk8gex-wg",
+        "status": "OK",
+        "details": "HIDROSFER : SIKLUS AIR ATAU SIKLUS HIDROLOGI"
+      },
+      {
+        "index": 64,
+        "topic": "Atmosfer",
+        "url": "https://www.youtube.com/watch?v=ekQwOK6viYU",
+        "status": "OK",
+        "details": "ATMOSFER : UNSUR - UNSUR CUACA DAN IKLIM"
+      },
+      {
+        "index": 65,
+        "topic": "Atmosfer",
+        "url": "https://www.youtube.com/watch?v=tyq4G69eNmU",
+        "status": "OK",
+        "details": "DINAMIKA ATMOSFER : Pengertian, Komposisi, Lapisan Atmosfer - Materi Geografi SMA, TKA SMA | Part 1"
+      },
+      {
+        "index": 66,
+        "topic": "Antroposfer",
+        "url": "https://www.youtube.com/watch?v=MifLG8ICvz8",
+        "status": "TOPIC_MISMATCH",
+        "details": "Dinamika Penduduk | Geografi SMA"
+      },
+      {
+        "index": 67,
+        "topic": "Antroposfer",
+        "url": "https://www.youtube.com/watch?v=ocLLmoXiRVQ",
+        "status": "TOPIC_MISMATCH",
+        "details": "DINAMIKA PENDUDUK - GEOGRAFI KELAS XI SEMESTER 2"
+      },
+      {
+        "index": 68,
+        "topic": "Sumber Daya",
+        "url": "https://www.youtube.com/watch?v=zEjSKAeDIDQ",
+        "status": "TOPIC_MISMATCH",
+        "details": "Mitigasi Bencana Alam - Geografi Kelas 11 (Quipper Video)"
+      },
+      {
+        "index": 69,
+        "topic": "Sumber Daya",
+        "url": "https://www.youtube.com/watch?v=PooZ0B9myUE",
+        "status": "OK",
+        "details": "Klasifikasi Sumber Daya Alam |Geografi  Kelas 11 - EDURAYA MENGAJAR"
+      },
+      {
+        "index": 70,
+        "topic": "Sosiologi Dasar",
+        "url": "https://www.youtube.com/watch?v=551gHFtki_A",
+        "status": "OK",
+        "details": "Diferensiasi Sosial | |Sosiologi Kelas 11 | EDURAYA MENGAJAR"
+      },
+      {
+        "index": 71,
+        "topic": "Sosiologi Dasar",
+        "url": "https://www.youtube.com/watch?v=QVFvRiwVvQo",
+        "status": "OK",
+        "details": "Sosiologi Kelas XI: Pembentukan Kelompok Sosial"
+      },
+      {
+        "index": 72,
+        "topic": "Interaksi Sosial",
+        "url": "https://www.youtube.com/watch?v=ushsEHIzvTY",
+        "status": "OK",
+        "details": "Interaksi sosial di masyarakat | Sosiologi Kelas 10 - EDURAYA MENGAJAR"
+      },
+      {
+        "index": 73,
+        "topic": "Interaksi Sosial",
+        "url": "https://www.youtube.com/watch?v=KYd-glb289s",
+        "status": "OK",
+        "details": "TINDAKAN & INTERAKSI SOSIAL : Pengertian Interaksi Sosial - Materi Sosiologi SMA, TKA SMA | Part.1"
+      },
+      {
+        "index": 74,
+        "topic": "Stratifikasi",
+        "url": "https://www.youtube.com/watch?v=-Jb6lDpuW-k",
+        "status": "OK",
+        "details": "Stratifikasi Sosial | Sosiologi Kelas 11 - KHATULISTIWA MENGAJAR"
+      },
+      {
+        "index": 75,
+        "topic": "Stratifikasi",
+        "url": "https://www.youtube.com/watch?v=Wdvy8e5ElEA",
+        "status": "OK",
+        "details": "STRATIFIKASI SOSIAL DALAM MASYARAKAT || SOSIOLOGI KELAS XI"
+      },
+      {
+        "index": 76,
+        "topic": "Konflik",
+        "url": "https://www.youtube.com/watch?v=rhb7oQfdO7c",
+        "status": "OK",
+        "details": "Chapter 11: Konflik Sosial | Sosiologi | Alternatifa"
+      },
+      {
+        "index": 77,
+        "topic": "Konflik",
+        "url": "https://www.youtube.com/watch?v=cTE992WmsOc",
+        "status": "OK",
+        "details": "SOSIOLOGI KELAS 11 - BAB 3 KONFLIK SOSIAL KURIKULUM MERDEKA"
+      },
+      {
+        "index": 78,
+        "topic": "Konflik",
+        "url": "https://www.youtube.com/watch?v=95MWVOIcekQ",
+        "status": "TOPIC_MISMATCH",
+        "details": "Integrasi Sosial - Sosiologi Kelas 11 (Quipper Video)"
+      },
+      {
+        "index": 79,
+        "topic": "Perubahan Sosial",
+        "url": "https://www.youtube.com/watch?v=dD1TrddgQPg",
+        "status": "TOPIC_MISMATCH",
+        "details": "Materi Sosiologi SMA | Globalisasi | Pengertian dan Ciri-Ciri Globalisasi | Part 1"
+      },
+      {
+        "index": 80,
+        "topic": "Perubahan Sosial",
+        "url": "https://www.youtube.com/watch?v=eUBRVWQIF2s",
+        "status": "TOPIC_MISMATCH",
+        "details": "Apa itu Globalisasi | Sosiologi Kelas 12 - EDURAYA MENGAJAR"
+      },
+      {
+        "index": 81,
+        "topic": "Permainan Bola Besar",
+        "url": "https://www.youtube.com/watch?v=lPqPfLz3ppY",
+        "status": "OK",
+        "details": "Materi Permainan Bola Besar - Pembelajaran Daring PJOK"
+      },
+      {
+        "index": 82,
+        "topic": "Permainan Bola Besar",
+        "url": "https://www.youtube.com/watch?v=sF8H7b8kyNk",
+        "status": "OK",
+        "details": "Semua Materi Bola Voli Dijelaskan - Sejarah, Teknik dasar, Peraturan (Ringkasan / Rangkuman Materi)"
+      },
+      {
+        "index": 83,
+        "topic": "Permainan Bola Besar",
+        "url": "https://www.youtube.com/watch?v=crh89E2Aya0",
+        "status": "OK",
+        "details": "MATERI PENJAS KELAS 11 BOLA BASKET"
+      },
+      {
+        "index": 84,
+        "topic": "Permainan Bola Kecil",
+        "url": "https://www.youtube.com/watch?v=1aMU8Njprnc",
+        "status": "TOPIC_MISMATCH",
+        "details": "Semua Materi Bulutangkis Dijelaskan - Sejarah, Teknik Dasar, Peraturan (Ringkasan/ Rangkuman Materi)"
+      },
+      {
+        "index": 85,
+        "topic": "Permainan Bola Kecil",
+        "url": "https://www.youtube.com/watch?v=EfFZaP9_MBA",
+        "status": "TOPIC_MISMATCH",
+        "details": "Permaian Badminton / Bulu Tangkis ~ Mata Pelajaran PJOK ~ Kelas 11"
+      },
+      {
+        "index": 86,
+        "topic": "Atletik",
+        "url": "https://www.youtube.com/watch?v=MCxLS4eymc8",
+        "status": "OK",
+        "details": "PJOK Kelas 11 - Olahraga Atletik Lari Jarak Pendek - SMK Doa Bangsa | Sopian Saputra, S.Pd."
+      },
+      {
+        "index": 87,
+        "topic": "Atletik",
+        "url": "https://www.youtube.com/watch?v=6M7ymu3MnZw",
+        "status": "OK",
+        "details": "Lari Jarak Pendek - Materi Pembelajaran Atletik"
+      },
+      {
+        "index": 88,
+        "topic": "Kebugaran",
+        "url": "https://www.youtube.com/watch?v=_Rhg8WD_pkw",
+        "status": "OK",
+        "details": "Materi PJOK Aktivitas Kebugaran Jasmani Latihan Kekuatan"
+      },
+      {
+        "index": 89,
+        "topic": "Kebugaran",
+        "url": "https://www.youtube.com/watch?v=B701CNNxNGs",
+        "status": "OK",
+        "details": "LATIHAN SOAL MATERI KEBUGARAN JASMANI"
+      },
+      {
+        "index": 90,
+        "topic": "Pola Hidup Sehat",
+        "url": "https://www.youtube.com/watch?v=j4XKhD2DzyE",
+        "status": "TOPIC_MISMATCH",
+        "details": "jenis jenis Napza (narkotika, psikotropika,zat adiktif) - Biologi sma Bab.narkoba kelas 11"
+      },
+      {
+        "index": 91,
+        "topic": "Pola Hidup Sehat",
+        "url": "https://www.youtube.com/watch?v=ZhYszcLbDIo",
+        "status": "TOPIC_MISMATCH",
+        "details": "Apa Itu Narkoba? Mengapa Narkoba Berbahaya? Bagaimana Agar Terhindar Narkoba?"
+      },
+      {
+        "index": 92,
+        "topic": "Pancasila",
+        "url": "https://www.youtube.com/watch?v=XQN2P0wC6LM",
+        "status": "OK",
+        "details": "PKN Kelas XI - BAB 1. MENJIWAI PANCASILA - D. Pancasila sebagai Ideologi Negara"
+      },
+      {
+        "index": 93,
+        "topic": "Pancasila",
+        "url": "https://www.youtube.com/watch?v=y2LUKrMfC6g",
+        "status": "OK",
+        "details": "Rangkuman Materi Pancasila Kelas 11 Bab 1 Kurikulum Merdeka Rev 2023"
+      },
+      {
+        "index": 94,
+        "topic": "Pancasila",
+        "url": "https://www.youtube.com/watch?v=OCsvY1IGSgc",
+        "status": "OK",
+        "details": "Pancasila sebagai Ideologi Negara || Pendidikan Pancasila Fase F || Kurikulum Merdeka"
+      },
+      {
+        "index": 95,
+        "topic": "Hukum",
+        "url": "https://www.youtube.com/watch?v=wt2uHXro_ws",
+        "status": "TOPIC_MISMATCH",
+        "details": "Rangkuman Materi Pancasila Kelas 11 Bab 2 Kurikulum Merdeka Rev 2023"
+      },
+      {
+        "index": 96,
+        "topic": "Hukum",
+        "url": "https://www.youtube.com/watch?v=hG4zR3F3nEQ",
+        "status": "OK",
+        "details": "Pendidikan Pancasila Kelas 11: Sistem Hukum di Indonesia"
+      },
+      {
+        "index": 97,
+        "topic": "HAM",
+        "url": "https://www.youtube.com/watch?v=E-fpHsnggKE",
+        "status": "TOPIC_MISMATCH",
+        "details": "Materi PKn Kelas 11 Harmonisasi Hak Asasi dan Kewajiban Asasi Manusia Dalam Perspektif Pancasila (1)"
+      },
+      {
+        "index": 98,
+        "topic": "HAM",
+        "url": "https://www.youtube.com/watch?v=7TqevT9IOS0",
+        "status": "OK",
+        "details": "Bagaimana HAM Terbentuk? | Sejarah Singkat Hak Asasi Manusia"
+      },
+      {
+        "index": 99,
+        "topic": "Demokrasi",
+        "url": "https://www.youtube.com/watch?v=sulsr6DPC6g",
+        "status": "OK",
+        "details": "Materi PKn Kelas 11 Bab 2 Sistem dan Dinamika Demokrasi Pancasila (Bagian 1)"
+      },
+      {
+        "index": 100,
+        "topic": "Demokrasi",
+        "url": "https://www.youtube.com/watch?v=KuVtsR7QYZk",
+        "status": "OK",
+        "details": "Video Pembelajaran #21 ||  Hakikat Demokrasi PPKn"
+      },
+      {
+        "index": 101,
+        "topic": "Globalisasi",
+        "url": "https://www.youtube.com/watch?v=XGmbaH4DQHs",
+        "status": "TOPIC_MISMATCH",
+        "details": "Kita dan Masyarakat Global"
+      },
+      {
+        "index": 102,
+        "topic": "Globalisasi",
+        "url": "https://www.youtube.com/watch?v=pEo61hZoULo",
+        "status": "TOPIC_MISMATCH",
+        "details": "Kita dan Masyarakat Global - Elemen Bhinneka Tunggal Ika Pendidikan Pancasila Kelas XI"
+      },
+      {
+        "index": 103,
+        "topic": "Algoritma",
+        "url": "https://www.youtube.com/watch?v=zrz6_ifc6b0",
+        "status": "OK",
+        "details": "Algoritma dan Pemrograman - Informatika Fase F Kelas XI"
+      },
+      {
+        "index": 104,
+        "topic": "Algoritma",
+        "url": "https://www.youtube.com/watch?v=u1huXRBkSbE",
+        "status": "OK",
+        "details": "#3 Notasi FLOWCHART pada Algoritma | DASAR DASAR PEMROGRAMAN"
+      },
+      {
+        "index": 105,
+        "topic": "Algoritma",
+        "url": "https://www.youtube.com/watch?v=IGPY6B3De_U",
+        "status": "TOPIC_MISMATCH",
+        "details": "Strategi Algoritmik dan Pemograman | Informatika Kelas XI"
+      },
+      {
+        "index": 106,
+        "topic": "Struktur Data",
+        "url": "https://www.youtube.com/watch?v=q04buHDFT6M",
+        "status": "OK",
+        "details": "STRUKTUR DATA dalam PEMROGRAMAN"
+      },
+      {
+        "index": 107,
+        "topic": "Struktur Data",
+        "url": "https://www.youtube.com/watch?v=E_IplykMZH0",
+        "status": "TOPIC_MISMATCH",
+        "details": "ARRAY pada Programming"
+      },
+      {
+        "index": 108,
+        "topic": "Pemrograman",
+        "url": "https://www.youtube.com/watch?v=uqVJc9lLknA",
+        "status": "OK",
+        "details": "ALGORITMA dalam PEMROGRAMAN"
+      },
+      {
+        "index": 109,
+        "topic": "Pemrograman",
+        "url": "https://www.youtube.com/watch?v=SdEdeNCANuM",
+        "status": "TOPIC_MISMATCH",
+        "details": "Informatika   Analisis Data   Pengenalan Bahasa Phyton Pada Google Collab Perintah print dan array"
+      },
+      {
+        "index": 110,
+        "topic": "Basis Data",
+        "url": "https://www.youtube.com/watch?v=rKaq-WeHRqE",
+        "status": "OK",
+        "details": "APA ITU DATABASE ? Tonton ini 5 Menit Langsung Bisa DIJAMIN"
+      },
+      {
+        "index": 111,
+        "topic": "Basis Data",
+        "url": "https://www.youtube.com/watch?v=S4igMZFCvh8",
+        "status": "OK",
+        "details": "Belajar Basis Data untuk Pemula"
+      },
+      {
+        "index": 112,
+        "topic": "Jaringan",
+        "url": "https://www.youtube.com/watch?v=usnVxO6duJE",
+        "status": "OK",
+        "details": "Topologi Jaringan - Jaringan Komputer dan Internet | Informatika XI"
+      },
+      {
+        "index": 113,
+        "topic": "Jaringan",
+        "url": "https://www.youtube.com/watch?v=w8CW9HaE8ZM",
+        "status": "OK",
+        "details": "Topologi Jaringan Komputer || Materi Informatika SMA"
+      },
+      {
+        "index": 114,
+        "topic": "Termokimia",
+        "url": "https://www.youtube.com/watch?v=FjNThpLAkOY",
+        "status": "OK",
+        "details": "Termokimia (1) | Entalpi Dan Perubahan Entalpi | Persamaan Termokimia | Hukum Hess"
+      },
+      {
+        "index": 115,
+        "topic": "Termokimia",
+        "url": "https://www.youtube.com/watch?v=9D6WGcLf7UU",
+        "status": "OK",
+        "details": "Termokimia: Kalor dan Entalpi | Kimia | SMA"
+      },
+      {
+        "index": 116,
+        "topic": "Laju Reaksi",
+        "url": "https://www.youtube.com/watch?v=JWRH5mibIws",
+        "status": "OK",
+        "details": "Laju Reaksi (1) | Konsep Laju Reaksi | Kimia kelas 11"
+      },
+      {
+        "index": 117,
+        "topic": "Laju Reaksi",
+        "url": "https://www.youtube.com/watch?v=lE3-HOasaU8",
+        "status": "OK",
+        "details": "Laju Reaksi - Kimia Kelas 11 (Quipper Video)"
+      },
+      {
+        "index": 118,
+        "topic": "Kesetimbangan Kimia",
+        "url": "https://www.youtube.com/watch?v=oDR1CJHEq9A",
+        "status": "OK",
+        "details": "Reaksi Kesetimbangan | Tetapan Kesetimbangan Kc | Kimia kelas 11"
+      },
+      {
+        "index": 119,
+        "topic": "Kesetimbangan Kimia",
+        "url": "https://www.youtube.com/watch?v=xD8TFFL9TRA",
+        "status": "OK",
+        "details": "KIMIA Kelas 11 - Kesetimbangan Kimia | GIA Academy"
+      },
+      {
+        "index": 120,
+        "topic": "Asam dan Basa",
+        "url": "https://www.youtube.com/watch?v=e_0mceAEvks",
+        "status": "OK",
+        "details": "Larutan Asam Basa (1) | Teori Asam dan Basa | Kimia Kelas 11"
+      },
+      {
+        "index": 121,
+        "topic": "Asam dan Basa",
+        "url": "https://www.youtube.com/watch?v=4aJckRYT-mk",
+        "status": "OK",
+        "details": "Larutan Asam Basa (2) | Indikator Asam dan Basa | Kimia kelas 11"
+      },
+      {
+        "index": 122,
+        "topic": "Larutan Penyangga",
+        "url": "https://www.youtube.com/watch?v=b0xsz9Zrq20",
+        "status": "OK",
+        "details": "KIMIA Kelas 11 - Larutan Penyangga | GIA Academy"
+      },
+      {
+        "index": 123,
+        "topic": "Larutan Penyangga",
+        "url": "https://www.youtube.com/watch?v=N-0aZuKpgzE",
+        "status": "OK",
+        "details": "Larutan Penyangga (1) | Jenis-jenis Larutan Penyangga | Cara Kerja Larutan Penyangga"
+      },
+      {
+        "index": 124,
+        "topic": "Hidrolisis Garam",
+        "url": "https://www.youtube.com/watch?v=w3VkBDgOadg",
+        "status": "OK",
+        "details": "Hidrolisis Garam (1) | Sifat Garam |  Reaksi Hidrolisis"
+      },
+      {
+        "index": 125,
+        "topic": "Hidrolisis Garam",
+        "url": "https://www.youtube.com/watch?v=x8cItpmNLb0",
+        "status": "OK",
+        "details": "HIDROLISIS GARAM - MATERI UTBK SBMPTN DAN SIMAK UI - MATERI UTBK KIMIA | UTBK 2022 | SIMAK UI 2022"
+      },
+      {
+        "index": 126,
+        "topic": "Titrasi Asam-Basa",
+        "url": "https://www.youtube.com/watch?v=EqMVS53UDNw",
+        "status": "OK",
+        "details": "Larutan Asam Basa (8) | Titrasi Asam Basa | Kimia kelas 11"
+      },
+      {
+        "index": 127,
+        "topic": "Titrasi Asam-Basa",
+        "url": "https://www.youtube.com/watch?v=UoPKs_nCVSs",
+        "status": "OK",
+        "details": "Kimia Kelas 11 Semester 2 : Titrasi Asam Basa"
+      },
+      {
+        "index": 128,
+        "topic": "Hidrokarbon dan Minyak Bumi",
+        "url": "https://www.youtube.com/watch?v=22-S9htSXqU",
+        "status": "OK",
+        "details": "Hidrokarbon (3) | Tata Nama Senyawa Hidrokarbon | Alkana Alkena Alkuna"
+      },
+      {
+        "index": 129,
+        "topic": "Hidrokarbon dan Minyak Bumi",
+        "url": "https://www.youtube.com/watch?v=64Ns-OU0wnQ",
+        "status": "OK",
+        "details": "Hidrokarbon (4) | Isomer Senyawa Alkana | Kimia Kelas 11"
+      }
+    ]
+  },
+  "parserFix": "Fixed parse_mapping_file: original regex expected topic-before-url but TS files have url-before-topic. DOTALL fallback matched topics from one object with URLs from next object, causing systematic URL shift and 51% false mismatch rate."
+}

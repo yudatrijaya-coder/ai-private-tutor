@@ -22,6 +22,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Resolve student by login identifier → internal UUID
+    const student = await prisma.student.findUnique({
+      where: { studentId },
+      select: { id: true, name: true, gradeLevel: true },
+    });
+    if (!student) {
+      return NextResponse.json({ error: "Student not found" }, { status: 404 });
+    }
+
     // 1. Fetch exam with questions to calculate score
     const exam = await prisma.exam.findUnique({
       where: { id: examId },
@@ -35,11 +44,31 @@ export async function POST(request: NextRequest) {
     // 2. Calculate score: compare student's answers to correct answers
     let correctCount = 0;
     const topicScores: Record<string, { correct: number; total: number }> = {};
+    const details: {
+      questionIndex: number;
+      correct: boolean;
+      correctIndex: number;
+      userAnswer: string;
+      correctAnswer: string;
+      explanation: string;
+    }[] = [];
 
     exam.questions.forEach((q, idx) => {
       const studentAnswer = answers[idx];
       const isCorrect = studentAnswer?.toUpperCase() === q.correctAnswer?.toUpperCase();
       if (isCorrect) correctCount++;
+
+      details.push({
+        questionIndex: idx,
+        correct: isCorrect,
+        correctIndex: Math.max(
+          0,
+          "ABCDEF".indexOf((q.correctAnswer ?? "").toUpperCase()),
+        ),
+        userAnswer: studentAnswer ?? "",
+        correctAnswer: q.correctAnswer ?? "",
+        explanation: q.explanation ?? "",
+      });
 
       // Aggregate per topic
       const topic = q.topic || exam.subject;
@@ -52,13 +81,25 @@ export async function POST(request: NextRequest) {
     const maxScore = 100;
 
     // 3. Save the attempt with calculated score
+    const prevAttempts = await prisma.examAttempt.count({
+      where: { studentId: student.id, examId },
+    });
+    const attemptNumber = prevAttempts + 1;
+
     const attempt = await prisma.examAttempt.create({
       data: {
-        studentId,
+        studentId: student.id,
         examId,
         score,
         maxScore,
-        details: { answers, score, correctCount, totalQuestions: exam.questions.length },
+        attemptNumber,
+        details: {
+          answers,
+          score,
+          correctCount,
+          totalQuestions: exam.questions.length,
+          details, // per-question: correctIndex + explanation
+        },
         status: "COMPLETED",
       },
     });
@@ -66,7 +107,7 @@ export async function POST(request: NextRequest) {
     // 4. Update per-topic mastery
     for (const [topic, data] of Object.entries(topicScores)) {
       await updateTopicMastery({
-        studentId,
+        studentId: student.id,
         subject: exam.subject,
         topic,
         subTopic: null,
@@ -83,9 +124,11 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       attemptId: attempt.id,
+      attemptNumber,
       score,
       totalQuestions: exam.questions.length,
       correctCount,
+      details,
     });
   } catch (err) {
     console.error("Error saving exam attempt:", err);
