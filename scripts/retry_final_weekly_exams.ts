@@ -2,9 +2,12 @@ import { prisma } from "../src/lib/prisma";
 import { generateWeeklyExam } from "../src/services/weekly-exam-generator";
 
 /**
- * Retry failed weekly exam generations (transient LLM errors).
- * Usage: npx tsx scripts/retry_failed_weekly_exams.ts
+ * Final retry for subjects that failed twice:
+ * - thin-content subjects → 10 questions instead of 20 (LLM can't sustain 20 from ~1K chars)
+ * - empty-content subjects → skip (needs content pipeline, not retry)
  */
+const THIN_Q = 10;
+
 async function main() {
   const students = await prisma.student.findMany({
     select: { id: true, studentId: true, gradeLevel: true },
@@ -29,19 +32,36 @@ async function main() {
     });
 
     for (const g of groups) {
-      if (existingSubjects.has(g.subject)) continue; // already done or failed → skip
-      // Skip placeholder-only subjects (week 999 only, no real content)
-      const placeholderOnly = await prisma.material.count({
+      if (existingSubjects.has(g.subject)) continue;
+
+      // Skip placeholder-only
+      const realWeeks = await prisma.material.count({
         where: { curriculumId: cur.id, subject: g.subject, weekOrder: { lt: 999 } },
       });
-      if (placeholderOnly === 0) {
-        console.log(`[${s.studentId}] SKIP ${g.subject} — placeholder-only (no real weeks)`);
+      if (realWeeks === 0) {
+        console.log(`[${s.studentId}] SKIP ${g.subject} — placeholder-only`);
         existingSubjects.add(g.subject);
         continue;
       }
-      console.log(`[${s.studentId}] RETRY ${g.subject}...`);
+
+      // Check content thickness
+      const mats = await prisma.material.findMany({
+        where: { curriculumId: cur.id, subject: g.subject, weekOrder: { lt: 999 } },
+        select: { rawContent: true },
+      });
+      const totalChars = mats.reduce((a, m) => a + (m.rawContent ?? "").length, 0);
+      const withContent = mats.filter((m) => (m.rawContent ?? "").trim().length > 50).length;
+
+      if (withContent === 0) {
+        console.log(`[${s.studentId}] SKIP ${g.subject} — NO CONTENT (${mats.length} mat kosong). Perlu pipeline konten dulu.`);
+        existingSubjects.add(g.subject);
+        continue;
+      }
+
+      const q = totalChars < 5000 ? THIN_Q : 20;
+      console.log(`[${s.studentId}] RETRY ${g.subject} (${q} soal, ${withContent}/${mats.length} mat, ${totalChars} chars)...`);
       try {
-        const res = await generateWeeklyExam({ studentId: s.id, subject: g.subject });
+        const res = await generateWeeklyExam({ studentId: s.id, subject: g.subject, questionCount: q });
         console.log(`[${s.studentId}] ✅ ${g.subject} → ${res.examId} (${res.questionCount} soal)`);
         existingSubjects.add(g.subject);
       } catch (err) {

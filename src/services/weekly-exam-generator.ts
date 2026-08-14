@@ -412,23 +412,32 @@ export async function generateWeeklyExam(
     throw new Error(`No materials found for subject "${subject}"`);
   }
 
-  // Limit content passed to the LLM.
-  let contentSnippet = materials
-    .map((m) => {
-      const body = (m.rawContent ?? m.processedContent ?? "").trim();
-      return body ? `## ${m.topic}\n${body}` : "";
-    })
-    .filter(Boolean)
-    .join("\n\n");
-  if (contentSnippet.length > MAX_CONTENT_CHARS) {
-    contentSnippet = contentSnippet.slice(0, MAX_CONTENT_CHARS);
+  // Limit content passed to the LLM. Build snippet greedily so that every
+  // topic in the blueprint actually has content available (otherwise the LLM
+  // is asked to write questions about topics it never saw → empty batches).
+  const snippetParts: string[] = [];
+  let snippetLen = 0;
+  const selected: typeof materials = [];
+  for (const m of materials) {
+    const body = (m.rawContent ?? m.processedContent ?? "").trim();
+    if (!body) continue;
+    const part = `## ${m.topic}\n${body}`;
+    if (snippetLen + part.length > MAX_CONTENT_CHARS && snippetParts.length > 0) break;
+    snippetParts.push(part);
+    snippetLen += part.length;
+    selected.push(m);
   }
+  let contentSnippet = snippetParts.join("\n\n");
   if (!contentSnippet.trim()) {
-    // No content at all — rely on topic names only.
-    contentSnippet = materials.map((m) => `## ${m.topic}`).join("\n");
+    // No content at all — rely on topic names only (limit to first few).
+    contentSnippet = materials
+      .slice(0, 8)
+      .map((m) => `## ${m.topic}`)
+      .join("\n");
+    selected.push(...materials.slice(0, 8));
   }
 
-  const topicList = materials.map((m) => ({
+  const topicList = selected.map((m) => ({
     topic: m.topic,
     subTopic: m.subTopic,
   }));
