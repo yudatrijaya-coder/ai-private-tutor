@@ -417,9 +417,11 @@ export async function generateWeeklyExam(
   if (!curriculum) throw new Error("Student has no curriculum");
 
   // Pick materials: current week first, fallback to latest READY materials.
+  // Note: weekly exam is per-grade (not per-student), so filter by gradeLevel
+  // rather than curriculumId to catch materials from any curriculum version.
   const weekNumber = opts.weekNumber ?? currentIsoWeek();
   const where: Record<string, unknown> = {
-    curriculumId: curriculum.id,
+    gradeLevel: student.gradeLevel,
     subject,
   };
 
