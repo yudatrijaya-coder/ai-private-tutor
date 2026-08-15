@@ -10,6 +10,7 @@ interface LeaderboardRow {
   currentStreak: number;
   longestStreak: number;
   badgeCount: number;
+  weeklyXpDelta?: number;
   isMe: boolean;
 }
 
@@ -78,9 +79,16 @@ export default function LeaderboardPage() {
                   <span>🏅 {row.badgeCount}</span>
                 </div>
               </div>
-              <span className="text-lg font-bold" style={{ fontFamily: "var(--font-st-display)", color: "var(--st-primary)" }}>
-                ⭐ {row.xp.toLocaleString()}
-              </span>
+              <div className="text-right">
+                <span className="text-lg font-bold block" style={{ fontFamily: "var(--font-st-display)", color: "var(--st-primary)" }}>
+                  ⭐ {row.xp.toLocaleString()}
+                </span>
+                {typeof row.weeklyXpDelta === "number" && row.weeklyXpDelta !== 0 && (
+                  <span className="text-[11px] font-semibold" style={{ color: row.weeklyXpDelta > 0 ? "#16a34a" : "#dc2626" }}>
+                    {row.weeklyXpDelta > 0 ? `▲ +${row.weeklyXpDelta}` : `▼ ${row.weeklyXpDelta}`} /minggu
+                  </span>
+                )}
+              </div>
             </div>
           );
         })}
