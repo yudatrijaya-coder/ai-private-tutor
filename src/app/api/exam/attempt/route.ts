@@ -86,25 +86,8 @@ export async function POST(request: NextRequest) {
     });
     const attemptNumber = prevAttempts + 1;
 
-    const attempt = await prisma.examAttempt.create({
-      data: {
-        studentId: student.id,
-        examId,
-        score,
-        maxScore,
-        attemptNumber,
-        details: {
-          answers,
-          score,
-          correctCount,
-          totalQuestions: exam.questions.length,
-          details, // per-question: correctIndex + explanation
-        },
-        status: "COMPLETED",
-      },
-    });
-
     // 4. Update per-topic mastery + capture before/after delta
+    //    (SEBELUM attempt.create supaya delta tersimpan di details)
     const masteryDeltas: { topic: string; before: number | null; after: number }[] = [];
     for (const [topic, data] of Object.entries(topicScores)) {
       const findMastery = () =>
@@ -129,6 +112,25 @@ export async function POST(request: NextRequest) {
         after: after ? after.mastery : 0,
       });
     }
+
+    const attempt = await prisma.examAttempt.create({
+      data: {
+        studentId: student.id,
+        examId,
+        score,
+        maxScore,
+        attemptNumber,
+        details: {
+          answers,
+          score,
+          correctCount,
+          totalQuestions: exam.questions.length,
+          details, // per-question: correctIndex + explanation
+          masteryDeltas, // per-topic before/after (untuk tampilan hasil attempt lama)
+        },
+        status: "COMPLETED",
+      },
+    });
 
     // 5. Asynchronously trigger AI analysis via queue
     const queue = await getQueue(QUEUES.IMPROVEMENT_ANALYSIS.name);
