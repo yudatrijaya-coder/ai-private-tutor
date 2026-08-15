@@ -45,6 +45,23 @@ interface SubjectMastery {
   lastActiveAt: string;
 }
 
+interface AchievementExtra {
+  selfCompare: {
+    xpThisWeek: number;
+    xpDelta: number;
+    quizzesThisWeek: number;
+    quizzesDelta: number;
+  };
+  weakTopics: {
+    topic: string;
+    subject: string;
+    mastery: number;
+    weaknessLevel: string;
+    quizId: string | null;
+  }[];
+  trend: { subject: string; points: { date: string; mastery: number }[] }[];
+}
+
 interface ActivitySummary {
   totalQuizzes: number;
   totalExams: number;
@@ -99,16 +116,19 @@ export default function AchievementPage() {
   const [error, setError] = useState<string | null>(null);
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [badgeFilter, setBadgeFilter] = useState<string>("all");
+  const [extra, setExtra] = useState<AchievementExtra | null>(null);
 
   useEffect(() => {
     Promise.all([
       fetch("/api/students/gamification").then((r) => r.json()),
       fetch("/api/students/mastery").then((r) => r.json()),
+      fetch("/api/students/achievement-extra").then((r) => r.json()),
     ])
-      .then(([g, m]) => {
+      .then(([g, m, e]) => {
         if (g.error) { setError(g.error); return; }
         setGamification(g);
         setMastery(m);
+        if (e && !e.error) setExtra(e);
       })
       .catch(() => setError("Gagal memuat data"))
       .finally(() => setLoading(false));
@@ -118,7 +138,10 @@ export default function AchievementPage() {
   if (error) return <div className="text-center py-20"><div className="text-4xl mb-3">😅</div><p className="text-sm" style={{ color: "var(--st-text-dim)" }}>{error}</p></div>;
   if (!gamification || !mastery) return null;
 
-  const filtered = activeFilter === "all" ? mastery.subjects : mastery.subjects.filter((s) => s.subject === activeFilter);
+  // Sembunyikan subject noise: belum pernah dinilai (quiz/exam) & mastery 0
+  const hasActivity = (s: SubjectMastery) => s.mastery > 0 || s.quizCount > 0 || s.examCount > 0;
+  const meaningfulSubjects = mastery.subjects.filter(hasActivity);
+  const filtered = activeFilter === "all" ? meaningfulSubjects : meaningfulSubjects.filter((s) => s.subject === activeFilter);
 
   const badgeCategories = [...new Set(gamification.badges.unlocked.map((b) => b.category))];
   const filteredBadges = badgeFilter === "all"
@@ -170,6 +193,108 @@ export default function AchievementPage() {
           </div>
         </div>
       </div>
+
+      {/* Ringkasan Naratif — vs minggu lalu */}
+      {extra && (
+        <div className="rounded-2xl p-5" style={{ backgroundColor: "var(--st-bg-card)" }}>
+          <p className="text-sm leading-relaxed" style={{ color: "var(--st-text)" }}>
+            <span className="font-bold">Minggu ini</span> kamu dapat{" "}
+            <span className="font-bold" style={{ color: "var(--st-primary)" }}>{extra.selfCompare.xpThisWeek} XP</span>
+            {" "}{extra.selfCompare.xpDelta >= 0 ? (
+              <span className="text-xs font-semibold" style={{ color: "#16a34a" }}>▲ +{extra.selfCompare.xpDelta} vs minggu lalu</span>
+            ) : (
+              <span className="text-xs font-semibold" style={{ color: "#dc2626" }}>▼ {extra.selfCompare.xpDelta} vs minggu lalu</span>
+            )}
+            {" "}dan mengerjakan <span className="font-bold">{extra.selfCompare.quizzesThisWeek} quiz</span>
+            {" "}{extra.selfCompare.quizzesDelta !== 0 ? (
+              extra.selfCompare.quizzesDelta > 0
+                ? <span className="text-xs font-semibold" style={{ color: "#16a34a" }}>(+{extra.selfCompare.quizzesDelta})</span>
+                : <span className="text-xs font-semibold" style={{ color: "#dc2626" }}>({extra.selfCompare.quizzesDelta})</span>
+            ) : null}
+            {extra.weakTopics.length > 0 && (
+              <>
+                . Topik yang perlu diperkuat:{" "}
+                <span className="font-semibold">{extra.weakTopics.slice(0, 2).map((w) => `${w.topic} (${w.mastery}%)`).join(", ")}</span>
+                {" "}— scroll ke bawah untuk drill 👇
+              </>
+            )}
+            {" "}🔥 {gamification.currentStreak > 0 ? `Lanjutkan streak ${gamification.currentStreak} hari kamu!` : "Mulai streakmu hari ini!"}
+          </p>
+        </div>
+      )}
+
+      {/* Tren 30 Hari — sparkline per subject */}
+      {extra && extra.trend.length > 0 && (
+        <div className="rounded-2xl p-5" style={{ backgroundColor: "var(--st-bg-card)" }}>
+          <h2 className="font-bold mb-3">📈 Tren Penguasaan (30 hari)</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {extra.trend.map((t) => {
+              const pts = t.points.map((p) => p.mastery);
+              const min = Math.min(...pts);
+              const max = Math.max(...pts);
+              const range = max - min || 1;
+              const W = 100;
+              const H = 28;
+              const step = W / Math.max(1, pts.length - 1);
+              const coords = pts.map((p, i) => [i * step, H - 3 - ((p - min) / range) * (H - 6)]);
+              const d = coords.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
+              const last = pts[pts.length - 1];
+              const prev = pts[pts.length - 2];
+              const delta = last - prev;
+              return (
+                <div key={t.subject} className="flex items-center justify-between rounded-xl px-3 py-2" style={{ backgroundColor: "var(--st-bg)" }}>
+                  <div className="min-w-0">
+                    <p className="font-semibold text-xs truncate">{EMOJI[t.subject] || "📚"} {t.subject}</p>
+                    <p className="text-[11px]" style={{ color: "var(--st-text-dim)" }}>{last}% mastery</p>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <svg width={W} height={H} className="shrink-0">
+                      <path d={d} fill="none" stroke="#8b5cf6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span className="text-[11px] font-bold" style={{ color: delta >= 0 ? "#16a34a" : "#dc2626" }}>
+                      {delta >= 0 ? `▲${delta}` : `▼${Math.abs(delta)}`}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Topik Lemah — aksi drill */}
+      {extra && extra.weakTopics.length > 0 && (
+        <div className="rounded-2xl p-5" style={{ backgroundColor: "var(--st-bg-card)" }}>
+          <h2 className="font-bold mb-1">🎯 Topik yang Perlu Diperkuat</h2>
+          <p className="text-xs mb-3" style={{ color: "var(--st-text-dim)" }}>
+            Latihan langsung untuk menaikkan mastery
+          </p>
+          <div className="space-y-2">
+            {extra.weakTopics.map((w) => (
+              <div key={w.topic} className="flex items-center gap-3 rounded-xl px-3 py-2.5" style={{ backgroundColor: "var(--st-bg)" }}>
+                <span className="text-lg shrink-0">
+                  {w.weaknessLevel === "severe" ? "🔴" : w.weaknessLevel === "moderate" ? "🟡" : "🟠"}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="font-semibold text-sm truncate">{w.topic}</p>
+                  <p className="text-[11px]" style={{ color: "var(--st-text-dim)" }}>
+                    {w.subject} · mastery {w.mastery}%
+                  </p>
+                </div>
+                {w.quizId ? (
+                  <Link href={`/student/quiz?quizId=${w.quizId}`} className="text-xs font-semibold px-3 py-1.5 rounded-lg text-white shrink-0" style={{ backgroundColor: "var(--st-primary)" }}>
+                    🚀 Latihan
+                  </Link>
+                ) : (
+                  <Link href={`/student/subject/${encodeURIComponent(w.subject)}`} className="text-xs font-semibold px-3 py-1.5 rounded-lg shrink-0" style={{ backgroundColor: "var(--st-bg-card)", color: "var(--st-text-dim)" }}>
+                    📚 Materi
+                  </Link>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Badge Section */}
       {gamification.badges.unlockedCount > 0 && (
@@ -227,7 +352,7 @@ export default function AchievementPage() {
           style={{ backgroundColor: activeFilter === "all" ? "var(--st-primary)" : "var(--st-bg-card)", color: activeFilter === "all" ? "#fff" : "var(--st-text)" }}>
           📊 Semua
         </button>
-        {mastery.subjects.map((s) => (
+        {meaningfulSubjects.map((s) => (
           <button key={s.subject} onClick={() => setActiveFilter(s.subject)}
             className="shrink-0 px-4 py-2 rounded-full text-xs font-bold transition-all"
             style={{ backgroundColor: activeFilter === s.subject ? "var(--st-primary)" : "var(--st-bg-card)", color: activeFilter === s.subject ? "#fff" : "var(--st-text)" }}>
