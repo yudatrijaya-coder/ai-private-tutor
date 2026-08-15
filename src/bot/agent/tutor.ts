@@ -80,6 +80,7 @@ async function buildSystemPrompt(student: Student): Promise<string> {
       ].join("\n")
     : "";
 
+  const masterySummary = await buildMasterySummary(student);
   return [
     SYSTEM_PROMPTS.tutor,
     "",
@@ -95,7 +96,7 @@ async function buildSystemPrompt(student: Student): Promise<string> {
     `Student ID: ${student.studentId}`,
     `Grade: ${getGradeLabel(student.gradeLevel)}`,
     "",
-    await buildMasterySummary(student),
+    masterySummary,
     "",
     buildCapabilitiesPrompt(),
     "",
