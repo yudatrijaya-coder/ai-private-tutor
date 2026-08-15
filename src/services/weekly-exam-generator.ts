@@ -208,12 +208,36 @@ Buat blueprint ${total} soal sesuai aturan di atas.`,
 
 /* ── Pass 2: generate questions in batches ───────────────────── */
 
+/**
+ * Build a content snippet for a specific batch of blueprint items.
+ * Only includes material for topics in this batch → LLM always has the
+ * relevant content, no matter how many topics exist in the subject.
+ */
+function buildBatchSnippet(
+  batch: WeeklyBlueprintItem[],
+  contentByTopic: Map<string, string>,
+  maxChars = 8000,
+): string {
+  const parts: string[] = [];
+  let len = 0;
+  for (const b of batch) {
+    const body = contentByTopic.get(b.topic) ?? "";
+    if (!body.trim()) continue;
+    const part = `## ${b.topic}\n${body}`;
+    if (len + part.length > maxChars) break;
+    parts.push(part);
+    len += part.length;
+  }
+  return parts.join("\n\n");
+}
+
 async function generateQuestionBatch(
   blueprint: WeeklyBlueprintItem[],
   subject: string,
   gradeLevel: string,
   contentSnippet: string,
   studentId: string,
+  contentByTopic: Map<string, string> = new Map(),
 ): Promise<WeeklyQuestion[]> {
   const batchSize = 5;
   const questions: WeeklyQuestion[] = [];
@@ -226,6 +250,11 @@ async function generateQuestionBatch(
           `${i + j + 1}. topic="${b.topic}" | subTopic=${b.subTopic ?? "-"} | Bloom=${b.bloomLevel} | difficulty=${b.difficulty} | focus=${b.focus}`,
       )
       .join("\n");
+
+    // Prefer per-batch snippet (only topics in this batch); fall back to the
+    // global snippet when we have no per-topic map.
+    const batchSnippet =
+      contentByTopic.size > 0 ? buildBatchSnippet(batch, contentByTopic) : contentSnippet;
 
     const system: ChatMessage = {
       role: "system",
@@ -261,7 +290,7 @@ Output HANYA JSON array (urut sesuai blueprint), tanpa teks lain:
       role: "user",
       content: `Konten materi (kutipan):
 ---AWAL KONTEN---
-${contentSnippet}
+${batchSnippet || contentSnippet}
 ---AKHIR KONTEN---
 
 Blueprint untuk batch ini (${batch.length} soal):
@@ -442,6 +471,15 @@ export async function generateWeeklyExam(
     subTopic: m.subTopic,
   }));
 
+  // Per-topic content map for batch-scoped snippets (fixes LLM "no questions"
+  // when the global snippet only covers the first few topics).
+  const contentByTopic = new Map<string, string>();
+  for (const m of materials) {
+    const body = (m.rawContent ?? m.processedContent ?? "").trim();
+    if (!body) continue;
+    contentByTopic.set(m.topic, body);
+  }
+
   // Adjust composition for non-default counts (scale proportionally, min 1).
   const target = scaleTargets(questionCount);
 
@@ -462,6 +500,7 @@ export async function generateWeeklyExam(
     student.gradeLevel,
     contentSnippet,
     studentId,
+    contentByTopic,
   );
 
   // Composition enforcement + trimming to target
