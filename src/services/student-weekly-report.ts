@@ -147,6 +147,19 @@ export async function sendWeeklyStudentReports(): Promise<{
           chat_id: data.student.telegramId,
           text,
           parse_mode: "HTML",
+          reply_markup: {
+            debug_buttons: "inline",
+            inline_keyboard: [
+              [
+                { text: "🧠 Quiz", url: "https://senangbelajar.web.id/student/quiz" },
+                { text: "📈 Progress", url: "https://senangbelajar.web.id/student/progress" },
+              ],
+              [
+                { text: "🔁 Review", url: "https://senangbelajar.web.id/student/review" },
+                { text: "🏆 Peringkat", url: "https://senangbelajar.web.id/student/leaderboard" },
+              ],
+            ],
+          },
         }),
       });
       if (res.ok) sent++;
