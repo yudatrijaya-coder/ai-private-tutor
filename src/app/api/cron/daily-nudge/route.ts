@@ -46,14 +46,28 @@ export async function GET() {
 
     if (!nudgeBotToken || !student.telegramId) continue;
 
+    // Saran topik lemah biar nudge lebih terarah
+    const weakTopic = await prisma.topicMastery.findFirst({
+      where: {
+        studentId: student.id,
+        weaknessLevel: { in: ["severe", "moderate"] },
+      },
+      orderBy: { mastery: "asc" },
+    });
+
+    const streakAtRisk = student.currentStreak >= 3;
     const streakMsg = student.currentStreak > 0
-      ? `Streak kamu sedang di <b>${student.currentStreak} hari</b> — jangan putus!`
+      ? `Streak kamu sedang di <b>${student.currentStreak} hari</b> — ${streakAtRisk ? "awas putus! 🔥" : "jangan putus!"}`
       : "Yuk mulai streak pertamamu!";
+    const weakLine = weakTopic
+      ? `🎯 Saran: perkuat <b>${weakTopic.topic}</b> (${weakTopic.subject})`
+      : "";
 
     const message =
       `🌅 <b>Selamat pagi, ${student.name}!</b>\n\n` +
       `${streakMsg}\n\n` +
       `Hari ini belum belajar? Yuk mulai 10 menit aja! 📚\n\n` +
+      (weakLine ? weakLine + "\n" : "") +
       `🧠 <a href="https://senangbelajar.web.id/student/quiz">Mulai Quiz</a>\n` +
       `📖 <a href="https://senangbelajar.web.id/student/slides">Baca Materi</a>`;
 
@@ -71,6 +85,18 @@ export async function GET() {
                 { text: "🧠 Mulai Quiz", url: "https://senangbelajar.web.id/student/quiz" },
                 { text: "📖 Baca Materi", url: "https://senangbelajar.web.id/student/slides" },
               ],
+              ...(weakTopic
+                ? [
+                    [
+                      {
+                        text: "🎯 Perkuat " + weakTopic.topic,
+                        url:
+                          "https://senangbelajar.web.id/student/subject/" +
+                          encodeURIComponent(weakTopic.subject),
+                      },
+                    ],
+                  ]
+                : []),
             ],
           },
         }),

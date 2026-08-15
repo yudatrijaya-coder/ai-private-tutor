@@ -144,6 +144,220 @@ function MasteryChart({
   );
 }
 
+function colorFor(subject: string): string {
+  if (SUBJECT_COLORS[subject]) return SUBJECT_COLORS[subject];
+  const c = TREND_COLORS[Object.keys(SUBJECT_COLORS).length % TREND_COLORS.length];
+  SUBJECT_COLORS[subject] = c;
+  return c;
+}
+
+const TREND_COLORS = ["#6366f1", "#22c55e", "#f59e0b", "#ef4444", "#a78bfa", "#06b6d4", "#ec4899", "#84cc16"];
+const SUBJECT_COLORS: Record<string, string> = {};
+
+function formatShort(ts: number): string {
+  const d = new Date(ts);
+  return d.getDate() + "/" + (d.getMonth() + 1);
+}
+
+function MasteryTrendChart({
+  series,
+}: {
+  series: {
+    subject: string;
+    emoji: string;
+    color: string;
+    points: { date: Date; mastery: number }[];
+  }[];
+}) {
+  const all = series.flatMap((s) => s.points);
+  if (all.length < 2) return null;
+  const W = 340;
+  const H = 150;
+  const padL = 30;
+  const padR = 12;
+  const padT = 12;
+  const padB = 22;
+  const iw = W - padL - padR;
+  const ih = H - padT - padB;
+
+  const minT = Math.min(...all.map((p) => p.date.getTime()));
+  const maxT = Math.max(...all.map((p) => p.date.getTime()));
+  const spanT = Math.max(1, maxT - minT);
+
+  const x = (t: number) => padL + ((t - minT) / spanT) * iw;
+  const y = (m: number) => padT + ih - (Math.max(0, Math.min(100, m)) / 100) * ih;
+
+  const gridLines = [0, 25, 50, 75, 100];
+
+  return (
+    <div
+      className="rounded-2xl p-5"
+      style={{ backgroundColor: "var(--st-bg-card)" }}
+    >
+      <h3
+        className="font-bold text-base mb-4"
+        style={{ fontFamily: "var(--font-st-display)" }}
+      >
+        📈 Perkembangan Penguasaan
+      </h3>
+      <svg viewBox={"0 0 " + W + " " + H} className="w-full h-auto">
+        {gridLines.map((g) => (
+          <g key={g}>
+            <line
+              x1={padL}
+              x2={W - padR}
+              y1={y(g)}
+              y2={y(g)}
+              stroke="rgba(168,162,158,0.15)"
+              strokeWidth={1}
+            />
+            <text
+              x={padL - 6}
+              y={y(g) + 3}
+              textAnchor="end"
+              fontSize={9}
+              fill="var(--st-text-dim)"
+            >
+              {g}
+            </text>
+          </g>
+        ))}
+        {series
+          .filter((s) => s.points.length >= 2)
+          .map((s) => {
+            const pts = s.points
+              .map(
+                (p) =>
+                  x(p.date.getTime()).toFixed(1) + "," + y(p.mastery).toFixed(1),
+              )
+              .join(" ");
+            return (
+              <g key={s.subject}>
+                <polyline
+                  points={pts}
+                  fill="none"
+                  stroke={s.color}
+                  strokeWidth={2}
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                />
+                {s.points.map((p, i) => (
+                  <circle
+                    key={i}
+                    cx={x(p.date.getTime())}
+                    cy={y(p.mastery)}
+                    r={2.5}
+                    fill={s.color}
+                  />
+                ))}
+              </g>
+            );
+          })}
+        <text x={padL} y={H - 6} fontSize={9} fill="var(--st-text-dim)">
+          {formatShort(minT)}
+        </text>
+        <text
+          x={W - padR}
+          y={H - 6}
+          textAnchor="end"
+          fontSize={9}
+          fill="var(--st-text-dim)"
+        >
+          {formatShort(maxT)}
+        </text>
+      </svg>
+      <div className="mt-3 space-y-1">
+        {series.map((s) => (
+          <div key={s.subject} className="flex items-center gap-2 text-xs">
+            <span
+              className="w-2.5 h-2.5 rounded-full"
+              style={{ backgroundColor: s.color }}
+            />
+            <span className="font-medium">
+              {s.emoji} {s.subject}
+            </span>
+            <span className="ml-auto font-bold" style={{ color: s.color }}>
+              {s.points.length > 0
+                ? Math.round(s.points[s.points.length - 1].mastery) + "%"
+                : "—"}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function WeeklyStudyChart({
+  weekly,
+}: {
+  weekly: { label: string; minutes: number }[];
+}) {
+  if (weekly.length === 0) return null;
+  const W = 340;
+  const H = 120;
+  const padL = 30;
+  const padR = 12;
+  const padT = 14;
+  const padB = 20;
+  const iw = W - padL - padR;
+  const ih = H - padT - padB;
+  const maxM = Math.max(...weekly.map((w) => w.minutes), 1);
+  const bw = iw / weekly.length;
+
+  return (
+    <div
+      className="rounded-2xl p-5"
+      style={{ backgroundColor: "var(--st-bg-card)" }}
+    >
+      <h3
+        className="font-bold text-base mb-4"
+        style={{ fontFamily: "var(--font-st-display)" }}
+      >
+        ⏱️ Waktu Belajar per Minggu
+      </h3>
+      <svg viewBox={"0 0 " + W + " " + H} className="w-full h-auto">
+        {weekly.map((w, i) => {
+          const h = Math.max(2, (w.minutes / maxM) * ih);
+          const bx = padL + i * bw;
+          return (
+            <g key={i}>
+              <rect
+                x={bx + bw * 0.15}
+                y={padT + ih - h}
+                width={bw * 0.7}
+                height={h}
+                rx={3}
+                fill="var(--st-primary)"
+              />
+              <text
+                x={bx + bw / 2}
+                y={H - 6}
+                textAnchor="middle"
+                fontSize={9}
+                fill="var(--st-text-dim)"
+              >
+                {w.label}
+              </text>
+              {w.minutes > 0 && (
+                <text
+                  x={bx + bw / 2}
+                  y={padT + ih - h - 4}
+                  textAnchor="middle"
+                  fontSize={9}
+                  fill="var(--st-text-dim)"
+                >
+                  {Math.round((w.minutes / 60) * 10) / 10}j
+                </text>
+              )}
+            </g>
+          );
+        })}
+      </svg>
+    </div>
+  );
+}
+
 function BadgesSection({
   badges,
 }: {
@@ -276,6 +490,50 @@ async function ProgressContent() {
     emoji: EMOJI_MAP[subject] ?? "📚",
   }));
 
+  // Perkembangan: trend mastery per subject (per hari, 90 hari terakhir)
+  const nowMs = Date.now();
+  const subjectTrend = new Map<string, { subject: string; emoji: string; points: Map<string, { date: Date; mastery: number }> }>();
+  for (const snap of student.progressSnaps) {
+    if (nowMs - snap.snapDate.getTime() > 90 * 86400000) continue;
+    let entry = subjectTrend.get(snap.subject);
+    if (!entry) {
+      entry = { subject: snap.subject, emoji: EMOJI_MAP[snap.subject] ?? "📚", points: new Map() };
+      subjectTrend.set(snap.subject, entry);
+    }
+    const dk = snap.snapDate.toDateString();
+    const existing = entry.points.get(dk);
+    if (!existing || snap.snapDate > existing.date) {
+      entry.points.set(dk, { date: snap.snapDate, mastery: snap.mastery * 100 });
+    }
+  }
+  const trendSeries = Array.from(subjectTrend.values())
+    .map((e) => ({
+      subject: e.subject,
+      emoji: e.emoji,
+      color: colorFor(e.subject),
+      points: Array.from(e.points.values()).sort((a, b) => a.date.getTime() - b.date.getTime()),
+    }))
+    .filter((s) => s.points.length >= 2);
+
+  // Waktu belajar per minggu (5 minggu terakhir)
+  const weeks: { start: number; label: string; minutes: number }[] = [];
+  for (const snap of student.progressSnaps) {
+    const d = snap.snapDate;
+    const day = d.getDay();
+    const monday = new Date(d);
+    monday.setDate(d.getDate() - (day === 0 ? 6 : day - 1));
+    monday.setHours(0, 0, 0, 0);
+    const key = monday.getTime();
+    let w = weeks.find((x) => x.start === key);
+    if (!w) {
+      w = { start: key, label: monday.getDate() + "/" + (monday.getMonth() + 1), minutes: 0 };
+      weeks.push(w);
+    }
+    w.minutes += snap.studyMinutes ?? 0;
+  }
+  weeks.sort((a, b) => a.start - b.start);
+  const weeklyData = weeks.slice(-5);
+
   // Unique study dates
   const studyDates = Array.from(
     new Set(snapDates.map((d) => d.toDateString())),
@@ -309,7 +567,9 @@ async function ProgressContent() {
   return (
     <div className="space-y-5">
       <StreakCalendar snapDates={studyDates} />
+      {trendSeries.length > 0 && <MasteryTrendChart series={trendSeries} />}
       {masteryData.length > 0 && <MasteryChart data={masteryData} />}
+      {weeklyData.length > 0 && <WeeklyStudyChart weekly={weeklyData} />}
 
       <div className="grid grid-cols-3 gap-3">
         <div

@@ -12,6 +12,7 @@ import { DashboardTracker } from "@/components/DashboardTracker";
 import { TrackedSubjectCircle } from "@/components/TrackedSubjectCircle";
 import SchoolScheduleSection from "@/components/SchoolScheduleSection";
 import { MoodleQuickLink } from "@/components/MoodleQuickLink";
+import MissionSection from "@/components/MissionSection";
 import { MoodleBookQuickLink } from "@/components/MoodleQuickLink";
 
 const STUDENT_JWT_SECRET = new TextEncoder().encode(
@@ -842,6 +843,11 @@ export default function StudentHomePage() {
       {/* Rekomendasi Hari Ini */}
       <Suspense fallback={<SkeletonRecs />}>
         <RecommendationSection />
+      </Suspense>
+
+      {/* Misi Hari Ini — task list interaktif + XP */}
+      <Suspense fallback={null}>
+        <MissionSection />
       </Suspense>
 
       {/* Quote */}

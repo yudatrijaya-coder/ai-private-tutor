@@ -44,7 +44,7 @@ function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise
  * Single source of truth — the capability list comes from `capabilities.ts`
  * so `handleMessage` and `streamMessage` can never drift apart.
  */
-function buildSystemPrompt(student: Student): string {
+async function buildSystemPrompt(student: Student): Promise<string> {
   const persona = getPersona(student.persona);
   const personaPrompt =
     persona.prompt ?? `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}`;
@@ -95,10 +95,61 @@ function buildSystemPrompt(student: Student): string {
     `Student ID: ${student.studentId}`,
     `Grade: ${getGradeLabel(student.gradeLevel)}`,
     "",
+    await buildMasterySummary(student),
+    "",
     buildCapabilitiesPrompt(),
     "",
     "Respond in Indonesian, warm, friendly.",
   ].join("\n");
+}
+
+/**
+ * Build a compact quantitative summary of the student's progress so the LLM
+ * can personalise answers (weak topics, streak, subject averages).
+ */
+async function buildMasterySummary(student: Student): Promise<string> {
+  try {
+    const topics = await prisma.topicMastery.findMany({
+      where: { studentId: student.id },
+      orderBy: { mastery: "asc" },
+      take: 12,
+    });
+    if (topics.length === 0) return "";
+
+    const bySubject = new Map<string, { sum: number; count: number }>();
+    for (const t of topics) {
+      const cur = bySubject.get(t.subject) ?? { sum: 0, count: 0 };
+      cur.sum += t.mastery;
+      cur.count += 1;
+      bySubject.set(t.subject, cur);
+    }
+    const subjectLine = Array.from(bySubject.entries())
+      .map(([s2, d]) => s2 + " " + Math.round(d.sum / d.count) + "%")
+      .join(", ");
+
+    const weak = topics
+      .filter((t) => t.weaknessLevel !== "none")
+      .slice(0, 6)
+      .map(
+        (t) =>
+          "• " + t.topic + " (" + t.subject + "): " + Math.round(t.mastery) + "% — " + t.weaknessLevel,
+      )
+      .join("\n");
+
+    return [
+      "📊 DATA PERKEMBANGAN SISWA (pakai ini untuk personalisasi jawaban, jangan menebak-nebak):",
+      "- Streak: " + student.currentStreak + " hari | XP: " + student.xp + " | Mastery per mapel: " + subjectLine,
+      weak
+        ? "- Topik yang masih lemah (bantu siswa fokus di sini):\n" + weak
+        : "- Belum ada data mastery yang cukup.",
+    ].join("\n");
+  } catch (err) {
+    console.warn(
+      "[tutor] buildMasterySummary failed:",
+      err instanceof Error ? err.message : String(err),
+    );
+    return "";
+  }
 }
 
 function getRecentHistory(session: BotSession) {
@@ -107,13 +158,13 @@ function getRecentHistory(session: BotSession) {
   return { chatHistory, recentHistory: chatHistory.slice(-10) };
 }
 
-function buildMessages(
+async function buildMessages(
   student: Student,
   recentHistory: Array<{ role: string; content: string }>,
   userText: string,
-): ChatMessage[] {
+): Promise<ChatMessage[]> {
   return [
-    { role: "system", content: buildSystemPrompt(student) },
+    { role: "system", content: await buildSystemPrompt(student) },
     ...recentHistory.map((m) => ({
       role: m.role === "assistant" ? ("assistant" as const) : ("user" as const),
       content: m.content,
@@ -168,7 +219,7 @@ export async function handleMessage(
     session.currentMode,
   );
 
-  const messages = buildMessages(student, recentHistory, msg.text);
+  const messages = await buildMessages(student, recentHistory, msg.text);
 
   // ── Off-hours observability (tutor-session-time-limit rule) ──
   const localHour = hourIn(getStudentTimezone(student));
@@ -248,7 +299,7 @@ export async function* streamMessage(
 
   const persona = getPersona(student.persona);
   const { chatHistory, recentHistory } = getRecentHistory(session);
-  const messages = buildMessages(student, recentHistory, msg.text);
+  const messages = await buildMessages(student, recentHistory, msg.text);
 
   let buffer = "";
   let emitted = "";

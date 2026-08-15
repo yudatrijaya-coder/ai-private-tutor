@@ -104,8 +104,15 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // 4. Update per-topic mastery
+    // 4. Update per-topic mastery + capture before/after delta
+    const masteryDeltas: { topic: string; before: number | null; after: number }[] = [];
     for (const [topic, data] of Object.entries(topicScores)) {
+      const findMastery = () =>
+        prisma.topicMastery.findFirst({
+          where: { studentId: student.id, subject: exam.subject, topic },
+          orderBy: { mastery: "desc" },
+        });
+      const before = await findMastery().catch(() => null);
       await updateTopicMastery({
         studentId: student.id,
         subject: exam.subject,
@@ -114,6 +121,12 @@ export async function POST(request: NextRequest) {
         score: data.correct,
         maxScore: data.total,
         attemptType: "exam",
+      });
+      const after = await findMastery().catch(() => null);
+      masteryDeltas.push({
+        topic,
+        before: before ? before.mastery : null,
+        after: after ? after.mastery : 0,
       });
     }
 
@@ -129,6 +142,7 @@ export async function POST(request: NextRequest) {
       totalQuestions: exam.questions.length,
       correctCount,
       details,
+      masteryDeltas,
     });
   } catch (err) {
     console.error("Error saving exam attempt:", err);

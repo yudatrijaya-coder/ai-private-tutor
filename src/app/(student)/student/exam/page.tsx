@@ -61,6 +61,7 @@ interface ExamResult {
     correctAnswer?: string;
     explanation: string;
   }[];
+  masteryDeltas?: { topic: string; before: number | null; after: number }[];
 }
 
 const SUBJECT_EMOJI: Record<string, string> = {
@@ -217,6 +218,7 @@ export default function ExamPage() {
         totalQuestions: data.totalQuestions,
         correctCount: data.correctCount,
         details: data.details,
+        masteryDeltas: data.masteryDeltas,
       });
       setSubmitting(false);
     } catch {
@@ -290,6 +292,25 @@ export default function ExamPage() {
               </div>
             </div>
           </div>
+
+          {displayResult.masteryDeltas && displayResult.masteryDeltas.length > 0 && (
+            <div
+              className="mt-5 text-left rounded-xl p-4"
+              style={{ backgroundColor: "rgba(168,162,158,0.06)" }}
+            >
+              <p className="text-sm font-bold mb-2">📈 Penguasaan topik</p>
+              <div className="space-y-1">
+                {displayResult.masteryDeltas.map((d) => (
+                  <p key={d.topic} className="text-xs" style={{ color: "var(--st-text-dim)" }}>
+                    {d.topic}:{" "}
+                    {d.before === null
+                      ? Math.round(d.after) + "% (baru tercatat)"
+                      : Math.round(d.before) + "% → " + Math.round(d.after) + "%" + (d.after >= d.before ? " ▲" : " ▼")}
+                  </p>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="mt-6 flex gap-3 justify-center">
             <button

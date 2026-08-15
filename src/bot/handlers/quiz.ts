@@ -487,8 +487,21 @@ async function finishQuiz(
   quiz: Quiz & { material?: unknown },
   questions: QuizQuestion[],
   answers: { questionIndex: number; selectedIndex: number }[],
-): Promise<void> {
+) : Promise<void> {
   const persona = getPersona(student.persona);
+
+  // Capture mastery BEFORE grading so we can report the delta (quantitative feedback)
+  const qSubject = (quiz.material as any)?.subject ?? "";
+  const qTopic = (quiz.material as any)?.topic ?? qSubject;
+  let beforeMastery: { mastery: number } | null = null;
+  if (qTopic) {
+    beforeMastery = await prisma.topicMastery
+      .findFirst({
+        where: { studentId: student.id, subject: qSubject, topic: qTopic },
+        orderBy: { mastery: "desc" },
+      })
+      .catch(() => null);
+  }
 
   // Grade server-side (persists Attempt + ProgressSnap)
   let grade: Awaited<ReturnType<typeof gradeAttempt>> | null = null;
@@ -516,13 +529,37 @@ async function finishQuiz(
   const maxScore = grade.maxScore;
   const mastery = maxScore > 0 ? (score / maxScore) * 100 : 0;
 
+  // Mastery delta for the quiz topic
+  let masteryLine = "";
+  if (qTopic) {
+    try {
+      const afterMastery = await prisma.topicMastery.findFirst({
+        where: { studentId: student.id, subject: qSubject, topic: qTopic },
+        orderBy: { mastery: "desc" },
+      });
+      const afterPct = afterMastery ? Math.round(afterMastery.mastery) : null;
+      if (afterPct !== null) {
+        const beforePct = beforeMastery ? Math.round(beforeMastery.mastery) : null;
+        masteryLine =
+          beforePct === null
+            ? "\n📈 Mastery *" + qTopic + "* tercatat: " + afterPct + "%"
+            : "\n📈 Mastery *" + qTopic + "*: " + beforePct + "% → " + afterPct + "% " + (afterPct >= beforePct ? "▲" : "▼");
+      }
+    } catch (mErr) {
+      console.warn("[quiz] mastery delta failed:", mErr);
+    }
+  }
+
   // Gamification: award XP, update streak, check badges
-  await handleActivity({
+  const { xpAwarded } = await handleActivity({
     studentId: student.id,
     materialId: quiz.materialId ?? undefined,
     type: "quiz_complete",
     metadata: { score, maxScore, subject: (quiz as any).material?.subject },
-  }).catch((err) => console.warn("[quiz] handleActivity error:", err));
+  }).catch((err) => {
+    console.warn("[quiz] handleActivity error:", err);
+    return { xpAwarded: 0, newBadges: [] };
+  });
 
   // Spaced repetition: add wrong answers to review queue
   for (const a of answers) {
@@ -567,7 +604,10 @@ async function finishQuiz(
 
   const resultText =
     `${persona.emoji} *Selesai!* ${gradeEmoji}\n\n` +
-    `Skor kamu: *${score}/${maxScore}* (${Math.round(mastery)}%)\n\n` +
+    `Skor kamu: *${score}/${maxScore}* (${Math.round(mastery)}%)` +
+    (xpAwarded > 0 ? `\n✨ +${xpAwarded} XP` : "") +
+    (masteryLine ? masteryLine : "") +
+    `\n\n` +
     feedbackLines.join("\n\n") +
     "\n\n" +
     (mastery >= 80
