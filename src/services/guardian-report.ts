@@ -144,6 +144,7 @@ export async function sendWeeklyGuardianReports(): Promise<void> {
       where: {
         studentId: student.id,
         createdAt: { gte: oneWeekAgo },
+        status: { in: ["COMPLETED", "ANALYZED"] },
       },
     });
 
