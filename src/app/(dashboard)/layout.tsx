@@ -1,4 +1,5 @@
-import { auth, signOut } from "@/lib/auth/auth";
+import { auth } from "@/lib/auth/auth";
+import { logoutAction } from "./actions";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -65,12 +66,7 @@ export default async function DashboardLayout({
         <div className="px-4 py-3 border-t text-xs" style={{ borderColor: "var(--su-border)", color: "var(--su-text-dim)" }}>
           <div className="flex items-center justify-between">
             <span>{session?.user?.name ?? "👤 Parent"}</span>
-            <form
-              action={async () => {
-                "use server";
-                await signOut({ redirectTo: "/login" });
-              }}
-            >
+            <form action={logoutAction}>
               <button type="submit" className="text-xs px-2 py-1 rounded cursor-pointer hover:opacity-80">
                 Keluar
               </button>
