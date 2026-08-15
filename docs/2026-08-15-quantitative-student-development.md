@@ -169,6 +169,43 @@ curl -s -X POST -H "x-cron-secret: $CRON_SECRET" https://senangbelajar.web.id/ap
 
 ---
 
+## Roadmap fitur berikutnya (prioritas)
+
+Semua item memakai data yang **sudah ada** — tidak butuh schema baru (kecuali 1–2 field
+opsional untuk target harian). Urutan berdasar impact/effort, hasil dari evaluasi
+kondisi aktual app (15 Ags 2026).
+
+| # | Fitur | Data yang dipakai | Prioritas | Estimasi effort |
+|:--|:------|:------------------|:----------|:----------------|
+| 1 | **Self-comparison** — "kamu naik 2 peringkat minggu ini", "jam belajar +15% vs minggu lalu" | StudentActivity, StudySession, ProgressSnap | ⭐⭐⭐ tinggi | Kecil (render + query delta) |
+| 2 | **Misi/streak harian + XP booster** — streak multiplier XP, target harian (mis. 20 menit / 1 quiz) dengan reward | XP_RULES, StudySession, Attempt | ⭐⭐⭐ tinggi | Kecil–Sedang (1–2 field baru opsional) |
+| 3 | **Mode drill otomatis dari weaknesses** — bot & halaman quiz langsung dari topik lemah (spaced-repetition sudah ada di quiz handler) | TopicMastery (weaknessLevel) | ⭐⭐ sedang | Sedang |
+| 4 | **Proaktif bot lanjutan** — alert streak terancam (sudah ada di nudge), daily recap angka, weekly summary via inline buttons | sama seperti #4 saat ini | ⭐⭐ sedang | Sedang |
+| 5 | **Tampilkan trend di home** — mini sparkline per subject + estimasi "prediksi mastery 2 minggu" | ProgressSnap | ⭐ rendah | Kecil (komponen SVG sudah ada dari #2) |
+
+### Detail prioritas tinggi
+
+**1. Self-comparison (motivasi vs diri sendiri)**
+Perbandingan dengan diri sendiri terbukti lebih memotivasi daripada ranking global.
+Implementasi minimal: di halaman Progress/peringkat, hitung delta per minggu dari
+`StudentActivity`/`StudySession` (XP, jam belajar, jumlah quiz) dan tampilkan
+"▲/▼ vs minggu lalu". Leaderboard tetap ada — self-comparison jadi pelengkap.
+
+**2. Target harian + streak multiplier**
+Perluas `XP_RULES` dengan streak multiplier (XP × 1.5 saat streak ≥ 7, dst.) dan
+misi harian ber-target kuantitatif (bukan cuma checklist): "20 menit belajar" atau
+"1 quiz selesai". Perlu 1–2 field opsional (mis. `dailyTarget` di Student) —
+sisanya bisa dihitung dari data yang ada.
+
+### Prinsip eksekusi
+- Tetap **1 panggilan LLM per request** (9Router serial) — fitur proaktif harus pakai
+template/format statis, bukan generate ulang via LLM.
+- Verifikasi end-to-end sebelum klaim selesai (log PM2, curl endpoint, query DB)
+seperti yang sudah dilakukan untuk fitur #1–#4.
+- Commit lokal + push (token valid) setiap milestone.
+
+---
+
 ## Catatan operasional
 - Semua panggilan LLM tetap 1 panggilan per request (9Router serial — aturan project).
 - Perubahan belum tentu di-push; cek `git log --oneline -5` di VPS untuk commit terbaru.
