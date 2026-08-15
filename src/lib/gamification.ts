@@ -214,7 +214,21 @@ export async function handleActivity(params: {
     : false;
 
   const xp = getXpFor(type, isPerfect);
-  if (xp > 0) await awardXp(studentId, xp);
+
+  // Streak multiplier XP — reward konsistensi: streak 7-13 = 1.5x, 14-29 = 2x, 30+ = 3x
+  let multiplier = 1;
+  if (xp > 0) {
+    const streakRow = await prisma.student.findUnique({
+      where: { id: studentId },
+      select: { currentStreak: true },
+    });
+    const streak = streakRow?.currentStreak ?? 0;
+    if (streak >= 30) multiplier = 3;
+    else if (streak >= 14) multiplier = 2;
+    else if (streak >= 7) multiplier = 1.5;
+  }
+  const xpFinal = Math.round(xp * multiplier);
+  if (xpFinal > 0) await awardXp(studentId, xpFinal);
 
   // Guard: only call updateStreak once per UTC calendar day.
   // Must use UTC to match updateStreak()'s internal UTC-day comparison.

@@ -10,6 +10,14 @@ interface Mission {
   href: string;
 }
 
+interface DailyProgress {
+  minutes: number;
+  minutesTarget: number;
+  quizzes: number;
+  quizzesTarget: number;
+  done: boolean;
+}
+
 export default function MissionSection() {
   const [missions, setMissions] = useState<Mission[]>([]);
   const [done, setDone] = useState<Set<string>>(new Set());
@@ -18,6 +26,7 @@ export default function MissionSection() {
   const [streak, setStreak] = useState(0);
   const [busy, setBusy] = useState(false);
   const [flash, setFlash] = useState<string | null>(null);
+  const [daily, setDaily] = useState<DailyProgress | null>(null);
 
   const refresh = useCallback(async () => {
     try {
@@ -28,6 +37,7 @@ export default function MissionSection() {
       setDone(new Set(data.completedKeys ?? []));
       setXp(data.xp ?? 0);
       setStreak(data.streak ?? 0);
+      setDaily(data.dailyProgress ?? null);
     } finally {
       setLoading(false);
     }
@@ -71,6 +81,34 @@ export default function MissionSection() {
       className="rounded-2xl p-5"
       style={{ backgroundColor: "var(--st-bg-card)" }}
     >
+      {daily && (
+        <div
+          className="rounded-xl p-3 mb-3"
+          style={{ backgroundColor: "var(--st-bg)" }}
+        >
+          <p className="text-xs font-semibold mb-2" style={{ color: "var(--st-text-dim)" }}>
+            🎯 Target Hari Ini
+          </p>
+          <div className="flex items-center gap-2 text-xs mb-1">
+            <span>⏱️ {daily.minutes}/{daily.minutesTarget} menit</span>
+            <span>·</span>
+            <span>📝 {daily.quizzes}/{daily.quizzesTarget} quiz</span>
+            {daily.done && <span className="font-bold text-green-600">✓ tercapai!</span>}
+          </div>
+          <div
+            className="h-1.5 rounded-full overflow-hidden"
+            style={{ backgroundColor: "var(--st-bg-card)" }}
+          >
+            <div
+              className="h-full rounded-full"
+              style={{
+                width: `${Math.min(100, Math.round((daily.minutes / daily.minutesTarget) * 100))}%`,
+                backgroundColor: "var(--st-primary)",
+              }}
+            />
+          </div>
+        </div>
+      )}
       <div className="flex items-center justify-between mb-4">
         <h3
           className="font-bold text-base"
