@@ -37,9 +37,10 @@ export async function GET(
 
   // Server-side per-question review for completed attempts (safe to expose:
   // the student already submitted; answer key only leaks after completion).
+  const storedAttempt = attempt ? (attempt.details as any) || {} : null;
   let attemptDetails: unknown = null;
   if (attempt) {
-    const stored = (attempt.details as any) || {};
+    const stored = storedAttempt || {};
     const storedAnswers: Record<string, string> = stored.answers || {};
     attemptDetails = exam.questions.map((q, idx) => {
       const userLetter = storedAnswers[idx] ?? "";
@@ -81,6 +82,7 @@ export async function GET(
             // Per-question detail (correctIndex + explanation) so the
             // "Lihat Pembahasan" view works for previous attempts too.
             details: attemptDetails,
+            masteryDeltas: storedAttempt?.masteryDeltas ?? null,
             attemptNumber: attempt.attemptNumber ?? 1,
           }
         : null,

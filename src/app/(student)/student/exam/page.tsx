@@ -174,6 +174,7 @@ export default function ExamPage() {
             ),
             // per-question details (correctIndex + explanation) from stored attempt
             details: data.exam.attempt.details ?? null,
+            masteryDeltas: data.exam.attempt.masteryDeltas ?? undefined,
             attemptNumber: data.exam.attempt.attemptNumber ?? 1,
           });
           setConfirmStart(false);
