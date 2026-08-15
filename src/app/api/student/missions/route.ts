@@ -82,6 +82,35 @@ export async function GET() {
       });
     }
 
+    // ── Target harian kuantitatif ──
+    const dayStart = utcDayStart(today);
+    const [studySessionsToday, quizzesToday, actsToday] = await Promise.all([
+      prisma.studySession.aggregate({
+        where: { studentId: student.id, startTime: { gte: dayStart } },
+        _sum: { durationMinutes: true },
+      }),
+      prisma.attempt.count({ where: { studentId: student.id, createdAt: { gte: dayStart } } }),
+      prisma.studentActivity.findMany({
+        where: { studentId: student.id, type: "quiz_complete", createdAt: { gte: dayStart } },
+        select: { metadata: true },
+      }),
+    ]);
+    let quizMinutes = 0;
+    for (const a of actsToday) {
+      const md = a.metadata as { timeSpent?: number } | null;
+      if (md && typeof md.timeSpent === "number") quizMinutes += md.timeSpent;
+    }
+    const studyMinutes = Math.round((studySessionsToday._sum.durationMinutes ?? 0) + quizMinutes / 60);
+    const DAILY_TARGET_MIN = 20;
+    const DAILY_TARGET_QUIZ = 1;
+    const dailyProgress = {
+      minutes: Math.min(studyMinutes, DAILY_TARGET_MIN),
+      minutesTarget: DAILY_TARGET_MIN,
+      quizzes: quizzesToday,
+      quizzesTarget: DAILY_TARGET_QUIZ,
+      done: studyMinutes >= DAILY_TARGET_MIN && quizzesToday >= DAILY_TARGET_QUIZ,
+    };
+
     // Misi yang sudah diselesaikan hari ini (dedup per hari)
     const done = await prisma.studentActivity.findMany({
       where: {
@@ -100,6 +129,7 @@ export async function GET() {
       completedKeys,
       streak: student.currentStreak,
       xp: student.xp,
+      dailyProgress,
     });
   } catch (err) {
     console.error("[missions] GET error:", err);
