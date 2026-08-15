@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendWeeklyGuardianReports } from "@/services/guardian-report";
+import { sendWeeklyStudentReports } from "@/services/student-weekly-report";
 
 /**
  * POST /api/cron/guardian-report
@@ -17,7 +18,12 @@ export async function POST(request: NextRequest) {
 
   try {
     await sendWeeklyGuardianReports();
-    return NextResponse.json({ success: true, message: "Guardian reports sent." });
+    const studentReport = await sendWeeklyStudentReports();
+    return NextResponse.json({
+      success: true,
+      message: "Guardian reports sent.",
+      studentReport,
+    });
   } catch (err) {
     console.error("[GuardianCron] Error:", err);
     return NextResponse.json(

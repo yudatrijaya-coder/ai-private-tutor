@@ -9,6 +9,7 @@ const XP_RULES: Record<string, number> = {
   video_click: 5,
   exam_complete: 100,
   streak_day: 10,
+  mission_complete: 10,
 };
 
 export function getXpFor(type: string, isPerfect = false): number {
