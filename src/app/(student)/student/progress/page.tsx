@@ -4,6 +4,7 @@ import { unstable_noStore as noStore } from "next/cache";
 import { cookies } from "next/headers";
 import { jwtVerify } from "jose";
 import { SkeletonProgressPage } from "@/components/Skeleton";
+import SelfCompareCard from "@/components/SelfCompareCard";
 
 const STUDENT_JWT_SECRET = new TextEncoder().encode(
   process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
@@ -566,6 +567,7 @@ async function ProgressContent() {
 
   return (
     <div className="space-y-5">
+      <SelfCompareCard />
       <StreakCalendar snapDates={studyDates} />
       {trendSeries.length > 0 && <MasteryTrendChart series={trendSeries} />}
       {masteryData.length > 0 && <MasteryChart data={masteryData} />}
