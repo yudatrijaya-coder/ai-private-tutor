@@ -212,7 +212,9 @@ export async function getStudentMasteryMap(studentId: string) {
   }
 
   for (const [subject, masteries] of Object.entries(topicBySubject)) {
-    const avgMastery = masteries.reduce((a, b) => a + b, 0) / masteries.length;
+    // TopicMastery disimpan skala 0-100; normalisasi ke fraksi 0-1 agar
+    // konsisten dengan StudentSubjectMastery (0-1) yang dicampur di sini.
+    const avgMastery = (masteries.reduce((a, b) => a + b, 0) / masteries.length) / 100;
     if (subjectMap[subject]) {
       subjectMap[subject].mastery = avgMastery;
     } else {
@@ -305,7 +307,7 @@ export async function getStudentMasteryMap(studentId: string) {
     .map(m => ({
       subject: m.subject,
       topic: m.topic,
-      mastery: m.mastery,
+      mastery: m.mastery / 100,
       weaknessLevel: m.weaknessLevel,
       confidenceScore: m.confidenceScore,
     }));
@@ -327,7 +329,7 @@ export async function getStudentMasteryMap(studentId: string) {
           return tm ? {
             topic: tm.topic,
             subTopic: tm.subTopic,
-            mastery: tm.mastery,
+            mastery: tm.mastery / 100,
             confidenceScore: tm.confidenceScore,
             weaknessLevel: tm.weaknessLevel,
             streakDays: tm.streakDays,
