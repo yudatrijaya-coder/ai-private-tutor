@@ -40,9 +40,9 @@ async function collect(studentId: string): Promise<StudentWeeklyData | null> {
       orderBy: { mastery: "asc" },
     }),
     prisma.attempt.count({ where: { studentId, createdAt: { gte: weekAgo } } }),
-    prisma.examAttempt.count({ where: { studentId, createdAt: { gte: weekAgo } } }),
+    prisma.examAttempt.count({ where: { studentId, createdAt: { gte: weekAgo }, status: { in: ["COMPLETED", "ANALYZED"] } } }),
     prisma.examAttempt.findFirst({
-      where: { studentId, createdAt: { gte: weekAgo }, status: "COMPLETED" },
+      where: { studentId, createdAt: { gte: weekAgo }, status: { in: ["COMPLETED", "ANALYZED"] } },
       orderBy: { score: "desc" },
       select: { score: true, maxScore: true },
     }),
