@@ -13,6 +13,7 @@ import { TrackedSubjectCircle } from "@/components/TrackedSubjectCircle";
 import SchoolScheduleSection from "@/components/SchoolScheduleSection";
 import { MoodleQuickLink } from "@/components/MoodleQuickLink";
 import MissionSection from "@/components/MissionSection";
+import TrendSparklineSection from "@/components/TrendSparklineSection";
 import { MoodleBookQuickLink } from "@/components/MoodleQuickLink";
 
 const STUDENT_JWT_SECRET = new TextEncoder().encode(
@@ -856,6 +857,11 @@ export default function StudentHomePage() {
       {/* Aktivitas Cepat */}
       <Suspense fallback={null}>
         <QuickActionsDynamic />
+      </Suspense>
+
+      {/* Tren Penguasaan — sparkline per subject */}
+      <Suspense fallback={null}>
+        <TrendSparklineSection />
       </Suspense>
 
       {/* Subject Grid */}
