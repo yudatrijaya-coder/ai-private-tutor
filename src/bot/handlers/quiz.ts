@@ -160,6 +160,51 @@ export async function handleSubjectCallback(
 }
 
 /**
+ * /drill — start a quiz for the student's weakest topic.
+ * Finds the weakest topic with a severe/moderate weakness and launches
+ * its quiz (or sends the student to the dashboard if none exists).
+ */
+export async function handleDrillStart(
+  ctx: Context,
+  student: Student,
+): Promise<void> {
+  const persona = getPersona(student.persona);
+  const weak = await prisma.topicMastery.findFirst({
+    where: { studentId: student.id, weaknessLevel: { in: ["severe", "moderate"] } },
+    orderBy: { mastery: "asc" },
+  });
+
+  if (!weak) {
+    await ctx.reply(
+      `${persona.emoji} Mantap, ${student.name}! Semua topik sudah kamu kuasai. ` +
+        `Coba /quiz untuk latihan baru ya! 💪`,
+    );
+    return;
+  }
+
+  const quiz = await prisma.quiz.findFirst({
+    where: { studentId: student.id, material: { topic: weak.topic } },
+    include: { material: true },
+  });
+
+  if (!quiz) {
+    await ctx.reply(
+      `${persona.emoji} Topik paling lemah kamu: *${weak.topic}* (mastery ${Math.round(weak.mastery)}%).\n` +
+        `Belum ada kuis khusus topik ini — buka materinya dulu ya:\n` +
+        `${"https://senangbelajar.web.id/student/subject/" + encodeURIComponent(weak.subject)}`,
+      { parse_mode: "Markdown" },
+    );
+    return;
+  }
+
+  await ctx.reply(
+    `${persona.emoji} Deteksi topik lemah: *${weak.topic}* (mastery ${Math.round(weak.mastery)}%). Yuk drill sekarang! 🎯`,
+    { parse_mode: "Markdown" },
+  );
+  await handleQuizPick(ctx, student, quiz.id);
+}
+
+/**
  * Handle quiz pick callback — start the selected quiz.
  */
 export async function handleQuizPick(

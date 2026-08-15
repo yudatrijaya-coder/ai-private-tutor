@@ -16,6 +16,7 @@ const DASHBOARD = "https://senangbelajar.web.id/student";
 export const COMMAND_MENU = [
   { command: "start", description: "Mulai / daftar ulang" },
   { command: "quiz", description: "Kerjakan kuis" },
+  { command: "drill", description: "Latihan topik lemah 🎯" },
   { command: "review", description: "Ulangi soal yang pernah salah" },
   { command: "materi", description: "Lihat materi pelajaran" },
   { command: "weeklyexam", description: "Weekly exam & jadwal" },
@@ -44,6 +45,7 @@ export async function sendHelp(ctx: Context, student: Student): Promise<void> {
   await ctx.reply(
     `${persona.emoji} *Bantuan Perintah*\n\n` +
       `/quiz — Kerjakan kuis 🧠\n` +
+      `/drill — Latihan topik lemah 🎯\n` +
       `/review — Ulangi soal yang pernah salah 🔁\n` +
       `/materi — Lihat materi pelajaran 📗\n` +
       `/weeklyexam — Weekly exam & jadwal 📝\n` +

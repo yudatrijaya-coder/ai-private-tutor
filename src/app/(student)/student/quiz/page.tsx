@@ -3,6 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { useActivityTracker } from "@/hooks/useActivityTracker";
+import WeakTopicsSection from "@/components/WeakTopicsSection";
 
 /* ── Types ── */
 interface Question {
@@ -917,6 +918,7 @@ function QuizInner() {
   // Fallback — show subject picker
   return (
     <div className="space-y-4">
+      <WeakTopicsSection />
       <h2 className="text-lg font-bold" style={{ fontFamily: "var(--font-st-display)" }}>
         📝 Pilih Mata Pelajaran
       </h2>

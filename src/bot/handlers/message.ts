@@ -207,6 +207,12 @@ export async function onMessage(ctx: Context): Promise<void> {
           return;
         }
 
+        if ("text" in msg && /^\/drill$/i.test(msg.text?.trim() ?? "")) {
+          const { handleDrillStart } = await import("./quiz");
+          await handleDrillStart(ctx, student);
+          return;
+        }
+
         if ("text" in msg && /^\/start(\s+|@\w+|$)/i.test(msg.text?.trim() ?? "")) {
           await handleStart(ctx, student);
           return;
@@ -221,6 +227,7 @@ export async function onMessage(ctx: Context): Promise<void> {
                           `/daftar _ID_ — Hubungkan akun Telegram dengan ID siswa\n` +
                           `/materi — Lihat materi pelajaran\n` +
                           `/quiz — Kerjakan kuis\n` +
+                          `/drill — Latihan topik lemah\n` +
                           `/jadwal — Cek jadwal belajar\n` +
                           `/jadwal_sekolah — Cek jadwal sekolah asli 🏫\n` +
                           `/web — Buka dashboard di browser\n` +
