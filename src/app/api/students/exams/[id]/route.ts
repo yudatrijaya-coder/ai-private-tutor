@@ -84,6 +84,30 @@ export async function GET(
             details: attemptDetails,
             masteryDeltas: storedAttempt?.masteryDeltas ?? null,
             attemptNumber: attempt.attemptNumber ?? 1,
+            speed: {
+              speedIndex: storedAttempt?.speedIndex ?? null,
+              confidenceIndex: storedAttempt?.confidenceIndex ?? null,
+              totalSeconds: attempt.timeSpent ?? null,
+              avgSecondsPerQuestion:
+                Array.isArray(storedAttempt?.timeSpentMs) &&
+                storedAttempt.timeSpentMs.some((ms: unknown) => typeof ms === "number" && (ms as number) > 0)
+                  ? Math.round(
+                      (storedAttempt.timeSpentMs
+                        .filter((ms: unknown) => typeof ms === "number" && (ms as number) > 0)
+                        .reduce((a: number, b: unknown) => a + (b as number), 0) /
+                        storedAttempt.timeSpentMs.filter(
+                          (ms: unknown) => typeof ms === "number" && (ms as number) > 0,
+                        ).length /
+                        1000) *
+                        10,
+                    ) / 10
+                  : null,
+              timedQuestions: Array.isArray(storedAttempt?.timeSpentMs)
+                ? storedAttempt.timeSpentMs.filter(
+                    (ms: unknown) => typeof ms === "number" && (ms as number) > 0,
+                  ).length
+                : 0,
+            },
           }
         : null,
     },

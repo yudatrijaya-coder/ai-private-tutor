@@ -62,6 +62,14 @@ interface ExamResult {
     explanation: string;
   }[];
   masteryDeltas?: { topic: string; before: number | null; after: number }[];
+  speed?: {
+    speedIndex: number | null;
+    speedLabel: string;
+    confidenceIndex: number | null;
+    totalSeconds: number | null;
+    avgSecondsPerQuestion: number | null;
+    timedQuestions: number;
+  } | null;
 }
 
 const SUBJECT_EMOJI: Record<string, string> = {
@@ -112,6 +120,11 @@ export default function ExamPage() {
   const [previousAttempt, setPreviousAttempt] = useState<ExamResult | null>(null);
 
   const hasFetchedRef = useRef(false);
+
+  // opt2 speed-index: per-question timing (ms per question index)
+  const timeSpentMsRef = useRef<(number | null)[]>([]);
+  const qStartRef = useRef<number>(0);
+  const prevIdxRef = useRef<number | null>(null);
 
   // Resolve student from session
   useEffect(() => {
@@ -176,6 +189,7 @@ export default function ExamPage() {
             details: data.exam.attempt.details ?? null,
             masteryDeltas: data.exam.attempt.masteryDeltas ?? undefined,
             attemptNumber: data.exam.attempt.attemptNumber ?? 1,
+            speed: data.exam.attempt.speed ?? null,
           });
           setConfirmStart(false);
         } else {
@@ -193,9 +207,36 @@ export default function ExamPage() {
     setConfirmStart(true);
   };
 
+  // opt2 speed-index: close out timing for the previous question and
+  // (re)start the clock. Called on navigation and before submit.
+  const closeTiming = () => {
+    const prev = prevIdxRef.current;
+    if (prev !== null) {
+      const elapsed = Date.now() - qStartRef.current;
+      timeSpentMsRef.current[prev] = (timeSpentMsRef.current[prev] ?? 0) + elapsed;
+      qStartRef.current = Date.now();
+    }
+  };
+
+  const startTiming = (questionCount: number) => {
+    timeSpentMsRef.current = new Array(questionCount).fill(null);
+    qStartRef.current = Date.now();
+    prevIdxRef.current = 0;
+  };
+
+  // opt2: navigate to a question while recording time on the outgoing one
+  const goto = (idx: number) => {
+    closeTiming();
+    prevIdxRef.current = idx;
+    setCurrentIdx(idx);
+  };
+
   const handleSubmit = async () => {
     if (!activeExam || !studentId || submitting) return;
     setSubmitting(true);
+    // opt2: record time spent on the last question before sending
+    closeTiming();
+    prevIdxRef.current = null;
     try {
       const payload: Record<number, string> = {};
       activeExam.questions.forEach((q, idx) => {
@@ -206,7 +247,12 @@ export default function ExamPage() {
       const r = await fetch("/api/exam/attempt", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ studentId, examId: activeExam.id, answers: payload }),
+        body: JSON.stringify({
+          studentId,
+          examId: activeExam.id,
+          answers: payload,
+          timeSpentMs: timeSpentMsRef.current,
+        }),
       });
       const data = await r.json();
       if (!r.ok) {
@@ -220,6 +266,7 @@ export default function ExamPage() {
         correctCount: data.correctCount,
         details: data.details,
         masteryDeltas: data.masteryDeltas,
+        speed: data.speed,
       });
       setSubmitting(false);
     } catch {
@@ -234,6 +281,9 @@ export default function ExamPage() {
     setPreviousAttempt(null);
     setAnswers(new Array(activeExam?.questionCount ?? 0).fill(null));
     setCurrentIdx(0);
+    // opt2: reset per-question timing for the new attempt
+    prevIdxRef.current = null;
+    timeSpentMsRef.current = new Array(activeExam?.questionCount ?? 0).fill(null);
     setConfirmStart(true);
   };
 
@@ -310,6 +360,36 @@ export default function ExamPage() {
                   </p>
                 ))}
               </div>
+            </div>
+          )}
+
+          {displayResult.speed && displayResult.speed.speedIndex !== null && (
+            <div
+              className="mt-5 text-left rounded-xl p-4"
+              style={{ backgroundColor: "rgba(168,162,158,0.06)" }}
+            >
+              <p className="text-sm font-bold mb-2">⚡ Kecepatan & Keyakinan</p>
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="rounded-lg p-2" style={{ backgroundColor: "var(--st-bg)" }}>
+                  <div className="text-lg font-bold">{displayResult.speed.speedIndex}</div>
+                  <div className="text-[10px]" style={{ color: "var(--st-text-dim)" }}>Speed Index</div>
+                </div>
+                <div className="rounded-lg p-2" style={{ backgroundColor: "var(--st-bg)" }}>
+                  <div className="text-lg font-bold">
+                    {displayResult.speed.confidenceIndex ?? "—"}
+                  </div>
+                  <div className="text-[10px]" style={{ color: "var(--st-text-dim)" }}>Confidence</div>
+                </div>
+                <div className="rounded-lg p-2" style={{ backgroundColor: "var(--st-bg)" }}>
+                  <div className="text-lg font-bold">
+                    {displayResult.speed.avgSecondsPerQuestion ?? "—"}s
+                  </div>
+                  <div className="text-[10px]" style={{ color: "var(--st-text-dim)" }}>Rata²/soal</div>
+                </div>
+              </div>
+              <p className="text-xs mt-2" style={{ color: "var(--st-text-dim)" }}>
+                {displayResult.speed.speedLabel}
+              </p>
             </div>
           )}
 
@@ -498,7 +578,11 @@ export default function ExamPage() {
               Batal
             </button>
             <button
-              onClick={() => setConfirmStart(false)}
+              onClick={() => {
+                setConfirmStart(false);
+                // opt2: begin per-question timing from question 0
+                startTiming(activeExam.questions.length);
+              }}
               className="px-6 py-2.5 rounded-xl font-semibold text-white"
               style={{ backgroundColor: "var(--st-primary)" }}
             >
@@ -542,7 +626,7 @@ export default function ExamPage() {
             {activeExam.questions.map((_, i) => (
               <button
                 key={i}
-                onClick={() => setCurrentIdx(i)}
+                onClick={() => goto(i)}
                 className="w-6 h-6 rounded-full text-[10px] font-bold"
                 style={{
                   backgroundColor:
@@ -630,7 +714,7 @@ export default function ExamPage() {
         {/* Nav buttons */}
         <div className="flex justify-between mt-5">
           <button
-            onClick={() => setCurrentIdx((i) => Math.max(0, i - 1))}
+            onClick={() => goto(Math.max(0, currentIdx - 1))}
             disabled={currentIdx === 0}
             className="px-5 py-2.5 rounded-xl font-semibold disabled:opacity-40"
             style={{ backgroundColor: "var(--st-bg-card)" }}
@@ -649,7 +733,7 @@ export default function ExamPage() {
             </button>
           ) : (
             <button
-              onClick={() => setCurrentIdx((i) => Math.min(total - 1, i + 1))}
+              onClick={() => goto(Math.min(total - 1, currentIdx + 1))}
               className="px-5 py-2.5 rounded-xl font-semibold text-white"
               style={{ backgroundColor: "var(--st-primary)" }}
             >

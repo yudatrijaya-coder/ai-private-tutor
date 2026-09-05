@@ -3,17 +3,18 @@ import { prisma } from "@/lib/prisma";
 import { QUEUES } from "@/queue/definitions";
 import { getQueue } from "@/queue/runner";
 import { updateTopicMastery } from "@/services/topic-mastery";
+import { computeSpeedIndex, speedLabel } from "@/services/speed-index";
 
 /**
  * POST /api/exam/attempt
- * Body: { studentId, examId, answers: Record<questionIndex, selectedOption> }
+ * Body: { studentId, examId, answers: Record<questionIndex, selectedOption>, timeSpentMs?: (number|null)[] }
  * 
  * Calculates real score, saves attempt, triggers AI analysis,
  * and updates per-topic mastery.
  */
 export async function POST(request: NextRequest) {
   try {
-    const { studentId, examId, answers } = await request.json();
+    const { studentId, examId, answers, timeSpentMs } = await request.json();
 
     if (!studentId || !examId || !answers) {
       return NextResponse.json(
@@ -113,6 +114,20 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    // Compute Speed Index (opt2) from per-question timing, if provided
+    const normalizedTime = Array.isArray(timeSpentMs)
+      ? exam.questions.map((_, i) =>
+          typeof timeSpentMs[i] === "number" && (timeSpentMs[i] as number) > 0
+            ? (timeSpentMs[i] as number)
+            : null,
+        )
+      : [];
+    const speed = computeSpeedIndex({
+      timeSpentMs: normalizedTime,
+      difficulties: exam.questions.map((q) => q.difficulty ?? "MEDIUM"),
+      accuracyPct: score,
+    });
+
     const attempt = await prisma.examAttempt.create({
       data: {
         studentId: student.id,
@@ -120,6 +135,7 @@ export async function POST(request: NextRequest) {
         score,
         maxScore,
         attemptNumber,
+        timeSpent: speed.totalSeconds, // total seconds (null if no timing)
         details: {
           answers,
           score,
@@ -127,6 +143,9 @@ export async function POST(request: NextRequest) {
           totalQuestions: exam.questions.length,
           details, // per-question: correctIndex + explanation
           masteryDeltas, // per-topic before/after (untuk tampilan hasil attempt lama)
+          timeSpentMs: normalizedTime, // per-question ms (null = no data)
+          speedIndex: speed.speedIndex,
+          confidenceIndex: speed.confidenceIndex,
         },
         status: "COMPLETED",
       },
@@ -145,6 +164,14 @@ export async function POST(request: NextRequest) {
       correctCount,
       details,
       masteryDeltas,
+      speed: {
+        speedIndex: speed.speedIndex,
+        speedLabel: speedLabel(speed.speedIndex),
+        confidenceIndex: speed.confidenceIndex,
+        totalSeconds: speed.totalSeconds,
+        avgSecondsPerQuestion: speed.avgSecondsPerQuestion,
+        timedQuestions: speed.timedQuestions,
+      },
     });
   } catch (err) {
     console.error("Error saving exam attempt:", err);
