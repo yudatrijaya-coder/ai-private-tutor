@@ -85,7 +85,29 @@ export default function StudentLoginPage() {
               border: "1px solid #fdba74",
             }}
           >
-            Masa trial 7 hari kamu sudah habis. Hubungi admin untuk upgrade ke akun penuh.
+            <p className="font-semibold mb-1">⏰ Masa trial kamu sudah habis.</p>
+            <p className="mb-2">
+              Untuk melanjutkan, transfer ke <b>BCA 4780127169</b> a.n. Yuda Trijaya.
+            </p>
+            <p className="mb-1">💰 Harga langganan:</p>
+            <ul className="list-disc pl-4 mb-2">
+              <li>1 bulan — Rp 100.000</li>
+              <li>3 bulan — Rp 250.000</li>
+              <li>6 bulan — Rp 500.000</li>
+              <li>1 tahun — Rp 800.000</li>
+            </ul>
+            <p>
+              Setelah transfer, hubungi admin via{" "}
+              <a
+                href="https://t.me/senangbelajar_bot"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#f97316", textDecoration: "underline" }}
+              >
+                Telegram bot
+              </a>{" "}
+              untuk aktivasi.
+            </p>
           </div>
         )}
 

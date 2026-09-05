@@ -21,6 +21,10 @@ import { handleOnboardingStart } from "./onboarding";
 import { hasActiveRegistration, cancelRegistration, handleOnboardingMessage } from "./onboarding";
 import { routeCallback } from "../state-machine";
 import { routeCommand, registerCommandMenu } from "../commands";
+import {
+  sendTrialExpiredWithButton,
+  handleExtensionRequest,
+} from "./extension";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 
@@ -168,9 +172,8 @@ export async function onMessage(ctx: Context): Promise<void> {
       if (student.status === "TRIAL" && student.trialEndsAt) {
         const hoursLeft = (student.trialEndsAt.getTime() - Date.now()) / 36e5;
         if (hoursLeft <= 0) {
-          await ctx.reply(
-            `⏰ Masa trial kamu sudah habis. Hubungi admin untuk upgrade ke akun penuh ya! 🙏`,
-          );
+          // Trial expired — show BCA transfer plan + quick button to notify admin
+          await sendTrialExpiredWithButton(ctx);
           return;
         }
         if (hoursLeft <= 72 && !session.context?._trialWarned) {
@@ -184,6 +187,12 @@ export async function onMessage(ctx: Context): Promise<void> {
             context: { ...session.context, _trialWarned: true },
           });
         }
+      }
+
+      // /extend — manual command to request extension (same quick-button flow)
+      if (msg && "text" in msg && /^\/(extend|perpanjang)$/i.test(msg.text?.trim() ?? "")) {
+        await handleExtensionRequest(ctx, student);
+        return;
       }
 
       const handled = await routeByState(ctx, session, student);
