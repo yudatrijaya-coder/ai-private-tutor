@@ -17,6 +17,7 @@ import {
   handleOnboardingMessage,
   handleOnboardingCallback,
 } from "./handlers/onboarding";
+import { handleExtensionRequest } from "./handlers/extension";
 
 /**
  * Route an incoming message based on the current session state.
@@ -123,6 +124,17 @@ export async function routeCallback(
     }
     const { handleWeeklyExamCallback } = await import("./handlers/weekly-exam");
     return await handleWeeklyExamCallback(ctx, student);
+  }
+
+  // Extension request (trial expired → ask admin to approve)
+  if (data === "ext:request") {
+    const student = await findStudentByTelegramId(ctx);
+    if (!student) {
+      await ctx.answerCbQuery("Sesi tidak ditemukan. Ketik /start ya!").catch(() => {});
+      return true;
+    }
+    await handleExtensionRequest(ctx, student);
+    return true;
   }
 
   return false;
