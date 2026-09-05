@@ -23,6 +23,9 @@ interface GuardianReport {
     }>;
     streakDays: number;
     improvements: string[]; // positive changes
+    speedIndex: number | null; // latest exam speed index (opt2)
+    confidenceIndex: number | null; // latest exam confidence composite
+    avgSecondsPerQuestion: number | null;
   };
 }
 
@@ -65,6 +68,9 @@ function formatGuardianMessage(report: GuardianReport): string {
     topWeaknesses,
     streakDays,
     improvements,
+    speedIndex,
+    confidenceIndex,
+    avgSecondsPerQuestion,
   } = weekSummary;
 
   const masteryEmoji = overallMastery >= 80 ? "🟢" : overallMastery >= 60 ? "🟡" : "🔴";
@@ -80,6 +86,13 @@ function formatGuardianMessage(report: GuardianReport): string {
   message += `• Ujian diselesaikan: ${examsTaken}\n`;
   message += `• Hari beruntun: ${streakDays} 🔥\n`;
   message += `• Penguasaan keseluruhan: ${masteryEmoji} ${overallMastery.toFixed(1)}%\n\n`;
+
+  if (speedIndex !== null) {
+    message += `⚡ <b>Kecepatan & Keyakinan</b>\n`;
+    message += `• Speed Index: ${speedIndex}${speedIndex >= 80 ? " 🚀" : speedIndex >= 60 ? " 👍" : " 🐢"}\n`;
+    message += `• Confidence Index: ${confidenceIndex ?? "—"}\n`;
+    message += `• Rata-rata waktu/soal: ${avgSecondsPerQuestion ?? "—"}s\n\n`;
+  }
 
   if (improvements.length > 0) {
     message += `✨ <b>Peningkatan</b>\n`;
@@ -148,6 +161,29 @@ export async function sendWeeklyGuardianReports(): Promise<void> {
       },
     });
 
+    // Latest exam attempt (any time) — speed/confidence metrics (opt2)
+    const latestExam = await prisma.examAttempt.findFirst({
+      where: { studentId: student.id, status: { in: ["COMPLETED", "ANALYZED"] } },
+      orderBy: { createdAt: "desc" },
+    });
+    const latestDetails = latestExam?.details as any | null;
+    const speedIndex = latestDetails?.speedIndex ?? null;
+    const confidenceIndex = latestDetails?.confidenceIndex ?? null;
+    const avgSecondsPerQuestion =
+      Array.isArray(latestDetails?.timeSpentMs) &&
+      latestDetails.timeSpentMs.some((ms: unknown) => typeof ms === "number" && (ms as number) > 0)
+        ? Math.round(
+            (latestDetails.timeSpentMs
+              .filter((ms: unknown) => typeof ms === "number" && (ms as number) > 0)
+              .reduce((a: number, b: unknown) => a + (b as number), 0) /
+              latestDetails.timeSpentMs.filter(
+                (ms: unknown) => typeof ms === "number" && (ms as number) > 0,
+              ).length /
+              1000) *
+              10,
+          ) / 10
+        : null;
+
     // Topic mastery data
     const masteries = await prisma.topicMastery.findMany({
       where: { studentId: student.id },
@@ -197,6 +233,9 @@ export async function sendWeeklyGuardianReports(): Promise<void> {
         topWeaknesses,
         streakDays: maxStreak,
         improvements: improvements.slice(0, 3),
+        speedIndex,
+        confidenceIndex,
+        avgSecondsPerQuestion,
       },
     };
 
