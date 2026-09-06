@@ -56,6 +56,7 @@ export default function Hero() {
               src="/characters/kpop-lisa-action-nobg.png"
               alt="Kakak AI Lisa"
               fill
+              sizes="(min-width: 768px) 384px, 288px"
               className="object-contain drop-shadow-2xl"
               priority
             />
