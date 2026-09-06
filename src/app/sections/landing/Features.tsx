@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { MessageCircle, ClipboardCheck, BarChart3 } from "lucide-react";
 
 const features = [
@@ -36,20 +33,17 @@ export default function Features() {
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {features.map((f, i) => (
-            <motion.div
+            <div
               key={f.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="rounded-2xl border border-orange-100 bg-white p-6 shadow-sm transition hover:shadow-md"
+              style={{ animationDelay: `${i * 0.1}s` }}
+              className="animate-fade-up rounded-2xl border border-orange-100 bg-white p-6 shadow-sm transition hover:shadow-md"
             >
               <div className={`mb-4 inline-flex rounded-xl p-3 ${f.color}`}>
                 <f.icon size={24} />
               </div>
               <h3 className="mb-2 text-xl font-bold text-[#292524]">{f.title}</h3>
               <p className="text-[#78716c]">{f.desc}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
