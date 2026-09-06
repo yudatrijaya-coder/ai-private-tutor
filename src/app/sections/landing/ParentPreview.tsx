@@ -1,19 +1,10 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { TrendingUp, Trophy, CalendarCheck } from "lucide-react";
 
 export default function ParentPreview() {
   return (
     <section id="laporan" className="bg-white px-4 py-20">
       <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="rounded-2xl border border-orange-100 bg-[#FFF7ED] p-6 shadow-lg md:p-8"
-        >
+        <div className="animate-fade-in-left rounded-2xl border border-orange-100 bg-[#FFF7ED] p-6 shadow-lg md:p-8">
           <div className="mb-6 flex items-center justify-between">
             <div>
               <p className="text-sm text-[#78716c]">Laporan Mingguan</p>
@@ -40,14 +31,9 @@ export default function ParentPreview() {
               <p className="text-xs text-[#78716c]">Hari streak</p>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
+        <div className="animate-fade-in-right" style={{ animationDelay: "0.2s" }}>
           <h2 className="text-3xl font-bold text-[#292524] [font-family:var(--font-display)] md:text-4xl">
             Orang tua tetap terinformasi
           </h2>
@@ -67,7 +53,7 @@ export default function ParentPreview() {
               </li>
             ))}
           </ul>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

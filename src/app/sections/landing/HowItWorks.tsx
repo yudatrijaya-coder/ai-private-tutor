@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { UserPlus, MessageSquareText, LineChart } from "lucide-react";
 
 const steps = [
@@ -36,13 +33,10 @@ export default function HowItWorks() {
         </div>
         <div className="grid gap-8 md:grid-cols-3">
           {steps.map((s, i) => (
-            <motion.div
+            <div
               key={s.step}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="relative rounded-2xl bg-white p-6 shadow-sm"
+              style={{ animationDelay: `${i * 0.1}s` }}
+              className="animate-fade-up relative rounded-2xl bg-white p-6 shadow-sm"
             >
               <span className="absolute right-4 top-4 text-5xl font-black text-orange-100 [font-family:var(--font-display)]">
                 {s.step}
@@ -52,7 +46,7 @@ export default function HowItWorks() {
               </div>
               <h3 className="mb-2 text-xl font-bold text-[#292524]">{s.title}</h3>
               <p className="text-[#78716c]">{s.desc}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
