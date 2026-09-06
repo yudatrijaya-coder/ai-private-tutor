@@ -51,7 +51,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="relative flex items-center justify-center"
         >
-          <div className="relative h-72 w-72 md:h-96 md:w-96">
+          <div className="relative aspect-[712/610] w-72 md:w-96">
             <Image
               src="/characters/kpop-lisa-action-nobg.png"
               alt="Kakak AI Lisa"

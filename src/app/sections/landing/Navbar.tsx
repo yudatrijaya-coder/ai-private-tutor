@@ -3,7 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { Menu, X, MessageCircle } from "lucide-react";
+
+const TELEGRAM_BOT_URL = "https://t.me/senangbelajar_bot?start=trial";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -51,12 +53,15 @@ export default function Navbar() {
           >
             Masuk Siswa
           </Link>
-          <Link
-            href="/login"
-            className="rounded-full bg-[#f97316] px-4 py-2 text-sm font-semibold text-white shadow hover:bg-orange-600 transition"
+          <a
+            href={TELEGRAM_BOT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-full bg-[#f97316] px-4 py-2 text-sm font-semibold text-white shadow hover:bg-orange-600 transition"
           >
-            Mulai Gratis
-          </Link>
+            <MessageCircle size={14} />
+            Daftar Gratis
+          </a>
         </div>
 
         {/* Mobile menu button */}
@@ -89,12 +94,14 @@ export default function Navbar() {
             >
               Masuk Siswa
             </Link>
-            <Link
-              href="/login"
+            <a
+              href={TELEGRAM_BOT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="block rounded-full bg-[#f97316] px-4 py-2 text-center text-sm font-semibold text-white"
             >
-              Mulai Gratis
-            </Link>
+              Daftar Gratis
+            </a>
           </div>
         </div>
       )}
