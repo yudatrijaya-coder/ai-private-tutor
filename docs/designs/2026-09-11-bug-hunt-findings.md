@@ -908,7 +908,7 @@ yang sama yang benar memakai `"\n"`.
 Akibatnya pesan darurat ke orang tua tampil sebagai satu baris rusak:
 `🚨 DARURAT — Nama\\n\\n*Jenis:* ...`. Perbaikan: `\\n` → `\n`.
 
-## C-10 — 5.366 baris `AgentLog` tidak pernah mencapai status terminal
+## C-10 — 5.369 baris `AgentLog` tidak pernah mencapai status terminal
 
 | Status | Jumlah | Rentang |
 |---|---|---|
@@ -916,6 +916,7 @@ Akibatnya pesan darurat ke orang tua tampil sebagai satu baris rusak:
 | `RETRYING` | 2.663 | 2026-07-05 … 2026-09-03 |
 | `QUEUED` | 3 | 2026-07-06 … 2026-07-08 |
 
+Total **5.369** (sempat tertulis 5.366 — salah jumlah; 2.703 + 2.663 + 3 = 5.369).
 Terbesar: `assessment-generate` — **2.637 `ACTIVE` + 2.637 `RETRYING`**,
 terakhir disentuh 2026-07-09. Ini residu insiden C-01 yang tidak pernah
 ditutup: worker menulis `ACTIVE` saat mulai dan `RETRYING` saat gagal, tapi
@@ -928,9 +929,19 @@ tampilan. Tetapi baris `ACTIVE` permanen membuat setiap inspeksi manual
 menyesatkan — terlihat seperti job yang masih berjalan padahal sudah mati
 sejak Juli.
 
-**Belum ditindak.** Opsi: skrip reaper yang menutup baris non-terminal lebih
-tua dari N hari dengan `FAILED` + `error: "stale: never reached terminal
-state"`, atau batasi query ke jendela waktu. Perlu keputusan sebelum menulis.
+**Reaper sudah disiapkan, BELUM dijalankan** — menunggu keputusan.
+`scripts/reap-stale-agent-logs.ts` (dry-run sebagai default):
+
+```
+npx tsx scripts/reap-stale-agent-logs.ts            # dry-run, cutoff 7 hari
+npx tsx scripts/reap-stale-agent-logs.ts --apply    # menulis + snapshot rollback
+```
+
+Dry-run nyata: **5.367 kandidat** lewat cutoff 7 hari (dari 5.369 total — 2
+baris masih segar). Rincian terbesar `ASSESSMENT | assessment-generate |
+ACTIVE -> 2637` dan `... | RETRYING -> 2637`. Rentang 2026-07-08 … 2026-09-03.
+Tidak menyentuh baris terminal, menulis snapshot id+status sebelum `--apply`.
+Dijalankan dry-run: **0 baris ditandai, DB tidak berubah**.
 
 ## Verifikasi
 
