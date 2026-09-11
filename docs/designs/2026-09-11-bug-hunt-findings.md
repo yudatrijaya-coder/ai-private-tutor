@@ -943,6 +943,127 @@ ACTIVE -> 2637` dan `... | RETRYING -> 2637`. Rentang 2026-07-08 … 2026-09-03.
 Tidak menyentuh baris terminal, menulis snapshot id+status sebelum `--apply`.
 Dijalankan dry-run: **0 baris ditandai, DB tidak berubah**.
 
+---
+
+# Pass 7 — C-10: akar masalahnya bukan data, tapi siklus hidup worker
+
+Investigasi lanjutan membatalkan premis "5.369 job macet". Baris-baris itu
+**bukan job yang menggantung** — mereka baris yang tidak pernah diperbarui.
+
+## Akar 1 — worker menulis siklus hidup sebagai tiga `create`, nol `update`
+
+`src/queue/worker.ts` membuka baris dengan `agentLog.create({status:"ACTIVE"})`
+lalu menulis transisi berikutnya sebagai **baris baru**, bukan pembaruan:
+
+```ts
+await prisma.agentLog.create({ data: { ..., status: "ACTIVE" } });     // baris 49
+await prisma.agentLog.create({ data: { ..., status: "COMPLETED" } });  // baris 63
+await prisma.agentLog.create({ data: { ..., status: "RETRYING" } });   // baris 77
+```
+
+`grep -c 'agentLog.update' src/queue/worker.ts` → **0**. Baris ACTIVE tidak
+pernah ditutup, secara konstruksi. Setiap percobaan job meninggalkan satu baris
+yatim.
+
+Bukti berpasangan dari DB — `jobId 26`: `ACTIVE 12:02:24.510` lalu
+`COMPLETED 12:02:27.811`. Dua baris, satu job.
+
+| agentType / action | ACTIVE | COMPLETED | RETRYING | Aritmetika |
+|---|---|---|---|---|
+| `assessment-generate` | 2637 | 0 | 2637 | 2637 = 2637 |
+| `improvement-analysis` | 39 | 21 | 18 | 39 = 21+18 |
+| `guardian-report` | 12 | 12 | 0 | 12 = 12 |
+| `scheduler-assign` | 10 | 10 | 0 | 10 = 10 |
+| `curriculum-review` | 3 | 0 | 3 | 3 = 3 |
+
+`src/queue/dlq.ts` **sudah** memakai `updateMany` — pola yang benar ada di repo;
+worker-nya yang menyimpang.
+
+## Akar 2 — `shouldDeadLetter` tidak pernah bernilai true
+
+Dua cacat di fungsi yang sama:
+
+1. **Filter mustahil cocok.** Ia mencari `jobId` + `status:"RETRYING"`, tetapi
+   worker menulis baris `RETRYING` **setelah** memanggilnya. Tidak ada baris
+   yang pernah menjadi `FAILED`.
+2. **Off-by-one.** `job.attemptsMade` bersifat 0-based selama proses berjalan —
+   terbukti di runtime: 0, 1, 2 pada tiga percobaan, baru menjadi 3 di event
+   `failed` setelah blok catch kembali. Perbandingan `attemptsMade >= attempts`
+   karena itu tidak pernah benar.
+
+Konsekuensi: **DLQ tidak pernah menerima satu pun entri** — 0 baris bertanda
+`Dead-lettered` dari 5.497 baris, padahal `getDeadLetteredJobs()` mencari persis
+penanda itu. Retry job dihabiskan tanpa jejak.
+
+## Perbaikan
+
+- `worker.ts`: satu baris per JOB. Baris pembuka disimpan id-nya, transisi
+  memakai `update`. Percobaan ulang **melanjutkan** baris yang ditinggalkan
+  percobaan sebelumnya (`findFirst` pada status transien). Filter status
+  transien itulah yang membuatnya aman saat BullMQ mendaur ulang job id: baris
+  job lama sudah terminal sehingga tidak cocok, dan id yang didaur ulang
+  membuka baris baru.
+- `shouldDeadLetter` menjadi predikat murni tanpa tulis DB, memakai
+  `attemptsMade + 1 >= (job.opts.attempts ?? MAX_RETRIES)`. Penutupan baris kini
+  milik worker, yang memang pemilik barisnya.
+- Label dead letter disesuaikan dengan `attempts` job, bukan konstanta global.
+
+## Test regresi — `scripts/test-agent-log-lifecycle.ts`
+
+9/9 lulus. **RED terbukti lebih dulu**: sebelum perbaikan, job sukses
+menghasilkan `["ACTIVE","COMPLETED"]` dan job gagal `["ACTIVE","RETRYING"] ×3`
+(6 baris, 0 terminal) — persis tanda tangan produksi. Sesudah perbaikan:
+1 baris `COMPLETED`, dan 1 baris `FAILED` bertanda
+`Dead-lettered after 3 failed attempts`.
+
+Terisolasi di Redis database 9; aplikasi memakai database 0, jadi worker
+produksi tidak bisa mengonsumsi job uji dan test tidak bisa mengganggu
+produksi. Diverifikasi: 0 baris uji tertinggal di DB.
+
+## Sapu residu — `scripts/sweep-stranded-agent-logs.ts`
+
+Reaper seragam **dibatalkan** karena akan menanam diagnosis palsu: 12 baris
+`ACTIVE` untuk `guardian-report` bersaudara dengan 12 baris `COMPLETED` — job
+itu **berhasil**. Label seragam `FAILED` akan menulis kebohongan ke dalam data.
+Skrip karena itu menurunkan label dari fakta, bukan mengasumsikannya.
+
+Bukti "saudara terminal" lewat `jobId` pun dibatasi jendela **1 jam**, karena
+BullMQ mendaur ulang job id (`jobId` unik hanya 555 dari 5.497 baris). Tanpa
+jendela: 317 baris diklaim "superseded". Dengan jendela: **71** — 246 baris
+dibatalkan klaimnya dan jatuh ke klasifikasi konservatif.
+
+Hasil `--apply` (snapshot: `docs/designs/2026-09-11-c10-stranded-sweep-rollback.json`):
+
+| status asal | status baru | alasan | jumlah |
+|---|---|---|---|
+| `RETRYING` | `FAILED` | retries habis tanpa catatan terminal | 2648 |
+| `ACTIVE` | `FAILED` | percobaan tak pernah mencapai status terminal | 2645 |
+| `ACTIVE` | `COMPLETED` | job selesai; baris tak pernah diperbarui | 56 |
+| `RETRYING` | `COMPLETED` | job selesai; baris tak pernah diperbarui | 15 |
+| `QUEUED` | `FAILED` | percobaan tak pernah mencapai status terminal | 3 |
+
+**5.367 baris ditulis, sisa basi 0.**
+
+| status | sebelum | sesudah |
+|---|---|---|
+| `ACTIVE` | 2703 | **2** |
+| `RETRYING` | 2663 | **0** |
+| `QUEUED` | 3 | **0** |
+| `FAILED` | 3 | 5299 |
+| `COMPLETED` | 135 | 207 |
+
+2 baris `ACTIVE` tersisa sengaja tidak disentuh (lebih muda dari cutoff 7 hari).
+Tampilan DLQ tidak tercemar: 0 baris memuat penanda `Dead-lettered`, jadi
+`getDeadLetteredJobs()` tetap bersih.
+
+## Verifikasi
+
+- `npx tsx scripts/test-agent-log-lifecycle.ts` — **9/9**
+- `npx tsc --noEmit` — **exit 0**
+- `ops/build.sh` — **exit 0**; deploy online, `[queue/runner] 10 queue(s) initialised`
+- Probe: `/` 200, `/login` 200, `/student` 307, cron tanpa secret 401
+- DB: 0 baris uji tertinggal
+
 ## Verifikasi
 
 - `npx tsc --noEmit` — **exit 0** setelah ketiga perbaikan.

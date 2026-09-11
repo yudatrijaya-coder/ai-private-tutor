@@ -45,49 +45,92 @@ export function createWorker<T>(
   const worker = new Worker<T>(
     queueName,
     async (job) => {
-      // --- lifecycle: mark ACTIVE ---
-      await prisma.agentLog.create({
-        data: {
-          agentType: queueNameToAgentType(queueName),
-          jobId: String(job.id),
-          action: queueName,
-          status: "ACTIVE" as never,
-          input: toJson(job.data),
+      const jobId = String(job.id);
+      const agentType = queueNameToAgentType(queueName);
+
+      // --- lifecycle: ONE row per JOB, resumed on retry ---
+      //
+      // Ledger C-10: this used to call `agentLog.create` for every transition
+      // (ACTIVE, then COMPLETED/RETRYING) and never update the row it opened.
+      // Every attempt therefore leaked a permanently-ACTIVE row — 2,703 of them
+      // accumulated in production, each one looking like a job that had been
+      // running since July. A retry must *resume* the row the previous attempt
+      // left behind, so look for a row still in a transient state first.
+      //
+      // Filtering on the transient statuses is what makes this safe when
+      // BullMQ recycles a job id: a previous job's row is already terminal and
+      // will not match, so the recycled id opens a fresh row.
+      const openRow = await prisma.agentLog.findFirst({
+        where: {
+          jobId,
+          status: { in: ["QUEUED", "ACTIVE", "RETRYING"] as never[] },
         },
+        select: { id: true },
+        orderBy: { createdAt: "desc" },
       });
+
+      const logId =
+        openRow?.id ??
+        (
+          await prisma.agentLog.create({
+            data: {
+              agentType,
+              jobId,
+              action: queueName,
+              status: "ACTIVE" as never,
+              input: toJson(job.data),
+            },
+            select: { id: true },
+          })
+        ).id;
+
+      if (openRow) {
+        await prisma.agentLog.update({
+          where: { id: logId },
+          data: { status: "ACTIVE" as never },
+        });
+      }
 
       try {
         await processor(job);
 
         // --- lifecycle: mark COMPLETED ---
-        await prisma.agentLog.create({
+        await prisma.agentLog.update({
+          where: { id: logId },
           data: {
-            agentType: queueNameToAgentType(queueName),
-            jobId: String(job.id),
-            action: queueName,
             status: "COMPLETED" as never,
-            input: toJson(job.data),
             output: toJson(job.returnvalue),
           },
         });
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : String(err);
+        const maxAttempts = job.opts.attempts ?? MAX_RETRIES;
+
+        // If this is the last attempt, close the row as FAILED and stop.
+        const dead = shouldDeadLetter(job);
 
         // --- lifecycle: log failure (may still retry) ---
-        await prisma.agentLog.create({
+        await prisma.agentLog.update({
+          where: { id: logId },
           data: {
-            agentType: queueNameToAgentType(queueName),
-            jobId: String(job.id),
-            action: queueName,
-            status: "RETRYING" as never,
-            error: errorMessage,
-            input: toJson(job.data),
+            status: (dead ? "FAILED" : "RETRYING") as never,
+            // `getDeadLetteredJobs` finds dead letters by this marker, so the
+            // final failure must carry it.
+            error: dead
+              ? `Dead-lettered after ${maxAttempts} failed attempts`
+              : errorMessage,
+            metadata: dead
+              ? toJson({
+                  attemptsMade: job.attemptsMade,
+                  failedReason: job.failedReason,
+                })
+              : undefined,
           },
         });
 
-        // If past retry limit, write DLQ record and stop.
-        const dead = await shouldDeadLetter(job);
         if (dead) {
+          // Do not re-throw: BullMQ would schedule another attempt for a job we
+          // have already declared dead.
           return;
         }
 

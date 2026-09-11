@@ -1,39 +1,35 @@
 import type { Job } from "bullmq";
 import { prisma } from "@/lib/prisma";
-import type { Prisma } from "@/generated/prisma/client";
-import { MAX_RETRIES, type QueueName, queueNameToAgentType } from "./definitions";
-
-/** Serialise arbitrary data to Prisma-compatible Json value. */
-function toJson(value: unknown): Prisma.InputJsonValue {
-  return JSON.parse(JSON.stringify(value ?? {})) as Prisma.InputJsonValue;
-}
+import { MAX_RETRIES } from "./definitions";
 
 /**
- * Check whether a job has exhausted its retry quota.
- * If so, write a final FAILED entry to AgentLog.
+ * Check whether the attempt currently in flight is the job's last one.
+ *
+ * Pure predicate — it deliberately performs no database writes. It used to
+ * write to `AgentLog` itself, which had two consequences:
+ *
+ *  - it filtered on `jobId` + `status: "RETRYING"`, but BullMQ recycles small
+ *    integer job ids, so a dead-letter for job "3" also clobbered the
+ *    `RETRYING` row of an unrelated earlier job "3";
+ *  - the row it had just written could never match that filter (the worker
+ *    wrote `RETRYING` *after* calling it), so no row was ever marked `FAILED`
+ *    and **no dead letter was ever recorded** — 0 rows carrying the
+ *    "Dead-lettered" marker in production, which is what `getDeadLetteredJobs`
+ *    searches for.
+ *
+ * Closing the row is the worker's job now: it owns the row and updates it in
+ * place, so the dead letter is recorded exactly once, on the right row.
+ *
+ * OFF-BY-ONE, verified against BullMQ at runtime: `job.attemptsMade` counts
+ * attempts that have *already* failed, so while the processor is running the
+ * current attempt is not yet included — it reads 0, 1, 2 across the three
+ * attempts of a 3-attempt job, and only becomes 3 on the `failed` event that
+ * fires after the catch block returns. Comparing `attemptsMade >= attempts`
+ * therefore never fires, the row stays `RETRYING` forever, and the retry
+ * budget is spent with nothing recorded. Hence the `+ 1`.
  */
-export async function shouldDeadLetter<T>(job: Job<T, unknown, string>): Promise<boolean> {
-  const attemptsMade = job.attemptsMade;
-  if (attemptsMade < MAX_RETRIES) return false;
-
-  await prisma.agentLog.updateMany({
-    where: { jobId: String(job.id), status: "RETRYING" as never },
-    data: { status: "FAILED" as never, error: `Exceeded ${MAX_RETRIES} retries` },
-  });
-
-  await prisma.agentLog.create({
-    data: {
-      agentType: queueNameToAgentType(job.queueName as QueueName),
-      jobId: String(job.id),
-      action: job.queueName,
-      status: "FAILED" as never,
-      error: `Dead-lettered after ${MAX_RETRIES} failed attempts`,
-      input: toJson(job.data),
-      metadata: toJson({ attemptsMade, failedReason: job.failedReason }),
-    },
-  });
-
-  return true;
+export function shouldDeadLetter<T>(job: Job<T, unknown, string>): boolean {
+  return job.attemptsMade + 1 >= (job.opts.attempts ?? MAX_RETRIES);
 }
 
 /**
