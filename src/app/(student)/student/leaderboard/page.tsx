@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { SkeletonPageShell } from "@/components/Skeleton";
 
 interface LeaderboardRow {
   rank: number;
@@ -36,7 +37,7 @@ export default function LeaderboardPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <div className="flex items-center justify-center py-20"><div className="animate-spin text-4xl">🏆</div></div>;
+  if (loading) return <SkeletonPageShell title="Peringkat" subtitle="Memuat papan peringkat…" />;
   if (error) return <div className="text-center py-20"><p>{error}</p></div>;
   if (!data) return null;
 

@@ -702,3 +702,153 @@ kehilangan mindmap karena `mindmap_sibi` satu-satunya sumbernya dan isinya
 deliberasi. UI merender tanpa mindmap; **lebih baik kosong daripada sampah**.
 Regenerasi mindmap untuk 23 baris ini adalah pekerjaan pipeline konten terpisah
 (lihat `ai-private-tutor-sibi-pipeline`), bukan cacat kode.
+
+**Tindak lanjut (2026-09-11):** 23 baris ini direkonsiliasi dan diregenerasi —
+lihat "Pass 5" di bawah.
+
+---
+
+# Pass 5 — gelombang e (A-07, A-18, A-20, C-03…C-09, D-02, B-02 keluarga 2)
+
+## A-07 + A-20 — dua endpoint cron tanpa autentikasi sama sekali
+
+`src/app/api/cron/daily-nudge/route.ts` dan
+`src/app/api/cron/progress-snap/route.ts` tidak memanggil pemeriksaan secret
+apa pun. A-07 sudah tercatat; A-20 ditemukan saat menyisir ulang seluruh
+direktori `src/app/api/cron/` (bukan dari ledger).
+
+Dampak: siapa pun yang tahu URL dapat memicu blast Telegram ke seluruh siswa
+(`daily-nudge`) atau menulis snapshot progres palsu (`progress-snap`). Keduanya
+tidak butuh sesi.
+
+Perbaikan: keduanya kini memakai `checkCronSecret()` dari
+`src/lib/cron/guard.ts` dan menulis `logCronRun()`. **5/5 route cron** kini
+ter-guard dan ter-log dengan pola yang sama.
+
+`daily-nudge` juga diubah agar melaporkan kegagalan: sebelumnya selalu
+`{ ok: true }` walau ada kirim yang gagal (pola sama dengan C-05). Kini
+mengembalikan `ok: false` + `failed: n`, dan `logCronRun` memakai status
+`FAILED` bila ada kegagalan.
+
+## A-14 — guard cron fail-open
+
+Akar: `CRON_SECRET || "local-cron"` — bila `CRON_SECRET` tidak diset, secret
+jatuh ke nilai publik yang bisa ditebak, sehingga endpoint terbuka di produksi.
+Pola sama muncul di lebih dari satu route.
+
+Perbaikan: satu guard bersama `src/lib/cron/guard.ts` (`checkCronSecret()`).
+Bila secret tidak diset, guard **menolak** (fail-closed), bukan menerima.
+`schedule-sweep` yang sebelumnya memakai perbandingan inline kini memakai guard
+yang sama dan menulis `logCronRun()`.
+
+## A-18 — fallback login tanpa `passwordHash`
+
+Akar: `src/app/api/auth/student-login/route.ts` punya cabang
+`// else: no passwordHash set — backward compat, allow login without password`.
+Saat itu 0 siswa terdampak, tapi jebakannya hidup: begitu ada satu baris siswa
+tanpa hash, akun itu bisa dimasuki tanpa password.
+
+Perbaikan: **fail-closed** — siswa tanpa `passwordHash` tidak dapat login.
+
+## C-03 — OOM saat build
+
+Akar: `next build` kehabisan memori pada VPS. Perbaikan: `ops/build.sh`
+(54 baris) menjalankan build di latar dengan `NODE_OPTIONS` yang dibatasi, plus
+swap build `/swap-build.img` 3 GB yang **persisten** di `/etc/fstab`.
+
+Bukti: `swapon --show` menampilkan swap aktif; `findmnt --verify` bersih;
+`bash ops/build.sh` **exit 0** dua kali.
+
+## C-04 — koreksi temuan: 6 skrip "orphan" bukan dead code
+
+Inventaris ulang menunjukkan 3 job cron memakai 3 skrip, dan 6 skrip sisanya
+adalah **manual tools terdokumentasi** (dipanggil manusia, tidak dijadwalkan di
+`jobs.json`). Hanya `guardian-weekly-trigger.sh` yang benar-benar usang —
+dihapus, digantikan `guardian-report-trigger.sh`.
+
+Dokumentasi: `~/.hermes/profiles/opencode/scripts/README.md` (baru) membedakan
+"scheduled" vs "manual"; dua `SKILL.md` yang masih merujuk nama skrip lama
+diperbaiki.
+
+## C-09 — `enableOfflineQueue: false` di `src/queue/redis.ts`
+
+Dengan opsi itu, perintah melempar error saat Redis sempat putus alih-alih
+menunggu reconnect. Diubah agar menunggu reconnect.
+
+## D-02 — shell kosong di 5 halaman siswa
+
+`/student/achievement`, `/leaderboard`, `/profile-link`, `/quiz`, `/review`
+adalah client component yang hanya merender spinner saat SSR (~130 char). Satu
+komponen `SkeletonPageShell` di `src/components/Skeleton.tsx` kini dipakai
+kelimanya, sehingga SSR mengirim kerangka halaman, bukan shell kosong.
+
+## B-02 keluarga 2 — detektor melewatkan satu keluarga kontaminasi penuh
+
+Pass 1 hanya menangkap keluarga pertama: model **menarasikan rencana**
+("Analyze the Request", "Let me think"). Sapuan ulang menemukan keluarga kedua:
+model **mengulang brief sebagai spec**, lalu menempel outline aslinya.
+
+```
+Goal: Create a mind map outline.
+Format: Dash (-) and indentation.
+Levels: Maximum 3 levels.
+Kekalahan Jepang          ← mindmap asli menyusul
+```
+
+### Skala (terukur)
+
+| Gelombang | Field | Sumber |
+|---|---|---|
+| Sapuan awal | 67 `mindmap_sibi` + 2 `slide_sibi` | detektor keluarga 2 |
+| Setelah aturan dipertajam | +20 `mindmap_sibi` + 4 `slide_sibi` | oracle independen |
+| **Total dipindahkan** | **91 field** → `*_raw` | reversibel |
+
+Semua baris punya `metadata.mindmap` / `metadata.slide` bersih sebagai
+pengganti — tidak ada regenerasi LLM, tidak ada biaya. Snapshot:
+`docs/designs/2026-09-11-b02-family2-rollback.json`.
+
+### Akar ketiga: oracle tes yang tautologis
+
+`scripts/test-slide-content.ts` memakai `isLlmReasoningDump()` — fungsi yang
+sedang diuji — sebagai "ground truth". Akibatnya tes **tidak mungkin** melaporkan
+regresi detektor; ia hanya bisa mengonfirmasi dirinya sendiri. Oracle kini
+menuliskan polanya sendiri, independen dari daftar regex detektor.
+
+Oracle independen itu langsung menemukan 24 field yang detektor lewatkan.
+
+### Dua false positive yang dibatalkan
+
+Aturan spec-line harus **berjangkar di awal label** dan **hanya bertitik-dua**.
+Versi pertama terlalu luas dan memblokir materi sah:
+
+| Teks | Kenapa sah |
+|---|---|
+| `Kosakata HSK 3.0 Level 1: Hanzi Dasar` | nama topik (kata `Level` di tengah) |
+| `Constraints (PRIMARY KEY, NOT NULL, UNIQUE, FOREIGN KEY)` | materi SQL; `(` bukan pemisah spec |
+| `Format: [Tahun]年[Bulan]月…` | mengajarkan pola tanggal |
+| `Format: NamaDepan + TahunLahir` | mengajarkan pola username |
+
+Karena itu aturan spec-line **hanya berlaku untuk mindmap**, tidak untuk slide:
+label node mindmap adalah frasa pendek, sedangkan `Format:` pada slide adalah
+konten ajar biasa. Menjalankannya pada slide akan menolak materi bagus dan
+membuat generator berulang sia-sia.
+
+### Hasil verifikasi
+
+- `scripts/test-slide-content.ts` — **31/31 lulus**, `false positive = 0`,
+  `false negative = 0`, `mindmap bocor ke klien = 0`.
+- `scripts/test-sibi-content-guard.py` — **semua lulus**, termasuk regresi untuk
+  keempat false positive di atas.
+- Sapuan DB langsung: 1422 baris `slide_sibi` + 1330 `mindmap_sibi`,
+  **0 terkontaminasi**.
+- `npx tsc --noEmit` — **exit 0**.
+
+### Rekonsiliasi 23 vs 16
+
+Catatan Pass 4 menyebut 23 baris kehilangan mindmap. Rekonsiliasi:
+`mindmap_sibi` kotor = 289 → 266 dipulihkan + 23 kosong; dari 23 itu **7 punya
+`metadata.mindmap` LLM** sehingga masih terender, dan **16 benar-benar kosong**.
+Regenerasi menyasar 16, hasil **16/16 berhasil, 0 gagal**. Irisan himpunan
+"16 diregenerasi" dengan "91 terkontaminasi" = **kosong**, jadi output regen
+tidak menambah kontaminasi baru.
+

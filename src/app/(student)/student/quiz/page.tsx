@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { useActivityTracker } from "@/hooks/useActivityTracker";
 import WeakTopicsSection from "@/components/WeakTopicsSection";
+import { SkeletonPageShell } from "@/components/Skeleton";
 
 /* ── Types ── */
 interface Question {
@@ -836,11 +837,7 @@ function QuizInner() {
   }, []);
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center py-20">
-        <div className="animate-spin text-4xl">📚</div>
-      </div>
-    );
+    return <SkeletonPageShell title="Quiz" subtitle="Memuat soal…" />;
   }
 
   if (error) {
@@ -952,7 +949,7 @@ function QuizInner() {
 /* ── Page ── */
 export default function QuizPage() {
   return (
-    <Suspense fallback={<div className="flex items-center justify-center py-20"><div className="animate-spin text-4xl">📚</div></div>}>
+    <Suspense fallback={<SkeletonPageShell title="Quiz" subtitle="Memuat soal…" />}>
       <QuizInner />
     </Suspense>
   );

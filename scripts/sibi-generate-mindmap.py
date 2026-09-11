@@ -27,6 +27,13 @@ def update_mindmap(curriculum_id, subject, topic, sub_topic, data):
     else:
         print(f"  ❌ DB error: {r.stderr}")
 
+# ---- Reasoning-dump guard (ledger B-02) ----
+# Shared with `sibi-generate-slides.py`; see `sibi_content_guard.py` for the full
+# rationale. A dump is treated as a failed attempt and retried, so nothing
+# contaminated ever reaches `metadata.mindmap_sibi`.
+from sibi_content_guard import is_reasoning_dump, looks_like_outline
+
+
 def parse_outline_to_mindmap(text, main_label):
     """Parse a text outline into [{id, label, children}].
     Falls back to flat children when indentation is malformed.
@@ -81,26 +88,47 @@ def parse_outline_to_mindmap(text, main_label):
     return mindmap_nodes
 
 def generate_outline_from_llm(prompt):
+    """Ask the model for an indented-dash outline, rejecting reasoning dumps.
+
+    Ledger B-02: the previous revision returned `content` verbatim, so a model
+    that narrated its plan produced a contaminated mindmap. A dump now counts as
+    a failed attempt and is retried, and the raised error stops the caller from
+    writing anything to the database.
+    """
+    last_reason = "no attempt made"
     for attempt in range(3):
         try:
             r = LLM_CLIENT.chat.completions.create(
                 model=LLM_MODEL,
                 messages=[
-                    {"role": "system", "content": "You are a specialized educational content generator. Create a hierarchical mindmap outline using indented dashes. \n\nRULES:\n1. Use 2 spaces per level indentation.\n2. Start with a single dash '-'.\n3. DO NOT include any introductory or concluding text.\n4. DO NOT include markdown blocks like ```.\n5. ONLY return the outline."},
+                    {"role": "system", "content": "You are a specialized educational content generator. Create a hierarchical mindmap outline using indented dashes. \n\nRULES:\n1. Use 2 spaces per level indentation.\n2. Start with a single dash '-'.\n3. DO NOT include any introductory or concluding text.\n4. DO NOT include markdown blocks like ```.\n5. ONLY return the outline.\n6. Do NOT explain your plan, restate these rules, or describe your reasoning. Output the outline and nothing else."},
                     {"role": "user", "content": prompt}
                 ],
                 temperature=0.1,
                 max_tokens=1500,
             )
-            content = r.choices[0].message.content.strip()
+            msg = r.choices[0].message
+            content = (msg.content or "").strip()
             if "```" in content:
                 content = re.sub(r'```[a-z]*\n?|```', '', content).strip()
-            return content
+
+            # Reject deliberation and anything that is not an outline. Retrying is
+            # correct here: a dump means the model never produced the answer.
+            if is_reasoning_dump(content):
+                last_reason = "response was a reasoning dump"
+                print(f"    ⚠️  attempt {attempt+1}: rejected reasoning dump")
+            elif not looks_like_outline(content):
+                last_reason = "response was not an indented outline"
+                print(f"    ⚠️  attempt {attempt+1}: rejected — not an outline")
+            else:
+                return content
         except Exception as e:
+            last_reason = str(e)
             print(f"    ⚠️  LLM attempt {attempt+1}: {e}")
-            if attempt == 2:
-                raise
+        if attempt < 2:
             time.sleep(5)
+
+    raise RuntimeError(f"no usable outline after 3 attempts ({last_reason})")
 
 def process_subject(subject, matched, curriculum_id):
     cs = matched.get("curriculum_subject", subject)

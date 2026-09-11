@@ -29,13 +29,29 @@ interface GuardianReport {
   };
 }
 
+export interface GuardianReportResult {
+  /** Students considered (have a parentTelegramId and are ACTIVE). */
+  total: number;
+  /** Messages the Telegram API accepted. */
+  sent: number;
+  /** Messages the Telegram API rejected. */
+  failed: number;
+  /** Students skipped for a missing/invalid parent chat id. */
+  skipped: number;
+  errors: string[];
+}
+
 /**
  * Send a formatted Telegram message to a parent.
+ *
+ * Returns whether the API accepted it. Ledger C-05: this used to swallow every
+ * failure (log-only), so a broken digest still reported success upstream.
  */
-async function sendTelegramMessage(chatId: string, text: string): Promise<void> {
+async function sendTelegramMessage(chatId: string, text: string): Promise<boolean> {
   if (!BOT_TOKEN) {
-    console.warn("[Guardian] TELEGRAM_BOT_TOKEN not configured, skipping send.");
-    return;
+    // Ledger C-05: this used to `console.warn` and return, so a cron run with
+    // no bot token looked identical to a successful one. Fail loudly instead.
+    throw new Error("TELEGRAM_BOT_TOKEN is not configured — guardian reports cannot be sent.");
   }
 
   const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
@@ -52,7 +68,10 @@ async function sendTelegramMessage(chatId: string, text: string): Promise<void> 
   if (!response.ok) {
     const err = await response.text();
     console.error(`[Guardian] Failed to send Telegram message to ${chatId}:`, err);
+    return false;
   }
+
+  return true;
 }
 
 /**
@@ -121,7 +140,7 @@ function formatGuardianMessage(report: GuardianReport): string {
  * Generate and send weekly guardian reports for all students with parent Telegram IDs.
  * Call this from a cron job (e.g., every Sunday at 18:00 WIB).
  */
-export async function sendWeeklyGuardianReports(): Promise<void> {
+export async function sendWeeklyGuardianReports(): Promise<GuardianReportResult> {
   // Get all students with parent telegram IDs
   const students = await prisma.student.findMany({
     where: {
@@ -137,8 +156,22 @@ export async function sendWeeklyGuardianReports(): Promise<void> {
 
   console.log(`[Guardian] Processing ${students.length} students for weekly reports...`);
 
+  // Ledger C-05: the function used to return `void`, so the cron route could not
+  // report what happened and the weekly trigger printed `Guardian: sent=0`
+  // unconditionally. Count the real outcome.
+  const result: GuardianReportResult = {
+    total: students.length,
+    sent: 0,
+    failed: 0,
+    skipped: 0,
+    errors: [],
+  };
+
   for (const student of students) {
-    if (!student.parentTelegramId) continue;
+    if (!student.parentTelegramId) {
+      result.skipped++;
+      continue;
+    }
 
     // Get this week's data
     const oneWeekAgo = new Date();
@@ -240,8 +273,21 @@ export async function sendWeeklyGuardianReports(): Promise<void> {
     };
 
     const message = formatGuardianMessage(report);
-    await sendTelegramMessage(student.parentTelegramId, message);
+    try {
+      const ok = await sendTelegramMessage(student.parentTelegramId, message);
+      if (ok) result.sent++;
+      else {
+        result.failed++;
+        result.errors.push(`${student.name}: Telegram rejected the message`);
+      }
+    } catch (err) {
+      result.failed++;
+      result.errors.push(`${student.name}: ${err instanceof Error ? err.message : String(err)}`);
+    }
   }
 
-  console.log(`[Guardian] Finished sending ${students.length} weekly reports.`);
+  console.log(
+    `[Guardian] Finished — sent=${result.sent} failed=${result.failed} skipped=${result.skipped} of ${result.total}`,
+  );
+  return result;
 }

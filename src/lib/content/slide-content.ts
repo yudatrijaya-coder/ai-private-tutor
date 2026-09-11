@@ -43,13 +43,32 @@ const CONCLUSIVE_MARKERS: RegExp[] = [
   /\blet me (?:think|analy[sz]e|break|identify|extract|determine|outline|draft|plan)\b/i,
   /\bI(?:'ll| will) (?:now )?(?:draft|write|create|generate) the slides?\b/i,
   /\b(?:draft|internal) reasoning\b/i,
+
+  // ── Second marker family, found 2026-09-11 (Matematika Penalaran) ────────
+  // The first family keyed on the model *narrating* its plan ("Analyze the
+  // Request"). These rows instead leaked the model *restating the brief* as a
+  // bulleted spec, then the real outline after it. None of the phrases below
+  // occur in Indonesian teaching material, so each is conclusive on its own.
+  /\btarget audience\b/i, // was weak+colon; "Target Audience & Context:*" slipped past
+  /\bcreate a mindmap outline\b/i,
+  /\blet'?s brainstorm\b/i,
+  /\blet'?s structure\b/i,
+  /\bmax levels?\s*:/i,
+  /\bdepth\s*:\s*\d+\s*levels?\s*maximum\b/i,
+  /\blevel 1\s*\(root\)/i,
+  /\bformat\s*:\s*dash-?indent\b/i,
+  /\bdash-?indent\b/i,
+  /\bgoal\s*:\s*create\b/i,
+  /\btask\s*:\s*create\b/i,
+  /\bstructure for the (?:mindmap|outline)\b/i,
+  /\blevel \d\s*:\s*(?:main topic|sub-?topics?|details)\b/i,
 ];
 
 /**
  * Weaker markers that are individually plausible in a legitimate prompt echo,
  * so two of them must co-occur before the text is judged contaminated.
  */
-const WEAK_MARKERS: RegExp[] = [/target audience\s*:/i, /constraint(?:s)?\s*:/i];
+const WEAK_MARKERS: RegExp[] = [/constraint(?:s)?\s*:/i, /\bsub-?topics?\s*:/i];
 
 /** A leading "Thinking." / "Analyzing..." preamble. */
 const REASONING_PREFIX = /^\s*(?:thinking|analy[sz]ing|let me|okay|sure,? here|first,? I|<think>)/i;
@@ -123,6 +142,32 @@ function collectLabels(node: unknown, out: string[] = []): string[] {
 }
 
 /**
+ * A mindmap node that reads as a *spec line* rather than subject matter.
+ *
+ * Anchored at the start on purpose. The second contamination family
+ * (2026-09-11) leaks per node — `"Goal: Create a mind map outline."`,
+ * `"Level 1: Konsep Dasar, ..."`, `"root: Pinyin dan Nada"` — but the same
+ * words also occur mid-sentence in legitimate material, e.g. the topic name
+ * `"Kosakata HSK 3.0 Level 1: Hanzi Dasar"`. Matching those as substrings
+ * blanked real slides, so the shape has to be "label *begins* with a spec key".
+ *
+ * The separator is a colon only. Allowing `(` as well matched
+ * `"Constraints (PRIMARY KEY, NOT NULL, UNIQUE, FOREIGN KEY)"` — a real SQL
+ * syllabus topic, not a leaked spec — so parenthesised forms are handled by the
+ * narrower `MINDMAP_ROOT_LABEL` below instead.
+ */
+const MINDMAP_META_LABEL =
+  /^\s*(?:goal|task|topic|subject|format|style|levels?|level\s*\d+(?:\s*&\s*\d+)?|depth|max\s*levels?|root|target\s*audience|output\s*format)\s*:/i;
+
+/** `"Level 0 (Root): ..."` — the same spec leak in parenthesised form. */
+const MINDMAP_ROOT_LABEL = /^\s*level\s*\d+\s*\(\s*root\s*\)/i;
+
+/** True when a single mindmap label is a leaked spec line. */
+function isMetaLabel(label: string): boolean {
+  return MINDMAP_META_LABEL.test(label) || MINDMAP_ROOT_LABEL.test(label);
+}
+
+/**
  * True when `candidate` is a mindmap we are willing to render.
  *
  * Validates the *serialized* tree, not just string candidates: `mindmap_sibi`
@@ -134,19 +179,37 @@ export function isUsableMindmap(candidate: unknown): boolean {
   if (candidate == null) return false;
   const text = candidateText(candidate).trim();
   if (!text) return false;
-  if (isLlmReasoningDump(text)) return false;
+  if (isMindmapContaminated(candidate)) return false;
 
   const labels = collectLabels(candidate);
   if (labels.length > 0) {
-    // A real mindmap has at least a root plus one branch. Judge the labels as a
-    // corpus too — a single contaminated node is enough to reject the tree.
+    // A real mindmap has at least a root plus one branch.
     if (labels.length < 2) return false;
-    if (isLlmReasoningDump(labels.join("\n"))) return false;
     return true;
   }
 
   // No labels at all: fall back to the markdown length rule.
   return text.length >= MIN_USABLE_SLIDE_LENGTH;
+}
+
+/**
+ * True when a mindmap candidate carries leaked model deliberation — either as
+ * prose (family 1) or as per-node spec lines (family 2).
+ *
+ * Exported so remediation scripts can classify rows with the *same* predicate
+ * the render path uses. Keeping a second copy in the scripts is how the first
+ * B-02 pass ended up missing 67 rows.
+ */
+export function isMindmapContaminated(candidate: unknown): boolean {
+  if (candidate == null) return false;
+  const text = candidateText(candidate).trim();
+  if (!text) return false;
+  if (isLlmReasoningDump(text)) return true;
+
+  const labels = collectLabels(candidate);
+  if (labels.length === 0) return false;
+  if (isLlmReasoningDump(labels.join("\n"))) return true;
+  return labels.some((l) => isMetaLabel(l));
 }
 
 /**

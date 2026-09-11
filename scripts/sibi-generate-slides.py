@@ -8,9 +8,15 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 MATCHED_DIR = BASE_DIR / "data" / "sibi" / "matched" / "SMA_2"
 
-# ---- LLM config (9Router via OpenAI SDK for SSE handling) ----
-LLM_CLIENT = OpenAI(base_url="http://localhost:20128/v1", api_key="sk-9router")
+# ---- LLM config (9Router via [OI] SDK for SSE handling) ----
+LLM_CLIENT = [OI](base_url="http://localhost:20128/v1", api_key="sk-9router")
 LLM_MODEL = "hermes"
+
+# ---- Reasoning-dump guard (ledger B-02) ----
+# Shared with `sibi-generate-mindmap.py`; see `sibi_content_guard.py` for the full
+# rationale. A dump is treated as a failed attempt and retried, so nothing
+# contaminated ever reaches `metadata.slide_sibi`.
+from sibi_content_guard import is_reasoning_dump, is_usable
 
 # ---- DB functions ----
 def update_slide(curriculum_id, subject, topic, sub_topic, md):
@@ -28,28 +34,48 @@ def update_slide(curriculum_id, subject, topic, sub_topic, md):
 
 # ---- LLM call ----
 def llm_slides(prompt):
+    """Ask the model for markdown slides, rejecting reasoning dumps.
+
+    Ledger B-02: this used to return `content` verbatim, so a model that narrated
+    its plan instead of writing slides had that narration stored as
+    `metadata.slide_sibi` (268 rows in production). A dump, or anything that is
+    not markdown with structure, now counts as a failed attempt and is retried;
+    the raised error stops the caller from writing to the database.
+    """
+    last_reason = "no attempt made"
     for attempt in range(3):
         try:
             r = LLM_CLIENT.chat.completions.create(
                 model=LLM_MODEL,
                 messages=[
-                    {"role": "system", "content": "You generate educational slides from provided content."},
+                    {"role": "system", "content": "You generate educational slides from provided content. Output only the slide markdown. Do NOT explain your plan, restate the instructions, or describe your reasoning."},
                     {"role": "user", "content": prompt}
                 ],
                 temperature=0.3,
                 max_tokens=2000,
             )
-            content = r.choices[0].message.content.strip()
+            msg = r.choices[0].message
+            content = (msg.content or "").strip()
             # Clean markdown block if LLM included it
             if "```" in content:
                 content = re.sub(r'```[a-z]*\n?|```', '', content).strip()
-            
-            return content
+
+            if not is_usable(content, "slides"):
+                last_reason = (
+                    "response was a reasoning dump"
+                    if is_reasoning_dump(content)
+                    else "response was not slide markdown"
+                )
+                print(f"    ⚠️  attempt {attempt+1}: rejected — {last_reason}")
+            else:
+                return content
         except Exception as e:
+            last_reason = str(e)
             print(f"    ⚠️  LLM attempt {attempt+1}: {e}")
-            if attempt == 2:
-                raise
+        if attempt < 2:
             time.sleep(5) # Wait before retry
+
+    raise RuntimeError(f"no usable slides after 3 attempts ({last_reason})")
 
 # ---- Main ----
 def process_subject(subject_name, matched_data, curriculum_id):
