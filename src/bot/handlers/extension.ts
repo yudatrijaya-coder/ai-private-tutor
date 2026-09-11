@@ -71,7 +71,7 @@ export async function handleExtensionRequest(ctx: Context, student: Student): Pr
 
 👤 Nama: *${student.name}*
 🆔 ID Siswa: \`${student.studentId}\`
-📱 Telegram ID: \`${student.id}\`
+📱 Telegram ID: \`${student.telegramId ?? "-"}\`
 ⏰ Masa trial sudah habis
 
 💰 Harga langganan:
