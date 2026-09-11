@@ -8,28 +8,20 @@
  */
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
+import { readStudentSecret, requireStudentSecret } from "./student-secret";
+import { evaluateStudentAccess } from "./access";
 
 const COOKIE_NAME = "student_session";
 const SESSION_DURATION = "7d"; // 7 days
 
 /**
- * Resolve the JWT signing secret at call time.
+ * Resolve the JWT signing secret at call time and fail closed.
  *
- * Read inside a function, not at module scope: `next build` evaluates modules
- * before PM2 injects the runtime environment, so a module-level constant would
- * capture `undefined` permanently in production.
- *
- * Fails closed — there is deliberately no development fallback, because the old
- * default string is public in git history and would let anyone forge a session.
+ * See `./student-secret` for why there is no development fallback and why the
+ * value must not be captured at module scope.
  */
 function jwtSecret(): Uint8Array {
-  const s = process.env.STUDENT_JWT_SECRET;
-  if (!s || s.length < 16) {
-    throw new Error(
-      "STUDENT_JWT_SECRET is not configured (must be >= 16 chars) — student sessions disabled",
-    );
-  }
-  return new TextEncoder().encode(s);
+  return requireStudentSecret();
 }
 
 export interface StudentSession {
@@ -68,7 +60,12 @@ export async function createStudentSession(
 
 /**
  * Read and verify the student session from the request cookies.
- * Returns null if no valid session exists.
+ * Returns null if no valid, still-entitled session exists.
+ *
+ * The entitlement check (trial expiry, status) runs HERE, not only in the
+ * middleware, because the middleware never sees `/api/auth/*` (its matcher
+ * excludes that prefix) and because API routes must not depend on a page-level
+ * redirect having happened.
  */
 export async function getStudentSession(): Promise<StudentSession | null> {
   try {
@@ -76,7 +73,41 @@ export async function getStudentSession(): Promise<StudentSession | null> {
     const token = cookieStore.get(COOKIE_NAME)?.value;
     if (!token) return null;
 
-    const { payload } = await jwtVerify(token, jwtSecret());
+    const secret = readStudentSecret();
+    if (!secret) return null;
+
+    const { payload } = await jwtVerify(token, secret);
+    const session = payload as unknown as StudentSession;
+
+    const access = evaluateStudentAccess({
+      status: session.status,
+      trialEndsAt: session.trialEndsAt,
+    });
+    if (!access.allowed) return null;
+
+    return session;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Verify the cookie signature only, without the entitlement check.
+ *
+ * For the few places that must still recognise a student whose trial lapsed
+ * (e.g. offering a renewal link instead of a hard logout). Never use this to
+ * authorise data access.
+ */
+export async function getStudentSessionUnchecked(): Promise<StudentSession | null> {
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get(COOKIE_NAME)?.value;
+    if (!token) return null;
+
+    const secret = readStudentSecret();
+    if (!secret) return null;
+
+    const { payload } = await jwtVerify(token, secret);
     return payload as unknown as StudentSession;
   } catch {
     return null;

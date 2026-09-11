@@ -2,25 +2,15 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
 import { auth } from "@/lib/auth/edge";
+import { readStudentSecret } from "@/lib/auth/student-secret";
+import { evaluateStudentAccess } from "@/lib/auth/access";
 
 const STUDENT_COOKIE = "student_session";
 
 /**
- * Read the signing secret at call time and fail closed when it is unset.
- *
- * The previous default ("student-dev-secret-change-in-production") is public
- * in the git history, so anyone could forge a student session cookie with it.
- * No fallback: if the env var is missing, every student request is rejected.
- */
-function studentSecret(): Uint8Array | null {
-  const s = process.env.STUDENT_JWT_SECRET;
-  if (!s || s.length < 16) return null;
-  return new TextEncoder().encode(s);
-}
-
-/**
- * Session probes for the API guards below. Both run in the Edge runtime:
- * `jose` and the Edge NextAuth config are Edge-safe.
+ * Session probes for the guards below. Both run in the Edge runtime:
+ * `jose`, the Edge NextAuth config, and the two pure auth helpers are all
+ * Edge-safe.
  */
 async function hasAdminSession(): Promise<boolean> {
   try {
@@ -31,13 +21,25 @@ async function hasAdminSession(): Promise<boolean> {
   }
 }
 
+/**
+ * True only for a correctly signed cookie whose claims still entitle the
+ * student to access (ACTIVE, or TRIAL that has not lapsed).
+ *
+ * The entitlement check is deliberately here as well as in `getStudentSession`:
+ * this is the gate that protects every `/api/students/*` call, and a cookie can
+ * outlive the trial it was minted under.
+ */
 async function hasStudentSession(request: NextRequest): Promise<boolean> {
   const token = request.cookies.get(STUDENT_COOKIE)?.value;
-  const secret = studentSecret();
+  const secret = readStudentSecret();
   if (!token || !secret) return false;
   try {
-    await jwtVerify(token, secret);
-    return true;
+    const { payload } = await jwtVerify(token, secret);
+    const decision = evaluateStudentAccess({
+      status: payload.status as string | undefined,
+      trialEndsAt: payload.trialEndsAt as string | undefined,
+    });
+    return decision.allowed;
   } catch {
     return false;
   }
@@ -87,7 +89,7 @@ export async function middleware(request: NextRequest) {
   // ---- Student routes ----
   if (pathname.startsWith("/student") && !pathname.startsWith("/login")) {
     const token = request.cookies.get(STUDENT_COOKIE)?.value;
-    const secret = studentSecret();
+    const secret = readStudentSecret();
     if (!token || !secret) {
       if (!secret) {
         console.error(
@@ -100,14 +102,17 @@ export async function middleware(request: NextRequest) {
     }
     try {
       const { payload } = await jwtVerify(token, secret);
-      const status = payload.status as string | undefined;
-      const trialEndsAt = payload.trialEndsAt as string | undefined;
-
-      if (status === "TRIAL" && trialEndsAt) {
-        if (new Date(trialEndsAt) < new Date()) {
-          const expiredUrl = new URL("/login/student?expired=trial", request.url);
-          return NextResponse.redirect(expiredUrl);
-        }
+      const decision = evaluateStudentAccess({
+        status: payload.status as string | undefined,
+        trialEndsAt: payload.trialEndsAt as string | undefined,
+      });
+      if (!decision.allowed) {
+        // Send them to the login page with the reason, rather than bouncing
+        // them to a page they cannot use. Login re-issues a token with fresh
+        // claims, so a stale cookie self-heals.
+        const expiredUrl = new URL("/login/student", request.url);
+        expiredUrl.searchParams.set("reason", decision.reason.toLowerCase());
+        return NextResponse.redirect(expiredUrl);
       }
     } catch {
       const loginUrl = new URL("/login/student", request.url);

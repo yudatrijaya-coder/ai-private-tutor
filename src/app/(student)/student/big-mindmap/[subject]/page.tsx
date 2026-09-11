@@ -7,9 +7,10 @@ import Link from "next/link";
 import { BigMindmap } from "./BigMindmap";
 import { parseMindmapFromMarkdown, type MindmapNode } from "@/lib/mindmap-template";
 
-const STUDENT_JWT_SECRET = new TextEncoder().encode(
-  process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
-);
+import { requireStudentSecret } from "@/lib/auth/student-secret";
+// Signing secret is resolved at call time by `requireStudentSecret()`, which
+// fails closed. The old module-scope constant captured `undefined` during
+// `next build` and fell back to a string that is public in git history.
 
 interface TopicNode {
   label: string;
@@ -22,7 +23,7 @@ async function getSessionStudent(): Promise<{ studentId: string; gradeLevel?: st
     const cookieStore = await cookies();
     const token = cookieStore.get("student_session")?.value;
     if (!token) return null;
-    const { payload } = await jwtVerify(token, STUDENT_JWT_SECRET);
+    const { payload } = await jwtVerify(token, requireStudentSecret());
     return payload as { studentId: string; gradeLevel?: string };
   } catch {
     return null;

@@ -16,9 +16,10 @@ import MissionSection from "@/components/MissionSection";
 import TrendSparklineSection from "@/components/TrendSparklineSection";
 import { MoodleBookQuickLink } from "@/components/MoodleQuickLink";
 
-const STUDENT_JWT_SECRET = new TextEncoder().encode(
-  process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
-);
+import { requireStudentSecret } from "@/lib/auth/student-secret";
+// Signing secret is resolved at call time by `requireStudentSecret()`, which
+// fails closed. The old module-scope constant captured `undefined` during
+// `next build` and fell back to a string that is public in git history.
 
 /** Baca student_session cookie dan dapatkan studentId dan studentIdentifier (kode) */
 async function getSessionStudent(): Promise<{
@@ -31,7 +32,7 @@ async function getSessionStudent(): Promise<{
     const cookieStore = await cookies();
     const token = cookieStore.get("student_session")?.value;
     if (!token) return null;
-    const { payload } = await jwtVerify(token, STUDENT_JWT_SECRET);
+    const { payload } = await jwtVerify(token, requireStudentSecret());
     const p = payload as {
       studentId: string;
       studentIdentifier: string;
@@ -187,6 +188,8 @@ async function RecommendationSection() {
         curriculum: {
           studentId: session.id,
         },
+        // Grade-scoped (ledger B-01).
+        ...(student?.gradeLevel ? { gradeLevel: student.gradeLevel } : {}),
       },
       select: { subject: true, topic: true, metadata: true },
       take: 20,

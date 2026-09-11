@@ -34,6 +34,9 @@ export async function POST(request: NextRequest) {
       where: { studentId: student.id },
       include: {
         materials: {
+          // Grade-scoped (ledger B-01): a mislabelled material inside this
+          // curriculum would otherwise become an exam question at the wrong level.
+          where: { gradeLevel: student.gradeLevel },
           orderBy: { weekOrder: "asc" },
           include: { quizzes: { where: { type: "QUIZ" } } },
         },
@@ -177,6 +180,8 @@ export async function GET(request: NextRequest) {
     where: { studentId: student.id },
     include: {
       materials: {
+        // Grade-scoped (ledger B-01) — same reason as the period template above.
+        where: { gradeLevel: student.gradeLevel },
         orderBy: { weekOrder: "asc" },
         select: { weekOrder: true, subject: true, topic: true },
       },

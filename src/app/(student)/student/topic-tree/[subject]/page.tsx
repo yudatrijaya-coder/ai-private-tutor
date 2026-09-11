@@ -5,17 +5,37 @@ import { cookies } from "next/headers";
 import { jwtVerify } from "jose";
 import Link from "next/link";
 
-const STUDENT_JWT_SECRET = new TextEncoder().encode(
-  process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
-);
+import { requireStudentSecret } from "@/lib/auth/student-secret";
+// Signing secret is resolved at call time by `requireStudentSecret()`, which
+// fails closed. The old module-scope constant captured `undefined` during
+// `next build` and fell back to a string that is public in git history.
 
 async function getSessionStudentId(): Promise<string | null> {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("student_session")?.value;
     if (!token) return null;
-    const { payload } = await jwtVerify(token, STUDENT_JWT_SECRET);
+    const { payload } = await jwtVerify(token, requireStudentSecret());
     return (payload as { studentId: string }).studentId;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Same as `getSessionStudentId`, plus the grade carried by the token.
+ *
+ * The grade is needed to filter materials: `Material` rows carry their own
+ * `gradeLevel`, and a row mislabelled for another grade inside this student's
+ * curriculum (ledger B-01) would otherwise show up as an off-grade topic.
+ */
+async function getSessionGrade(): Promise<string | null> {
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("student_session")?.value;
+    if (!token) return null;
+    const { payload } = await jwtVerify(token, requireStudentSecret());
+    return (payload as { gradeLevel?: string }).gradeLevel ?? null;
   } catch {
     return null;
   }
@@ -45,11 +65,16 @@ async function MindmapContent({ subject }: { subject: string }) {
   const decoded = decodeURIComponent(subject);
   const theme = THEMES[decoded] ?? { gradient: "from-slate-500/30 via-gray-600/20 to-zinc-700/30", accent: "#94a3b8", emoji: "📚" };
 
+  const sessionGrade = await getSessionGrade();
+
   const curricula = await prisma.curriculum.findMany({
     where: { studentId: sessionId },
     include: {
       materials: {
-        where: { subject: decoded },
+        // Grade-scoped (ledger B-01): `Material` carries its own gradeLevel, so
+        // without this a row labelled for another grade but living in this
+        // student's curriculum leaks into the topic tree.
+        where: { subject: decoded, ...(sessionGrade ? { gradeLevel: sessionGrade as never } : {}) },
         select: {
           topic: true,
           subTopic: true,

@@ -8,16 +8,17 @@ import { getYouTubeForTopic } from "@/data/youtube";
 import { getMoodleModule, getMoodleBook } from "@/data/moodle-modules";
 import { SubjectTracker } from "@/components/SubjectTracker";
 
-const STUDENT_JWT_SECRET = new TextEncoder().encode(
-  process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
-);
+import { requireStudentSecret } from "@/lib/auth/student-secret";
+// Signing secret is resolved at call time by `requireStudentSecret()`, which
+// fails closed. The old module-scope constant captured `undefined` during
+// `next build` and fell back to a string that is public in git history.
 
 async function getSessionStudent(): Promise<{ studentId: string; studentIdentifier: string; name: string; gradeLevel?: string } | null> {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("student_session")?.value;
     if (!token) return null;
-    const { payload } = await jwtVerify(token, STUDENT_JWT_SECRET);
+    const { payload } = await jwtVerify(token, requireStudentSecret());
     return payload as { studentId: string; studentIdentifier: string; name: string; gradeLevel?: string };
   } catch {
     return null;
@@ -116,7 +117,8 @@ async function SubjectContent({ subject }: { subject: string }) {
     where: { studentId: session.studentId },
     include: {
       materials: {
-        where: { subject: decodedSubject },
+        // Grade-scoped (ledger B-01) — see the note in the subject page.
+        where: { subject: decodedSubject, ...(studentData?.gradeLevel ? { gradeLevel: studentData.gradeLevel } : {}) },
         include: {
           _count: { select: { quizzes: true } },
           quizzes: {
