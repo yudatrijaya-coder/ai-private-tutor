@@ -334,7 +334,12 @@ async function SubjectContent({ subject }: { subject: string }) {
                     color: meta.color,
                   }}
                 >
-                  Minggu {material.weekOrder}
+                  {/*
+                    Ledger B-04: `weekOrder` 999 is the "unplaced" sentinel used
+                    for extra material that has no slot in the week sequence.
+                    Rendering it raw printed "Minggu 999" to students.
+                  */}
+                  {material.weekOrder >= 999 ? "Tambahan" : `Minggu ${material.weekOrder}`}
                 </span>
               </div>
 

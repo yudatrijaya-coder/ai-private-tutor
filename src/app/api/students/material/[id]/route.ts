@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { resolveScope, isAdmin } from "@/lib/auth/scope";
+import { resolveSlideMarkdown, resolveMindmap } from "@/lib/content/slide-content";
 
 /**
  * GET /api/students/material/[id] — Get material with slide content
@@ -46,18 +47,14 @@ export async function GET(
     }
 
     const metadata = material.metadata as Record<string, any> | null;
-    
-    // Pick content based on source
-    const slides = source === "sibi" 
-      ? (metadata?.slide_sibi ?? metadata?.slide) 
-      : source === "moodle" 
-        ? (metadata?.slide_moodle ?? metadata?.slide) 
-        : metadata?.slide;
-    const mindmap = source === "sibi" 
-      ? (metadata?.mindmap_sibi ?? metadata?.mindmap) 
-      : source === "moodle" 
-        ? (metadata?.mindmap_moodle ?? metadata?.mindmap) 
-        : metadata?.mindmap;
+
+    // Resolve content through the shared validator (ledger B-02). A plain
+    // `metadata?.slide_sibi ?? metadata?.slide` chain short-circuits on a
+    // non-null garbage value — 268 rows carried leaked LLM reasoning in
+    // `slide_sibi` and were served to students that way. The resolver skips
+    // unusable candidates instead.
+    const slides = resolveSlideMarkdown(metadata, source);
+    const mindmap = resolveMindmap(metadata, source);
 
     return NextResponse.json({
       id: material.id,
