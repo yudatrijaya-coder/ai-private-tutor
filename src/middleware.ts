@@ -18,8 +18,46 @@ function studentSecret(): Uint8Array | null {
   return new TextEncoder().encode(s);
 }
 
+/**
+ * Guard against RSC server-action scanners.
+ *
+ * Next.js action IDs are sha1-style lowercase hex digests. This build emits
+ * 42-char IDs, but the exact length is a framework-internal detail that can
+ * change between Next.js versions, so the accepted range is deliberately wide
+ * (32-64 hex). Blocking a legitimate action would break the app, so the filter
+ * only ever rejects values that CANNOT be a digest.
+ *
+ * Rationale: scanners POST junk action IDs ("x", "exploit", "0", "action") and
+ * every one makes Next.js print
+ *   Error: The Server Reference ID did not match the expected format. Received "x".
+ * 1600+ such lines were observed in production logs, drowning out real errors.
+ * Rejecting them here returns the same 404 the app would have produced, without
+ * the log spam or the server-action handler work.
+ *
+ * If a future Next.js changes the digest format, `looksLikeDigestButRejected`
+ * logs a warning so the breakage is visible instead of silent.
+ */
+const ACTION_DIGEST = /^[0-9a-f]{32,64}$/;
+const HEX_ONLY = /^[0-9a-f]+$/i;
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  const actionId = request.headers.get("next-action");
+  if (actionId && !ACTION_DIGEST.test(actionId)) {
+    // Pure hex but outside the accepted width: likely a real (new-format) action
+    // ID we would be breaking. Warn loudly. Junk like "exploit" stays silent.
+    if (HEX_ONLY.test(actionId)) {
+      console.warn(
+        `[middleware] Rejected hex next-action id of unexpected length (${actionId.length}): ${actionId.slice(0, 12)}... ` +
+          `If server actions are broken, widen ACTION_DIGEST in src/middleware.ts.`,
+      );
+    }
+    return new NextResponse("Server action not found.", {
+      status: 404,
+      headers: { "content-type": "text/plain; charset=utf-8" },
+    });
+  }
 
   // ---- Student routes ----
   if (pathname.startsWith("/student") && !pathname.startsWith("/login")) {
