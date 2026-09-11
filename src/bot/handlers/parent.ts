@@ -1,6 +1,8 @@
 import type { Context } from "telegraf";
 import type { Student } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
+import { generateWeeklyReport } from "@/agents/guardian/report";
+import { formatWeeklyReport } from "@/agents/guardian/notifier";
 
 /**
  * /parent_daftar <studentId> — Link parent Telegram ID to a student.
@@ -96,30 +98,34 @@ export async function handleReport(
   ctx: Context,
   student: Student,
 ): Promise<void> {
-  // Get recent agent logs for guardian reports
-  const report = await prisma.agentLog.findFirst({
-    where: {
-      studentId: student.id,
-      agentType: "GUARDIAN",
-      action: "report",
-      status: "COMPLETED",
-    },
-    orderBy: { createdAt: "desc" },
-  });
-
-  if (report?.output) {
-    const output =
-      typeof report.output === "string"
-        ? report.output
-        : JSON.stringify(report.output);
-    await ctx.reply(
-      `📋 *Laporan ${student.name}*\n\n${output}`,
-      { parse_mode: "Markdown" },
+  // Ledger C-11: this used to look up `AgentLog` with `action: "report"` — a
+  // value **no code ever writes** (every writer uses `"guardian-report"`), so
+  // the command always answered "Belum ada laporan mingguan" no matter how many
+  // reports had actually been sent. The stored `output` is a summary object
+  // (`{subjects, weakAreas, safety}`), not report text, so even a matching
+  // action would have dumped JSON at the parent. Generate the report on demand
+  // and render it with the same formatter the weekly push uses.
+  try {
+    const periodEnd = new Date();
+    const periodStart = new Date(
+      periodEnd.getTime() - 7 * 24 * 60 * 60 * 1000,
     );
-  } else {
+    const report = await generateWeeklyReport(
+      student.id,
+      periodStart,
+      periodEnd,
+    );
+    await ctx.reply(formatWeeklyReport(report, student.name), {
+      parse_mode: "Markdown",
+    });
+  } catch (err) {
+    console.error(
+      "[parent/laporan] gagal membuat laporan:",
+      err instanceof Error ? err.message : String(err),
+    );
     await ctx.reply(
       `📋 *Laporan ${student.name}*\n\n` +
-        `Belum ada laporan mingguan. Laporan akan dibuat otomatis setiap minggu. 🗓️`,
+        `Laporan sedang tidak bisa dibuat. Coba lagi nanti ya. 🙏`,
       { parse_mode: "Markdown" },
     );
   }

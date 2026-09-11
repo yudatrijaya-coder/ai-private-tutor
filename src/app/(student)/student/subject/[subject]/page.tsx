@@ -452,8 +452,9 @@ async function SubjectContent({ subject }: { subject: string }) {
                     color: "#a78bfa",
                   }}
                   title="Lihat mindmap untuk topik ini"
+                  aria-label={`Lihat mindmap untuk topik ${material.topic}`}
                 >
-                  🧠
+                  <span aria-hidden="true">🧠</span>
                 </Link>
 
                 {/* YouTube — per topik */}
@@ -474,8 +475,9 @@ async function SubjectContent({ subject }: { subject: string }) {
                             color: "#ef4444",
                           }}
                           title={`${yt.channel} — ${yt.title}`}
+                          aria-label={`Tonton video YouTube: ${yt.title} (${yt.channel})`}
                         >
-                          ▶️
+                          <span aria-hidden="true">▶️</span>
                         </a>
                       ))}
                     </div>
