@@ -1,32 +1,52 @@
 # AI Private Tutor — Caddy reverse proxy with auto SSL
-# Set A record @ -> 43.133.151.242 at your registrar, then Caddy
-# will auto-provision Let's Encrypt certificates.
 
 # 9Router — AI Model Router Dashboard
 9router.senangbelajar.web.id {
-    reverse_proxy 127.0.0.1:20128
-    header {
-        -Server
-    }
-    log {
-        output file /var/log/caddy/9router.log
-    }
+	reverse_proxy 127.0.0.1:20128
+	header {
+		-Server
+	}
+	log {
+		output file /var/log/caddy/9router.log {
+			roll_size 20MiB
+			roll_keep 5
+			roll_keep_for 720h
+		}
+	}
 }
 
 senangbelajar.web.id {
-    # Reverse proxy to Next.js app
-    reverse_proxy 127.0.0.1:3000
+	# Serve resume directly
+	handle /ai_private_tutor_project_resume.pdf {
+		root * /home/ubuntu/ai-private-tutor/public
+		file_server
+	}
 
-    # Security headers
+	# Reverse proxy to Next.js app
+	reverse_proxy 127.0.0.1:3000
+
+	# Security headers
+	header {
+		X-Content-Type-Options nosniff
+		X-Frame-Options DENY
+		X-XSS-Protection "1; mode=block"
+		-Server
+	}
+
+	# Logs — rotate so the file cannot grow unbounded (it had reached 90MB)
+	log {
+		output file /var/log/caddy/senangbelajar.log {
+			roll_size 20MiB
+			roll_keep 5
+			roll_keep_for 720h
+		}
+	}
+}
+
+qr.senangbelajar.web.id {
+    root * /tmp/qrshare
+    file_server browse
     header {
-        X-Content-Type-Options nosniff
-        X-Frame-Options DENY
-        X-XSS-Protection "1; mode=block"
         -Server
-    }
-
-    # Logs
-    log {
-        output file /var/log/caddy/senangbelajar.log
     }
 }
