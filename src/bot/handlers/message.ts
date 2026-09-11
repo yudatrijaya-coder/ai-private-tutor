@@ -178,8 +178,8 @@ export async function onMessage(ctx: Context): Promise<void> {
         }
         if (hoursLeft <= 72 && !session.context?._trialWarned) {
           await ctx.reply(
-            `⏰ Trial kamu tinggal *${Math.max(1, Math.ceil(hoursLeft / 24))} hari lagi*. ` +
-              `Kalau suka, hubungi admin untuk upgrade ke akun penuh! 🚀`,
+            `⏰ Trial kamu tinggal *${Math.max(1, Math.ceil(hoursLeft / 24))} hari lagi*.\n\n` +
+              `Kalau mau lanjut belajar, ketik /perpanjang ya — nanti Kakak jelasin pilihan paketnya. 🚀`,
             { parse_mode: "Markdown" },
           );
           await setSession(student.id, {
@@ -241,6 +241,7 @@ export async function onMessage(ctx: Context): Promise<void> {
                           `/jadwal_sekolah — Cek jadwal sekolah asli 🏫\n` +
                           `/web — Buka dashboard di browser\n` +
                           `/nilai — Lihat nilai dan progres\n` +
+                          `/perpanjang — Perpanjang masa belajar 📅\n` +
                           `/help — Tampilkan bantuan ini\n\n` +
                           `Atau cukup tanya aja langsung! 😊`,
             { parse_mode: "Markdown" },
@@ -344,6 +345,17 @@ export async function onMessage(ctx: Context): Promise<void> {
               ? `${cleaned}\n\n🌐 *Dashboard:* [Klik di sini](${dashboardUrl})`
               : `🌐 *Dashboard Belajar*\nKlik link di bawah:\n[Buka Dashboard](${dashboardUrl})`;
             await ctx.reply(msg, { parse_mode: "Markdown" });
+            return;
+          }
+
+          // ── Check for EXTENSION intent (perpanjang langganan) ──
+          // The tutor LLM answers the price/how-to question in prose and appends
+          // the tag; the actual admin notification goes through the same flow as
+          // the trial-expiry button.
+          if (/\[EXTENSION:REQUEST\]/i.test(respText)) {
+            const cleaned = respText.replace(/\[EXTENSION:REQUEST\]/gi, "").trim();
+            if (cleaned) await ctx.reply(cleaned);
+            await handleExtensionRequest(ctx, student);
             return;
           }
 
