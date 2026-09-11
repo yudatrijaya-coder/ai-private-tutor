@@ -488,3 +488,215 @@ datanya kembali kacau di masa depan.
 - **C-02** — 34× `Cannot read properties of undefined (reading 'type')`.
 - **D-02** — 5 halaman siswa ~20 KB shell SSR.
 - **A-18** — `student-login` fallback tanpa `passwordHash` (0 siswa terdampak).
+
+---
+
+# Pass 3 — B-02 (konten terkontaminasi) + B-04 (label minggu) + C-02 (TypeError auth)
+
+## B-02 — `metadata.slide_sibi` berisi penalaran mentah LLM, bukan slide
+
+### Akar
+
+Skrip generator SIBI (`scripts/sibi-*.py`, `scripts/generate-*.cjs`) hanya
+membuang pagar ``` dari respons model, tanpa memvalidasi bahwa isinya benar-benar
+slide. Ketika model berdeliberasi alih-alih menjawab, deliberasi itu **disimpan
+verbatim** ke `metadata.slide_sibi`.
+
+Jalur tampil memperparahnya — `??` berhenti pada nilai non-null apa pun:
+
+```ts
+// src/app/api/students/material/[id]/route.ts (sebelum)
+const slides = source === "sibi"
+  ? (metadata?.slide_sibi ?? metadata?.slide)   // dump non-null → fallback tak pernah jalan
+  : metadata?.slide;
+```
+
+### Skala (terukur)
+
+| Metrik | Nilai |
+|---|---|
+| Baris diperiksa | 1426 |
+| `slide_sibi` = dump penalaran | **268** (19%) |
+| Bisa dipulihkan dari kandidat bersih | 266 |
+| Tanpa kandidat bersih (placeholder) | 2 |
+| false positive / false negative detektor | 0 / 0 |
+
+Sebaran: Pendidikan Pancasila 41, Biologi 39, Bahasa Indonesia 37, Kimia 35,
+Matematika 26, Fisika 20, Sejarah 15, IPA 14, PJOK 14, IPS 11, lainnya 16.
+
+Penanda yang ditemukan (semua bahasa meta Inggris, tidak pernah muncul di slide
+ajar berbahasa Indonesia): `the user wants`, `Analyze the Request`,
+`Identify the Goal`, `Deconstruct the Topic`, `<think>`, `Let me ...`.
+
+### Perbaikan
+
+1. **`src/lib/content/slide-content.ts` (baru)** — `isLlmReasoningDump()` +
+   `isUsableSlideText()` + `resolveSlideMarkdown()` / `resolveMindmap()`.
+   Penanda "konklusif" (satu hit cukup) dipisah dari penanda "lemah"
+   (`target audience:`, `constraints:`) yang butuh dua kemunculan.
+2. **Jalur tampil** — `resolveSlideMarkdown()` menggantikan rantai `??` di
+   `src/app/api/students/material/[id]/route.ts`.
+3. **Data** — `scripts/fix-b02-slide-cot.ts`: teks asli **dipindah** ke
+   `metadata.slide_sibi_raw` (tidak dihancurkan), `slide_sibi` diisi kandidat
+   bersih, atau kuncinya dihapus bila tak ada kandidat. 268 baris diperbarui.
+   Snapshot: `docs/designs/2026-09-11-b02-rollback.json`.
+4. **Verifikasi** — `scripts/test-slide-content.ts`: 16/16 unit + sapuan DB
+   (false positive 0, false negative 0).
+
+Hasil: `dump tersisa di slide_sibi = 0`, `slide_sibi_raw tersimpan = 268`.
+
+### Sisa cluster B (bukan cacat, terdokumentasi)
+
+| ID | Status | Alasan |
+|---|---|---|
+| B-02 "3 material duplikat" | **false positive** | 403 grup `(curriculumId, subject, topic)` berulang, tetapi `topic` = **bab** dan `subTopic` = pelajaran (mis. "Matriks" 9× dengan `subTopic` berbeda). Bukan duplikat. |
+| B-03 "172 READY tanpa konten" | **false positive** | 186 baris tanpa `processedContent`, tetapi 184/186 punya `metadata.slide`, 183 punya `slide_sibi`, 186/186 punya `videoUrl`. `processedContent` bukan sumber tampilan. |
+| B-05 `videoScript` kosong | **by design** | Skrip video disimpan di `metadata.videoScript` oleh `src/agents/media/worker.ts:39`; kolom `Material.videoScript` legacy. |
+| B-07 10 DRAFT | normal | Sisa alur draf. |
+
+## B-04 — `weekOrder=999` ditampilkan sebagai "Minggu 999"
+
+### Akar
+
+`999` adalah sentinel "belum ditempatkan" untuk 603/1426 material (mis. Bahasa
+Mandarin 52/52, Matematika Penalaran 52/52). Skrip ujian sudah menanganinya
+(`weekOrder: { lt: 999 }`), tetapi UI siswa mencetak nilainya mentah:
+
+```tsx
+// src/app/(student)/student/subject/[subject]/page.tsx:337
+Minggu {material.weekOrder}     // → "Minggu 999"
+```
+
+### Perbaikan
+
+```tsx
+{material.weekOrder >= 999 ? "Tambahan" : `Minggu ${material.weekOrder}`}
+```
+
+Material tanpa slot minggu tetap terlihat, tanpa nomor palsu.
+
+## C-02 — `Cannot read properties of undefined (reading 'type')` (34×)
+
+### Akar
+
+`@auth/core` 0.41.3 (`node_modules/@auth/core/lib/index.js:53`) melakukan
+dereferensi `options.provider.type` untuk aksi `callback` **sebelum** memvalidasi
+bahwa `providerId` ada:
+
+```js
+case "callback":
+    if (options.provider.type === "credentials")   // options.provider undefined
+        validateCSRF(action, csrfTokenVerified);
+```
+
+`POST /api/auth/callback` tanpa segmen provider → TypeError → ditangkap,
+di-log `[auth][error]`, dan diubah jadi 302 ke halaman error. Terjadi bersamaan
+dengan banjir `Failed to find Server Action "x"` (pemindai otomatis), terakhir
+2026-09-10 21:02.
+
+### Reproduksi
+
+```
+before=34
+  [302] POST /api/auth/callback            ← TypeError, 302 ke error page
+  [308] POST /api/auth/callback/
+after=36  delta=2
+```
+
+### Perbaikan
+
+`src/app/api/auth/[...nextauth]/route.ts` — guard sebelum menyerahkan ke library.
+ID provider adalah segmen path, jadi bentuk cacat bisa dideteksi lebih dulu:
+
+```ts
+export async function POST(req: NextRequest) {
+  if (/\/callback\/?$/.test(new URL(req.url).pathname)) {
+    return NextResponse.json({ error: "MissingProviderId" }, { status: 400 });
+  }
+  return handlers.POST(req);
+}
+```
+
+Callback tanpa ID provider tidak pernah valid, jadi 400 lebih tepat daripada
+500/302. Tes regresi: `scripts/test-c02-callback-guard.sh` (5/5) — memastikan
+`callback/credentials` tetap 302, `session` tetap 400, dan tidak ada
+`reading 'type'` baru di `logs/err.log`.
+
+> Catatan: akar ada di `node_modules` (`next-auth@5.0.0-beta.32` /
+> `@auth/core@0.41.3`). Guard ini bertahan sampai upstream memperbaiki
+> `lib/index.js:53`; perbarui tes bila versi naik.
+
+---
+
+# Pass 4 — B-02 lanjutan: `mindmap_sibi` juga terkontaminasi
+
+## Bagaimana ditemukan
+
+Probe produksi Pass 3 memakai pola deteksi yang sama terhadap **seluruh** respons
+API, bukan hanya field `slides`. Field `mindmap` ikut kena:
+
+```json
+[{"id":"0","label":"Struktur Bumi","children":[
+   {"id":"1","label":"Thinking. 1.  **Analyze the Request:**"},
+   {"id":"2","label":"Target: Mindmap outline."},
+   {"id":"3","label":"Format: Hierarchical, indented dashes, 2 spaces per level."}]}]
+```
+
+Jadi remediasi Pass 3 **belum tuntas** — ia hanya menutup `slide_sibi`.
+
+## Akar kedua: bug di resolver yang baru ditulis
+
+`resolveMindmap` (dan cabang `slides` di `resolveSlideMarkdown`) mengembalikan
+kandidat array **tanpa validasi**:
+
+```ts
+// src/lib/content/slide-content.ts (sebelum)
+if (Array.isArray(candidate)) {
+  if (candidate.length > 0) return JSON.stringify(candidate);   // ← lolos validasi
+  continue;
+}
+if (isUsableSlideText(candidate)) return candidate.trim();
+```
+
+`mindmap_sibi` disimpan sebagai **array JSON**, jadi cabang array selalu menang dan
+`isLlmReasoningDump` tidak pernah dijalankan. Detektor yang benar pun tidak akan
+menolong selama jalur ini melewatinya.
+
+## Skala (terukur)
+
+| Metrik | Nilai |
+|---|---|
+| Baris dengan `mindmap_sibi` | 1426 (semua) |
+| Tipe JSON | array 1424, object 2 |
+| Terkontaminasi | **289** (20%) |
+| Bisa dipulihkan dari `metadata.mindmap` | 266 |
+| Tanpa sumber bersih | 23 |
+
+Sebaran: Sejarah 16, PJOK 15, IPS 9, Informatika 6, Geografi 4, Bahasa Mandarin 1,
+Pendidikan Pancasila 6, Biologi 3, lainnya.
+
+## Perbaikan
+
+1. **Validasi array/objek** — `candidateText()` menyerialkan pohon sehingga
+   detektor melihat `label`; `isUsableMindmap()` menilai korpus label
+   (≥ 2 label, tidak ada penanda deliberasi). Cabang `slides` di
+   `resolveSlideMarkdown` kini tunduk pada bar yang sama.
+2. **Data** — `scripts/fix-b02-mindmap-cot.ts`: pohon asli dipindah ke
+   `metadata.mindmap_sibi_raw`; `mindmap_sibi` diisi pohon bersih dari
+   `metadata.mindmap`, atau kuncinya dihapus bila tak ada pengganti.
+   289 baris diperbarui. Snapshot:
+   `docs/designs/2026-09-11-b02-mindmap-rollback.json`.
+3. **Tes** — 10 kasus mindmap baru (termasuk array kosong, node tunggal,
+   fallback ke `metadata.mindmap`, dan `slides` array kotor). Sapuan DB kini
+   memeriksa kedua field.
+
+Hasil: `mindmap_sibi tak layak/dump = 0`, `mindmap_sibi_raw tersimpan = 289`,
+`mindmap bocor ke klien = 0`, tes **31/31**.
+
+## Sisa yang terdokumentasi
+
+23 material (Sejarah, Geografi, Biologi, Pendidikan Pancasila — semuanya SMP_1)
+kehilangan mindmap karena `mindmap_sibi` satu-satunya sumbernya dan isinya
+deliberasi. UI merender tanpa mindmap; **lebih baik kosong daripada sampah**.
+Regenerasi mindmap untuk 23 baris ini adalah pekerjaan pipeline konten terpisah
+(lihat `ai-private-tutor-sibi-pipeline`), bukan cacat kode.
