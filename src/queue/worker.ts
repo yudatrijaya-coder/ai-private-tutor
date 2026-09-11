@@ -8,7 +8,7 @@ import {
   MAX_RETRIES,
   defaultConcurrency,
 } from "./definitions";
-import { shouldDeadLetter } from "./dlq";
+import { shouldDeadLetter, effectiveAttempts } from "./dlq";
 
 export type JobProcessor<T = unknown> = (
   job: Job<T, unknown, string>,
@@ -104,7 +104,9 @@ export function createWorker<T>(
         });
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : String(err);
-        const maxAttempts = job.opts.attempts ?? MAX_RETRIES;
+        // Must agree with the predicate, or the row is closed as FAILED on the
+        // wrong attempt. `effectiveAttempts` exists for exactly that reason.
+        const maxAttempts = effectiveAttempts(job);
 
         // If this is the last attempt, close the row as FAILED and stop.
         const dead = shouldDeadLetter(job);
@@ -117,7 +119,7 @@ export function createWorker<T>(
             // `getDeadLetteredJobs` finds dead letters by this marker, so the
             // final failure must carry it.
             error: dead
-              ? `Dead-lettered after ${maxAttempts} failed attempts`
+              ? `Dead-lettered after ${maxAttempts} failed attempt${maxAttempts === 1 ? "" : "s"}`
               : errorMessage,
             metadata: dead
               ? toJson({

@@ -1053,20 +1053,98 @@ Hasil `--apply` (snapshot: `docs/designs/2026-09-11-c10-stranded-sweep-rollback.
 | `COMPLETED` | 135 | 207 |
 
 2 baris `ACTIVE` tersisa sengaja tidak disentuh (lebih muda dari cutoff 7 hari).
-Tampilan DLQ tidak tercemar: 0 baris memuat penanda `Dead-lettered`, jadi
-`getDeadLetteredJobs()` tetap bersih.
+
+## Bug ketiga: DLQ tidak pernah menerima satu entri pun
+
+Ditemukan saat menyiapkan verifikasi produksi. Dua cacat bertumpuk di
+`shouldDeadLetter()`:
+
+1. **Filter mustahil cocok** — ia mencari `jobId` + `status: "RETRYING"`,
+   padahal worker menulis baris itu *setelah* memanggilnya.
+2. **Off-by-one** — `attemptsMade` bersifat 0-based selama proses berjalan
+   (terukur: 0, 1, 2 pada job 3-percobaan), baru naik ke 3 di event `failed`.
+
+Akibatnya predikatnya tak pernah bernilai benar, jadi **0 dari 5.497 baris**
+memuat penanda `Dead-lettered` — padahal `getDeadLetteredJobs()` mencari persis
+penanda itu. Tampilan DLQ dan tombol retry manual permanen kosong. Perbaikan:
+`shouldDeadLetter` dijadikan predikat murni (tanpa tulis DB), dan worker yang
+menutup barisnya.
+
+## Semantik percobaan BullMQ — terukur, bukan diasumsikan
+
+`job.opts.attempts` **tidak** bernilai `undefined` saat `attempts` tidak
+ditentukan; nilainya **`0`**, dan BullMQ menjalankan processor **sekali**:
+
+| cara job ditambahkan | `job.opts.attempts` | processor jalan |
+|---|---|---|
+| tanpa `attempts`, tanpa default queue | 0 | 1 |
+| `attempts: 0` | 0 | 1 |
+| `attempts: 1` | 1 | 1 |
+| `attempts: 3` | 3 | 3 |
+
+Limit sebenarnya karena itu `max(1, opts.attempts)` — diekstrak ke
+`effectiveAttempts()` di `dlq.ts` agar predikat dan pesan dead-letter tak bisa
+saling berselisih.
+
+Catatan jujur: ekspresi lama `job.opts.attempts ?? MAX_RETRIES` **bukan** bug
+fungsional — `0 ?? 3` menghasilkan `0`, jadi fallback-nya mati dan
+`Math.max(1, 0)` = 1 tetap benar. Yang salah adalah pesannya: job tanpa
+`attempts` dilaporkan "Dead-lettered after **0** failed attempts". Hipotesis
+awal bahwa fallback itu bisa memulihkan bug asli **diuji dan gugur** (test tetap
+14/14 dengan versi `?? MAX_RETRIES`), dan koreksi ini dicatat alih-alih
+dipertahankan.
+
+## Bukti di produksi — `scripts/verify-c10-in-production.ts`
+
+Test regresi berjalan di Redis db 9 dengan worker sendiri. Itu membuktikan
+logikanya, bukan worker yang **sedang berjalan**. Skrip ini menaruh dua job ke
+queue sungguhan (Redis db 0) lewat `getQueue()` aplikasi — jadi ikut membawa
+`defaultJobOptions` (`attempts: 3`) — lalu membiarkan worker produksi
+mengonsumsinya dan membaca barisnya dari DB.
+
+Job dipilih agar **tanpa efek ke pihak ketiga**:
+
+1. `assessment-generate` dengan siswa + topik tak dikenal → material tak
+   ditemukan, processor kembali tanpa panggilan LLM dan tanpa tulis data.
+   Jalur SUKSES, dan justru queue yang mengakumulasi 2.637 baris yatim.
+2. `improvement-analysis` dengan `attemptId` tak ada → `analyzeExamAttempt`
+   melempar di lookup, sebelum panggilan LLM. Jalur GAGAL dengan retry penuh.
+
+`guardian-report` **sengaja tidak dipakai**: `processGuardianReportJob` selalu
+memanggil `sendWeeklyReportToParent`, jadi memicunya akan mengirim pesan
+Telegram ke orang tua sungguhan. Invarian yang diuji adalah siklus hidup, dan
+job apa pun melatihnya — tak ada alasan menerima efek samping itu.
+
+Hasil (deploy `23:18`, commit `c0aea7d`+):
+
+```
+verify-c10-ok-5bf53aa3    COMPLETED  -
+verify-c10-fail-5bf53aa3  FAILED     Dead-lettered after 3 failed attempts
+lulus: 9/9
+```
+
+Job gagal menghabiskan **3 percobaan** dalam **satu baris** — artinya retry
+benar-benar terjadi dan barisnya di-resume antar percobaan, bukan hanya sekali
+jalan. Sesudahnya `getDeadLetteredJobs()` mengembalikan **2 baris** untuk
+pertama kalinya; sebelumnya selalu 0.
+
+Baris verifikasi dihapus sesudahnya (`scripts/check-dlq-and-cleanup.ts --apply`),
+dibaca ulang dari DB: 0 tersisa.
 
 ## Verifikasi
 
-- `npx tsx scripts/test-agent-log-lifecycle.ts` — **9/9**
-- `npx tsc --noEmit` — **exit 0**
-- `ops/build.sh` — **exit 0**; deploy online, `[queue/runner] 10 queue(s) initialised`
+- `npx tsx scripts/test-agent-log-lifecycle.ts` — **14/14** (naik dari 9: kasus
+  "gagal tanpa `attempts`" ditambahkan)
+- `npx tsx scripts/verify-c10-in-production.ts` — **9/9** di worker produksi
+- `npx tsx scripts/check-dlq-and-cleanup.ts` — DLQ mengembalikan 2 baris; 4 baris uji dihapus
+- `npx tsx scripts/test-slide-content.ts` — 31/31
+- `python3.12 scripts/test-sibi-content-guard.py` — lulus
+- `npx tsx scripts/test-student-access.ts` — 13/13
+- `bash scripts/test-c02-callback-guard.sh` — 5/5
+- `npx tsc --noEmit` — **exit 0**; `ops/build.sh` — **exit 0**
+- Deploy online, `[queue/runner] 10 queue(s) initialised`
 - Probe: `/` 200, `/login` 200, `/student` 307, cron tanpa secret 401
-- DB: 0 baris uji tertinggal
-
-## Verifikasi
-
-- `npx tsc --noEmit` — **exit 0** setelah ketiga perbaikan.
+- DB: 0 baris uji tertinggal; Redis db 9 dibersihkan, db 0 (aplikasi) utuh
 - D-04 (tombol `▶️` tanpa label teks) — diperbaiki: `aria-label` deskriptif +
   emoji di dalam `aria-hidden`.
 

@@ -50,7 +50,7 @@ function check(label: string, got: unknown, want: unknown) {
 async function runJob(
   tag: string,
   processor: () => Promise<void>,
-  attempts: number,
+  attempts: number | undefined,
 ): Promise<string> {
   const { Queue, Worker } = await import("bullmq");
   const { redis } = await import("../src/queue/redis");
@@ -67,15 +67,22 @@ async function runJob(
   const jobId = `${tag}-${randomUUID().slice(0, 8)}`;
   const queueName = "guardian-report" as const;
 
+  // `attempts === undefined` means "do not specify it anywhere" — exactly what
+  // a bare `new Queue(...).add(...)` does. BullMQ then runs the processor ONCE
+  // while reporting `job.opts.attempts` as 0. That is the configuration that
+  // used to strand a row on RETRYING forever, so it gets its own case.
   const queue = new Queue(queueName, {
     connection: redis as never,
     defaultJobOptions: {
-      attempts,
+      ...(attempts === undefined ? {} : { attempts }),
       backoff: { type: "fixed", delay: 10 },
       removeOnComplete: true,
       removeOnFail: true,
     },
   });
+
+  // What BullMQ will really do — mirrors `effectiveAttempts` in dlq.ts.
+  const effective = Math.max(1, attempts ?? 0);
 
   // A dedicated Worker on the same (isolated) database, mirroring exactly how
   // `initQueues` wires workers up in production.
@@ -95,10 +102,7 @@ async function runJob(
     // on the first event would assert while a retry is still pending and read a
     // row that is legitimately still RETRYING.
     worker.on("failed", (job) => {
-      // BullMQ emits `failed` after EVERY attempt, not just the last one.
-      // Waiting on the first event would assert while a retry is still pending
-      // and read a row that is legitimately still RETRYING.
-      if (job && job.attemptsMade >= attempts) finish();
+      if (job && job.attemptsMade >= effective) finish();
     });
     setTimeout(finish, 20_000).unref?.();
   });
@@ -119,7 +123,7 @@ async function runJob(
     if (!j) break;
     const state = await j.getState();
     if (state === "completed") break;
-    if (state === "failed" && j.attemptsMade >= attempts) break;
+    if (state === "failed" && j.attemptsMade >= effective) break;
     await new Promise((r) => setTimeout(r, 200));
   }
 
@@ -191,7 +195,34 @@ async function main() {
       );
     }
 
-    console.log("\n=== 3. tidak ada baris yatim untuk job uji ===");
+    console.log("\n=== 3. job gagal TANPA `attempts` (BullMQ mencoba sekali) ===");
+    {
+      // The trap: `job.opts.attempts` reads 0 here, and BullMQ runs the
+      // processor exactly once. A predicate that falls back to MAX_RETRIES
+      // waits for a retry that never arrives and leaves the row RETRYING
+      // forever — the original bug, recreated.
+      const jobId = await runJob(
+        "noattempts",
+        async () => {
+          throw new Error("test: gagal sekali tanpa retry");
+        },
+        undefined,
+      );
+      created.push(jobId);
+      const s = await survey(jobId);
+      console.log(`  statuses: ${JSON.stringify(s.statuses)}`);
+      console.log(`  errors  : ${JSON.stringify(s.errors)}`);
+      check("tepat 1 baris", s.total, 1);
+      check("status FAILED (bukan RETRYING yang menggantung)", s.statuses, ["FAILED"]);
+      check("0 baris non-terminal", s.nonTerminal, 0);
+      check(
+        "penanda Dead-lettered menyebut 1 percobaan",
+        (s.errors[0] ?? "").includes("Dead-lettered after 1"),
+        true,
+      );
+    }
+
+    console.log("\n=== 4. tidak ada baris yatim untuk job uji ===");
     {
       for (const jobId of created) {
         const s = await survey(jobId);
