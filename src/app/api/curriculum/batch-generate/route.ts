@@ -4,6 +4,7 @@ import { callLLM } from "@/llm/client";
 import { getContent, hasContent } from "@/data/curriculum-content";
 import { GRADE_TOPICS } from "@/data/curriculum-topics";
 import { normalizeVideoUrl } from "@/lib/video-url";
+import { resolveScope, isAdmin } from "@/lib/auth/scope";
 
 /**
  * POST /api/curriculum/batch-generate
@@ -18,6 +19,12 @@ import { normalizeVideoUrl } from "@/lib/video-url";
  * Returns progress array per subTopic.
  */
 export async function POST(request: NextRequest) {
+  // Admin only — this generates and persists curriculum content, and it costs
+  // LLM calls. It must never be reachable anonymously.
+  if (!isAdmin(await resolveScope())) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const body = await request.json();
   const { studentId, batchSize = 5 } = body || {};
 

@@ -1,6 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+/**
+ * GET /api/bot/diag — probe the Telegram Bot API with the configured token.
+ *
+ * Guarded by CRON_SECRET: it exercises a live credential against a third-party
+ * API, so it must not be reachable anonymously.
+ */
+export async function GET(req: NextRequest) {
+  const secret = process.env.CRON_SECRET;
+  const provided =
+    req.headers.get("x-cron-secret") ?? req.nextUrl.searchParams.get("secret");
+
+  if (!secret || provided !== secret) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const results: Record<string, any> = {};
 

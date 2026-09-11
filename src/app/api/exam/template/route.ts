@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { getQuiz as getQuizSD5 } from "@/data/quiz-bank-sd5";
 import { getQuiz as getQuizSMP7 } from "@/data/quiz-bank-smp7";
 import { getQuiz as getQuizSMA11 } from "@/data/quiz-bank-sma11";
+import { resolveScope, isAdmin } from "@/lib/auth/scope";
 
 const QUIZ_BANKS: Record<string, any> = {
   SD_5: getQuizSD5,
@@ -15,6 +16,11 @@ const QUIZ_BANKS: Record<string, any> = {
  * Body: { studentId, periodWeeks?: number } — default 4 weeks per exam
  */
 export async function POST(request: NextRequest) {
+  // Admin only — this writes new exams into the database.
+  if (!isAdmin(await resolveScope())) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     const body = await request.json();
     const { studentId, periodWeeks = 4 } = body;
@@ -156,6 +162,11 @@ export async function POST(request: NextRequest) {
  * Shows the timeline of exam periods for a student
  */
 export async function GET(request: NextRequest) {
+  // Admin only — exam template planning is a dashboard feature.
+  if (!isAdmin(await resolveScope())) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const studentId = request.nextUrl.searchParams.get("studentId");
   if (!studentId) return NextResponse.json({ error: "studentId required" }, { status: 400 });
 

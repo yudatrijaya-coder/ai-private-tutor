@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { handleActivity } from "@/lib/gamification";
 import { addToReviewQueue } from "@/lib/spaced-repetition";
+import { resolveScope, scopedStudentIdentifier } from "@/lib/auth/scope";
 
 const ALLOWED_TYPES = [
   "slide_view",
@@ -24,8 +25,13 @@ const EXAM_TYPES = new Set(["exam_complete", "exam_start"]);
  * Used by student pages to show "already done" indicators.
  */
 export async function GET(request: NextRequest) {
+  const scope = await resolveScope();
+  if (!scope) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { searchParams } = new URL(request.url);
-  const studentId = searchParams.get("studentId"); // e.g. "SYIFA001"
+  const studentId = scopedStudentIdentifier(scope, searchParams.get("studentId"));
 
   if (!studentId) {
     return NextResponse.json({ error: "studentId required" }, { status: 400 });
@@ -129,8 +135,17 @@ export async function GET(request: NextRequest) {
  */
 export async function POST(request: NextRequest) {
   try {
+    const scope = await resolveScope();
+    if (!scope) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const body = await request.json();
-    const { studentId, materialId, type, metadata } = body;
+    const { materialId, type, metadata } = body;
+
+    // A student may only log activity as themselves; the identifier is taken
+    // from the session, never trusted from the body.
+    const studentId = scopedStudentIdentifier(scope, body.studentId ?? null);
 
     // Validate required fields
     if (!studentId || !type) {

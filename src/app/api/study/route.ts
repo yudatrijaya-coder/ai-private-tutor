@@ -9,6 +9,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getStudentSession } from "@/lib/auth/student";
+import { resolveScope, scopedStudentIdentifier, isAdmin } from "@/lib/auth/scope";
 import { captureError } from "@/lib/monitoring";
 
 /* ------------------------------------------------------------------ */
@@ -82,10 +83,22 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
+    const scope = await resolveScope();
+    if (!scope) {
+      return NextResponse.json({ error: "not authenticated" }, { status: 401 });
+    }
+
     const { searchParams } = new URL(request.url);
-    const studentId = searchParams.get("studentId");
     const days = parseInt(searchParams.get("days") || "7");
     const period = searchParams.get("period") || "daily"; // daily | weekly | monthly
+
+    // A student may only read their OWN stats — the query param is discarded for
+    // them. The no-id branch below returns every ACTIVE student, which is an
+    // admin-only view, so a student can never reach it.
+    const studentId = scopedStudentIdentifier(scope, searchParams.get("studentId"));
+    if (!studentId && !isAdmin(scope)) {
+      return NextResponse.json({ error: "studentId required" }, { status: 400 });
+    }
 
     const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
 

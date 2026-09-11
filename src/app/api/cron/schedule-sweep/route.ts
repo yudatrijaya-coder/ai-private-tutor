@@ -14,7 +14,9 @@ import { runReminderSweep } from "@/agents/scheduler/reminder";
 import { prisma } from "@/lib/prisma";
 import { bot } from "@/bot/bot";
 
-const CRON_SECRET = process.env.CRON_SECRET || "local-cron";
+// NOTE: the cron secret is read inside the handler, not at module scope.
+// The old `process.env.CRON_SECRET || "local-cron"` default was guessable —
+// anyone could trigger the sweep if the env var were ever unset.
 
 /* ── Helpers ─────────────────────────────────────────────────── */
 
@@ -192,7 +194,8 @@ async function setDefaultConfigIfMissing(): Promise<number> {
 
 export async function GET(request: NextRequest) {
   const token = request.nextUrl.searchParams.get("token");
-  if (token !== CRON_SECRET) {
+  const expected = process.env.CRON_SECRET;
+  if (!expected || token !== expected) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

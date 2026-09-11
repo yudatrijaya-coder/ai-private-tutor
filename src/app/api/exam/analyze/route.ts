@@ -1,8 +1,14 @@
 
 import { NextResponse } from "next/server";
 import { analyzeExamAttempt } from "@/services/improvement-analysis";
+import { resolveScope, isAdmin } from "@/lib/auth/scope";
 
 export async function POST(request: Request) {
+  // Admin only — re-running AI analysis mutates an attempt's improvement plan.
+  if (!isAdmin(await resolveScope())) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     const { attemptId } = await request.json();
 

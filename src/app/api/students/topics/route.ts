@@ -1,12 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { resolveScope, scopedStudentIdentifier } from "@/lib/auth/scope";
 
 /**
  * GET /api/students/topics?studentId=xxx&subject=xxx
- * Returns unique topics for a student's subject
+ * Returns unique topics for a student's subject.
+ *
+ * A student may only read their own curriculum — the query param is discarded
+ * for them. Admins keep the ability to inspect any student.
  */
 export async function GET(request: NextRequest) {
-  const studentId = request.nextUrl.searchParams.get("studentId");
+  const scope = await resolveScope();
+  if (!scope) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const studentId = scopedStudentIdentifier(
+    scope,
+    request.nextUrl.searchParams.get("studentId"),
+  );
   const subject = request.nextUrl.searchParams.get("subject");
   if (!studentId || !subject) return NextResponse.json({ error: "studentId and subject required" }, { status: 400 });
 

@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { generateCurriculumDraft } from "@/agents/curriculum";
+import { resolveScope, isAdmin } from "@/lib/auth/scope";
 
 export async function POST(request: NextRequest) {
+  // Admin only — this DELETES the student's curriculum and regenerates it.
+  if (!isAdmin(await resolveScope())) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const body = await request.json();
   const { studentId } = body;
 

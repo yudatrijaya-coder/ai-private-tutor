@@ -417,6 +417,10 @@ async function ScheduleSection() {
       subject: true,
       topic: true,
       metadata: true,
+      // The quiz page takes a QUIZ id, not a material id. Fetching the first
+      // quiz id here is what makes the "📝 Quiz" link resolve; passing matId
+      // produced a 404 {"error":"Quiz not found"}.
+      quizzes: { take: 1, select: { id: true } },
       _count: {
         select: { quizzes: true },
       },
@@ -449,6 +453,7 @@ async function ScheduleSection() {
             // Cari materialId dari matching subject+topic
             const mat = matByKey.get(`${subject}|${topic}`);
             const matId = mat?.id;
+            const matQuizId = mat?.quizzes?.[0]?.id;
             const hasQuiz = (mat?._count?.quizzes ?? 0) > 0;
             const generatedVideoUrl = (mat?.metadata as any)?.generatedVideoUrl;
 
@@ -503,9 +508,9 @@ async function ScheduleSection() {
                       📖 Baca
                     </Link>
                   )}
-                  {matId && hasQuiz && (
+                  {matQuizId && hasQuiz && (
                     <Link
-                      href={`/student/quiz?quizId=${matId}`}
+                      href={`/student/quiz?quizId=${matQuizId}`}
                       className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all hover:opacity-80"
                       style={{
                         backgroundColor: "rgba(99,102,241,0.1)",
@@ -531,7 +536,7 @@ async function ScheduleSection() {
                   )}
                   {matId && (
                     <Link
-                      href={`/student/mindmap/${encodeURIComponent(subject)}`}
+                      href={`/student/mindmap/${encodeURIComponent(subject)}?id=${matId}`}
                       className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all hover:opacity-80"
                       style={{
                         backgroundColor: "rgba(167,139,250,0.1)",

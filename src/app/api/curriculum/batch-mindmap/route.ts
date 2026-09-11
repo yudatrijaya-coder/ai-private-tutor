@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { parseMindmapFromMarkdown, type MindmapNode } from "@/lib/mindmap-template";
+import { resolveScope, isAdmin } from "@/lib/auth/scope";
 
 /**
  * Parse slides that are flat bullet/numbered lists (no ## headers) into mindmap nodes.
@@ -56,6 +57,11 @@ function slidesToMindmap(slides: string): MindmapNode[] {
  * and stores in metadata.mindmap.
  */
 export async function POST(request: NextRequest) {
+  // Admin only — this writes mindmap data into material metadata.
+  if (!isAdmin(await resolveScope())) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     const body = await request.json();
     const { studentId } = body || {};
