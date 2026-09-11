@@ -9,6 +9,7 @@ import { SYSTEM_PROMPTS } from "@/llm/prompts";
 import { scanResponse } from "../safety";
 import { setSession } from "../session";
 import { buildCapabilitiesPrompt } from "./capabilities";
+import { buildSubscriptionKnowledge } from "@/data/subscription";
 import {
   getStudentTimezone,
   getTimezoneLabel,
@@ -44,7 +45,7 @@ function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise
  * Single source of truth — the capability list comes from `capabilities.ts`
  * so `handleMessage` and `streamMessage` can never drift apart.
  */
-async function buildSystemPrompt(student: Student): Promise<string> {
+export async function buildSystemPrompt(student: Student): Promise<string> {
   const persona = getPersona(student.persona);
   const personaPrompt =
     persona.prompt ?? `${SYSTEM_PROMPTS.tutor}\n\nPersona: ${persona.displayName}`;
@@ -81,6 +82,14 @@ async function buildSystemPrompt(student: Student): Promise<string> {
     : "";
 
   const masterySummary = await buildMasterySummary(student);
+
+  // Subscription/trial facts — without these the tutor invents
+  // "hubungi support/admin" when asked about upgrading.
+  const subscriptionKnowledge = buildSubscriptionKnowledge({
+    status: student.status,
+    trialEndsAt: student.trialEndsAt,
+    timezone: tz,
+  });
   return [
     SYSTEM_PROMPTS.tutor,
     "",
@@ -98,7 +107,7 @@ async function buildSystemPrompt(student: Student): Promise<string> {
     "",
     masterySummary,
     "",
-    buildCapabilitiesPrompt(),
+    buildCapabilitiesPrompt(subscriptionKnowledge),
     "",
     "Respond in Indonesian, warm, friendly.",
   ].join("\n");

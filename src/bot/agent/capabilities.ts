@@ -95,9 +95,16 @@ export const CAPABILITIES = [
     description: "Start spaced-repetition review of past wrong answers",
     trigger: "student asks to review, repeat, or ulang soal yang salah",
   },
+  {
+    tag: "EXTENSION:REQUEST",
+    description: "Send a subscription-extension request to the admin",
+    trigger:
+      'student says they want to extend/upgrade/renew (e.g. "mau perpanjang", "cara upgrade gimana", "udah transfer")',
+    note: 'Only append this tag when the student actually wants to extend. For a plain price question ("berapa harganya?"), just answer with the plans — do NOT append the tag.',
+  },
 ];
 
-export function buildCapabilitiesPrompt(): string {
+export function buildCapabilitiesPrompt(subscriptionKnowledge?: string): string {
   const lines = CAPABILITIES.map((c, i) => {
     let text = `${i + 1}. [${c.tag}] — ${c.description}`;
     if (c.subCommands) {
@@ -120,5 +127,7 @@ export function buildCapabilitiesPrompt(): string {
     'IMPORTANT: "jadwal" alone = [SCHEDULE]. "sekolah" = [SCHOOL_SCHEDULE].',
     'ACHIEVEMENT — Show XP, streak, badges when student asks. Data from real db.',
     'REVIEW — Start spaced-repetition review of past wrong answers.',
+    '',
+    subscriptionKnowledge ?? '',
   ].join("\n");
 }

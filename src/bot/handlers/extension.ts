@@ -1,19 +1,15 @@
 import type { Context } from "telegraf";
 import type { Student } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
+import { EXTENSION_PLANS, BCA_ACCOUNT, PLAN_BULLETS } from "@/data/subscription";
 
 /**
  * Price plan & extension config (BCA transfer).
- * Displayed to the student when trial expires and in the admin approval request.
+ * Single source of truth lives in `src/data/subscription.ts` so the tutor LLM
+ * prompt and this expiry flow can never disagree. Re-exported here for
+ * backwards compatibility with existing importers.
  */
-export const EXTENSION_PLANS = [
-  { months: 1, price: 100000, label: "1 bulan — Rp 100.000" },
-  { months: 3, price: 250000, label: "3 bulan — Rp 250.000" },
-  { months: 6, price: 500000, label: "6 bulan — Rp 500.000" },
-  { months: 12, price: 800000, label: "1 tahun — Rp 800.000" },
-];
-
-export const BCA_ACCOUNT = "4780127169";
+export { EXTENSION_PLANS, BCA_ACCOUNT };
 
 /** Shortcut text shown to the student at trial expiry. */
 export const TRIAL_EXPIRED_TEXT = `⏰ *Masa trial kamu sudah habis.*
@@ -23,10 +19,7 @@ Untuk melanjutkan belajar, transfer ke:
 a.n. *Yuda Trijaya*
 
 💰 Harga langganan:
-• 1 bulan — Rp 100.000
-• 3 bulan — Rp 250.000
-• 6 bulan — Rp 500.000
-• 1 tahun — Rp 800.000
+${PLAN_BULLETS}
 
 Setelah transfer, klik tombol di bawah untuk memberi tahu admin.`;
 
@@ -82,7 +75,7 @@ export async function handleExtensionRequest(ctx: Context, student: Student): Pr
 ⏰ Masa trial sudah habis
 
 💰 Harga langganan:
-${EXTENSION_PLANS.map((p) => `• ${p.label}`).join("\n")}
+${PLAN_BULLETS}
 
 Setelah siswa transfer ke BCA ${BCA_ACCOUNT}, silakan aktifkan akunnya.`,
       { parse_mode: "Markdown" },
