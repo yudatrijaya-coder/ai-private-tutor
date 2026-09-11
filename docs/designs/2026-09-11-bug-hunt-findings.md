@@ -344,10 +344,12 @@ Dua regresi **ditemukan dan dicegah** saat pass ini:
 
 ## Sisa / belum dikerjakan
 
-- **B-02** — 603/1426 material pakai `weekOrder=999`; `videoScript` kosong di
-  seluruh 1426 material; 172 material `READY` tanpa konten.
-- **C-02** — 34× `Cannot read properties of undefined (reading 'type')`; perlu
-  reproduksi sebelum diperbaiki.
+- ~~**B-02**~~ — **diperbaiki di pass 3 + 4** (lihat bagian di bawah). Yang
+  dilaporkan semula ("603 pakai `weekOrder=999`, `videoScript` kosong, 172
+  `READY` tanpa konten") ternyata bukan cacat — akar sebenarnya adalah
+  kontaminasi penalaran LLM di `slide_sibi`/`mindmap_sibi`.
+- ~~**C-02**~~ — **diperbaiki di pass 3** (lihat bagian di bawah).
+- **B-04** — ~~"Minggu 999"~~ **diperbaiki di pass 3**.
 - **D-02** — 5 halaman siswa ~20 KB shell SSR.
 - ~~**A-19**~~ — **diperbaiki di pass 2** (lihat bagian di bawah).
 - ~~**B-01**~~ — **diperbaiki di pass 2** (lihat bagian di bawah).
