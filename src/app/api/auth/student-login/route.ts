@@ -5,6 +5,7 @@ import { studentLoginSchema } from "@/lib/validations/auth";
 import { safeString } from "@/lib/sanitize";
 import { rateLimit } from "@/lib/rate-limit";
 import { createStudentSession } from "@/lib/auth/student";
+import { evaluateStudentAccess, accessDeniedMessage } from "@/lib/auth/access";
 
 export async function POST(request: Request) {
   try {
@@ -75,8 +76,25 @@ export async function POST(request: Request) {
       }
     }
     // else: no passwordHash set — backward compat, allow login without password
+    // (see ledger A-18; admin provisions the first password via the reset link)
 
-    // Create session JWT
+    // Entitlement gate (ledger A-19). Reject before a cookie is issued: the
+    // middleware and `getStudentSession()` both fail closed on a token whose
+    // claims are missing or lapsed, so issuing one here would only produce a
+    // login that immediately bounces back to this page.
+    const access = evaluateStudentAccess({
+      status: student.status,
+      trialEndsAt: student.trialEndsAt?.toISOString() ?? null,
+    });
+    if (!access.allowed) {
+      return NextResponse.json(
+        { error: accessDeniedMessage(access.reason), reason: access.reason },
+        { status: 403 },
+      );
+    }
+
+    // Create session JWT — always carrying status + trialEndsAt so downstream
+    // checks have something to evaluate.
     await createStudentSession({
       studentId: student.id,
       studentIdentifier: student.studentId,

@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 
-const STUDENT_JWT_SECRET = new TextEncoder().encode(
-  process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
-);
+import { requireStudentSecret } from "@/lib/auth/student-secret";
+// Signing secret is resolved at call time by `requireStudentSecret()`, which
+// fails closed. The old module-scope constant captured `undefined` during
+// `next build` and fell back to a string that is public in git history.
 const COOKIE_NAME = "student_session";
 
 /**
@@ -18,7 +19,7 @@ export async function GET() {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
-    const { payload } = await jwtVerify(token, STUDENT_JWT_SECRET);
+    const { payload } = await jwtVerify(token, requireStudentSecret());
     return NextResponse.json({
       student: {
         studentId: (payload as any).studentIdentifier,

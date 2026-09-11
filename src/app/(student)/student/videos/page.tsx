@@ -6,9 +6,10 @@ import { jwtVerify } from "jose";
 import Link from "next/link";
 import VideoPlayer from "@/components/VideoPlayer";
 
-const STUDENT_JWT_SECRET = new TextEncoder().encode(
-  process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
-);
+import { requireStudentSecret } from "@/lib/auth/student-secret";
+// Signing secret is resolved at call time by `requireStudentSecret()`, which
+// fails closed. The old module-scope constant captured `undefined` during
+// `next build` and fell back to a string that is public in git history.
 
 const SUBJECT_META: Record<string, { emoji: string }> = {
   Matematika: { emoji: "🔢" },
@@ -37,7 +38,7 @@ async function getSessionStudent() {
     const cookieStore = await cookies();
     const token = cookieStore.get("student_session")?.value;
     if (!token) return null;
-    const { payload } = await jwtVerify(token, STUDENT_JWT_SECRET);
+    const { payload } = await jwtVerify(token, requireStudentSecret());
     return payload as { studentId: string; studentIdentifier: string; name: string; gradeLevel?: string };
   } catch { return null; }
 }
@@ -51,7 +52,7 @@ async function VideoContent() {
 
   const student = await prisma.student.findUnique({
     where: { studentId: session.studentIdentifier },
-    select: { id: true, name: true },
+    select: { id: true, name: true, gradeLevel: true },
   });
   if (!student) return <div className="text-center py-20 text-amber-400">Siswa tidak ditemukan</div>;
 
@@ -62,7 +63,11 @@ async function VideoContent() {
   });
 
   const subjectVideos = await prisma.material.findMany({
-    where: { curriculumId: { in: curricula.map(c => c.id) } },
+    where: {
+      curriculumId: { in: curricula.map(c => c.id) },
+      // Grade-scoped (ledger B-01).
+      gradeLevel: student.gradeLevel,
+    },
     select: {
       subject: true,
       topic: true,

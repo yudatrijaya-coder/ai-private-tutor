@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { SignJWT } from "jose";
 
+import { requireStudentSecret } from "@/lib/auth/student-secret";
 /**
  * GET /api/admin/students/[id]/password-reset-link
  * Generate a one-time password reset link for a student.
@@ -36,11 +37,8 @@ export async function GET(
       );
     }
 
-    // Generate reset token (JWT, 1 hour expiry)
-    const JWT_SECRET = new TextEncoder().encode(
-      process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
-    );
-
+    // Generate reset token (JWT, 1 hour expiry).
+    // Resolved at call time and fail-closed — see @/lib/auth/student-secret.
     const resetToken = await new SignJWT({
       purpose: "password-reset",
       studentId: student.id,
@@ -49,7 +47,7 @@ export async function GET(
       .setProtectedHeader({ alg: "HS256" })
       .setIssuedAt()
       .setExpirationTime("1h")
-      .sign(JWT_SECRET);
+      .sign(requireStudentSecret());
 
     // Build reset URL
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "";

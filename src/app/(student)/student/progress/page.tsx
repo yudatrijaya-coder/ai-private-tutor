@@ -6,16 +6,17 @@ import { jwtVerify } from "jose";
 import { SkeletonProgressPage } from "@/components/Skeleton";
 import SelfCompareCard from "@/components/SelfCompareCard";
 
-const STUDENT_JWT_SECRET = new TextEncoder().encode(
-  process.env.STUDENT_JWT_SECRET ?? "student-dev-secret-change-in-production",
-);
+import { requireStudentSecret } from "@/lib/auth/student-secret";
+// Signing secret is resolved at call time by `requireStudentSecret()`, which
+// fails closed. The old module-scope constant captured `undefined` during
+// `next build` and fell back to a string that is public in git history.
 
 async function getSessionStudentId(): Promise<string | null> {
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get("student_session")?.value;
     if (!token) return null;
-    const { payload } = await jwtVerify(token, STUDENT_JWT_SECRET);
+    const { payload } = await jwtVerify(token, requireStudentSecret());
     return (payload as { studentId: string }).studentId;
   } catch {
     return null;

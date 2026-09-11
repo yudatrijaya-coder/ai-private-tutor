@@ -344,12 +344,147 @@ Dua regresi **ditemukan dan dicegah** saat pass ini:
 
 ## Sisa / belum dikerjakan
 
-- **B-01** — 197 material `SMA_2` di kurikulum RAIHAN001 (`SMP_1`) salah label
-  jenjang. Perlu keputusan pemetaan, bukan tambalan otomatis.
 - **B-02** — 603/1426 material pakai `weekOrder=999`; `videoScript` kosong di
   seluruh 1426 material; 172 material `READY` tanpa konten.
 - **C-02** — 34× `Cannot read properties of undefined (reading 'type')`; perlu
   reproduksi sebelum diperbaiki.
 - **D-02** — 5 halaman siswa ~20 KB shell SSR.
-- **A-19** — token siswa di-mint tanpa klaim `status`/`trialEndsAt`, sehingga
-  siswa TRIAL bisa melewati gerbang kedaluwarsa. Belum diperbaiki.
+- ~~**A-19**~~ — **diperbaiki di pass 2** (lihat bagian di bawah).
+- ~~**B-01**~~ — **diperbaiki di pass 2** (lihat bagian di bawah).
+
+---
+
+# Pass 2 — A-19 (gerbang kedaluwarsa) + B-01 (salah label jenjang)
+
+## A-19 — token `student_session` tanpa klaim entitlement
+
+### Akar
+`createStudentSession()` di `src/lib/auth/student.ts` menandatangani JWT berisi
+**hanya** `studentId`, `studentIdentifier`, `name`, `gradeLevel`. Middleware
+`src/middleware.ts` hanya memeriksa *tanda tangan* token, bukan hak aksesnya:
+
+```ts
+// sebelum
+if (payload.trialEndsAt) {                    // ← opsional: token tanpa klaim = lolos
+  if (new Date(payload.trialEndsAt as string) < new Date()) { redirect("/expired") }
+}
+if (payload.status && !["ACTIVE","TRIAL"].includes(payload.status)) { redirect("/expired") }
+```
+
+Dua celah: (1) `createStudentSession` tidak pernah mengisi kedua klaim itu,
+jadi syarat `if (payload.X)` selalu false → gerbang kedaluwarsa **dilewati
+total**; (2) `status` juga opsional, jadi `SUSPENDED`/`EXPIRED` ikut lolos bila
+token dibuat tanpa klaim.
+
+Satu akar ketiga: **8 berkas mendeklarasikan secret `STUDENT_JWT_SECRET` sendiri**
+dengan fallback `?? "student-dev-secret-change-in-production"` — string yang
+publik di riwayat git. Saat `next build` (env tidak lengkap) fallback ter-capture
+di module scope, dan token uji bisa ditandatangani dengan string publik itu.
+
+### Perbaikan
+
+| Berkas | Perubahan |
+|---|---|
+| `src/lib/auth/student-secret.ts` | **baru** — `readStudentSecret()` / `requireStudentSecret()`; fail-closed, dibaca saat panggilan (bukan module scope) |
+| `src/lib/auth/access.ts` | **baru** — `evaluateStudentAccess(claims, now)`: murni, tanpa Prisma, bisa dipakai Edge middleware **dan** route Node |
+| `src/lib/auth/student.ts` | mint token **selalu** mengisi `status` + `trialEndsAt`; `getStudentSession()` menolak sesi yang tidak berhak |
+| `src/middleware.ts` | gerbang jadi **fail-closed**: klaim hilang / `trialEndsAt` lewat / status non-aktif → redirect `/expired` |
+| `src/app/api/auth/student-login/route.ts` | tolak login lebih awal dengan pesan spesifik (TRIAL berakhir / akun nonaktif) |
+| 8 berkas (halaman + route) | hapus secret inline + fallback `student-dev-secret-*`; pakai `requireStudentSecret()` |
+
+`npx tsx scripts/test-student-access.ts` — 12 kasus, semua lulus:
+
+```
+lulus: 12/12
+```
+
+Kasus kunci (regresi yang dulu bocor):
+
+| Klaim | Harapan | Hasil |
+|---|---|---|
+| `{status: TRIAL, trialEndsAt: <lampau>}` | tolak | ✅ ditolak |
+| `{status: TRIAL, trialEndsAt: <depan>}` | izinkan | ✅ |
+| `{status: ACTIVE}` | izinkan | ✅ |
+| `{status: ACTIVE, trialEndsAt: <lampau>}` | izinkan (bayar, trial tak relevan) | ✅ |
+| `{status: SUSPENDED}` / `EXPIRED` / `CANCELLED` | tolak | ✅ |
+| klaim kosong / `status` hilang | **tolak** (dulu: lolos) | ✅ ditolak |
+| `status: ACTIVE`, tanpa `trialEndsAt` | izinkan | ✅ |
+| `TRIAL` tanpa `trialEndsAt` | **tolak** (dulu: lolos) | ✅ ditolak |
+
+### Catatan dampak
+Gerbang ini memakai klaim token (tanpa query DB), jadi siswa yang statusnya
+diubah admin tetap memakai token lamanya sampai token kedaluwarsa (7 hari) atau
+login ulang. Perilaku ini disengaja agar middleware Edge tetap bebas Prisma;
+`getStudentSession()` menambahkan pemeriksaan yang sama di sisi server.
+
+## B-01 — 197 material salah label jenjang
+
+### Koreksi temuan awal
+Ledger pass 1 menyebut ini "salah label jenjang" tanpa membuktikan arahnya.
+Bukti yang dikumpulkan sekarang menunjukkan **labelnya** yang salah, **bukan
+barisnya**:
+
+- 79 topik distinct pada 197 baris itu. **44 ada verbatim** di
+  `src/data/curriculum-topics-smp7.ts` (`Teks Deskripsi`, `Bilangan`, `Aljabar`,
+  `Klasifikasi Makhluk Hidup`, `Greetings`, `Berpikir Komputasional`, …);
+  **0 hanya ada** di `curriculum-topics-sma11.ts`.
+- 31 sisanya juga topik Kelas 7 yang kebetulan tidak ada di file topik
+  (`latar sejarah kelahiran Pancasila`, `Besaran dan Pengukuran`,
+  `Pengantar Informatika`, `我叫李文 - Wǒ jiào lǐ wén`, …).
+- Baris-baris itu berada di kurikulum **Raihan (SMP_1)** dan membawa konten
+  hasil generate: `slide_sibi` 197/197, `mindmap_sibi` 197/197,
+  `videoUrl` 185/197.
+- Cakupan global: **hanya Raihan** yang punya ketidakcocokan —
+  `RAIHAN001 SMP_1 → 197 baris SMA_2`. Siswa lain 0.
+
+### Akar kode (yang membuat baris salah label terlihat siswa)
+Query halaman siswa memfilter **hanya** `subject`, bukan `gradeLevel`, padahal
+`Material` membawa `gradeLevel` sendiri:
+
+```ts
+// sebelum
+materials: { where: { subject: decodedSubject } }   // baris SMA_2 ikut tampil
+```
+
+### Perbaikan
+1. **Data** — `scripts/fix-b01-grade-mislabel.ts` (dry-run default, `--apply`
+   untuk eksekusi, snapshot rollback ditulis lebih dulu):
+   ```
+   mismatched rows: 197 (semua SMA_2)
+   updated 197 rows -> gradeLevel=SMP_1
+   verification: mismatches remaining = 0
+   ```
+   Snapshot: `docs/designs/2026-09-11-b01-rollback-RAIHAN001.json`.
+   Tidak ada baris yang dihapus (492 → 492) dan tidak ada konten yang hilang
+   (`slide_sibi` 492/492, `mindmap_sibi` 492/492, `videoUrl` 482/492).
+2. **Kode** — scoping `gradeLevel` ditambahkan di 6 query siswa:
+
+| Berkas | Query |
+|---|---|
+| `(student)/student/subject/[subject]/page.tsx` | daftar material per mapel |
+| `(student)/student/topic-tree/[subject]/page.tsx` | topic tree (+ `getSessionGrade()`) |
+| `(student)/student/page.tsx` | fallback materi dashboard |
+| `(student)/student/videos/page.tsx` | daftar video |
+| `api/students/topics/route.ts` | topic picker |
+| `api/exam/template/route.ts` | template ujian periode + timeline |
+
+Dengan scoping ini, baris salah label tidak bisa lagi bocor ke siswa walau
+datanya kembali kacau di masa depan.
+
+## Status akhir pass 2
+
+| Item | Status |
+|---|---|
+| A-19 gerbang kedaluwarsa | ✅ fail-closed, 12/12 tes lulus |
+| A-19 secret ganda / fallback publik | ✅ 8 berkas → satu sumber `requireStudentSecret()` |
+| B-01 salah label jenjang (data) | ✅ 197 baris → `SMP_1`, 0 sisa |
+| B-01 scoping jenjang (kode) | ✅ 6 query |
+| `npx tsc --noEmit` | ✅ 0 error |
+
+## Sisa (belum dikerjakan)
+
+- **B-02** — 603/1426 material `weekOrder=999`; `videoScript` kosong di seluruh
+  1426; 172 material `READY` tanpa konten.
+- **C-02** — 34× `Cannot read properties of undefined (reading 'type')`.
+- **D-02** — 5 halaman siswa ~20 KB shell SSR.
+- **A-18** — `student-login` fallback tanpa `passwordHash` (0 siswa terdampak).

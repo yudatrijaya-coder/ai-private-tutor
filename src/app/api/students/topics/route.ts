@@ -27,7 +27,10 @@ export async function GET(request: NextRequest) {
     where: { studentId: student.id },
     include: {
       materials: {
-        where: { subject },
+        // Grade-scoped (ledger B-01): materials carry their own gradeLevel, and
+        // a mislabelled row inside this student's curriculum would otherwise
+        // contribute off-grade topics to the topic picker.
+        where: { subject, gradeLevel: student.gradeLevel },
         select: { topic: true },
         distinct: ["topic"],
         orderBy: { weekOrder: "asc" },
