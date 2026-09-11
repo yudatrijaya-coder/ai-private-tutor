@@ -19,6 +19,31 @@ function studentSecret(): Uint8Array | null {
 }
 
 /**
+ * Session probes for the API guards below. Both run in the Edge runtime:
+ * `jose` and the Edge NextAuth config are Edge-safe.
+ */
+async function hasAdminSession(): Promise<boolean> {
+  try {
+    const session = await auth();
+    return Boolean(session?.user);
+  } catch {
+    return false;
+  }
+}
+
+async function hasStudentSession(request: NextRequest): Promise<boolean> {
+  const token = request.cookies.get(STUDENT_COOKIE)?.value;
+  const secret = studentSecret();
+  if (!token || !secret) return false;
+  try {
+    await jwtVerify(token, secret);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Guard against RSC server-action scanners.
  *
  * Next.js action IDs are sha1-style lowercase hex digests. This build emits
@@ -104,6 +129,53 @@ export async function middleware(request: NextRequest) {
   if (pathname.startsWith("/api/admin/")) {
     const session = await auth();
     if (!session?.user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+  }
+
+  // ---- Student API routes (admin OR student session) ----
+  //
+  // These families were reachable with NO credentials at all until 2026-09-11:
+  // `pathname.startsWith("/student")` above guards student PAGES, but it does
+  // not prefix-match "/api/students", so the whole student API fell through to
+  // NextResponse.next(). See docs/designs/2026-09-11-bug-hunt-findings.md §A.
+  //
+  // Both the student app and the admin dashboard call these routes, so either
+  // credential is accepted: a student_session JWT, or a NextAuth admin session.
+  // Per-route ownership (a student may only read their OWN record) is enforced
+  // in the handlers, which pin studentId to the session instead of the query.
+  const isStudentApi =
+    pathname === "/api/students" ||
+    pathname.startsWith("/api/students/") ||
+    pathname === "/api/study" ||
+    pathname === "/api/exam" ||
+    pathname.startsWith("/api/exam/");
+
+  if (isStudentApi) {
+    if (await hasStudentSession(request)) return NextResponse.next();
+    if (await hasAdminSession()) return NextResponse.next();
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  // ---- Admin-only API routes ----
+  if (pathname === "/api/queues" || pathname === "/api/bot/diag") {
+    if (await hasAdminSession()) return NextResponse.next();
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  // ---- Cron endpoints (shared secret) ----
+  //
+  // Fail closed: no `|| "local-cron"` fallback. A guessable default would let
+  // anyone trigger mass notifications if CRON_SECRET were ever unset.
+  if (
+    pathname === "/api/cron/daily-nudge" ||
+    pathname === "/api/cron/progress-snap"
+  ) {
+    const expected = process.env.CRON_SECRET;
+    const provided =
+      request.headers.get("x-cron-secret") ??
+      request.nextUrl.searchParams.get("token");
+    if (!expected || provided !== expected) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
   }

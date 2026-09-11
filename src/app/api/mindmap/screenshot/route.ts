@@ -12,10 +12,19 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import sharp from "sharp";
 import { mindmapToSvg, type MindmapNode } from "@/lib/mindmap-renderer";
+import { resolveScope, scopedStudentIdentifier } from "@/lib/auth/scope";
 
 export async function GET(request: NextRequest) {
   try {
-    const studentId = request.nextUrl.searchParams.get("studentId");
+    const scope = await resolveScope();
+    if (!scope) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const studentId = scopedStudentIdentifier(
+      scope,
+      request.nextUrl.searchParams.get("studentId"),
+    );
     const subject = request.nextUrl.searchParams.get("subject");
     const materialId = request.nextUrl.searchParams.get("materialId");
 

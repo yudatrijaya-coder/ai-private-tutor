@@ -4,6 +4,7 @@ import { QUEUES } from "@/queue/definitions";
 import { getQueue } from "@/queue/runner";
 import { updateTopicMastery } from "@/services/topic-mastery";
 import { computeSpeedIndex, speedLabel } from "@/services/speed-index";
+import { resolveScope, scopedStudentIdentifier } from "@/lib/auth/scope";
 
 /**
  * POST /api/exam/attempt
@@ -14,7 +15,18 @@ import { computeSpeedIndex, speedLabel } from "@/services/speed-index";
  */
 export async function POST(request: NextRequest) {
   try {
-    const { studentId, examId, answers, timeSpentMs } = await request.json();
+    const scope = await resolveScope();
+    if (!scope) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const body = await request.json();
+    const { examId, answers, timeSpentMs } = body;
+
+    // The student is taken from the session, never the request body. Otherwise
+    // anyone could submit an attempt as another student, and the score, mastery
+    // updates and AI analysis would all be attributed to the victim.
+    const studentId = scopedStudentIdentifier(scope, body.studentId ?? null);
 
     if (!studentId || !examId || !answers) {
       return NextResponse.json(

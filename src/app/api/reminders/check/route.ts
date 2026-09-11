@@ -8,11 +8,13 @@ import { processPendingReminders } from "@/bot/agent/reminder";
  * Panggil dari cron job tiap 1 menit.
  */
 export async function GET(request: NextRequest): Promise<NextResponse> {
-  // Simple auth — check for cron secret
-  const auth = request.headers.get("authorization");
-  const expected = `Bearer ${process.env.CRON_SECRET || "local-cron"}`;
+  // Shared-secret auth. Fail closed: the old `process.env.CRON_SECRET ||
+  // "local-cron"` default was guessable, so an unset env var let anyone run the
+  // reminder pass. There is now nothing to match against when it is unset.
+  const secret = process.env.CRON_SECRET;
+  const provided = request.headers.get("authorization");
 
-  if (auth !== expected && process.env.NODE_ENV === "production") {
+  if (!secret || provided !== `Bearer ${secret}`) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

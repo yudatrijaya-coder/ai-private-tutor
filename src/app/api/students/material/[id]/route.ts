@@ -1,13 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { resolveScope, isAdmin } from "@/lib/auth/scope";
 
 /**
  * GET /api/students/material/[id] — Get material with slide content
+ *
+ * A student may only read material reachable from their OWN curriculum.
  */
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
+  const scope = await resolveScope();
+  if (!scope) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
   const { id } = await params;
   const searchParams = request.nextUrl.searchParams;
   const source = searchParams.get("source"); // "sibi" or default
@@ -23,11 +29,20 @@ export async function GET(
         metadata: true,
         processedContent: true,
         videoUrl: true,
+        // Ownership probe only — not part of the response below.
+        curriculum: { select: { studentId: true } },
       },
     });
 
     if (!material) {
       return NextResponse.json({ error: "Material not found" }, { status: 404 });
+    }
+
+    // Ownership: 404 (not 403) so a guessed material id cannot be confirmed.
+    if (scope.kind === "student") {
+      if (material.curriculum?.studentId !== scope.session.studentId) {
+        return NextResponse.json({ error: "Material not found" }, { status: 404 });
+      }
     }
 
     const metadata = material.metadata as Record<string, any> | null;
@@ -64,11 +79,17 @@ export async function GET(
 
 /**
  * PATCH /api/students/material/[id] — Update material fields (e.g. subTopic)
+ *
+ * Admin only: this edits curriculum content, and it is a write.
  */
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
+  if (!isAdmin(await resolveScope())) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { id } = await params;
 
   try {

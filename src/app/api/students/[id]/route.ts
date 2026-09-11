@@ -1,13 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { resolveScope, isAdmin } from "@/lib/auth/scope";
 
 /**
  * DELETE /api/students/[id] — Delete a student and all related data.
+ *
+ * Admin only. This cascades across a dozen tables; before 2026-09-11 it was
+ * reachable anonymously, so anyone who guessed a student ID could wipe that
+ * student along with their curriculum, materials, quizzes and attempts.
  */
 export async function DELETE(
   _request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
+  if (!isAdmin(await resolveScope())) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { id } = await params;
 
   try {

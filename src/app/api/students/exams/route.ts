@@ -1,13 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { resolveScope, scopedStudentIdentifier } from "@/lib/auth/scope";
 
 /**
  * GET /api/students/exams?studentId=xxx
  * Lists WEEKLY exams for a student, with attempt status per exam.
+ *
+ * A student may only list their OWN exams — the query param is discarded for
+ * them. Admins keep the ability to inspect any student.
  */
 export async function GET(request: NextRequest) {
+  const scope = await resolveScope();
+  if (!scope) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
   const { searchParams } = new URL(request.url);
-  const studentId = searchParams.get("studentId");
+  const studentId = scopedStudentIdentifier(scope, searchParams.get("studentId"));
 
   if (!studentId) {
     return NextResponse.json({ error: "studentId required" }, { status: 400 });

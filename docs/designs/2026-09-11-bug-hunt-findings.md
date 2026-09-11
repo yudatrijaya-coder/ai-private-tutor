@@ -248,3 +248,108 @@ Status halaman terautentikasi (cookie SYIFA001):
 | 6 | **C-07** | Pindahkan `CRON_SECRET` keluar dari skrip |
 
 Perbaikan #2 paling berdampak: middleware saat ini menjaga halaman tapi tidak API-nya. Satu blok `startsWith("/api/students")` menutup seluruh permukaan A sekaligus, bukan tambal per route.
+
+
+---
+
+# Pass perbaikan — 2026-09-11 (malam)
+
+Semua perbaikan di bawah **sudah di-deploy**: build produksi `next build` sukses,
+PM2 `ai-private-tutor` restart, dan setiap klaim diverifikasi lewat probe HTTP
+nyata terhadap `localhost:3000` **dan** `https://senangbelajar.web.id`.
+
+## Hasil verifikasi (bukti mentah)
+
+**Sebelum → sesudah, tanpa kredensial apa pun** (17 route):
+
+| Route | Sebelum | Sesudah |
+|---|---|---|
+| `GET /api/students` | 200 + `passwordHash` bcrypt | **401** |
+| `DELETE /api/students/<id>` | 404 (handler jalan tanpa auth) | **401** |
+| `GET /api/students/quizzes?studentId=X` | 200 (40.734 B) | **401** |
+| `GET /api/students/activity?studentId=X` | 200 (21.021 B) | **401** |
+| `GET /api/students/material/<id>` | 404 | **401** |
+| `GET /api/exam/template?studentId=X` | 200 (20.287 B) | **401** |
+| `GET /api/cron/daily-nudge` | 200 (notifikasi massal) | **401** |
+| `GET /api/cron/progress-snap` | 200 | **401** |
+| `GET /api/study` | 200 (seluruh siswa ACTIVE) | **401** |
+| `GET /api/students/{subjects,topics,exams,mastery}` | 200 | **401** |
+| `GET /api/queues` | 200 | **401** |
+| `GET /api/bot/diag` | 200 | **401** |
+| `GET /api/mindmap/screenshot` | 200 | **401** |
+
+**IDOR — sesi sah Syifa (SD_5) meminta data Raihan (SMP_1):**
+
+```
+GET /api/students/activity?studentId=RAIHAN001  ->  200
+  {"studentId":"4f248d53-940f-406c-ae64-a1722f8d5c86", ...}   # = UUID Syifa
+GET /api/students/exams?studentId=RAIHAN001     ->  200
+  {"title":"Weekly Exam ... (Kelas SD_5)"}                    # = exam Syifa
+```
+
+Sebelumnya 8 endpoint mengembalikan data Raihan. Sekarang `studentId` dari
+query/body **diabaikan untuk pemanggil siswa** dan selalu di-pin ke
+`session.studentId`. Tidak ada lagi kebocoran lintas siswa.
+
+**Regresi siswa sah (sesi Syifa):** `activity`, `quizzes`, `mastery`, `subjects`,
+`exams`, `study` → **200** dengan data Syifa sendiri. Tidak ada yang rusak.
+
+**Regresi dashboard admin:** `/dashboard` tanpa sesi → **307 → /login** (bukan
+500, jadi `auth()` di Edge middleware jalan); login NextAuth → 302; `/dashboard`
+dengan cookie admin → **200** (84.765 B); `GET /api/students` dengan cookie admin
+→ **200**, dan `grep -c passwordHash` = **0** (hash di-strip di handler).
+
+**Cron tetap jalan:** tanpa secret → 401; dengan secret →
+`{"ok":true,...,"sessionsAssigned":0}` dan
+`{"success":true,...,"schedulesCreated":3}`. Kedua skrip `~/.hermes` (yang kini
+membaca `CRON_SECRET` dari `.env`) exit 0.
+
+**C-01 tuntas:** 540 job `assessment-generate` gagal → **0**. Lihat di bawah.
+
+## Akar C-01 (bukan bug kode)
+
+540 job gagal dalam burst **4,6 menit** (2026-07-10 04:55:28 → 05:00:04),
+semuanya dengan `failedReason = "Material not found or not processed: <uuid>"`.
+Semua menunjuk satu siswa `a80cbfa5-9e21-42fa-a0e2-69943d9a2161` yang **sudah
+tidak ada di DB** (0 material, 0 curriculum). Jadi ini sampah orphan — retry
+tidak akan pernah berhasil.
+
+Dibersihkan dengan `scripts/purge-orphan-jobs.ts`, yang **hanya** menghapus job
+bila (1) `failedReason` cocok pola orphan DAN (2) `materialId`-nya tidak ada di
+tabel `Material`. Dry-run: `orphans=540, kept=0`. Eksekusi: `removed 540`.
+
+4 job `improvement-analysis` yang masih gagal **sengaja tidak dihapus** — itu
+error nyata, bukan orphan: 1× `Unterminated string in JSON` dan 3× `401 Invalid
+API key` (insiden kunci LLM yang sudah dicatat di memori operasional).
+
+## Perubahan kode
+
+| Berkas | Perubahan |
+|---|---|
+| `src/middleware.ts` | +72 baris: guard `/api/students*`, `/api/study`, `/api/exam{,/}`, `/api/queues`, `/api/bot/diag` — menerima sesi **siswa ATAU admin**; cron fail-closed |
+| `src/lib/auth/scope.ts` | **baru** — `resolveScope()`, `isAdmin()`, `scopedStudentIdentifier()` |
+| 15 route API | guard + pin `studentId` ke sesi |
+| `(student)/student/page.tsx` | D-01: `?id=${matId}`; D-03: kirim `quizId` bukan `materialId` |
+| `cron/schedule-sweep`, `reminders/check` | hapus `CRON_SECRET \|\| "local-cron"` (fail-open → fail-closed) |
+| `scripts/purge-orphan-jobs.ts` | **baru** — pembersih job orphan, idempoten, ada `--dry-run` |
+| 3 skrip `~/.hermes/profiles/opencode/scripts/` | token hardcoded → baca `CRON_SECRET` dari `.env` |
+
+Dua regresi **ditemukan dan dicegah** saat pass ini:
+
+1. `/api/students/*` dipakai dashboard admin lewat NextAuth. Guard sesi-siswa-saja
+   akan memutus dashboard → guard dibuat menerima **kedua** kredensial.
+2. `/api/exam` ternyata dipakai **halaman siswa** (exam mode), bukan hanya admin.
+   Sempat dibuat admin-only → dikembalikan ke siswa-atau-admin dengan `studentId`
+   di-pin ke sesi.
+
+## Sisa / belum dikerjakan
+
+- **B-01** — 197 material `SMA_2` di kurikulum RAIHAN001 (`SMP_1`) salah label
+  jenjang. Perlu keputusan pemetaan, bukan tambalan otomatis.
+- **B-02** — 603/1426 material pakai `weekOrder=999`; `videoScript` kosong di
+  seluruh 1426 material; 172 material `READY` tanpa konten.
+- **C-02** — 34× `Cannot read properties of undefined (reading 'type')`; perlu
+  reproduksi sebelum diperbaiki.
+- **D-02** — 5 halaman siswa ~20 KB shell SSR.
+- **A-19** — token siswa di-mint tanpa klaim `status`/`trialEndsAt`, sehingga
+  siswa TRIAL bisa melewati gerbang kedaluwarsa. Belum diperbaiki.

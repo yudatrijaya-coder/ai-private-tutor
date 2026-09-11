@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { resolveScope, isAdmin } from "@/lib/auth/scope";
 
 /**
  * POST /api/exam/apply-plan
@@ -7,8 +8,14 @@ import { prisma } from "@/lib/prisma";
  *
  * Transitions an ImprovementPlan from DRAFT → APPLIED
  * and creates new ScheduleSession entries based on recommendedSch.
+ *
+ * Admin only — this writes schedule sessions for a student.
  */
 export async function POST(request: NextRequest) {
+  if (!isAdmin(await resolveScope())) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     const { planId } = await request.json();
 

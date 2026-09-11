@@ -4,11 +4,19 @@ import { enqueue } from "@/queue/runner";
 import { enqueueLocal } from "@/queue/local";
 import { QUEUES } from "@/queue/definitions";
 import { redis } from "@/queue/redis";
+import { resolveScope, isAdmin } from "@/lib/auth/scope";
 
 /**
  * GET /api/students — List all students.
+ *
+ * Admin only: this returns every student record, so it must never be reachable
+ * with a student credential (or anonymously — see src/middleware.ts).
  */
 export async function GET() {
+  if (!isAdmin(await resolveScope())) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     const students = await prisma.student.findMany({
       orderBy: { createdAt: "desc" },
@@ -23,7 +31,12 @@ export async function GET() {
       },
     });
 
-    return NextResponse.json({ students });
+    // Never ship password hashes, not even to admins: the dashboard has no use
+    // for them, and a leaked admin session should not hand over offline-crackable
+    // bcrypt hashes for every student in the system.
+    const safe = students.map(({ passwordHash: _hash, ...rest }) => rest);
+
+    return NextResponse.json({ students: safe });
   } catch (error) {
     console.error("[api/students] Error listing:", error);
     return NextResponse.json(
@@ -38,6 +51,10 @@ export async function GET() {
  * Body: { action: "trigger", studentId: string, stages?: string[] }
  */
 export async function POST(request: NextRequest) {
+  if (!isAdmin(await resolveScope())) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     const body = await request.json();
     const { action, studentId, stages } = body;

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { resolveScope, scopedStudentIdentifier } from "@/lib/auth/scope";
 
 /**
  * GET /api/students/exams/[id]?studentId=xxx
@@ -9,9 +10,12 @@ export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
+  const scope = await resolveScope();
+  if (!scope) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
   const { id } = await params;
   const { searchParams } = new URL(request.url);
-  const studentId = searchParams.get("studentId");
+  const studentId = scopedStudentIdentifier(scope, searchParams.get("studentId"));
 
   if (!studentId) {
     return NextResponse.json({ error: "studentId required" }, { status: 400 });
