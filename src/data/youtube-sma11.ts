@@ -908,4 +908,494 @@ export const YOUTUBE_SMA11: YouTubeResource[] = [
     channel: "Kimatika",
     topic: "Hidrokarbon dan Minyak Bumi",
   },
+
+  // ══════ Kosakata HSK 3.0 Level 1 (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "New HSK 3.0 Level 1_Lesson 1",
+    url: "https://www.youtube.com/watch?v=M69BZeqNgtY",
+    channel: "Mandarin Bareng Tari",
+    topic: "Kosakata HSK 3.0 Level 1",
+  },
+  {
+    title: "Gratis Belajar New HSK 3.0",
+    url: "https://www.youtube.com/watch?v=2BpcIi2zDwQ",
+    channel: "Mandarin Corner",
+    topic: "Kosakata HSK 3.0 Level 1",
+  },
+  {
+    title: "KOSAKATA LENGKAP BAHASA MANDARIN HSK 1 (HSK词汇1)",
+    url: "https://www.youtube.com/watch?v=xTqkpr0v7ZI",
+    channel: "Panda Mandarin Education",
+    topic: "Kosakata HSK 3.0 Level 1",
+  },
+
+  // ══════ Kosakata HSK 3.0 Level 2 (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Pelajaran 11 Kosakata 2 | Kursus Standar HSK 3 – Penjelasan Guru",
+    url: "https://www.youtube.com/watch?v=dx8JOGUgvgs",
+    channel: "Espresso Chinese - John Wang",
+    topic: "Kosakata HSK 3.0 Level 2",
+  },
+  {
+    title: "TIPS menghafal & belajar HSK",
+    url: "https://www.youtube.com/watch?v=Ghr43YH4TFo",
+    channel: "Firda Fei",
+    topic: "Kosakata HSK 3.0 Level 2",
+  },
+  {
+    title: "Belajar Mandarin untuk Pemula 🇨🇳 HSK 2 Pelajaran 3 — 20 Kata Baru | Zhongwen Indonesia",
+    url: "https://www.youtube.com/watch?v=pBK-g5Ol-Dk",
+    channel: "Zhongwen Indonesia",
+    topic: "Kosakata HSK 3.0 Level 2",
+  },
+
+  // ══════ Kosakata HSK 3.0 Level 3 (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "New HSK 3.0 Level 1_Lesson 1",
+    url: "https://www.youtube.com/watch?v=M69BZeqNgtY",
+    channel: "Mandarin Bareng Tari",
+    topic: "Kosakata HSK 3.0 Level 3",
+  },
+  {
+    title: "New HSK 3.0 2021 has 3 stages and 9 levels | HSK 1-9 Vocabulary List Review | Update new HSK",
+    url: "https://www.youtube.com/watch?v=qTknCJZQqkE",
+    channel: "Sry Wahyuni",
+    topic: "Kosakata HSK 3.0 Level 3",
+  },
+  {
+    title: "HSK 3.0 : LEVEL HSK BARU, ADA SAMPAI HSK 9?! (汉语水平考试 3.0)",
+    url: "https://www.youtube.com/watch?v=92yrwMd4wUY",
+    channel: "Panda Mandarin Education",
+    topic: "Kosakata HSK 3.0 Level 3",
+  },
+
+  // ══════ Kosakata HSK 3.0 Level 4 (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "New HSK Vocab Level 4 Pt 1: 1-30 (New HSK/HSK 3.0 Intermediate Mandarin Chinese Level 4 Vocabulary)",
+    url: "https://www.youtube.com/watch?v=uhsXGz-Osc4",
+    channel: "Mr Kung Chinese Tutoring   龔老師中文輔導",
+    topic: "Kosakata HSK 3.0 Level 4",
+  },
+  {
+    title: "New HSK 3.0 2021 has 3 stages and 9 levels | HSK 1-9 Vocabulary List Review | Update new HSK",
+    url: "https://www.youtube.com/watch?v=qTknCJZQqkE",
+    channel: "Sry Wahyuni",
+    topic: "Kosakata HSK 3.0 Level 4",
+  },
+  {
+    title: "HSK 3.0 : LEVEL HSK BARU, ADA SAMPAI HSK 9?! (汉语水平考试 3.0)",
+    url: "https://www.youtube.com/watch?v=92yrwMd4wUY",
+    channel: "Panda Mandarin Education",
+    topic: "Kosakata HSK 3.0 Level 4",
+  },
+
+  // ══════ Sel (2 video — curated 11 Sep 2026) ══════
+  {
+    title: "Pembelahan Sel | Biologi SMA",
+    url: "https://www.youtube.com/watch?v=U4bDwt-FKY8",
+    channel: "kejarcita",
+    topic: "Sel",
+  },
+  {
+    title: "Sistem Organisasi Kehidupan Makhluk Hidup - Sel | IPA | SayaBisa",
+    url: "https://www.youtube.com/watch?v=-1iU8EKV6iY",
+    channel: "SayaBisa",
+    topic: "Sel",
+  },
+
+  // ══════ Sistem Ekskresi (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Sistem Ekskresi Manusia",
+    url: "https://www.youtube.com/watch?v=kfFZCNFrN-U",
+    channel: "Mr. Klik",
+    topic: "Sistem Ekskresi",
+  },
+  {
+    title: "SISTEM EKSKRESI PADA MANUSIA ( Mekanisme Kerja Ginjal) Biologi SMA kelas XI #biologi",
+    url: "https://www.youtube.com/watch?v=wV9seozLFII",
+    channel: "AnaTa Teacher",
+    topic: "Sistem Ekskresi",
+  },
+  {
+    title: "Biologi BAB.sistem ekskresi - sistem ekskresi pada kulit - struktur kulit - kelas 11 SMA",
+    url: "https://www.youtube.com/watch?v=j7pPtaGLo2w",
+    channel: "Biologi Tv",
+    topic: "Sistem Ekskresi",
+  },
+
+  // ══════ Sistem Eksresi (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Sistem Ekskresi Manusia",
+    url: "https://www.youtube.com/watch?v=kfFZCNFrN-U",
+    channel: "Mr. Klik",
+    topic: "Sistem Eksresi",
+  },
+  {
+    title: "SISTEM EKSKRESI PADA MANUSIA ( Mekanisme Kerja Ginjal) Biologi SMA kelas XI #biologi",
+    url: "https://www.youtube.com/watch?v=wV9seozLFII",
+    channel: "AnaTa Teacher",
+    topic: "Sistem Eksresi",
+  },
+  {
+    title: "Biologi BAB.sistem ekskresi - sistem ekskresi pada kulit - struktur kulit - kelas 11 SMA",
+    url: "https://www.youtube.com/watch?v=j7pPtaGLo2w",
+    channel: "Biologi Tv",
+    topic: "Sistem Eksresi",
+  },
+
+  // ══════ Sistem Gerak (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Part 2 Sistem Gerak Pada Manusia | Sendi - Biologi",
+    url: "https://www.youtube.com/watch?v=Fq4yn5kK-9k",
+    channel: "Mood Edukasi",
+    topic: "Sistem Gerak",
+  },
+  {
+    title: "SISTEM GERAK AKTIF (OTOT) | Biologi Kelas 11 SMA",
+    url: "https://www.youtube.com/watch?v=1oGz_fjJ-JU",
+    channel: "Skolahan",
+    topic: "Sistem Gerak",
+  },
+  {
+    title: "SISTEM GERAK PASIF (RANGKA) | Biologi Kelas 11 SMA",
+    url: "https://www.youtube.com/watch?v=oTs1p0VRb9M",
+    channel: "Skolahan",
+    topic: "Sistem Gerak",
+  },
+
+  // ══════ Sistem Pencernaan (2 video — curated 11 Sep 2026) ══════
+  {
+    title: "Cara Kerja Sistem Pencernaan | Animasi 3D",
+    url: "https://www.youtube.com/watch?v=YMU_HCXf_0c",
+    channel: "Dr. Smurf",
+    topic: "Sistem Pencernaan",
+  },
+  {
+    title: "Sistem Pencernaan Manusia: Proses Pencernaan Pada Tubuh Manusia",
+    url: "https://www.youtube.com/watch?v=8gvvB9POcVQ",
+    channel: "SayaBisa",
+    topic: "Sistem Pencernaan",
+  },
+
+  // ══════ Sistem Pernapasan (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Volume / grafik udara pernapasan (tidal, residu, komplementer, suplementer, kapasitas total, vital)",
+    url: "https://www.youtube.com/watch?v=NIIh2w5WL3U",
+    channel: "Belajar Bareng Bu Dwi (B3)",
+    topic: "Sistem Pernapasan",
+  },
+  {
+    title: "Wisata Pernapasan - Animasi Edukasi",
+    url: "https://www.youtube.com/watch?v=r_ELNHrfyPE",
+    channel: "Dolewak",
+    topic: "Sistem Pernapasan",
+  },
+  {
+    title: "Sistem Pernapasan Manusia: Gimana Sih Cara Manusia Bernapas? | IPA | SayaBisa",
+    url: "https://www.youtube.com/watch?v=AKW3Zen8DD4",
+    channel: "SayaBisa",
+    topic: "Sistem Pernapasan",
+  },
+
+  // ══════ Sistem Respirasi (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Sistem Pernapasan: Respirasi Eksternal dan Internal | Ilmu Biomedik Dasar | Brainy Panda",
+    url: "https://www.youtube.com/watch?v=AkkxZCPid6s",
+    channel: "Brainy Panda",
+    topic: "Sistem Respirasi",
+  },
+  {
+    title: "BIOLOGI SMA KELAS XI : SISTEM RESPIRASI",
+    url: "https://www.youtube.com/watch?v=4xZ44rQWMxQ",
+    channel: "Belajar Biologi SMA",
+    topic: "Sistem Respirasi",
+  },
+  {
+    title: "Materi Biologi: Sistem Pernapasan | Respirasi Eksternal, Internal, & Seluler | Part 1",
+    url: "https://www.youtube.com/watch?v=6sM9eP-LRR0",
+    channel: "Edcent",
+    topic: "Sistem Respirasi",
+  },
+
+  // ══════ Sistem Sirkulasi (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Latihan Soal Biologi Kelas 11  SISTEM SIRKULASI PADA MANUSIA",
+    url: "https://www.youtube.com/watch?v=qnk7D0717AI",
+    channel: "Mudah Belajar Official",
+    topic: "Sistem Sirkulasi",
+  },
+  {
+    title: "Mekanisme Peredaran Darah-Sistem Sirkulasi Kelas XI",
+    url: "https://www.youtube.com/watch?v=aQBLBW4Wik4",
+    channel: "Beny Yulianingsih",
+    topic: "Sistem Sirkulasi",
+  },
+  {
+    title: "Komposisi Darah - Sistem Sirkulasi - Biologi Kelas XI",
+    url: "https://www.youtube.com/watch?v=TAfDFyEiP-A",
+    channel: "Bebisik Channel",
+    topic: "Sistem Sirkulasi",
+  },
+
+  // ══════ Dinamika (2 video — curated 11 Sep 2026) ══════
+  {
+    title: "Dinamika Partikel • Part 2: Gaya Berat, Gaya Normal, Gaya Tegangan Tali, Gaya Gesek",
+    url: "https://www.youtube.com/watch?v=e9ME0j11sFc",
+    channel: "Jendela Sains",
+    topic: "Dinamika",
+  },
+  {
+    title: "LATIHAN SOAL DINAMIKA GERAK HUKUM NEWTON",
+    url: "https://www.youtube.com/watch?v=7fZFuyFrm5k",
+    channel: "FISIKAku",
+    topic: "Dinamika",
+  },
+
+  // ══════ Dinamika Gerak (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Dinamika Partikel • Part 1: Hukum Newton Tentang Gerak",
+    url: "https://www.youtube.com/watch?v=24P12dFuXMo",
+    channel: "Jendela Sains",
+    topic: "Dinamika Gerak",
+  },
+  {
+    title: "Dinamika Gerak | Fisika Kelas XI SMA | Hukum Newton, Gaya Gesek dan Gravitasi [LENGKAP]",
+    url: "https://www.youtube.com/watch?v=rOCO3Gw98Wg",
+    channel: "Physics and Coding",
+    topic: "Dinamika Gerak",
+  },
+  {
+    title: "LATIHAN SOAL DINAMIKA GERAK HUKUM NEWTON",
+    url: "https://www.youtube.com/watch?v=7fZFuyFrm5k",
+    channel: "FISIKAku",
+    topic: "Dinamika Gerak",
+  },
+
+  // ══════ Fluida (2 video — curated 11 Sep 2026) ══════
+  {
+    title: "Fluida Statis - Fisika Kelas XI",
+    url: "https://www.youtube.com/watch?v=G-r-LCJKpz0",
+    channel: "SmarterIndo",
+    topic: "Fluida",
+  },
+  {
+    title: "Materi Fisika: Fluida Statis | Tekanan Hidrostatis & Konsep Dasar Fluida | Part 1",
+    url: "https://www.youtube.com/watch?v=03UxucGQAic",
+    channel: "Edcent",
+    topic: "Fluida",
+  },
+
+  // ══════ Kalor (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Pengertian Suhu dan Alat Ukurnya Hal 149-153 Bab 6 KALOR Kelas 11 SMA Kurikulum Merdeka",
+    url: "https://www.youtube.com/watch?v=2nnA8ilmkbM",
+    channel: "Ruang Pintar",
+    topic: "Kalor",
+  },
+  {
+    title: "Suhu dan Kalor - Fisika Kelas 11 (Quipper Video)",
+    url: "https://www.youtube.com/watch?v=HPiZR1zFCbM",
+    channel: "Quipper Indonesia",
+    topic: "Kalor",
+  },
+  {
+    title: "FISIKA KELAS XI | SUHU DAN KALOR (PART 1) - Konversi Satuan Suhu",
+    url: "https://www.youtube.com/watch?v=DryeET0HTxs",
+    channel: "Yusuf Ahmada",
+    topic: "Kalor",
+  },
+
+  // ══════ Kinematika (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Kinematika: Konsep Gerak dalam Fisika",
+    url: "https://www.youtube.com/watch?v=BIio7dI0qzM",
+    channel: "Bimbel Pak Billcen",
+    topic: "Kinematika",
+  },
+  {
+    title: "Tebongkar! Rahasia Cepat Memahami Kinematika Gerak dengan jelas dan detail! (Seri Fisika Dasar)",
+    url: "https://www.youtube.com/watch?v=6YHxMdRG_CI",
+    channel: "Berfisika. com",
+    topic: "Kinematika",
+  },
+  {
+    title: "YUK BELAJAR FISIKA!!! - \"KINEMATIKA GERAK LURUS\" - FISIKA KELAS X",
+    url: "https://www.youtube.com/watch?v=NoJrn5Zszxc",
+    channel: "Pendidikan Fisika C 17 UM",
+    topic: "Kinematika",
+  },
+
+  // ══════ Suhu dan Kalor (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "PAHAM CARA MENGHITUNG SKALA CELCIUS REAMUR DAN FAHRENHEIT | Suhu dan Kalor Fisika SMA Kelas 11",
+    url: "https://www.youtube.com/watch?v=1mVdBBrQXFM",
+    channel: "Wien Classroom",
+    topic: "Suhu dan Kalor",
+  },
+  {
+    title: "Soal HOTS - Suhu dan Kalor - Kalor Lebur Es || Seri Belajar || No 3 || 2022/K11/F/B5/UK3 | Fisika 11",
+    url: "https://www.youtube.com/watch?v=TT-GhScfhSA",
+    channel: "Bimbel Fantastis - Channel Belajar",
+    topic: "Suhu dan Kalor",
+  },
+  {
+    title: "Pengertian Suhu dan Alat Ukurnya Hal 149-153 Bab 6 KALOR Kelas 11 SMA Kurikulum Merdeka",
+    url: "https://www.youtube.com/watch?v=2nnA8ilmkbM",
+    channel: "Ruang Pintar",
+    topic: "Suhu dan Kalor",
+  },
+
+  // ══════ Usaha dan Energi (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Usaha dan Energi - Soal 1 (Energi Kinetik Benda)",
+    url: "https://www.youtube.com/watch?v=14M1Va5mN6Y",
+    channel: "Tanya Jawab Soal",
+    topic: "Usaha dan Energi",
+  },
+  {
+    title: "Usaha & Energi (Kinetik, Potensial, Hukum Kekalan) - Fisika Kelas XI",
+    url: "https://www.youtube.com/watch?v=qYP1u5EzWSM",
+    channel: "SmarterIndo",
+    topic: "Usaha dan Energi",
+  },
+  {
+    title: "Usaha dan Energi | FISIKA KELAS 10",
+    url: "https://www.youtube.com/watch?v=8o7ND60cZCI",
+    channel: "fismatbykagit",
+    topic: "Usaha dan Energi",
+  },
+
+  // ══════ Bangun Datar (2 video — curated 11 Sep 2026) ══════
+  {
+    title: "🦿 Langkah 038: Bangun Datar | Fundamental Logika Alternatifa",
+    url: "https://www.youtube.com/watch?v=w51EHq4p9AM",
+    channel: "Alternatifa.Project",
+    topic: "Bangun Datar",
+  },
+  {
+    title: "[BAB 9.1] KELILING, LUAS, DAN VOLUME | BANGUN DATAR DAN BANGUN RUANG TKA MATEMATIKA SMA SMK MA 2025",
+    url: "https://www.youtube.com/watch?v=Zso7An5mvPg",
+    channel: "Ruang Tentor",
+    topic: "Bangun Datar",
+  },
+
+  // ══════ Bangun Ruang (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Aplikasi Bangun Ruang, Penalaran Matematika UTBK SNBT",
+    url: "https://www.youtube.com/watch?v=XAE8HOw6M7M",
+    channel: "Rumah Belajar Kak-Ita",
+    topic: "Bangun Ruang",
+  },
+  {
+    title: "Materi lengkap Volume bangun ruang",
+    url: "https://www.youtube.com/watch?v=q50HvRP1n4E",
+    channel: "Matematika Hebat",
+    topic: "Bangun Ruang",
+  },
+  {
+    title: "Trik Mudah Dimensi Tiga (Bangun Ruang) Jarak Titik Ke Bidang Hanya 5 detik !!!",
+    url: "https://www.youtube.com/watch?v=RPVZdflO_PY",
+    channel: "Privat Al Faiz",
+    topic: "Bangun Ruang",
+  },
+
+  // ══════ Bilangan dan Operasi (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Operasi hitung bilangan bulat negatif dan positif",
+    url: "https://www.youtube.com/watch?v=JqMnBdCBeEE",
+    channel: "Ari Ermawan",
+    topic: "Bilangan dan Operasi",
+  },
+  {
+    title: "Operasi Bilangan | Materi SNBT (UTBK) Penalaran Matematika",
+    url: "https://www.youtube.com/watch?v=SKel3YQ0V7k",
+    channel: "Zenius - Video Belajar",
+    topic: "Bilangan dan Operasi",
+  },
+  {
+    title: "Jenis dan Operasi Bilangan | Pra Aljabar | Alternatifa",
+    url: "https://www.youtube.com/watch?v=D1aIsT4TYC8",
+    channel: "Alternatifa.Project",
+    topic: "Bilangan dan Operasi",
+  },
+
+  // ══════ Himpunan (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Eps 11 | Himpunan dalam Matematika dan Jenis Himpunan PK/PM UTBK - Matematika Super Dasar",
+    url: "https://www.youtube.com/watch?v=kj-J_f6cui0",
+    channel: "Team Tanpa Les Indonesia",
+    topic: "Himpunan",
+  },
+  {
+    title: "10 TIPE SOAL CERITA HIMPUNAN YANG SERING MUNCUL DIUJIAN",
+    url: "https://www.youtube.com/watch?v=ALcOGGSA5GI",
+    channel: "Seekor Lebah",
+    topic: "Himpunan",
+  },
+  {
+    title: "Day 2 Belajar SNBT – Himpunan dan Diagram Venn #snbt #belajaronline #utbk #snbt2026",
+    url: "https://www.youtube.com/watch?v=ZiQpAAYdxgQ",
+    channel: "Mr Phi Tutor",
+    topic: "Himpunan",
+  },
+
+  // ══════ Hubungan Garis dan Sudut (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Belajar Matematika Dasar: Hubungan Dua Sudut pada Suatu Garis (seri 070)",
+    url: "https://www.youtube.com/watch?v=FsxYD50Pdas",
+    channel: "Yufid EDU",
+    topic: "Hubungan Garis dan Sudut",
+  },
+  {
+    title: "HUBUNGAN SUDUT-SUDUT PADA DUA GARIS SEJAJAR YANG DIPOTONG OLEH SATU GARIS",
+    url: "https://www.youtube.com/watch?v=uu96vz4mwfA",
+    channel: "RUMAH GEMAR MATEMATIKA",
+    topic: "Hubungan Garis dan Sudut",
+  },
+  {
+    title: "Hubungan Garis dan Sudut",
+    url: "https://www.youtube.com/watch?v=uFChWnX_LUo",
+    channel: "Matematika Hebat",
+    topic: "Hubungan Garis dan Sudut",
+  },
+
+  // ══════ Kesebangunan dan Kekongruenan (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Materi KEKONGRUENAN dan KESEBANGUNAN [Part 1] : Mengenal Benda yang Kongruen #matematika",
+    url: "https://www.youtube.com/watch?v=N1fTT5zPOWc",
+    channel: "Kelas Matematika Nisa",
+    topic: "Kesebangunan dan Kekongruenan",
+  },
+  {
+    title: "Kekongruenan dan Kesebangunan [Part 1]  - Kekongruenan Bangun Datar",
+    url: "https://www.youtube.com/watch?v=RdEXHsf3C-s",
+    channel: "Benni al azhri",
+    topic: "Kesebangunan dan Kekongruenan",
+  },
+  {
+    title: "[FULL] KEKONGRUENAN DAN KESEBANGUNAN‼️",
+    url: "https://www.youtube.com/watch?v=GWQtdpdk89c",
+    channel: "Seekor Lebah",
+    topic: "Kesebangunan dan Kekongruenan",
+  },
+
+  // ══════ Logika Matematika (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Cara Mudah Menentukan Tabel Kebenaran Dalam Operasi Logika Matematika",
+    url: "https://www.youtube.com/watch?v=U5eWAywK1Mo",
+    channel: "Les Kak ir",
+    topic: "Logika Matematika",
+  },
+  {
+    title: "Materi dasar logika matematika - Kalimat pernyataan dan kalimat terbuka",
+    url: "https://www.youtube.com/watch?v=8nms4vBMZPQ",
+    channel: "Matematika Hebat",
+    topic: "Logika Matematika",
+  },
+  {
+    title: "CONTOH SOAL SOAL LOGIKA MATEMATIKA",
+    url: "https://www.youtube.com/watch?v=6zbTQQLuQ_4",
+    channel: "PUAS Belajar",
+    topic: "Logika Matematika",
+  },
 ];

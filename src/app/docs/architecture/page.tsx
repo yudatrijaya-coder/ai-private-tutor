@@ -513,9 +513,9 @@ Scheduler ──► reminder & jadwal harian`}
             </thead>
             <tbody>
               {([
-                ["SD Kelas 5", "28 video", "youtube.ts"],
-                ["SMP Kelas 1", "91 video", "youtube-smp7.ts"],
-                ["SMA Kelas 2", "113 video", "youtube-sma11.ts"],
+                ["SD Kelas 5", "78 video", "youtube.ts"],
+                ["SMP Kelas 1", "163 video", "youtube-smp7.ts"],
+                ["SMA Kelas 2", "201 video", "youtube-sma11.ts"],
               ] as const).map(([jenjang, count, file]) => (
                 <tr key={jenjang}>
                   <td className="p-2 border font-medium">{jenjang}</td>
@@ -527,7 +527,7 @@ Scheduler ──► reminder & jadwal harian`}
           </table>
           <p className="text-slate-700">
             Fungsi <code className="bg-slate-100 px-1.5 py-0.5 rounded text-sm font-mono">getYouTubeForTopic()</code> mendukung filtering per grade level. 
-            Total <strong>232 video</strong> dari channel edukasi Indonesia terverifikasi.
+            Total <strong>442 video</strong> dari channel edukasi Indonesia terverifikasi.
           </p>
         </Section>
 

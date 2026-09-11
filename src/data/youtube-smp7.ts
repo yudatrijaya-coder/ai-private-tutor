@@ -646,4 +646,492 @@ export const YOUTUBE_SMP7: YouTubeResource[] = [
     channel: "Portal Edukasi",
     topic: "Descriptive",
   },
+
+  // ══════ Hello AI Xiaoyu! AI 小语，你好！ (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "|FILE NGHE NEW HSK1| BÀI 1: AI 小语，你好！",
+    url: "https://www.youtube.com/watch?v=X-l-ukfVEc4",
+    channel: "Linglinglaoshi",
+    topic: "Hello AI Xiaoyu! AI 小语，你好！",
+  },
+  {
+    title: "HSK 1 LESSON 1 AI小语 你好 Hello AI Xiaoyu | Learn Mandarin Through Songs",
+    url: "https://www.youtube.com/watch?v=UbqEWd6DGng",
+    channel: "Joshua Linguist Chinese ",
+    topic: "Hello AI Xiaoyu! AI 小语，你好！",
+  },
+  {
+    title: "Learn Chinese for Beginners - HSK 1 - Lesson 1 - Hello | 学中文 - 简单会话 - 你好",
+    url: "https://www.youtube.com/watch?v=YZbwEIQAlfE",
+    channel: "Super Cucos",
+    topic: "Hello AI Xiaoyu! AI 小语，你好！",
+  },
+
+  // ══════ Mandarin Dasar (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Angka 1 sampai 10 dalam Bahasa Mandarin | Belajar Angka dalam Mandarin",
+    url: "https://www.youtube.com/watch?v=wLwjPfxxFJA",
+    channel: "KosaKata Mandarin",
+    topic: "Mandarin Dasar",
+  },
+  {
+    title: "Aktivitas Sehari-hari dalam Bahasa Mandarin | Kosakata Mandarin",
+    url: "https://www.youtube.com/watch?v=gzG5A9R2SMI",
+    channel: "KosaKata Mandarin",
+    topic: "Mandarin Dasar",
+  },
+  {
+    title: "Pelajaran 4 Kelas 7 Bahasa Mandarin",
+    url: "https://www.youtube.com/watch?v=_OgAoNw1B0k",
+    channel: "Suwito Wu",
+    topic: "Mandarin Dasar",
+  },
+
+  // ══════ Menulis teks bacaan dan kosakata 我叫李文 - Wǒ jiào lǐ wén (2 video — curated 11 Sep 2026) ══════
+  {
+    title: "New HSK course 1|Lesson 2  我叫李文|My name is Li Wen|新HSK",
+    url: "https://www.youtube.com/watch?v=yjYR1AFQqEQ",
+    channel: "Tiya Easy Chinese ",
+    topic: "Menulis teks bacaan dan kosakata 我叫李文 - Wǒ jiào lǐ wén",
+  },
+  {
+    title: "Chinese HSK 1 New Work Book | Lesson 2 (我叫李文) #hsk #hsk1 #mandarin ",
+    url: "https://www.youtube.com/watch?v=z2FBG8ECtTk",
+    channel: "Fluent Chinese",
+    topic: "Menulis teks bacaan dan kosakata 我叫李文 - Wǒ jiào lǐ wén",
+  },
+
+  // ══════ 我叫李文 - Wǒ jiào lǐ wén (My Name is Li Wen) (1 video — curated 11 Sep 2026) ══════
+  {
+    title: "New HSK course 1|Lesson 2  我叫李文|My name is Li Wen|新HSK",
+    url: "https://www.youtube.com/watch?v=yjYR1AFQqEQ",
+    channel: "Tiya Easy Chinese ",
+    topic: "我叫李文 - Wǒ jiào lǐ wén (My Name is Li Wen)",
+  },
+
+  // ══════ Keanekaragaman Hayati (2 video — curated 11 Sep 2026) ══════
+  {
+    title: "IPA KELAS 7 EKOLOGI & KEANEKARAGAMAN HAYATI",
+    url: "https://www.youtube.com/watch?v=obdpPyr_scc",
+    channel: "YUK BELAJAR FISIKA IPA",
+    topic: "Keanekaragaman Hayati",
+  },
+  {
+    title: "Ekologi & Keanekaragaman Hayati di Indonesia (EKOSISTEM) untuk SMP Kelas 7 ll Kurikulum Merdeka",
+    url: "https://www.youtube.com/watch?v=Wx6O7otPAPo",
+    channel: "Ala Mei",
+    topic: "Keanekaragaman Hayati",
+  },
+
+  // ══════ Protista dan Jamur (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Materi IPA Kelas VII SMP/MTs Monera,Protista dan Jamur",
+    url: "https://www.youtube.com/watch?v=CQ3Q0g8q-PQ",
+    channel: "eSF.Official",
+    topic: "Protista dan Jamur",
+  },
+  {
+    title: "Protista dan Jamur",
+    url: "https://www.youtube.com/watch?v=zK7Ckmxxqds",
+    channel: "Amoeba Sisters",
+    topic: "Protista dan Jamur",
+  },
+  {
+    title: "Kelompok Protista, Monera dan Jamur",
+    url: "https://www.youtube.com/watch?v=VZSJ9H-rZLI",
+    channel: "Yusro Channel",
+    topic: "Protista dan Jamur",
+  },
+
+  // ══════ Sel dan Jaringan (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "SISTEM ORGANISASI KEHIDUPAN MAKHLUK HIDUP : Sel dan Jaringan - Materi IPA SMP Kelas 7 | Part.1",
+    url: "https://www.youtube.com/watch?v=N2eFRKDv5O8",
+    channel: "Edcent",
+    topic: "Sel dan Jaringan",
+  },
+  {
+    title: "IPA Kelas 7 Semester 2 \"Sel dan Jaringan\"",
+    url: "https://www.youtube.com/watch?v=3ScO_mNRHc0",
+    channel: "Wahyu Sudaryati",
+    topic: "Sel dan Jaringan",
+  },
+  {
+    title: "Kegiatan Sel dan Jaringan|| IPA MTs / SMP Kelas 7|| Semester Genap (2)",
+    url: "https://www.youtube.com/watch?v=84C5fpQarLg",
+    channel: "Herlina Mokoginta",
+    topic: "Sel dan Jaringan",
+  },
+
+  // ══════ Sistem Organ (1 video — curated 11 Sep 2026) ══════
+  {
+    title: "Cara Mudah Memahami Tubuh Mu - Animasi Organ Tubuh",
+    url: "https://www.youtube.com/watch?v=t3mu1BgTg0c",
+    channel: "Dolewak",
+    topic: "Sistem Organ",
+  },
+
+  // ══════ Virus dan Bakteri (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Lagu Biologi  - Virus dan Bakteri",
+    url: "https://www.youtube.com/watch?v=Y0TUB9f7G7M",
+    channel: "Dosen Gaul",
+    topic: "Virus dan Bakteri",
+  },
+  {
+    title: "Apasih Bedanya Virus dan Bakteri? | SI UNYIL (11/03/20)",
+    url: "https://www.youtube.com/watch?v=-7ac5CuAHZI",
+    channel: "EDUTAINMENT TRANS7 OFFICIAL",
+    topic: "Virus dan Bakteri",
+  },
+  {
+    title: "Virus vs Bakteri - Apa Bedanya?",
+    url: "https://www.youtube.com/watch?v=JAoeZRb8z_M",
+    channel: "SmarterIndo",
+    topic: "Virus dan Bakteri",
+  },
+
+  // ══════ Besaran dan Pengukuran (2 video — curated 11 Sep 2026) ══════
+  {
+    title: "Besaran Pokok dan Besaran Turunan | IPA Kelas 7 SMP | Materi Pengukuran",
+    url: "https://www.youtube.com/watch?v=T_-jHNQ5EF0",
+    channel: "Ruang Inspirasi Ilham",
+    topic: "Besaran dan Pengukuran",
+  },
+  {
+    title: "Cara Membaca Penggaris | Besaran dan Pengukuran | Fisika SMP Kelas 7 | Math and Science Learning",
+    url: "https://www.youtube.com/watch?v=D5mUg-fkRtE",
+    channel: "Math and Science Learning",
+    topic: "Besaran dan Pengukuran",
+  },
+
+  // ══════ Gaya dan Hukum Newton (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Hukum Gerak Newton (Gerak, Gaya, Percepatan)",
+    url: "https://www.youtube.com/watch?v=-w6oW1ut4Dw",
+    channel: "LearnFree",
+    topic: "Gaya dan Hukum Newton",
+  },
+  {
+    title: "Materi Gaya dan Hukum Newton Kelas 8 SMP",
+    url: "https://www.youtube.com/watch?v=W4xISwlChQE",
+    channel: "Heryanah Ana",
+    topic: "Gaya dan Hukum Newton",
+  },
+  {
+    title: "bab 4 HUKUM NEWTON | gerak dan gaya IPA KELAS 7 kurikulum merdeka #ipakelas7 #gerakdangaya",
+    url: "https://www.youtube.com/watch?v=0zTSKV6mx9k",
+    channel: "Anita Fitria",
+    topic: "Gaya dan Hukum Newton",
+  },
+
+  // ══════ Gerak Lurus (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "GERAK LURUS BERATURAN CONTOH SOAL DAN PEMBAHASAN",
+    url: "https://www.youtube.com/watch?v=uCCoNYAHVqE",
+    channel: "Belajar 43",
+    topic: "Gerak Lurus",
+  },
+  {
+    title: "Fisika 7 SMP Gerak Lurus",
+    url: "https://www.youtube.com/watch?v=kKS_wqRFXUI",
+    channel: "Edu Penguin",
+    topic: "Gerak Lurus",
+  },
+  {
+    title: "Rumus Umum GLBB - Materi Gerak Lurus - Fisika",
+    url: "https://www.youtube.com/watch?v=TD4Ah5Ytwsc",
+    channel: "Cici Raherani",
+    topic: "Gerak Lurus",
+  },
+
+  // ══════ Getaran dan Gelombang (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Getaran dan Gelombang | IPA | SayaBisa",
+    url: "https://www.youtube.com/watch?v=x1x71WPgy8I",
+    channel: "SayaBisa",
+    topic: "Getaran dan Gelombang",
+  },
+  {
+    title: "Bab Getaran dan Gelombang ( contoh soal ) - Fisika SMP",
+    url: "https://www.youtube.com/watch?v=kxGtXNC0lO4",
+    channel: "seratus institute",
+    topic: "Getaran dan Gelombang",
+  },
+  {
+    title: "getaran dan gelombang",
+    url: "https://www.youtube.com/watch?v=giiNZDWMZk4",
+    channel: "Guru IPA",
+    topic: "Getaran dan Gelombang",
+  },
+
+  // ══════ Tekanan (1 video — curated 11 Sep 2026) ══════
+  {
+    title: "Tekanan Balok pada Lantai (Soal UN IPA SMP - TEKANAN ZAT PADAT)",
+    url: "https://www.youtube.com/watch?v=SXksi3CTK2k",
+    channel: "Risma Julianti",
+    topic: "Tekanan",
+  },
+
+  // ══════ Usaha dan Energi (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Usaha dan Hukum Kekekalan Energi - Fisika SMP - Tips dan Trik",
+    url: "https://www.youtube.com/watch?v=RuQUwxM7r78",
+    channel: "Bimbel SMARRT",
+    topic: "Usaha dan Energi",
+  },
+  {
+    title: "Usaha sebagai perubahan energi potensial (Kelompok 7 Fisika sains teknologi).",
+    url: "https://www.youtube.com/watch?v=3O52QHrV3aI",
+    channel: "Izam Azis Pratama",
+    topic: "Usaha dan Energi",
+  },
+  {
+    title: "Fisika SMP - Usaha dan Energi",
+    url: "https://www.youtube.com/watch?v=ozjZ6nkWFXU",
+    channel: "Anivisi Edutama",
+    topic: "Usaha dan Energi",
+  },
+
+  // ══════ Asam Basa (2 video — curated 11 Sep 2026) ══════
+  {
+    title: "Uji Larutan Asam, Basa Dan Garam menggunakan Indikator Universal untuk Kelas 7 SMP",
+    url: "https://www.youtube.com/watch?v=mFpB6eT2qZ8",
+    channel: "Sisi terang IPA",
+    topic: "Asam Basa",
+  },
+  {
+    title: "PRAKTIKUM ASAM BASA",
+    url: "https://www.youtube.com/watch?v=Ta_ua1-uvg8",
+    channel: "Sheila Aulia Rahmi",
+    topic: "Asam Basa",
+  },
+
+  // ══════ Campuran (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Cara Memisahkan Campuran - Pemisahan campuran - Klasifikasi materi dan perubahannya",
+    url: "https://www.youtube.com/watch?v=QYhkWImfoz4",
+    channel: "Guru IPA",
+    topic: "Campuran",
+  },
+  {
+    title: "Unsur, Senyawa, dan Campuran | Kimia Mudah untuk Kelas 7",
+    url: "https://www.youtube.com/watch?v=MsUVNfWa-Mw",
+    channel: "Chemistry Magically Decoded",
+    topic: "Campuran",
+  },
+  {
+    title: "Mengenal Unsur, Senyawa dan Campuran",
+    url: "https://www.youtube.com/watch?v=uRfUhWusfHA",
+    channel: "Mr. Klik",
+    topic: "Campuran",
+  },
+
+  // ══════ Hakikat Kimia (2 video — curated 11 Sep 2026) ══════
+  {
+    title: "HAKIKAT ILMU KIMIA | Cabang Ilmu Kimia | Peranan Ilmu Kimia | KIMIA X",
+    url: "https://www.youtube.com/watch?v=wdQYAVhdSX4",
+    channel: "HALOGEN",
+    topic: "Hakikat Kimia",
+  },
+  {
+    title: "Hakikat Ilmu Kimia • Part 1: Hakikat dan Peran Ilmu Kimia dalam Kehidupan",
+    url: "https://www.youtube.com/watch?v=4xWe3fdxTuE",
+    channel: "Jendela Sains",
+    topic: "Hakikat Kimia",
+  },
+
+  // ══════ Objek IPA dan Pengenalan Kimia (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Apa Itu Objek IPA? | IPA kelas 7 SMP/MTs | EDURAYA MENGAJAR",
+    url: "https://www.youtube.com/watch?v=Nc8l3NSylFE",
+    channel: "Eduraya Teknologi",
+    topic: "Objek IPA dan Pengenalan Kimia",
+  },
+  {
+    title: "Rangkuman Materi IPA Kelas 7 Bab 1 | Objek IPA dan Pengamatannya",
+    url: "https://www.youtube.com/watch?v=xOFJe81UZi0",
+    channel: "Portal Edukasi",
+    topic: "Objek IPA dan Pengenalan Kimia",
+  },
+  {
+    title: "OBJEK IPA DAN PENGAMATANNYA || IPA SMP KELAS 7 #objekipa #ipasmpkelas7",
+    url: "https://www.youtube.com/watch?v=ZhZ0Ss1LuGE",
+    channel: "Anita Fitria",
+    topic: "Objek IPA dan Pengenalan Kimia",
+  },
+
+  // ══════ Pemisahan Campuran (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "PEMISAHAN CAMPURAN",
+    url: "https://www.youtube.com/watch?v=Mg_7QnKASzI",
+    channel: "Catatan Guru IPA",
+    topic: "Pemisahan Campuran",
+  },
+  {
+    title: "PEMISAHAN CAMPURAN || METODE PEMISAHAN CAMPURAN || IPA SMP KELAS VII",
+    url: "https://www.youtube.com/watch?v=CV4ax0DV8zE",
+    channel: "Nur Ayu Safitri",
+    topic: "Pemisahan Campuran",
+  },
+  {
+    title: "Cara Memisahkan Campuran - Pemisahan campuran - Klasifikasi materi dan perubahannya",
+    url: "https://www.youtube.com/watch?v=QYhkWImfoz4",
+    channel: "Guru IPA",
+    topic: "Pemisahan Campuran",
+  },
+
+  // ══════ Reaksi Kimia (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Kimia SMP Asam Basa dan Garam 1",
+    url: "https://www.youtube.com/watch?v=hA7locPRPfQ",
+    channel: "Bimbel Nurul Fikri (NF)",
+    topic: "Reaksi Kimia",
+  },
+  {
+    title: "Kimia Dasar - Mengenal Unsur dan Senyawa (Seri 001)",
+    url: "https://www.youtube.com/watch?v=bYia8Vh4B9M",
+    channel: "Yufid EDU",
+    topic: "Reaksi Kimia",
+  },
+  {
+    title: "SIFAT DAN PERUBAHAN ZAT | SIFAT FISIKA DAN KIMIA | PERUBAHAN FISIKA DAN KIMIA",
+    url: "https://www.youtube.com/watch?v=XLwN63sexIM",
+    channel: "Catatan Guru IPA",
+    topic: "Reaksi Kimia",
+  },
+
+  // ══════ Senyawa (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "✅ UNSUR SENYAWA DAN CAMPURAN | IPA | kelas 7 SMP",
+    url: "https://www.youtube.com/watch?v=9Zh1LnJ87X4",
+    channel: "SMP BUMITAMA CEMPAGA HULU",
+    topic: "Senyawa",
+  },
+  {
+    title: "Unsur, Senyawa, dan Campuran | Kimia Mudah untuk Kelas 7",
+    url: "https://www.youtube.com/watch?v=MsUVNfWa-Mw",
+    channel: "Chemistry Magically Decoded",
+    topic: "Senyawa",
+  },
+  {
+    title: "Unsur dan Senyawa | IPA Kimia SMP Kelas 7",
+    url: "https://www.youtube.com/watch?v=3ypfcREuea8",
+    channel: "Dhafka Alhaqie",
+    topic: "Senyawa",
+  },
+
+  // ══════ Unsur (2 video — curated 11 Sep 2026) ══════
+  {
+    title: "Materi IPA kelas 7 SMP \"mengenal unsur, senyawa dan campuran \"",
+    url: "https://www.youtube.com/watch?v=qjKvqynBgvI",
+    channel: "Siti Salamiah",
+    topic: "Unsur",
+  },
+  {
+    title: "✅ UNSUR SENYAWA DAN CAMPURAN | IPA | kelas 7 SMP",
+    url: "https://www.youtube.com/watch?v=9Zh1LnJ87X4",
+    channel: "SMP BUMITAMA CEMPAGA HULU",
+    topic: "Unsur",
+  },
+
+  // ══════ Akhlak (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Materi Aqidah Akhlak Kelas 7 Semester 2 Bab 9 | Adab Membaca Alquran dan Berdoa",
+    url: "https://www.youtube.com/watch?v=IdlWnHluBPo",
+    channel: "Study With Eliya ",
+    topic: "Akhlak",
+  },
+  {
+    title: "Rangkuman Materi Aqidah Akhlak Kelas 7 Semester 1 Bab 1 | Aqidah Islam",
+    url: "https://www.youtube.com/watch?v=CrfdRFxJJ0U",
+    channel: "Study With Eliya ",
+    topic: "Akhlak",
+  },
+  {
+    title: "Rangkuman Materi Aqidah Akhlak Kelas 7 Semester 2 Bab 8  | Riya dan Nifaq",
+    url: "https://www.youtube.com/watch?v=v5vXGN9fmcI",
+    channel: "Study With Eliya ",
+    topic: "Akhlak",
+  },
+
+  // ══════ Akidah (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Pembelajaran Bersyukur Kepada Allah SWT | Materi Akidah anak Soleh",
+    url: "https://www.youtube.com/watch?v=uu7uOzqcEkc",
+    channel: "Ruang Belajar Indonesia",
+    topic: "Akidah",
+  },
+  {
+    title: "Akidah Akhlak kelas 7 sem 1 | Akidah Islam",
+    url: "https://www.youtube.com/watch?v=DfPsztuMKgQ",
+    channel: "Kusnaedi Halim Ch",
+    topic: "Akidah",
+  },
+  {
+    title: "VIDEO PEMBELAJARAN AKIDAH AKHLAK KELAS VII SEMESTER 1 BAB 1 || MATERI TENTANG AKIDAH ISLAM",
+    url: "https://www.youtube.com/watch?v=tyUiGm8Dv2o",
+    channel: "uniqueen",
+    topic: "Akidah",
+  },
+
+  // ══════ Al-Qur'an dan Hadis (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Rangkuman PAI kelas 7 Bab 1 Al-Qur'an dan Hadis sebagai Pedoman Hidup | Kurikulum Merdeka",
+    url: "https://www.youtube.com/watch?v=MZ3kIhDTlyw",
+    channel: "SALADIN MR",
+    topic: "Al-Qur'an dan Hadis",
+  },
+  {
+    title: "PAI Kelas 7 Kurikulum Merdeka Bab 1 | Posisi Hadis Terhadap Al-Qur'an",
+    url: "https://www.youtube.com/watch?v=xZgN6kcoEys",
+    channel: "Hanum Channel",
+    topic: "Al-Qur'an dan Hadis",
+  },
+  {
+    title: "Rangkuman Materi Al-Quran Hadist Kelas 7 Bab 4 | Memperindah Bacaan Al-Quran dengan Tajwid",
+    url: "https://www.youtube.com/watch?v=a-Yd_7b2NiU",
+    channel: "Study With Eliya ",
+    topic: "Al-Qur'an dan Hadis",
+  },
+
+  // ══════ Fikih (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Rangkuman Materi Fikih Kelas 7 Bab 6 Semester 2 | Sholat Jumat",
+    url: "https://www.youtube.com/watch?v=qf2w34D3EIQ",
+    channel: "Study With Eliya ",
+    topic: "Fikih",
+  },
+  {
+    title: "Materi Fikih Kelas 7 | Bab 1 Bersuci",
+    url: "https://www.youtube.com/watch?v=OdzPMq83t4Y",
+    channel: "Guru PAI",
+    topic: "Fikih",
+  },
+  {
+    title: "Rangkuman Materi Fikih Kelas 7 Bab 3 Semester 1 | Sholat Fardhu Lima Waktu",
+    url: "https://www.youtube.com/watch?v=LYwVFGQE-u4",
+    channel: "Study With Eliya ",
+    topic: "Fikih",
+  },
+
+  // ══════ Sejarah Peradaban Islam (3 video — curated 11 Sep 2026) ══════
+  {
+    title: "Sejarah Kuno Kelas 7 U04 L04 — Munculnya Islam dan Peradaban Islam",
+    url: "https://www.youtube.com/watch?v=Bu1RROIkCH0",
+    channel: "Solbee",
+    topic: "Sejarah Peradaban Islam",
+  },
+  {
+    title: "Bahan Ajar PAI kelas 7 Kumer: Andalusia, kota Peradaban Islam di Barat (756-1031M)",
+    url: "https://www.youtube.com/watch?v=GF05Hz4zr-o",
+    channel: "ILH",
+    topic: "Sejarah Peradaban Islam",
+  },
+  {
+    title: "Kurikulum Merdeka Rangkuman Materi PAI Kelas 7 Bab 10 Andalusia Kota Peradaban Islam di Barat",
+    url: "https://www.youtube.com/watch?v=DCxcpdJ4a9Q",
+    channel: "Portal Edukasi",
+    topic: "Sejarah Peradaban Islam",
+  },
 ];
