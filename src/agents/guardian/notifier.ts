@@ -33,22 +33,25 @@ function masteryBar(pct: number): string {
 /* ------------------------------------------------------------------ */
 
 /**
- * Send a weekly report to the student's parent via Telegram.
- * Silently skips if no parentTelegramId or bot unavailable.
+ * Build the weekly report message body.
+ *
+ * Extracted from `sendWeeklyReportToParent` (ledger C-11) so the bot's
+ * `/laporan` handler can render the same text on demand. Previously `/laporan`
+ * read `AgentLog` looking for `action: "report"` — a value **nothing ever
+ * wrote** (the writers use `"guardian-report"`), so the command always answered
+ * "Belum ada laporan mingguan" no matter how many reports had been sent. The
+ * stored `output` is a summary object (`{subjects, weakAreas, safety}`), not
+ * the report text, so it could not have rendered a readable report anyway.
+ *
+ * @param report      Generated report.
+ * @param studentName Name to show in the heading.
  */
-export async function sendWeeklyReportToParent(
+export function formatWeeklyReport(
   report: WeeklyReport,
-): Promise<boolean> {
-  if (!bot) return false;
-
-  const student = await prisma.student.findUnique({
-    where: { id: report.studentId },
-    select: { parentTelegramId: true, name: true },
-  });
-  if (!student?.parentTelegramId) return false;
-
+  studentName: string,
+): string {
   const lines: string[] = [
-    `📋 *Laporan Mingguan — ${esc(student.name)}*`,
+    `📋 *Laporan Mingguan — ${esc(studentName)}*`,
     `🗓 ${report.periodStart.slice(0, 10)} – ${report.periodEnd.slice(0, 10)}`,
     "",
   ];
@@ -57,6 +60,10 @@ export async function sendWeeklyReportToParent(
   for (const s of report.subjects) {
     const pct = Math.round(s.mastery * 100);
     lines.push(`${esc(s.subject)}: ${masteryBar(pct)} ${pct}%`);
+  }
+
+  if (report.subjects.length === 0) {
+    lines.push("_Belum ada aktivitas belajar pada periode ini._");
   }
 
   if (report.weakAreas.length > 0) {
@@ -86,8 +93,28 @@ export async function sendWeeklyReportToParent(
     `_Laporan dibuat ${report.llmGenerated ? "dengan AI" : "otomatis"}_`,
   );
 
+  return lines.join("\n");
+}
+
+/**
+ * Send a weekly report to the student's parent via Telegram.
+ * Silently skips if no parentTelegramId or bot unavailable.
+ */
+export async function sendWeeklyReportToParent(
+  report: WeeklyReport,
+): Promise<boolean> {
+  if (!bot) return false;
+
+  const student = await prisma.student.findUnique({
+    where: { id: report.studentId },
+    select: { parentTelegramId: true, name: true },
+  });
+  if (!student?.parentTelegramId) return false;
+
+  const text = formatWeeklyReport(report, student.name);
+
   try {
-    await bot.telegram.sendMessage(student.parentTelegramId, lines.join("\n"), {
+    await bot.telegram.sendMessage(student.parentTelegramId, text, {
       parse_mode: "Markdown",
     });
     console.log(
@@ -171,9 +198,9 @@ export async function sendEmergencyAlertToParent(
   if (!student?.parentTelegramId) return false;
 
   const text =
-    `🚨 *DARURAT — ${esc(student.name)}*\\n\\n` +
-    `*Jenis:* ${esc(issueType)}\\n` +
-    `${esc(description)}\\n\\n` +
+    `🚨 *DARURAT — ${esc(student.name)}*\n\n` +
+    `*Jenis:* ${esc(issueType)}\n` +
+    `${esc(description)}\n\n` +
     `_Segera hubungi pihak terkait._`;
 
   try {

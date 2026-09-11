@@ -852,3 +852,90 @@ Regenerasi menyasar 16, hasil **16/16 berhasil, 0 gagal**. Irisan himpunan
 "16 diregenerasi" dengan "91 terkontaminasi" = **kosong**, jadi output regen
 tidak menambah kontaminasi baru.
 
+---
+
+# Pass 6 — temuan baru dari verifikasi ulang (C-10, C-11, C-12)
+
+Ditemukan saat memverifikasi gelombang e, bukan dari ledger. Ketiganya cacat
+nyata, bukan kosmetik.
+
+## Koreksi label: C-08 sudah selesai
+
+Catatan kerja sempat menyebut "C-08 = AgentLog basi". **Salah label.** C-08 di
+ledger adalah `/swap-build.img` tidak ada di `/etc/fstab`. Sudah selesai:
+`/etc/fstab` baris 11 memuat `/swap-build.img`, `swapon --show` menampilkan
+3 GB aktif. "AgentLog basi" sebenarnya **C-05**.
+
+## C-11 — `/laporan` mustahil menampilkan laporan
+
+Handler bot `handleReport` (`src/bot/handlers/parent.ts`) mencari baris
+`AgentLog` dengan:
+
+```ts
+agentType: "GUARDIAN", action: "report", status: "COMPLETED"
+```
+
+**Tidak ada kode mana pun yang menulis `action: "report"`.** Bukti dari DB:
+
+| Query | Hasil |
+|---|---|
+| `GUARDIAN` + `action='report'` | **0 baris** |
+| `GUARDIAN` + `action='guardian-report'` | **24 baris** |
+
+Akibatnya `/laporan` **selalu** menjawab "Belum ada laporan mingguan", berapa
+pun laporan yang sudah terkirim ke orang tua.
+
+Lapisan kedua: `output` yang tersimpan adalah objek ringkasan
+(`{subjects, weakAreas, safety, reportId}`), bukan teks laporan. Jadi walau
+nama action dicocokkan, handler hanya akan mencetak JSON mentah ke orang tua.
+
+Perbaikan: laporan **dibuat saat diminta** — `generateWeeklyReport()` lalu
+`formatWeeklyReport()`. Formatter diekstrak dari `sendWeeklyReportToParent()`
+agar jalur dorong mingguan dan jalur `/laporan` memakai teks yang identik, dan
+tidak bisa lagi berbeda diam-diam.
+
+## C-12 — teks peringatan darurat berisi `\\n` literal
+
+`sendEmergencyAlertToParent()` (`src/agents/guardian/notifier.ts`) menyusun
+teks dengan `\\\\n` **di dalam template literal**. TypeScript mengubah `\\`
+menjadi satu backslash, jadi runtime menerima `\n` sebagai **dua karakter**
+(backslash + n), bukan baris baru.
+
+Verifikasi: `repr()` pada byte mentah menunjukkan run 2 backslash sebelum `n`
+di lima tempat; `cat -A` mengonfirmasi. Bandingkan dengan baris lain di berkas
+yang sama yang benar memakai `"\n"`.
+
+Akibatnya pesan darurat ke orang tua tampil sebagai satu baris rusak:
+`🚨 DARURAT — Nama\\n\\n*Jenis:* ...`. Perbaikan: `\\n` → `\n`.
+
+## C-10 — 5.366 baris `AgentLog` tidak pernah mencapai status terminal
+
+| Status | Jumlah | Rentang |
+|---|---|---|
+| `ACTIVE` | 2.703 | 2026-07-08 … 2026-09-08 |
+| `RETRYING` | 2.663 | 2026-07-05 … 2026-09-03 |
+| `QUEUED` | 3 | 2026-07-06 … 2026-07-08 |
+
+Terbesar: `assessment-generate` — **2.637 `ACTIVE` + 2.637 `RETRYING`**,
+terakhir disentuh 2026-07-09. Ini residu insiden C-01 yang tidak pernah
+ditutup: worker menulis `ACTIVE` saat mulai dan `RETRYING` saat gagal, tapi
+tidak ada yang memindahkannya ke status terminal.
+
+**Dampak terbatas**: DLQ (`src/queue/dlq.ts`) hanya membaca
+`status: "FAILED"` + `error contains "Dead-lettered"`, dan handler orang tua
+memfilter `GUARDIAN` + `COMPLETED`, jadi baris macet ini tidak mengotori
+tampilan. Tetapi baris `ACTIVE` permanen membuat setiap inspeksi manual
+menyesatkan — terlihat seperti job yang masih berjalan padahal sudah mati
+sejak Juli.
+
+**Belum ditindak.** Opsi: skrip reaper yang menutup baris non-terminal lebih
+tua dari N hari dengan `FAILED` + `error: "stale: never reached terminal
+state"`, atau batasi query ke jendela waktu. Perlu keputusan sebelum menulis.
+
+## Verifikasi
+
+- `npx tsc --noEmit` — **exit 0** setelah ketiga perbaikan.
+- D-04 (tombol `▶️` tanpa label teks) — diperbaiki: `aria-label` deskriptif +
+  emoji di dalam `aria-hidden`.
+
+
