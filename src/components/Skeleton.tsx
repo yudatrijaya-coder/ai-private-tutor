@@ -309,6 +309,54 @@ export function SkeletonStudentPage() {
   );
 }
 
+/* ── Generic student page loading shell (ledger D-02) ── */
+
+/**
+ * Page-level loading shell for the client-rendered student pages.
+ *
+ * Ledger D-02: `/student/{achievement,leaderboard,profile-link,quiz,review}`
+ * are `"use client"` components whose data arrives in a `useEffect`, so the
+ * server-rendered HTML was a bare spinner — ~130 characters of text and no
+ * structure. Search engines, slow connections, and the first paint all saw an
+ * effectively empty document.
+ *
+ * Rendering a titled shell fixes that: the heading is real text in the SSR
+ * output, the skeleton mirrors the eventual layout, and `aria-busy` tells
+ * assistive tech the region is still loading.
+ */
+export function SkeletonPageShell({
+  title,
+  subtitle = "Memuat data…",
+  children,
+}: {
+  title: string;
+  subtitle?: string;
+  children?: React.ReactNode;
+}) {
+  return (
+    <div className="space-y-5" role="status" aria-live="polite" aria-busy="true">
+      <header className="space-y-1">
+        <h1 className="text-xl font-bold" style={{ color: "var(--st-text, #111827)" }}>
+          {title}
+        </h1>
+        <p className="text-sm" style={{ color: "var(--st-text-dim, #6b7280)" }}>
+          {subtitle}
+        </p>
+      </header>
+      {children ?? (
+        <>
+          <SkeletonStatsBar />
+          <div className="space-y-3">
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 /* ── Progress page skeleton (light theme) ── */
 
 export function SkeletonProgressPage() {

@@ -149,11 +149,20 @@ async function dbSweep() {
     const flagged = isLlmReasoningDump(sibi);
     // Ground truth, deliberately a DIFFERENT signal from the detector: a dump
     // always talks about the generation task in English meta-language, which
-    // never occurs in Indonesian teaching slides.
+    // never occurs in Indonesian teaching slides. Two families are known —
+    // (1) the model narrating its plan, (2) the model restating the brief as a
+    // spec — and this oracle spells both out independently of the detector's
+    // own regex list, so it can actually catch the detector drifting.
     const truth =
-      /\bthe user wants\b|analy[sz]e the request|deconstruct the|identify the goal|<think>|^\s*thinking\.|\blet me (?:think|analy[sz]e|identify|extract|break|determine)\b/im.test(
+      /\bthe user wants\b|analy[sz]e the request|deconstruct the|identify the goal|<think>|^\s*thinking\.|\blet me (?:think|analy[sz]e|identify|extract|break|determine)\b|\blet'?s (?:structure|brainstorm|break)\b|\bcreate a mind ?map outline\b|\bdash-?indent\b|\bmax levels?\b|\btarget audience\b|\bgoal\s*:\s*create\b|\bwe must produce \d|\bstyle\s*:\s*terse/im.test(
         sibi ?? "",
       );
+    // Deliberately NOT the anchored spec-line rule used for mindmaps. On slides
+    // `Format:` is ordinary teaching content — "Format: [Tahun]年[Bulan]月…"
+    // teaches date layout, "Format: NamaDepan + TahunLahir" teaches a username
+    // pattern — so the rule that is correct for short mindmap node labels is a
+    // false positive here. Verified against the two live rows it flagged
+    // (bfa07aa1, cf0a7394) before narrowing the oracle.
     if (truth) contaminated++;
     else clean++;
     if (flagged && !truth) falsePositive++;
@@ -195,8 +204,14 @@ async function dbSweep() {
   let mmLeak = 0;
   for (const r of mmRows) {
     const sibi = (r.metadata ?? {})["mindmap_sibi"];
-    // Ground truth: the same meta-language signal, read from the serialized tree.
-    const truth = isLlmReasoningDump(candidateText(sibi));
+    // Ground truth: an independent meta-language oracle read from the
+    // serialized tree. Previously this called `isLlmReasoningDump()` — the very
+    // function under test — which made the check tautological: it could never
+    // report a detector regression. Kept in sync with the slide oracle above.
+    const truth =
+      /\bthe user wants\b|analy[sz]e the request|deconstruct the|identify the goal|<think>|\blet me (?:think|analy[sz]e|identify|extract|break|determine)\b|\blet'?s (?:structure|brainstorm|break)\b|\bcreate a mind ?map outline\b|\bdash-?indent\b|\bmax levels?\b|\btarget audience\b|\bgoal\s*:\s*create\b|\bwe must produce \d|\bstyle\s*:\s*terse|"label":\s*"(?:goal|task|topic|subject|format|style|levels?|level\s*\d+(?:\s*&\s*\d+)?|depth|max\s*levels?|root|target\s*audience|output\s*format)\s*:|"label":\s*"level\s*\d+\s*\(\s*root\s*\)/i.test(
+        candidateText(sibi),
+      );
     if (!truth) continue;
     mmContaminated++;
     const resolved = resolveMindmap(r.metadata, "sibi");

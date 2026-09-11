@@ -2,11 +2,22 @@
  * API route: weekly ProgressSnap generation.
  * Cron: captures weekly snapshot of each student's progress per subject.
  * Called every Sunday 23:00 via cron.
+ *
+ * Ledger A-20: this endpoint had **no authentication at all**, like
+ * `daily-nudge` (A-07). Anyone could POST/GET it to force a full snapshot run:
+ * the handler loops every active student × subject and inserts `ProgressSnap`
+ * rows, so an anonymous caller could both pollute the progress history with
+ * duplicate snapshots and burn server time. Now behind the shared fail-closed
+ * `checkCronSecret()` guard, with each run recorded in `AgentLog`.
  */
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { checkCronSecret, logCronRun } from "@/lib/cron/guard";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const denied = checkCronSecret(request);
+  if (denied) return denied;
+
   const students = await prisma.student.findMany({
     where: { status: "ACTIVE" },
     select: { id: true, name: true },
@@ -69,6 +80,13 @@ export async function GET() {
       created++;
     }
   }
+
+  await logCronRun({
+    agentType: "SCHEDULER",
+    action: "progress-snap",
+    status: "COMPLETED",
+    output: { snapsCreated: created, students: students.length },
+  });
 
   return NextResponse.json({ ok: true, snapsCreated: created, students: students.length });
 }

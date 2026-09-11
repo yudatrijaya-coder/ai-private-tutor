@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
+import { SkeletonPageShell } from "@/components/Skeleton";
 
 interface ReviewItem {
   id: string;
@@ -52,7 +53,7 @@ export default function ReviewPage() {
 
   useEffect(() => { fetchData(); }, [fetchData]);
 
-  if (loading) return <div className="flex items-center justify-center py-20"><div className="animate-spin">🔄</div></div>;
+  if (loading) return <SkeletonPageShell title="Spaced Review" subtitle="Memuat kartu ulangan…" />;
   if (error) return <div className="text-center py-20"><p>{error}</p></div>;
   if (!data) return null;
 

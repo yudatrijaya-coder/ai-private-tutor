@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import { SkeletonPageShell } from "@/components/Skeleton";
 
 interface StudentData {
   id: string;
@@ -63,11 +64,7 @@ function ProfileLinkContent() {
   }, []);
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center py-20">
-        <span className="text-2xl animate-pulse">⏳</span>
-      </div>
-    );
+    return <SkeletonPageShell title="Tautan Profil" subtitle="Memuat tautan berbagi…" />;
   }
 
   if (error) {

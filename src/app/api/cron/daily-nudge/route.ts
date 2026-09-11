@@ -2,11 +2,21 @@
  * Daily nudge cron — sends a reminder if student hasn't studied today.
  * Max 1 nudge per day per student.
  * Triggered once per day (configurable).
+ *
+ * Ledger A-07: this endpoint had **no authentication at all**. Any anonymous
+ * request to `/api/cron/daily-nudge` ran the whole sweep, sending Telegram
+ * messages to every inactive student — a free spam/abuse vector and a way to
+ * burn the bot's Telegram rate limit. It now goes through the shared
+ * `checkCronSecret()` guard (fail-closed) and records each run in `AgentLog`.
  */
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { checkCronSecret, logCronRun } from "@/lib/cron/guard";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const denied = checkCronSecret(request);
+  if (denied) return denied;
+
   const students = await prisma.student.findMany({
     where: {
       status: "ACTIVE",
@@ -25,6 +35,7 @@ export async function GET() {
   today.setHours(0, 0, 0, 0);
   const nudgeBotToken = process.env.TELEGRAM_BOT_TOKEN;
   const results: string[] = [];
+  let failed = 0;
 
   for (const student of students) {
     const lastActivity = student.lastActivityDate
@@ -120,9 +131,20 @@ export async function GET() {
       });
       results.push(`nudged ${student.name}`);
     } catch (err) {
+      failed++;
       results.push(`failed ${student.name}: ${err}`);
     }
   }
 
-  return NextResponse.json({ ok: true, results });
+  await logCronRun({
+    agentType: "GUARDIAN",
+    action: "daily-nudge",
+    status: failed > 0 ? "FAILED" : "COMPLETED",
+    output: { nudged: results.length - failed, failed, results: results.slice(0, 20) },
+    error: failed > 0 ? `${failed} nudge(s) failed` : undefined,
+  });
+
+  // Report `ok: false` when any send failed. The old handler always returned
+  // `ok: true`, so a run where every Telegram call failed still looked healthy.
+  return NextResponse.json({ ok: failed === 0, failed, results });
 }

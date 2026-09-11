@@ -119,8 +119,10 @@ export async function sendWeeklyStudentReports(): Promise<{
   failed: number;
 }> {
   if (!BOT_TOKEN) {
-    console.warn("[StudentWeekly] TELEGRAM_BOT_TOKEN not configured, skipping.");
-    return { sent: 0, skipped: 0, failed: 0 };
+    // Ledger C-05: this used to `console.warn` and return an all-zero result,
+    // which the cron route reported as `success: true`. A missing bot token is
+    // a deployment fault, not a quiet no-op.
+    throw new Error("TELEGRAM_BOT_TOKEN is not configured — student weekly reports cannot be sent.");
   }
 
   const students = await prisma.student.findMany({

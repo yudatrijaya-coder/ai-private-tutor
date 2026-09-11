@@ -2,6 +2,7 @@
 
 import { use, useEffect, useState, useCallback } from "react";
 import Link from "next/link";
+import { SkeletonPageShell } from "@/components/Skeleton";
 
 /* ── Types ── */
 interface GamificationData {
@@ -134,7 +135,7 @@ export default function AchievementPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <div className="flex items-center justify-center py-20"><div className="animate-spin text-4xl">🏆</div></div>;
+  if (loading) return <SkeletonPageShell title="Pencapaian" subtitle="Memuat lencana dan XP…" />;
   if (error) return <div className="text-center py-20"><div className="text-4xl mb-3">😅</div><p className="text-sm" style={{ color: "var(--st-text-dim)" }}>{error}</p></div>;
   if (!gamification || !mastery) return null;
 

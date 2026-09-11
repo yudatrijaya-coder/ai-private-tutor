@@ -58,25 +58,38 @@ export async function POST(request: Request) {
     // Password verification
     const password = parsed.data.password;
 
-    if (student.passwordHash) {
-      // Student has a password set — require verification
-      if (!password) {
-        return NextResponse.json(
-          { error: "Password diperlukan untuk akun ini" },
-          { status: 401 },
-        );
-      }
-
-      const valid = await bcrypt.compare(password, student.passwordHash);
-      if (!valid) {
-        return NextResponse.json(
-          { error: "Password salah" },
-          { status: 401 },
-        );
-      }
+    // Fail closed (ledger A-18). The previous revision let a student whose
+    // `passwordHash` was null log in with no password at all — the comment
+    // called it "backward compat", but it turns an admin provisioning gap into
+    // an open door: student IDs are guessable (`SYIFA001`, `RAIHAN001`, …), so
+    // anyone could mint a session for a student who had not been issued a
+    // password yet. Every provisioning path sets a hash
+    // (`scripts/send-credentials.ts`, admin set-password, reset link) and no
+    // student currently lacks one, so refusing here costs nothing.
+    if (!student.passwordHash) {
+      return NextResponse.json(
+        {
+          error: "Akun ini belum memiliki password. Hubungi admin untuk mengatur password.",
+          reason: "no_password_set",
+        },
+        { status: 403 },
+      );
     }
-    // else: no passwordHash set — backward compat, allow login without password
-    // (see ledger A-18; admin provisions the first password via the reset link)
+
+    if (!password) {
+      return NextResponse.json(
+        { error: "Password diperlukan untuk akun ini" },
+        { status: 401 },
+      );
+    }
+
+    const valid = await bcrypt.compare(password, student.passwordHash);
+    if (!valid) {
+      return NextResponse.json(
+        { error: "Password salah" },
+        { status: 401 },
+      );
+    }
 
     // Entitlement gate (ledger A-19). Reject before a cookie is issued: the
     // middleware and `getStudentSession()` both fail closed on a token whose

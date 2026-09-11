@@ -13,10 +13,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { runReminderSweep } from "@/agents/scheduler/reminder";
 import { prisma } from "@/lib/prisma";
 import { bot } from "@/bot/bot";
+import { checkCronSecret, logCronRun } from "@/lib/cron/guard";
 
-// NOTE: the cron secret is read inside the handler, not at module scope.
-// The old `process.env.CRON_SECRET || "local-cron"` default was guessable —
-// anyone could trigger the sweep if the env var were ever unset.
+// The cron secret is verified by the shared `checkCronSecret()` guard, which
+// fails closed when `CRON_SECRET` is unset. The old `process.env.CRON_SECRET ||
+// "local-cron"` default was guessable — anyone could trigger the sweep if the
+// env var were ever unset. Each run is recorded in `AgentLog` (ledger C-05).
 
 /* ── Helpers ─────────────────────────────────────────────────── */
 
@@ -193,13 +195,11 @@ async function setDefaultConfigIfMissing(): Promise<number> {
 /* ── Cron handler ────────────────────────────────────────────── */
 
 export async function GET(request: NextRequest) {
-  const token = request.nextUrl.searchParams.get("token");
-  const expected = process.env.CRON_SECRET;
-  if (!expected || token !== expected) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const denied = checkCronSecret(request);
+  if (denied) return denied;
 
   const result: Record<string, unknown> = {};
+  let sweepErrors = 0;
 
   try {
     // 1. Set defaults for students without config (runs rarely)
@@ -207,6 +207,7 @@ export async function GET(request: NextRequest) {
 
     // 2. Run reminder sweep (H-1, T-30, missed)
     const sweep = await runReminderSweep();
+    sweepErrors = sweep.errors.length;
     result.reminderSweep = {
       h1Sent: sweep.h1Sent,
       t30Sent: sweep.t30Sent,
@@ -230,11 +231,27 @@ export async function GET(request: NextRequest) {
       result.dailyBriefSent = 0;
     }
 
+    await logCronRun({
+      agentType: "SCHEDULER",
+      action: "schedule-sweep",
+      status: sweepErrors > 0 ? "FAILED" : "COMPLETED",
+      output: result,
+      error: sweepErrors > 0 ? `${sweepErrors} reminder(s) failed` : undefined,
+    });
+
     return NextResponse.json({ ok: true, ...result });
   } catch (err) {
     console.error("[schedule-sweep] Error:", err);
+    const message = err instanceof Error ? err.message : "Internal error";
+    await logCronRun({
+      agentType: "SCHEDULER",
+      action: "schedule-sweep",
+      status: "FAILED",
+      output: result,
+      error: message,
+    });
     return NextResponse.json(
-      { error: err instanceof Error ? err.message : "Internal error", ...result },
+      { error: message, ...result },
       { status: 500 },
     );
   }
