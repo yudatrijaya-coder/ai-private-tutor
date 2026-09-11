@@ -535,6 +535,34 @@ export const YOUTUBE_RECOMMENDATIONS: YouTubeResource[] = [
     channel: "Studycle Kids",
     topic: "Permainan Tradisional",
   },
+
+  // ══════ Culture (4 video — kurasi manual 11 Sep 2026) ══════
+  // Topik "Culture" di kurikulum = Fables and Moral Values + Indonesian Folktales.
+  // Video dipilih yang eksplisit menyebut folklore/cerita rakyat atau moral value.
+  {
+    title: "Malin Kundang | Dongeng Bahasa Inggris | Folklore | Cerita Rakyat",
+    url: "https://www.youtube.com/watch?v=x40K7rlMHjI",
+    channel: "sok English",
+    topic: "Culture",
+  },
+  {
+    title: "Legenda Danau Toba Versi Bahasa Inggris - Sub Indo",
+    url: "https://www.youtube.com/watch?v=Ax8Lmo-01UE",
+    channel: "Story Weaver ZinnQyu",
+    topic: "Culture",
+  },
+  {
+    title: "Popular Fable Story Telling: The Lion and the Mouse — Narrative Text & Moral Value",
+    url: "https://www.youtube.com/watch?v=9ccJWSsES6Q",
+    channel: "Bibi Sugiaswati",
+    topic: "Culture",
+  },
+  {
+    title: "Merpati dan Semut | Fable Bahasa Inggris - Sub Indo",
+    url: "https://www.youtube.com/watch?v=njaWaFA9TQc",
+    channel: "Story Weaver ZinnQyu",
+    topic: "Culture",
+  },
 ];
 
 import { YOUTUBE_SMP7 } from "./youtube-smp7";
