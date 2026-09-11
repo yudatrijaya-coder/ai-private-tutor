@@ -3,6 +3,35 @@ import { prisma } from "@/lib/prisma";
 import { MAX_RETRIES } from "./definitions";
 
 /**
+ * How many attempts BullMQ will actually make for this job.
+ *
+ * MEASURED, NOT ASSUMED. When a job is added without an explicit `attempts`
+ * and the queue has no `defaultJobOptions`, the value arriving in the processor
+ * is **`0`**, and BullMQ runs the processor exactly **once**:
+ *
+ *   | how the job was added            | job.opts.attempts | processor runs |
+ *   |----------------------------------|-------------------|----------------|
+ *   | no `attempts`, no queue defaults  | 0                 | 1              |
+ *   | `attempts: 0`                     | 0                 | 1              |
+ *   | `attempts: 1`                     | 1                 | 1              |
+ *   | `attempts: 3`                     | 3                 | 3              |
+ *
+ * So the real limit is `max(1, opts.attempts)`, and this is the single place
+ * that decides it — the predicate and the dead-letter message must not be able
+ * to disagree about how many attempts a job gets.
+ *
+ * Note on the previous `job.opts.attempts ?? MAX_RETRIES`: that fallback is
+ * dead code, because BullMQ reports `0` rather than `undefined` for an
+ * unspecified limit — `0 ?? 3` is `0`. It was not a functional bug, but it did
+ * produce a nonsense dead-letter message ("after 0 failed attempts") when the
+ * worker used it as the attempt count. The `?? 0` below is equivalent in
+ * behaviour and makes the intent legible.
+ */
+export function effectiveAttempts<T>(job: Job<T, unknown, string>): number {
+  return Math.max(1, job.opts.attempts ?? 0);
+}
+
+/**
  * Check whether the attempt currently in flight is the job's last one.
  *
  * Pure predicate — it deliberately performs no database writes. It used to
@@ -29,7 +58,7 @@ import { MAX_RETRIES } from "./definitions";
  * budget is spent with nothing recorded. Hence the `+ 1`.
  */
 export function shouldDeadLetter<T>(job: Job<T, unknown, string>): boolean {
-  return job.attemptsMade + 1 >= (job.opts.attempts ?? MAX_RETRIES);
+  return job.attemptsMade + 1 >= effectiveAttempts(job);
 }
 
 /**
