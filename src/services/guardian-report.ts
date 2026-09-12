@@ -4,6 +4,7 @@
  */
 
 import { prisma } from "@/lib/prisma";
+import { claimOnce, releaseClaim, guardianReportKey } from "@/lib/cron/idempotency";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 
@@ -36,9 +37,39 @@ export interface GuardianReportResult {
   sent: number;
   /** Messages the Telegram API rejected. */
   failed: number;
-  /** Students skipped for a missing/invalid parent chat id. */
+  /** Students skipped for a missing/invalid parent chat id, or already sent this week. */
   skipped: number;
   errors: string[];
+}
+
+/**
+ * Injectable collaborators.
+ *
+ * Production passes nothing and gets the real Telegram transport. The
+ * regression test injects a recording transport (so no message is ever sent), a
+ * fixed `now`, and a `claimPrefix` that namespaces its claims away from the
+ * keys a real run uses — running the test must not consume the production
+ * weekly claim.
+ */
+export interface GuardianReportDeps {
+  sendMessage?: (chatId: string, text: string) => Promise<boolean>;
+  now?: Date;
+  claimPrefix?: string;
+}
+
+/**
+ * Injectable collaborators.
+ *
+ * Production passes nothing and gets the real Telegram transport. The
+ * regression test injects a recording transport (so no message is ever sent),
+ * a fixed `now`, and a `claimPrefix` so its claims are namespaced away from the
+ * ones a real run writes — running the test must not consume the production
+ * weekly claim.
+ */
+export interface GuardianReportDeps {
+  sendMessage?: (chatId: string, text: string) => Promise<boolean>;
+  now?: Date;
+  claimPrefix?: string;
 }
 
 /**
@@ -140,7 +171,13 @@ function formatGuardianMessage(report: GuardianReport): string {
  * Generate and send weekly guardian reports for all students with parent Telegram IDs.
  * Call this from a cron job (e.g., every Sunday at 18:00 WIB).
  */
-export async function sendWeeklyGuardianReports(): Promise<GuardianReportResult> {
+export async function sendWeeklyGuardianReports(
+  deps: GuardianReportDeps = {},
+): Promise<GuardianReportResult> {
+  const now = deps.now ?? new Date();
+  const send = deps.sendMessage ?? sendTelegramMessage;
+  const claimPrefix = deps.claimPrefix ?? "";
+
   // Get all students with parent telegram IDs
   const students = await prisma.student.findMany({
     where: {
@@ -173,8 +210,18 @@ export async function sendWeeklyGuardianReports(): Promise<GuardianReportResult>
       continue;
     }
 
+    // Ledger C-13: claim this parent for this week before doing anything else.
+    // A second run in the same week loses the race and skips instead of
+    // re-delivering the digest. The claim is released below if the send fails,
+    // so a failure stays retryable.
+    const claimKey = `${claimPrefix}${guardianReportKey(student.id, now)}`;
+    if (!(await claimOnce(claimKey, { studentId: student.id }))) {
+      result.skipped++;
+      continue;
+    }
+
     // Get this week's data
-    const oneWeekAgo = new Date();
+    const oneWeekAgo = new Date(now);
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
     // Quiz attempts this week
@@ -274,15 +321,19 @@ export async function sendWeeklyGuardianReports(): Promise<GuardianReportResult>
 
     const message = formatGuardianMessage(report);
     try {
-      const ok = await sendTelegramMessage(student.parentTelegramId, message);
+      const ok = await send(student.parentTelegramId, message);
       if (ok) result.sent++;
       else {
         result.failed++;
         result.errors.push(`${student.name}: Telegram rejected the message`);
+        // Ledger C-13: a rejected send must not consume the claim, or this
+        // parent is silently skipped for the rest of the week.
+        await releaseClaim(claimKey);
       }
     } catch (err) {
       result.failed++;
       result.errors.push(`${student.name}: ${err instanceof Error ? err.message : String(err)}`);
+      await releaseClaim(claimKey);
     }
   }
 

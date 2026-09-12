@@ -7,6 +7,7 @@
  */
 
 import { prisma } from "@/lib/prisma";
+import { claimOnce, releaseClaim, studentWeeklyReportKey } from "@/lib/cron/idempotency";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 
@@ -113,40 +114,35 @@ function formatSummary(data: StudentWeeklyData): string {
   );
 }
 
-export async function sendWeeklyStudentReports(): Promise<{
+export interface StudentWeeklyReportDeps {
+  sendMessage?: (chatId: string, text: string) => Promise<boolean>;
+  now?: Date;
+  claimPrefix?: string;
+}
+
+export async function sendWeeklyStudentReports(
+  deps: StudentWeeklyReportDeps = {},
+): Promise<{
   sent: number;
   skipped: number;
   failed: number;
 }> {
-  if (!BOT_TOKEN) {
+  if (!BOT_TOKEN && !deps.sendMessage) {
     // Ledger C-05: this used to `console.warn` and return an all-zero result,
     // which the cron route reported as `success: true`. A missing bot token is
     // a deployment fault, not a quiet no-op.
     throw new Error("TELEGRAM_BOT_TOKEN is not configured — student weekly reports cannot be sent.");
   }
 
-  const students = await prisma.student.findMany({
-    where: { status: "ACTIVE", telegramId: { not: null } },
-    select: { id: true },
-  });
-
-  let sent = 0;
-  let skipped = 0;
-  let failed = 0;
-
-  for (const s of students) {
-    try {
-      const data = await collect(s.id);
-      if (!data) {
-        skipped++;
-        continue;
-      }
-      const text = formatSummary(data);
+  const now = deps.now ?? new Date();
+  const send =
+    deps.sendMessage ??
+    (async (chatId: string, text: string) => {
       const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          chat_id: data.student.telegramId,
+          chat_id: chatId,
           text,
           parse_mode: "HTML",
           reply_markup: {
@@ -164,11 +160,48 @@ export async function sendWeeklyStudentReports(): Promise<{
           },
         }),
       });
-      if (res.ok) sent++;
-      else failed++;
+      return res.ok;
+    });
+  const claimPrefix = deps.claimPrefix ?? "";
+
+  const students = await prisma.student.findMany({
+    where: { status: "ACTIVE", telegramId: { not: null } },
+    select: { id: true },
+  });
+
+  let sent = 0;
+  let skipped = 0;
+  let failed = 0;
+
+  for (const s of students) {
+    // Ledger C-13: the student digest has the same duplicate problem as the
+    // parent digest — claim once per student per week.
+    const claimKey = `${claimPrefix}${studentWeeklyReportKey(s.id, now)}`;
+    if (!(await claimOnce(claimKey, { studentId: s.id }))) {
+      skipped++;
+      continue;
+    }
+
+    try {
+      const data = await collect(s.id);
+      if (!data || !data.student.telegramId) {
+        skipped++;
+        // Nothing to send, so do not hold the claim: the student may link a
+        // Telegram account later in the same week and should receive the digest.
+        await releaseClaim(claimKey);
+        continue;
+      }
+      const text = formatSummary(data);
+      const ok = await send(data.student.telegramId, text);
+      if (ok) sent++;
+      else {
+        failed++;
+        await releaseClaim(claimKey);
+      }
     } catch (err) {
       console.error(`[StudentWeekly] Failed for ${s.id}:`, err);
       failed++;
+      await releaseClaim(claimKey);
     }
   }
 

@@ -587,6 +587,23 @@ model AgentLog {
   @@index([createdAt])
 }
 
+/// One-shot claim that makes the notification cron jobs idempotent (ledger C-13).
+///
+/// A row existing means "this unit of work has already been done". The unique
+/// constraint on `key` is the whole mechanism: two concurrent runs race on the
+/// INSERT and exactly one wins, with no read-then-write window for a duplicate
+/// digest to slip through. Callers compose the key from the recipient and the
+/// period, e.g. `guardian-report:<studentId>:2026-W37`, so a per-recipient
+/// failure can be retried without re-sending to the recipients that succeeded.
+model CronClaim {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
 
 model Account {
   id                String  @id @default(cuid())
