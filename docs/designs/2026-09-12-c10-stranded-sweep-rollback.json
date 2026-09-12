@@ -1,0 +1,18 @@
+{
+  "createdAt": "2026-09-12T01:53:44.745Z",
+  "days": 3,
+  "cutoff": "2026-09-09T01:53:44.558Z",
+  "count": 2,
+  "rows": [
+    {
+      "id": "48255758-e914-45e5-b9c9-57151bbecef0",
+      "status": "ACTIVE",
+      "newStatus": "COMPLETED"
+    },
+    {
+      "id": "2ebc7d7d-389f-4756-9782-8c1bfb5becdb",
+      "status": "ACTIVE",
+      "newStatus": "COMPLETED"
+    }
+  ]
+}

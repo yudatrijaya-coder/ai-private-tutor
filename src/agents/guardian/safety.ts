@@ -237,36 +237,65 @@ export function sanitiseReport(reportText: string): string {
  *
  * This enforces data isolation — no student data shared across families.
  *
- * @returns true if the student is linked to the given parent user ID.
+ * The parent↔student relation lives on `Student.parentTelegramId`, so
+ * `parentUserId` is the parent's Telegram ID, and `studentId` accepts either
+ * the row id (`Student.id`, a uuid) or the login identifier
+ * (`Student.studentId`, e.g. `"SYIFA001"`).
+ *
+ * Fail-closed. A missing input, an unknown student, or a student with no
+ * parent linked all return `false`. The previous implementation returned
+ * `true` unconditionally, so the first caller to appear would have granted
+ * every parent access to every student.
+ *
+ * @returns true only if the student is linked to the given parent.
  */
 export async function verifyStudentOwnership(
   studentId: string,
   parentUserId: string,
 ): Promise<boolean> {
-  // The schema has User{id, role} but no direct parent-student join table yet.
-  // For now, we use a convention: the Student.telegramId links through
-  // the parent's session context. This is a placeholder that should be
-  // replaced once a ParentStudentLink model is added to the schema.
-  //
-  // For MVP, we return true and rely on API/auth middleware for access control.
-  void studentId;
-  void parentUserId;
+  if (!studentId || !parentUserId) return false;
 
-  // 🔐 TODO: Replace with proper parent-student relation lookup once
-  // the schema has a ParentStudentLink or student.parentId field.
-  return true;
+  const { prisma } = await import("@/lib/prisma");
+
+  const student = await prisma.student.findFirst({
+    where: { OR: [{ id: studentId }, { studentId }] },
+    select: { parentTelegramId: true },
+  });
+
+  if (!student) return false;
+  return student.parentTelegramId === parentUserId;
 }
 
 /**
  * Filter a list of student IDs to only those visible to a given parent.
+ *
+ * Accepts the same two id namespaces as `verifyStudentOwnership` and returns
+ * the survivors in the caller's original order, in the namespace they were
+ * given. Fail-closed: a missing parent, unknown ids, and students with no
+ * linked parent are all dropped — a caller bug degrades to "sees nothing"
+ * rather than "sees every family's data".
  */
 export async function filterVisibleStudents(
   studentIds: string[],
   parentUserId: string,
 ): Promise<string[]> {
-  // Placeholder — same as verifyStudentOwnership.
-  void parentUserId;
+  if (!parentUserId || studentIds.length === 0) return [];
 
-  // For MVP, return all IDs. Replace with DB query once relation model exists.
-  return studentIds;
+  const { prisma } = await import("@/lib/prisma");
+
+  const rows = await prisma.student.findMany({
+    where: {
+      parentTelegramId: parentUserId,
+      OR: [{ id: { in: studentIds } }, { studentId: { in: studentIds } }],
+    },
+    select: { id: true, studentId: true },
+  });
+
+  const visible = new Set<string>();
+  for (const row of rows) {
+    visible.add(row.id);
+    visible.add(row.studentId);
+  }
+
+  return studentIds.filter((id) => visible.has(id));
 }

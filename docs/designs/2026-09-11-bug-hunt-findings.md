@@ -1148,4 +1148,103 @@ dibaca ulang dari DB: 0 tersisa.
 - D-04 (tombol `▶️` tanpa label teks) — diperbaiki: `aria-label` deskriptif +
   emoji di dalam `aria-hidden`.
 
+---
+
+# Pass 8 — penutupan sisa (2026-09-12)
+
+## Kandidat youtube `TE1BqPXXX7E` — **false positive**
+
+`src/data/youtube-sma11.ts:95` memuat video ID `TE1BqPXXX7E`. Tiga huruf `X`
+membuatnya terlihat seperti placeholder. **Bukan.**
+
+oEmbed mengembalikan metadata nyata yang cocok persis dengan entri di berkas:
+
+```
+title:  "Konsep Dasar Turunan Fungsi Aljabar Matematika Wajib Kelas 11 m4thlab"
+author: "m4th-lab"        ← sama dengan field channel: "m4th-lab"
+thumb:  maxresdefault.jpg 159.401 byte  (gambar nyata, bukan placeholder abu-abu)
+```
+
+Kontrol negatif dari investigasi sebelumnya tetap berlaku: tiga ID acak
+well-formed (`aB3dE5gH7jK`, `TE1BqPXXX7F`, `Qw9zX2mN8pL`) semuanya dijawab
+**400** oleh oEmbed, jadi oEmbed tidak asal meloloskan. Video-nya ada, `XXX`
+kebetulan. Tidak ada perubahan berkas.
+
+## Sisa 2 baris `AgentLog` non-terminal — disapu
+
+Sapuan sebelumnya (`--days 7`) sengaja melewati 2 baris yang lebih muda dari
+cutoff. Keduanya ternyata juga yatim, dan **keduanya job yang berhasil** —
+saudara terminalnya ada di dalam jendela 1 jam:
+
+| jobId | baris `ACTIVE` | saudara terminal | jeda |
+|---|---|---|---|
+| 25 | 2026-09-05 13:42:32 | `COMPLETED` 13:43:19 | 47 s |
+| 26 | 2026-09-08 12:02:24 | `COMPLETED` 12:02:27 | 3 s |
+
+`npx tsx scripts/sweep-stranded-agent-logs.ts --days 3 --apply` →
+**2 baris `ACTIVE` → `COMPLETED`**, alasan
+`superseded: job completed, this row was never updated (lifecycle bug, fixed)`.
+Snapshot rollback: `docs/designs/2026-09-12-c10-stranded-sweep-rollback.json`.
+
+Sesudahnya `SELECT count(*) ... status IN ('QUEUED','ACTIVE','RETRYING')`
+= **0** — pertama kali tabel `AgentLog` bersih dari baris non-terminal.
+
+## `safety.ts` — dua helper privasi yang fail-open
+
+`verifyStudentOwnership()` mengembalikan `true` tanpa syarat, dan
+`filterVisibleStudents()` mengembalikan masukannya utuh. Keduanya **dead code**
+(tak ada pemanggil di `src/` maupun `scripts/`), jadi belum ada kebocoran nyata
+— tetapi begitu pemanggil pertama muncul, setiap orang tua akan melihat data
+setiap keluarga. Ini pola yang sama dengan A-14 (guard cron fail-open).
+
+Premis TODO di komentar lama juga sudah usang: ia menunggu
+`ParentStudentLink` / `student.parentId`, padahal relasinya **sudah ada**
+sebagai `Student.parentTelegramId`.
+
+Perbaikan — keduanya **fail-closed**, memakai `parentTelegramId`:
+
+- `verifyStudentOwnership(studentId, parentUserId)` menerima `Student.id`
+  (uuid) **atau** `Student.studentId` (mis. `"RAIHAN001"`). Input kosong, siswa
+  tak dikenal, dan siswa tanpa orang tua tertaut semuanya `false`.
+- `filterVisibleStudents(ids, parentUserId)` mengembalikan irisan, urutan
+  masukan dipertahankan, namespace id yang diberikan dipertahankan.
+
+Pola `await import("@/lib/prisma")` di dalam fungsi diikuti — sama seperti
+`createEmergencyIntervention()` di berkas yang sama — agar tidak menambah
+import top-level pada modul yang di-re-export barrel `agents/guardian`.
+
+### Test regresi — `scripts/test-guardian-ownership.ts`
+
+**RED terbukti lebih dulu.** Dengan `safety.ts` versi lama (di-`git stash`),
+skrip yang sama menghasilkan **4/15**; dengan versi baru **15/15**. Kegagalan
+versi lama persis tanda tangan fail-open:
+
+```
+FAIL  login id + parent LAIN      got=true  expected=false
+FAIL  siswa tidak dikenal         got=true  expected=false
+FAIL  parentUserId kosong         got=true  expected=false
+FAIL  hanya milik parent ini      got=["RAIHAN001","TIUMU001","NO-SUCH-STUDENT"]  expected=["RAIHAN001"]
+```
+
+Fixture dibaca dari DB nyata (read-only), bukan dikarang: RAIHAN001/SHOFI001/
+SYIFA001 berbagi `parentTelegramId=640765830`, TIUMU001 `NULL`. Skrip keluar
+dengan kode 2 bila fixture bergeser, supaya tidak lulus secara palsu.
+
+## Verifikasi
+
+- `npx tsx scripts/test-guardian-ownership.ts` — **15/15** (RED: 4/15)
+- `npx tsc --noEmit` — **exit 0**
+- `ops/build.sh` — **exit 0**
+- DB: baris `AgentLog` non-terminal **0** (sebelumnya 2)
+
+## Sisa yang belum tertutup
+
+- **C-05 runtime.** Patch `guardian` sudah deploy 2026-09-11, tetapi job
+  GUARDIAN terakhir berjalan 2026-09-06 — sebelum patch. Bukti runtime pertama
+  baru ada setelah `guardian-report-weekly` jalan **2026-09-13 18:00**.
+- **`/api/health` tidak dibuat** — keputusan pemilik produk (2026-09-12):
+  probe publik yang ada dinilai cukup.
+- **TIUMU001 trial berakhir 2026-09-13 03:49:37** — keputusan perpanjangan ada
+  di tangan pemilik produk, di luar lingkup audit ini.
+
 
