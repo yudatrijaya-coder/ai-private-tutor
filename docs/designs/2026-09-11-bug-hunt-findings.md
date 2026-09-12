@@ -1320,17 +1320,91 @@ selalu dilaporkan skrip cron. **C-05 ditutup** — tidak perlu menunggu jadwal
 
 ## Status
 
-**Belum diperbaiki.** Kandidat perbaikan, dari yang paling kecil:
+**DIPERBAIKI 2026-09-12** — pendekatan kedua dari daftar kandidat di bawah
+(kunci per-siswa per-periode) plus perbaikan `daily-nudge`.
+
+### Mekanisme
+
+Tabel baru `CronClaim` (`key` unik) di `prisma/schema.prisma`. Klaim = satu
+`INSERT`; indeks unik database yang menentukan pemenang, jadi tidak ada jendela
+baca-lalu-tulis tempat dua run bersamaan sama-sama menyimpulkan "harus kirim".
+Kalah balapan berarti "sudah dikerjakan" → lewati, jangan kirim.
+
+`src/lib/cron/idempotency.ts`:
+
+| Fungsi | Kunci |
+|---|---|
+| `guardianReportKey` | `guardian-report:<studentId>:<ISO-week>` |
+| `studentWeeklyReportKey` | `student-weekly-report:<studentId>:<ISO-week>` |
+| `dailyNudgeKey` | `daily-nudge:<studentId>:<YYYY-MM-DD>` |
+
+Kunci per-penerima per-periode itulah yang membuat kegagalan sebagian bisa
+dipulihkan: bila 2 dari 3 kiriman gagal, hanya 2 klaim itu yang dilepas, sehingga
+percobaan ulang mengirim ke 2 tersebut dan tidak menyentuh 1 yang sudah menerima.
+Flag tingkat-job ("sudah jalan minggu ini?") memaksa pilihan all-or-nothing antara
+menggandakan dan menghilangkan.
+
+`isoWeekKey()` memakai aturan ISO bahwa tahun-seminggu adalah tahun hari Kamis-nya
+— penting karena job mingguan jatuh hari Minggu, hari terakhir minggu ISO, jadi
+Minggu berurutan harus tetap berada di minggu berurutan saat melewati batas tahun.
+Dihitung dari komponen **waktu lokal**, karena jadwal dinyatakan dalam waktu lokal.
+
+### Perubahan perilaku
+
+- `sendWeeklyGuardianReports()`, `sendWeeklyStudentReports()`, dan
+  `runDailyNudge()` menerima `deps` opsional (`sendMessage`, `now`,
+  `claimPrefix`). Produksi tidak mengirim apa pun → transport Telegram asli.
+  `now` yang dapat disuntik juga menghapus `new Date()` yang tersembunyi.
+- Logika sweep `daily-nudge` dipindah dari route ke `src/services/daily-nudge.ts`;
+  route menjadi tipis. Route itu juga **sebelumnya tanpa autentikasi sama sekali**
+  (ledger A-07) — siapa pun bisa memicu sweep Telegram; kini lewat
+  `checkCronSecret()` fail-closed + `logCronRun()`, dan mengembalikan
+  `ok: false` bila ada kiriman gagal (dulu selalu `ok: true`).
+- `pruneClaims()` dipanggil dari route `daily-nudge` dengan retensi 60 hari.
+- Field `debug_buttons: "inline"` yang sempat hilang saat refactor dikembalikan.
+
+### Verifikasi
+
+`scripts/test-cron-idempotency.ts` — **36/36**, exit 0, tiga kali berturut-turut.
+
+RED dibuktikan dengan membuat `claimOnce` tak punya memori (`isUniqueViolation →
+return true`, yaitu perilaku pra-perbaikan): **8 gagal**, exit 1, dengan gejala
+persis bug aslinya:
+
+```
+FAIL  guardian run 2 sends nothing   (got 3 want 0)
+FAIL  student run 2 sends nothing    (got 3 want 0)
+FAIL  day A second run nudges nobody (got 3 want 0)
+```
+
+Test tidak mengirim Telegram apa pun (transport disuntik) dan seluruh klaimnya
+ber-namespace `test-c13-`, sehingga tidak bisa memakan klaim produksi.
+
+`tsc --noEmit` bersih; `ops/build.sh` exit 0; `pm2 restart` ke-22; probe:
+`/api/cron/daily-nudge` tanpa secret → 401, dengan secret salah → 401;
+`/api/cron/guardian-report` GET → 405 (hanya POST), POST secret salah → 401;
+`/` 200, `/login` 200, `/student` 307.
+
+### Dua pelajaran saat mengerjakan
+
+1. **`| head` membunuh proses lewat SIGPIPE**, sehingga blok `finally` yang
+   membersihkan tidak pernah jalan dan klaim uji tertinggal — membuat run
+   berikutnya gagal palsu di bagian B. Test kini menyapu namespace-nya **di awal
+   juga**, bukan hanya di akhir.
+2. **Fixture test harus dibangun dengan konstruktor waktu lokal**, bukan offset
+   UTC tetap. Host produksi berjalan di **+08** sedangkan audiensnya di +07;
+   instan yang ditulis `T23:30+07:00` adalah hari lokal *berikutnya* di host +08.
+   Ini yang membuat satu check gagal pada percobaan pertama — bug di test, bukan
+   di implementasi.
+
+### Kandidat perbaikan awal (untuk catatan)
 
 - **Klaim idempoten berbasis waktu** — sebelum mengirim, periksa `AgentLog`
   terakhir untuk `agentType=GUARDIAN, action=guardian-report, status=COMPLETED`;
-  lewati bila lebih muda dari 6 hari. Kembalikan `skipped` agar pemanggil tahu.
-- **Kirim per-siswa dengan kunci unik** — satu baris per siswa per minggu
-  (mis. `guardian-report:<studentId>:<ISO-week>`), sehingga kiriman yang gagal
-  bisa diulang tanpa menggandakan yang sudah berhasil.
+  lewati bila lebih muda dari 6 hari.
+- **Kirim per-siswa dengan kunci unik** — satu baris per siswa per minggu.
+  ← **dipilih dan dikerjakan**
 - Untuk `daily-nudge`: filter pada nudge terakhir, bukan aktivitas terakhir.
-
-Perlu keputusan pemilik produk sebelum dikerjakan — ia mengubah perilaku
-pengiriman, bukan sekadar menambal bug.
+  ← **dikerjakan**
 
 
