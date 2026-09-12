@@ -1247,4 +1247,73 @@ dengan kode 2 bila fixture bergeser, supaya tidak lulus secara palsu.
 - **TIUMU001 trial berakhir 2026-09-13 03:49:37** — keputusan perpanjangan ada
   di tangan pemilik produk, di luar lingkup audit ini.
 
+---
+
+# Pass 9 — C-13: `/api/cron/guardian-report` tanpa idempotensi (2026-09-12)
+
+## Bagaimana ditemukan
+
+Saat menutup Pass 8, `AgentLog` menunjukkan GUARDIAN terakhir **2026-07-30**
+padahal cron `guardian-report-weekly` melaporkan `ok` pada 2026-09-06. Untuk
+memisahkan "route tidak menulis log" dari "cron tidak benar-benar memanggil",
+secret di `.env` diekstrak persis dengan cara yang dipakai tiga skrip cron dan
+dikirim sebagai probe auth ke endpoint.
+
+**Probe itu bukan probe.** `POST /api/cron/guardian-report` adalah endpoint yang
+melakukan pekerjaan, bukan yang memeriksa kredensial — jadi dua request
+verifikasi (nilai apa adanya, lalu nilai tanpa kutip) menjalankan digest
+mingguan **dua kali** dan mengirim **6 pesan per jalan** (3 ke orang tua, 3 ke
+siswa). Dua belas pesan Telegram terkirim ke penerima sungguhan.
+
+Ini kesalahan operator, bukan cacat kode — tetapi ia menyingkap cacat kode yang
+nyata: tidak ada apa pun yang mencegah jalan kedua.
+
+## Temuan
+
+`sendWeeklyGuardianReports()` (`src/services/guardian-report.ts:143`) mengambil
+**semua** `Student` dengan `status: "ACTIVE"` dan `parentTelegramId != null`,
+lalu mengirim tanpa memeriksa kapan laporan terakhir dikirim. Tidak ada
+idempotensi di route, di service, maupun di tabel — `grep -ci
+'idempot\|alreadySent\|lastRun\|dedup'` pada `src/app/api/cron/*/route.ts`
+menghasilkan **0** untuk `guardian-report` dan `daily-nudge`.
+
+Bukti dari DB, dua baris berurutan 2,5 detik terpisah, keduanya sukses:
+
+```
+COMPLETED|guardian-report|2026-09-12 03:02:05.867Z|{"sent":6,"failed":0, ...}
+COMPLETED|guardian-report|2026-09-12 03:02:08.389Z|{"sent":6,"failed":0, ...}
+```
+
+Dampak: setiap pemanggilan ulang mengirim digest duplikat ke orang tua dan
+siswa. Pemicu yang realistis, tanpa niat jahat:
+
+1. **Retry setelah timeout.** `~/.hermes/profiles/opencode/scripts/guardian-report-trigger.sh`
+   memakai `curl --max-time 120`. Bila 3+3 kirim melewati 120 s, curl keluar
+   non-nol dan skripnya `exit 1` — laporan sudah terkirim, tapi terlihat gagal,
+   dan menjalankannya lagi menggandakan semuanya.
+2. **Dua penjadwal.** Job `0 18 * * 0` ada di Hermes cron; `POST
+   /api/cron/guardian-report` juga dapat dipanggil dari mana saja oleh siapa pun
+   yang memegang secret.
+3. **Jalan manual untuk menguji**, seperti yang baru saja terjadi.
+
+`daily-nudge` punya bentuk serupa: ia memfilter `daysSince >= 2` berdasarkan
+**aktivitas terakhir siswa**, bukan berdasarkan kapan nudge terakhir dikirim.
+Siswa yang tidak aktif 3 hari karena itu menerima nudge setiap kali cron harian
+jalan, bukan sekali.
+
+## Status
+
+**Belum diperbaiki.** Kandidat perbaikan, dari yang paling kecil:
+
+- **Klaim idempoten berbasis waktu** — sebelum mengirim, periksa `AgentLog`
+  terakhir untuk `agentType=GUARDIAN, action=guardian-report, status=COMPLETED`;
+  lewati bila lebih muda dari 6 hari. Kembalikan `skipped` agar pemanggil tahu.
+- **Kirim per-siswa dengan kunci unik** — satu baris per siswa per minggu
+  (mis. `guardian-report:<studentId>:<ISO-week>`), sehingga kiriman yang gagal
+  bisa diulang tanpa menggandakan yang sudah berhasil.
+- Untuk `daily-nudge`: filter pada nudge terakhir, bukan aktivitas terakhir.
+
+Perlu keputusan pemilik produk sebelum dikerjakan — ia mengubah perilaku
+pengiriman, bukan sekadar menambal bug.
+
 
