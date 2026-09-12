@@ -1397,6 +1397,54 @@ ber-namespace `test-c13-`, sehingga tidak bisa memakan klaim produksi.
    Ini yang membuat satu check gagal pada percobaan pertama — bug di test, bukan
    di implementasi.
 
+### Tindak lanjut operasional: menahan digest ISO week 2026-W37
+
+Dua run akibat kesalahan probe (lihat Pass 9) mengirim digest W37 pada Sabtu
+2026-09-12. Cron terjadwal Minggu 2026-09-13 18:00 masih berada di **minggu ISO
+yang sama** (`SELECT to_char('2026-09-13'::date,'IYYY-"W"IW')` → `2026-W37`),
+sehingga akan menjadi **kiriman ketiga** dengan isi nyaris identik (jendela 7
+hari bergulir, selisih 39 jam).
+
+Karena mekanisme klaim belum ada saat kiriman itu terjadi, tidak ada baris
+`CronClaim` untuk W37 — jadi scheduler tidak tahu pekerjaannya sudah dilakukan.
+Klaim W37 di-*backfill* agar scheduler melihat kebenarannya.
+
+Skala sebenarnya: ketiga siswa berbagi **satu** `parentTelegramId`
+(`640765830`), jadi satu run = 3 pesan ke **satu** chat orang tua (satu per
+anak) + 3 ke chat siswa. Bukan 3 orang tua berbeda.
+
+Alat: `scripts/seed-cron-claims.ts` (dry-run default, `--apply`, `--verify`).
+Kunci diturunkan dengan memanggil fungsi produksi, tidak dengan merangkai string
+di script, sehingga perubahan skema kunci tidak bisa membuat seed diam-diam
+menyimpang dari yang dicari service.
+
+Hasil: 6 klaim W37 tertulis; `--verify` → `HELD — 6/6 production claims present`.
+Laporan berikutnya 2026-09-20 (W38) berjalan normal. Reversibel:
+`DELETE FROM "CronClaim" WHERE key LIKE '%2026-W37';`
+
+### Pelajaran ketiga: `--verify` yang memutasi
+
+Versi pertama `--verify` memanggil service dengan transport perekam dan
+menyimpulkan "tertahan" bila tidak ada panggilan. Itu **salah dua kali**:
+
+1. Memanggil service berarti **melakukan klaim**. Pada minggu yang belum di-seed,
+   `--verify` menulis klaim produksi — sebuah pemeriksaan baca-saja yang
+   diam-diam menjadi `--apply`. Ini terungkap saat `--apply` melaporkan
+   `Created 0 claim(s); 6 already present` padahal dry-run sebelumnya bilang
+   `would create` untuk keenamnya; baris-baris itu ber-`metadata {studentId}`
+   (tulisan service), bukan `{seededBy}` (tulisan script).
+2. Di bawah prefix baru, klaim selalu segar sehingga service **memang** akan
+   mengirim. Run tunggal tidak bisa membedakan "tertahan" dari "tidak ada yang
+   perlu dikirim".
+
+Perbaikan: `--verify` (a) membuktikan klaim produksi ada lewat pembacaan DB
+murni, lalu (b) menjalankan service **dua kali** di bawah prefix
+`seed-c13-verify:` yang tidak mungkin bertabrakan dengan produksi — run 1 harus
+mengirim, run 2 harus tertahan; pasangan itulah yang membuktikan kabel
+klaim→lewati tersambung — lalu (c) menghapus kunci prefix itu di blok `finally`.
+Kuncinya: **alat verifikasi harus tidak punya efek samping**, dan cara
+membuktikannya adalah menjalankannya dua kali lalu memeriksa state-nya identik.
+
 ### Kandidat perbaikan awal (untuk catatan)
 
 - **Klaim idempoten berbasis waktu** — sebelum mengirim, periksa `AgentLog`
