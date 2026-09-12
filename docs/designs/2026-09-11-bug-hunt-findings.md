@@ -1301,6 +1301,23 @@ siswa. Pemicu yang realistis, tanpa niat jahat:
 Siswa yang tidak aktif 3 hari karena itu menerima nudge setiap kali cron harian
 jalan, bukan sekali.
 
+## C-05 — runtime terverifikasi (efek samping di atas)
+
+Perbaikan C-05 (`logCronRun()` + jumlah kiriman nyata) di-deploy 2026-09-11 dan
+belum pernah dieksekusi karena job GUARDIAN terakhir jatuh 2026-09-06. Dua jalan
+tak sengaja di atas adalah eksekusi runtime pertamanya:
+
+```
+COMPLETED|guardian-report|2026-09-12 03:02:05.867Z|{"sent":6,"failed":0,...}
+COMPLETED|guardian-report|2026-09-12 03:02:08.389Z|{"sent":6,"failed":0,...}
+```
+
+`logCronRun` menulis baris; `output` memuat hitungan sebenarnya
+(`guardianReport.sent=3`, `studentReport.sent=3`) alih-alih `sent=0` yang dulu
+selalu dilaporkan skrip cron. **C-05 ditutup** — tidak perlu menunggu jadwal
+2026-09-13 18:00. Yang belum terekspresi hanyalah pelaporan sisi skrip cron
+(`Guardian: sent=X`), bukan lagi inti perbaikannya.
+
 ## Status
 
 **Belum diperbaiki.** Kandidat perbaikan, dari yang paling kecil:
