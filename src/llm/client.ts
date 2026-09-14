@@ -67,35 +67,26 @@ export const VISION_MODELS = [
 export const FALLBACK_CHAIN: Record<AgentRole, string[]> = {
   tutor: [
     "ai_tutor_agent",
-    "sumopod/deepseek-v4-flash",
-    "sumopod/gpt-4o-mini",
     "hermes",
   ],
   curriculum: [
     "ai_tutor_agent",
-    "sumopod/deepseek-v4-flash",
     "hermes",
   ],
   content: [
     "ai_tutor_agent",
-    "sumopod/deepseek-v4-flash",
-    "sumopod/gemini/gemini-2.5-flash-lite",
     "hermes",
   ],
   assessment: [
     "ai_tutor_agent",
-    "sumopod/gpt-4o-mini",
     "hermes",
   ],
   guardian: [
     "ai_tutor_agent",
-    "sumopod/deepseek-v4-flash",
     "hermes",
   ],
   media_script: [
     "ai_tutor_agent",
-    "sumopod/deepseek-v4-flash",
-    "sumopod/gpt-4o-mini",
     "hermes",
   ],
 };

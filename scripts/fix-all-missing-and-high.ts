@@ -81,7 +81,7 @@ HANYA output JSON. Tidak ada teks di luar JSON.`;
 
   try {
     const res = await llm.chat.completions.create({
-      model: "sumopod/deepseek-v4-flash",
+      model: "hermes",
       messages: [
         { role: "system", content: "Anda guru profesional Indonesia. Output JSON saja." },
         { role: "user", content: prompt },
@@ -124,7 +124,7 @@ HANYA output konten pembelajaran, tidak perlu format khusus.`;
 
   try {
     const res = await llm.chat.completions.create({
-      model: "sumopod/deepseek-v4-flash",
+      model: "hermes",
       messages: [
         { role: "system", content: "Anda guru profesional Indonesia yang menyusun materi pembelajaran." },
         { role: "user", content: prompt },

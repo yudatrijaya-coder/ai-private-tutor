@@ -319,6 +319,11 @@ model ProgressSnap {
   student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
   @@index([studentId, subject, snapDate])
+  // Anti-duplicate guard: grader (upsertProgressSnap) and the weekly cron
+  // route both create snaps; a race or repeated cron trigger previously
+  // produced 4 rows/day (ledger A-20). Keeps the FIRST snap per day —
+  // later writers must findFirst + update instead of inserting.
+  @@unique([studentId, subject, snapDate])
 }
 
 
