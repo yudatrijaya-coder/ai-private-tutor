@@ -383,26 +383,44 @@ async function SubjectContent({ subject }: { subject: string }) {
             </span>
           </div>
           <div className="space-y-2">
-            {weekMaterials.map((material) => (
-              <Link
+            {weekMaterials.map((material) => {
+              const quizId = material.quizzes[0]?.id;
+              const hasQuiz = material._count.quizzes > 0 && !!quizId;
+              return (
+              <div
                 key={material.id}
-                href={`/student/slides/${material.id}`}
-                className="flex items-center justify-between gap-3 rounded-xl p-3 transition-all hover:opacity-80 active:scale-[0.99]"
+                className="flex items-center justify-between gap-3 rounded-xl p-3"
                 style={{ backgroundColor: "var(--st-bg-card)" }}
               >
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold truncate">{material.topic}</p>
-                  {material.subTopic && (
-                    <p className="text-xs mt-0.5 truncate" style={{ color: "var(--st-text-dim)" }}>
-                      {material.subTopic}
-                    </p>
-                  )}
-                </div>
-                <span className="text-xs shrink-0" style={{ color: meta.color }}>
-                  Minggu {material.weekOrder} →
-                </span>
-              </Link>
-            ))}
+                <Link
+                  href={`/student/slides/${material.id}`}
+                  className="flex flex-1 items-center justify-between gap-3 min-w-0 transition-all hover:opacity-80 active:scale-[0.99]"
+                >
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold truncate">{material.topic}</p>
+                    {material.subTopic && (
+                      <p className="text-xs mt-0.5 truncate" style={{ color: "var(--st-text-dim)" }}>
+                        {material.subTopic}
+                      </p>
+                    )}
+                  </div>
+                  <span className="text-xs shrink-0" style={{ color: meta.color }}>
+                    Minggu {material.weekOrder} →
+                  </span>
+                </Link>
+                {hasQuiz && (
+                  <Link
+                    href={`/student/quiz?quizId=${quizId}`}
+                    title="Kerjakan quiz"
+                    className="shrink-0 text-xs font-semibold rounded-lg px-2.5 py-1.5 transition-all hover:opacity-80 active:scale-95"
+                    style={{ backgroundColor: `${meta.color}25`, color: meta.color }}
+                  >
+                    🧠 Quiz
+                  </Link>
+                )}
+              </div>
+              );
+            })}
           </div>
         </section>
       )}
