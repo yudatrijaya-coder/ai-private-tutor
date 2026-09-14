@@ -1,0 +1,303 @@
+{
+ "source": "3666_Revisi_Formulir_Program_Semester_2627_kelas_XI_ganjil.pdf",
+ "subject": "Fisika",
+ "grade": "XI",
+ "semester": "ganjil",
+ "entries": [
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "DINAMIKA GERAK",
+   "weeks": []
+  },
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "1. Gaya Pemulih",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 4
+    },
+    {
+     "week": 2,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "2. Elastisitas Benda Padat",
+   "weeks": [
+    {
+     "week": 3,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "3. Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 4,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "4. Remedial",
+   "weeks": [
+    {
+     "week": 4,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "5. Dinamika Rotasi",
+   "weeks": [
+    {
+     "week": 5,
+     "hours": 4
+    },
+    {
+     "week": 6,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "6. Kesetimbangan Benda Tegar",
+   "weeks": [
+    {
+     "week": 6,
+     "hours": 2
+    },
+    {
+     "week": 7,
+     "hours": 4
+    },
+    {
+     "week": 8,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "7. Praktikum Kesetimbangan Benda Tegar/Pegas",
+   "weeks": [
+    {
+     "week": 8,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "FLUIDA",
+   "weeks": []
+  },
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "1. Tekanan hidrostatika",
+   "weeks": [
+    {
+     "week": 9,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "2. Gaya Ke atas",
+   "weeks": [
+    {
+     "week": 10,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "3. Praktikum Gaya Archimedes",
+   "weeks": [
+    {
+     "week": 11,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "3. Tegangan Permukaan",
+   "weeks": [
+    {
+     "week": 11,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "4. Fluida Dinamis",
+   "weeks": [
+    {
+     "week": 12,
+     "hours": 4
+    },
+    {
+     "week": 13,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "5. Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 14,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Keterampilan Proses",
+   "subtopic": "6. Remedial",
+   "weeks": [
+    {
+     "week": 14,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "KALOR",
+   "weeks": []
+  },
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "1. Kalor",
+   "weeks": [
+    {
+     "week": 15,
+     "hours": 4
+    },
+    {
+     "week": 16,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "2. Perpindahan Kalor",
+   "weeks": [
+    {
+     "week": 16,
+     "hours": 2
+    },
+    {
+     "week": 17,
+     "hours": 4
+    },
+    {
+     "week": 18,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Konsep",
+   "subtopic": "3. Tugas Kuis",
+   "weeks": [
+    {
+     "week": 18,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Keterampilan Proses",
+   "subtopic": "Total",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 4
+    },
+    {
+     "week": 2,
+     "hours": 4
+    },
+    {
+     "week": 3,
+     "hours": 4
+    },
+    {
+     "week": 4,
+     "hours": 4
+    },
+    {
+     "week": 5,
+     "hours": 4
+    },
+    {
+     "week": 6,
+     "hours": 4
+    },
+    {
+     "week": 7,
+     "hours": 4
+    },
+    {
+     "week": 8,
+     "hours": 4
+    },
+    {
+     "week": 9,
+     "hours": 4
+    },
+    {
+     "week": 10,
+     "hours": 4
+    },
+    {
+     "week": 11,
+     "hours": 4
+    },
+    {
+     "week": 12,
+     "hours": 4
+    },
+    {
+     "week": 13,
+     "hours": 4
+    },
+    {
+     "week": 14,
+     "hours": 4
+    },
+    {
+     "week": 15,
+     "hours": 4
+    },
+    {
+     "week": 16,
+     "hours": 4
+    },
+    {
+     "week": 17,
+     "hours": 4
+    },
+    {
+     "week": 18,
+     "hours": 4
+    }
+   ]
+  }
+ ]
+}

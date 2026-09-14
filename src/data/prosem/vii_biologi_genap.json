@@ -1,0 +1,118 @@
+{
+ "source": "4169_PROGRAM_SEMESTER_BIOLOGI_7_2627_GENAP.pdf",
+ "subject": "Biologi",
+ "grade": "VII",
+ "semester": "genap",
+ "entries": [
+  {
+   "topic": "Pemahaman IPA dan Ketrampilan Proses",
+   "subtopic": "Sistem Organisasi Kehidupan",
+   "weeks": []
+  },
+  {
+   "topic": "Pemahaman IPA dan Ketrampilan Proses",
+   "subtopic": "Tingkat Organisasi Kehidupan",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman IPA dan Ketrampilan Proses",
+   "subtopic": "Jaringan Pada Hewan dan Tumbuhan",
+   "weeks": [
+    {
+     "week": 2,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman IPA dan Ketrampilan Proses",
+   "subtopic": "Organ Pada Tumbuhan dan Hewan",
+   "weeks": [
+    {
+     "week": 3,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman IPA dan Ketrampilan Proses",
+   "subtopic": "Sistem Organ Pada Hewan dan Tumbuhan",
+   "weeks": [
+    {
+     "week": 4,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman IPA dan Ketrampilan Proses",
+   "subtopic": "Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 6,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman IPA dan Ketrampilan Proses",
+   "subtopic": "Remedial",
+   "weeks": [
+    {
+     "week": 7,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman IPA dan Ketrampilan Proses",
+   "subtopic": "Interaksi Makhluk Hidup dengan Lingkungannya",
+   "weeks": []
+  },
+  {
+   "topic": "Pemahaman IPA dan Ketrampilan Proses",
+   "subtopic": "Komponen Penyusun Ekosistem",
+   "weeks": [
+    {
+     "week": 8,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman IPA dan Ketrampilan Proses",
+   "subtopic": "Satuan dalam Ekosistem",
+   "weeks": [
+    {
+     "week": 8,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman IPA dan Ketrampilan Proses",
+   "subtopic": "Praktikum: Pengamatan Komponen Biotik dan Abiotik di Lingkungan Sekolah",
+   "weeks": [
+    {
+     "week": 9,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman IPA dan Ketrampilan Proses",
+   "subtopic": "Rantai Makanan dan Jaring-Jaring Makanan",
+   "weeks": [
+    {
+     "week": 10,
+     "hours": 2
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,308 @@
+{
+ "source": "3668_Formulir_Program_Semester_2627_kimia_kelas_XI__1_.xlsx",
+ "subject": "Kimia",
+ "grade": "XI",
+ "semester": "ganjil",
+ "entries": [
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Termokimia",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Reaksi Eksoterm dan Reaksi Endoterm",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Menentukan DH reaksi berdasarkan Hukum Hess, data perubahan entalpi pembentukan standar dan data energi ikatan",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 2
+    },
+    {
+     "week": 2,
+     "hours": 4
+    },
+    {
+     "week": 3,
+     "hours": 4
+    },
+    {
+     "week": 4,
+     "hours": 4
+    },
+    {
+     "week": 5,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 5,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Remedial",
+   "weeks": [
+    {
+     "week": 6,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Laju Reaksi",
+   "weeks": [
+    {
+     "week": 6,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Laju Reaksi dan Faktor Penentu Laju Reaksi",
+   "weeks": [
+    {
+     "week": 7,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Teori Tumbukan untuk Menentukan Laju Reaksi dan Orde Reaksi",
+   "weeks": [
+    {
+     "week": 8,
+     "hours": 4
+    },
+    {
+     "week": 9,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 10,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Remedial",
+   "weeks": [
+    {
+     "week": 10,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Tetapan Kesetimbangan (Kp dan Kc)",
+   "weeks": [
+    {
+     "week": 11,
+     "hours": 4
+    },
+    {
+     "week": 12,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Proses Haber Bosch dan Proses Kontak",
+   "weeks": [
+    {
+     "week": 13,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Kesetimbangan Dinamis",
+   "weeks": [
+    {
+     "week": 13,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Pergeseran Arah Kesetimbangan",
+   "weeks": [
+    {
+     "week": 14,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Teori Asam Basa",
+   "weeks": [
+    {
+     "week": 15,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Sifat Asam Basa",
+   "weeks": [
+    {
+     "week": 15,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Keasaman (pH) dari asam dan basa",
+   "weeks": [
+    {
+     "week": 16,
+     "hours": 4
+    },
+    {
+     "week": 17,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Derajat ionisasi dan konstanta asam basa",
+   "weeks": [
+    {
+     "week": 17,
+     "hours": 2
+    },
+    {
+     "week": 18,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Aplikasi keasaman dan konsep (pH) dalam polusi",
+   "weeks": [
+    {
+     "week": 18,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Pemahaman Kimia dan Keterampilan Proses",
+   "subtopic": "Total",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 4
+    },
+    {
+     "week": 2,
+     "hours": 4
+    },
+    {
+     "week": 3,
+     "hours": 4
+    },
+    {
+     "week": 4,
+     "hours": 4
+    },
+    {
+     "week": 5,
+     "hours": 4
+    },
+    {
+     "week": 6,
+     "hours": 4
+    },
+    {
+     "week": 7,
+     "hours": 4
+    },
+    {
+     "week": 8,
+     "hours": 4
+    },
+    {
+     "week": 9,
+     "hours": 4
+    },
+    {
+     "week": 10,
+     "hours": 4
+    },
+    {
+     "week": 11,
+     "hours": 4
+    },
+    {
+     "week": 12,
+     "hours": 4
+    },
+    {
+     "week": 13,
+     "hours": 4
+    },
+    {
+     "week": 14,
+     "hours": 4
+    },
+    {
+     "week": 15,
+     "hours": 4
+    },
+    {
+     "week": 16,
+     "hours": 4
+    },
+    {
+     "week": 17,
+     "hours": 4
+    },
+    {
+     "week": 18,
+     "hours": 4
+    }
+   ]
+  }
+ ]
+}

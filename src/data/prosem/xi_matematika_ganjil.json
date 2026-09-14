@@ -1,0 +1,383 @@
+{
+ "source": "3675_Program_Semester_Matematika_Umum_2627_kelas_XI.xlsx",
+ "subject": "Matematika",
+ "grade": "XI",
+ "semester": "ganjil",
+ "entries": [
+  {
+   "topic": "Aljabar",
+   "subtopic": "Matriks",
+   "weeks": []
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Konsep Matriks",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Jenis-Jenis Matriks",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Kesamaan Dua Matriks",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 1
+    },
+    {
+     "week": 2,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Operasi pada Matriks",
+   "weeks": [
+    {
+     "week": 2,
+     "hours": 2
+    },
+    {
+     "week": 3,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Determinan Matriks",
+   "weeks": [
+    {
+     "week": 3,
+     "hours": 2
+    },
+    {
+     "week": 4,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Invers Matriks",
+   "weeks": [
+    {
+     "week": 4,
+     "hours": 2
+    },
+    {
+     "week": 5,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Aplikasi Matriks",
+   "weeks": [
+    {
+     "week": 5,
+     "hours": 2
+    },
+    {
+     "week": 6,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 6,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Remedial",
+   "weeks": [
+    {
+     "week": 7,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Geometri dan Aljabar",
+   "subtopic": "Transformasi Geometri",
+   "weeks": []
+  },
+  {
+   "topic": "Geometri dan Aljabar",
+   "subtopic": "Translasi (pergeseran)",
+   "weeks": [
+    {
+     "week": 7,
+     "hours": 1
+    },
+    {
+     "week": 8,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Geometri dan Aljabar",
+   "subtopic": "Refleksi (pencerminan)",
+   "weeks": [
+    {
+     "week": 8,
+     "hours": 1
+    },
+    {
+     "week": 9,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Geometri dan Aljabar",
+   "subtopic": "Rotasi (perputaran)",
+   "weeks": [
+    {
+     "week": 9,
+     "hours": 1
+    },
+    {
+     "week": 10,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Geometri dan Aljabar",
+   "subtopic": "Dilatasi (perkalian)",
+   "weeks": [
+    {
+     "week": 10,
+     "hours": 1
+    },
+    {
+     "week": 11,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Geometri dan Aljabar",
+   "subtopic": "Aplikasi transformasi geometri",
+   "weeks": [
+    {
+     "week": 11,
+     "hours": 1
+    },
+    {
+     "week": 12,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Fungsi Komposisi dan Invers",
+   "weeks": []
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Konsep Fungsi Komposisi",
+   "weeks": [
+    {
+     "week": 12,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Sifat-sifat Fungsi Komposisi",
+   "weeks": [
+    {
+     "week": 13,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Aplikasi fungsi komposisi",
+   "weeks": [
+    {
+     "week": 13,
+     "hours": 2
+    },
+    {
+     "week": 14,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Konsep fungsi invers",
+   "weeks": [
+    {
+     "week": 14,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Rumus invers fungsi linear, kuadrat, eksponen, dan logaritma",
+   "weeks": [
+    {
+     "week": 14,
+     "hours": 1
+    },
+    {
+     "week": 15,
+     "hours": 3
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Aplikasi fungsi invers",
+   "weeks": [
+    {
+     "week": 16,
+     "hours": 3
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 17,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Remedial",
+   "weeks": [
+    {
+     "week": 17,
+     "hours": 1
+    },
+    {
+     "week": 18,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Penguatan",
+   "weeks": [
+    {
+     "week": 18,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Total",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 3
+    },
+    {
+     "week": 2,
+     "hours": 3
+    },
+    {
+     "week": 3,
+     "hours": 3
+    },
+    {
+     "week": 4,
+     "hours": 3
+    },
+    {
+     "week": 5,
+     "hours": 3
+    },
+    {
+     "week": 6,
+     "hours": 3
+    },
+    {
+     "week": 7,
+     "hours": 3
+    },
+    {
+     "week": 8,
+     "hours": 3
+    },
+    {
+     "week": 9,
+     "hours": 3
+    },
+    {
+     "week": 10,
+     "hours": 3
+    },
+    {
+     "week": 11,
+     "hours": 3
+    },
+    {
+     "week": 12,
+     "hours": 3
+    },
+    {
+     "week": 13,
+     "hours": 3
+    },
+    {
+     "week": 14,
+     "hours": 3
+    },
+    {
+     "week": 15,
+     "hours": 3
+    },
+    {
+     "week": 16,
+     "hours": 3
+    },
+    {
+     "week": 17,
+     "hours": 3
+    },
+    {
+     "week": 18,
+     "hours": 3
+    }
+   ]
+  }
+ ]
+}

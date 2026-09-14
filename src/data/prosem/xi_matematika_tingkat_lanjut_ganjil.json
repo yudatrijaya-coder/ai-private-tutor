@@ -1,0 +1,325 @@
+{
+ "source": "3674_Program_Semester_2627_MTL_XI.xlsx",
+ "subject": "Matematika Tingkat Lanjut",
+ "grade": "XI",
+ "semester": "ganjil",
+ "entries": [
+  {
+   "topic": "Aljabar",
+   "subtopic": "Polinomial (Suku Banyak)",
+   "weeks": []
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Polinomial dan Fungsi Polinomial",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Operasi Aljabar pada Polinomial",
+   "weeks": [
+    {
+     "week": 2,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Pembagian Sintetik dan Kesamaan",
+   "weeks": [
+    {
+     "week": 3,
+     "hours": 4
+    },
+    {
+     "week": 4,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Teorema Sisa dan Teorema Faktor",
+   "weeks": [
+    {
+     "week": 5,
+     "hours": 4
+    },
+    {
+     "week": 6,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Akar-Akar Persamaan Polinomial",
+   "weeks": [
+    {
+     "week": 6,
+     "hours": 2
+    },
+    {
+     "week": 7,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 7,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Remedial",
+   "weeks": [
+    {
+     "week": 8,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Trigonometri",
+   "weeks": []
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Identitas Trigonometri",
+   "weeks": [
+    {
+     "week": 8,
+     "hours": 2
+    },
+    {
+     "week": 9,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Aturan Sinus",
+   "weeks": [
+    {
+     "week": 9,
+     "hours": 2
+    },
+    {
+     "week": 10,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Aturan Cosinus",
+   "weeks": [
+    {
+     "week": 11,
+     "hours": 4
+    },
+    {
+     "week": 12,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Fungsi Trigonometri",
+   "weeks": [
+    {
+     "week": 12,
+     "hours": 2
+    },
+    {
+     "week": 13,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 13,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Remedial",
+   "weeks": [
+    {
+     "week": 14,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Fungsi dan Pemodelannya",
+   "weeks": []
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Fungsi Rasional",
+   "weeks": [
+    {
+     "week": 14,
+     "hours": 2
+    },
+    {
+     "week": 15,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Fungsi Irasional",
+   "weeks": [
+    {
+     "week": 15,
+     "hours": 2
+    },
+    {
+     "week": 16,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Fungsi Nilai Mutlak",
+   "weeks": [
+    {
+     "week": 16,
+     "hours": 2
+    },
+    {
+     "week": 17,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Fungsi Tangga",
+   "weeks": [
+    {
+     "week": 17,
+     "hours": 2
+    },
+    {
+     "week": 18,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Fungsi Piecewise",
+   "weeks": [
+    {
+     "week": 18,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Aljabar",
+   "subtopic": "Total",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 4
+    },
+    {
+     "week": 2,
+     "hours": 4
+    },
+    {
+     "week": 3,
+     "hours": 4
+    },
+    {
+     "week": 4,
+     "hours": 4
+    },
+    {
+     "week": 5,
+     "hours": 4
+    },
+    {
+     "week": 6,
+     "hours": 4
+    },
+    {
+     "week": 7,
+     "hours": 4
+    },
+    {
+     "week": 8,
+     "hours": 4
+    },
+    {
+     "week": 9,
+     "hours": 4
+    },
+    {
+     "week": 10,
+     "hours": 4
+    },
+    {
+     "week": 11,
+     "hours": 4
+    },
+    {
+     "week": 12,
+     "hours": 4
+    },
+    {
+     "week": 13,
+     "hours": 4
+    },
+    {
+     "week": 14,
+     "hours": 4
+    },
+    {
+     "week": 15,
+     "hours": 4
+    },
+    {
+     "week": 16,
+     "hours": 4
+    },
+    {
+     "week": 17,
+     "hours": 4
+    },
+    {
+     "week": 18,
+     "hours": 4
+    }
+   ]
+  }
+ ]
+}

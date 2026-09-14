@@ -1,0 +1,275 @@
+{
+ "source": "3673_Program_Semester_Matematika_Penalaran.xlsx",
+ "subject": "Matematika Penalaran",
+ "grade": "XI",
+ "semester": "ganjil",
+ "entries": [
+  {
+   "topic": "Bilangan",
+   "subtopic": "Himpunan",
+   "weeks": []
+  },
+  {
+   "topic": "Bilangan",
+   "subtopic": "Definisi Himpunan",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Bilangan",
+   "subtopic": "Cara Menyatakan Himpunan",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Bilangan",
+   "subtopic": "Jenis-jenis Himpunan",
+   "weeks": [
+    {
+     "week": 2,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Bilangan",
+   "subtopic": "Operasi Himpunan",
+   "weeks": [
+    {
+     "week": 3,
+     "hours": 2
+    },
+    {
+     "week": 4,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Geometri",
+   "subtopic": "Hubungan Garis dan Sudut",
+   "weeks": []
+  },
+  {
+   "topic": "Geometri",
+   "subtopic": "Pengertian garis dan Jenis-jenisnya",
+   "weeks": [
+    {
+     "week": 5,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Geometri",
+   "subtopic": "Pengertian sudut dan Jenis-jenisnya",
+   "weeks": [
+    {
+     "week": 5,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Geometri",
+   "subtopic": "Hubungan antar sudut pada dua buah garis lurus yang sejajar dan berpotongan dengan garis transversal",
+   "weeks": [
+    {
+     "week": 6,
+     "hours": 2
+    },
+    {
+     "week": 7,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Geometri",
+   "subtopic": "Hubungan antar sudut pada dua garis lurus yang sejajar dan berpotongan dengan garis transversal dalam menentukan nilai sudut yang tidak diketahui dalam segitiga dan segi-empat",
+   "weeks": [
+    {
+     "week": 7,
+     "hours": 1
+    },
+    {
+     "week": 8,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Geometri",
+   "subtopic": "Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 9,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Geometri",
+   "subtopic": "Kesebangunan dan Kekongruenan",
+   "weeks": []
+  },
+  {
+   "topic": "Geometri",
+   "subtopic": "Kekongruenan bangun datar",
+   "weeks": [
+    {
+     "week": 10,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Geometri",
+   "subtopic": "Kekongruenan dua segitiga",
+   "weeks": [
+    {
+     "week": 11,
+     "hours": 2
+    },
+    {
+     "week": 12,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Geometri",
+   "subtopic": "Kesebangunan bangun datar",
+   "weeks": [
+    {
+     "week": 13,
+     "hours": 2
+    },
+    {
+     "week": 14,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Geometri",
+   "subtopic": "Kesebangunan dua segitiga",
+   "weeks": [
+    {
+     "week": 15,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Geometri",
+   "subtopic": "Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 16,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Geometri",
+   "subtopic": "Persiapan ASAS Matematika Wajib",
+   "weeks": [
+    {
+     "week": 17,
+     "hours": 2
+    },
+    {
+     "week": 18,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Geometri",
+   "subtopic": "Total",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 2
+    },
+    {
+     "week": 2,
+     "hours": 2
+    },
+    {
+     "week": 3,
+     "hours": 2
+    },
+    {
+     "week": 4,
+     "hours": 2
+    },
+    {
+     "week": 5,
+     "hours": 2
+    },
+    {
+     "week": 6,
+     "hours": 2
+    },
+    {
+     "week": 7,
+     "hours": 2
+    },
+    {
+     "week": 8,
+     "hours": 2
+    },
+    {
+     "week": 9,
+     "hours": 2
+    },
+    {
+     "week": 10,
+     "hours": 2
+    },
+    {
+     "week": 11,
+     "hours": 2
+    },
+    {
+     "week": 12,
+     "hours": 2
+    },
+    {
+     "week": 13,
+     "hours": 2
+    },
+    {
+     "week": 14,
+     "hours": 2
+    },
+    {
+     "week": 15,
+     "hours": 2
+    },
+    {
+     "week": 16,
+     "hours": 2
+    },
+    {
+     "week": 17,
+     "hours": 2
+    },
+    {
+     "week": 18,
+     "hours": 2
+    }
+   ]
+  }
+ ]
+}

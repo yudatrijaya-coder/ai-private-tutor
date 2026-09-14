@@ -6,6 +6,7 @@ import { jwtVerify } from "jose";
 import Link from "next/link";
 import { getYouTubeForTopic } from "@/data/youtube";
 import { getMoodleModule, getMoodleBook } from "@/data/moodle-modules";
+import { getProsem, groupProsemByTopic } from "@/lib/prosem";
 import { SubjectTracker } from "@/components/SubjectTracker";
 
 import { requireStudentSecret } from "@/lib/auth/student-secret";
@@ -96,6 +97,26 @@ function getMeta(subject: string) {
   return SUBJECT_META[subject] ?? { emoji: "📚", color: "#94a3b8" };
 }
 
+/* ── Completion status ──
+   Ledger: topic completion is derived deterministically from TopicMastery
+   (updated by grader.ts / exam attempt route). No separate table.
+   Threshold 70 aligns with the "moderate" weakness boundary in
+   src/services/topic-mastery.ts (below 70 = moderate/severe). */
+const TOPIC_DONE_THRESHOLD = 70;
+
+type TopicStatus = "done" | "in_progress" | "not_started";
+
+function topicStatus(mastery: number | undefined): TopicStatus {
+  if (mastery === undefined || mastery <= 0) return "not_started";
+  return mastery >= TOPIC_DONE_THRESHOLD ? "done" : "in_progress";
+}
+
+const STATUS_META: Record<TopicStatus, { label: string; emoji: string; bg: string; color: string }> = {
+  done: { label: "Tuntas", emoji: "✅", bg: "rgba(34,197,94,0.15)", color: "#16a34a" },
+  in_progress: { label: "Berlangsung", emoji: "🔄", bg: "rgba(245,158,11,0.15)", color: "#d97706" },
+  not_started: { label: "Belum", emoji: "⚪", bg: "rgba(148,163,184,0.15)", color: "#64748b" },
+};
+
 /* ── Content ── */
 async function SubjectContent({ subject }: { subject: string }) {
   noStore();
@@ -162,6 +183,26 @@ async function SubjectContent({ subject }: { subject: string }) {
     );
   }
 
+  // Completion status — topic-level mastery (subTopic = "" rows, written by
+  // grader.ts / exam attempt route). Keyed by topic string.
+  const topicMasteries = await prisma.topicMastery.findMany({
+    where: { studentId: session.studentId, subject: decodedSubject },
+    select: { topic: true, subTopic: true, mastery: true },
+  });
+  const masteryByTopic = new Map<string, number>();
+  for (const tm of topicMasteries) {
+    if (tm.subTopic) continue; // topic-level rows only
+    masteryByTopic.set(tm.topic, tm.mastery);
+  }
+  const doneCount = materials.filter(m => topicStatus(masteryByTopic.get(m.topic)) === "done").length;
+
+  // Prosem (program semester) plan from Moodle — topic/subtopic week schedule.
+  const prosem = getProsem(decodedSubject, studentData?.gradeLevel);
+  const prosemGroups = prosem ? groupProsemByTopic(prosem.entries.filter(e => e.subtopic !== "(BAB)")) : [];
+  const currentWeek = Math.max(1, Math.ceil(
+    (Date.now() - new Date(new Date().getFullYear(), 6, 1).getTime()) / (7 * 24 * 3600 * 1000)
+  ));
+
   const totalQuizCount = materials.reduce(
     (sum, m) => sum + m._count.quizzes, 0
   );
@@ -195,6 +236,18 @@ async function SubjectContent({ subject }: { subject: string }) {
           <p className="text-white/80 text-sm mt-1">
             {materials.length} topik · {totalQuizCount} quiz
           </p>
+          <div className="mt-3">
+            <div className="flex items-center justify-between text-white/90 text-xs font-medium mb-1.5">
+              <span>{doneCount}/{materials.length} topik tuntas</span>
+              <span>{Math.round((doneCount / materials.length) * 100)}%</span>
+            </div>
+            <div className="h-2 rounded-full bg-white/25 overflow-hidden">
+              <div
+                className="h-full rounded-full bg-white transition-all"
+                style={{ width: `${(doneCount / materials.length) * 100}%` }}
+              />
+            </div>
+          </div>
         </div>
         <div className="absolute -right-6 -bottom-6 w-28 h-28 rounded-full bg-white/10" />
         <div className="absolute -right-2 -bottom-2 w-16 h-16 rounded-full bg-white/10" />
@@ -294,6 +347,73 @@ async function SubjectContent({ subject }: { subject: string }) {
         </Link>
       </div>
 
+      {/* Program Semester (prosem) — week schedule from school's Moodle */}
+      {prosemGroups.length > 0 && (
+        <section>
+          <div className="flex items-center justify-between mb-2">
+            <h2
+              className="text-base font-bold"
+              style={{ fontFamily: "var(--font-st-display)" }}
+            >
+              🗓️ Program Semester
+            </h2>
+            <span className="text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: "var(--st-bg-card)", color: "var(--st-text-dim)" }}>
+              {prosem?.semester ?? ""} · minggu ke-{Math.min(currentWeek, 18)}
+            </span>
+          </div>
+          <div className="space-y-2">
+            {prosemGroups.map((g, gi) => (
+              <details
+                key={gi}
+                className="rounded-2xl px-4 py-3"
+                style={{ backgroundColor: "var(--st-bg-card)" }}
+                open={g.items.some((it) => it.weeks.some((w) => w.week === Math.min(currentWeek, 18)))}
+              >
+                <summary className="text-sm font-semibold cursor-pointer list-none flex items-center justify-between">
+                  <span className="truncate">{g.topic}</span>
+                  <span className="text-xs shrink-0 ml-2" style={{ color: "var(--st-text-dim)" }}>
+                    {g.items.reduce((a, it) => a + it.weeks.length, 0)} sesi
+                  </span>
+                </summary>
+                <ul className="mt-2 space-y-1.5">
+                  {g.items.map((it, ii) => {
+                    const wks = it.weeks.map((w) => w.week);
+                    const minW = wks.length ? Math.min(...wks) : 999;
+                    const maxW = wks.length ? Math.max(...wks) : 0;
+                    const isNow = wks.includes(Math.min(currentWeek, 18));
+                    const isPast = wks.length > 0 && maxW < Math.min(currentWeek, 18);
+                    return (
+                      <li
+                        key={ii}
+                        className="flex items-center justify-between text-xs gap-2"
+                        style={{ opacity: isPast ? 0.55 : 1 }}
+                      >
+                        <span className="truncate min-w-0">
+                          {isNow ? "▸ " : ""}{it.subtopic}
+                        </span>
+                        <span
+                          className="shrink-0 px-1.5 py-0.5 rounded-full"
+                          style={{
+                            backgroundColor: isNow ? `${meta.color}25` : "transparent",
+                            color: isNow ? meta.color : "var(--st-text-dim)",
+                            fontWeight: isNow ? 600 : 400,
+                          }}
+                        >
+                          {wks.length ? (wks.length === 1 ? `mg ${wks[0]}` : `mg ${Math.min(...wks)}–${maxW}`) : "—"}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </details>
+            ))}
+          </div>
+          <p className="text-[11px] mt-2" style={{ color: "var(--st-text-dim)" }}>
+            Sumber: {prosem?.source ?? "prosem"} — jadwal mingguan dari sekolah
+          </p>
+        </section>
+      )}
+
       {/* Topic List */}
       <h2
         className="text-base font-bold"
@@ -306,6 +426,9 @@ async function SubjectContent({ subject }: { subject: string }) {
         {materials.map((material) => {
           const hasQuiz = material._count.quizzes > 0;
           const quizId = material.quizzes[0]?.id;
+          const mastery = masteryByTopic.get(material.topic);
+          const status = topicStatus(mastery);
+          const statusMeta = STATUS_META[status];
 
           return (
             <div
@@ -327,20 +450,37 @@ async function SubjectContent({ subject }: { subject: string }) {
                     </p>
                   )}
                 </div>
-                <span
-                  className="text-xs px-2 py-0.5 rounded-full font-medium shrink-0 ml-2"
-                  style={{
-                    backgroundColor: `${meta.color}20`,
-                    color: meta.color,
-                  }}
-                >
-                  {/*
-                    Ledger B-04: `weekOrder` 999 is the "unplaced" sentinel used
-                    for extra material that has no slot in the week sequence.
-                    Rendering it raw printed "Minggu 999" to students.
-                  */}
-                  {material.weekOrder >= 999 ? "Tambahan" : `Minggu ${material.weekOrder}`}
-                </span>
+                <div className="flex items-center gap-2 shrink-0 ml-2">
+                  <span
+                    className="text-xs px-2 py-0.5 rounded-full font-medium"
+                    style={{
+                      backgroundColor: statusMeta.bg,
+                      color: statusMeta.color,
+                    }}
+                    title={
+                      status === "in_progress" && mastery !== undefined
+                        ? `Mastery ${Math.round(mastery)}% (target ${TOPIC_DONE_THRESHOLD}%)`
+                        : statusMeta.label
+                    }
+                  >
+                    {statusMeta.emoji} {statusMeta.label}
+                    {status === "in_progress" && mastery !== undefined ? ` ${Math.round(mastery)}%` : ""}
+                  </span>
+                  <span
+                    className="text-xs px-2 py-0.5 rounded-full font-medium"
+                    style={{
+                      backgroundColor: `${meta.color}20`,
+                      color: meta.color,
+                    }}
+                  >
+                    {/*
+                      Ledger B-04: `weekOrder` 999 is the "unplaced" sentinel used
+                      for extra material that has no slot in the week sequence.
+                      Rendering it raw printed "Minggu 999" to students.
+                    */}
+                    {material.weekOrder >= 999 ? "Tambahan" : `Minggu ${material.weekOrder}`}
+                  </span>
+                </div>
               </div>
 
               {/* Action Buttons */}
