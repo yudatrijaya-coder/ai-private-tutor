@@ -16,7 +16,7 @@ const MOODLE_BOOKS: Record<string, Record<string, string[]>> = {
       "/moodle-files/3975_NEW_HSK4_3.0_VOCABULARY.pdf",
     ],
     "Matematika Tingkat Lanjut": [
-      "https://moodle.kumbang.sch.id/mod/resource/view.php?id=53029",
+      "/moodle-files/3674_Matematika_Tingkat_Lanjut_XI.pdf",
     ],
     "Bahasa Inggris Tingkat Lanjut": [
       "/moodle-files/sibi-books/Inggris_BS_KLS_XI_TL_Rev.pdf",
@@ -46,17 +46,21 @@ const MOODLE_MODULES: Record<string, Record<string, string[]>> = {
     "Bahasa Indonesia": [
       "/moodle-files/3659_Program_Semester_2627_XI_Bahasa_Indonesia_Ganjil.pdf",
       "/moodle-files/3659_Program_Semester_2627_XI_Bahasa_Indonesia_Genap.pdf",
+      "/moodle-files/4164_TEKS_DESKRIPSI.pdf",
+      "/moodle-files/4164_KISI-KISI_UH-1_VII_2627.pdf",
     ],
     // Course 4166 — Bahasa Mandarin VII
     "Bahasa Mandarin": [
       "/moodle-files/4166_E-book_HSK_3.0_Level_1_.pdf",
       "/moodle-files/4166_Program_Semester_Kelas_7_TP_20262027.xlsx",
+      "/moodle-files/4166_Pinyin_dan_Nada.pptx",
     ],
     // Course 4169 — Biologi VII
     Biologi: [
-      "/moodle-files/4169_BAB_1_IDENTIFIKASI_MAKHLUK_HIDUP__1_.pdf",
+      "/moodle-files/4169_BAB_1_IDENTIFIKASI_MAKLUK_HIDUP__1_.pdf",
       "/moodle-files/4169_LKPD_CIRI_MAKHLUK_HIDUP.pdf",
       "/moodle-files/4169_LKPD_CIRI_MAKHLUK_HIDUP_2.pdf",
+      "/moodle-files/4169_KLASIFIKASI_MAKHLUK_HIDUP_KELAS_7.pdf",
     ],
     // Course 4171 — Fisika VII
     Fisika: [
@@ -73,11 +77,21 @@ const MOODLE_MODULES: Record<string, Record<string, string[]>> = {
       "/moodle-files/4174_MOODLE-Hakikat_Ilmu_Kimia_dan_Metode_Ilmiah.pdf",
       "/moodle-files/4174_1_Hakikat_Ilmu_Kimia.pdf",
       "/moodle-files/4174_2_Keselamatan_Kerja_Lab.pdf",
+      "/moodle-files/4174_3_Unsur_Senyawa_dan_Campuran.pdf",
+    ],
+    // Course 4178 — PPKn VII
+    "Pendidikan Pancasila": [
+      "/moodle-files/4178_Program_Semester_2627_kelas_VII.xlsx",
+      "/moodle-files/4178_KISI-KISI_LATIHAN_UH_1_VII_A.pdf",
     ],
     // Course 4179 — Sejarah VII
     Sejarah: [
       "/moodle-files/4179_Masa_praaksara.pdf",
       "/moodle-files/4179_Revisi_Formulir_Program_Semester_2627_kelas_VII.pdf",
+      "/moodle-files/4179_Teori_asal_usul_nenek_moyang.pdf",
+      "/moodle-files/4179_Catatan_masa_Praaksara.pdf",
+      "/moodle-files/4179_Masuknya_Hindu-Budha.pdf",
+      "/moodle-files/4179_Kerajaan_Hindu_Buddha_di_Indonesia_7.pdf",
     ],
   },
   SMA_2: {
@@ -101,8 +115,16 @@ const MOODLE_MODULES: Record<string, Record<string, string[]>> = {
     // Course 3674 — Matematika Tingkat Lanjut XI
     "Matematika Tingkat Lanjut": [
       "/moodle-files/sibi-books/Matematika_BS_KLS_XI_TL_Rev.pdf",
-      "https://moodle.kumbang.sch.id/mod/resource/view.php?id=53030",
-      "https://moodle.kumbang.sch.id/mod/resource/view.php?id=54390",
+      "/moodle-files/3674_Program_Semester_2627_MTL_XI.xlsx",
+      "/moodle-files/01_sukubanyak_unlocked.pdf",
+      "/moodle-files/3674_Hasil_bagi_sisa_metode_horner.pdf",
+      "/moodle-files/3674_Kesamaan_suku_banyak.pdf",
+      "/moodle-files/3674_Teorema_sisa.pdf",
+      "/moodle-files/3674_Teorema_faktor.pdf",
+      "/moodle-files/3674_Latihan_Suku_banyak.pdf",
+      "/moodle-files/3674_Latihan_Suku_Banyak_2.pdf",
+      "/moodle-files/3674_Materi_remedi_UH_suku_banyak.pdf",
+      "/moodle-files/3674_Latihan_identitas_Trigonometri.pdf",
     ],
     // Course 3673 — Matematika Penalaran XI
     "Bahasa Inggris Tingkat Lanjut": [
@@ -112,6 +134,7 @@ const MOODLE_MODULES: Record<string, Record<string, string[]>> = {
     Biologi: [
       "/moodle-files/3664_BAB_1_-_SISTEM_PENCERNAAN.pdf",
       "/moodle-files/3664_PPT_SISTEM_PENCERNAAN_NEW.pdf",
+      "/moodle-files/3664_PPT_SISTEM_SIRKULASI.pdf",
       "/moodle-files/3664_Program_Semester_Biologi_2627_kelas_XI.pdf",
     ],
     // Course 3666 — Fisika XI
@@ -122,6 +145,7 @@ const MOODLE_MODULES: Record<string, Record<string, string[]>> = {
     // Course 3668 — Kimia XI
     Kimia: [
       "/moodle-files/3668_Termokimia_Update_2627.pdf",
+      "/moodle-files/3668_Laju_Reaksi_2526.pdf",
     ],
     // Course 3667 — Informatika XI
     Informatika: [
@@ -130,12 +154,17 @@ const MOODLE_MODULES: Record<string, Record<string, string[]>> = {
       "/moodle-files/3667_MODUL_MATERI_PEMBELAJARAN_KELAS_XI.pdf",
       "/moodle-files/3667_Progsem_Ganjil_XI.pdf",
       "/moodle-files/3667_Progsem_Genap_XI.pdf",
+      "/moodle-files/3667_Kisi_Kisi_UH_1_Python.pdf",
     ],
     // Course 3673 — Matematika Penalaran XI
     "Matematika Penalaran": [
       "/moodle-files/3673_Penalaran_P1.pdf",
       "/moodle-files/3673_Bahasa_Indonesia_Penalaran_P2.pdf",
       "/moodle-files/3673_Program_Semester_Matematika_Penalaran.xlsx",
+      "/moodle-files/3673_Latihan_1_Himpunan.pdf",
+      "/moodle-files/3673_Garis_dan_Sudut_Materi.pdf",
+      "/moodle-files/3673_Garis_dan_Sudut_Latihan.pdf",
+      "/moodle-files/3673_Garis_dan_Sudut_Ind.pdf",
     ],
     // Course 3675 — Matematika XI
     Matematika: [
@@ -147,6 +176,11 @@ const MOODLE_MODULES: Record<string, Record<string, string[]>> = {
       "/moodle-files/3675_Determinan_Matriks.pdf",
       "/moodle-files/3675_Invers_Matriks.pdf",
       "/moodle-files/3675_Program_Semester_Matematika_Umum_2627_kelas_XI.xlsx",
+      "/moodle-files/3675_PERSAMAAN_MATRIKS.pdf",
+      "/moodle-files/3675_Latihan_SPLDV_matriks.pdf",
+      "/moodle-files/3675_LATIHAN_SOAL_PERSIAPAN_UH_1.pdf",
+      "/moodle-files/3675_Kisi_kisi_UH_1_matriks.pdf",
+      "/moodle-files/3675_Transformasi_Geometri.pdf",
     ],
     // Course 3670 — Literasi XI
     "Literasi dalam Bahasa Indonesia": [
