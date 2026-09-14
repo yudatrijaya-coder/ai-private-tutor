@@ -213,9 +213,9 @@ export const YOUTUBE_SMA11: YouTubeResource[] = [
     topic: "Cerita Pendek",
   },
   {
-    title: "Unsur Intrinsik & Ekstrinsik Drama",
-    url: "https://www.youtube.com/watch?v=JXygZE1VcIg",
-    channel: "Galeri Bahasa",
+    title: "Unsur-Unsur Pembangun Cerpen",
+    url: "https://www.youtube.com/watch?v=hm2_8tSXTGI",
+    channel: "Kelas Bu Rima",
     topic: "Cerita Pendek",
   },
 
@@ -471,9 +471,9 @@ export const YOUTUBE_SMA11: YouTubeResource[] = [
 
   // Geografi — Sumber Daya (2 video)
   {
-    title: "Mitigasi Bencana Alam - Geografi Kelas 11 (Quipper Video)",
-    url: "https://www.youtube.com/watch?v=zEjSKAeDIDQ",
-    channel: "Quipper Indonesia",
+    title: "Pengertian dan Klasifikasi Sumber Daya Alam - Geografi Kelas 11",
+    url: "https://www.youtube.com/watch?v=SM4EDiXQYU8",
+    channel: "Kita Pintar",
     topic: "Sumber Daya",
   },
   {

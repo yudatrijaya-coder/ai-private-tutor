@@ -1,6 +1,6 @@
 /** 
  * Efficient quiz bank generator — one LLM call per SUBJECT (not per sub-topic)
- * Uses sumopod/deepseek-v4-flash (faster than ai_tutor_agent combo)
+ * Uses hermes (9Router strict; sumopod/* models hang the router)
  */
 import { writeFileSync } from "fs";
 import OpenAI from "openai";
@@ -27,7 +27,7 @@ Output HARUS berupa JSON array of objects:
 HANYA output JSON, tanpa teks lain. Soal harus AKURAT secara ilmiah.`;
 
   const res = await client.chat.completions.create({
-    model: "sumopod/deepseek-v4-flash",
+    model: "hermes",
     messages: [
       { role: "system", content: "Anda guru profesional. Output JSON saja." },
       { role: "user", content: prompt },
