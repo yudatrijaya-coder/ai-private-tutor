@@ -82,6 +82,8 @@ export async function buildSystemPrompt(student: Student): Promise<string> {
     : "";
 
   const masterySummary = await buildMasterySummary(student);
+  const { buildProsemContext } = await import("@/lib/prosem-context");
+  const prosemContext = await buildProsemContext(student);
 
   // Subscription/trial facts — without these the tutor invents
   // "hubungi support/admin" when asked about upgrading.
@@ -106,6 +108,8 @@ export async function buildSystemPrompt(student: Student): Promise<string> {
     `Grade: ${getGradeLabel(student.gradeLevel)}`,
     "",
     masterySummary,
+    "",
+    prosemContext?.summary ?? "",
     "",
     buildCapabilitiesPrompt(subscriptionKnowledge),
     "",

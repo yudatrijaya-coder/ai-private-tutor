@@ -9,6 +9,11 @@
 import type { Context, Telegraf } from "telegraf";
 import type { Student } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
+import { getProsem, groupProsemByTopic } from "@/lib/prosem";
+import {
+  getStudentProsemContext,
+  formatProsemContextForPrompt,
+} from "@/lib/student-prosem-context";
 
 const DASHBOARD = "https://senangbelajar.web.id/student";
 
@@ -25,6 +30,7 @@ export const COMMAND_MENU = [
   { command: "pr", description: "Catat / lihat PR" },
   { command: "badge", description: "XP, streak & badge kamu" },
   { command: "nilai", description: "Lihat nilai & progres" },
+  { command: "prosem", description: "Jadwal prosem & status minggu ini" },
   { command: "web", description: "Buka dashboard" },
   { command: "help", description: "Tampilkan bantuan" },
 ];
@@ -54,6 +60,7 @@ export async function sendHelp(ctx: Context, student: Student): Promise<void> {
       `/pr — Catat / lihat PR 📖\n` +
       `/badge — XP, streak & badge 🏆\n` +
       `/nilai — Nilai dan progres 📊\n` +
+      `/prosem — Jadwal prosem minggu ini 🗓️\n` +
       `/web — Buka dashboard 🌐\n` +
       `/help — Bantuan ini\n\n` +
       `Atau cukup tanya aja langsung! 😊`,
@@ -198,6 +205,47 @@ export async function sendHomework(ctx: Context, student: Student): Promise<void
  * Route a slash command for a registered student.
  * Returns true when the command was handled (caller should stop).
  */
+/** /prosem — deterministic prosem schedule + sync status vs student progress. */
+export async function sendProsem(ctx: Context, student: Student): Promise<void> {
+  const { getPersona } = await import("./personas");
+  const persona = getPersona(student.persona);
+
+  const context = await getStudentProsemContext(student.id, student.gradeLevel);
+  if (!context) {
+    await ctx.reply("Belum ada data kurikulum. Selesaikan onboarding dulu ya!");
+    return;
+  }
+
+  let text =
+    `${persona.emoji} *Jadwal Prosem — Minggu ke-${context.week}*\n\n`;
+
+  for (const s of context.subjects) {
+    if (!s.hasProsem) continue;
+    const pct = s.totalCount > 0 ? Math.round((s.doneCount / s.totalCount) * 100) : 0;
+    text += `📚 *${s.subject}* — ${s.doneCount}/${s.totalCount} topik (${pct}%)\n`;
+
+    if (s.thisWeek.length > 0) {
+      text += `  🗓️ Minggu ini:\n`;
+      for (const m of s.thisWeek) {
+        text += `    ${m.done ? "✅" : "⬜"} ${m.topic}${m.subTopic ? ` — ${m.subTopic}` : ""}\n`;
+      }
+    }
+    if (s.behind.length > 0) {
+      text += `  ⏳ Tertinggal:\n`;
+      for (const b of s.behind) {
+        text += `    • ${b.topic} (jadwal minggu ${b.weekOrder})\n`;
+      }
+    }
+    if (s.thisWeek.length === 0 && s.behind.length === 0) {
+      text += `  ✅ Semua materi sampai minggu ini sudah tuntas. Mantap!\n`;
+    }
+    text += "\n";
+  }
+
+  text += `Buka dashboard: ${DASHBOARD}`;
+  await ctx.reply(text, { parse_mode: "Markdown" });
+}
+
 export async function routeCommand(
   ctx: Context,
   student: Student,
@@ -220,6 +268,9 @@ export async function routeCommand(
       return true;
     case "/nilai":
       await sendProgress(ctx, student);
+      return true;
+    case "/prosem":
+      await sendProsem(ctx, student);
       return true;
     case "/pr":
     case "/tugas":
