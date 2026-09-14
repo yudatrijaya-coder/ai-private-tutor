@@ -88,7 +88,10 @@ export default async function TrendSparklineSection() {
     const date = s.snapDate.toISOString().slice(0, 10);
     const arr = bySubject.get(key) ?? [];
     const existing = arr.find((a) => a.date === date);
-    if (existing) existing.mastery = s.mastery;
+    // Overwrite must round too: raw snaps share the day (progress-snap was
+    // triggered multiple times pre-auth-fix), and assigning the raw 0–1
+    // float here leaked values like "84.16915%" into the sparkline.
+    if (existing) existing.mastery = Math.round(s.mastery * 100);
     else arr.push({ date, mastery: Math.round(s.mastery * 100) });
     bySubject.set(key, arr);
   }
