@@ -8,6 +8,7 @@ import { getYouTubeForTopic } from "@/data/youtube";
 import { getMoodleModule, getMoodleBook } from "@/data/moodle-modules";
 import { getProsem, groupProsemByTopic } from "@/lib/prosem";
 import { SubjectTracker } from "@/components/SubjectTracker";
+import ProsemDialog from "@/components/ProsemDialog";
 
 import { requireStudentSecret } from "@/lib/auth/student-secret";
 // Signing secret is resolved at call time by `requireStudentSecret()`, which
@@ -337,6 +338,14 @@ async function SubjectContent({ subject }: { subject: string }) {
           <span className="text-2xl">🎬</span>
           <span className="text-xs font-medium text-center">Video</span>
         </Link>
+        {prosem && (
+          <ProsemDialog
+            plan={{ source: prosem.source, semester: prosem.semester }}
+            groups={prosemGroups}
+            currentWeek={currentWeek}
+            accentColor={meta.color}
+          />
+        )}
         <Link
           href={`/student/big-mindmap/${encodeURIComponent(decodedSubject)}`}
           className="flex flex-col items-center gap-1.5 rounded-2xl p-4 transition-all hover:scale-105 active:scale-95"
@@ -347,74 +356,7 @@ async function SubjectContent({ subject }: { subject: string }) {
         </Link>
       </div>
 
-      {/* Program Semester (prosem) — week schedule from school's Moodle */}
-      {prosemGroups.length > 0 && (
-        <section>
-          <div className="flex items-center justify-between mb-2">
-            <h2
-              className="text-base font-bold"
-              style={{ fontFamily: "var(--font-st-display)" }}
-            >
-              🗓️ Program Semester
-            </h2>
-            <span className="text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: "var(--st-bg-card)", color: "var(--st-text-dim)" }}>
-              {prosem?.semester ?? ""} · minggu ke-{Math.min(currentWeek, 18)}
-            </span>
-          </div>
-          <div className="space-y-2">
-            {prosemGroups.map((g, gi) => (
-              <details
-                key={gi}
-                className="rounded-2xl px-4 py-3"
-                style={{ backgroundColor: "var(--st-bg-card)" }}
-                open={g.items.some((it) => it.weeks.some((w) => w.week === Math.min(currentWeek, 18)))}
-              >
-                <summary className="text-sm font-semibold cursor-pointer list-none flex items-center justify-between">
-                  <span className="truncate">{g.topic}</span>
-                  <span className="text-xs shrink-0 ml-2" style={{ color: "var(--st-text-dim)" }}>
-                    {g.items.reduce((a, it) => a + it.weeks.length, 0)} sesi
-                  </span>
-                </summary>
-                <ul className="mt-2 space-y-1.5">
-                  {g.items.map((it, ii) => {
-                    const wks = it.weeks.map((w) => w.week);
-                    const minW = wks.length ? Math.min(...wks) : 999;
-                    const maxW = wks.length ? Math.max(...wks) : 0;
-                    const isNow = wks.includes(Math.min(currentWeek, 18));
-                    const isPast = wks.length > 0 && maxW < Math.min(currentWeek, 18);
-                    return (
-                      <li
-                        key={ii}
-                        className="flex items-center justify-between text-xs gap-2"
-                        style={{ opacity: isPast ? 0.55 : 1 }}
-                      >
-                        <span className="truncate min-w-0">
-                          {isNow ? "▸ " : ""}{it.subtopic}
-                        </span>
-                        <span
-                          className="shrink-0 px-1.5 py-0.5 rounded-full"
-                          style={{
-                            backgroundColor: isNow ? `${meta.color}25` : "transparent",
-                            color: isNow ? meta.color : "var(--st-text-dim)",
-                            fontWeight: isNow ? 600 : 400,
-                          }}
-                        >
-                          {wks.length ? (wks.length === 1 ? `mg ${wks[0]}` : `mg ${Math.min(...wks)}–${maxW}`) : "—"}
-                        </span>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </details>
-            ))}
-          </div>
-          <p className="text-[11px] mt-2" style={{ color: "var(--st-text-dim)" }}>
-            Sumber: {prosem?.source ?? "prosem"} — jadwal mingguan dari sekolah
-          </p>
-        </section>
-      )}
-
-      {/* Topic List */}
+            {/* Topic List */}
       <h2
         className="text-base font-bold"
         style={{ fontFamily: "var(--font-st-display)" }}
