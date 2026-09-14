@@ -9,6 +9,9 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import pg from "pg";
 import OpenAI from "openai";
 import { writeFileSync, appendFileSync } from "fs";
+// 9Router requires the real LLM_API_KEY from .env — `npx tsx` does NOT load
+// .env, so the "sk-9router" default fallback gets a 401.
+import "dotenv/config";
 
 const PG = {
   host: process.env.PGHOST || "localhost",
@@ -19,7 +22,9 @@ const PG = {
 };
 
 const prisma = new PrismaClient({ adapter: new PrismaPg(new pg.Pool(PG)) });
-const llm = new OpenAI({ baseURL: "http://localhost:20128/v1", apiKey: "sk-9router" });
+// strip stray quotes / CR from .env value - they break the Bearer header
+const apiKey = (process.env.LLM_API_KEY || "sk-9router").replace(/["'\r]/g, "");
+const llm = new OpenAI({ baseURL: "http://localhost:20128/v1", apiKey });
 
 const PROGRESS_FILE = "/tmp/quiz-gen-progress.txt";
 const LOG_FILE = "/tmp/quiz-gen-log.json";
@@ -50,7 +55,7 @@ HANYA output JSON. Soal akurat secara ilmiah.`;
 
   try {
     const res = await llm.chat.completions.create({
-      model: "sumopod/deepseek-v4-flash",
+      model: "hermes",
       messages: [
         { role: "system", content: "Anda guru IPA/IPS/PAI profesional Indonesia. Output JSON saja." },
         { role: "user", content: prompt },
