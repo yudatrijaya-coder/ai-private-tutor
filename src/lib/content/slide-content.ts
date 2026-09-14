@@ -62,6 +62,16 @@ const CONCLUSIVE_MARKERS: RegExp[] = [
   /\btask\s*:\s*create\b/i,
   /\bstructure for the (?:mindmap|outline)\b/i,
   /\blevel \d\s*:\s*(?:main topic|sub-?topics?|details)\b/i,
+
+  // ── Third marker family, found 2026-09-15 (Bahasa Indonesia / Biologi) ──
+  // The model restating the task in first person plural before writing:
+  // "We need to generate 3-5 markdown slides for ..." — zero overlap with
+  // families 1-2. Phrases are English meta-language, impossible in real
+  // Indonesian teaching slides.
+  /\bwe need to (?:generate|create|produce|write|extract)\b/i,
+  /\bwe must (?:generate|create|produce|write|extract)\b/i,
+  /\busing (?:only )?the provided content\b/i,
+  /\bthe slides should (?:be|cover|focus)\b/i,
 ];
 
 /**

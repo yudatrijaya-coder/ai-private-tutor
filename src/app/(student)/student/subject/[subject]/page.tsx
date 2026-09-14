@@ -7,6 +7,7 @@ import Link from "next/link";
 import { getYouTubeForTopic } from "@/data/youtube";
 import { getMoodleModule, getMoodleBook } from "@/data/moodle-modules";
 import { getProsem, groupProsemByTopic } from "@/lib/prosem";
+import { getCurrentSchoolWeek } from "@/lib/academic-calendar";
 import { SubjectTracker } from "@/components/SubjectTracker";
 import ProsemDialog from "@/components/ProsemDialog";
 
@@ -200,9 +201,17 @@ async function SubjectContent({ subject }: { subject: string }) {
   // Prosem (program semester) plan from Moodle — topic/subtopic week schedule.
   const prosem = getProsem(decodedSubject, studentData?.gradeLevel);
   const prosemGroups = prosem ? groupProsemByTopic(prosem.entries.filter(e => e.subtopic !== "(BAB)")) : [];
-  const currentWeek = Math.max(1, Math.ceil(
-    (Date.now() - new Date(new Date().getFullYear(), 6, 1).getTime()) / (7 * 24 * 3600 * 1000)
-  ));
+  // Ledger B-04: 999 = "unplaced" sentinel (extra material, no week slot).
+  const UNPLACED = 999;
+  const currentWeek = getCurrentSchoolWeek();
+  // "Materi Minggu Ini" — materials the prosem schedule places in the
+  // current week, plus any not-yet-done material from earlier weeks
+  // (catch-up). Unplaced (999) materials never appear here.
+  const weekMaterials = materials
+    .filter(m => m.weekOrder < UNPLACED && m.weekOrder <= currentWeek)
+    .filter(m => topicStatus(masteryByTopic.get(m.topic)) !== "done")
+    .sort((a, b) => a.weekOrder - b.weekOrder)
+    .slice(0, 4);
 
   const totalQuizCount = materials.reduce(
     (sum, m) => sum + m._count.quizzes, 0
@@ -355,6 +364,48 @@ async function SubjectContent({ subject }: { subject: string }) {
           <span className="text-xs font-medium text-center">Big Map</span>
         </Link>
       </div>
+
+            {/* This Week — materials the prosem schedule wants now */}
+      {weekMaterials.length > 0 && (
+        <section
+          className="rounded-2xl p-4"
+          style={{ backgroundColor: `${meta.color}15` }}
+        >
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-sm font-bold" style={{ fontFamily: "var(--font-st-display)" }}>
+              🎯 Materi Minggu Ini
+            </h2>
+            <span
+              className="text-xs px-2 py-0.5 rounded-full font-medium"
+              style={{ backgroundColor: `${meta.color}30`, color: meta.color }}
+            >
+              Minggu {currentWeek}
+            </span>
+          </div>
+          <div className="space-y-2">
+            {weekMaterials.map((material) => (
+              <Link
+                key={material.id}
+                href={`/student/slides/${material.id}`}
+                className="flex items-center justify-between gap-3 rounded-xl p-3 transition-all hover:opacity-80 active:scale-[0.99]"
+                style={{ backgroundColor: "var(--st-bg-card)" }}
+              >
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold truncate">{material.topic}</p>
+                  {material.subTopic && (
+                    <p className="text-xs mt-0.5 truncate" style={{ color: "var(--st-text-dim)" }}>
+                      {material.subTopic}
+                    </p>
+                  )}
+                </div>
+                <span className="text-xs shrink-0" style={{ color: meta.color }}>
+                  Minggu {material.weekOrder} →
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
             {/* Topic List */}
       <h2
