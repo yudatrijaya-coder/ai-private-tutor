@@ -1,0 +1,252 @@
+{
+ "source": "3659_Program_Semester_2627_XI_Bahasa_Indonesia_Ganjil.pdf",
+ "subject": "Bahasa Indonesia",
+ "grade": "XI",
+ "semester": "ganjil",
+ "entries": [
+  {
+   "topic": "Membaca dan memirsa",
+   "subtopic": "Menemukan perbedaan antara karya puisi, prosa, dan drama",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Menyimak",
+   "subtopic": "Menentukan unsur pembangun drama",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Menulis naskah drama",
+   "weeks": [
+    {
+     "week": 2,
+     "hours": 2
+    },
+    {
+     "week": 3,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara dan mempresentasikan",
+   "subtopic": "Mempersiapkan pertunjukan drama dengan tema tertentu",
+   "weeks": [
+    {
+     "week": 4,
+     "hours": 2
+    },
+    {
+     "week": 5,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara dan mempresentasikan",
+   "subtopic": "Menampilkan pertunjukan drama",
+   "weeks": [
+    {
+     "week": 6,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara dan mempresentasikan",
+   "subtopic": "Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 7,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara dan mempresentasikan",
+   "subtopic": "Remedial",
+   "weeks": [
+    {
+     "week": 8,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Menyimak",
+   "subtopic": "Menemukan informasi aktual dan akurat dalam berita",
+   "weeks": [
+    {
+     "week": 9,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Menganalis struktur dan unsur teks berita",
+   "weeks": [
+    {
+     "week": 10,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara dan mempresentasikan",
+   "subtopic": "Membuat vlog dari teks berita yang dibaca",
+   "weeks": [
+    {
+     "week": 11,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara dan mempresentasikan",
+   "subtopic": "Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 12,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara dan mempresentasikan",
+   "subtopic": "Remedial",
+   "weeks": [
+    {
+     "week": 13,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Membaca dan memirsa",
+   "subtopic": "Menemukan kalimat opini dan kalimat fakta",
+   "weeks": [
+    {
+     "week": 14,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Membaca dan memirsa",
+   "subtopic": "Memahami poster sebagai jenis persuasi",
+   "weeks": [
+    {
+     "week": 15,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Membuat poster dengan tema ketahanan pangan lokal",
+   "weeks": [
+    {
+     "week": 16,
+     "hours": 2
+    },
+    {
+     "week": 17,
+     "hours": 2
+    },
+    {
+     "week": 18,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Total",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 2
+    },
+    {
+     "week": 2,
+     "hours": 2
+    },
+    {
+     "week": 3,
+     "hours": 2
+    },
+    {
+     "week": 4,
+     "hours": 2
+    },
+    {
+     "week": 5,
+     "hours": 2
+    },
+    {
+     "week": 6,
+     "hours": 2
+    },
+    {
+     "week": 7,
+     "hours": 2
+    },
+    {
+     "week": 8,
+     "hours": 2
+    },
+    {
+     "week": 9,
+     "hours": 2
+    },
+    {
+     "week": 10,
+     "hours": 2
+    },
+    {
+     "week": 11,
+     "hours": 2
+    },
+    {
+     "week": 12,
+     "hours": 2
+    },
+    {
+     "week": 13,
+     "hours": 2
+    },
+    {
+     "week": 14,
+     "hours": 2
+    },
+    {
+     "week": 15,
+     "hours": 2
+    },
+    {
+     "week": 16,
+     "hours": 2
+    },
+    {
+     "week": 17,
+     "hours": 2
+    },
+    {
+     "week": 18,
+     "hours": 2
+    }
+   ]
+  }
+ ]
+}

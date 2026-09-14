@@ -1,0 +1,240 @@
+{
+ "source": "4166_Program_Semester_Kelas_7_TP_20262027.xlsx",
+ "subject": "Bahasa Mandarin",
+ "grade": "VII",
+ "semester": "ganjil",
+ "entries": [
+  {
+   "topic": "Menyimak",
+   "subtopic": "Mandarin Dasar",
+   "weeks": []
+  },
+  {
+   "topic": "Menyimak",
+   "subtopic": "- Pengenalan Bahasa Mandarin (pinyin dan nada). Vokal tunggal (a,i,u,e,o) dan konsonan, cara pelafalan dan latihan pengucapan dengan nada",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 1
+    },
+    {
+     "week": 2,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Menyimak",
+   "subtopic": "- Nada Bahasa Mandarin (4 nada dan nada netral), latihan mendengar dan mengucapkan nada",
+   "weeks": [
+    {
+     "week": 3,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Menyimak",
+   "subtopic": "- Guratan Hanzi (guratan dasar, aturan urutan guratan, arah penulisan hanzi)",
+   "weeks": [
+    {
+     "week": 4,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara",
+   "subtopic": "- Angka dan bilangan (数字 Shùzì）membaca dan menulis angka dalam hanzi sederhana",
+   "weeks": [
+    {
+     "week": 5,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara",
+   "subtopic": "- Tanggal dan waktu (日期和时间 rìqí hé shíjiān) hari, bulan, tanggal, tahun, jam dan waktu sederhana.",
+   "weeks": [
+    {
+     "week": 6,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara",
+   "subtopic": "- Keluarga (家庭 jiātíng) kosakata anggota keluarga, memperkenalkan keluarga, penggunaan kata ganti orang dan kepemilikan (我的…)  Hobi dan kegemaran (kosakata hobi, menyatakan kesukaan dan ketidaksukaan 喜欢，不喜欢…，bertanya tentang hobi teman)",
+   "weeks": [
+    {
+     "week": 7,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara",
+   "subtopic": "- Memperkenalkan diri (自我介绍 Zìwǒ jièshào）Menyebutkan nama, umur, kelas, hobi secara sederhana",
+   "weeks": [
+    {
+     "week": 8,
+     "hours": 1
+    },
+    {
+     "week": 9,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Membaca",
+   "subtopic": "Hello AI Xiaoyu! AI 小语，你好！",
+   "weeks": []
+  },
+  {
+   "topic": "Membaca",
+   "subtopic": "Mendengarkan tentang cara menyebutkan kosakata dan kalimat tentang Hello AI Xiaoyu! AI 小语，你好！",
+   "weeks": [
+    {
+     "week": 10,
+     "hours": 1
+    },
+    {
+     "week": 11,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Membaca",
+   "subtopic": "Melafalkan tentang cara menyebutkan kosakata dan kalimat Hello AI Xiaoyu! AI 小语，你好！",
+   "weeks": [
+    {
+     "week": 12,
+     "hours": 1
+    },
+    {
+     "week": 13,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Membaca",
+   "subtopic": "Membacakan teks bacaan tentang Hello AI Xiaoyu! AI 小语，你好！",
+   "weeks": [
+    {
+     "week": 14,
+     "hours": 1
+    },
+    {
+     "week": 15,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Membaca",
+   "subtopic": "Menuliskan hanzi tentang Hello AI Xiaoyu! AI 小语，你好！",
+   "weeks": [
+    {
+     "week": 16,
+     "hours": 1
+    },
+    {
+     "week": 17,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 18,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Total",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 1
+    },
+    {
+     "week": 2,
+     "hours": 1
+    },
+    {
+     "week": 3,
+     "hours": 1
+    },
+    {
+     "week": 4,
+     "hours": 1
+    },
+    {
+     "week": 5,
+     "hours": 1
+    },
+    {
+     "week": 6,
+     "hours": 1
+    },
+    {
+     "week": 7,
+     "hours": 1
+    },
+    {
+     "week": 8,
+     "hours": 1
+    },
+    {
+     "week": 9,
+     "hours": 1
+    },
+    {
+     "week": 10,
+     "hours": 1
+    },
+    {
+     "week": 11,
+     "hours": 1
+    },
+    {
+     "week": 12,
+     "hours": 1
+    },
+    {
+     "week": 13,
+     "hours": 1
+    },
+    {
+     "week": 14,
+     "hours": 1
+    },
+    {
+     "week": 15,
+     "hours": 1
+    },
+    {
+     "week": 16,
+     "hours": 1
+    },
+    {
+     "week": 17,
+     "hours": 1
+    },
+    {
+     "week": 18,
+     "hours": 1
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,243 @@
+{
+ "source": "4173_Program_Semester_2627_kelas_VII_Ganjil.pdf",
+ "subject": "Informatika",
+ "grade": "VII",
+ "semester": "ganjil",
+ "entries": [
+  {
+   "topic": "Literasi Digital",
+   "subtopic": "Perangkat keras",
+   "weeks": []
+  },
+  {
+   "topic": "Literasi Digital",
+   "subtopic": "Pengenalan perangkat keras",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Literasi Digital",
+   "subtopic": "Spesifikasi perangkat keras",
+   "weeks": [
+    {
+     "week": 2,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Literasi Digital",
+   "subtopic": "Perangkat lunak",
+   "weeks": []
+  },
+  {
+   "topic": "Literasi Digital",
+   "subtopic": "Pengenalan perangkat lunak",
+   "weeks": [
+    {
+     "week": 3,
+     "hours": 2
+    },
+    {
+     "week": 4,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Literasi Digital",
+   "subtopic": "Pengenalan sistem operasi",
+   "weeks": []
+  },
+  {
+   "topic": "Literasi Digital",
+   "subtopic": "Pengenalan antar muka pengguna",
+   "weeks": [
+    {
+     "week": 5,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Literasi Digital",
+   "subtopic": "Folder dan file",
+   "weeks": [
+    {
+     "week": 6,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Literasi Digital",
+   "subtopic": "Peramban dan search engine",
+   "weeks": []
+  },
+  {
+   "topic": "Literasi Digital",
+   "subtopic": "Pencarian informasi",
+   "weeks": [
+    {
+     "week": 7,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Literasi Digital",
+   "subtopic": "Surat elektronik",
+   "weeks": [
+    {
+     "week": 8,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Literasi Digital",
+   "subtopic": "Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 9,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Literasi Digital",
+   "subtopic": "Presentasi Digital",
+   "weeks": []
+  },
+  {
+   "topic": "Literasi Digital",
+   "subtopic": "Membuat presentasi digital",
+   "weeks": [
+    {
+     "week": 10,
+     "hours": 2
+    },
+    {
+     "week": 11,
+     "hours": 2
+    },
+    {
+     "week": 12,
+     "hours": 2
+    },
+    {
+     "week": 13,
+     "hours": 2
+    },
+    {
+     "week": 14,
+     "hours": 2
+    },
+    {
+     "week": 15,
+     "hours": 2
+    },
+    {
+     "week": 16,
+     "hours": 2
+    },
+    {
+     "week": 17,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Literasi Digital",
+   "subtopic": "Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 18,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Literasi Digital",
+   "subtopic": "Total",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 2
+    },
+    {
+     "week": 2,
+     "hours": 2
+    },
+    {
+     "week": 3,
+     "hours": 2
+    },
+    {
+     "week": 4,
+     "hours": 2
+    },
+    {
+     "week": 5,
+     "hours": 2
+    },
+    {
+     "week": 6,
+     "hours": 2
+    },
+    {
+     "week": 7,
+     "hours": 2
+    },
+    {
+     "week": 8,
+     "hours": 2
+    },
+    {
+     "week": 9,
+     "hours": 2
+    },
+    {
+     "week": 10,
+     "hours": 2
+    },
+    {
+     "week": 11,
+     "hours": 2
+    },
+    {
+     "week": 12,
+     "hours": 2
+    },
+    {
+     "week": 13,
+     "hours": 2
+    },
+    {
+     "week": 14,
+     "hours": 2
+    },
+    {
+     "week": 15,
+     "hours": 2
+    },
+    {
+     "week": 16,
+     "hours": 2
+    },
+    {
+     "week": 17,
+     "hours": 2
+    },
+    {
+     "week": 18,
+     "hours": 2
+    }
+   ]
+  }
+ ]
+}

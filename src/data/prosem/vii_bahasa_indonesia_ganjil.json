@@ -1,0 +1,354 @@
+{
+ "source": "4164_Formulir_Program_Semester_2627_kelas_VII.xlsx",
+ "subject": "Bahasa Indonesia",
+ "grade": "VII",
+ "semester": "ganjil",
+ "entries": [
+  {
+   "topic": "JELAJAH NUSANTARA",
+   "subtopic": "(BAB)",
+   "weeks": []
+  },
+  {
+   "topic": "Membaca dan Memirsa",
+   "subtopic": "Menemukan informasi eksplisit pada teks deskripsi dan menyimpulkan melalui kegiatan menjawab pertanyaan dengan tepat.",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Membaca dan Memirsa",
+   "subtopic": "Mengidentifikasi gaya penulisan teks deskripsi di media sosial dengan menuliskan kalimat ungkapan yang menyapa pembaca dengan baik.",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Membaca dan Memirsa",
+   "subtopic": "Memahami kata yang jarang muncul dengan menemukan arti, kalimat perincian, dan majas personifikasi.",
+   "weeks": [
+    {
+     "week": 2,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Membaca dan Memirsa",
+   "subtopic": "Menganalisis teks deskripsi dan visual dalam pamflet dengan kritis.",
+   "weeks": [
+    {
+     "week": 2,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara dan Mempresentasikan",
+   "subtopic": "Memaparkan gagasan dengan menyajikan deskripsi terhadap gambar secara lisan dengan menggunakan kalimat perincian yang memikat.",
+   "weeks": [
+    {
+     "week": 3,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Menyimak",
+   "subtopic": "Menganalisis ragam teks deskripsi lisan dengan membandingkan objek yang dijelaskan dan tujuan penutur, membandingkan ciri-ciri kalimat yang menjelaskan objek yang berbeda dengan baik.",
+   "weeks": [
+    {
+     "week": 3,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Menyajikan teks deskripsi dengan baik melalui latihan menyunting penggunaan huruf kapital, tanda titik, tanda koma, serta kata depan dalam kalimat dengan tepat.",
+   "weeks": [
+    {
+     "week": 4,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Menulis teks deskirpsi dengan berlatih menjelaskan benda kesukaannya dengan baik, sesuai konteks dan pembaca",
+   "weeks": [
+    {
+     "week": 5,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 6,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Remedial",
+   "weeks": [
+    {
+     "week": 6,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "BERKELANA DI DUNIA IMAJINASI",
+   "subtopic": "(BAB)",
+   "weeks": []
+  },
+  {
+   "topic": "Membaca dan Memirsa",
+   "subtopic": "Mengenal jenis dan unsur puisi rakyat dengan tepat",
+   "weeks": [
+    {
+     "week": 7,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Membaca dan Memirsa",
+   "subtopic": "Mengidentifikasi elemen dalam teks naratif berupa alur, penokohan, dan kaidah kebahasaan.",
+   "weeks": [
+    {
+     "week": 7,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Membaca dan Memirsa",
+   "subtopic": "Menganalisis sifat tokoh cerita dan amanat penulisan dalam cerita naratif.",
+   "weeks": [
+    {
+     "week": 8,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara dan Mempresentasikan",
+   "subtopic": "Mendiskusikan dan mempresentasikan sifat tokoh cerita dan amanat penulisan dalam cerita naratif",
+   "weeks": [
+    {
+     "week": 9,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Menulis cerita fantasi sederhana untuk menyampaikan amanat tertentu dengan menarik.",
+   "weeks": [
+    {
+     "week": 10,
+     "hours": 4
+    },
+    {
+     "week": 11,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 12,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Remedial",
+   "weeks": [
+    {
+     "week": 12,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Membaca dan Memirsa",
+   "subtopic": "Memahami ciri teks prosedur dengan menemukenali strukturnya agar dapat menyajikannya dengan baik.",
+   "weeks": [
+    {
+     "week": 13,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Membaca dan Memirsa",
+   "subtopic": "Mengenali ciri kebahasaan dalam teks prosedur dengan mengisi kalimat rumpang dengan adverbia yang tepat.",
+   "weeks": [
+    {
+     "week": 13,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Membaca dan Memirsa",
+   "subtopic": "Mengenali ragam teks prosedur dengan menjawab pertanyaan pada kutipan teks prosedur pada karya fiksi.",
+   "weeks": [
+    {
+     "week": 14,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Menyimak",
+   "subtopic": "Menyimak informasi dan memahami instruksi dari teks lisan dengan menjawab pertanyaan pada bacaan.",
+   "weeks": [
+    {
+     "week": 14,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara dan Mempresentasikan",
+   "subtopic": "Mengenali teks infografik dengan kejelasan isi dan teks yang tersaji dalam bentuk infografik.",
+   "weeks": [
+    {
+     "week": 15,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara dan Mempresentasikan",
+   "subtopic": "Mendiskusikan ciri kebahasaan dalam teks prosedur (kalimat ajakan, perintah, atau larangan) dengan santun.",
+   "weeks": [
+    {
+     "week": 15,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara dan Mempresentasikan",
+   "subtopic": "Menyajikan teks prosedur secara lisan, visual, atau audiovisual dengan menarik dan efektif",
+   "weeks": [
+    {
+     "week": 16,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Menulis teks prosedur sederhana secara runut dan sistematis untuk beragam konteks dan tujuan secara tepat dan kreatif.",
+   "weeks": [
+    {
+     "week": 17,
+     "hours": 4
+    },
+    {
+     "week": 18,
+     "hours": 4
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Total",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 4
+    },
+    {
+     "week": 2,
+     "hours": 4
+    },
+    {
+     "week": 3,
+     "hours": 4
+    },
+    {
+     "week": 4,
+     "hours": 4
+    },
+    {
+     "week": 5,
+     "hours": 4
+    },
+    {
+     "week": 6,
+     "hours": 4
+    },
+    {
+     "week": 7,
+     "hours": 4
+    },
+    {
+     "week": 8,
+     "hours": 4
+    },
+    {
+     "week": 9,
+     "hours": 4
+    },
+    {
+     "week": 10,
+     "hours": 4
+    },
+    {
+     "week": 11,
+     "hours": 4
+    },
+    {
+     "week": 12,
+     "hours": 4
+    },
+    {
+     "week": 13,
+     "hours": 4
+    },
+    {
+     "week": 14,
+     "hours": 4
+    },
+    {
+     "week": 15,
+     "hours": 4
+    },
+    {
+     "week": 16,
+     "hours": 4
+    },
+    {
+     "week": 17,
+     "hours": 4
+    },
+    {
+     "week": 18,
+     "hours": 4
+    }
+   ]
+  }
+ ]
+}

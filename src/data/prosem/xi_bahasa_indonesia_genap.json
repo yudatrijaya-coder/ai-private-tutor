@@ -1,0 +1,234 @@
+{
+ "source": "3659_Program_Semester_2627_XI_Bahasa_Indonesia_Genap.pdf",
+ "subject": "Bahasa Indonesia",
+ "grade": "XI",
+ "semester": "genap",
+ "entries": [
+  {
+   "topic": "Membaca dan memirsa",
+   "subtopic": "Mengidentifikasi jurnal karya ilmiah dan mengenal sistematika karya ilmiah",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Membaca dan memirsa",
+   "subtopic": "Memahami struktur karya ilmiah",
+   "weeks": [
+    {
+     "week": 2,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Membaca dan memirsa",
+   "subtopic": "Memahami ragam karya ilmiah",
+   "weeks": [
+    {
+     "week": 3,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Menulis karya ilmiah dengan kondisi permasalahan sosial dan alam dengan memperhatikan kaidah penulisan karya ilmiah",
+   "weeks": [
+    {
+     "week": 4,
+     "hours": 2
+    },
+    {
+     "week": 5,
+     "hours": 2
+    },
+    {
+     "week": 6,
+     "hours": 2
+    },
+    {
+     "week": 9,
+     "hours": 2
+    },
+    {
+     "week": 10,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara dan mempresentasikan",
+   "subtopic": "Menyajikan karya ilmiah dengan tema sosial dan alam terkini dalam aplikasi presentasi",
+   "weeks": [
+    {
+     "week": 11,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara dan mempresentasikan",
+   "subtopic": "Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 7,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Berbicara dan mempresentasikan",
+   "subtopic": "Remedial",
+   "weeks": [
+    {
+     "week": 8,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Membaca dan memirsa",
+   "subtopic": "Menemukan nilai-nilai dalam cerpen bertema sejarah.",
+   "weeks": [
+    {
+     "week": 12,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Membaca dan memirsa",
+   "subtopic": "Menganalisis unsur intrinsik cerpen",
+   "weeks": [
+    {
+     "week": 12,
+     "hours": 1
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Menulis cerpen",
+   "weeks": [
+    {
+     "week": 13,
+     "hours": 2
+    },
+    {
+     "week": 14,
+     "hours": 2
+    },
+    {
+     "week": 15,
+     "hours": 2
+    },
+    {
+     "week": 16,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Penilaian Sumatif",
+   "weeks": [
+    {
+     "week": 17,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Remedial",
+   "weeks": [
+    {
+     "week": 18,
+     "hours": 2
+    }
+   ]
+  },
+  {
+   "topic": "Menulis",
+   "subtopic": "Total",
+   "weeks": [
+    {
+     "week": 1,
+     "hours": 2
+    },
+    {
+     "week": 2,
+     "hours": 2
+    },
+    {
+     "week": 3,
+     "hours": 2
+    },
+    {
+     "week": 4,
+     "hours": 2
+    },
+    {
+     "week": 5,
+     "hours": 2
+    },
+    {
+     "week": 6,
+     "hours": 2
+    },
+    {
+     "week": 7,
+     "hours": 2
+    },
+    {
+     "week": 8,
+     "hours": 2
+    },
+    {
+     "week": 9,
+     "hours": 2
+    },
+    {
+     "week": 10,
+     "hours": 2
+    },
+    {
+     "week": 11,
+     "hours": 2
+    },
+    {
+     "week": 12,
+     "hours": 2
+    },
+    {
+     "week": 13,
+     "hours": 2
+    },
+    {
+     "week": 14,
+     "hours": 2
+    },
+    {
+     "week": 15,
+     "hours": 2
+    },
+    {
+     "week": 16,
+     "hours": 2
+    },
+    {
+     "week": 17,
+     "hours": 2
+    },
+    {
+     "week": 18,
+     "hours": 2
+    }
+   ]
+  }
+ ]
+}
