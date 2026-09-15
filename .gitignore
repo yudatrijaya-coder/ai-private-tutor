@@ -45,5 +45,8 @@ parse_moodle.py
 query.ts
 query_raihan.js
 
+# Data backups — contain real student records, never commit
+backups/
+
 # Generated scripts (one-offs, not part of project)
 scripts/inject_subjects.cjs
