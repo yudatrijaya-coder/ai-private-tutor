@@ -26,6 +26,7 @@ export type AccessReason =
   | "MISSING_STATUS"
   | "TRIAL_EXPIRED"
   | "TRIAL_NO_END"
+  | "SUBSCRIPTION_EXPIRED"
   | "NOT_ALLOWED";
 
 export interface AccessDecision {
@@ -36,6 +37,7 @@ export interface AccessDecision {
 export interface StudentAccessClaims {
   status?: string | null;
   trialEndsAt?: string | null;
+  subscriptionUntil?: string | null;
 }
 
 /** Statuses that may use the student app. Mirrors the `StudentStatus` enum. */
@@ -61,7 +63,25 @@ export function evaluateStudentAccess(
     return { allowed: false, reason: "NOT_ALLOWED" };
   }
 
-  if (status === "ACTIVE") return { allowed: true, reason: "OK" };
+  // ACTIVE covers two cases:
+  //   - `subscriptionUntil` absent/null → unlimited (legacy and comped
+  //     accounts, plus tokens minted before this claim existed). Allowed, so
+  //     no existing student is locked out by this change.
+  //   - `subscriptionUntil` set → must still be in the future.
+  if (status === "ACTIVE") {
+    const subRaw = claims.subscriptionUntil;
+    if (!subRaw) return { allowed: true, reason: "OK" };
+
+    const subEnds = new Date(subRaw);
+    if (Number.isNaN(subEnds.getTime())) {
+      // Malformed claim: fail closed rather than granting an unbounded session.
+      return { allowed: false, reason: "SUBSCRIPTION_EXPIRED" };
+    }
+    if (subEnds.getTime() <= now.getTime()) {
+      return { allowed: false, reason: "SUBSCRIPTION_EXPIRED" };
+    }
+    return { allowed: true, reason: "OK" };
+  }
 
   // TRIAL — must carry a usable end date, in the future.
   const raw = claims.trialEndsAt;
@@ -86,6 +106,8 @@ export function accessDeniedMessage(reason: AccessReason): string | null {
   switch (reason) {
     case "TRIAL_EXPIRED":
       return "Masa coba gratis sudah berakhir. Hubungi admin untuk melanjutkan.";
+    case "SUBSCRIPTION_EXPIRED":
+      return "Masa langganan sudah berakhir. Hubungi admin untuk memperpanjang.";
     case "TRIAL_NO_END":
       return "Akun trial belum memiliki tanggal berakhir. Hubungi admin.";
     case "NOT_ALLOWED":

@@ -38,6 +38,7 @@ async function hasStudentSession(request: NextRequest): Promise<boolean> {
     const decision = evaluateStudentAccess({
       status: payload.status as string | undefined,
       trialEndsAt: payload.trialEndsAt as string | undefined,
+      subscriptionUntil: payload.subscriptionUntil as string | undefined,
     });
     return decision.allowed;
   } catch {
@@ -105,6 +106,7 @@ export async function middleware(request: NextRequest) {
       const decision = evaluateStudentAccess({
         status: payload.status as string | undefined,
         trialEndsAt: payload.trialEndsAt as string | undefined,
+        subscriptionUntil: payload.subscriptionUntil as string | undefined,
       });
       if (!decision.allowed) {
         // Send them to the login page with the reason, rather than bouncing

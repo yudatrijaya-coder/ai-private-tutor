@@ -28,6 +28,13 @@ const cases: Case[] = [
   ["ARCHIVED", { status: "ARCHIVED" }, false, "NOT_ALLOWED"],
   ["PENDING", { status: "PENDING" }, false, "NOT_ALLOWED"],
   ["unknown status", { status: "WHATEVER" }, false, "NOT_ALLOWED"],
+  // Subscription window (admin-approved extension). NULL/absent keeps the
+  // legacy unlimited behaviour so no existing student is locked out.
+  ["ACTIVE, sub absent", { status: "ACTIVE" }, true, "OK"],
+  ["ACTIVE, sub future", { status: "ACTIVE", subscriptionUntil: FUTURE }, true, "OK"],
+  ["ACTIVE, sub past", { status: "ACTIVE", subscriptionUntil: PAST }, false, "SUBSCRIPTION_EXPIRED"],
+  ["ACTIVE, sub exactly now", { status: "ACTIVE", subscriptionUntil: NOW.toISOString() }, false, "SUBSCRIPTION_EXPIRED"],
+  ["ACTIVE, sub unparseable", { status: "ACTIVE", subscriptionUntil: "garbage" }, false, "SUBSCRIPTION_EXPIRED"],
   // Regression guard: the exact token the old mint script produced.
   ["old mint script token (no claims)", {}, false, "MISSING_STATUS"],
 ];

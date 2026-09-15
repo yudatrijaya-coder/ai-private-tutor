@@ -116,6 +116,10 @@ model Student {
   // Trial
   trialEndsAt         DateTime?     // set when status = TRIAL (7-day trial)
 
+  // Paid subscription (set by admin approve). NULL + ACTIVE = unlimited
+  // (legacy/comped accounts). Evaluated by src/lib/auth/access.ts.
+  subscriptionUntil   DateTime?
+
   createdAt           DateTime      @default(now())
   updatedAt           DateTime      @updatedAt
 

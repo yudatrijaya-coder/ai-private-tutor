@@ -137,6 +137,19 @@ export async function routeCallback(
     return true;
   }
 
+  // Admin decision on an extension request (package choice / ❌ reject)
+  if (data.startsWith("ext:set:") || data.startsWith("ext:reject:")) {
+    const [, action, studentId, monthsRaw] = data.split(":");
+    const { handleExtensionDecision } = await import("./handlers/extension");
+    await handleExtensionDecision(
+      ctx,
+      action as "set" | "reject",
+      studentId,
+      monthsRaw ? Number(monthsRaw) : undefined,
+    );
+    return true;
+  }
+
   return false;
 }
 
