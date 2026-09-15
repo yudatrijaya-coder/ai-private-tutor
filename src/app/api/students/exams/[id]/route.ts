@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { resolveScope, scopedStudentIdentifier } from "@/lib/auth/scope";
+import { optionTexts } from "@/lib/quiz-grading";
 
 /**
  * GET /api/students/exams/[id]?studentId=xxx
@@ -73,7 +74,7 @@ export async function GET(
         topic: q.topic,
         subTopic: q.subTopic,
         question: q.question,
-        options: q.options,
+        options: optionTexts(q.options),
         difficulty: q.difficulty,
       })),
       attempt: attempt

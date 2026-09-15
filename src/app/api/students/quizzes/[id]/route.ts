@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { optionTexts } from "@/lib/quiz-grading";
 import { resolveScope } from "@/lib/auth/scope";
 
 /**
@@ -57,7 +58,9 @@ export async function GET(
       timeLimit: quiz.timeLimit,
       questions: questions.map((q) => ({
         question: q.question,
-        options: q.options,
+        // Flattened, but correctIndex is still deliberately withheld — the
+        // answer key must not reach the client before the student submits.
+        options: optionTexts(q.options),
         difficulty: q.difficulty || "medium",
       })),
       material: quiz.material,

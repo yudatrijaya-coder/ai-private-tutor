@@ -7,6 +7,7 @@ import { setSession, clearSession, getSession } from "../session";
 import { handleActivity } from "@/lib/gamification";
 import { gradeAttempt } from "@/agents/assessment/grader";
 import { escapeMd } from "@/lib/telegram-format";
+import { parseQuestions } from "@/lib/quiz-grading";
 
 /** Callback data prefix for quiz answer buttons. */
 export const QUIZ_ANS_PREFIX = "quiz:ans:";
@@ -21,9 +22,27 @@ const QUIZ_TIMEOUT_MIN = 10;
 interface QuizQuestion {
   question: string;
   options?: string[];
+  /** Legacy field. No question in the bank carries it; kept for the "?" fallback. */
   correctAnswer?: string;
   correctIndex?: number;
   explanation?: string;
+}
+
+/**
+ * Read `Quiz.questions` as the bot's own shape.
+ *
+ * `parseQuestions` is the normalisation boundary. Part of the bank stores
+ * options as `{text, isCorrect}` objects rather than strings, which reached the
+ * inline keyboard as "[object Object]" and made `matchAnswerToIndex` throw on
+ * `o.trim()`. It also guarantees `correctIndex` is in range whenever it is set.
+ */
+function readQuestions(raw: unknown): QuizQuestion[] {
+  return parseQuestions(raw).map((q) => ({
+    question: q.question ?? "",
+    options: q.options ?? [],
+    correctIndex: q.correctIndex,
+    explanation: q.explanation,
+  }));
 }
 
 /**
@@ -275,7 +294,7 @@ export async function handleQuizAnswer(
     return;
   }
 
-  const questions = (quiz.questions as unknown as QuizQuestion[]) ?? [];
+  const questions = readQuestions(quiz.questions);
 
   // Cancel commands
   const raw = ctx.message && "text" in ctx.message ? ctx.message.text ?? "" : "";
@@ -411,7 +430,7 @@ async function recordAnswer(
   questionIndex: number,
   selectedIndex: number,
 ): Promise<void> {
-  const questions = (quiz.questions as unknown as QuizQuestion[]) ?? [];
+  const questions = readQuestions(quiz.questions);
   const q = questions[questionIndex];
   if (!q) return;
 
@@ -466,7 +485,7 @@ export function renderQuestionText(index: number, total: number, question: strin
  * Render a question with inline answer buttons (when options exist).
  */
 async function sendQuestion(ctx: Context, quiz: Quiz, index: number): Promise<void> {
-  const questions = (quiz.questions as unknown as QuizQuestion[]) ?? [];
+  const questions = readQuestions(quiz.questions);
   const q = questions[index];
   if (!q) return;
 

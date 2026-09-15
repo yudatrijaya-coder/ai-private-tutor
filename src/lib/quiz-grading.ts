@@ -26,6 +26,20 @@
 /** Question shape as stored in `Quiz.questions`. */
 export interface QuizQuestion {
   question?: string;
+  /**
+   * Option texts, always plain strings once parsed.
+   *
+   * The database stores this column two different ways. 8833 questions hold
+   * `["Asam sitrat", ...]`; 200 hold `[{text: "Asam sitrat", isCorrect: true}]`.
+   * Every consumer — the student pages, the admin pages, the bot's inline
+   * keyboard, the feedback message — renders these directly, so the object
+   * shape used to reach React as a child and throw error #31
+   * ("Objects are not valid as a React child"), taking the whole page down.
+   *
+   * `parseQuestions` / `normalizeQuestion` flatten it, so anything that goes
+   * through them can trust this type. Read the raw column directly and you get
+   * whatever is on disk.
+   */
   options?: string[];
   correctIndex?: number;
   explanation?: string;
@@ -42,12 +56,120 @@ export interface QuizAnswer {
 export const FEEDBACK_QUESTION_LIMIT = 5;
 
 /**
+ * Flatten a question's options to plain strings.
+ *
+ * Accepts the two shapes found on disk plus the shapes an LLM tends to emit:
+ *   ["a", "b"]                       → unchanged
+ *   [{text: "a"}, {label: "b"}]      → ["a", "b"]
+ *   {A: "a", B: "b"}                 → ["a", "b"]
+ * Anything unreadable is dropped rather than stringified — `String({...})`
+ * would put "[object Object]" in front of a student, which is worse than
+ * showing one option fewer.
+ */
+export function optionTexts(raw: unknown): string[] {
+  if (!Array.isArray(raw)) {
+    // { A: "...", B: "..." } — Object.values keeps insertion order for string keys.
+    if (raw && typeof raw === "object") {
+      return optionTexts(Object.values(raw as Record<string, unknown>));
+    }
+    return [];
+  }
+  const out: string[] = [];
+  for (const o of raw) {
+    if (typeof o === "string") {
+      out.push(o);
+      continue;
+    }
+    if (typeof o === "number" || typeof o === "boolean") {
+      out.push(String(o));
+      continue;
+    }
+    if (o && typeof o === "object") {
+      const rec = o as Record<string, unknown>;
+      const t = rec.text ?? rec.label ?? rec.value ?? rec.option ?? rec.answer;
+      if (typeof t === "string") out.push(t);
+      else if (typeof t === "number") out.push(String(t));
+    }
+  }
+  return out;
+}
+
+/** Index of the single option carrying `isCorrect: true`, or null. */
+function flaggedOptionIndex(raw: unknown): number | null {
+  if (!Array.isArray(raw)) return null;
+  const hits = raw
+    .map((o, i) =>
+      o && typeof o === "object" && (o as Record<string, unknown>).isCorrect === true ? i : -1,
+    )
+    .filter((i) => i >= 0);
+  return hits.length === 1 ? hits[0] : null;
+}
+
+/**
+ * Decide which option is correct.
+ *
+ * `correctIndex` wins when it is present and in range. The `isCorrect` flag is
+ * only a fallback for the case where the index is missing or out of bounds —
+ * 8838 of 9038 questions carry no flag at all, so it cannot be the primary
+ * source. Returns null when neither is usable, which callers must treat as
+ * "cannot grade" rather than "everything is wrong".
+ */
+export function pickCorrectIndex(
+  rawOptions: unknown,
+  correctIndex: unknown,
+  optionCount: number,
+): number | null {
+  if (
+    typeof correctIndex === "number" &&
+    Number.isInteger(correctIndex) &&
+    correctIndex >= 0 &&
+    (optionCount === 0 || correctIndex < optionCount)
+  ) {
+    return correctIndex;
+  }
+  return flaggedOptionIndex(rawOptions);
+}
+
+/** `pickCorrectIndex` for an already-parsed question. */
+export function resolveCorrectIndex(question: QuizQuestion | undefined): number | null {
+  if (!question) return null;
+  return pickCorrectIndex(
+    (question as { options?: unknown }).options,
+    question.correctIndex,
+    question.options?.length ?? 0,
+  );
+}
+
+/**
+ * Coerce one raw question into the normalised shape.
+ * Returns null for entries that are not objects, so a malformed row cannot
+ * shift the indexes of the questions around it.
+ */
+export function normalizeQuestion(raw: unknown): QuizQuestion | null {
+  if (typeof raw !== "object" || raw === null) return null;
+  const rec = raw as Record<string, unknown>;
+  const options = optionTexts(rec.options);
+  const correctIndex = pickCorrectIndex(rec.options, rec.correctIndex, options.length);
+
+  const out: QuizQuestion = { options };
+  if (typeof rec.question === "string") out.question = rec.question;
+  if (correctIndex !== null) out.correctIndex = correctIndex;
+  if (typeof rec.explanation === "string") out.explanation = rec.explanation;
+  if (typeof rec.difficulty === "string") out.difficulty = rec.difficulty;
+  return out;
+}
+
+/**
  * Parse `Quiz.questions` defensively — the column is untyped JSON, so anything
  * can be in there and a throw here would take down the grading caller.
+ *
+ * This is also the normalisation boundary: options come out as plain strings and
+ * `correctIndex` is guaranteed to be in range whenever it is set. Callers that
+ * go through here can treat `QuizQuestion` as honest.
  */
 export function parseQuestions(raw: unknown): QuizQuestion[] {
   if (!Array.isArray(raw)) return [];
-  return raw.filter((q): q is QuizQuestion => typeof q === "object" && q !== null);
+  return raw.map(normalizeQuestion).filter((q): q is QuizQuestion => q !== null);
 }
 
 /**
@@ -85,9 +207,9 @@ export function isAnswerCorrect(
   answer: QuizAnswer | undefined,
 ): boolean {
   if (!question || !answer) return false;
-  const correct = question.correctIndex;
+  const correct = resolveCorrectIndex(question);
   const selected = answer.selectedIndex;
-  if (typeof correct !== "number" || typeof selected !== "number") return false;
+  if (correct === null || typeof selected !== "number") return false;
   return selected === correct;
 }
 

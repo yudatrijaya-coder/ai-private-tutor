@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { optionTexts, pickCorrectIndex } from "@/lib/quiz-grading";
 import { prisma } from "@/lib/prisma";
 
 /**
@@ -46,13 +47,16 @@ export async function GET(request: NextRequest) {
         type: q.type,
         maxScore: q.maxScore,
         timeLimit: q.timeLimit,
-        questions: questions.map((qs) => ({
-          question: qs.question,
-          options: qs.options,
-          correctIndex: qs.correctIndex,
-          difficulty: qs.difficulty || "medium",
-          explanation: qs.explanation,
-        })),
+        questions: questions.map((qs) => {
+          const options = optionTexts(qs.options);
+          return {
+            question: qs.question,
+            options,
+            correctIndex: pickCorrectIndex(qs.options, qs.correctIndex, options.length),
+            difficulty: qs.difficulty || "medium",
+            explanation: qs.explanation,
+          };
+        }),
         material: q.material,
         student: q.student,
         createdAt: q.createdAt,
