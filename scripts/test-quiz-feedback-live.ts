@@ -46,7 +46,16 @@ const ANSWERS = [
 async function cleanup() {
   const s = await prisma.student.findUnique({ where: { studentId: CODE } });
   if (!s) return;
-  await prisma.cronClaim.deleteMany({ where: { key: { startsWith: `quiz-feedback:` } } });
+  // Scope the claim cleanup to THIS fixture's attempts. Deleting every
+  // `quiz-feedback:*` claim would wipe a real student's in-flight claim and let
+  // the next request send a second message.
+  const fixtureAttempts = await prisma.attempt.findMany({
+    where: { studentId: s.id },
+    select: { id: true },
+  });
+  await prisma.cronClaim.deleteMany({
+    where: { key: { in: fixtureAttempts.map((a) => `quiz-feedback:${a.id}`) } },
+  });
   await prisma.reviewQueue.deleteMany({ where: { studentId: s.id } });
   await prisma.attempt.deleteMany({ where: { studentId: s.id } });
   await prisma.studentActivity.deleteMany({ where: { studentId: s.id } });
