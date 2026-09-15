@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@/generated/prisma/client";
 import bcrypt from "bcryptjs";
+import { escapeMd } from "@/lib/telegram-format";
 
 /* ─────────────────────────────────────────────────────────────
    POST /api/admin/students/approve
@@ -138,13 +139,13 @@ async function sendWelcomeMessage(student: {
   const msg = [
     `🌟 *Pendaftaran Disetujui! 🎉*`,
     ``,
-    `Halo *${student.name}!*`,
+    `Halo *${escapeMd(student.name)}!*`,
     `Akun kamu sudah aktif dan siap digunakan!`,
     ``,
     `📋 *Data Login:*`,
     `🆔 ID Siswa: \`${student.studentId}\``,
     `🔑 Password: \`belajar123\` (default)`,
-    `📖 Kelas: ${label}`,
+    `📖 Kelas: ${escapeMd(label)}`,
     ``,
     `[Buka Dashboard](https://senangbelajar.web.id/login/student)`,
     ``,

@@ -14,6 +14,7 @@
  */
 
 import "dotenv/config";
+import { hardenContext } from "../lib/telegram-send";
 
 async function main() {
   const { bot, configureWebhook } = await import("./bot");
@@ -23,6 +24,17 @@ async function main() {
     console.error("[bot] TELEGRAM_BOT_TOKEN not set. Cannot start bot.");
     process.exit(1);
   }
+
+  // Harden outgoing sends BEFORE any handler runs.
+  //
+  // In polling mode Telegraf constructs its own Context internally, so the
+  // hardenContext() call in the webhook route never applies here. Registering it
+  // as middleware closes that gap: without it, local dev would reproduce the
+  // production "can't parse entities" failure while production is fixed.
+  bot.use(async (ctx, next) => {
+    hardenContext(ctx);
+    return next();
+  });
 
   // Register the catch-all message handler
   bot.on("message", onMessage);

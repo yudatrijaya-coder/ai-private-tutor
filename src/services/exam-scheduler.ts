@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { escapeMd } from "@/lib/telegram-format";
 import type { Student, ExamSchedule } from "@/generated/prisma/client";
 
 const DASHBOARD = "https://senangbelajar.web.id/student/exam";
@@ -212,9 +213,9 @@ export async function runExamSchedulerSweep(): Promise<{
     const ok = await sendTelegramMessage(
       tgId,
       `📝 *Weekly Exam Besok!*\n\n` +
-        `${sch.exam.title}\n` +
+        `${escapeMd(sch.exam.title)}\n` +
         `⏰ *${timeLabel} WIB*\n\n` +
-        `Jangan lupa ya, ${sch.student.name}! 💪`,
+        `Jangan lupa ya, ${escapeMd(sch.student.name)}! 💪`,
     );
     if (ok) {
       await prisma.examSchedule.update({
@@ -245,7 +246,7 @@ export async function runExamSchedulerSweep(): Promise<{
     const ok = await sendTelegramMessage(
       tgId,
       `🧠 *Waktunya Weekly Exam!*\n\n` +
-        `${sch.exam.title}\n\n` +
+        `${escapeMd(sch.exam.title)}\n\n` +
         `Klik di bawah untuk mulai:\n` +
         `[➡️ Kerjakan Sekarang](${link})\n\n` +
         `Jawaban terkunci selama exam. Kerjakan sampai selesai ya! 🔒`,
@@ -291,10 +292,10 @@ export async function runExamSchedulerSweep(): Promise<{
       await sendTelegramMessage(
         tgId,
         `⏰ *Weekly Exam belum dikerjakan!*\n\n` +
-          `${sch.exam.title} sudah lewat jadwalnya (${formatTime(sch.scheduledAt)} WIB).\n\n` +
+          `${escapeMd(sch.exam.title)} sudah lewat jadwalnya (${formatTime(sch.scheduledAt)} WIB).\n\n` +
           `Kamu masih bisa kerjakan sekarang:\n` +
           `[➡️ Kerjakan Sekarang](${link})\n\n` +
-          `Jangan ditunda-tunda ya, ${sch.student.name}! 🔥`,
+          `Jangan ditunda-tunda ya, ${escapeMd(sch.student.name)}! 🔥`,
       );
     }
     await prisma.examSchedule.update({
@@ -434,16 +435,16 @@ export async function sendExamRecap(
     const emoji = pct >= 70 ? "🎉" : pct >= 50 ? "💪" : "📚";
     const message =
       `${emoji} *Hasil Weekly Exam Kamu*\n\n` +
-      `📋 ${exam.title}\n` +
+      `📋 ${escapeMd(exam.title)}\n` +
       `✅ Benar: ${correct} dari ${totalQ}\n` +
       `📊 Nilai: *${pct}%*\n\n` +
       (attempt.improvementPlan
-        ? `💡 ${attempt.improvementPlan.aiNarrative.slice(0, 300)}\n\n`
+        ? `💡 ${escapeMd(attempt.improvementPlan.aiNarrative.slice(0, 300))}\n\n`
         : ``) +
       `[📝 Lihat Pembahasan](${DASHBOARD})\n\n` +
       (pct >= 70
-        ? `Luar biasa, ${student.name}! Pertahankan! 🔥`
-        : `Semangat, ${student.name}! Ayo tingkatkan minggu depan! 💪`);
+        ? `Luar biasa, ${escapeMd(student.name)}! Pertahankan! 🔥`
+        : `Semangat, ${escapeMd(student.name)}! Ayo tingkatkan minggu depan! 💪`);
 
     let sentStudent = false;
     if (student.telegramId) {
@@ -452,11 +453,11 @@ export async function sendExamRecap(
 
     if (options?.notifyParent !== false && student.parentTelegramId) {
       const parentMsg =
-        `📊 *Laporan Weekly Exam — ${student.name}*\n\n` +
-        `📋 ${exam.title}\n` +
+        `📊 *Laporan Weekly Exam — ${escapeMd(student.name)}*\n\n` +
+        `📋 ${escapeMd(exam.title)}\n` +
         `📊 Nilai: *${pct}%* (${correct}/${totalQ} benar)\n\n` +
         (attempt.improvementPlan
-          ? `💡 Catatan tutor: ${attempt.improvementPlan.aiNarrative.slice(0, 200)}\n\n`
+          ? `💡 Catatan tutor: ${escapeMd(attempt.improvementPlan.aiNarrative.slice(0, 200))}\n\n`
           : ``) +
         `Lihat detail di dashboard: ${DASHBOARD}`;
       await sendTelegramMessage(student.parentTelegramId, parentMsg);

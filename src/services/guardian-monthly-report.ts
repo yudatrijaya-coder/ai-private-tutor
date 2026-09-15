@@ -14,6 +14,7 @@
  */
 
 import { prisma } from "@/lib/prisma";
+import { escapeHtml } from "@/lib/telegram-format";
 import { claimOnce, releaseClaim } from "@/lib/cron/idempotency";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -79,7 +80,7 @@ function trendArrow(s: SubjectTrend): string {
 function formatMonthlyMessage(report: MonthlyReport): string {
   const { studentName, monthLabel, totalQuizzes, subjects, topWeaknesses } = report;
 
-  let message = `🗓 <b>Laporan Bulanan — ${studentName}</b>\n`;
+  let message = `🗓 <b>Laporan Bulanan — ${escapeHtml(studentName)}</b>\n`;
   message += `Periode: <b>${monthLabel}</b>\n`;
   message += `━━━━━━━━━━━━━━━━━\n\n`;
 
@@ -114,7 +115,7 @@ function formatMonthlyMessage(report: MonthlyReport): string {
   }
 
   message += `━━━━━━━━━━━━━━━━━\n`;
-  message += `📚 AI Private Tutor — ${studentName}`;
+  message += `📚 AI Private Tutor — ${escapeHtml(studentName)}`;
   return message;
 }
 

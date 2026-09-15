@@ -6,6 +6,7 @@ import type { BotSession } from "../session";
 import { setSession, clearSession, getSession } from "../session";
 import { handleActivity } from "@/lib/gamification";
 import { gradeAttempt } from "@/agents/assessment/grader";
+import { escapeMd } from "@/lib/telegram-format";
 
 /** Callback data prefix for quiz answer buttons. */
 export const QUIZ_ANS_PREFIX = "quiz:ans:";
@@ -423,8 +424,8 @@ async function recordAnswer(
   // Immediate per-question feedback
   let feedback = isCorrect
     ? `✅ *Benar!*`
-    : `❌ *Kurang tepat* — jawaban benar: *${correctText}*`;
-  if (q.explanation) feedback += `\n💡 ${q.explanation}`;
+    : `❌ *Kurang tepat* — jawaban benar: *${escapeMd(correctText)}*`;
+  if (q.explanation) feedback += `\n💡 ${escapeMd(q.explanation)}`;
 
   await ctx.answerCbQuery(isCorrect ? "✅ Benar!" : "❌ Kurang tepat").catch(() => {});
   await ctx.reply(feedback, { parse_mode: "Markdown" }).catch(() => {});
@@ -443,6 +444,25 @@ async function recordAnswer(
 }
 
 /**
+ * Render the body of a quiz question message.
+ *
+ * Exported as a pure function so the escaping can be asserted directly, against
+ * the real template, rather than against a copy of it in a test.
+ *
+ * Question text is LLM-generated and routinely contains `_` or `*` — physics
+ * writes F_N, maths writes lim_{x→2}. Unescaped, that opens a Markdown entity
+ * which never closes and Telegram rejects the ENTIRE message with "can't parse
+ * entities", so the student silently receives nothing.
+ *
+ * Answer options are NOT escaped here: they become inline-keyboard button
+ * labels, and Telegram does not parse those, so escaping would show the student
+ * literal backslashes.
+ */
+export function renderQuestionText(index: number, total: number, question: string): string {
+  return `📝 *Soal ${index + 1} dari ${total}*\n\n${escapeMd(question)}`;
+}
+
+/**
  * Render a question with inline answer buttons (when options exist).
  */
 async function sendQuestion(ctx: Context, quiz: Quiz, index: number): Promise<void> {
@@ -450,7 +470,7 @@ async function sendQuestion(ctx: Context, quiz: Quiz, index: number): Promise<vo
   const q = questions[index];
   if (!q) return;
 
-  let text = `📝 *Soal ${index + 1} dari ${questions.length}*\n\n${q.question}`;
+  let text = renderQuestionText(index, questions.length, q.question);
 
   const keyboard: { text: string; callback_data: string }[][] = [];
   if (q.options && q.options.length > 0) {
@@ -622,14 +642,14 @@ async function finishQuiz(
     if (!q) continue;
     const isCorrect = a.selectedIndex === q.correctIndex;
     if (isCorrect) {
-      feedbackLines.push(`✅ Soal ${a.questionIndex + 1}: ${q.question.slice(0, 60)}…`);
+      feedbackLines.push(`✅ Soal ${a.questionIndex + 1}: ${escapeMd(q.question.slice(0, 60))}…`);
     } else {
       const correctText = q.options?.[q.correctIndex ?? -1] ?? q.correctAnswer ?? "?";
       const yourText = q.options?.[a.selectedIndex] ?? "?";
       feedbackLines.push(
-        `❌ Soal ${a.questionIndex + 1}: ${q.question.slice(0, 80)}…\n` +
-        `   Jawabanmu: *${yourText}* | Jawaban benar: *${correctText}*\n` +
-        `   💡 ${q.explanation ?? "Coba baca materinya lagi ya!"}`,
+        `❌ Soal ${a.questionIndex + 1}: ${escapeMd(q.question.slice(0, 80))}…\n` +
+        `   Jawabanmu: *${escapeMd(yourText)}* | Jawaban benar: *${escapeMd(correctText)}*\n` +
+        `   💡 ${escapeMd(q.explanation ?? "Coba baca materinya lagi ya!")}`,
       );
     }
   }

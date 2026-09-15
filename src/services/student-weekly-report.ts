@@ -7,6 +7,7 @@
  */
 
 import { prisma } from "@/lib/prisma";
+import { escapeHtml } from "@/lib/telegram-format";
 import { claimOnce, releaseClaim, studentWeeklyReportKey } from "@/lib/cron/idempotency";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -91,7 +92,7 @@ function formatSummary(data: StudentWeeklyData): string {
       ? data.weakTopics
           .map(
             (w) =>
-              `• ${w.topic} (${w.subject}): ${Math.round(w.mastery)}%`,
+              `• ${escapeHtml(w.topic)} (${escapeHtml(w.subject)}): ${Math.round(w.mastery)}%`,
           )
           .join("\n")
       : "Tidak ada — keren! 👏";
@@ -101,7 +102,7 @@ function formatSummary(data: StudentWeeklyData): string {
     : "🏆 Belum ada exam minggu ini";
 
   return (
-    `📊 <b>Ringkasan Mingguanmu, ${student.name}!</b>\n\n` +
+    `📊 <b>Ringkasan Mingguanmu, ${escapeHtml(student.name)}!</b>\n\n` +
     `🔥 Streak: <b>${student.currentStreak} hari</b> | ✨ XP: ${student.xp}\n` +
     (avgAll !== null ? `📚 Rata-rata penguasaan: <b>${avgAll}%</b>\n` : "") +
     (data.quizzes7d > 0 || data.exams7d > 0
