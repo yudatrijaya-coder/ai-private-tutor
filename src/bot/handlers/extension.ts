@@ -127,8 +127,15 @@ export async function handleExtensionDecision(
     return;
   }
 
-  const student = await prisma.student.findUnique({ where: { studentId } });
+  // Callback data may carry either the DB uuid (`student.id`) or the login
+  // code (`student.studentId`, e.g. "TIUMU001"). Both have shipped in admin
+  // notifications — a re-sent or hand-built message carries the uuid — so
+  // accept either form instead of failing with "Siswa tidak ditemukan".
+  const student =
+    (await prisma.student.findUnique({ where: { studentId } })) ??
+    (await prisma.student.findFirst({ where: { id: studentId } }));
   if (!student) {
+    console.warn(`[extension] no student matched callback id "${studentId}"`);
     await ctx.answerCbQuery("Siswa tidak ditemukan.").catch(() => {});
     return;
   }

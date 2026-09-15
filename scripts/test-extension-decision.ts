@@ -129,6 +129,36 @@ async function main() {
     row.subscriptionUntil?.getTime() === untilBefore?.getTime(),
   );
 
+  // ── 4b. Callback carrying the DB uuid (not the login code) still resolves ──
+  // Regression: a hand-built/re-sent admin notification shipped `student.id`
+  // and the button died with "Siswa tidak ditemukan".
+  await prisma.student.update({
+    where: { id: student.id },
+    data: { status: "TRIAL", trialEndsAt: new Date(Date.now() - 86400000), subscriptionUntil: null },
+  });
+  sends = [];
+  edits = [];
+  await handleExtensionDecision(makeCtx(ADMIN_ID, sends, edits), "set", student.id, 1);
+  row = await prisma.student.findUniqueOrThrow({ where: { id: student.id } });
+  check(
+    "uuid-form callback resolves (approve 1mo)",
+    row.status === "ACTIVE" && row.subscriptionUntil !== null,
+    `status=${row.status}`,
+  );
+  check(
+    "uuid-form callback → student notified",
+    sends.some((s) => s.to === STUDENT_TG && /Aktif sampai/.test(s.text)),
+  );
+
+  // ── 4c. Genuinely unknown id → refused, no crash ──
+  sends = [];
+  edits = [];
+  await handleExtensionDecision(makeCtx(ADMIN_ID, sends, edits), "set", "NOPE-DOES-NOT-EXIST", 1);
+  check(
+    "unknown id → refusal answer, no student message",
+    edits.some((e) => /Siswa tidak ditemukan/.test(e)) && sends.length === 0,
+  );
+
   // ── 5. Reject → no DB change + student told to re-check ──
   await prisma.student.update({
     where: { id: student.id },
