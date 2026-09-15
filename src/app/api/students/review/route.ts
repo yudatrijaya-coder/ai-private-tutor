@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getStudentSession } from "@/lib/auth/student";
 import { gradeReviewItem } from "@/lib/spaced-repetition";
+import { parseQuestions } from "@/lib/quiz-grading";
 
 /**
  * GET /api/students/review
@@ -50,14 +51,13 @@ export async function GET() {
   ]);
 
   const items = dueRows.map((row) => {
-    const questions = (row.quiz?.questions ?? []) as Array<{
-      question?: string;
-      options?: string[];
-      correctIndex?: number;
-      correctAnswer?: string;
-      explanation?: string;
-    }>;
+    // parseQuestions flattens the {text, isCorrect} option shape the database
+    // stores for part of the bank. Without it, `options` reached React as
+    // objects and threw error #31, blanking the whole page.
+    const questions = parseQuestions(row.quiz?.questions);
     const q = questions[row.questionIdx];
+    const correctIndex = q?.correctIndex ?? null;
+    const options = q?.options ?? [];
 
     return {
       id: row.id,
@@ -70,9 +70,12 @@ export async function GET() {
       intervalDays: row.intervalDays,
       dueAt: row.dueAt,
       question: q?.question ?? "(soal tidak ditemukan)",
-      options: q?.options ?? [],
-      correctIndex: q?.correctIndex ?? null,
-      correctAnswer: q?.correctAnswer ?? null,
+      options,
+      correctIndex,
+      // The page shows `correctAnswer` as text, but the column only ever holds
+      // a letter ("A"), so the old `q.correctAnswer` was always null and the
+      // "jawaban benar" line never rendered. Derive the text from the index.
+      correctAnswer: correctIndex !== null ? (options[correctIndex] ?? null) : null,
       explanation: q?.explanation ?? null,
     };
   });

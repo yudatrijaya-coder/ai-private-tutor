@@ -8,6 +8,7 @@
  */
 
 import { prisma } from "@/lib/prisma";
+import { optionTexts, pickCorrectIndex } from "@/lib/quiz-grading";
 import type { QuestionData, QuizData, LLMQuizResponse, LLMQuestion } from "./types";
 import { AttemptType } from "@/generated/prisma/enums";
 
@@ -114,20 +115,36 @@ function mapLLMQuestion(q: LLMQuestion): QuestionData {
 function mapRawQuestion(q: Record<string, unknown>): QuestionData {
   return {
     question: String(q.question ?? ""),
-    options: normalizeOptions(q.options as string[] | Record<string, string> | undefined),
-    correctIndex: Number(q.correctIndex ?? 0),
+    options: normalizeOptions(q.options),
+    correctIndex: resolveRawCorrectIndex(q),
     explanation: String(q.explanation ?? ""),
   };
 }
 
-function normalizeOptions(
-  options: string[] | Record<string, string> | undefined,
-  // eslint-disable-next-line @typescript-eslint/default-param-last
-): string[] {
-  if (!options) return ["A", "B", "C", "D"];
-  if (Array.isArray(options)) return options;
-  // { A: "...", B: "..." } → ["...", "..."]
-  return Object.values(options).slice(0, 4);
+/**
+ * Delegate to the shared parser rather than reimplementing it.
+ *
+ * The local copy used to be `if (Array.isArray(options)) return options`, which
+ * let an array of `{text, isCorrect}` objects through untouched — that is how
+ * 200 questions ended up storing objects in a field every consumer treats as
+ * `string[]`. `optionTexts` flattens both shapes.
+ */
+function normalizeOptions(options: unknown): string[] {
+  const texts = optionTexts(options);
+  return texts.length > 0 ? texts : ["A", "B", "C", "D"];
+}
+
+/**
+ * Resolve the answer index without silently defaulting to 0.
+ *
+ * `Number(q.correctIndex ?? 0)` was the other half of the same defect: when the
+ * model omitted the index, every such question was stored as "option A is
+ * correct" regardless of the actual answer. Fall back to the `isCorrect` flag
+ * and only then to 0.
+ */
+function resolveRawCorrectIndex(q: Record<string, unknown>): number {
+  const picked = pickCorrectIndex(q.options, q.correctIndex, optionTexts(q.options).length);
+  return picked ?? 0;
 }
 
 function resolveCorrectIndex(q: LLMQuestion): number {
