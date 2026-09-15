@@ -11,6 +11,7 @@
 import { prisma } from "@/lib/prisma";
 import type { Material } from "@/generated/prisma/client";
 import { addDays } from "date-fns";
+import { buildProsemContext } from "@/lib/prosem-context";
 
 /* ------------------------------------------------------------------ */
 /*  Constants                                                         */
@@ -122,7 +123,25 @@ export async function assignWeeklyTopics(
   const randomCount = totalSlots - newCount - weakCount;
 
   const newTopics = unassignedMaterials.slice(0, newCount);
-  const weakTopics = selectWeakAreaTopics(weakSubjects, availableMaterials, weakCount);
+  const usedTopics = new Set(assignedTopics);
+  for (const m of newTopics) usedTopics.add(m.topic);
+
+  // Lagging topics from the same prosem context the bot uses — the topics a
+  // student should have covered in past weeks but hasn't mastered yet,
+  // oldest week first. These drive the weak-area slots.
+  const prosemCtx = await buildProsemContext({ id: student.id, gradeLevel: student.gradeLevel });
+  const laggingTopics: Array<{ topic: string; subject: string; weekOrder: number }> = [];
+  if (prosemCtx) {
+    for (const s of prosemCtx.subjects) {
+      for (const l of s.lagging) {
+        laggingTopics.push({ topic: l.topic, subject: s.subject, weekOrder: l.weekOrder });
+      }
+    }
+    laggingTopics.sort((a, b) => a.weekOrder - b.weekOrder);
+  }
+  const weakTopics = selectWeakAreaTopics(
+    weakSubjects, availableMaterials, weakCount, laggingTopics, usedTopics,
+  );
   const randomTopics = selectRandomTopics(
     unassignedMaterials, availableMaterials, randomCount, assignedTopics,
   );
@@ -239,28 +258,48 @@ async function identifyWeakSubjects(studentId: string, curriculumIds: string[]):
   return weak;
 }
 
-function selectWeakAreaTopics(
+export function selectWeakAreaTopics(
   weakSubjects: Map<string, Material[]>,
   allMaterials: Material[],
   count: number,
+  laggingTopics: Array<{ topic: string; subject: string; weekOrder: number }> = [],
+  usedTopics: Set<string> = new Set(),
 ): Array<{ topic: string; subject: string | null }> {
   const result: Array<{ topic: string; subject: string | null }> = [];
+  const seen = new Set<string>();
+
+  // Priority 1: prosem lagging topics — the exact same computed-from-DB list
+  // the bot and web use (weekOrder < current week, mastery < 70, deduped per
+  // topic). Oldest week first so the most overdue material gets scheduled
+  // before recent catch-up topics.
+  const sortedLagging = [...laggingTopics].sort((a, b) => a.weekOrder - b.weekOrder);
+  for (const l of sortedLagging) {
+    if (result.length >= count) break;
+    if (seen.has(l.topic) || usedTopics.has(l.topic)) continue;
+    seen.add(l.topic);
+    result.push({ topic: l.topic, subject: l.subject });
+  }
+
+  // Fallback 1: materials of weak subjects (mastery < 50% snap) for any
+  // remaining slots.
   const pool = allMaterials.filter(
     (m) => m.subject && weakSubjects.has(m.subject),
   );
-
-  const seen = new Set<string>();
   for (const mat of pool) {
     if (result.length >= count) break;
-    if (seen.has(mat.topic)) continue;
+    if (seen.has(mat.topic) || usedTopics.has(mat.topic)) continue;
     seen.add(mat.topic);
     result.push({ topic: mat.topic, subject: mat.subject });
   }
 
+  // Fallback 2: generic review labels.
   if (result.length < count) {
     for (const [subject] of weakSubjects) {
       if (result.length >= count) break;
-      result.push({ topic: `Review ${subject}`, subject });
+      const label = `Review ${subject}`;
+      if (seen.has(label)) continue;
+      seen.add(label);
+      result.push({ topic: label, subject });
     }
   }
 
