@@ -26,6 +26,8 @@ const TARGET_IDS = [
   "f32103f1-fb64-429b-8a0c-e189d9695c40",
   "58d52efa-b061-46c7-83bf-32bf2485a74d",
   "c70854c5-c640-4d07-a91f-3017a468c395",
+  "733f365d-da92-4f6f-bd9d-48ff22cabce3", // Fisika ~ Kalor (stub 77 chars, 2026-09-15)
+  "6685df84-6635-4661-afa7-2f8f3584de28", // Matematika Penalaran ~ Bangun Datar (stub 81 chars, 2026-09-15)
   // Raihan
   "f8f4d60c59a240edb0ff0a4a", // Pendidikan Pancasila ~ pengertian macam-macam norma
 ];

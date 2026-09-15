@@ -8,6 +8,13 @@ import json, os, re, requests, sys, subprocess, uuid, time
 from openai import OpenAI
 from pathlib import Path
 
+# Guard (ledger B-02 parity with sibi-generate-slides.py): nothing
+# unvalidated may reach metadata.slide_sibi. Root cause 2026-09-15: two
+# stubs (77/81 chars, truncated mid-sentence) landed via this script
+# because it only checked `if slide_md:` truthiness.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from sibi_content_guard import is_usable
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 MATCHED_DIR = BASE_DIR / "data" / "sibi" / "matched" / "SMA_2"
 
@@ -225,6 +232,10 @@ def main():
                 if slide_md:
                     if "```" in slide_md:
                         slide_md = re.sub(r'```[a-z]*\n?|```', '', slide_md).strip()
+                    if not is_usable(slide_md, "slides"):
+                        print(f"  ⛔ Slide REJECTED by guard (len={len(slide_md)}) — not saved")
+                        slide_md = None
+                if slide_md:
                     update_slide(curriculum_id, m['subject'], m['topic'], m['subTopic'], slide_md)
                     print("  ✅ Slide saved")
                     time.sleep(5)
