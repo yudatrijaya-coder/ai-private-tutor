@@ -1,4 +1,5 @@
 import type { Context } from "telegraf";
+import { escapeMd } from "@/lib/telegram-format";
 import type { Student } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { getPersona } from "../personas";
@@ -116,7 +117,7 @@ export async function handleSchedule(ctx: Context, student: Student, commandText
 
     await ctx.reply(
       `${persona.emoji} *Jadwal Minggu Ini*\n\n${lines.join("\n")}` +
-      `Semangat, ${student.name}! 🔥`,
+      `Semangat, ${escapeMd(student.name)}! 🔥`,
       { parse_mode: "Markdown" },
     );
     return;
@@ -171,7 +172,7 @@ export async function handleSchedule(ctx: Context, student: Student, commandText
     const hasConfig = config.sessionsPerDay || config.preferredTime;
 
     await ctx.reply(
-      `${persona.emoji} Hmm, nggak ada jadwal buat hari ini, ${student.name}.\n\n` +
+      `${persona.emoji} Hmm, nggak ada jadwal buat hari ini, ${escapeMd(student.name)}.\n\n` +
       (hasConfig
         ? `📋 *Preferensi kamu:* ${formatScheduleConfig(config)}\n\n`
         : `💡 *Tips:* Bilang "Atur jadwal belajar aku jam 4 sore" biar aku ingetin tiap hari!\n\n`) +
@@ -192,7 +193,7 @@ export async function handleSchedule(ctx: Context, student: Student, commandText
 
   await ctx.reply(
     `${persona.emoji} *Jadwal Hari Ini*\n\n${lines.join("\n")}\n\n` +
-    `Semangat, ${student.name}! 🔥`,
+    `Semangat, ${escapeMd(student.name)}! 🔥`,
     { parse_mode: "Markdown" },
   );
 

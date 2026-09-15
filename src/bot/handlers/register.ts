@@ -1,4 +1,5 @@
 import type { Context } from "telegraf";
+import { escapeMd } from "@/lib/telegram-format";
 import type { Student } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { generateCurriculumDraft } from "@/agents/curriculum";
@@ -63,7 +64,7 @@ export async function handleRegister(
   // 3. Check approval status
   if (student.status === "PENDING") {
     await ctx.reply(
-      `⏳ *Pendaftaran kamu belum disetujui, ${student.name}!*\n\n` +
+      `⏳ *Pendaftaran kamu belum disetujui, ${escapeMd(student.name)}!*\n\n` +
         `Admin masih dalam proses review. Mohon tunggu sebentar ya!\n\n` +
         `Biasanya tidak perlu lama — kalau sudah disetujui, kamu akan dapat notifikasi dari bot ini. 😊`,
       { parse_mode: "Markdown" },
@@ -108,9 +109,9 @@ export async function handleRegister(
   };
 
   await ctx.reply(
-    `🎉 *Halo ${student.name}!* Selamat datang di AI Private Tutor!\n\n` +
+    `🎉 *Halo ${escapeMd(student.name)}!* Selamat datang di AI Private Tutor!\n\n` +
       `📖 Kelas: ${gradeLabels[student.gradeLevel] ?? student.gradeLevel}\n` +
-      `🆔 ID Siswa: ${student.studentId}\n\n` +
+      `🆔 ID Siswa: ${escapeMd(student.studentId)}\n\n` +
       `Yang bisa kamu lakukan:\n` +
       `📚 /materi — Lihat materi pelajaran\n` +
       `📝 /quiz — Kerjakan kuis\n` +

@@ -1,4 +1,5 @@
 import type { Context } from "telegraf";
+import { escapeMd } from "@/lib/telegram-format";
 import type { Student } from "@/generated/prisma/client";
 import { getPersona } from "../personas";
 import { getSchoolSchedule, getDaySchedule, getAvailableDays } from "@/data/school-schedule";
@@ -154,7 +155,7 @@ export async function handleSchoolSchedule(
     const entries = getDaySchedule(student.studentId, day);
     if (!entries || entries.length === 0) {
       await ctx.reply(
-        `${persona.emoji} ${student.name}, nggak ada jadwal sekolah buat *${day}*. ` +
+        `${persona.emoji} ${escapeMd(student.name)}, nggak ada jadwal sekolah buat *${day}*. ` +
           `Santai dulu aja! 🎉`,
         { parse_mode: "Markdown" },
       );
@@ -169,7 +170,7 @@ export async function handleSchoolSchedule(
   if (subCmd.toUpperCase() === "WEEK") {
     const msg = formatWeekSchedule(schedule);
     await ctx.reply(
-      `${persona.emoji} *Jadwal Sekolah ${student.name} — 1 Minggu* 🏫\n\n${msg}\n` +
+      `${persona.emoji} *Jadwal Sekolah ${escapeMd(student.name)} — 1 Minggu* 🏫\n\n${msg}\n` +
         `Semangat belajarnya! 🔥`,
       { parse_mode: "Markdown" },
     );
@@ -196,7 +197,7 @@ export async function handleSchoolSchedule(
     } else {
       await ctx.reply(
         `${persona.emoji} *Hari ${today} — Libur!* 🎉\n` +
-          `Nikmati liburan kamu ya, ${student.name}! 😊`,
+          `Nikmati liburan kamu ya, ${escapeMd(student.name)}! 😊`,
         { parse_mode: "Markdown" },
       );
     }
@@ -213,7 +214,7 @@ export async function handleSchoolSchedule(
       return;
     }
     await ctx.reply(
-      `${persona.emoji} ${student.name}, hari ini nggak ada jadwal sekolah ya.\n\n` +
+      `${persona.emoji} ${escapeMd(student.name)}, hari ini nggak ada jadwal sekolah ya.\n\n` +
         `Jadwal tersedia: ${daysWithSchedule.map((d) => `*${d}*`).join(", ")}.\n` +
         `Coba tanya "Jadwal sekolah ${daysWithSchedule[0]}" atau "Jadwal sekolah minggu ini"! 📅`,
       { parse_mode: "Markdown" },
@@ -229,7 +230,7 @@ export async function handleSchoolSchedule(
   const msg = formatDaySchedule(today, todayEntries);
   await ctx.reply(
     `${persona.emoji} *Jadwal Sekolah Hari ${today}* 🏫${mataPelajaran}\n\n${msg}\n` +
-      `Semangat ${student.name}! 🔥`,
+      `Semangat ${escapeMd(student.name)}! 🔥`,
     { parse_mode: "Markdown" },
   );
 }
@@ -280,7 +281,7 @@ export async function handleNextSubject(
   }
 
   await ctx.reply(
-    `${persona.emoji} Hmm, kayaknya nggak ada jadwal *${subject}* dalam waktu dekat, ${student.name}. ` +
+    `${persona.emoji} Hmm, kayaknya nggak ada jadwal *${escapeMd(subject)}* dalam waktu dekat, ${escapeMd(student.name)}. ` +
       `Coba tanya jadwal lengkap dengan bilang "Jadwal sekolah minggu ini"! 📅`,
     { parse_mode: "Markdown" },
   );
