@@ -335,6 +335,54 @@ async function main() {
   }
   check(`real AI narratives pass HTML escaping (${plans.length} checked)`, htmlBad === 0, `${htmlBad} rejected`);
 
+  // ── 7. The precise rule for unpaired underscores ────────────────────────
+  // Established by probing the live API, because guessing this wrong leads to
+  // "fixing" sites that were never broken. All 35 exam titles in the bank look
+  // like "Weekly Exam Matematika — Minggu 5 (Kelas SMP_1)".
+  const examTitle = "Weekly Exam Matematika — Minggu 5 (Kelas SMP_1)";
+
+  // Bare: the `_` opens italic and nothing closes it.
+  check(
+    "bare exam title is rejected",
+    isParseError(await send(examTitle, "Markdown")),
+    `got "${await send(examTitle, "Markdown")}"`,
+  );
+
+  // Wrapped in bold: Telegram does not open an entity that could never close,
+  // so the same title survives. This is why `*${exam.title}*` sites are safe
+  // while bare `${exam.title}` sites were not.
+  check(
+    "the same title wrapped in *...* is accepted",
+    !isParseError(await send(`📋 *${examTitle}*`, "Markdown")),
+    `got "${await send(`📋 *${examTitle}*`, "Markdown")}"`,
+  );
+
+  // ...but wrapping is not a general defence: a `*` inside the value breaks it,
+  // because that star closes the bold span early and leaves the tail loose.
+  check(
+    "a star inside the wrapped value still breaks the message",
+    isParseError(await send(`📋 *Weekly * Exam SMP_1*`, "Markdown")),
+  );
+
+  // escapeMd handles both, which is why values are escaped even when they are
+  // currently wrapped.
+  check(
+    "escaped exam title passes whether wrapped or not",
+    !isParseError(await send(examTitle.replace(/_/g, "\\_"), "Markdown")) &&
+      !isParseError(await send(`📋 *${escapeMd(examTitle)}*`, "Markdown")),
+  );
+
+  // A student name is free text from onboarding, which only enforces length>=2,
+  // so names with markup characters are reachable in production.
+  check(
+    "a name with an unpaired underscore is rejected bare",
+    isParseError(await send("Halo Dwi_Putra, selamat belajar!", "Markdown")),
+  );
+  check(
+    "that name passes once escaped",
+    !isParseError(await send(`Halo ${escapeMd("Dwi_Putra")}, selamat belajar!`, "Markdown")),
+  );
+
   console.log(`\n${fail === 0 ? "ALL PASS" : "FAILURES"} — ${pass} passed, ${fail} failed`);
   if (fail > 0) process.exit(1);
 }

@@ -1,4 +1,5 @@
 import type { Context } from "telegraf";
+import { escapeMd } from "@/lib/telegram-format";
 import type { Student } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { generateWeeklyReport } from "@/agents/guardian/report";
@@ -34,7 +35,7 @@ export async function handleParentRegister(
   });
 
   await ctx.reply(
-    `✅ Halo! Sekarang kamu terhubung sebagai orang tua / wali dari *${student.name}*.\n\n` +
+    `✅ Halo! Sekarang kamu terhubung sebagai orang tua / wali dari *${escapeMd(student.name)}*.\n\n` +
       `Berikut yang bisa kamu lakukan:\n\n` +
       `📊 /progres — Lihat progress belajar anak\n` +
       `📋 /laporan — Laporan mingguan\n` +
@@ -60,7 +61,7 @@ export async function handleProgress(
 
   if (snaps.length === 0) {
     await ctx.reply(
-      `📊 *Progress ${student.name}*\n\n` +
+      `📊 *Progress ${escapeMd(student.name)}*\n\n` +
         `Belum ada data progress. Anak kamu mungkin belum mulai belajar.`,
       { parse_mode: "Markdown" },
     );
@@ -124,7 +125,7 @@ export async function handleReport(
       err instanceof Error ? err.message : String(err),
     );
     await ctx.reply(
-      `📋 *Laporan ${student.name}*\n\n` +
+      `📋 *Laporan ${escapeMd(student.name)}*\n\n` +
         `Laporan sedang tidak bisa dibuat. Coba lagi nanti ya. 🙏`,
       { parse_mode: "Markdown" },
     );

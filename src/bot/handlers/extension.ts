@@ -1,4 +1,5 @@
 import type { Context } from "telegraf";
+import { escapeMd } from "@/lib/telegram-format";
 import type { Student } from "@/generated/prisma/client";
 import { addMonths } from "date-fns";
 import { prisma } from "@/lib/prisma";
@@ -96,7 +97,7 @@ export async function handleExtensionRequest(ctx: Context, student: Student): Pr
 
   await ctx.answerCbQuery("Permintaan dikirim ke admin ✅").catch(() => {});
   await ctx.reply(
-    `✅ Permintaan perpanjang akun *${student.name}* (_${student.studentId}_) dikirim ke admin. Admin akan mengaktifkan akun kamu setelah konfirmasi pembayaran ya.`,
+    `✅ Permintaan perpanjang akun *${student.name}* (_${escapeMd(student.studentId)}_) dikirim ke admin. Admin akan mengaktifkan akun kamu setelah konfirmasi pembayaran ya.`,
     { parse_mode: "Markdown" },
   );
 }

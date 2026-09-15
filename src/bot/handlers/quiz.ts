@@ -172,7 +172,7 @@ export async function handleSubjectCallback(
 
   await ctx.answerCbQuery();
   await ctx.editMessageText(
-    `📖 *${subject}* — pilih kuis:\n(🔁 = ada soal untuk diulang)`,
+    `📖 *${escapeMd(subject)}* — pilih kuis:\n(🔁 = ada soal untuk diulang)`,
     { parse_mode: "Markdown", reply_markup: { inline_keyboard: keyboard } },
   );
   return true;
@@ -208,7 +208,7 @@ export async function handleDrillStart(
 
   if (!quiz) {
     await ctx.reply(
-      `${persona.emoji} Topik paling lemah kamu: *${weak.topic}* (mastery ${Math.round(weak.mastery)}%).\n` +
+      `${persona.emoji} Topik paling lemah kamu: *${escapeMd(weak.topic)}* (mastery ${Math.round(weak.mastery)}%).\n` +
         `Belum ada kuis khusus topik ini — buka materinya dulu ya:\n` +
         `${"https://senangbelajar.web.id/student/subject/" + encodeURIComponent(weak.subject)}`,
       { parse_mode: "Markdown" },
@@ -217,7 +217,7 @@ export async function handleDrillStart(
   }
 
   await ctx.reply(
-    `${persona.emoji} Deteksi topik lemah: *${weak.topic}* (mastery ${Math.round(weak.mastery)}%). Yuk drill sekarang! 🎯`,
+    `${persona.emoji} Deteksi topik lemah: *${escapeMd(weak.topic)}* (mastery ${Math.round(weak.mastery)}%). Yuk drill sekarang! 🎯`,
     { parse_mode: "Markdown" },
   );
   await handleQuizPick(ctx, student, quiz.id);
@@ -625,8 +625,8 @@ async function finishQuiz(
         const beforePct = beforeMastery ? Math.round(beforeMastery.mastery) : null;
         masteryLine =
           beforePct === null
-            ? "\n📈 Mastery *" + qTopic + "* tercatat: " + afterPct + "%"
-            : "\n📈 Mastery *" + qTopic + "*: " + beforePct + "% → " + afterPct + "% " + (afterPct >= beforePct ? "▲" : "▼");
+            ? "\n📈 Mastery *" + escapeMd(qTopic) + "* tercatat: " + afterPct + "%"
+            : "\n📈 Mastery *" + escapeMd(qTopic) + "*: " + beforePct + "% → " + afterPct + "% " + (afterPct >= beforePct ? "▲" : "▼");
       }
     } catch (mErr) {
       console.warn("[quiz] mastery delta failed:", mErr);

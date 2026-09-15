@@ -2,6 +2,7 @@ import type { Context } from "telegraf";
 import type { Student } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { getPersona } from "../personas";
+import { escapeMd } from "@/lib/telegram-format";
 
 /**
  * /materi — list available materials for this student.
@@ -31,8 +32,8 @@ export async function handleMaterial(ctx: Context, student: Student): Promise<vo
 
   const lines = materials.map(
     (m, i) =>
-      `${i + 1}. *${m.topic}*${m.subTopic ? ` — ${m.subTopic}` : ""}\n` +
-      `   📖 ${m.subject} | ${m._count.quizzes > 0 ? `📝 ${m._count.quizzes} kuis` : "Belum ada kuis"}`,
+      `${i + 1}. *${escapeMd(m.topic)}*${m.subTopic ? ` — ${escapeMd(m.subTopic)}` : ""}\n` +
+      `   📖 ${escapeMd(m.subject)} | ${m._count.quizzes > 0 ? `📝 ${m._count.quizzes} kuis` : "Belum ada kuis"}`,
   );
 
   await ctx.reply(

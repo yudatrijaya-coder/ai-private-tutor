@@ -1,3 +1,4 @@
+import { escapeMd } from "@/lib/telegram-format";
 /**
  * Onboarding flow — pendaftaran murid baru via Telegram
  *
@@ -172,7 +173,7 @@ async function stepConfirm(ctx: Context, data: RegistrationData): Promise<void> 
 
   await ctx.reply(
     `*Konfirmasi Pendaftaran* 📋\n\n` +
-    `👤 Nama: *${data.name}*\n` +
+    `👤 Nama: *${escapeMd(data.name)}*\n` +
     `📖 Kelas: *${GRADE_LABELS[data.grade] ?? data.grade}*\n` +
     `🎯 Karakter: *${data.character.replace("KAK_", "Kak ")}*\n` +
     `📅 Hari belajar: ${daysText}\n` +
@@ -266,7 +267,7 @@ async function approveStudent(ctx: Context, data: RegistrationData): Promise<voi
   });
 
   await ctx.reply(
-    `🎉 *Selamat datang, ${data.name}!* Akun kamu sudah aktif!\n\n` +
+    `🎉 *Selamat datang, ${escapeMd(data.name)}!* Akun kamu sudah aktif!\n\n` +
     `📖 Kelas: *${GRADE_LABELS[data.grade] ?? data.grade}*\n` +
     `🎯 Tutor: *${data.character.replace("KAK_", "Kak ")}*\n\n` +
     `🔑 *Kredensial Login Dashboard Kamu:*\n` +
@@ -317,7 +318,7 @@ async function approveTrialStudent(ctx: Context, data: RegistrationData): Promis
   });
 
   await ctx.reply(
-    `🎉 *Selamat datang, ${data.name}!* Akun trial 7 hari kamu sudah aktif! 📚\n\n` +
+    `🎉 *Selamat datang, ${escapeMd(data.name)}!* Akun trial 7 hari kamu sudah aktif! 📚\n\n` +
     `📖 Kelas: *${GRADE_LABELS[data.grade] ?? data.grade}*\n` +
     `🎯 Tutor: *${data.character.replace("KAK_", "Kak ")}*\n` +
     `⏰ Trial aktif sampai: *${trialEndsAt.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}*\n\n` +
@@ -615,7 +616,7 @@ async function handleAdminApprove(ctx: Context, studentId: string): Promise<void
     });
 
     await ctx.editMessageText(
-      `✅ *Pendaftaran Disetujui!*\n\n👤 ${student.name}\n📖 ${GRADE_LABELS[regData.grade] ?? regData.grade}\n🎯 ${regData.character.replace("KAK_", "Kak ")}`,
+      `✅ *Pendaftaran Disetujui!*\n\n👤 ${escapeMd(student.name)}\n📖 ${GRADE_LABELS[regData.grade] ?? regData.grade}\n🎯 ${regData.character.replace("KAK_", "Kak ")}`,
       { parse_mode: "Markdown" },
     );
 
