@@ -17,6 +17,7 @@
  */
 
 import { prisma } from "@/lib/prisma";
+import { escapeHtml } from "@/lib/telegram-format";
 import { claimOnce, releaseClaim, dailyNudgeKey } from "@/lib/cron/idempotency";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -157,11 +158,11 @@ export async function runDailyNudge(deps: DailyNudgeDeps = {}): Promise<DailyNud
     const recapLine =
       recapParts.length > 0 ? `📊 24 jam terakhir: <b>${recapParts.join(", ")}</b>\n\n` : "";
     const weakLine = weakTopic
-      ? `🎯 Saran: perkuat <b>${weakTopic.topic}</b> (${weakTopic.subject})`
+      ? `🎯 Saran: perkuat <b>${escapeHtml(weakTopic.topic)}</b> (${escapeHtml(weakTopic.subject)})`
       : "";
 
     const message =
-      `🌅 <b>Selamat pagi, ${student.name}!</b>\n\n` +
+      `🌅 <b>Selamat pagi, ${escapeHtml(student.name)}!</b>\n\n` +
       `${streakMsg}\n\n` +
       (recapLine ? recapLine : "") +
       `Hari ini belum belajar? Yuk mulai 10 menit aja! 📚\n\n` +

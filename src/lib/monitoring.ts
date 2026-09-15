@@ -18,6 +18,7 @@
 
 import { appendFile, mkdir } from "node:fs/promises";
 import path from "node:path";
+import { escapeMd } from "@/lib/telegram-format";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -147,10 +148,14 @@ async function maybeAlert(
   alertsThisHour++;
 
   const icon = severity === "fatal" ? "🔥" : "⚠️";
+  // Alert text embeds raw error messages, which routinely contain `_`, `*`,
+  // backticks or brackets. Unescaped, Telegram rejects the alert itself with
+  // "can't parse entities" — so the alert about the failure is lost for the
+  // same reason the original failure happened.
   const text =
-    `${icon} *${severity.toUpperCase()}* \`${scope}\`\n` +
-    (code ? `Code: \`${code}\`\n` : "") +
-    `\n${message.slice(0, 500)}`;
+    `${icon} *${severity.toUpperCase()}* \`${escapeMd(scope)}\`\n` +
+    (code ? `Code: \`${escapeMd(code)}\`\n` : "") +
+    `\n${escapeMd(message.slice(0, 500))}`;
 
   try {
     // 5s timeout: alerting must never block a request handler.

@@ -20,6 +20,7 @@
  */
 
 import { prisma } from "@/lib/prisma";
+import { escapeHtml } from "@/lib/telegram-format";
 import { claimOnce, releaseClaim, isoWeekKey } from "@/lib/cron/idempotency";
 import { buildProsemContext } from "@/lib/prosem-context";
 import { getPersona } from "@/bot/personas";
@@ -163,8 +164,8 @@ export async function runMotivationNudge(
 
     const greeting =
       type === "monday"
-        ? `Hai ${student.name}! Semangat awal minggu! ${persona.emoji}`
-        : `Hai ${student.name}! Kamu sudah kerja keras minggu ini. ${persona.emoji}`;
+        ? `Hai ${escapeHtml(student.name)}! Semangat awal minggu! ${persona.emoji}`
+        : `Hai ${escapeHtml(student.name)}! Kamu sudah kerja keras minggu ini. ${persona.emoji}`;
 
     const message =
       `${greeting}\n\n${lines.join("\n\n")}\n\n` +

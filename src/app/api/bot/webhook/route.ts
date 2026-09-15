@@ -3,6 +3,7 @@ import { Context, Telegraf } from "telegraf";
 import { onMessage } from "@/bot/handlers/message";
 import { routeCallback } from "@/bot/state-machine";
 import { bot } from "@/bot/bot";
+import { hardenContext } from "@/lib/telegram-send";
 
 // ── In-memory dedupe: update_id → expiry timestamp ───────────────────────────
 const dedupe = new Map<number, number>();
@@ -89,6 +90,13 @@ async function processUpdate(update: any): Promise<void> {
     console.log("[webhook] Update:", update.update_id, "from", update.message?.from?.id);
 
     const ctx = new Context(update, (bot as any).telegram, (bot as any).botInfo || {});
+
+    // Single interception point for outgoing markup. Telegram rejects the whole
+    // message when parse_mode is malformed, and most sends here are
+    // fire-and-forget, so the student would otherwise receive nothing. This makes
+    // an unrecognised bad value degrade to plain text instead of vanishing.
+    // See src/lib/telegram-send.ts.
+    hardenContext(ctx);
 
     // Route callback queries (inline keyboard buttons)
     if (update.callback_query) {

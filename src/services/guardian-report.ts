@@ -4,6 +4,7 @@
  */
 
 import { prisma } from "@/lib/prisma";
+import { escapeHtml } from "@/lib/telegram-format";
 import { claimOnce, releaseClaim, guardianReportKey } from "@/lib/cron/idempotency";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -127,7 +128,7 @@ function formatGuardianMessage(report: GuardianReport): string {
   const weaknessEmoji = (level: string) =>
     level === "severe" ? "🔴" : level === "moderate" ? "🟡" : level === "mild" ? "🟠" : "🟢";
 
-  let message = `📊 <b>Laporan Mingguan — ${studentName}</b>\n`;
+  let message = `📊 <b>Laporan Mingguan — ${escapeHtml(studentName)}</b>\n`;
   message += `━━━━━━━━━━━━━━━━━\n\n`;
 
   message += `📈 <b>Ringkasan Minggu Ini</b>\n`;
@@ -162,7 +163,7 @@ function formatGuardianMessage(report: GuardianReport): string {
   }
 
   message += `━━━━━━━━━━━━━━━━━\n`;
-  message += `📚 AI Private Tutor — ${studentName}`;
+  message += `📚 AI Private Tutor — ${escapeHtml(studentName)}`;
 
   return message;
 }
