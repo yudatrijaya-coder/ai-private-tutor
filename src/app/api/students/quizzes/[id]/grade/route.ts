@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getStudentSession } from "@/lib/auth/student";
 import { gradeAttempt } from "@/agents/assessment/grader";
+import { sendQuizFeedback } from "@/services/quiz-feedback";
 import type { QuestionData } from "@/agents/assessment/types";
 
 interface IncomingAnswer {
@@ -69,6 +70,11 @@ export async function POST(
         answers,
         timeSpent: body.timeSpent,
       });
+
+      // Post-quiz feedback to the student's Telegram, fire-and-forget: the
+      // submission must not wait on, or fail because of, a Telegram call.
+      // sendQuizFeedback never throws and is idempotent per attempt id.
+      void sendQuizFeedback(result.attemptId);
 
       return NextResponse.json({
         committed: true,
