@@ -46,15 +46,12 @@ export function escapeMd(text: string | null | undefined): string {
 /**
  * Escape a dynamic value for `parse_mode: "HTML"`.
  *
- * Only `&`, `<`, `>` are special, and `&` must be replaced first or the
- * entities produced for `<` and `>` would themselves be double-escaped.
+ * Re-exported from `lib/slide-html` rather than implemented here: the slide
+ * viewer renders untrusted LLM/scraped text with `dangerouslySetInnerHTML` and
+ * needs the identical function, and two copies of an escaper is how one of them
+ * ends up subtly weaker than the other.
  */
-export function escapeHtml(text: string | null | undefined): string {
-  return (text ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-}
+export { escapeHtml } from "./slide-html";
 
 /**
  * Collapse whitespace and cap length, for text that will be shown inline.

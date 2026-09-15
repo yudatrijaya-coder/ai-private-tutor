@@ -4,6 +4,7 @@ import { useEffect, useState, useMemo, useRef, useCallback } from "react";
 import { useParams, useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useActivityTracker } from "@/hooks/useActivityTracker";
+import { renderSlideMarkdown } from "@/lib/slide-html";
 
 /* ── Tema ── */
 const SUBJECT_THEMES: Record<string, { bg: string; card: string; accent: string; gradient: string; particles: string }> = {
@@ -22,21 +23,6 @@ function extractEmoji(slide: string): string {
   return "📖";
 }
 
-function renderMarkdown(slide: string, accent: string): string {
-  return slide
-    .replace(/^##\s+(.+)/gm, (_, t: string) => {
-      const emojiMatch = t.match(/^([\u{1F000}-\u{1FFFF}])\s*/u);
-      const emoji = emojiMatch ? emojiMatch[1] : "";
-      const text = emojiMatch ? t.slice(emojiMatch[0].length) : t;
-      const finalText = text || t;
-      return `<div class="flex items-center gap-3 mb-6"><span class="text-4xl">${emoji || "📖"}</span><h2 class="text-2xl font-extrabold tracking-tight" style="color:${accent}">${finalText}</h2></div>`;
-    })
-    .replace(/^#\s+(.+)/gm, '<h1 class="text-3xl font-extrabold mb-4 text-white">$1</h1>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong class="font-bold" style="color:#fff">$1</strong>')
-    .replace(/^-\s+(.+)/gm, '<div class="flex items-start gap-2 mb-2"><span class="text-lg shrink-0 mt-0.5">•</span><span class="text-base">$1</span></div>')
-    .replace(/^\d\.\s+(.+)/gm, '<div class="flex items-start gap-2 mb-2"><span class="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">1</span><span class="text-base">$1</span></div>')
-    .replace(/\n---\n?/g, "").replace(/\n{3,}/g, '\n\n').replace(/\n\n/g, '</div><div class="space-y-3 mt-4">').replace(/\n/g, '<br/>');
-}
 
 function Particles({ emojis }: { emojis: string }) {
   const items = useMemo(() => {
@@ -190,7 +176,10 @@ export default function SlideViewerPage() {
   const currentSlides = slidesState[activeSource] || [];
   const isLoading = loading[activeSource] && currentSlides.length === 0;
   const slide = currentSlides[current] || "";
-  const html = useMemo(() => renderMarkdown(slide, theme.accent), [slide, theme.accent]);
+  const html = useMemo(
+    () => renderSlideMarkdown(slide, { accent: theme.accent, mode: "decorated" }),
+    [slide, theme.accent],
+  );
   const emoji = useMemo(() => extractEmoji(slide), [slide]);
 
   // Determine which sources are available

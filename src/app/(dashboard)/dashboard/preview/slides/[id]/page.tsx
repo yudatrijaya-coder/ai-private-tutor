@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import { renderSlideMarkdown } from "@/lib/slide-html";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 
@@ -152,15 +153,8 @@ export default function SlideViewerPage() {
   // Extract emoji from slide
   const slideEmoji = slide.match(/[\u{1F300}-\u{1FAFF}]/u)?.[0] || theme.emoji;
 
-  // Convert markdown to HTML
-  const html = slide
-    .replace(/^##\s+(.+)/gm, "")
-    .replace(/^#\s+(.+)/gm, "")
-    .replace(/\*\*(.+?)\*\*/g, '<strong style="color:white">$1</strong>')
-    .replace(/\n- (.+)/g, '<div class="flex items-start gap-3 mb-2"><span class="mt-1.5 w-2 h-2 rounded-full flex-shrink-0" style="background:' + theme.accent + '"></span><span>$1</span></div>')
-    .replace(/\n---\n?/g, "")
-    .replace(/\n\n/g, '<div class="h-4"></div>')
-    .replace(/\n/g, '<br/>');
+  // Convert markdown to HTML (shared renderer — escapes untrusted content)
+  const html = renderSlideMarkdown(slide, { accent: theme.accent, mode: "plain" });
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: theme.gradient }}>
