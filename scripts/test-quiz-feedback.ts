@@ -18,8 +18,10 @@ import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
 import {
   isAnswerCorrect,
+  optionTexts,
   parseAnswers,
   parseQuestions,
+  pickCorrectIndex,
   wrongQuestionIndices,
   countCorrect,
 } from "../src/lib/quiz-grading";
@@ -104,6 +106,80 @@ async function main() {
   check(
     "parseAnswers drops junk entries",
     parseAnswers(["nonsense", null, { questionIndex: 0, selectedIndex: 1 }]).length === 1,
+  );
+
+  // ── 4b. The two option shapes ──────────────────────────────────────────
+  // 200 questions in the bank store options as objects, not strings. The
+  // object shape reached React as a child and blanked /student/review with
+  // error #31. These assertions pin the flattening that fixed it.
+  const objectShaped = [
+    {
+      question: "Zat asam dalam jeruk?",
+      options: [
+        { text: "Asam sitrat", isCorrect: true },
+        { text: "Natrium hidroksida", isCorrect: false },
+      ],
+      correctIndex: 0,
+    },
+  ];
+  const flat = parseQuestions(objectShaped);
+  check(
+    "object options are flattened to strings",
+    flat.length === 1 && flat[0].options?.[0] === "Asam sitrat" && flat[0].options?.[1] === "Natrium hidroksida",
+    JSON.stringify(flat[0]?.options),
+  );
+  check(
+    "flattened options contain no objects",
+    (flat[0]?.options ?? []).every((o) => typeof o === "string"),
+  );
+  check("correctIndex survives flattening", flat[0]?.correctIndex === 0);
+
+  // Mixed shapes inside ONE question array — seen in the wild, and the reason
+  // a per-quiz check would not have caught it.
+  const mixed = parseQuestions([
+    { question: "a", options: [{ text: "x" }, { text: "y" }], correctIndex: 1 },
+    { question: "b", options: ["p", "q"], correctIndex: 0 },
+  ]);
+  check(
+    "mixed object/string options in one quiz both flatten",
+    mixed[0]?.options?.[1] === "y" && mixed[1]?.options?.[0] === "p",
+    JSON.stringify(mixed.map((m) => m.options)),
+  );
+
+  // `{A: "...", B: "..."}` — the shape the LLM also emits.
+  check(
+    "object-map options flatten in order",
+    JSON.stringify(optionTexts({ A: "one", B: "two" })) === JSON.stringify(["one", "two"]),
+  );
+
+  // Unreadable entries are dropped, never stringified into "[object Object]".
+  check(
+    "unreadable option entries are dropped, not stringified",
+    JSON.stringify(optionTexts(["ok", { nope: 1 }, 42])) === JSON.stringify(["ok", "42"]),
+  );
+
+  // The isCorrect flag is a fallback, used only when the index is unusable.
+  check(
+    "isCorrect flag rescues a missing correctIndex",
+    pickCorrectIndex([{ text: "a" }, { text: "b", isCorrect: true }], undefined, 2) === 1,
+  );
+  check(
+    "an out-of-range correctIndex falls back to the flag",
+    pickCorrectIndex([{ text: "a" }, { text: "b", isCorrect: true }], 9, 2) === 1,
+  );
+  check(
+    "correctIndex wins over the flag when both are present",
+    pickCorrectIndex([{ text: "a", isCorrect: false }, { text: "b", isCorrect: true }], 0, 2) === 0,
+  );
+
+  // A malformed row must not shift its neighbours' indexes.
+  check(
+    "null question entries are dropped without shifting indexes",
+    parseQuestions([null, { question: "kept", options: ["a", "b"], correctIndex: 1 }]).length === 1,
+  );
+  check(
+    "the surviving question kept its own correctIndex",
+    parseQuestions([null, { question: "kept", options: ["a", "b"], correctIndex: 1 }])[0]?.correctIndex === 1,
   );
 
   // ── 5. Feedback service against real DB rows ───────────────────────────
