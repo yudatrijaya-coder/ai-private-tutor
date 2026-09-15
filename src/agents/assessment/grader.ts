@@ -7,6 +7,8 @@
 
 import { prisma } from "@/lib/prisma";
 import { updateTopicMastery } from "@/services/topic-mastery";
+import { addToReviewQueue } from "@/lib/spaced-repetition";
+import { isAnswerCorrect, wrongQuestionIndices } from "@/lib/quiz-grading";
 import type {
   QuestionData,
   StudentAnswer,
@@ -62,7 +64,9 @@ export async function gradeAttempt(params: {
     const q = questions[answer.questionIndex];
     if (!q) continue;
 
-    const correct = answer.selectedIndex === q.correctIndex;
+    // Shared rule (src/lib/quiz-grading.ts) — previously duplicated inline in
+    // three places, one of which was wrong. Single source of truth now.
+    const correct = isAnswerCorrect(q, answer);
     if (correct) correctCount++;
 
     details.push({
@@ -114,6 +118,29 @@ export async function gradeAttempt(params: {
     attemptType: "quiz",
     timeSpentMs: timeSpent ?? undefined,
   });
+
+  // 7. Spaced repetition: file the wrong answers for review.
+  //
+  // This belongs here, not in the activity route: the web quiz page posts the
+  // answer key to THIS endpoint and only sends `{subject, topic, score}` to the
+  // activity tracker, so the activity route never sees `answers` and its
+  // review-queue loop is a no-op for web submissions. Production showed 1
+  // ReviewQueue row against 352 QUIZ attempts — that is the gap this closes.
+  // `wrongQuestionIndices` only returns questions the student actually
+  // answered wrong, so unattempted questions are not manufactured into work.
+  try {
+    for (const idx of wrongQuestionIndices(questions, answers)) {
+      await addToReviewQueue(
+        studentId,
+        quizId,
+        idx,
+        quiz.material.subject,
+        quiz.material.topic || quiz.material.subject,
+      );
+    }
+  } catch (err) {
+    console.warn("[grader] addToReviewQueue failed:", err);
+  }
 
   return {
     attemptId: attempt.id,

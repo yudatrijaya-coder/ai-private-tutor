@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { handleActivity } from "@/lib/gamification";
 import { addToReviewQueue } from "@/lib/spaced-repetition";
+import { parseAnswers, parseQuestions, wrongQuestionIndices } from "@/lib/quiz-grading";
 import { resolveScope, scopedStudentIdentifier } from "@/lib/auth/scope";
 
 const ALLOWED_TYPES = [
@@ -18,6 +19,16 @@ type ActivityType = (typeof ALLOWED_TYPES)[number];
 
 const ASSESSMENT_TYPES = new Set(["quiz_complete", "exam_complete"]);
 const EXAM_TYPES = new Set(["exam_complete", "exam_start"]);
+
+/**
+ * Window within which an existing Attempt counts as the same submission.
+ *
+ * The web quiz page commits through the grade route and then posts
+ * `quiz_complete` here; the gap measured in production is ~45 ms, so 30 s
+ * is far outside any real re-attempt while comfortably covering a slow
+ * request or a client retry.
+ */
+const ATTEMPT_DEDUPE_WINDOW_MS = 30_000;
 
 /**
  * GET /api/students/activity
@@ -197,34 +208,67 @@ export async function POST(request: NextRequest) {
     });
 
     // If assessment type, also create Attempt record + spaced repetition for wrong answers
+    let createdAttemptId: string | null = null;
     if (ASSESSMENT_TYPES.has(type) && quizId) {
       try {
         const score: number = metadata?.score ?? 0;
         const maxScore: number = metadata?.maxScore ?? 0;
-        const answers = typeof metadata?.answers === "object" && Array.isArray(metadata.answers)
-          ? metadata.answers
-          : [];
+        const rawAnswers = metadata?.answers;
 
-        await prisma.attempt.create({
-          data: {
-            quizId,
+        // Canonical parsing + grading (src/lib/quiz-grading.ts). The previous
+        // inline check compared a stringified answer object against a
+        // `correctAnswer` property that does not exist, so every question was
+        // filed as wrong and the review queue filled with correct answers.
+        const answers = parseAnswers(rawAnswers);
+
+        // Deduplicate against the authoritative write.
+        //
+        // The web quiz page submits one attempt through two paths: the grade
+        // route commits the real Attempt (with masteryAfter, ProgressSnap and
+        // topic mastery), then the activity tracker posts `quiz_complete` and
+        // this route inserted a *second* Attempt for the same submission.
+        // Production holds 135 such pairs, every one of them ~45 ms apart with
+        // the duplicate lacking `masteryAfter` — the signature of exactly this
+        // double write. Reuse the recent attempt instead of inserting again.
+        const recentAttempt = await prisma.attempt.findFirst({
+          where: {
             studentId: student.id,
-            type: EXAM_TYPES.has(type) ? "EXAM" : "QUIZ",
-            answers: answers.length > 0 ? answers : [],
-            score,
-            maxScore,
-            createdAt: new Date(),
+            quizId,
+            createdAt: { gte: new Date(Date.now() - ATTEMPT_DEDUPE_WINDOW_MS) },
           },
+          orderBy: { createdAt: "desc" },
+          select: { id: true },
         });
 
-        // Spaced repetition: add wrong answers to review queue
-        const quiz = await prisma.quiz.findUnique({ where: { id: quizId } });
-        const questions = (quiz?.questions as Array<{ correctAnswer?: string }>) ?? [];
-        for (const [idx, ans] of answers.entries()) {
-          const question = questions[idx];
-          if (!question) continue;
-          const isCorrect = String(ans).trim().toUpperCase() === String(question.correctAnswer).trim().toUpperCase();
-          if (!isCorrect) {
+        const attempt =
+          recentAttempt ??
+          (await prisma.attempt.create({
+            data: {
+              quizId,
+              studentId: student.id,
+              type: EXAM_TYPES.has(type) ? "EXAM" : "QUIZ",
+              answers: answers as never,
+              score,
+              maxScore,
+              createdAt: new Date(),
+            },
+            select: { id: true },
+          }));
+        createdAttemptId = attempt.id;
+
+        // Spaced repetition: add wrong answers to review queue.
+        //
+        // Only when this route created the attempt itself. If `recentAttempt`
+        // matched, the write came from gradeAttempt(), which already filed the
+        // wrong answers — and addToReviewQueue() upserts with
+        // `lapses: { increment: 1 }`, so running the loop again would record a
+        // spurious lapse for every wrong answer (measured: 0 → 1 on a fresh
+        // row). It also cannot work for web submissions anyway, because the web
+        // client never sends `answers` here — the grade route owns the key.
+        if (!recentAttempt) {
+          const quiz = await prisma.quiz.findUnique({ where: { id: quizId } });
+          const questions = parseQuestions(quiz?.questions);
+          for (const idx of wrongQuestionIndices(questions, answers)) {
             await addToReviewQueue(
               student.id,
               quizId,

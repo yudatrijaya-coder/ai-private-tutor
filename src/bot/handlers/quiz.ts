@@ -5,7 +5,6 @@ import { getPersona } from "../personas";
 import type { BotSession } from "../session";
 import { setSession, clearSession, getSession } from "../session";
 import { handleActivity } from "@/lib/gamification";
-import { addToReviewQueue } from "@/lib/spaced-repetition";
 import { gradeAttempt } from "@/agents/assessment/grader";
 
 /** Callback data prefix for quiz answer buttons. */
@@ -606,21 +605,11 @@ async function finishQuiz(
     return { xpAwarded: 0, newBadges: [] };
   });
 
-  // Spaced repetition: add wrong answers to review queue
-  for (const a of answers) {
-    const q = questions[a.questionIndex];
-    if (!q) continue;
-    const isCorrect = a.selectedIndex === q.correctIndex;
-    if (!isCorrect) {
-      await addToReviewQueue(
-        student.id,
-        quiz.id,
-        a.questionIndex,
-        (quiz.material as any)?.subject ?? "",
-        undefined,
-      ).catch((err) => console.warn("[quiz] addToReviewQueue error:", err));
-    }
-  }
+  // Spaced repetition is filed inside gradeAttempt() now (see
+  // src/agents/assessment/grader.ts step 7). The loop that used to live here
+  // ran in addition to it, and because addToReviewQueue() upserts with
+  // `lapses: { increment: 1 }`, every wrong answer was counted twice — one
+  // lapse from each loop. One writer, one increment.
 
   // Reset session
   await clearSession(student.id);
