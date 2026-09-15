@@ -32,6 +32,7 @@ export interface StudentSession {
   character?: string | null;
   status?: string;
   trialEndsAt?: string | null;
+  subscriptionUntil?: string | null;
 }
 
 /**
@@ -82,6 +83,7 @@ export async function getStudentSession(): Promise<StudentSession | null> {
     const access = evaluateStudentAccess({
       status: session.status,
       trialEndsAt: session.trialEndsAt,
+      subscriptionUntil: session.subscriptionUntil,
     });
     if (!access.allowed) return null;
 

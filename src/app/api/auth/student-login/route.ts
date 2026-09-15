@@ -45,6 +45,7 @@ export async function POST(request: Request) {
         passwordHash: true,
         status: true,
         trialEndsAt: true,
+        subscriptionUntil: true,
       },
     });
 
@@ -98,6 +99,7 @@ export async function POST(request: Request) {
     const access = evaluateStudentAccess({
       status: student.status,
       trialEndsAt: student.trialEndsAt?.toISOString() ?? null,
+      subscriptionUntil: student.subscriptionUntil?.toISOString() ?? null,
     });
     if (!access.allowed) {
       return NextResponse.json(
@@ -116,6 +118,7 @@ export async function POST(request: Request) {
       character: student.characterPreference,
       status: student.status,
       trialEndsAt: student.trialEndsAt?.toISOString() ?? null,
+      subscriptionUntil: student.subscriptionUntil?.toISOString() ?? null,
     });
 
     return NextResponse.json({
