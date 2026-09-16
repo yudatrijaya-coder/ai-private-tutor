@@ -14,6 +14,7 @@ import SchoolScheduleSection from "@/components/SchoolScheduleSection";
 import { MoodleQuickLink } from "@/components/MoodleQuickLink";
 import MissionSection from "@/components/MissionSection";
 import TrendSparklineSection from "@/components/TrendSparklineSection";
+import StudentProgressPanel from "@/components/StudentProgressPanel";
 import { MoodleBookQuickLink } from "@/components/MoodleQuickLink";
 
 import { requireStudentSecret } from "@/lib/auth/student-secret";
@@ -865,6 +866,11 @@ export default function StudentHomePage() {
       {/* Aktivitas Cepat */}
       <Suspense fallback={null}>
         <QuickActionsDynamic />
+      </Suspense>
+
+      {/* Progres Saya — ringkasan hari ini, ujian terdekat, topik lemah */}
+      <Suspense fallback={null}>
+        <StudentProgressPanel />
       </Suspense>
 
       {/* Tren Penguasaan — sparkline per subject */}

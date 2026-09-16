@@ -29,6 +29,37 @@ function getClient(): OpenAI {
   return _client;
 }
 
+// ─── Timeouts ─────────────────────────────────────────────────
+
+/**
+ * Per-role request timeouts (ms).
+ *
+ * Without these, a stuck upstream connection kept a request open until the
+ * provider or the OS gave up. Measured over the live `ApiUsage` table
+ * (14 days to 2026-09-16): p50 latency 16.1s, p90 53.4s, **max 224.7s**, and
+ * the slowest calls were all `content`-role bulk generation (slide/quiz banks)
+ * at ~6k output tokens. A 224s request burns a BullMQ worker slot and, for the
+ * tutor role, leaves a student staring at a chat with no reply.
+ *
+ * Interactive student-facing calls get a short leash. Background content
+ * generation gets a long one because batches legitimately take minutes.
+ */
+const ROLE_TIMEOUT_MS: Record<AgentRole, number> = {
+  tutor: 90_000,         // student is waiting — must fail over, not hang
+  guardian: 90_000,      // parent is waiting
+  assessment: 120_000,
+  curriculum: 180_000,
+  media_script: 180_000,
+  content: 300_000,      // bulk slide/quiz generation, runs in background
+};
+
+/** Default timeout when a role is not listed above. */
+const DEFAULT_TIMEOUT_MS = 120_000;
+
+function timeoutFor(role: AgentRole, override?: number): number {
+  return override ?? ROLE_TIMEOUT_MS[role] ?? DEFAULT_TIMEOUT_MS;
+}
+
 // ─── Model Routing ────────────────────────────────────────────
 
 /** Primary model per agent role — via 9Router combo */
@@ -224,10 +255,11 @@ export async function callLLM(
         max_tokens: options?.maxTokens ?? 2048,
       };
 
-      const fetchOptions: Record<string, unknown> = {};
-      if (options?.timeoutMs) {
-        fetchOptions.signal = AbortSignal.timeout(options.timeoutMs);
-      }
+      // Always set a signal: without one a stalled upstream holds the request
+      // open indefinitely (observed max: 224s on the content role).
+      const fetchOptions: Record<string, unknown> = {
+        signal: AbortSignal.timeout(timeoutFor(role, options?.timeoutMs)),
+      };
 
       const response = await getClient().chat.completions.create(body, fetchOptions);
       const latencyMs = Date.now() - start;
@@ -301,7 +333,13 @@ export async function* callLLMStream(
         max_tokens: options?.maxTokens ?? 2048,
       };
 
-      const stream = await getClient().chat.completions.create(body);
+      const stream = await getClient().chat.completions.create(body, {
+        // The stream had no timeout at all: if the upstream accepted the request
+        // then went quiet, the student's chat hung with no reply and no error.
+        // The signal bounds the whole stream, so a stalled connection now
+        // surfaces as an error the fallback chain can act on.
+        signal: AbortSignal.timeout(timeoutFor(role, options?.timeoutMs)),
+      });
 
       for await (const chunk of stream) {
         const content = chunk.choices[0]?.delta?.content;

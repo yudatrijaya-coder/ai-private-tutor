@@ -4,6 +4,13 @@ import { StudentCard } from "./StudentCard";
 import { StatsBar } from "./StatsBar";
 import { SkeletonStatsBar, SkeletonCard } from "@/components/Skeleton";
 import Image from "next/image";
+import { getAdminOverview } from "@/lib/admin-insights";
+import {
+  AttentionSection,
+  UpcomingExamSection,
+  ActivityTrendSection,
+  GradeBreakdownSection,
+} from "./AdminSections";
 
 export const dynamic = "force-dynamic";
 
@@ -14,17 +21,7 @@ async function StatsSection() {
     orderBy: { createdAt: "desc" },
   });
 
-  const totalSessions = students.length
-    ? await prisma.scheduleSession.count()
-    : 0;
-  const missedSessions = students.length
-    ? await prisma.scheduleSession.count({ where: { status: "MISSED" } })
-    : 0;
-
-  const pendingCount = students.filter((s) => s.status === "PENDING").length;
-  const newToday = students.filter(
-    (s) => s.createdAt.toISOString().slice(0, 10) === new Date().toISOString().slice(0, 10)
-  ).length;
+  const overview = await getAdminOverview();
 
   // Study time from StudySession (last 7 days) — was tracked but never surfaced
   const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
@@ -37,16 +34,26 @@ async function StatsSection() {
     0
   );
 
+  const pendingCount = students.filter((s) => s.status === "PENDING").length;
+  const newToday = students.filter(
+    (s) => s.createdAt.toISOString().slice(0, 10) === new Date().toISOString().slice(0, 10)
+  ).length;
+
   return (
     <div className="space-y-4">
       <StatsBar
         totalStudents={students.length}
         activeStudents={students.filter((s) => s.status === "ACTIVE").length}
         pendingStudents={pendingCount}
-        totalSessions={totalSessions}
-        missedSessions={missedSessions}
+        totalSessions={overview.sessions.total}
+        missedSessions={overview.sessions.missed}
         newToday={newToday}
         studyMinutes7d={studyMinutes7d}
+        completedSessions={overview.sessions.completed}
+        activeLast7d={overview.totals.activeLast7d}
+        attentionCount={overview.attention.length}
+        dueReviews={overview.system.dueReviews}
+        avgLatencyMs={overview.system.avgLatencyMs}
       />
     </div>
   );
@@ -174,6 +181,27 @@ function StatsFallback() {
   return <SkeletonStatsBar />;
 }
 
+function SectionFallback({ rows = 3 }: { rows?: number }) {
+  return (
+    <div
+      className="rounded-xl p-5 animate-pulse"
+      style={{
+        backgroundColor: "var(--su-bg-card)",
+        border: "1px solid var(--su-border)",
+      }}
+    >
+      <div className="h-4 w-40 rounded mb-4" style={{ backgroundColor: "var(--su-bg-hover)" }} />
+      {Array.from({ length: rows }).map((_, i) => (
+        <div
+          key={i}
+          className="h-12 rounded mb-2"
+          style={{ backgroundColor: "var(--su-bg-hover)" }}
+        />
+      ))}
+    </div>
+  );
+}
+
 function StudentGridFallback() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -217,6 +245,22 @@ export default function DashboardPage() {
         <PendingApprovalsSection />
       </Suspense>
 
+      <Suspense fallback={<SectionFallback rows={4} />}>
+        <AttentionSection />
+      </Suspense>
+
+      <Suspense fallback={<SectionFallback rows={3} />}>
+        <UpcomingExamSection />
+      </Suspense>
+
+      <Suspense fallback={<SectionFallback rows={2} />}>
+        <ActivityTrendSection />
+      </Suspense>
+
+      <Suspense fallback={<SectionFallback rows={3} />}>
+        <GradeBreakdownSection />
+      </Suspense>
+
       <div>
         <h2 className="text-lg font-semibold mb-3" style={{ fontFamily: "var(--font-display)" }}>
           🎯 Siswa Aktif
@@ -226,51 +270,27 @@ export default function DashboardPage() {
         </Suspense>
       </div>
 
-      <div className="flex gap-3 mt-8">
-        <a
-          href="/dashboard/students"
-          className="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-          style={{
-            backgroundColor: "var(--su-bg-card)",
-            border: "1px solid var(--su-border)",
-            color: "var(--su-text)",
-          }}
-        >
-          👥 Kelola Siswa
-        </a>
-        <a
-          href="/dashboard/curriculum"
-          className="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-          style={{
-            backgroundColor: "var(--su-bg-card)",
-            border: "1px solid var(--su-border)",
-            color: "var(--su-text)",
-          }}
-        >
-          📚 Kurikulum
-        </a>
-        <a
-          href="/dashboard/quizzes"
-          className="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-          style={{
-            backgroundColor: "var(--su-bg-card)",
-            border: "1px solid var(--su-border)",
-            color: "var(--su-text)",
-          }}
-        >
-          📝 Quiz
-        </a>
-        <a
-          href="/dashboard/agents"
-          className="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-          style={{
-            backgroundColor: "var(--su-bg-card)",
-            border: "1px solid var(--su-border)",
-            color: "var(--su-text)",
-          }}
-        >
-          🤖 Agents
-        </a>
+      <div className="flex gap-3 mt-8 flex-wrap">
+        {[
+          { href: "/dashboard/students", label: "👥 Kelola Siswa" },
+          { href: "/dashboard/curriculum", label: "📚 Kurikulum" },
+          { href: "/dashboard/quizzes", label: "📝 Quiz" },
+          { href: "/dashboard/agents", label: "🤖 Agents" },
+          { href: "/dashboard/settings", label: "⚙️ Pengaturan" },
+        ].map((link) => (
+          <a
+            key={link.href}
+            href={link.href}
+            className="px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+            style={{
+              backgroundColor: "var(--su-bg-card)",
+              border: "1px solid var(--su-border)",
+              color: "var(--su-text)",
+            }}
+          >
+            {link.label}
+          </a>
+        ))}
       </div>
     </div>
   );
