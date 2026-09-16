@@ -6,9 +6,10 @@ export default function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-[#78716c] md:flex-row">
         <p>© {new Date().getFullYear()} Senang Belajar. All rights reserved.</p>
         <div className="flex flex-wrap items-center justify-center gap-6">
+          <a href="#kurikulum" className="hover:text-[#f97316]">Kurikulum</a>
+          <a href="#faq" className="hover:text-[#f97316]">FAQ</a>
           <Link href="/login/student" className="hover:text-[#f97316]">Login Siswa</Link>
           <Link href="/login" className="hover:text-[#f97316]">Login Orang Tua</Link>
-          <Link href="/dashboard" className="hover:text-[#f97316]">Dashboard Admin</Link>
         </div>
       </div>
     </footer>

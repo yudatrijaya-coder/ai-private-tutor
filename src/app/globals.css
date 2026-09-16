@@ -81,6 +81,57 @@
 .animate-scale-in { animation: scale-in 0.4s ease-out both; }
 .animate-fade-in { animation: fade-in 0.3s ease-out both; }
 
+/* ---- Scroll-triggered reveal (see components/landing/Reveal.tsx) ----
+   Initial state is hidden; .is-visible transitions to the resting state.
+   The observer adds .is-visible once the element enters the viewport. */
+.reveal-up,
+.reveal-left,
+.reveal-right,
+.reveal-scale,
+.reveal-fade {
+  opacity: 0;
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+
+.reveal-up { transform: translateY(24px); }
+.reveal-left { transform: translateX(-24px); }
+.reveal-right { transform: translateX(24px); }
+.reveal-scale { transform: scale(0.96); }
+
+.reveal-up.is-visible,
+.reveal-left.is-visible,
+.reveal-right.is-visible,
+.reveal-scale.is-visible,
+.reveal-fade.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* No-JS safety net: if the observer never runs, content must still show. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale,
+  .reveal-fade {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .animate-fade-up,
+  .animate-fade-in-left,
+  .animate-fade-in-right,
+  .animate-scale-in,
+  .animate-fade-in,
+  .animate-shake {
+    animation: none;
+  }
+}
+
 .safe-area-inset-bottom {
   padding-bottom: env(safe-area-inset-bottom, 0);
 }

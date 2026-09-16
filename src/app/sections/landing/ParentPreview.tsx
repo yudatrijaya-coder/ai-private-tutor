@@ -1,10 +1,11 @@
 import { TrendingUp, Trophy, CalendarCheck } from "lucide-react";
+import Reveal from "@/components/landing/Reveal";
 
 export default function ParentPreview() {
   return (
     <section id="laporan" className="bg-white px-4 py-20">
       <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
-        <div className="animate-fade-in-left rounded-2xl border border-orange-100 bg-[#FFF7ED] p-6 shadow-lg md:p-8">
+        <Reveal variant="left" className="rounded-2xl border border-orange-100 bg-[#FFF7ED] p-6 shadow-lg md:p-8">
           <div className="mb-6 flex items-center justify-between">
             <div>
               <p className="text-sm text-[#78716c]">Laporan Mingguan</p>
@@ -31,9 +32,12 @@ export default function ParentPreview() {
               <p className="text-xs text-[#78716c]">Hari streak</p>
             </div>
           </div>
-        </div>
+          <p className="mt-5 text-center text-xs text-[#a8a29e]">
+            Ilustrasi tampilan laporan — bukan data siswa nyata
+          </p>
+        </Reveal>
 
-        <div className="animate-fade-in-right" style={{ animationDelay: "0.2s" }}>
+        <Reveal variant="right" delay={120}>
           <h2 className="text-3xl font-bold text-[#292524] [font-family:var(--font-display)] md:text-4xl">
             Orang tua tetap terinformasi
           </h2>
@@ -53,7 +57,7 @@ export default function ParentPreview() {
               </li>
             ))}
           </ul>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
