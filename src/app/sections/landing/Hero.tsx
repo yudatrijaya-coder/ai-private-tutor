@@ -40,12 +40,12 @@ export default function Hero() {
         </div>
 
         <div className="animate-scale-in relative flex items-center justify-center" style={{ animationDelay: "0.2s" }}>
-        <div className="relative aspect-[712/610] w-72 md:w-96">
+        <div className="relative aspect-square w-64 md:w-80">
           <Image
-            src="/characters/kpop-lisa-action-nobg.png"
-            alt="Kakak AI Senang Belajar siap menemani belajar"
+            src="/characters/guru-wanita-berkacamata.png"
+            alt="Kakak AI Senang Belajar, guru wanita berkacamata, siap menemani belajar"
             fill
-            sizes="(min-width: 768px) 384px, 288px"
+            sizes="(min-width: 768px) 320px, 256px"
             className="object-contain drop-shadow-2xl"
             priority
           />
