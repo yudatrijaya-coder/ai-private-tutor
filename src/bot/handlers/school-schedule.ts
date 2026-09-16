@@ -51,8 +51,8 @@ function resolveDay(query: string): string | null {
 }
 
 function formatScheduleEntry(entry: { time: string; subject: string; room: string; teacher: string; linkZoom?: string }): string {
-  let line = `⏰ ${entry.time}  **${entry.subject}**`;
-  line += `  (${entry.room})`;
+  let line = `⏰ ${entry.time}  **${escapeMd(entry.subject)}**`;
+  line += `  (${escapeMd(entry.room)})`;
   if (entry.linkZoom) {
     line += `  [🔗 Zoom](${entry.linkZoom})`;
   }
@@ -190,7 +190,7 @@ export async function handleSchoolSchedule(
       await ctx.reply(
         `${persona.emoji} *Hari ${today} — Libur!* 🎉\n\n` +
           `Jadwal sekolah terakhir hari Jumat kemarin:\n` +
-          `${subjects.map((s) => `• ${s}`).join("\n")}\n\n` +
+          `${subjects.map((s) => `• ${escapeMd(s)}`).join("\n")}\n\n` +
           `Istirahat dulu, senin semangat lagi! 🔥`,
         { parse_mode: "Markdown" },
       );
@@ -224,7 +224,7 @@ export async function handleSchoolSchedule(
 
   const todaySubjects = getSubjectsForDay(student, today);
   const mataPelajaran = todaySubjects.length > 0
-    ? `\n📚 *Mapel hari ini:* ${todaySubjects.join(", ")}`
+    ? `\n📚 *Mapel hari ini:* ${todaySubjects.map((s) => escapeMd(s)).join(", ")}`
     : "";
 
   const msg = formatDaySchedule(today, todayEntries);
@@ -271,7 +271,7 @@ export async function handleNextSubject(
       ) {
         const dayLabel = i === 0 ? "Hari ini" : i === 1 ? "Besok" : `Hari ${day}`;
         await ctx.reply(
-          `${persona.emoji} ${dayLabel}, *${entry.subject}* jam *${entry.time}* di ${entry.room}.` +
+          `${persona.emoji} ${dayLabel}, *${escapeMd(entry.subject)}* jam *${entry.time}* di ${escapeMd(entry.room)}.` +
             (entry.linkZoom ? `\n🔗 Link Zoom: ${entry.linkZoom}` : ""),
           { parse_mode: "Markdown" },
         );

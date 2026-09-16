@@ -770,6 +770,17 @@ function QuizInner() {
   }, [isQuizActive]);
 
   // ── Handle submit with activity tracking ──
+  // Idempotency: one uuid per quiz session. A retried/double submit hits the
+  // grade route with the same id and gets the already-persisted attempt back
+  // instead of grading twice.
+  const submissionIdRef = useRef<string>("");
+  if (!submissionIdRef.current) {
+    submissionIdRef.current =
+      typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  }
+
   const handleSubmit = useCallback(
     async (ans: number[]) => {
       if (!quiz || !studentId) return;
@@ -790,6 +801,7 @@ function QuizInner() {
               .map((selectedIndex, questionIndex) => ({ questionIndex, selectedIndex }))
               .filter((a) => a.selectedIndex >= 0),
             commit: true,
+            submissionId: submissionIdRef.current,
           }),
         });
         if (!res.ok) throw new Error(`grade failed: ${res.status}`);

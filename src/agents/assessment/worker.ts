@@ -14,6 +14,7 @@ import type {
 import { generateQuiz } from "./generator";
 import { gradeAttempt } from "./grader";
 import { analyzeExamAttempt } from "@/services/improvement-analysis";
+import { sendQuizFeedback } from "@/services/quiz-feedback";
 import { prisma } from "@/lib/prisma";
 
 /* ------------------------------------------------------------------ */
@@ -109,6 +110,11 @@ export async function processAssessmentEvaluate(
       `score=${result.score}/${result.maxScore} ` +
       `mastery=${result.masteryAfter?.toFixed(2) ?? "N/A"}`,
   );
+
+  // Post-quiz feedback to the student's Telegram — same message as the web
+  // grade route. sendQuizFeedback never throws and is idempotent per attempt
+  // id (claimOnce), so this cannot duplicate the web route's send.
+  void sendQuizFeedback(result.attemptId);
 }
 
 /* ------------------------------------------------------------------ */

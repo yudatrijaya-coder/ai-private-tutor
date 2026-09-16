@@ -102,16 +102,3 @@ export function generateCompositeExam(
     difficulty: difficultyCount,
   };
 }
-
-/**
- * Get answer key for an exam
- */
-export function getAnswerKey(exam: Exam) {
-  return exam.questions.map((q, i) => ({
-    no: i + 1,
-    difficulty: q.difficulty,
-    correctIndex: q.correctIndex,
-    correctAnswer: q.options[q.correctIndex],
-    explanation: q.explanation,
-  }));
-}

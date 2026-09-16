@@ -110,7 +110,7 @@ export async function handleSchedule(ctx: Context, student: Student, commandText
           s.status === "COMPLETED" ? "✅" :
           s.status === "MISSED" ? "❌" :
           s.status === "RESCHEDULED" ? "🔄" : "⏳";
-        lines.push(` ${statusEmoji} ${time} — ${s.topic ?? s.type} (${s.durationMin} mnt)`);
+        lines.push(` ${statusEmoji} ${time} — ${escapeMd(s.topic ?? s.type)} (${s.durationMin} mnt)`);
       }
       lines.push("");
     }
@@ -188,7 +188,7 @@ export async function handleSchedule(ctx: Context, student: Student, commandText
       s.status === "COMPLETED" ? "✅" :
       s.status === "MISSED" ? "❌" :
       s.status === "RESCHEDULED" ? "🔄" : "⏳";
-    return `${statusEmoji} *${time}* — ${s.topic ?? s.type} (${s.durationMin} mnt)`;
+    return `${statusEmoji} *${time}* — ${escapeMd(s.topic ?? s.type)} (${s.durationMin} mnt)`;
   });
 
   await ctx.reply(

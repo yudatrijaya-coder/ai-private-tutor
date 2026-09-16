@@ -145,7 +145,7 @@ async function stepName(ctx: Context): Promise<void> {
 
 async function stepGrade(ctx: Context, name: string): Promise<void> {
   await ctx.reply(
-    `Senang kenalan, *${name}!* 🎉\n\nSekarang kamu kelas berapa?`,
+    `Senang kenalan, *${escapeMd(name)}!* 🎉\n\nSekarang kamu kelas berapa?`,
     { parse_mode: "Markdown", ...gradeKeyboard() },
   );
 }
@@ -215,12 +215,12 @@ async function notifyAdmin(ctx: Context, data: RegistrationData): Promise<void> 
     await bot?.telegram.sendMessage(
       adminId,
       `🆕 *Pendaftaran Baru!*\n\n` +
-      `👤 Nama: *${data.name}*\n` +
+      `👤 Nama: *${escapeMd(data.name)}*\n` +
       `📖 Kelas: *${GRADE_LABELS[data.grade] ?? data.grade}*\n` +
       `🎯 Karakter: *${data.character.replace("KAK_", "Kak ")}*\n` +
       `📅 Hari belajar: ${daysText}\n` +
       `🆔 ID siswa: *${newStudentId}*\n` +
-      `🆔 Telegram: @${ctx.from?.username ?? ctx.from?.id}\n\n` +
+      `🆔 Telegram: \`${ctx.from?.username ? "@" + ctx.from.username : ctx.from?.id}\`\n\n` +
       `Setujui pendaftaran ini?`,
       {
         parse_mode: "Markdown",
