@@ -154,6 +154,21 @@ function pct(numerator: number, denominator: number): number | null {
   return Math.round((numerator / denominator) * 100);
 }
 
+/**
+ * Normalise a stored mastery value to 0–100.
+ *
+ * The two mastery models disagree on scale: `StudentSubjectMastery.mastery` is
+ * documented 0.0–1.0 while `TopicMastery.mastery` is already a percentage.
+ * Anything at or below 1 is therefore a fraction (a genuine 1% subject score is
+ * indistinguishable, and the fraction interpretation is the safe one — showing
+ * 100% would be a worse error than showing 1%).
+ */
+function toPercent(value: number): number {
+  if (!Number.isFinite(value)) return 0;
+  const scaled = value <= 1 ? value * 100 : value;
+  return Math.max(0, Math.min(100, Math.round(scaled)));
+}
+
 function firstNameOf(fullName: string): string {
   const cleaned = fullName.trim().replace(/^kak\s+/i, "");
   return cleaned.split(/\s+/)[0] || cleaned;
@@ -389,25 +404,42 @@ export async function getStudentSnapshot(
     }
   }
 
-  const subjects: SubjectProgress[] = subjectMastery.map((m) => {
-    const agg = subjectAgg.get(m.subject);
-    return {
-      subject: m.subject,
-      mastery: Math.round(m.mastery),
-      quizCount: m.quizCount,
-      // Fall back to the cached mastery row when the join found no attempts.
-      quizAccuracy: agg
-        ? pct(agg.quizScore, agg.quizMax)
-        : pct(m.quizTotalScore, m.quizTotalMax),
-      examCount: m.examCount,
-      examAccuracy: agg
-        ? pct(agg.examScore, agg.examMax)
-        : pct(m.examBestScore, m.examBestMax),
-      slidesRead: m.slidesRead,
-      videosWatched: m.videosWatched,
-      lastActiveAt: m.lastActiveAt.toISOString(),
-    };
-  });
+  const subjects: SubjectProgress[] = subjectMastery
+    .map((m) => {
+      const agg = subjectAgg.get(m.subject);
+      return {
+        subject: m.subject,
+        // `StudentSubjectMastery.mastery` is stored 0.0–1.0 ("based on quiz+exam
+        // performance"), unlike `TopicMastery.mastery` which is already 0–100.
+        // Converting here rather than at each call site: the old `Math.round(m.mastery)`
+        // turned every real score into 0 or 1, so /pantau showed "1%" for a student
+        // whose quiz accuracy was 82%.
+        mastery: toPercent(m.mastery),
+        quizCount: m.quizCount,
+        // Fall back to the cached mastery row when the join found no attempts.
+        quizAccuracy: agg
+          ? pct(agg.quizScore, agg.quizMax)
+          : pct(m.quizTotalScore, m.quizTotalMax),
+        examCount: m.examCount,
+        examAccuracy: agg
+          ? pct(agg.examScore, agg.examMax)
+          : pct(m.examBestScore, m.examBestMax),
+        slidesRead: m.slidesRead,
+        videosWatched: m.videosWatched,
+        lastActiveAt: m.lastActiveAt.toISOString(),
+      };
+    })
+    // Drop placeholder rows: DashboardTracker pre-creates one row per subject
+    // with mastery 0 and every counter at zero. Telling a parent "IPA 0% · 0
+    // kuis · Perlu latihan" reads as a failing grade when the child simply has
+    // never touched the subject.
+    .filter(
+      (s) =>
+        s.quizCount > 0 ||
+        s.examCount > 0 ||
+        s.slidesRead > 0 ||
+        s.videosWatched > 0,
+    );
 
   const weakTopics: WeakTopic[] = topicMasteries.map((t) => ({
     subject: t.subject,

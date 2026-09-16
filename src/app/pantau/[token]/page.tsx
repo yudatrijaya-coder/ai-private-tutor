@@ -342,6 +342,9 @@ export default async function MonitorPage({
             <ul className="space-y-3">
               {subjects.map((s) => {
                 const band = masteryBand(s.mastery);
+                // No graded work yet (only slide/video browsing): a "0%" would
+                // read as a failing grade, so show "belum diukur" instead.
+                const unmeasured = s.quizCount === 0 && s.examCount === 0;
                 return (
                   <li key={s.subject}>
                     <div className="flex items-center justify-between text-sm mb-1">
@@ -349,7 +352,7 @@ export default async function MonitorPage({
                         {SUBJECT_EMOJI[s.subject] ?? "📚"} {s.subject}
                       </span>
                       <span className="font-bold" style={{ color: band.color }}>
-                        {s.mastery}%
+                        {unmeasured ? "—" : `${s.mastery}%`}
                       </span>
                     </div>
                     <div
@@ -363,9 +366,9 @@ export default async function MonitorPage({
                     </div>
                     <div className="flex items-center justify-between text-xs mt-1" style={{ color: "var(--st-text-dim)" }}>
                       <span>
-                        {band.label} · {s.quizCount} kuis
-                        {s.quizAccuracy !== null ? ` (akurasi ${s.quizAccuracy}%)` : ""}
-                        {s.examCount > 0 ? ` · ${s.examCount} ujian` : ""}
+                        {unmeasured
+                          ? "Belum diukur"
+                          : `${band.label} · ${s.quizCount} kuis${s.quizAccuracy !== null ? ` (akurasi ${s.quizAccuracy}%)` : ""}${s.examCount > 0 ? ` · ${s.examCount} ujian` : ""}`}
                       </span>
                       <span>{s.slidesRead} materi</span>
                     </div>
