@@ -13,7 +13,9 @@ export default function Navbar() {
   const links = [
     { href: "#fitur", label: "Fitur" },
     { href: "#cara-kerja", label: "Cara Kerja" },
+    { href: "#kurikulum", label: "Kurikulum" },
     { href: "#laporan", label: "Laporan Ortu" },
+    { href: "#faq", label: "FAQ" },
   ];
 
   return (

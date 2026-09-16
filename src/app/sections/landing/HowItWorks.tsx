@@ -1,4 +1,5 @@
 import { UserPlus, MessageSquareText, LineChart } from "lucide-react";
+import Reveal from "@/components/landing/Reveal";
 
 const steps = [
   {
@@ -33,20 +34,18 @@ export default function HowItWorks() {
         </div>
         <div className="grid gap-8 md:grid-cols-3">
           {steps.map((s, i) => (
-            <div
-              key={s.step}
-              style={{ animationDelay: `${i * 0.1}s` }}
-              className="animate-fade-up relative rounded-2xl bg-white p-6 shadow-sm"
-            >
-              <span className="absolute right-4 top-4 text-5xl font-black text-orange-100 [font-family:var(--font-display)]">
-                {s.step}
-              </span>
-              <div className="mb-4 inline-flex rounded-full bg-[#f97316]/10 p-3 text-[#f97316]">
-                <s.icon size={24} />
+            <Reveal key={s.step} variant="up" delay={i * 100}>
+              <div className="relative h-full rounded-2xl bg-white p-6 shadow-sm">
+                <span className="absolute right-4 top-4 text-5xl font-black text-orange-100 [font-family:var(--font-display)]">
+                  {s.step}
+                </span>
+                <div className="mb-4 inline-flex rounded-full bg-[#f97316]/10 p-3 text-[#f97316]">
+                  <s.icon size={24} />
+                </div>
+                <h3 className="mb-2 text-xl font-bold text-[#292524]">{s.title}</h3>
+                <p className="text-[#78716c]">{s.desc}</p>
               </div>
-              <h3 className="mb-2 text-xl font-bold text-[#292524]">{s.title}</h3>
-              <p className="text-[#78716c]">{s.desc}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
