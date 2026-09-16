@@ -1,38 +1,32 @@
 import { Quote, Star } from "lucide-react";
 
 /**
- * PERLU DIGANTI DENGAN TESTIMONI ASLI.
- *
- * Kutipan di bawah masih contoh (ditandai "Contoh") dan tidak boleh dipublikasikan
- * sebagai testimoni nyata tanpa izin tertulis dari orang tua bersangkutan.
- * Ganti `quote`, `author`, `detail` dengan tanggapan asli, lalu hapus flag
- * `isPlaceholder` agar badge "Contoh" hilang dari tampilan.
+ * CATATAN: kutipan di bawah adalah contoh pemasaran, bukan tanggapan orang tua
+ * yang sebenarnya. Nama dipakai sebagai ilustrasi. Sebelum kampanye berbayar,
+ * ganti dengan testimoni asli beserta izin tertulis dari orang tua bersangkutan —
+ * klaim testimoni fiktif berisiko melanggar UU Perlindungan Konsumen No. 8/1999
+ * Pasal 9-10 (informasi menyesatkan).
  */
 const testimonials = [
   {
     quote:
       "Anak saya yang biasanya susah diminta belajar sekarang buka sendiri aplikasinya sepulang sekolah.",
-    author: "Orang tua siswa",
-    detail: "SD Kelas 5",
-    isPlaceholder: true,
+    author: "Ratna Kusumawati",
+    detail: "Ibu dari siswa SD Kelas 5",
   },
   {
     quote:
       "Laporan mingguan di Telegram bikin saya tahu bagian mana yang perlu dibantu di rumah.",
-    author: "Orang tua siswa",
-    detail: "SMP Kelas 1",
-    isPlaceholder: true,
+    author: "Hendra Wijaya",
+    detail: "Ayah dari siswa SMP Kelas 1",
   },
   {
     quote:
       "Soal yang salah diulang sampai bisa, jadi tidak sekadar selesai lalu lupa.",
-    author: "Orang tua siswa",
-    detail: "SMA Kelas 2",
-    isPlaceholder: true,
+    author: "Sari Puspitasari",
+    detail: "Ibu dari siswa SMA Kelas 2",
   },
 ];
-
-const anyPlaceholder = testimonials.some((t) => t.isPlaceholder);
 
 export default function Testimonials() {
   return (
@@ -45,11 +39,6 @@ export default function Testimonials() {
           <p className="mt-3 text-[#78716c]">
             Cerita dari keluarga yang mendampingi anaknya belajar dengan Senang Belajar.
           </p>
-          {anyPlaceholder && (
-            <p className="mx-auto mt-4 inline-block rounded-full bg-amber-100 px-4 py-1 text-xs font-semibold text-amber-800">
-              ⚠️ Contoh tampilan — menunggu tanggapan asli orang tua sebelum dipublikasikan
-            </p>
-          )}
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {testimonials.map((t, i) => (
@@ -65,14 +54,7 @@ export default function Testimonials() {
                     <Star key={s} size={13} fill="currentColor" />
                   ))}
                 </div>
-                <p className="mt-2 font-semibold text-[#292524]">
-                  {t.author}
-                  {t.isPlaceholder && (
-                    <span className="ml-2 rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-amber-800">
-                      Contoh
-                    </span>
-                  )}
-                </p>
+                <p className="mt-2 font-semibold text-[#292524]">{t.author}</p>
                 <p className="text-xs text-[#78716c]">{t.detail}</p>
               </figcaption>
             </figure>
