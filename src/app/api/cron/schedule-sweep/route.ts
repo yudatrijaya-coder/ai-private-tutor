@@ -14,6 +14,7 @@ import { runReminderSweep } from "@/agents/scheduler/reminder";
 import { prisma } from "@/lib/prisma";
 import { bot } from "@/bot/bot";
 import { checkCronSecret, logCronRun } from "@/lib/cron/guard";
+import { revalidateOpenInterventions } from "@/lib/intervention-health";
 
 // The cron secret is verified by the shared `checkCronSecret()` guard, which
 // fails closed when `CRON_SECRET` is unset. The old `process.env.CRON_SECRET ||
@@ -223,7 +224,15 @@ export async function GET(request: NextRequest) {
     // 3. Auto-assign sessions if needed
     result.sessionsAssigned = await assignSessionsIfNeeded();
 
-    // 4. Daily brief (only at 6-9 AM)
+    // 4. Close interventions whose trigger condition no longer holds.
+    //    Without this, an alert raised in July stays "OPEN" on the dashboard
+    //    forever — the admin sees a false alarm and the genuinely struggling
+    //    student gets lost in the noise.
+    const verdicts = await revalidateOpenInterventions({ apply: true });
+    result.interventionsResolved = verdicts.filter((v) => !v.stillValid).length;
+    result.interventionsOpen = verdicts.filter((v) => v.stillValid).length;
+
+    // 5. Daily brief (only at 6-9 AM)
     const hour = new Date().getHours();
     if (hour >= 6 && hour <= 10) {
       result.dailyBriefSent = await sendDailyBrief();

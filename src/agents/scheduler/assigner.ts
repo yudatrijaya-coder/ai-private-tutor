@@ -98,13 +98,27 @@ export async function assignWeeklyTopics(
     where: {
       studentId,
       scheduledAt: { gte: weekStartDate, lt: weekEndDate },
-      topic: { not: null },
     },
-    select: { topic: true },
+    select: { topic: true, scheduledAt: true },
   });
 
   const assignedTopics = new Set<string>(
     existingSessions.map((s) => s.topic).filter((t): t is string => t !== null),
+  );
+
+  /**
+   * Slots already occupied for this student.
+   *
+   * Guards against re-running the assign job for the same week, which used to
+   * insert a second session at the exact same instant. Measured on the live DB
+   * (2026-09-16): 30 duplicated (student, scheduledAt) pairs, one slot four
+   * times over — every duplicate then aged into a permanent MISSED row and
+   * inflated the "missed" count on the admin dashboard.
+   *
+   * Keyed by epoch ms because Prisma Date equality in a Set needs a primitive.
+   */
+  const takenSlots = new Set<number>(
+    existingSessions.map((s) => s.scheduledAt.getTime()),
   );
   const unassignedMaterials = availableMaterials.filter(
     (m) => !assignedTopics.has(m.topic),
@@ -114,7 +128,12 @@ export async function assignWeeklyTopics(
   const weakSubjects = await identifyWeakSubjects(studentId, curriculumIds);
 
   // 4. Compute available session slots
-  const slots = computeWeeklySlots(student.scheduleConfig, weekStartDate);
+  const allSlots = computeWeeklySlots(student.scheduleConfig, weekStartDate);
+
+  // Drop slots this student already has a session in. Combined with the
+  // `assignedTopics` filter above, re-running the job for a week that was
+  // already assigned is now a no-op instead of a duplicate generator.
+  const slots = allSlots.filter((s) => !takenSlots.has(s.start.getTime()));
 
   // 5. Allocate 60/30/10
   const totalSlots = slots.length;

@@ -23,6 +23,46 @@ const MISSED_GRACE = 5 * 60 * 1000;             // 5 min grace after session sta
 const ATTENDANCE_PRE_WINDOW = 30 * 60 * 1000;   // 30 min before scheduled start
 const ATTENDANCE_POST_WINDOW = 30 * 60 * 1000;  // 30 min after scheduled end
 
+/**
+ * Fallback attendance window, in Jakarta wall-clock days.
+ *
+ * Why this exists: the tight window above (start −30min → end +30min) is
+ * correct in spirit but wrong in practice for this product. Students study on
+ * their own clock — they open the bot at 20:15 for a 19:30 session, or at 21:00
+ * the same evening. Measured over the live DB on 2026-09-16: of 153 sessions
+ * marked MISSED, only 10 had activity inside the tight window and 55 more had
+ * activity elsewhere on the very same calendar day. Those 55 were attendance,
+ * mislabelled as absence.
+ *
+ * So: try the tight window first (it is the precise signal). If nothing lands,
+ * and the student was active at all on that Jakarta day, count the session as
+ * COMPLETED anyway rather than accusing the student of not showing up.
+ *
+ * The remaining gap — active that week but not that day (69 sessions in the
+ * measurement) — is deliberately NOT counted. "Studied 2 days later" is not
+ * attendance.
+ */
+const ATTENDANCE_SAME_DAY_FALLBACK = true;
+
+/** Jakarta is UTC+7 with no DST — a fixed offset is exact, not an approximation. */
+const JAKARTA_OFFSET_MS = 7 * 60 * 60 * 1000;
+
+/**
+ * UTC instant of Jakarta-local midnight for the day containing `d`.
+ * Sessions are scheduled against Jakarta wall-clock slots, so day boundaries
+ * must be drawn in Jakarta too — a 06:00 WIB session belongs to that same
+ * Jakarta day even though it is 23:00 UTC on the date before.
+ */
+function jakartaDayStart(d: Date): Date {
+  const shifted = new Date(d.getTime() + JAKARTA_OFFSET_MS);
+  const midnightUtc = Date.UTC(
+    shifted.getUTCFullYear(),
+    shifted.getUTCMonth(),
+    shifted.getUTCDate(),
+  );
+  return new Date(midnightUtc - JAKARTA_OFFSET_MS);
+}
+
 /** Labels used in reminder metadata to prevent double-sends */
 const REMINDER_META_KEY = "reminderSentAt";
 const REMINDER_META_30 = "reminder30SentAt";
@@ -147,11 +187,32 @@ export async function runReminderSweep(): Promise<ReminderResult> {
         select: { id: true, createdAt: true },
       });
 
-      if (!activity) continue;
+      let attendedAt: Date | null = activity?.createdAt ?? null;
+
+      // Fallback: no activity inside the tight window. Before declaring a
+      // no-show, check whether the student was on the platform at all that
+      // Jakarta day — studying off-schedule still counts as attending.
+      if (!attendedAt && ATTENDANCE_SAME_DAY_FALLBACK) {
+        const dayStart = jakartaDayStart(session.scheduledAt);
+        const dayEnd = new Date(dayStart.getTime() + 24 * 60 * 60 * 1000);
+
+        const sameDayActivity = await prisma.studentActivity.findFirst({
+          where: {
+            studentId: session.studentId,
+            createdAt: { gte: dayStart, lt: dayEnd },
+          },
+          orderBy: { createdAt: "asc" },
+          select: { createdAt: true },
+        });
+
+        if (sameDayActivity) attendedAt = sameDayActivity.createdAt;
+      }
+
+      if (!attendedAt) continue;
 
       await prisma.scheduleSession.update({
         where: { id: session.id },
-        data: { status: "COMPLETED", completedAt: activity.createdAt },
+        data: { status: "COMPLETED", completedAt: attendedAt },
       });
       attendedIds.add(session.id);
       result.completedMarked++;
