@@ -69,7 +69,7 @@ export async function handleExtensionRequest(ctx: Context, student: Student): Pr
   try {
     await ctx.telegram.sendMessage(
       adminId,
-      `🔔 *Permintaan Perpanjangan Akun*\n\n👤 Nama: *${student.name}*\n🆔 ID Siswa: \`${student.studentId}\`\n📱 Telegram ID: \`${student.telegramId ?? "-"}\`\n⏰ Masa trial sudah habis\n\n💰 Harga langganan:\n${PLAN_BULLETS}\n\nSetelah siswa transfer ke BCA ${BCA_ACCOUNT}, aktifkan akunnya lewat tombol:`,
+      `🔔 *Permintaan Perpanjangan Akun*\n\n👤 Nama: *${escapeMd(student.name)}*\n🆔 ID Siswa: \`${student.studentId}\`\n📱 Telegram ID: \`${student.telegramId ?? "-"}\`\n⏰ Masa trial sudah habis\n\n💰 Harga langganan:\n${PLAN_BULLETS}\n\nSetelah siswa transfer ke BCA ${BCA_ACCOUNT}, aktifkan akunnya lewat tombol:`,
       {
         parse_mode: "Markdown",
         reply_markup: {
@@ -97,7 +97,7 @@ export async function handleExtensionRequest(ctx: Context, student: Student): Pr
 
   await ctx.answerCbQuery("Permintaan dikirim ke admin ✅").catch(() => {});
   await ctx.reply(
-    `✅ Permintaan perpanjang akun *${student.name}* (_${escapeMd(student.studentId)}_) dikirim ke admin. Admin akan mengaktifkan akun kamu setelah konfirmasi pembayaran ya.`,
+    `✅ Permintaan perpanjang akun *${escapeMd(student.name)}* (_${escapeMd(student.studentId)}_) dikirim ke admin. Admin akan mengaktifkan akun kamu setelah konfirmasi pembayaran ya.`,
     { parse_mode: "Markdown" },
   );
 }

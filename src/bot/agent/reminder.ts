@@ -8,6 +8,7 @@
 import type { Context } from "telegraf";
 import type { Student } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
+import { escapeMd } from "@/lib/telegram-format";
 import bcrypt from "bcryptjs";
 import { bot } from "../bot";
 
@@ -44,7 +45,7 @@ async function handleCreateReminder(studentId: string, data: Record<string, any>
     data: { studentId, title, description, remindAt, category },
   });
 
-  return `✅ Baik, aku catat ya!\n📌 *${title}*${description ? `\n📝 ${description}` : ""}\n⏰ ${remindAt.toLocaleDateString("id-ID", { weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" })}\n\nNanti aku ingatkan pas waktunya ya! 🫶`;
+  return `✅ Baik, aku catat ya!\n📌 *${escapeMd(title)}*${description ? `\n📝 ${escapeMd(description)}` : ""}\n⏰ ${remindAt.toLocaleDateString("id-ID", { weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" })}\n\nNanti aku ingatkan pas waktunya ya! 🫶`;
 }
 
 async function handleListReminders(studentId: string): Promise<string> {
@@ -58,7 +59,7 @@ async function handleListReminders(studentId: string): Promise<string> {
 
   const lines = reminders.map((r, i) => {
     const date = r.remindAt.toLocaleDateString("id-ID", { weekday: "long", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" });
-    return `${i + 1}. *${r.title}* — ${date}${r.category !== "general" ? ` (${r.category})` : ""}`;
+    return `${i + 1}. *${escapeMd(r.title)}* — ${date}${r.category !== "general" ? ` (${escapeMd(r.category)})` : ""}`;
   });
 
   return `📋 *Daftar Pengingat:*\n\n${lines.join("\n")}`;
@@ -235,7 +236,7 @@ export async function processPendingReminders(): Promise<void> {
       if (reminder.student.telegramId) {
         await bot?.telegram.sendMessage(
           reminder.student.telegramId,
-          `⏰ *Pengingat!*\n\n📌 ${reminder.title}${reminder.description ? `\n📝 ${reminder.description}` : ""}\n\nJangan lupa ya! 🫶`,
+          `⏰ *Pengingat!*\n\n📌 ${escapeMd(reminder.title)}${reminder.description ? `\n📝 ${escapeMd(reminder.description)}` : ""}\n\nJangan lupa ya! 🫶`,
           { parse_mode: "Markdown" },
         );
       }

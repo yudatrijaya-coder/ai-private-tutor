@@ -15,6 +15,7 @@ import { callLLM } from "@/llm/client";
 import { getPersona } from "../personas";
 import { prisma } from "@/lib/prisma";
 import { getYouTubeForTopic } from "@/data/youtube";
+import { escapeMd } from "@/lib/telegram-format";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://senangbelajar.web.id";
 
@@ -88,7 +89,7 @@ export async function handleVideoRecommendation(
 
   // Show videos
   const lines = allVideos.slice(0, 3).map((v, i) =>
-    `${i + 1}. *${v.title}*\n   🔗 ${v.url}\n   📺 ${v.channel}`
+    `${i + 1}. *${escapeMd(v.title)}*\n   🔗 ${v.url}\n   📺 ${escapeMd(v.channel)}`
   );
   const gradeLabel = getGradeName(student.gradeLevel);
 
@@ -167,7 +168,7 @@ Jelaskan isi video ini dengan bahasa yang seru!`;
         ? transcript.substring(0, 500) + "..."
         : transcript;
       await ctx.reply(
-        `📖 *Ringkasan video ${title}:*\n\n${summary}\n\nAda yang mau ditanyakan? 😊`,
+        `📖 *Ringkasan video ${escapeMd(title)}:*\n\n${escapeMd(summary)}\n\nAda yang mau ditanyakan? 😊`,
         { parse_mode: "Markdown" }
       );
     }
@@ -271,8 +272,8 @@ Jelaskan isi video ini dengan bahasa yang asyik dan mudah dipahami!`;
         ? transcript.substring(0, 500) + "..."
         : transcript;
       await ctx.reply(
-        `📹 *${title}*\n\n` +
-        `Berikut ringkasan dari video:\n\n${summary}\n\n` +
+        `📹 *${escapeMd(title)}*\n\n` +
+        `Berikut ringkasan dari video:\n\n${escapeMd(summary)}\n\n` +
         `Tanya aja kalau ada yang mau didiskusikan! 😊`,
         { parse_mode: "Markdown" },
       );
