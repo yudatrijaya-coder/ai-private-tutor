@@ -21,6 +21,7 @@ import { writeFileSync } from "node:fs";
 import { prisma } from "@/lib/prisma";
 import { getActiveCurriculumId } from "@/lib/curriculum-active";
 import { isUsableSlideText, isLlmReasoningDump } from "@/lib/content/slide-content";
+import { questionRejection } from "@/lib/quiz-grading";
 
 const ARGS = process.argv.slice(2);
 const WRITE = ARGS.includes("--write");
@@ -99,38 +100,24 @@ const DROP_REASONS = new Map<string, number>();
  * non-integer index — is dropped and counted rather than coerced.
  */
 function normalizeQuestion(raw: unknown): Q | null {
-  const drop = (why: string): null => {
+  // Delegate the decision to the shared rule. This function used to carry its
+  // own copy, which had already drifted from the audit's: it *filtered*
+  // non-string options instead of rejecting the row, shifting every later index
+  // while `correctIndex` stayed put. One predicate, imported.
+  const why = questionRejection(raw);
+  if (why) {
     DROP_REASONS.set(why, (DROP_REASONS.get(why) ?? 0) + 1);
     return null;
-  };
-  if (raw === null || typeof raw !== "object") return drop("not an object");
-  const o = raw as Record<string, unknown>;
-
-  const question = typeof o.question === "string" ? o.question.trim() : "";
-  if (!question) return drop("empty question");
-
-  const options = Array.isArray(o.options)
-    ? o.options.filter((x): x is string => typeof x === "string" && x.trim().length > 0)
-    : [];
-  if (options.length < 2) return drop(`options < 2 (got ${options.length})`);
-
-  const correctIndex = o.correctIndex;
-  if (
-    typeof correctIndex !== "number" ||
-    !Number.isInteger(correctIndex) ||
-    correctIndex < 0 ||
-    correctIndex >= options.length
-  ) {
-    return drop("correctIndex out of range");
   }
+  const o = raw as Record<string, unknown>;
 
   const d = o.difficulty;
   const difficulty = d === "easy" || d === "medium" || d === "hard" ? d : undefined;
 
   return {
-    question,
-    options,
-    correctIndex,
+    question: String(o.question).trim(),
+    options: o.options as string[],
+    correctIndex: o.correctIndex as number,
     ...(difficulty ? { difficulty } : {}),
     explanation: typeof o.explanation === "string" ? o.explanation.trim() : "",
   };

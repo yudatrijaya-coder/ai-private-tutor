@@ -141,6 +141,39 @@ export function resolveCorrectIndex(question: QuizQuestion | undefined): number 
 }
 
 /**
+ * Why a stored question cannot be shown to a student, or `null` when it can.
+ *
+ * The graders read `correctIndex` alone, so a truncated row still scores — a
+ * question the student cannot see is worse than a missing one. This is the one
+ * renderability rule: the audit that finds these rows, the bank emitter that
+ * drops them, and the writer that should never have stored them all call it, so
+ * their counts cannot disagree.
+ *
+ * Note it rejects a *non-string* option rather than filtering it out. Filtering
+ * shifts every later index while `correctIndex` stays put, which silently
+ * re-points the answer — the failure mode this predicate exists to catch.
+ */
+export function questionRejection(raw: unknown): string | null {
+  if (raw === null) return "null entry";
+  if (typeof raw !== "object") return `non-object (${typeof raw})`;
+  const o = raw as Record<string, unknown>;
+
+  const question = typeof o.question === "string" ? o.question.trim() : "";
+  if (!question) return "no `question`";
+
+  if (!Array.isArray(o.options)) return "options not an array";
+  const malformed = o.options.filter((x) => typeof x !== "string" || x.trim().length === 0).length;
+  if (malformed > 0) return `option not a non-empty string (${malformed})`;
+  if (o.options.length < 2) return `options < 2 (got ${o.options.length})`;
+
+  const ci = o.correctIndex;
+  if (typeof ci !== "number" || !Number.isInteger(ci) || ci < 0 || ci >= o.options.length) {
+    return "`correctIndex` outside options";
+  }
+  return null;
+}
+
+/**
  * Coerce one raw question into the normalised shape.
  * Returns null for entries that are not objects, so a malformed row cannot
  * shift the indexes of the questions around it.
