@@ -1256,9 +1256,21 @@ dengan kode 2 bila fixture bergeser, supaya tidak lulus secara palsu.
 
 ## Sisa yang belum tertutup
 
-- **C-05 runtime.** Patch `guardian` sudah deploy 2026-09-11, tetapi job
-  GUARDIAN terakhir berjalan 2026-09-06 — sebelum patch. Bukti runtime pertama
-  baru ada setelah `guardian-report-weekly` jalan **2026-09-13 18:00**.
+- ~~**C-05 runtime.**~~ **TERVERIFIKASI 2026-09-17.** Patch `guardian` deploy
+  2026-09-11; bukti runtime pertama diminta setelah `guardian-report-weekly`
+  jalan 2026-09-13 18:00. Keduanya cocok:
+
+  | Sumber | Nilai |
+  |---|---|
+  | cron `guardian-report-weekly` | `last_run_at 2026-09-13T18:00:10+08:00`, `last_status ok` |
+  | `AgentLog` | `GUARDIAN \| guardian-report \| COMPLETED \| 2026-09-13 10:00:09Z` |
+
+  10:00:09Z = 18:00:09 WIB — satu detik setelah cron memicu. Baris `COMPLETED`
+  bersih tanpa `error`, dan job yang sama pada 2026-09-12 juga `COMPLETED`.
+  Tidak ada lagi baris yatim bersaudara (pola `superseded: …` yang muncul untuk
+  jalur 2026-07-30 tidak berulang). Perbaikan siklus hidup worker (Pass 7 /
+  C-10) bekerja di runtime, bukan hanya di tes.
+
 - **`/api/health` tidak dibuat** — keputusan pemilik produk (2026-09-12):
   probe publik yang ada dinilai cukup.
 - **TIUMU001 trial berakhir 2026-09-13 03:49:37** — keputusan perpanjangan ada
