@@ -15,6 +15,7 @@ import { prisma } from "@/lib/prisma";
 import { bot } from "@/bot/bot";
 import { checkCronSecret, logCronRun } from "@/lib/cron/guard";
 import { revalidateOpenInterventions } from "@/lib/intervention-health";
+import { hasScheduleConfig } from "@/lib/schedule/schedule-config";
 
 // The cron secret is verified by the shared `checkCronSecret()` guard, which
 // fails closed when `CRON_SECRET` is unset. The old `process.env.CRON_SECRET ||
@@ -23,23 +24,10 @@ import { revalidateOpenInterventions } from "@/lib/intervention-health";
 
 /* ── Helpers ─────────────────────────────────────────────────── */
 
-function studentHasScheduleConfig(
-  config: unknown,
-): config is {
-  sessionsPerDay?: number;
-  excludeDays?: string[];
-  customTimes?: Record<string, string>;
-  preferredTime?: string;
-} {
-  if (!config || typeof config !== "object") return false;
-  const c = config as Record<string, unknown>;
-  return (
-    c.sessionsPerDay !== undefined ||
-    c.excludeDays !== undefined ||
-    c.customTimes !== undefined ||
-    c.preferredTime !== undefined
-  );
-}
+/* `studentHasScheduleConfig` moved to `@/lib/schedule/schedule-config` as
+   `hasScheduleConfig`. It only accepted the flat config shape, so every student
+   whose config came from onboarding (`{ days: {...} }`) was skipped here and no
+   curriculum session was ever assigned. See that module for the full story. */
 
 /* ── Daily Brief (with dedup) ─────────────────────────────────── */
 
@@ -150,24 +138,45 @@ async function assignSessionsIfNeeded(): Promise<number> {
 
   for (const student of students) {
     // Skip if no schedule config — can't know when they want to study
-    const hasConfig = studentHasScheduleConfig(student.scheduleConfig);
+    const hasConfig = hasScheduleConfig(student.scheduleConfig);
     if (!hasConfig) continue;
 
-    // Check if they already have upcoming sessions
-    const existingCount = await prisma.scheduleSession.count({
+    const { assignWeeklyTopics, computeWeeklySlots } = await import(
+      "@/agents/scheduler/assigner"
+    );
+
+    // The week the sweep is filling. `assignWeeklyTopics` filters its own
+    // "taken" slots over this same window, so the two must agree.
+    const weekStart = new Date(now);
+    weekStart.setHours(0, 0, 0, 0);
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekEnd.getDate() + 7);
+
+    // How many sessions does this config actually ask for this week? Zero for
+    // a config whose weekdays are all excluded or empty.
+    const expectedSlots = computeWeeklySlots(student.scheduleConfig, weekStart).length;
+    if (expectedSlots === 0) continue;
+
+    /*
+     * Count only sessions that fall inside the week being filled.
+     *
+     * The old guard was `count(all upcoming) > 0`. That conflated the exam
+     * system's INTENSIVE sessions with the curriculum slots this function
+     * assigns, so a student holding a single exam-driven session — Raihan, one
+     * INTENSIVE on 2026-09-18 — was treated as "already scheduled" and never
+     * got the rest of their week. Comparing against `expectedSlots` lets a
+     * partially-filled week be topped up, while a fully-booked week still
+     * short-circuits cheaply on every one of the ~145 sweeps per day.
+     */
+    const bookedThisWeek = await prisma.scheduleSession.count({
       where: {
         studentId: student.id,
         status: "SCHEDULED",
-        scheduledAt: { gte: now },
+        scheduledAt: { gte: now, lt: weekEnd },
       },
     });
 
-    if (existingCount > 0) continue; // already has sessions — skip
-
-    // Auto-assign one day's worth of sessions (today or tomorrow)
-    const { assignWeeklyTopics } = await import("@/agents/scheduler/assigner");
-    const weekStart = new Date(now);
-    weekStart.setHours(0, 0, 0, 0);
+    if (bookedThisWeek >= expectedSlots) continue; // week already full
 
     // Assign for the rest of the week
     const result = await assignWeeklyTopics(student.id, weekStart.toISOString());
