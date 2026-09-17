@@ -27,16 +27,25 @@ import { isUsableSlideText, isLlmReasoningDump, MIN_USABLE_SLIDE_LENGTH } from "
  * 1. `SMP_1 / Sejarah / Perubahan Sosial / Dampak Kedatangan Eropa pada
  *    Masyarakat Indonesia` — five truncated questions: `explanation`,
  *    `correctIndex` and `questionIndex` only, no `question` or `options`. The
- *    emitter drops all five.
+ *    emitter dropped all five. REPAIRED 2026-09-17.
  * 2. `SMA_2 / Matematika Tingkat Lanjut / Polinomial / Polinomial dan Fungsi
- *    Polinomial` — an orphan test row (`weekOrder 1`, `processedContent` empty,
- *    `slide_sibi` 3014 chars, zero quizzes). Never had a quiz.
+ *    Polinomial` — an orphan row with `processedContent` empty and zero
+ *    quizzes; `generateQuiz` refuses to run without `processedContent`, so it
+ *    could never acquire one. REPAIRED 2026-09-17.
+ *
+ * Both are closed, so the set is empty. Keep it empty unless a topic provably
+ * cannot have a quiz — a stale entry here reports a regression as a known gap.
  */
 const KNOWN_QUIZ_GAPS = new Set<string>([
-  // The Sejarah gap is closed: the five questions were unrenderable, so the
-  // emitter dropped the whole topic from the bank, and the topic now emits with
-  // all five. Leaving the entry here would hide a regression.
-  "SMA_2||Matematika Tingkat Lanjut||Polinomial||Polinomial dan Fungsi Polinomial",
+  // Empty, and it should stay that way. Both former entries were symptoms of a
+  // data defect rather than topics that genuinely have no quiz:
+  //   - SMP_1 Sejarah "Dampak Kedatangan Eropa": all five questions were
+  //     unrenderable, so the emitter dropped the whole topic;
+  //   - SMA_2 Matematika Tingkat Lanjut "Polinomial dan Fungsi Polinomial":
+  //     `processedContent` was null, so `generateQuiz` refused to run and the
+  //     topic never acquired a quiz.
+  // Both are repaired. A non-empty allowlist here hides a real regression as a
+  // known gap, so add an entry only for a topic that provably cannot have one.
 ]);
 
 const GRADES = {

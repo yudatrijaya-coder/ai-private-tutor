@@ -1,7 +1,7 @@
 /**
  * Quiz Bank — SMA Kelas 11, school palette (generated)
  *
- * 401 topics × 2691 questions, lifted from the live curriculum of
+ * 402 topics × 2696 questions, lifted from the live curriculum of
  * SHOFI001 so `generateCurriculumDraft` can attach a quiz to every material
  * it creates. Consulted by `quiz-bank-*.ts` before its own map.
  *
@@ -3305,6 +3305,14 @@ export const SMA11_QUIZ_DB: Record<string, QuestionData[]> = {
     {"question":"Jika matriks A berukuran 2×3 dan matriks B berukuran 3×4, maka hasil kali matriks AB berukuran?","options":["A. 2×2","B. 3×3","C. 2×4","D. 3×4"],"correctIndex":2,"difficulty":"medium","explanation":"Ukuran hasil kali matriks AB adalah m×n, di mana A berukuran m×k dan B berukuran k×n. Jadi 2×3 dikali 3×4 menghasilkan matriks berukuran 2×4"},
     {"question":"Diketahui A = [[1, 2], [3, 4]] dan B = [[0, 1], [1, 0]]. Hasil dari 2A - 3B adalah?","options":["A. [[2, 1], [3, 8]]","B. [[2, 7], [3, 8]]","C. [[-2, 1], [3, 8]]","D. [[2, 1], [9, 8]]"],"correctIndex":0,"difficulty":"hard","explanation":"2A = [[2, 4], [6, 8]], 3B = [[0, 3], [3, 0]]. Maka 2A - 3B = [[2-0, 4-3], [6-3, 8-0]] = [[2, 1], [3, 8]]"},
     {"question":"Diketahui matriks A = [[1, 0], [2, 3]] dan B = [[1, 1], [1, 0]]. Hasil dari A × B adalah?","options":["A. [[1, 1], [5, 2]]","B. [[2, 1], [5, 3]]","C. [[1, 1], [5, 3]]","D. [[2, 1], [5, 2]]"],"correctIndex":0,"difficulty":"medium","explanation":"Perkalian matriks: baris pertama A dikalikan kolom B. (1×1+0×1, 1×1+0×0) = (1, 1). Baris kedua: (2×1+3×1, 2×1+3×0) = (5, 2). Hasil: [[1, 1], [5, 2]]"},
+  ],
+
+  ["Matematika Tingkat Lanjut||Polinomial||Polinomial dan Fungsi Polinomial"]: [
+    {"question":"Manakah yang merupakan monomial?","options":["4x³ - 2x + 1","-2xy²","x + y","3/x"],"correctIndex":1,"explanation":"Monomial adalah bilangan, variabel berpangkat bilangan cacah, atau perkalian keduanya. -2xy² memenuhi definisi tersebut. Pilihan lain berupa penjumlahan (bukan monomial tunggal) atau mengandung pangkat negatif pada variabel."},
+    {"question":"Pada polinomial P(x) = 5x⁴ - 2x³ + x - 7, suku utamanya adalah ...","options":["-7","x","-2x³","5x⁴"],"correctIndex":3,"explanation":"Suku utama adalah suku berderajat tertinggi. Derajat 5x⁴ adalah 4, paling tinggi dibanding suku lain, sehingga suku utamanya 5x⁴."},
+    {"question":"Derajat fungsi polinomial P(x) = 4x³ - 2x + 1 adalah ...","options":["1","2","3","4"],"correctIndex":2,"explanation":"Derajat polinomial adalah pangkat tertinggi variabelnya. Pangkat tertinggi pada P(x) adalah 3, yaitu pada suku 4x³."},
+    {"question":"Fungsi h(x) = x³ + 3x² - 4 dapat difaktorkan menjadi h(x) = (x - 1)(x + 2)². Grafik h memotong sumbu-x di titik ...","options":["x = 1 dan x = -2","x = -1 dan x = 2","hanya x = 1","x = 4 dan x = -1"],"correctIndex":0,"explanation":"Dengan sifat hasil kali nol, h(x) = 0 ketika x - 1 = 0 atau x + 2 = 0, sehingga grafik memotong sumbu-x di x = 1 dan x = -2."},
+    {"question":"Jika fungsi polinomial memiliki suku utama dengan derajat ganjil dan koefisien utama negatif, perilaku ujung grafiknya adalah ...","options":["kedua ujung naik","ujung kiri turun, ujung kanan naik","kedua ujung turun","ujung kiri naik, ujung kanan turun"],"correctIndex":3,"explanation":"Menurut Sifat 2.1, untuk n ganjil dan aₙ < 0, saat x → -∞ grafik naik dan saat x → ∞ grafik turun, sehingga ujung kiri naik dan ujung kanan turun."},
   ],
 
   ["Matematika Tingkat Lanjut||Matriks||Invers Matriks"]: [

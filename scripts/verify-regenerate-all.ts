@@ -29,9 +29,12 @@ type Grade = (typeof GRADES)[number];
  */
 const KNOWN_QUIZ_GAPS: Record<Grade, string[]> = {
   SD_5: [],
-  // Sejarah closed — the topic now emits with all five questions.
+  // Both former gaps were data defects, now repaired: SMP_1 Sejarah had five
+  // unrenderable questions, and SMA_2 Polinomial had a null processedContent
+  // which made generateQuiz refuse to run. Add an entry only for a topic that
+  // provably cannot have a quiz.
   SMP_1: [],
-  SMA_2: ["Matematika Tingkat Lanjut||Polinomial||Polinomial dan Fungsi Polinomial"],
+  SMA_2: [],
 };
 
 interface Row {

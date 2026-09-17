@@ -2,7 +2,8 @@
 
 **Date:** 2026-09-17
 **Scope:** `Quiz.questions` across the whole database (1,436 quiz rows, 8,987 questions)
-**Result:** 0 unrenderable questions remain; 7 quiz rows repaired; no student record touched
+**Result:** 0 unrenderable questions remain; 7 quiz rows repaired; 1 orphan material
+repaired (see §7); no student record touched
 
 ---
 
@@ -118,9 +119,62 @@ Full marks, no answers recorded, four of the five questions invisible. **The att
 not touched.** It is a record of what happened, and deleting or restating a student's
 result is a decision for the operator, not a side effect of a content repair.
 
-## 7. Left open
+## 7. The SMA_2 orphan row — repaired 2026-09-17
 
-- **`SMA_2` orphan row** `13c766a1-…` (`Matematika Tingkat Lanjut / Polinomial`,
-  `weekOrder 1`, 3,014-char slide, 0 quizzes). Still the only empty row in Shofi's
-  curriculum (402/403 filled) and still in `KNOWN_QUIZ_GAPS`. Its disposition —
-  repair or delete — remains an open operator decision.
+`13c766a1-…` (`SMA_2 / Matematika Tingkat Lanjut / Polinomial / Polinomial dan
+Fungsi Polinomial`) was the last gap in `KNOWN_QUIZ_GAPS`: the only one of Shofi's 403
+materials with `processedContent = null`, and the only one with no quiz. Those two facts
+are one fact:
+
+```
+src/agents/assessment/generator.ts:31
+  if (!material || !material.processedContent) throw new Error("… not processed")
+```
+
+`generateQuiz` refuses to run without `processedContent`, so a material whose content
+generation never completed can never acquire a quiz. The topic then has no quiz in the
+database, the emitter lifts quizzes from the database, and the bank is short one quiz —
+which is what surfaced as a "known gap" rather than as the content defect underneath it.
+
+Nothing was missing from the row: 6,545 chars of `rawContent` and a 3,014-char
+`metadata.slide_sibi` were both intact. Only the processing step had never run.
+
+**Repair** (`scripts/fix-orphan-material.ts`, dry run by default):
+
+1. content through the same `content`-role call and prompt shape as
+   `POST /api/curriculum/batch-generate`, so the row ends up shaped like its 402
+   siblings. The SIBI text is passed as reference so the content describes this book's
+   treatment of the topic rather than the model's own;
+2. quiz through the real `generateQuiz()`, imported rather than reimplemented.
+
+Guards: the generated content must share vocabulary with the row's own source (measured
+93% on the dry run, 100% on the applied one) or it is reported and not written; slides
+must pass `isUsableSlideText` and not be a reasoning dump.
+
+| Field | Before | After |
+|---|---|---|
+| `processedContent` | `null` | 2,864 chars |
+| `metadata.slides` | absent | 648 chars |
+| `metadata.slide_sibi` | 3,014 chars | **3,014 chars — unchanged** |
+| `rawContent` | 6,545 chars | 6,545 chars — unchanged |
+| quizzes on the material | 0 | 1 (5 questions, 0 unrenderable) |
+| `videoUrl` | null | YouTube search URL |
+
+`slide_sibi` is preserved deliberately: it is the original SIBI text and the `?source=sibi`
+view still serves it. The default slide view now prefers `metadata.slides`, which is the
+documented precedence (`slide → slides → slide_moodle → slide_sibi`).
+
+With this, `KNOWN_QUIZ_GAPS` is empty in both verify scripts. A stale entry there reports
+a real regression as a known gap, so the set is now empty by design rather than by
+accident — the two entries it used to hold were both symptoms of data defects, not topics
+that genuinely cannot have a quiz.
+
+### Bank totals after both repairs
+
+| Grade | Topics | Quizzes | Questions |
+|---|---|---|---|
+| SD_5 | 130 | 130/130 | 1,127 |
+| SMP_1 | 218 | 218/218 | 1,113 |
+| SMA_2 | 402 | **402/402** | 2,696 |
+| **Total** | 750 | 750/750 | **4,936** |
+
