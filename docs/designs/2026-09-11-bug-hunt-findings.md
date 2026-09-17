@@ -929,16 +929,25 @@ tampilan. Tetapi baris `ACTIVE` permanen membuat setiap inspeksi manual
 menyesatkan — terlihat seperti job yang masih berjalan padahal sudah mati
 sejak Juli.
 
-> **STATUS 2026-09-17: SUDAH DIJALANKAN (2026-09-11).** Nama file sebenarnya
-> `scripts/sweep-stranded-agent-logs.ts` — bukan `reap-stale-agent-logs.ts`.
-> Referensi lama itu menunjuk berkas yang tidak pernah ada, dan sempat
-> menghabiskan waktu satu sesi untuk mengejarnya. Hasil: **5.296 baris**
-> dianotasi (`stale: retries exhausted…` 2.648 + `stale: attempt never reached
-> a terminal state` 2.648), lalu `ACTIVE`/`RETRYING` residu = **0**. Tidak ada
-> job baru yang ter-strand setelah perbaikan siklus hidup worker (Pass 7 / C-10),
-> jadi sweep ini **one-time** dan tidak dijadwalkan.
+> **STATUS 2026-09-17: SELESAI (2026-09-11).** Bagian di bawah ditulis *sebelum*
+> keputusan akhir, dan menyebut `scripts/reap-stale-agent-logs.ts` seolah masih
+> menunggu dijalankan. Yang sebenarnya terjadi di commit `c0aea7d`:
+>
+> - Reaper seragam itu **dibatalkan dan dihapus** (`D scripts/reap-stale-agent-logs.ts`),
+>   bukan sekadar diganti nama. Alasannya: 12 baris `ACTIVE` `guardian-report`
+>   bersaudara dengan baris `COMPLETED` — job itu **berhasil**, jadi menandainya
+>   `FAILED` akan menanam diagnosis palsu ke dalam data.
+> - Penggantinya `scripts/sweep-stranded-agent-logs.ts`, yang **menurunkan label
+>   dari fakta** (saudara terminal per `jobId`) alih-alih mengasumsikan setiap
+>   baris non-terminal adalah kegagalan.
+> - Hasil akhir: **5.296 baris** dianotasi (`stale: retries exhausted…` 2.648 +
+>   `stale: attempt never reached a terminal state` 2.648), lalu 2 baris muda
+>   disapu terpisah → residu `QUEUED`/`ACTIVE`/`RETRYING` = **0**.
+> - Dry-run ulang 2026-09-17: `Tidak ada baris non-terminal melewati cutoff`.
+>   Sweep ini **one-time**, tidak dijadwalkan — setelah perbaikan siklus hidup
+>   worker (Pass 7 / C-10) tidak ada baris baru yang ter-strand.
 
-Script asli (dry-run sebagai default), dipertahankan sebagai catatan:
+Script pengganti (dry-run sebagai default):
 
 ```
 npx tsx scripts/sweep-stranded-agent-logs.ts            # dry-run, cutoff 7 hari
