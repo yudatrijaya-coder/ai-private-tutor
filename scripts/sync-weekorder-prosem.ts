@@ -13,60 +13,15 @@ import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
 import { PROSEM_PLANS } from "../src/data/prosem-index";
 import type { ProsemEntry } from "../src/lib/prosem";
+import {
+  GRADE_MAP,
+  SKIP_SUBTOPIC,
+  SIM_THRESHOLD as THRESHOLD,
+  entryMaterialScore,
+} from "../src/lib/prosem-match";
 
 const APPLY = process.argv.includes("--apply");
 
-// gradeLevel enum -> prosem grade key
-const GRADE_MAP: Record<string, string> = {
-  SD_5: "v",
-  SMP_1: "vii",
-  SMA_2: "xi",
-};
-
-const SKIP_SUBTOPIC = /penilaian sumatif|remedial|total|evaluasi|asas/i;
-
-function norm(s: string): string {
-  return s
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "")
-    .trim();
-}
-
-/** token-overlap + sequence similarity blend */
-function sim(a: string, b: string): number {
-  const na = norm(a);
-  const nb = norm(b);
-  if (!na || !nb) return 0;
-  if (na === nb) return 1;
-  const seq = 1 - levenshtein(na, nb) / Math.max(na.length, nb.length);
-  const ta = new Set(na.match(/.{1,4}/g) ?? []);
-  const tb = new Set(nb.match(/.{1,4}/g) ?? []);
-  let inter = 0;
-  for (const t of ta) if (tb.has(t)) inter++;
-  const jacc = ta.size && tb.size ? inter / (ta.size + tb.size - inter) : 0;
-  return Math.max(seq * 0.6 + jacc * 0.4, na.includes(nb) || nb.includes(na) ? 0.85 : 0);
-}
-
-function levenshtein(a: string, b: string): number {
-  const m = a.length;
-  const n = b.length;
-  const dp = Array.from({ length: m + 1 }, (_, i) => [i, ...Array(n).fill(0)]);
-  for (let j = 0; j <= n; j++) dp[0][j] = j;
-  for (let i = 1; i <= m; i++)
-    for (let j = 1; j <= n; j++)
-      dp[i][j] = Math.min(
-        dp[i - 1][j] + 1,
-        dp[i][j - 1] + 1,
-        dp[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)
-      );
-  return dp[m][n];
-}
-
-const THRESHOLD = 0.84;
-// Materials already placed in a real week (1..18) keep their slot unless the
-// prosem match is near-exact — avoids overwriting correct schedules on
-// fuzzy 0.8x false positives.
-const PLACED_THRESHOLD = 0.9;
 
 async function main() {
   const students = await prisma.student.findMany({
@@ -119,11 +74,7 @@ async function main() {
         let best = -1;
         let bestScore = 0;
         entries.forEach(({ e }, i) => {
-          const s = Math.max(
-            sim(e.subtopic, m.subTopic || ""),
-            sim(e.subtopic, m.topic) * 0.9,
-            sim(e.topic, m.topic) * 0.8
-          );
+          const s = entryMaterialScore(e, m);
           if (s > bestScore) {
             bestScore = s;
             best = i;
