@@ -45,6 +45,9 @@ const PDF_MAP: Record<string, Record<string, string>> = {
   SMP_1: {
     IPA: "IPA_SMP7_BS.pdf",
     IPS: "IPS_SMP7_BS.pdf",
+    // Geografi SMP tidak punya buku sendiri — materinya ada di dalam buku IPS
+    // (Tema I-A letak/lokasi, I-C iklim, I-D bencana, III-A sumber daya alam).
+    Geografi: "IPS_SMP7_BS.pdf",
     PJOK: "PJOK_SMP7_BS.pdf",
     Informatika: "Informatika_SMP7_BS.pdf",
     "Bahasa Indonesia": "Indonesia_SMP7_BS.pdf",
@@ -88,6 +91,13 @@ const SUBJECT_META: Record<string, { emoji: string; color: string }> = {
   IPA: { emoji: "🔬", color: "#fbbf24" },
   IPAS: { emoji: "🔬", color: "#fbbf24" },
   IPS: { emoji: "🌍", color: "#f472b6" },
+  // Kept in sync with the dashboard's SUBJECT_META. SMP_1 curricula can hold
+  // these as subjects in their own right (Moodle splits them per course).
+  Biologi: { emoji: "🧬", color: "#22c55e" },
+  Fisika: { emoji: "⚡", color: "#fbbf24" },
+  Kimia: { emoji: "⚗️", color: "#06b6d4" },
+  Geografi: { emoji: "🗺️", color: "#f472b6" },
+  Sejarah: { emoji: "📜", color: "#a78bfa" },
   Agama: { emoji: "🕌", color: "#a78bfa" },
   PKN: { emoji: "🤝", color: "#fb923c" },
   "Pendidikan Pancasila": { emoji: "🤝", color: "#fb923c" },

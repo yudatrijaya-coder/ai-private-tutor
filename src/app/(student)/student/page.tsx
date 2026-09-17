@@ -93,6 +93,9 @@ const PDF_MAP: Record<string, Record<string, string>> = {
   SMP_1: {
     IPA: "IPA_SMP7_BS.pdf",
     IPS: "IPS_SMP7_BS.pdf",
+    // Geografi SMP tidak punya buku sendiri — materinya ada di dalam buku IPS
+    // (Tema I-A letak/lokasi, I-C iklim, I-D bencana, III-A sumber daya alam).
+    Geografi: "IPS_SMP7_BS.pdf",
     PJOK: "PJOK_SMP7_BS.pdf",
     Informatika: "Informatika_SMP7_BS.pdf",
     "Bahasa Indonesia": "Indonesia_SMP7_BS.pdf",
@@ -600,8 +603,8 @@ async function SubjectGridSection() {
   const session = await getSessionStudent();
   if (!session) return null;
 
-  // Active curriculum only — Raihan owns a stale v1 alongside v3, and unioning
-  // them listed subjects he no longer has (Biologi / Sejarah / Geografi).
+  // Active curriculum only — Raihan owns a stale, near-duplicate v1 alongside
+  // v3, and unioning them double-counted every subject that appears in both.
   // See `src/lib/curriculum-active.ts`.
   const curriculumId = await getActiveCurriculumId(session.id);
   const materials = curriculumId
