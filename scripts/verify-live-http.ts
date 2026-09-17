@@ -139,7 +139,11 @@ async function main(): Promise<void> {
   {
     // Ids come in two shapes in this database: uuid and bare 32-hex, so match
     // on the hex prefix rather than assuming a dash follows it.
-    const prefixes = ["8076ae81", "b26cc302", "a44396af", "79bb5d34", "1f423b30", "f661cc07", "7c95622c"];
+    const prefixes = [
+      "8076ae81", "b26cc302", "a44396af", "79bb5d34", "1f423b30", "f661cc07", // SMP_1
+      "7c95622c", // SD_5 (Syifa)
+      "894231be", // SMA_2 — the quiz generated for the repaired orphan material
+    ];
     for (const prefix of prefixes) {
       const quiz = await prisma.quiz.findFirst({
         where: { id: { startsWith: prefix } },
