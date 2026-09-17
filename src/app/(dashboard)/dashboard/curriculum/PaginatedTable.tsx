@@ -57,6 +57,9 @@ const PDF_MAP: Record<string, Record<string, string>> = {
   SMP_1: {
     IPA: "/pdf-smp7/IPA_SMP7_BS.pdf",
     IPS: "/pdf-smp7/IPS_SMP7_BS.pdf",
+    // Geografi SMP tidak punya buku sendiri — materinya ada di dalam buku IPS
+    // (Tema I-A letak/lokasi, I-C iklim, I-D bencana, III-A sumber daya alam).
+    Geografi: "/pdf-smp7/IPS_SMP7_BS.pdf",
     PJOK: "/pdf-smp7/PJOK_SMP7_BS.pdf",
     "Bahasa Indonesia": "/pdf-smp7/Indonesia_SMP7_BS.pdf",
     Informatika: "/pdf-smp7/Informatika_SMP7_BS.pdf",
