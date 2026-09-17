@@ -345,7 +345,7 @@ function selectRandomTopics(
   return result;
 }
 
-function computeWeeklySlots(
+export function computeWeeklySlots(
   scheduleConfig: unknown,
   weekStart: Date,
 ): Slot[] {
