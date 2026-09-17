@@ -84,7 +84,7 @@ export async function generateCurriculumDraft(
   // ─────────────────────────────────────────────────────────────
 
   for (const topic of topics) {
-    const content = getContent(topic.subject, topic.topic, topic.subTopic);
+    const content = getContent(topic.subject, topic.topic, topic.subTopic, student.gradeLevel);
 
     const material = await prisma.material.create({
       data: {

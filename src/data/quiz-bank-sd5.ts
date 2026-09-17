@@ -6,6 +6,7 @@
 //  Source: curriculum-topics-sd5.ts + 9Router LLM (ai_tutor_agent)
 // ═══════════════════════════════════════════════════════════════════
 import type { QuestionData } from '@/agents/assessment/types';
+import { SD5_QUIZ_DB } from './quiz-bank-sd5-db';
 
 export function quizKey(subject: string, topic: string, subTopic: string): string {
   return `${subject}||${topic}||${subTopic}`;
@@ -878,9 +879,13 @@ const QUIZ_MAP: Record<string, QuestionData[]> = {
 };
 
 export function getQuiz(subject: string, topic: string, subTopic: string): QuestionData[] {
-  return QUIZ_MAP[quizKey(subject, topic, subTopic)] || [];
+  const key = quizKey(subject, topic, subTopic);
+  // Generated bank first: it covers every topic of the school's own SD_5
+  // palette, where this hand-written map covers 108 of 130. The original map
+  // stays as a fallback for anything the generated bank lacks.
+  return SD5_QUIZ_DB[key] ?? QUIZ_MAP[key] ?? [];
 }
 
 export function getAllQuizzes(): Record<string, QuestionData[]> {
-  return QUIZ_MAP;
+  return { ...QUIZ_MAP, ...SD5_QUIZ_DB };
 }

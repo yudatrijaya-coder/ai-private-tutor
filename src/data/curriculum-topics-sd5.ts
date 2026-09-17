@@ -1,13 +1,76 @@
 /**
- * Full SD Kelas 5 Kurikulum Merdeka — from SIBI PDFs
- * 8 Buku: IPAS, Bahasa Indonesia, Inggris, Pancasila, PJOK, Koding
- * ~110+ total sub-topik mencakup 1 tahun ajaran
+ * SD Kelas 5 — school palette.
+ *
+ * Generated from the reference curriculum (student SYIFA001, curriculum
+ * d4c8f21a-6e62-4553-be51-0b6df08eb960, 130 topics, 7 subjects) by
+ * `scripts/emit-topic-bank.ts`. Regenerate with:
+ *
+ *   node scripts/run-ts.mjs scripts/emit-topic-bank.ts --grade SD_5 --write
+ *
+ * Do not hand-edit: the point of this file is that `GRADE_TOPICS.SD_5`
+ * reproduces the school's subject set exactly, so that regenerating a
+ * curriculum cannot drop or invent a subject.
+ *
+ * @module @/data/curriculum-topics-sd5
  */
 import type { TopicEntry } from "./curriculum-topics";
 
 export const GRADE_TOPICS_SD5: Record<string, TopicEntry[]> = {
   SD_5: [
-    // ═══ IPAS (Ilmu Pengetahuan Alam dan Sosial) — 8 Bab, 40 sub-topik ═══
+    // ═══ Bahasa Indonesia — 18 sub-topik ═══
+    { subject: "Bahasa Indonesia", topic: "Aku yang Unik", subTopic: "Mengenal Ciri-Ciri Melalui Cerita", weekOrder: 1, priority: 10 },
+    { subject: "Bahasa Indonesia", topic: "Aku yang Unik", subTopic: "Mendeskripsikan Diri dan Orang Lain", weekOrder: 2, priority: 9 },
+    { subject: "Bahasa Indonesia", topic: "Aku yang Unik", subTopic: "Kata Sifat dan Kata Kerja", weekOrder: 3, priority: 8 },
+    { subject: "Bahasa Indonesia", topic: "Buku Jendela Dunia", subTopic: "Mengenal Bagian-Bagian Buku", weekOrder: 4, priority: 9 },
+    { subject: "Bahasa Indonesia", topic: "Buku Jendela Dunia", subTopic: "Cara Memahami Bacaan", weekOrder: 5, priority: 8 },
+    { subject: "Bahasa Indonesia", topic: "Buku Jendela Dunia", subTopic: "Ide Pokok dan Kesimpulan", weekOrder: 6, priority: 9 },
+    { subject: "Bahasa Indonesia", topic: "Ekspresi Diri", subTopic: "Mengenal Hobi dan Minat", weekOrder: 7, priority: 7 },
+    { subject: "Bahasa Indonesia", topic: "Ekspresi Diri", subTopic: "Menulis Pengalaman Pribadi", weekOrder: 8, priority: 8 },
+    { subject: "Bahasa Indonesia", topic: "Ekspresi Diri", subTopic: "Puisi dan Ungkapan Perasaan", weekOrder: 9, priority: 7 },
+    { subject: "Bahasa Indonesia", topic: "Belajar Berwirausaha", subTopic: "Ide Kreatif dan Inovasi", weekOrder: 10, priority: 8 },
+    { subject: "Bahasa Indonesia", topic: "Belajar Berwirausaha", subTopic: "Iklan dan Promosi", weekOrder: 11, priority: 7 },
+    { subject: "Bahasa Indonesia", topic: "Belajar Berwirausaha", subTopic: "Negosiasi dan Tawar Menawar", weekOrder: 12, priority: 6 },
+    { subject: "Bahasa Indonesia", topic: "Cinta Indonesia", subTopic: "Keberagaman Budaya", weekOrder: 13, priority: 8 },
+    { subject: "Bahasa Indonesia", topic: "Cinta Indonesia", subTopic: "Pahlawan dan Tokoh Nasional", weekOrder: 14, priority: 7 },
+    { subject: "Bahasa Indonesia", topic: "Cinta Indonesia", subTopic: "Bahasa Daerah di Indonesia", weekOrder: 15, priority: 6 },
+    { subject: "Bahasa Indonesia", topic: "Sayangi Bumi", subTopic: "Lingkungan Hidup", weekOrder: 16, priority: 8 },
+    { subject: "Bahasa Indonesia", topic: "Sayangi Bumi", subTopic: "Sampah dan Daur Ulang", weekOrder: 17, priority: 7 },
+    { subject: "Bahasa Indonesia", topic: "Sayangi Bumi", subTopic: "Menulis Artikel Lingkungan", weekOrder: 18, priority: 6 },
+
+    // ═══ Bahasa Inggris — 14 sub-topik ═══
+    { subject: "Bahasa Inggris", topic: "Shopping", subTopic: "Fruits and Prices", weekOrder: 1, priority: 8 },
+    { subject: "Bahasa Inggris", topic: "Shopping", subTopic: "Vegetables and Groceries", weekOrder: 2, priority: 7 },
+    { subject: "Bahasa Inggris", topic: "Shopping", subTopic: "Shopping Dialogue", weekOrder: 3, priority: 7 },
+    { subject: "Bahasa Inggris", topic: "Direction", subTopic: "Giving Directions", weekOrder: 4, priority: 8 },
+    { subject: "Bahasa Inggris", topic: "Direction", subTopic: "Places in Town", weekOrder: 5, priority: 7 },
+    { subject: "Bahasa Inggris", topic: "Direction", subTopic: "Reading a Map", weekOrder: 6, priority: 6 },
+    { subject: "Bahasa Inggris", topic: "Daily Life", subTopic: "Daily Routines", weekOrder: 7, priority: 7 },
+    { subject: "Bahasa Inggris", topic: "Daily Life", subTopic: "Helping at Home", weekOrder: 8, priority: 6 },
+    { subject: "Bahasa Inggris", topic: "Daily Life", subTopic: "Cooking and Recipes", weekOrder: 9, priority: 6 },
+    { subject: "Bahasa Inggris", topic: "Reading", subTopic: "Borrowing Books", weekOrder: 10, priority: 7 },
+    { subject: "Bahasa Inggris", topic: "Reading", subTopic: "My Favorite Book", weekOrder: 11, priority: 6 },
+    { subject: "Bahasa Inggris", topic: "Reading", subTopic: "Storytelling", weekOrder: 12, priority: 7 },
+    { subject: "Bahasa Inggris", topic: "Culture", subTopic: "Indonesian Folktales", weekOrder: 13, priority: 6 },
+    { subject: "Bahasa Inggris", topic: "Culture", subTopic: "Fables and Moral Values", weekOrder: 14, priority: 6 },
+
+    // ═══ Informatika — 15 sub-topik ═══
+    { subject: "Informatika", topic: "Berpikir Komputasional", subTopic: "Memahami Masalah Sehari-hari", weekOrder: 1, priority: 8 },
+    { subject: "Informatika", topic: "Berpikir Komputasional", subTopic: "Pola dan Abstraksi", weekOrder: 2, priority: 7 },
+    { subject: "Informatika", topic: "Berpikir Komputasional", subTopic: "Algoritma Sederhana", weekOrder: 3, priority: 8 },
+    { subject: "Informatika", topic: "Berpikir Komputasional", subTopic: "Dekomposisi Masalah", weekOrder: 4, priority: 7 },
+    { subject: "Informatika", topic: "Teknologi Digital", subTopic: "Perangkat Digital", weekOrder: 5, priority: 7 },
+    { subject: "Informatika", topic: "Teknologi Digital", subTopic: "Internet dan Jaringan", weekOrder: 6, priority: 6 },
+    { subject: "Informatika", topic: "Teknologi Digital", subTopic: "Aplikasi dan Perangkat Lunak", weekOrder: 7, priority: 6 },
+    { subject: "Informatika", topic: "Teknologi Digital", subTopic: "Keamanan Digital", weekOrder: 8, priority: 7 },
+    { subject: "Informatika", topic: "Kecerdasan Artifisial", subTopic: "Apa Itu AI", weekOrder: 9, priority: 7 },
+    { subject: "Informatika", topic: "Kecerdasan Artifisial", subTopic: "AI dalam Kehidupan", weekOrder: 10, priority: 6 },
+    { subject: "Informatika", topic: "Kecerdasan Artifisial", subTopic: "Etika dan AI", weekOrder: 11, priority: 6 },
+    { subject: "Informatika", topic: "Proyek Digital", subTopic: "Proyek Berpikir Komputasional", weekOrder: 12, priority: 7 },
+    { subject: "Informatika", topic: "Proyek Digital", subTopic: "Presentasi Digital", weekOrder: 13, priority: 6 },
+    { subject: "Informatika", topic: "Proyek Digital", subTopic: "Kolaborasi Online", weekOrder: 14, priority: 5 },
+    { subject: "Informatika", topic: "Proyek Digital", subTopic: "Kreasi Konten Digital", weekOrder: 15, priority: 5 },
+
+    // ═══ IPAS — 29 sub-topik ═══
     { subject: "IPAS", topic: "Indonesia Kaya", subTopic: "Letak Geografis Indonesia", weekOrder: 1, priority: 10 },
     { subject: "IPAS", topic: "Indonesia Kaya", subTopic: "Daratan dan Lautan", weekOrder: 2, priority: 9 },
     { subject: "IPAS", topic: "Indonesia Kaya", subTopic: "Negara Maritim dan Agraris", weekOrder: 3, priority: 9 },
@@ -38,96 +101,7 @@ export const GRADE_TOPICS_SD5: Record<string, TopicEntry[]> = {
     { subject: "IPAS", topic: "Bunyi", subTopic: "Bunyi dan Pendengaran", weekOrder: 28, priority: 7 },
     { subject: "IPAS", topic: "Bunyi", subTopic: "Teknologi Bunyi", weekOrder: 29, priority: 6 },
 
-    // ═══ Bahasa Indonesia — 6 Bab, 28 sub-topik ═══
-    { subject: "Bahasa Indonesia", topic: "Aku yang Unik", subTopic: "Mengenal Ciri-Ciri Melalui Cerita", weekOrder: 1, priority: 10 },
-    { subject: "Bahasa Indonesia", topic: "Aku yang Unik", subTopic: "Mendeskripsikan Diri dan Orang Lain", weekOrder: 2, priority: 9 },
-    { subject: "Bahasa Indonesia", topic: "Aku yang Unik", subTopic: "Kata Sifat dan Kata Kerja", weekOrder: 3, priority: 8 },
-    { subject: "Bahasa Indonesia", topic: "Buku Jendela Dunia", subTopic: "Mengenal Bagian-Bagian Buku", weekOrder: 4, priority: 9 },
-    { subject: "Bahasa Indonesia", topic: "Buku Jendela Dunia", subTopic: "Cara Memahami Bacaan", weekOrder: 5, priority: 8 },
-    { subject: "Bahasa Indonesia", topic: "Buku Jendela Dunia", subTopic: "Ide Pokok dan Kesimpulan", weekOrder: 6, priority: 9 },
-    { subject: "Bahasa Indonesia", topic: "Ekspresi Diri", subTopic: "Mengenal Hobi dan Minat", weekOrder: 7, priority: 7 },
-    { subject: "Bahasa Indonesia", topic: "Ekspresi Diri", subTopic: "Menulis Pengalaman Pribadi", weekOrder: 8, priority: 8 },
-    { subject: "Bahasa Indonesia", topic: "Ekspresi Diri", subTopic: "Puisi dan Ungkapan Perasaan", weekOrder: 9, priority: 7 },
-    { subject: "Bahasa Indonesia", topic: "Belajar Berwirausaha", subTopic: "Ide Kreatif dan Inovasi", weekOrder: 10, priority: 8 },
-    { subject: "Bahasa Indonesia", topic: "Belajar Berwirausaha", subTopic: "Iklan dan Promosi", weekOrder: 11, priority: 7 },
-    { subject: "Bahasa Indonesia", topic: "Belajar Berwirausaha", subTopic: "Negosiasi dan Tawar Menawar", weekOrder: 12, priority: 6 },
-    { subject: "Bahasa Indonesia", topic: "Cinta Indonesia", subTopic: "Keberagaman Budaya", weekOrder: 13, priority: 8 },
-    { subject: "Bahasa Indonesia", topic: "Cinta Indonesia", subTopic: "Pahlawan dan Tokoh Nasional", weekOrder: 14, priority: 7 },
-    { subject: "Bahasa Indonesia", topic: "Cinta Indonesia", subTopic: "Bahasa Daerah di Indonesia", weekOrder: 15, priority: 6 },
-    { subject: "Bahasa Indonesia", topic: "Sayangi Bumi", subTopic: "Lingkungan Hidup", weekOrder: 16, priority: 8 },
-    { subject: "Bahasa Indonesia", topic: "Sayangi Bumi", subTopic: "Sampah dan Daur Ulang", weekOrder: 17, priority: 7 },
-    { subject: "Bahasa Indonesia", topic: "Sayangi Bumi", subTopic: "Menulis Artikel Lingkungan", weekOrder: 18, priority: 6 },
-
-    // ═══ Bahasa Inggris — 6 Unit, 18 sub-topik ═══
-    { subject: "Bahasa Inggris", topic: "Shopping", subTopic: "Fruits and Prices", weekOrder: 1, priority: 8 },
-    { subject: "Bahasa Inggris", topic: "Shopping", subTopic: "Vegetables and Groceries", weekOrder: 2, priority: 7 },
-    { subject: "Bahasa Inggris", topic: "Shopping", subTopic: "Shopping Dialogue", weekOrder: 3, priority: 7 },
-    { subject: "Bahasa Inggris", topic: "Direction", subTopic: "Giving Directions", weekOrder: 4, priority: 8 },
-    { subject: "Bahasa Inggris", topic: "Direction", subTopic: "Places in Town", weekOrder: 5, priority: 7 },
-    { subject: "Bahasa Inggris", topic: "Direction", subTopic: "Reading a Map", weekOrder: 6, priority: 6 },
-    { subject: "Bahasa Inggris", topic: "Daily Life", subTopic: "Daily Routines", weekOrder: 7, priority: 7 },
-    { subject: "Bahasa Inggris", topic: "Daily Life", subTopic: "Helping at Home", weekOrder: 8, priority: 6 },
-    { subject: "Bahasa Inggris", topic: "Daily Life", subTopic: "Cooking and Recipes", weekOrder: 9, priority: 6 },
-    { subject: "Bahasa Inggris", topic: "Reading", subTopic: "Borrowing Books", weekOrder: 10, priority: 7 },
-    { subject: "Bahasa Inggris", topic: "Reading", subTopic: "My Favorite Book", weekOrder: 11, priority: 6 },
-    { subject: "Bahasa Inggris", topic: "Reading", subTopic: "Storytelling", weekOrder: 12, priority: 7 },
-    { subject: "Bahasa Inggris", topic: "Culture", subTopic: "Indonesian Folktales", weekOrder: 13, priority: 6 },
-    { subject: "Bahasa Inggris", topic: "Culture", subTopic: "Fables and Moral Values", weekOrder: 14, priority: 6 },
-
-    // ═══ Pendidikan Pancasila — 5 Bab, 20 sub-topik ═══
-    { subject: "Pendidikan Pancasila", topic: "Pancasila", subTopic: "Sejarah Kelahiran Pancasila", weekOrder: 1, priority: 10 },
-    { subject: "Pendidikan Pancasila", topic: "Pancasila", subTopic: "Nilai-Nilai Pancasila", weekOrder: 2, priority: 9 },
-    { subject: "Pendidikan Pancasila", topic: "Pancasila", subTopic: "Simbol dan Makna Pancasila", weekOrder: 3, priority: 9 },
-    { subject: "Pendidikan Pancasila", topic: "Pancasila", subTopic: "Pengamalan Pancasila", weekOrder: 4, priority: 8 },
-    { subject: "Pendidikan Pancasila", topic: "Norma", subTopic: "Macam-Macam Norma", weekOrder: 5, priority: 8 },
-    { subject: "Pendidikan Pancasila", topic: "Norma", subTopic: "Penerapan Norma dalam Kehidupan", weekOrder: 6, priority: 7 },
-    { subject: "Pendidikan Pancasila", topic: "Norma", subTopic: "Hukum dan Aturan", weekOrder: 7, priority: 7 },
-    { subject: "Pendidikan Pancasila", topic: "Budaya Daerah", subTopic: "Keberagaman Budaya", weekOrder: 8, priority: 8 },
-    { subject: "Pendidikan Pancasila", topic: "Budaya Daerah", subTopic: "Bhineka Tunggal Ika", weekOrder: 9, priority: 7 },
-    { subject: "Pendidikan Pancasila", topic: "Budaya Daerah", subTopic: "Melestarikan Budaya Daerah", weekOrder: 10, priority: 6 },
-    { subject: "Pendidikan Pancasila", topic: "Gotong Royong", subTopic: "Kerja Sama dan Musyawarah", weekOrder: 11, priority: 8 },
-    { subject: "Pendidikan Pancasila", topic: "Gotong Royong", subTopic: "Keputusan Bersama", weekOrder: 12, priority: 7 },
-    { subject: "Pendidikan Pancasila", topic: "Gotong Royong", subTopic: "Kegiatan Sosial di Lingkungan", weekOrder: 13, priority: 6 },
-    { subject: "Pendidikan Pancasila", topic: "NKRI", subTopic: "Wilayah Negara Kesatuan RI", weekOrder: 14, priority: 8 },
-    { subject: "Pendidikan Pancasila", topic: "NKRI", subTopic: "Menjaga Keutuhan NKRI", weekOrder: 15, priority: 7 },
-
-    // ═══ PJOK — 5 Bab, 25 sub-topik ═══
-    { subject: "PJOK", topic: "Eksplorasi Gerak", subTopic: "Gerak Lokomotor", weekOrder: 1, priority: 8 },
-    { subject: "PJOK", topic: "Eksplorasi Gerak", subTopic: "Gerak Non-Lokomotor", weekOrder: 2, priority: 7 },
-    { subject: "PJOK", topic: "Eksplorasi Gerak", subTopic: "Gerak Manipulatif", weekOrder: 3, priority: 7 },
-    { subject: "PJOK", topic: "Eksplorasi Gerak", subTopic: "Koordinasi dan Keseimbangan", weekOrder: 4, priority: 6 },
-    { subject: "PJOK", topic: "Permainan Bola", subTopic: "Permainan Bola Besar", weekOrder: 5, priority: 8 },
-    { subject: "PJOK", topic: "Permainan Bola", subTopic: "Permainan Bola Kecil", weekOrder: 6, priority: 7 },
-    { subject: "PJOK", topic: "Permainan Bola", subTopic: "Teknik Melempar dan Menangkap", weekOrder: 7, priority: 7 },
-    { subject: "PJOK", topic: "Aktivitas Air", subTopic: "Gerakan Dasar di Air", weekOrder: 8, priority: 6 },
-    { subject: "PJOK", topic: "Aktivitas Air", subTopic: "Renang Gaya Bebas", weekOrder: 9, priority: 6 },
-    { subject: "PJOK", topic: "Aktivitas Air", subTopic: "Keamanan dan Keselamatan Air", weekOrder: 10, priority: 5 },
-    { subject: "PJOK", topic: "Kebugaran Jasmani", subTopic: "Latihan Kekuatan", weekOrder: 11, priority: 7 },
-    { subject: "PJOK", topic: "Kebugaran Jasmani", subTopic: "Latihan Kelenturan", weekOrder: 12, priority: 6 },
-    { subject: "PJOK", topic: "Kebugaran Jasmani", subTopic: "Daya Tahan Tubuh", weekOrder: 13, priority: 6 },
-    { subject: "PJOK", topic: "Kebugaran Jasmani", subTopic: "Pola Makan Sehat", weekOrder: 14, priority: 7 },
-    { subject: "PJOK", topic: "Permainan Tradisional", subTopic: "Aturan dan Sportivitas", weekOrder: 15, priority: 7 },
-    { subject: "PJOK", topic: "Permainan Tradisional", subTopic: "Kerja Sama dalam Tim", weekOrder: 16, priority: 6 },
-    { subject: "PJOK", topic: "Permainan Tradisional", subTopic: "Modifikasi Permainan", weekOrder: 17, priority: 5 },
-
-    // ═══ Informatika (Koding) — 4 Bab, 16 sub-topik ═══
-    { subject: "Informatika", topic: "Berpikir Komputasional", subTopic: "Memahami Masalah Sehari-hari", weekOrder: 1, priority: 8 },
-    { subject: "Informatika", topic: "Berpikir Komputasional", subTopic: "Pola dan Abstraksi", weekOrder: 2, priority: 7 },
-    { subject: "Informatika", topic: "Berpikir Komputasional", subTopic: "Algoritma Sederhana", weekOrder: 3, priority: 8 },
-    { subject: "Informatika", topic: "Berpikir Komputasional", subTopic: "Dekomposisi Masalah", weekOrder: 4, priority: 7 },
-    { subject: "Informatika", topic: "Teknologi Digital", subTopic: "Perangkat Digital", weekOrder: 5, priority: 7 },
-    { subject: "Informatika", topic: "Teknologi Digital", subTopic: "Internet dan Jaringan", weekOrder: 6, priority: 6 },
-    { subject: "Informatika", topic: "Teknologi Digital", subTopic: "Aplikasi dan Perangkat Lunak", weekOrder: 7, priority: 6 },
-    { subject: "Informatika", topic: "Teknologi Digital", subTopic: "Keamanan Digital", weekOrder: 8, priority: 7 },
-    { subject: "Informatika", topic: "Kecerdasan Artifisial", subTopic: "Apa Itu AI", weekOrder: 9, priority: 7 },
-    { subject: "Informatika", topic: "Kecerdasan Artifisial", subTopic: "AI dalam Kehidupan", weekOrder: 10, priority: 6 },
-    { subject: "Informatika", topic: "Kecerdasan Artifisial", subTopic: "Etika dan AI", weekOrder: 11, priority: 6 },
-    { subject: "Informatika", topic: "Proyek Digital", subTopic: "Proyek Berpikir Komputasional", weekOrder: 12, priority: 7 },
-    { subject: "Informatika", topic: "Proyek Digital", subTopic: "Presentasi Digital", weekOrder: 13, priority: 6 },
-    { subject: "Informatika", topic: "Proyek Digital", subTopic: "Kolaborasi Online", weekOrder: 14, priority: 5 },
-    { subject: "Informatika", topic: "Proyek Digital", subTopic: "Kreasi Konten Digital", weekOrder: 15, priority: 5 },
-
-    // ═══ Matematika — 5 Bab, 22 sub-topik ═══
+    // ═══ Matematika — 22 sub-topik ═══
     { subject: "Matematika", topic: "Pecahan", subTopic: "Penjumlahan Pecahan Berpenyebut Sama", weekOrder: 1, priority: 10 },
     { subject: "Matematika", topic: "Pecahan", subTopic: "Penjumlahan Pecahan Berpenyebut Berbeda", weekOrder: 2, priority: 9 },
     { subject: "Matematika", topic: "Pecahan", subTopic: "Pengurangan Pecahan Berpenyebut Sama", weekOrder: 3, priority: 9 },
@@ -150,5 +124,41 @@ export const GRADE_TOPICS_SD5: Record<string, TopicEntry[]> = {
     { subject: "Matematika", topic: "Pengukuran Data", subTopic: "Menafsirkan Data", weekOrder: 20, priority: 7 },
     { subject: "Matematika", topic: "Pengukuran Data", subTopic: "Pengukuran Sudut", weekOrder: 21, priority: 7 },
     { subject: "Matematika", topic: "Pengukuran Data", subTopic: "Menggambar Sudut", weekOrder: 22, priority: 6 },
+
+    // ═══ Pendidikan Pancasila — 15 sub-topik ═══
+    { subject: "Pendidikan Pancasila", topic: "Pancasila", subTopic: "Sejarah Kelahiran Pancasila", weekOrder: 1, priority: 10 },
+    { subject: "Pendidikan Pancasila", topic: "Pancasila", subTopic: "Nilai-Nilai Pancasila", weekOrder: 2, priority: 9 },
+    { subject: "Pendidikan Pancasila", topic: "Pancasila", subTopic: "Simbol dan Makna Pancasila", weekOrder: 3, priority: 9 },
+    { subject: "Pendidikan Pancasila", topic: "Pancasila", subTopic: "Pengamalan Pancasila", weekOrder: 4, priority: 8 },
+    { subject: "Pendidikan Pancasila", topic: "Norma", subTopic: "Macam-Macam Norma", weekOrder: 5, priority: 8 },
+    { subject: "Pendidikan Pancasila", topic: "Norma", subTopic: "Penerapan Norma dalam Kehidupan", weekOrder: 6, priority: 7 },
+    { subject: "Pendidikan Pancasila", topic: "Norma", subTopic: "Hukum dan Aturan", weekOrder: 7, priority: 7 },
+    { subject: "Pendidikan Pancasila", topic: "Budaya Daerah", subTopic: "Keberagaman Budaya", weekOrder: 8, priority: 8 },
+    { subject: "Pendidikan Pancasila", topic: "Budaya Daerah", subTopic: "Bhineka Tunggal Ika", weekOrder: 9, priority: 7 },
+    { subject: "Pendidikan Pancasila", topic: "Budaya Daerah", subTopic: "Melestarikan Budaya Daerah", weekOrder: 10, priority: 6 },
+    { subject: "Pendidikan Pancasila", topic: "Gotong Royong", subTopic: "Kerja Sama dan Musyawarah", weekOrder: 11, priority: 8 },
+    { subject: "Pendidikan Pancasila", topic: "Gotong Royong", subTopic: "Keputusan Bersama", weekOrder: 12, priority: 7 },
+    { subject: "Pendidikan Pancasila", topic: "Gotong Royong", subTopic: "Kegiatan Sosial di Lingkungan", weekOrder: 13, priority: 6 },
+    { subject: "Pendidikan Pancasila", topic: "NKRI", subTopic: "Wilayah Negara Kesatuan RI", weekOrder: 14, priority: 8 },
+    { subject: "Pendidikan Pancasila", topic: "NKRI", subTopic: "Menjaga Keutuhan NKRI", weekOrder: 15, priority: 7 },
+
+    // ═══ PJOK — 17 sub-topik ═══
+    { subject: "PJOK", topic: "Eksplorasi Gerak", subTopic: "Gerak Lokomotor", weekOrder: 1, priority: 8 },
+    { subject: "PJOK", topic: "Eksplorasi Gerak", subTopic: "Gerak Non-Lokomotor", weekOrder: 2, priority: 7 },
+    { subject: "PJOK", topic: "Eksplorasi Gerak", subTopic: "Gerak Manipulatif", weekOrder: 3, priority: 7 },
+    { subject: "PJOK", topic: "Eksplorasi Gerak", subTopic: "Koordinasi dan Keseimbangan", weekOrder: 4, priority: 6 },
+    { subject: "PJOK", topic: "Permainan Bola", subTopic: "Permainan Bola Besar", weekOrder: 5, priority: 8 },
+    { subject: "PJOK", topic: "Permainan Bola", subTopic: "Permainan Bola Kecil", weekOrder: 6, priority: 7 },
+    { subject: "PJOK", topic: "Permainan Bola", subTopic: "Teknik Melempar dan Menangkap", weekOrder: 7, priority: 7 },
+    { subject: "PJOK", topic: "Aktivitas Air", subTopic: "Gerakan Dasar di Air", weekOrder: 8, priority: 6 },
+    { subject: "PJOK", topic: "Aktivitas Air", subTopic: "Renang Gaya Bebas", weekOrder: 9, priority: 6 },
+    { subject: "PJOK", topic: "Aktivitas Air", subTopic: "Keamanan dan Keselamatan Air", weekOrder: 10, priority: 5 },
+    { subject: "PJOK", topic: "Kebugaran Jasmani", subTopic: "Latihan Kekuatan", weekOrder: 11, priority: 7 },
+    { subject: "PJOK", topic: "Kebugaran Jasmani", subTopic: "Latihan Kelenturan", weekOrder: 12, priority: 6 },
+    { subject: "PJOK", topic: "Kebugaran Jasmani", subTopic: "Daya Tahan Tubuh", weekOrder: 13, priority: 6 },
+    { subject: "PJOK", topic: "Kebugaran Jasmani", subTopic: "Pola Makan Sehat", weekOrder: 14, priority: 7 },
+    { subject: "PJOK", topic: "Permainan Tradisional", subTopic: "Aturan dan Sportivitas", weekOrder: 15, priority: 7 },
+    { subject: "PJOK", topic: "Permainan Tradisional", subTopic: "Kerja Sama dalam Tim", weekOrder: 16, priority: 6 },
+    { subject: "PJOK", topic: "Permainan Tradisional", subTopic: "Modifikasi Permainan", weekOrder: 17, priority: 5 },
   ],
 };

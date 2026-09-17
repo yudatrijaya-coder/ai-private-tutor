@@ -1,16 +1,19 @@
 /**
  * Curriculum Content Bank — SMP Kelas 7 (school palette)
  *
- * Generated from a live curriculum: one entry per topic of the 15 subjects the
- * school actually teaches (Biologi, Fisika, Kimia, Geografi, Sejarah, Ekonomi,
- * Sosiologi, …). The hand-written `curriculum-content.ts` covered the old
- * Kurikulum Merdeka integrated palette (IPA / IPS) and matched only 1 of these
- * 218 topics, so regenerating a curriculum produced empty materials.
+ * Generated from the live curriculum of RAIHAN001: one entry per topic of
+ * the 15 subjects the school actually teaches. The hand-written
+ * `curriculum-content.ts` was built for the old Kurikulum Merdeka integrated
+ * palette (IPA / IPS) and covers almost none of these topics, so regenerating a
+ * curriculum produced empty materials.
  *
  * Values are the rendered slide markdown, the same text the student sees.
+ * Looked up by `getContent(subject, topic, subTopic, grade)`, which scopes the
+ * key by grade because sub-topics repeat across grades with different depth
+ * (e.g. Fisika/Suhu dan Kalor at SMP_1 and SMA_2).
  *
  * DO NOT EDIT BY HAND — regenerate with:
- *   node scripts/run-ts.mjs scripts/emit-smp7-content-bank.ts --write
+ *   node scripts/run-ts.mjs scripts/emit-content-bank.ts --write
  *
  * @module @/data/curriculum-content-smp7
  */

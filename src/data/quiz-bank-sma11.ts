@@ -9,6 +9,7 @@
  */
 
 import type { QuestionData } from '@/agents/assessment/types';
+import { SMA11_QUIZ_DB } from './quiz-bank-sma11-db';
 
 // ---------------------------------------------------------------------------
 // Helper: build a lookup key
@@ -4625,11 +4626,14 @@ export function getQuiz(
   subTopic: string,
 ): QuestionData[] {
   const key = quizKey(subject, topic, subTopic);
-  return QUIZ_MAP[key] ?? [];
+  // Generated bank first: it covers 401 of the 402 topics in the school's own
+  // SMA_2 palette, where this hand-written map covered 121 of 403. The original
+  // map stays as a fallback for anything the generated bank lacks.
+  return SMA11_QUIZ_DB[key] ?? QUIZ_MAP[key] ?? [];
 }
 
 export function getAllQuizzes(): Record<string, QuestionData[]> {
-  return { ...QUIZ_MAP };
+  return { ...QUIZ_MAP, ...SMA11_QUIZ_DB };
 }
 
 export default QUIZ_MAP;
