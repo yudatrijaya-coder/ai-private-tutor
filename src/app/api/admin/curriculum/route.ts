@@ -38,7 +38,8 @@ export async function GET(request: NextRequest) {
           },
         },
       },
-      orderBy: { createdAt: "desc" },
+      // Highest version first, so the curriculum in force leads the list.
+      orderBy: [{ version: "desc" }, { createdAt: "desc" }],
     });
 
     return NextResponse.json({ curricula });

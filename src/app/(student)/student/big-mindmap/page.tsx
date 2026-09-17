@@ -6,6 +6,7 @@ import { jwtVerify } from "jose";
 import Link from "next/link";
 
 import { requireStudentSecret } from "@/lib/auth/student-secret";
+import { getActiveCurriculumId } from "@/lib/curriculum-active";
 // Signing secret is resolved at call time by `requireStudentSecret()`, which
 // fails closed. The old module-scope constant captured `undefined` during
 // `next build` and fell back to a string that is public in git history.
@@ -53,14 +54,12 @@ async function SubjectGrid() {
   });
   if (!student) return null;
 
-  // Get ALL curricula
-  const curricula = await prisma.curriculum.findMany({
-    where: { studentId: student.id },
-    select: { id: true },
-  });
+  // Active curriculum only — see `src/lib/curriculum-active.ts`.
+  const curriculumId = await getActiveCurriculumId(student.id);
+  if (!curriculumId) return null;
 
   const subjects = await prisma.material.findMany({
-    where: { curriculumId: { in: curricula.map(c => c.id) } },
+    where: { curriculumId },
     select: { subject: true },
     distinct: ["subject"],
     orderBy: { subject: "asc" },

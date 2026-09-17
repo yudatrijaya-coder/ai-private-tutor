@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { generateCurriculumDraft } from "@/agents/curriculum";
 import { resolveScope, isAdmin } from "@/lib/auth/scope";
+import { ACTIVE_CURRICULUM_ORDER } from "@/lib/curriculum-active";
 
 export async function POST(request: NextRequest) {
   // Admin only — this DELETES the student's curriculum and regenerates it.
@@ -43,7 +44,7 @@ export async function POST(request: NextRequest) {
   const newCurriculum = await prisma.curriculum.findFirst({
     where: { studentId },
     include: { _count: { select: { materials: true } } },
-    orderBy: { createdAt: "desc" },
+    orderBy: ACTIVE_CURRICULUM_ORDER as never,
   });
 
   return NextResponse.json({

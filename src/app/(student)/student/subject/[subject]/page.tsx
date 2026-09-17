@@ -12,6 +12,7 @@ import { SubjectTracker } from "@/components/SubjectTracker";
 import ProsemDialog from "@/components/ProsemDialog";
 
 import { requireStudentSecret } from "@/lib/auth/student-secret";
+import { getActiveCurriculumId } from "@/lib/curriculum-active";
 // Signing secret is resolved at call time by `requireStudentSecret()`, which
 // fails closed. The old module-scope constant captured `undefined` during
 // `next build` and fell back to a string that is public in git history.
@@ -135,13 +136,18 @@ async function SubjectContent({ subject }: { subject: string }) {
     select: { gradeLevel: true },
   });
 
-  // Cari semua curricula student
-  const curricula = await prisma.curriculum.findMany({
-    where: { studentId: session.studentId },
-    include: {
-      materials: {
+  // Active curriculum only — a student with a stale earlier curriculum would
+  // otherwise see every lesson twice (Raihan, RAIHAN001: 36 Fisika rows for 18.
+  // See `src/lib/curriculum-active.ts`).
+  const curriculumId = await getActiveCurriculumId(session.studentId);
+  const materials = curriculumId
+    ? await prisma.material.findMany({
         // Grade-scoped (ledger B-01) — see the note in the subject page.
-        where: { subject: decodedSubject, ...(studentData?.gradeLevel ? { gradeLevel: studentData.gradeLevel } : {}) },
+        where: {
+          curriculumId,
+          subject: decodedSubject,
+          ...(studentData?.gradeLevel ? { gradeLevel: studentData.gradeLevel } : {}),
+        },
         include: {
           _count: { select: { quizzes: true } },
           quizzes: {
@@ -150,19 +156,8 @@ async function SubjectContent({ subject }: { subject: string }) {
           },
         },
         orderBy: { weekOrder: "asc" },
-      },
-    },
-    orderBy: { createdAt: "desc" },
-  });
-
-  // Flatten materials from all curricula, deduplicate by id
-  const allMaterials = curricula.flatMap(c => c.materials);
-  const seenIds = new Set<string>();
-  const materials = allMaterials.filter(m => {
-    if (seenIds.has(m.id)) return false;
-    seenIds.add(m.id);
-    return true;
-  });
+      })
+    : [];
 
   if (materials.length === 0) {
     return (

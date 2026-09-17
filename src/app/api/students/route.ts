@@ -5,6 +5,7 @@ import { enqueueLocal } from "@/queue/local";
 import { QUEUES } from "@/queue/definitions";
 import { redis } from "@/queue/redis";
 import { resolveScope, isAdmin } from "@/lib/auth/scope";
+import { getActiveCurriculumId } from "@/lib/curriculum-active";
 
 /**
  * GET /api/students — List all students.
@@ -105,6 +106,7 @@ export async function POST(request: NextRequest) {
       // Check if curriculum already exists — call generateCurriculumDraft directly
       const existingCurriculum = await prisma.curriculum.findFirst({
         where: { studentId: student.id },
+        orderBy: [{ version: "desc" }, { createdAt: "desc" }],
       });
       if (existingCurriculum) {
         results.push({ stage: "curriculum", status: "skipped (already exists)" });
@@ -116,12 +118,17 @@ export async function POST(request: NextRequest) {
     }
 
     if (want.includes("content")) {
-      const materials = await prisma.material.findMany({
-        where: {
-          curriculum: { studentId: student.id },
-          status: { in: ["DRAFT", "RAW"] },
-        },
-      });
+      // Active curriculum only — queueing across every curriculum would re-scrape
+      // stale rows the student no longer sees. See `src/lib/curriculum-active.ts`.
+      const activeCurriculumId = await getActiveCurriculumId(student.id);
+      const materials = activeCurriculumId
+        ? await prisma.material.findMany({
+            where: {
+              curriculumId: activeCurriculumId,
+              status: { in: ["DRAFT", "RAW"] },
+            },
+          })
+        : [];
       for (const m of materials) {
         await trigger(
           QUEUES.CONTENT_SCRAPE,
@@ -133,10 +140,13 @@ export async function POST(request: NextRequest) {
     }
 
     if (want.includes("assessment")) {
-      const materials = await prisma.material.findMany({
-        where: { curriculum: { studentId: student.id }, status: "READY" },
-        include: { _count: { select: { quizzes: true } } },
-      });
+      const activeCurriculumId = await getActiveCurriculumId(student.id);
+      const materials = activeCurriculumId
+        ? await prisma.material.findMany({
+            where: { curriculumId: activeCurriculumId, status: "READY" },
+            include: { _count: { select: { quizzes: true } } },
+          })
+        : [];
       let queued = 0;
       for (const m of materials) {
         if (m._count.quizzes > 0) {

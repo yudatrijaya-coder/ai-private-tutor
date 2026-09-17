@@ -8,6 +8,7 @@ import { BigMindmap } from "./BigMindmap";
 import { parseMindmapFromMarkdown, type MindmapNode } from "@/lib/mindmap-template";
 
 import { requireStudentSecret } from "@/lib/auth/student-secret";
+import { getActiveCurriculumId } from "@/lib/curriculum-active";
 // Signing secret is resolved at call time by `requireStudentSecret()`, which
 // fails closed. The old module-scope constant captured `undefined` during
 // `next build` and fell back to a string that is public in git history.
@@ -42,16 +43,13 @@ async function BigMindmapContent({ subjectName }: { subjectName: string }) {
   });
   if (!student) return <div className="text-center py-20 text-amber-400">Siswa tidak ditemukan</div>;
 
-  // Get ALL curricula (Raihan & others may have multiple curricula)
-  const curricula = await prisma.curriculum.findMany({
-    where: { studentId: student.id },
-    select: { id: true },
-    orderBy: { createdAt: "desc" },
-  });
-  if (!curricula.length) return <div className="text-center py-20 text-amber-400">Kurikulum belum tersedia</div>;
+  // Active curriculum only — Raihan owns a stale v1 alongside v3, and unioning
+  // them duplicated every topic node. See `src/lib/curriculum-active.ts`.
+  const curriculumId = await getActiveCurriculumId(student.id);
+  if (!curriculumId) return <div className="text-center py-20 text-amber-400">Kurikulum belum tersedia</div>;
 
   const materials = await prisma.material.findMany({
-    where: { curriculumId: { in: curricula.map(c => c.id) }, subject: subjectName },
+    where: { curriculumId, subject: subjectName },
     select: { id: true, topic: true, rawContent: true, metadata: true },
     orderBy: { weekOrder: "asc" },
   });

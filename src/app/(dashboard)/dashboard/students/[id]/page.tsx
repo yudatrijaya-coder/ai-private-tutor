@@ -40,7 +40,9 @@ async function StudentDetailContent({ id }: { id: string }) {
               take: 100,
             },
           },
-          orderBy: { createdAt: "desc" },
+          // Highest version wins — the curriculum in force. `createdAt desc`
+          // could pick a stale row. See `src/lib/curriculum-active.ts`.
+          orderBy: [{ version: "desc" }, { createdAt: "desc" }],
           take: 1,
         },
       },
@@ -74,7 +76,9 @@ async function StudentDetailContent({ id }: { id: string }) {
               take: 100,
             },
           },
-          orderBy: { createdAt: "desc" },
+          // Highest version wins — the curriculum in force. `createdAt desc`
+          // could pick a stale row. See `src/lib/curriculum-active.ts`.
+          orderBy: [{ version: "desc" }, { createdAt: "desc" }],
           take: 1,
         },
       },

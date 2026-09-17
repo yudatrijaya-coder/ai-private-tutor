@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { optionTexts } from "@/lib/quiz-grading";
 import { resolveScope } from "@/lib/auth/scope";
+import { getActiveCurriculumId } from "@/lib/curriculum-active";
 
 /**
  * GET /api/students/quizzes/[id]
@@ -30,18 +31,20 @@ export async function GET(
   }
 
   // Ownership: a student may only open a quiz reachable from their OWN
-  // curriculum. Respond 404 rather than 403 so the endpoint does not confirm
-  // that a guessed quiz id exists.
+  // curriculum IN FORCE. Respond 404 rather than 403 so the endpoint does not
+  // confirm that a guessed quiz id exists. See `src/lib/curriculum-active.ts`.
   if (scope.kind === "student") {
-    const owns = quiz.materialId
-      ? await prisma.material.findFirst({
-          where: {
-            id: quiz.materialId,
-            curriculum: { studentId: scope.session.studentId },
-          },
-          select: { id: true },
-        })
-      : null;
+    const activeCurriculumId = await getActiveCurriculumId(scope.session.studentId);
+    const owns =
+      quiz.materialId && activeCurriculumId
+        ? await prisma.material.findFirst({
+            where: {
+              id: quiz.materialId,
+              curriculumId: activeCurriculumId,
+            },
+            select: { id: true },
+          })
+        : null;
     if (!owns) {
       return NextResponse.json({ error: "Quiz not found" }, { status: 404 });
     }

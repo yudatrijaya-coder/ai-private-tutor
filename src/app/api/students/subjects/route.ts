@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { resolveScope, scopedStudentIdentifier } from "@/lib/auth/scope";
+import { getActiveCurriculumId } from "@/lib/curriculum-active";
 
 /**
  * GET /api/students/subjects?studentId=xxx
@@ -22,14 +23,15 @@ export async function GET(request: NextRequest) {
   const student = await prisma.student.findUnique({ where: { studentId } });
   if (!student) return NextResponse.json({ error: "Student not found" }, { status: 404 });
 
-  const curricula = await prisma.curriculum.findMany({
-    where: { studentId: student.id },
-    include: {
-      materials: { select: { subject: true }, orderBy: { subject: "asc" } },
-    },
-    orderBy: { createdAt: "desc" },
+  const curriculumId = await getActiveCurriculumId(student.id);
+  if (!curriculumId) return NextResponse.json({ subjects: [] });
+
+  const materials = await prisma.material.findMany({
+    where: { curriculumId },
+    select: { subject: true },
+    orderBy: { subject: "asc" },
   });
 
-  const subjects = [...new Set(curricula.flatMap(c => c.materials.map(m => m.subject)))].sort();
+  const subjects = [...new Set(materials.map((m) => m.subject))].sort();
   return NextResponse.json({ subjects });
 }

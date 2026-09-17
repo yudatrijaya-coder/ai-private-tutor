@@ -13,6 +13,7 @@ import { prisma } from "@/lib/prisma";
 import sharp from "sharp";
 import { mindmapToSvg, type MindmapNode } from "@/lib/mindmap-renderer";
 import { resolveScope, scopedStudentIdentifier } from "@/lib/auth/scope";
+import { ACTIVE_CURRICULUM_ORDER } from "@/lib/curriculum-active";
 
 export async function GET(request: NextRequest) {
   try {
@@ -45,10 +46,10 @@ export async function GET(request: NextRequest) {
     if (materialId) {
       material = await prisma.material.findUnique({ where: { id: materialId } });
     } else if (subject) {
-      // Get first material for this subject (latest curriculum)
+      // Get first material for this subject from the curriculum in force.
       const curriculum = await prisma.curriculum.findFirst({
         where: { studentId: student.id },
-        orderBy: { createdAt: "desc" },
+        orderBy: ACTIVE_CURRICULUM_ORDER as never,
         include: {
           materials: {
             where: { subject },

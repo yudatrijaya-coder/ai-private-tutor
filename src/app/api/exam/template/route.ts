@@ -41,7 +41,8 @@ export async function POST(request: NextRequest) {
           include: { quizzes: { where: { type: "QUIZ" } } },
         },
       },
-      orderBy: { createdAt: "desc" },
+      // Highest version wins — see `src/lib/curriculum-active.ts`.
+      orderBy: [{ version: "desc" }, { createdAt: "desc" }],
     });
 
     if (!curriculum) return NextResponse.json({ error: "No curriculum" }, { status: 404 });
@@ -186,7 +187,9 @@ export async function GET(request: NextRequest) {
         select: { weekOrder: true, subject: true, topic: true },
       },
     },
-    orderBy: { createdAt: "desc" },
+    // Highest version wins, not newest-created — the active-curriculum rule in
+    // `src/lib/curriculum-active.ts`. Same answer today, explicit about why.
+    orderBy: [{ version: "desc" }, { createdAt: "desc" }],
   });
 
   if (!curriculum) return NextResponse.json({ error: "No curriculum" }, { status: 404 });

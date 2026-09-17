@@ -5,6 +5,7 @@ import { getContent, hasContent } from "@/data/curriculum-content";
 import { GRADE_TOPICS } from "@/data/curriculum-topics";
 import { normalizeVideoUrl } from "@/lib/video-url";
 import { resolveScope, isAdmin } from "@/lib/auth/scope";
+import { ACTIVE_CURRICULUM_ORDER } from "@/lib/curriculum-active";
 
 /**
  * POST /api/curriculum/batch-generate
@@ -41,7 +42,7 @@ export async function POST(request: NextRequest) {
 
   const curriculum = await prisma.curriculum.findFirst({
     where: { studentId },
-    orderBy: { createdAt: "desc" },
+    orderBy: ACTIVE_CURRICULUM_ORDER as never,
     include: { materials: { orderBy: { weekOrder: "asc" } } },
   });
 
@@ -227,7 +228,7 @@ export async function GET(request: NextRequest) {
 
   const curriculum = await prisma.curriculum.findFirst({
     where: { studentId },
-    orderBy: { createdAt: "desc" },
+    orderBy: ACTIVE_CURRICULUM_ORDER as never,
     include: { materials: { orderBy: { weekOrder: "asc" } } },
   });
 
