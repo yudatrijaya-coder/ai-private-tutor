@@ -929,12 +929,20 @@ tampilan. Tetapi baris `ACTIVE` permanen membuat setiap inspeksi manual
 menyesatkan — terlihat seperti job yang masih berjalan padahal sudah mati
 sejak Juli.
 
-**Reaper sudah disiapkan, BELUM dijalankan** — menunggu keputusan.
-`scripts/reap-stale-agent-logs.ts` (dry-run sebagai default):
+> **STATUS 2026-09-17: SUDAH DIJALANKAN (2026-09-11).** Nama file sebenarnya
+> `scripts/sweep-stranded-agent-logs.ts` — bukan `reap-stale-agent-logs.ts`.
+> Referensi lama itu menunjuk berkas yang tidak pernah ada, dan sempat
+> menghabiskan waktu satu sesi untuk mengejarnya. Hasil: **5.296 baris**
+> dianotasi (`stale: retries exhausted…` 2.648 + `stale: attempt never reached
+> a terminal state` 2.648), lalu `ACTIVE`/`RETRYING` residu = **0**. Tidak ada
+> job baru yang ter-strand setelah perbaikan siklus hidup worker (Pass 7 / C-10),
+> jadi sweep ini **one-time** dan tidak dijadwalkan.
+
+Script asli (dry-run sebagai default), dipertahankan sebagai catatan:
 
 ```
-npx tsx scripts/reap-stale-agent-logs.ts            # dry-run, cutoff 7 hari
-npx tsx scripts/reap-stale-agent-logs.ts --apply    # menulis + snapshot rollback
+npx tsx scripts/sweep-stranded-agent-logs.ts            # dry-run, cutoff 7 hari
+npx tsx scripts/sweep-stranded-agent-logs.ts --apply    # menulis + snapshot rollback
 ```
 
 Dry-run nyata: **5.367 kandidat** lewat cutoff 7 hari (dari 5.369 total — 2
