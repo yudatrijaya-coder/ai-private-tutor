@@ -9,7 +9,9 @@
  * @module @/data/curriculum-content
  */
 
+import { SD5_CONTENT } from "./curriculum-content-sd5";
 import { SMP7_CONTENT } from "./curriculum-content-smp7";
+import { SMA11_CONTENT } from "./curriculum-content-sma11";
 
 export interface CurriculumContent {
   subject: string;
@@ -1252,20 +1254,40 @@ export function getContent(
   subject: string,
   topic: string,
   subTopic: string,
+  grade?: string,
 ): string | null {
   const key = contentKey(subject, topic, subTopic);
-  // SMP_1 entries describe the 15 subjects the school actually teaches, so they
-  // take precedence over the Kurikulum Merdeka integrated entries (IPA / IPS)
-  // they replaced. Those originals stay in CONTENT_MAP untouched as a fallback.
-  return SMP7_CONTENT[key] ?? CONTENT_MAP[key] ?? null;
+  // The generated banks describe the subjects the school actually teaches, so
+  // they take precedence over the hand-written Kurikulum Merdeka integrated
+  // entries (IPA / IPS) they replaced. Those originals stay in CONTENT_MAP
+  // untouched as a fallback.
+  //
+  // The grade's own bank is checked first: sub-topics repeat across grades at
+  // different depth (Fisika/Suhu dan Kalor exists at both SMP_1 and SMA_2 with
+  // different text), and 4 keys collide between SD_5 and SMP_1 outright. Rules
+  // for a key missing from its own grade fall back to the other banks, which is
+  // only ever better than returning nothing.
+  const byGrade: Record<string, Record<string, string>> = {
+    SD_5: SD5_CONTENT,
+    SMP_1: SMP7_CONTENT,
+    SMA_2: SMA11_CONTENT,
+  };
+  const mine = grade ? byGrade[grade]?.[key] : undefined;
+  return (
+    mine ?? SMP7_CONTENT[key] ?? SD5_CONTENT[key] ?? SMA11_CONTENT[key] ?? CONTENT_MAP[key] ?? null
+  );
 }
 
 /**
  * The full content bank as an array of CurriculumContent objects.
+ *
+ * Generated entries win over hand-written ones for the same key.
  */
 export const CONTENT_BANK: CurriculumContent[] = Object.entries({
   ...CONTENT_MAP,
+  ...SD5_CONTENT,
   ...SMP7_CONTENT,
+  ...SMA11_CONTENT,
 }).map(([key, content]) => {
   const [subject, topic, subTopic] = key.split("||");
   return { subject, topic, subTopic, content };
@@ -1278,6 +1300,7 @@ export function hasContent(
   subject: string,
   topic: string,
   subTopic: string,
+  grade?: string,
 ): boolean {
-  return getContent(subject, topic, subTopic) !== null;
+  return getContent(subject, topic, subTopic, grade) !== null;
 }

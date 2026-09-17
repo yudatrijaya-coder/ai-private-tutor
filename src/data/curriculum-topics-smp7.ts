@@ -1,72 +1,22 @@
 /**
- * Full SMP Kelas 7 Kurikulum Merdeka.
- *
- * Subject structure follows the school, not the 2022 integrated model: Moodle
- * Kumbang runs Biologi (4169), Fisika (4171), Kimia (4174), Geografi (4172) and
- * Sejarah (4179) as separate VII A courses and has no IPA or IPS course at all.
- * Ekonomi (4170) is likewise its own course.
+ * SMP Kelas 7 — school palette.
  *
  * Generated from the reference curriculum (student RAIHAN001, curriculum
- * e94cf3dd-3fae-4fae-b28f-e7aa899d11e7) by `scripts/emit-smp7-bank.ts`. Regenerate with:
+ * e94cf3dd-3fae-4fae-b28f-e7aa899d11e7, 218 topics, 15 subjects) by
+ * `scripts/emit-topic-bank.ts`. Regenerate with:
  *
- *   node scripts/run-ts.mjs scripts/emit-smp7-bank.ts --write
+ *   node scripts/run-ts.mjs scripts/emit-topic-bank.ts --grade SMP_1 --write
  *
  * Do not hand-edit: the point of this file is that `GRADE_TOPICS.SMP_1`
  * reproduces the school's subject set exactly, so that regenerating a
  * curriculum cannot drop or invent a subject.
+ *
+ * @module @/data/curriculum-topics-smp7
  */
 import type { TopicEntry } from "./curriculum-topics";
 
 export const GRADE_TOPICS_SMP7: Record<string, TopicEntry[]> = {
   SMP_1: [
-    // ═══ Biologi — 10 sub-topik ═══
-    { subject: "Biologi", topic: "Sel dan Jaringan", subTopic: "Struktur dan Fungsi Sel", weekOrder: 1, priority: 8 },
-    { subject: "Biologi", topic: "Klasifikasi Makhluk Hidup", subTopic: "Ciri-Ciri Makhluk Hidup", weekOrder: 2, priority: 7 },
-    { subject: "Biologi", topic: "Klasifikasi Makhluk Hidup", subTopic: "Klasifikasi 5 Kingdom", weekOrder: 3, priority: 7 },
-    { subject: "Biologi", topic: "Sistem Organ", subTopic: "Sistem Organ pada Manusia dan Hewan", weekOrder: 4, priority: 8 },
-    { subject: "Biologi", topic: "Ekologi", subTopic: "Komponen Ekosistem dan Interaksi", weekOrder: 5, priority: 8 },
-    { subject: "Biologi", topic: "Ekologi", subTopic: "Rantai Makanan dan Jaring-Jaring Makanan", weekOrder: 6, priority: 7 },
-    { subject: "Biologi", topic: "Ekologi", subTopic: "Piramida Ekologi dan Aliran Energi", weekOrder: 7, priority: 7 },
-    { subject: "Biologi", topic: "Keanekaragaman Hayati", subTopic: "Tingkat Keanekaragaman", weekOrder: 8, priority: 8 },
-    { subject: "Biologi", topic: "Virus dan Bakteri", subTopic: "Ciri-Ciri Virus dan Bakteri", weekOrder: 9, priority: 8 },
-    { subject: "Biologi", topic: "Protista dan Jamur", subTopic: "Ciri-Ciri Protista dan Jamur", weekOrder: 10, priority: 7 },
-
-    // ═══ Fisika — 20 sub-topik ═══
-    { subject: "Fisika", topic: "Besaran dan Pengukuran", subTopic: "Besaran Pokok", weekOrder: 1, priority: 1 },
-    { subject: "Fisika", topic: "Besaran dan Pengukuran", subTopic: "Besaran Pokok dan Turunan", weekOrder: 1, priority: 4 },
-    { subject: "Fisika", topic: "Besaran dan Pengukuran", subTopic: "Besaran Turunan", weekOrder: 1, priority: 1 },
-    { subject: "Fisika", topic: "Gerak Lurus", subTopic: "Jarak dan Perpindahan", weekOrder: 1, priority: 4 },
-    { subject: "Fisika", topic: "Besaran dan Pengukuran", subTopic: "Satuan", weekOrder: 2, priority: 1 },
-    { subject: "Fisika", topic: "Gaya", subTopic: "Hukum Newton", weekOrder: 2, priority: 4 },
-    { subject: "Fisika", topic: "Gerak Lurus", subTopic: "Kelajuan, Kecepatan, dan Percepatan", weekOrder: 2, priority: 4 },
-    { subject: "Fisika", topic: "Suhu dan Kalor", subTopic: "Kalor dan Perpindahannya", weekOrder: 3, priority: 4 },
-    { subject: "Fisika", topic: "Suhu dan Kalor", subTopic: "Suhu dan Pemuaian", weekOrder: 3, priority: 4 },
-    { subject: "Fisika", topic: "Tekanan", subTopic: "Tekanan Zat Padat, Cair, dan Gas", weekOrder: 3, priority: 4 },
-    { subject: "Fisika", topic: "Usaha dan Energi", subTopic: "Energi Kinetik dan Potensial", weekOrder: 3, priority: 4 },
-    { subject: "Fisika", topic: "Getaran dan Gelombang", subTopic: "Getaran dan Gelombang", weekOrder: 4, priority: 4 },
-    { subject: "Fisika", topic: "Besaran dan Pengukuran", subTopic: "Alat Ukur", weekOrder: 999, priority: 1 },
-    { subject: "Fisika", topic: "Gaya dan Hukum Newton", subTopic: "Aplikasi", weekOrder: 999, priority: 1 },
-    { subject: "Fisika", topic: "Gaya dan Hukum Newton", subTopic: "Hukum III Newton", weekOrder: 999, priority: 1 },
-    { subject: "Fisika", topic: "Gaya dan Hukum Newton", subTopic: "Hukum II Newton", weekOrder: 999, priority: 1 },
-    { subject: "Fisika", topic: "Gaya dan Hukum Newton", subTopic: "Hukum I Newton", weekOrder: 999, priority: 1 },
-    { subject: "Fisika", topic: "Gerak Lurus", subTopic: "GLB dan GLBB", weekOrder: 999, priority: 1 },
-    { subject: "Fisika", topic: "Gerak Lurus", subTopic: "Kecepatan", weekOrder: 999, priority: 1 },
-    { subject: "Fisika", topic: "Gerak Lurus", subTopic: "Percepatan", weekOrder: 999, priority: 1 },
-
-    // ═══ Kimia — 12 sub-topik ═══
-    { subject: "Kimia", topic: "Hakikat Kimia", subTopic: "Metode Ilmiah dan Laboratorium", weekOrder: 1, priority: 4 },
-    { subject: "Kimia", topic: "Unsur", subTopic: "Lambang Unsur dan Tabel Periodik", weekOrder: 1, priority: 4 },
-    { subject: "Kimia", topic: "Campuran", subTopic: "Larutan dan Konsentrasi", weekOrder: 2, priority: 4 },
-    { subject: "Kimia", topic: "Senyawa", subTopic: "Rumus Kimia dan Tata Nama", weekOrder: 2, priority: 4 },
-    { subject: "Kimia", topic: "Asam Basa", subTopic: "Sifat Asam dan Basa", weekOrder: 3, priority: 4 },
-    { subject: "Kimia", topic: "Reaksi Kimia", subTopic: "Reaksi Kimia Sederhana", weekOrder: 3, priority: 4 },
-    { subject: "Kimia", topic: "Objek IPA dan Pengenalan Kimia", subTopic: "Mengklasifikasikan Materi", weekOrder: 999, priority: 1 },
-    { subject: "Kimia", topic: "Objek IPA dan Pengenalan Kimia", subTopic: "Senyawa dan Campuran", weekOrder: 999, priority: 1 },
-    { subject: "Kimia", topic: "Objek IPA dan Pengenalan Kimia", subTopic: "Unsur", weekOrder: 999, priority: 1 },
-    { subject: "Kimia", topic: "Pemisahan Campuran", subTopic: "Filtrasi, Evaporasi, dan Sentrifugasi", weekOrder: 999, priority: 1 },
-    { subject: "Kimia", topic: "Pemisahan Campuran", subTopic: "Perubahan Fisika dan Kimia", weekOrder: 999, priority: 1 },
-    { subject: "Kimia", topic: "Pemisahan Campuran", subTopic: "Sublimasi, Kromatografi, dan Destilasi", weekOrder: 999, priority: 1 },
-
     // ═══ Bahasa Indonesia — 27 sub-topik ═══
     { subject: "Bahasa Indonesia", topic: "Teks Deskripsi", subTopic: "Gaya Penulisan", weekOrder: 1, priority: 1 },
     { subject: "Bahasa Indonesia", topic: "Teks Deskripsi", subTopic: "Informasi Eksplisit", weekOrder: 1, priority: 1 },
@@ -134,20 +84,39 @@ export const GRADE_TOPICS_SMP7: Record<string, TopicEntry[]> = {
     { subject: "Bahasa Mandarin", topic: "我叫李文 - Wǒ jiào lǐ wén (My Name is Li Wen)", subTopic: "Membacakan teks bacaan 我叫李文 - Wǒ jiào lǐ wén", weekOrder: 999, priority: 1 },
     { subject: "Bahasa Mandarin", topic: "我叫李文 - Wǒ jiào lǐ wén (My Name is Li Wen)", subTopic: "Mendengarkan cara tentang menyebutkan 我叫李文 - Wǒ jiào lǐ wén", weekOrder: 999, priority: 1 },
 
-    // ═══ Matematika — 13 sub-topik ═══
-    { subject: "Matematika", topic: "Bilangan", subTopic: "Bilangan Bulat dan Operasinya", weekOrder: 1, priority: 6 },
-    { subject: "Matematika", topic: "Bilangan", subTopic: "Bilangan Pecahan", weekOrder: 1, priority: 6 },
-    { subject: "Matematika", topic: "Aljabar", subTopic: "Bentuk Aljabar", weekOrder: 2, priority: 6 },
-    { subject: "Matematika", topic: "Aljabar", subTopic: "Persamaan Linear Satu Variabel", weekOrder: 2, priority: 6 },
-    { subject: "Matematika", topic: "Geometri", subTopic: "Garis dan Sudut", weekOrder: 3, priority: 6 },
-    { subject: "Matematika", topic: "Geometri", subTopic: "Segitiga dan Segiempat", weekOrder: 3, priority: 6 },
-    { subject: "Matematika", topic: "Statistika", subTopic: "Penyajian Data", weekOrder: 4, priority: 6 },
-    { subject: "Matematika", topic: "Statistika", subTopic: "Ukuran Pemusatan Data", weekOrder: 4, priority: 4 },
-    { subject: "Matematika", topic: "Aritmatika Sosial", subTopic: "Harga dan Diskon", weekOrder: 999, priority: 1 },
-    { subject: "Matematika", topic: "Bangun Datar", subTopic: "Luas dan Keliling", weekOrder: 999, priority: 1 },
-    { subject: "Matematika", topic: "Bilangan", subTopic: "Bilangan Bulat dan Operasi", weekOrder: 999, priority: 1 },
-    { subject: "Matematika", topic: "Perbandingan", subTopic: "Skala dan Rasio", weekOrder: 999, priority: 1 },
-    { subject: "Matematika", topic: "Persamaan", subTopic: "Persamaan Linear", weekOrder: 999, priority: 1 },
+    // ═══ Biologi — 10 sub-topik ═══
+    { subject: "Biologi", topic: "Sel dan Jaringan", subTopic: "Struktur dan Fungsi Sel", weekOrder: 1, priority: 8 },
+    { subject: "Biologi", topic: "Klasifikasi Makhluk Hidup", subTopic: "Ciri-Ciri Makhluk Hidup", weekOrder: 2, priority: 7 },
+    { subject: "Biologi", topic: "Klasifikasi Makhluk Hidup", subTopic: "Klasifikasi 5 Kingdom", weekOrder: 3, priority: 7 },
+    { subject: "Biologi", topic: "Sistem Organ", subTopic: "Sistem Organ pada Manusia dan Hewan", weekOrder: 4, priority: 8 },
+    { subject: "Biologi", topic: "Ekologi", subTopic: "Komponen Ekosistem dan Interaksi", weekOrder: 5, priority: 8 },
+    { subject: "Biologi", topic: "Ekologi", subTopic: "Rantai Makanan dan Jaring-Jaring Makanan", weekOrder: 6, priority: 7 },
+    { subject: "Biologi", topic: "Ekologi", subTopic: "Piramida Ekologi dan Aliran Energi", weekOrder: 7, priority: 7 },
+    { subject: "Biologi", topic: "Keanekaragaman Hayati", subTopic: "Tingkat Keanekaragaman", weekOrder: 8, priority: 8 },
+    { subject: "Biologi", topic: "Virus dan Bakteri", subTopic: "Ciri-Ciri Virus dan Bakteri", weekOrder: 9, priority: 8 },
+    { subject: "Biologi", topic: "Protista dan Jamur", subTopic: "Ciri-Ciri Protista dan Jamur", weekOrder: 10, priority: 7 },
+
+    // ═══ Fisika — 20 sub-topik ═══
+    { subject: "Fisika", topic: "Besaran dan Pengukuran", subTopic: "Besaran Pokok", weekOrder: 1, priority: 1 },
+    { subject: "Fisika", topic: "Besaran dan Pengukuran", subTopic: "Besaran Pokok dan Turunan", weekOrder: 1, priority: 4 },
+    { subject: "Fisika", topic: "Besaran dan Pengukuran", subTopic: "Besaran Turunan", weekOrder: 1, priority: 1 },
+    { subject: "Fisika", topic: "Gerak Lurus", subTopic: "Jarak dan Perpindahan", weekOrder: 1, priority: 4 },
+    { subject: "Fisika", topic: "Besaran dan Pengukuran", subTopic: "Satuan", weekOrder: 2, priority: 1 },
+    { subject: "Fisika", topic: "Gaya", subTopic: "Hukum Newton", weekOrder: 2, priority: 4 },
+    { subject: "Fisika", topic: "Gerak Lurus", subTopic: "Kelajuan, Kecepatan, dan Percepatan", weekOrder: 2, priority: 4 },
+    { subject: "Fisika", topic: "Suhu dan Kalor", subTopic: "Kalor dan Perpindahannya", weekOrder: 3, priority: 4 },
+    { subject: "Fisika", topic: "Suhu dan Kalor", subTopic: "Suhu dan Pemuaian", weekOrder: 3, priority: 4 },
+    { subject: "Fisika", topic: "Tekanan", subTopic: "Tekanan Zat Padat, Cair, dan Gas", weekOrder: 3, priority: 4 },
+    { subject: "Fisika", topic: "Usaha dan Energi", subTopic: "Energi Kinetik dan Potensial", weekOrder: 3, priority: 4 },
+    { subject: "Fisika", topic: "Getaran dan Gelombang", subTopic: "Getaran dan Gelombang", weekOrder: 4, priority: 4 },
+    { subject: "Fisika", topic: "Besaran dan Pengukuran", subTopic: "Alat Ukur", weekOrder: 999, priority: 1 },
+    { subject: "Fisika", topic: "Gaya dan Hukum Newton", subTopic: "Aplikasi", weekOrder: 999, priority: 1 },
+    { subject: "Fisika", topic: "Gaya dan Hukum Newton", subTopic: "Hukum III Newton", weekOrder: 999, priority: 1 },
+    { subject: "Fisika", topic: "Gaya dan Hukum Newton", subTopic: "Hukum II Newton", weekOrder: 999, priority: 1 },
+    { subject: "Fisika", topic: "Gaya dan Hukum Newton", subTopic: "Hukum I Newton", weekOrder: 999, priority: 1 },
+    { subject: "Fisika", topic: "Gerak Lurus", subTopic: "GLB dan GLBB", weekOrder: 999, priority: 1 },
+    { subject: "Fisika", topic: "Gerak Lurus", subTopic: "Kecepatan", weekOrder: 999, priority: 1 },
+    { subject: "Fisika", topic: "Gerak Lurus", subTopic: "Percepatan", weekOrder: 999, priority: 1 },
 
     // ═══ Geografi — 10 sub-topik ═══
     { subject: "Geografi", topic: "Letak dan Geografi Indonesia", subTopic: "Letak Geografis dan Astronomis Indonesia", weekOrder: 1, priority: 8 },
@@ -160,25 +129,6 @@ export const GRADE_TOPICS_SMP7: Record<string, TopicEntry[]> = {
     { subject: "Geografi", topic: "Transmigrasi", subTopic: "Perpindahan Penduduk dan Dampaknya", weekOrder: 8, priority: 6 },
     { subject: "Geografi", topic: "Interaksi Antar Wilayah", subTopic: "Pergerakan Barang dan Jasa Antar Wilayah", weekOrder: 9, priority: 7 },
     { subject: "Geografi", topic: "Peta dan Atlas", subTopic: "Membaca Peta, Atlas, dan Globe", weekOrder: 10, priority: 6 },
-
-    // ═══ Sejarah — 10 sub-topik ═══
-    { subject: "Sejarah", topic: "Zaman Praaksara", subTopic: "Manusia Purba di Indonesia (Australopithecus, Homo Erectus, Homo Sapiens)", weekOrder: 1, priority: 8 },
-    { subject: "Sejarah", topic: "Zaman Praaksara", subTopic: "Peninggalan Zaman Praaksara (Sangiran, Ngandong, Situs Megalitik)", weekOrder: 2, priority: 7 },
-    { subject: "Sejarah", topic: "Keajaan Hindu-Buddha", subTopic: "Ciri-Ciri dan Peninggalan Kerajaan Hindu-Buddha", weekOrder: 3, priority: 8 },
-    { subject: "Sejarah", topic: "Kejaan Hindu-Buddha", subTopic: "Kerajaan Kutai, Tarumanagara, Sriwijaya, Majapahit", weekOrder: 4, priority: 8 },
-    { subject: "Sejarah", topic: "Kerajaan Islam", subTopic: "Masuknya Islam ke Indonesia dan Penyebarannya", weekOrder: 5, priority: 8 },
-    { subject: "Sejarah", topic: "Kerajaan Islam", subTopic: "Peninggalan Kerajaan Islam (Demak, Mataram Islam, Banten)", weekOrder: 6, priority: 7 },
-    { subject: "Sejarah", topic: "Perubahan Sosial", subTopic: "Dampak Kedatangan Eropa pada Masyarakat Indonesia", weekOrder: 7, priority: 8 },
-    { subject: "Sejarah", topic: "Masa Kolonial", subTopic: "Sistem Tanam Paksa, Reformasi, dan Perlawanan Lokal", weekOrder: 8, priority: 8 },
-    { subject: "Sejarah", topic: "Pergerakan Nasional", subTopic: "Budi Utomo hingga Sumpah Pemuda", weekOrder: 9, priority: 9 },
-    { subject: "Sejarah", topic: "Peristiwa Sekitar Proklamasi", subTopic: "Pendudukan Jepang, Proklamasi, dan Perjuangan Kemerdekaan", weekOrder: 10, priority: 10 },
-
-    // ═══ Ekonomi — 2 sub-topik ═══
-    { subject: "Ekonomi", topic: "Kegiatan Ekonomi", subTopic: "Produksi, Distribusi, dan Konsumsi", weekOrder: 3, priority: 4 },
-    { subject: "Ekonomi", topic: "Kegiatan Ekonomi", subTopic: "Pasar dan Permintaan-Penawaran", weekOrder: 4, priority: 4 },
-
-    // ═══ Sosiologi — 1 sub-topik ═══
-    { subject: "Sosiologi", topic: "Interaksi Sosial", subTopic: "Sosialisasi dan Lembaga Sosial", weekOrder: 4, priority: 4 },
 
     // ═══ Informatika — 12 sub-topik ═══
     { subject: "Informatika", topic: "Hardware", subTopic: "Pengenalan Perangkat Keras Komputer", weekOrder: 1, priority: 4 },
@@ -193,6 +143,35 @@ export const GRADE_TOPICS_SMP7: Record<string, TopicEntry[]> = {
     { subject: "Informatika", topic: "Dampak Sosial", subTopic: "Dampak Teknologi Informasi", weekOrder: 999, priority: 1 },
     { subject: "Informatika", topic: "Internet", subTopic: "Jaringan Internet", weekOrder: 999, priority: 1 },
     { subject: "Informatika", topic: "Keamanan", subTopic: "Keamanan Data dan Privasi", weekOrder: 999, priority: 1 },
+
+    // ═══ Kimia — 12 sub-topik ═══
+    { subject: "Kimia", topic: "Hakikat Kimia", subTopic: "Metode Ilmiah dan Laboratorium", weekOrder: 1, priority: 4 },
+    { subject: "Kimia", topic: "Unsur", subTopic: "Lambang Unsur dan Tabel Periodik", weekOrder: 1, priority: 4 },
+    { subject: "Kimia", topic: "Campuran", subTopic: "Larutan dan Konsentrasi", weekOrder: 2, priority: 4 },
+    { subject: "Kimia", topic: "Senyawa", subTopic: "Rumus Kimia dan Tata Nama", weekOrder: 2, priority: 4 },
+    { subject: "Kimia", topic: "Asam Basa", subTopic: "Sifat Asam dan Basa", weekOrder: 3, priority: 4 },
+    { subject: "Kimia", topic: "Reaksi Kimia", subTopic: "Reaksi Kimia Sederhana", weekOrder: 3, priority: 4 },
+    { subject: "Kimia", topic: "Objek IPA dan Pengenalan Kimia", subTopic: "Mengklasifikasikan Materi", weekOrder: 999, priority: 1 },
+    { subject: "Kimia", topic: "Objek IPA dan Pengenalan Kimia", subTopic: "Senyawa dan Campuran", weekOrder: 999, priority: 1 },
+    { subject: "Kimia", topic: "Objek IPA dan Pengenalan Kimia", subTopic: "Unsur", weekOrder: 999, priority: 1 },
+    { subject: "Kimia", topic: "Pemisahan Campuran", subTopic: "Filtrasi, Evaporasi, dan Sentrifugasi", weekOrder: 999, priority: 1 },
+    { subject: "Kimia", topic: "Pemisahan Campuran", subTopic: "Perubahan Fisika dan Kimia", weekOrder: 999, priority: 1 },
+    { subject: "Kimia", topic: "Pemisahan Campuran", subTopic: "Sublimasi, Kromatografi, dan Destilasi", weekOrder: 999, priority: 1 },
+
+    // ═══ Matematika — 13 sub-topik ═══
+    { subject: "Matematika", topic: "Bilangan", subTopic: "Bilangan Bulat dan Operasinya", weekOrder: 1, priority: 6 },
+    { subject: "Matematika", topic: "Bilangan", subTopic: "Bilangan Pecahan", weekOrder: 1, priority: 6 },
+    { subject: "Matematika", topic: "Aljabar", subTopic: "Bentuk Aljabar", weekOrder: 2, priority: 6 },
+    { subject: "Matematika", topic: "Aljabar", subTopic: "Persamaan Linear Satu Variabel", weekOrder: 2, priority: 6 },
+    { subject: "Matematika", topic: "Geometri", subTopic: "Garis dan Sudut", weekOrder: 3, priority: 6 },
+    { subject: "Matematika", topic: "Geometri", subTopic: "Segitiga dan Segiempat", weekOrder: 3, priority: 6 },
+    { subject: "Matematika", topic: "Statistika", subTopic: "Penyajian Data", weekOrder: 4, priority: 6 },
+    { subject: "Matematika", topic: "Statistika", subTopic: "Ukuran Pemusatan Data", weekOrder: 4, priority: 4 },
+    { subject: "Matematika", topic: "Aritmatika Sosial", subTopic: "Harga dan Diskon", weekOrder: 999, priority: 1 },
+    { subject: "Matematika", topic: "Bangun Datar", subTopic: "Luas dan Keliling", weekOrder: 999, priority: 1 },
+    { subject: "Matematika", topic: "Bilangan", subTopic: "Bilangan Bulat dan Operasi", weekOrder: 999, priority: 1 },
+    { subject: "Matematika", topic: "Perbandingan", subTopic: "Skala dan Rasio", weekOrder: 999, priority: 1 },
+    { subject: "Matematika", topic: "Persamaan", subTopic: "Persamaan Linear", weekOrder: 999, priority: 1 },
 
     // ═══ Pendidikan Agama Islam — 10 sub-topik ═══
     { subject: "Pendidikan Agama Islam", topic: "Al-Qur'an dan Hadis", subTopic: "Membaca Al-Qur'an dengan Tartil", weekOrder: 1, priority: 0 },
@@ -266,5 +245,24 @@ export const GRADE_TOPICS_SMP7: Record<string, TopicEntry[]> = {
     { subject: "PJOK", topic: "Strategi Gerak", subTopic: "Pertahanan dan Penyerangan", weekOrder: 999, priority: 1 },
     { subject: "PJOK", topic: "Strategi Gerak", subTopic: "Taktik Permainan Bola Besar", weekOrder: 999, priority: 1 },
     { subject: "PJOK", topic: "Strategi Gerak", subTopic: "Taktik Permainan Bola Kecil", weekOrder: 999, priority: 1 },
+
+    // ═══ Sejarah — 10 sub-topik ═══
+    { subject: "Sejarah", topic: "Zaman Praaksara", subTopic: "Manusia Purba di Indonesia (Australopithecus, Homo Erectus, Homo Sapiens)", weekOrder: 1, priority: 8 },
+    { subject: "Sejarah", topic: "Zaman Praaksara", subTopic: "Peninggalan Zaman Praaksara (Sangiran, Ngandong, Situs Megalitik)", weekOrder: 2, priority: 7 },
+    { subject: "Sejarah", topic: "Keajaan Hindu-Buddha", subTopic: "Ciri-Ciri dan Peninggalan Kerajaan Hindu-Buddha", weekOrder: 3, priority: 8 },
+    { subject: "Sejarah", topic: "Kejaan Hindu-Buddha", subTopic: "Kerajaan Kutai, Tarumanagara, Sriwijaya, Majapahit", weekOrder: 4, priority: 8 },
+    { subject: "Sejarah", topic: "Kerajaan Islam", subTopic: "Masuknya Islam ke Indonesia dan Penyebarannya", weekOrder: 5, priority: 8 },
+    { subject: "Sejarah", topic: "Kerajaan Islam", subTopic: "Peninggalan Kerajaan Islam (Demak, Mataram Islam, Banten)", weekOrder: 6, priority: 7 },
+    { subject: "Sejarah", topic: "Perubahan Sosial", subTopic: "Dampak Kedatangan Eropa pada Masyarakat Indonesia", weekOrder: 7, priority: 8 },
+    { subject: "Sejarah", topic: "Masa Kolonial", subTopic: "Sistem Tanam Paksa, Reformasi, dan Perlawanan Lokal", weekOrder: 8, priority: 8 },
+    { subject: "Sejarah", topic: "Pergerakan Nasional", subTopic: "Budi Utomo hingga Sumpah Pemuda", weekOrder: 9, priority: 9 },
+    { subject: "Sejarah", topic: "Peristiwa Sekitar Proklamasi", subTopic: "Pendudukan Jepang, Proklamasi, dan Perjuangan Kemerdekaan", weekOrder: 10, priority: 10 },
+
+    // ═══ Ekonomi — 2 sub-topik ═══
+    { subject: "Ekonomi", topic: "Kegiatan Ekonomi", subTopic: "Produksi, Distribusi, dan Konsumsi", weekOrder: 3, priority: 4 },
+    { subject: "Ekonomi", topic: "Kegiatan Ekonomi", subTopic: "Pasar dan Permintaan-Penawaran", weekOrder: 4, priority: 4 },
+
+    // ═══ Sosiologi — 1 sub-topik ═══
+    { subject: "Sosiologi", topic: "Interaksi Sosial", subTopic: "Sosialisasi dan Lembaga Sosial", weekOrder: 4, priority: 4 },
   ],
 };

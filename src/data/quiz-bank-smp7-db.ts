@@ -1,20 +1,16 @@
 /**
  * Quiz Bank — SMP Kelas 7, school palette (generated)
  *
- * 217 topics × 1103 questions, lifted from a live curriculum so
- * `generateCurriculumDraft` can attach a quiz to every material it creates.
- * The hand-written `quiz-bank-smp7.ts` only covered 54 of these topics.
+ * 217 topics × 1103 questions, lifted from the live curriculum of
+ * RAIHAN001 so `generateCurriculumDraft` can attach a quiz to every material
+ * it creates. Consulted by `quiz-bank-*.ts` before its own map.
  *
  * DO NOT EDIT BY HAND — regenerate with:
- *   node scripts/run-ts.mjs scripts/emit-smp7-content-bank.ts --write
+ *   node scripts/run-ts.mjs scripts/emit-content-bank.ts --write
  *
  * @module @/data/quiz-bank-smp7-db
  */
 import type { QuestionData } from "@/agents/assessment/types";
-
-export function smp7DbQuizKey(subject: string, topic: string, subTopic: string): string {
-  return `${subject}||${topic}||${subTopic}`;
-}
 
 export const SMP7_QUIZ_DB: Record<string, QuestionData[]> = {
   ["Bahasa Indonesia||Teks Deskripsi||Gaya Penulisan"]: [
