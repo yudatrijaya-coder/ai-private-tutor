@@ -6,6 +6,7 @@ import { jwtVerify } from "jose";
 import Link from "next/link";
 
 import { requireStudentSecret } from "@/lib/auth/student-secret";
+import { getActiveCurriculumId } from "@/lib/curriculum-active";
 // Signing secret is resolved at call time by `requireStudentSecret()`, which
 // fails closed. The old module-scope constant captured `undefined` during
 // `next build` and fell back to a string that is public in git history.
@@ -67,14 +68,19 @@ async function MindmapContent({ subject }: { subject: string }) {
 
   const sessionGrade = await getSessionGrade();
 
-  const curricula = await prisma.curriculum.findMany({
-    where: { studentId: sessionId },
-    include: {
-      materials: {
-        // Grade-scoped (ledger B-01): `Material` carries its own gradeLevel, so
-        // without this a row labelled for another grade but living in this
-        // student's curriculum leaks into the topic tree.
-        where: { subject: decoded, ...(sessionGrade ? { gradeLevel: sessionGrade as never } : {}) },
+  // Active curriculum only — unioning every curriculum showed a student with a
+  // stale earlier one each topic twice. See `src/lib/curriculum-active.ts`.
+  const curriculumId = await getActiveCurriculumId(sessionId);
+  const materials = curriculumId
+    ? await prisma.material.findMany({
+        where: {
+          curriculumId,
+          // Grade-scoped (ledger B-01): `Material` carries its own gradeLevel, so
+          // without this a row labelled for another grade but living in this
+          // student's curriculum leaks into the topic tree.
+          subject: decoded,
+          ...(sessionGrade ? { gradeLevel: sessionGrade as never } : {}),
+        },
         select: {
           topic: true,
           subTopic: true,
@@ -86,23 +92,12 @@ async function MindmapContent({ subject }: { subject: string }) {
           },
         },
         orderBy: { weekOrder: "asc" },
-      },
-    },
-    orderBy: { createdAt: "desc" },
-  });
-
-  const materials = curricula.flatMap(c => c.materials);
-  // Dedup by id
-  const seen = new Set<string>();
-  const uniqueMaterials = materials.filter(m => {
-    if (seen.has(m.id)) return false;
-    seen.add(m.id);
-    return true;
-  });
+      })
+    : [];
 
   // Group by topic
   const groups = new Map<string, { subTopics: string[]; id: string; quizId: string | null }>();
-  for (const m of uniqueMaterials) {
+  for (const m of materials) {
     if (!groups.has(m.topic)) {
       groups.set(m.topic, { subTopics: [], id: m.id, quizId: m.quizzes[0]?.id ?? null });
     }

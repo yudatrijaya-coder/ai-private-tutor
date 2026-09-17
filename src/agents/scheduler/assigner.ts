@@ -12,6 +12,7 @@ import { prisma } from "@/lib/prisma";
 import type { Material } from "@/generated/prisma/client";
 import { addDays } from "date-fns";
 import { buildProsemContext } from "@/lib/prosem-context";
+import { getActiveCurriculumId } from "@/lib/curriculum-active";
 
 /* ------------------------------------------------------------------ */
 /*  Constants                                                         */
@@ -60,14 +61,13 @@ export async function assignWeeklyTopics(
   studentId: string,
   weekStart: string,
 ): Promise<AssignResult> {
-  // 1. Load student + their curriculum IDs
+  // 1. Load student
   const student = await prisma.student.findUnique({
     where: { id: studentId },
     select: {
       id: true,
       gradeLevel: true,
       scheduleConfig: true,
-      curriculums: { select: { id: true } },
     },
   });
 
@@ -76,16 +76,22 @@ export async function assignWeeklyTopics(
     return { sessionsCreated: 0, summary: { new: [], weak: [], random: [] } };
   }
 
-  const curriculumIds = student.curriculums.map((c) => c.id);
-  if (curriculumIds.length === 0) {
-    console.warn(`[scheduler/assigner] No curricula found for student=${studentId}`);
+  // 2. Gather available materials — ACTIVE curriculum only.
+  //
+  // This used to read across every curriculum the student owns. Raihan
+  // (RAIHAN001) carries a stale v1 (264 materials) alongside v3 (228), so the
+  // scheduler could pick a lesson the student is never shown, and the same topic
+  // existed twice under two different weekOrders. See
+  // `src/lib/curriculum-active.ts`.
+  const activeCurriculumId = await getActiveCurriculumId(studentId);
+  if (!activeCurriculumId) {
+    console.warn(`[scheduler/assigner] No active curriculum for student=${studentId}`);
     return { sessionsCreated: 0, summary: { new: [], weak: [], random: [] } };
   }
 
-  // 2. Gather available materials scoped to student's curricula
   const availableMaterials = await prisma.material.findMany({
     where: {
-      curriculumId: { in: curriculumIds },
+      curriculumId: activeCurriculumId,
       status: { in: ["READY" as const, "PROCESSED" as const, "VIDEO_READY" as const] },
     },
     orderBy: [{ weekOrder: "asc" }, { priority: "desc" }],
@@ -125,7 +131,7 @@ export async function assignWeeklyTopics(
   );
 
   // 3. Identify weak subjects (mastery < 50%)
-  const weakSubjects = await identifyWeakSubjects(studentId, curriculumIds);
+  const weakSubjects = await identifyWeakSubjects(studentId, activeCurriculumId);
 
   // 4. Compute available session slots
   const allSlots = computeWeeklySlots(student.scheduleConfig, weekStartDate);
@@ -249,7 +255,10 @@ export async function assignWeeklyTopics(
 /**
  * Fetch subjects where the student's latest mastery is below 50%.
  */
-async function identifyWeakSubjects(studentId: string, curriculumIds: string[]): Promise<Map<string, Material[]>> {
+async function identifyWeakSubjects(
+  studentId: string,
+  curriculumId: string,
+): Promise<Map<string, Material[]>> {
   const snaps = await prisma.progressSnap.findMany({
     where: { studentId },
     orderBy: { snapDate: "desc" },
@@ -263,7 +272,7 @@ async function identifyWeakSubjects(studentId: string, curriculumIds: string[]):
       const materials = await prisma.material.findMany({
         where: {
           subject: snap.subject,
-          curriculumId: { in: curriculumIds },
+          curriculumId,
         },
         orderBy: { weekOrder: "asc" },
         take: 3,

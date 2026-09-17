@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { resolveScope, scopedStudentIdentifier } from "@/lib/auth/scope";
+import { getActiveCurriculumId } from "@/lib/curriculum-active";
 
 /**
  * GET /api/students/quizzes?studentId=xxx
@@ -23,22 +24,20 @@ export async function GET(request: NextRequest) {
   const student = await prisma.student.findUnique({ where: { studentId } });
   if (!student) return NextResponse.json({ error: "Student not found" }, { status: 404 });
 
-  const curricula = await prisma.curriculum.findMany({
-    where: { studentId: student.id },
+  // Only the curriculum in force — see `src/lib/curriculum-active.ts`.
+  const curriculumId = await getActiveCurriculumId(student.id);
+  if (!curriculumId) return NextResponse.json({ quizzes: [] });
+
+  const materials = await prisma.material.findMany({
+    where: { curriculumId },
     include: {
-      materials: {
-        include: {
-          quizzes: true,
-          _count: { select: { quizzes: true } },
-        },
-        orderBy: { weekOrder: "asc" },
-      },
+      quizzes: true,
+      _count: { select: { quizzes: true } },
     },
-    orderBy: { createdAt: "desc" },
-    take: 1,
+    orderBy: { weekOrder: "asc" },
   });
 
-  const quizzes = (curricula[0]?.materials || []).flatMap((m) =>
+  const quizzes = materials.flatMap((m) =>
     (m.quizzes || []).map((q) => ({
       id: q.id,
       materialId: m.id,

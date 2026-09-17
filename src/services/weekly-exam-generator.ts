@@ -409,12 +409,14 @@ export async function generateWeeklyExam(
 
   const student = await prisma.student.findUnique({
     where: { id: studentId },
-    include: { curriculums: { orderBy: { version: "desc" }, take: 1 } },
+    select: {
+      gradeLevel: true,
+      // Highest version wins — same rule as `src/lib/curriculum-active.ts`.
+      curriculums: { orderBy: { version: "desc" }, take: 1, select: { id: true } },
+    },
   });
   if (!student) throw new Error("Student not found");
-
-  const curriculum = student.curriculums[0];
-  if (!curriculum) throw new Error("Student has no curriculum");
+  if (student.curriculums.length === 0) throw new Error("Student has no curriculum");
 
   // Pick materials: current week first, fallback to latest READY materials.
   // Note: weekly exam is per-grade (not per-student), so filter by gradeLevel

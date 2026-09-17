@@ -16,6 +16,7 @@ import { gradeAttempt } from "./grader";
 import { analyzeExamAttempt } from "@/services/improvement-analysis";
 import { sendQuizFeedback } from "@/services/quiz-feedback";
 import { prisma } from "@/lib/prisma";
+import { getActiveCurriculumId } from "@/lib/curriculum-active";
 
 /* ------------------------------------------------------------------ */
 /*  assessment:generate — creates a quiz or exam for a student          */
@@ -48,16 +49,22 @@ export async function processAssessmentGenerate(
     material = await prisma.material.findUnique({ where: { id: materialId } });
   }
   if (!material) {
-    material = await prisma.material.findFirst({
-      where: {
-        curriculum: { studentId },
-        OR: [
-          { topic },
-          { subject: topic },
-        ],
-      },
-      orderBy: { createdAt: "desc" },
-    });
+    // Only the curriculum in force — searching every curriculum the student owns
+    // could resolve `topic` to a row the student is never shown. See
+    // `src/lib/curriculum-active.ts`.
+    const activeCurriculumId = await getActiveCurriculumId(studentId);
+    material = activeCurriculumId
+      ? await prisma.material.findFirst({
+          where: {
+            curriculumId: activeCurriculumId,
+            OR: [
+              { topic },
+              { subject: topic },
+            ],
+          },
+          orderBy: { createdAt: "desc" },
+        })
+      : null;
   }
 
   if (material) {

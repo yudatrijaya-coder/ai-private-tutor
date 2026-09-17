@@ -19,7 +19,9 @@ async function attachQuizzesForStudent(name: string, studentId: string) {
 
   const curriculum = await prisma.curriculum.findFirst({
     where: { studentId },
-    orderBy: { createdAt: "desc" },
+    // Highest version wins — same rule as `src/lib/curriculum-active.ts`.
+    // `createdAt desc` could attach quizzes to a stale curriculum.
+    orderBy: [{ version: "desc" }, { createdAt: "desc" }],
     include: { materials: true },
   });
   if (!curriculum) { console.log(`No curriculum for ${name}`); return; }

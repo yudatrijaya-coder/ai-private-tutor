@@ -7,6 +7,7 @@ import Link from "next/link";
 import VideoPlayer from "@/components/VideoPlayer";
 
 import { requireStudentSecret } from "@/lib/auth/student-secret";
+import { getActiveCurriculumId } from "@/lib/curriculum-active";
 // Signing secret is resolved at call time by `requireStudentSecret()`, which
 // fails closed. The old module-scope constant captured `undefined` during
 // `next build` and fell back to a string that is public in git history.
@@ -57,14 +58,14 @@ async function VideoContent() {
   if (!student) return <div className="text-center py-20 text-amber-400">Siswa tidak ditemukan</div>;
 
   // Ambil subject + video dari DB (generatedVideoUrl dan videoUrl YouTube)
-  const curricula = await prisma.curriculum.findMany({
-    where: { studentId: student.id },
-    select: { id: true },
-  });
+  // Active curriculum only — see `src/lib/curriculum-active.ts`. A student with
+  // a stale earlier curriculum would otherwise list subjects they no longer have.
+  const curriculumId = await getActiveCurriculumId(student.id);
+  if (!curriculumId) return <div className="text-center py-20 text-amber-400">Siswa tidak ditemukan</div>;
 
   const subjectVideos = await prisma.material.findMany({
     where: {
-      curriculumId: { in: curricula.map(c => c.id) },
+      curriculumId,
       // Grade-scoped (ledger B-01).
       gradeLevel: student.gradeLevel,
     },

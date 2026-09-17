@@ -18,6 +18,7 @@
  */
 import { prisma } from "@/lib/prisma";
 import { getCurrentSchoolWeek } from "@/lib/academic-calendar";
+import { getActiveCurriculumId } from "@/lib/curriculum-active";
 
 /** Ledger B-04: weekOrder 999 = unplaced sentinel. */
 const UNPLACED = 999;
@@ -49,15 +50,13 @@ export async function getStudentProsemContext(
 ): Promise<StudentProsemContext | null> {
   const week = getCurrentSchoolWeek();
 
-  const curricula = await prisma.curriculum.findMany({
-    where: { studentId },
-    select: {
-      materials: {
-        select: { subject: true, topic: true, subTopic: true, weekOrder: true },
-      },
-    },
+  const activeCurriculumId = await getActiveCurriculumId(studentId);
+  if (!activeCurriculumId) return null;
+
+  const materials = await prisma.material.findMany({
+    where: { curriculumId: activeCurriculumId },
+    select: { subject: true, topic: true, subTopic: true, weekOrder: true },
   });
-  const materials = curricula.flatMap((c) => c.materials);
   if (materials.length === 0) return null;
 
   const masteries = await prisma.topicMastery.findMany({

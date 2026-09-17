@@ -12,6 +12,7 @@
  */
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { getActiveCurriculumId } from "@/lib/curriculum-active";
 import { checkCronSecret, logCronRun } from "@/lib/cron/guard";
 
 export async function GET(request: NextRequest) {
@@ -26,9 +27,15 @@ export async function GET(request: NextRequest) {
   let created = 0;
 
   for (const student of students) {
-    // Get materials with subject+topic for this student
+    // Get materials with subject+topic for this student, active curriculum only.
+    // Unioning every curriculum would emit snapshots for subjects the student no
+    // longer has (Raihan kept a stale v1 with Biologi / Sejarah / Geografi).
+    // See `src/lib/curriculum-active.ts`.
+    const curriculumId = await getActiveCurriculumId(student.id);
+    if (!curriculumId) continue;
+
     const materials = await prisma.material.findMany({
-      where: { curriculum: { studentId: student.id } },
+      where: { curriculumId },
       select: { id: true, topic: true, subject: true },
     });
 

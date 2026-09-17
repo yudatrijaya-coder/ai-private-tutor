@@ -18,6 +18,7 @@ import StudentProgressPanel from "@/components/StudentProgressPanel";
 import { MoodleBookQuickLink } from "@/components/MoodleQuickLink";
 
 import { requireStudentSecret } from "@/lib/auth/student-secret";
+import { getActiveCurriculumId } from "@/lib/curriculum-active";
 // Signing secret is resolved at call time by `requireStudentSecret()`, which
 // fails closed. The old module-scope constant captured `undefined` during
 // `next build` and fell back to a string that is public in git history.
@@ -403,14 +404,18 @@ async function ScheduleSection() {
 
   if (todaySessions.length === 0) return null;
 
-  // Get matching materials for each session (by subject+topic)
+  // Get matching materials for each session (by subject+topic).
+  // Only the curriculum in force — see `src/lib/curriculum-active.ts`.
+  const activeCurriculumId = await getActiveCurriculumId(session.id);
+  if (!activeCurriculumId) return null;
+
   const matQueries = todaySessions.map((s) => ({
     subject: s.subject ?? "",
     topic: s.topic ?? "",
   }));
   const materials = await prisma.material.findMany({
     where: {
-      curriculum: { studentId: session.id },
+      curriculumId: activeCurriculumId,
       OR: matQueries.map((mq) => ({
         subject: mq.subject,
         topic: mq.topic,
@@ -595,26 +600,20 @@ async function SubjectGridSection() {
   const session = await getSessionStudent();
   if (!session) return null;
 
-  const curricula = await prisma.curriculum.findMany({
-    where: { studentId: session.id },
-    select: {
-      materials: {
+  // Active curriculum only — Raihan owns a stale v1 alongside v3, and unioning
+  // them listed subjects he no longer has (Biologi / Sejarah / Geografi).
+  // See `src/lib/curriculum-active.ts`.
+  const curriculumId = await getActiveCurriculumId(session.id);
+  const materials = curriculumId
+    ? await prisma.material.findMany({
+        where: { curriculumId },
         select: { subject: true },
         distinct: ["subject"],
         orderBy: { subject: "asc" },
-      },
-    },
-    orderBy: { createdAt: "desc" },
-  });
+      })
+    : [];
 
-  // Collect unique subjects from ALL curricula
-  const subjectSet = new Set<string>();
-  for (const c of curricula) {
-    for (const m of c.materials) {
-      subjectSet.add(m.subject);
-    }
-  }
-  const subjects = Array.from(subjectSet).sort();
+  const subjects = materials.map((m) => m.subject).sort();
   if (subjects.length === 0) return null;
 
   return (

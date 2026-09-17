@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { getActiveCurriculumId } from "@/lib/curriculum-active";
 import { callLLM } from "@/llm/client";
 import { ChatMessage } from "@/llm/types";
 
@@ -69,13 +70,16 @@ const getLLMQuestions = async (prompt: string, studentId: string): Promise<LLMQu
 };
 
 export async function generatePreTest(studentId: string, subject: string) {
-  const student = await prisma.student.findUnique({ where: { id: studentId }, include: { curriculums: true } });
+  const student = await prisma.student.findUnique({ where: { id: studentId } });
   if (!student) throw new Error("Student not found");
 
-  const curriculum = student.curriculums[0]; // Assuming one active curriculum
-  if (!curriculum) throw new Error("Curriculum not found");
+  // Only the curriculum in force — `include: { curriculums: true }` had no
+  // `orderBy`, so this silently took whichever row Postgres returned first.
+  // See `src/lib/curriculum-active.ts`.
+  const activeCurriculumId = await getActiveCurriculumId(studentId);
+  if (!activeCurriculumId) throw new Error("Curriculum not found");
 
-  const materials = await prisma.material.findMany({ where: { curriculumId: curriculum.id, subject: subject } });
+  const materials = await prisma.material.findMany({ where: { curriculumId: activeCurriculumId, subject: subject } });
 
   const topicList = materials.map(m => (m as any).topic || "").filter(Boolean).join(", ");
   

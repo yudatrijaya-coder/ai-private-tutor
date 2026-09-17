@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { parseMindmapFromMarkdown, type MindmapNode } from "@/lib/mindmap-template";
 import { resolveScope, isAdmin } from "@/lib/auth/scope";
+import { ACTIVE_CURRICULUM_ORDER } from "@/lib/curriculum-active";
 
 /**
  * Parse slides that are flat bullet/numbered lists (no ## headers) into mindmap nodes.
@@ -74,7 +75,7 @@ export async function POST(request: NextRequest) {
 
     const curriculum = await prisma.curriculum.findFirst({
       where: { studentId },
-      orderBy: { createdAt: "desc" },
+      orderBy: ACTIVE_CURRICULUM_ORDER as never,
       include: { materials: { orderBy: { weekOrder: "asc" } } },
     });
 
@@ -181,7 +182,7 @@ export async function GET(request: NextRequest) {
 
   const curriculum = await prisma.curriculum.findFirst({
     where: { studentId },
-    orderBy: { createdAt: "desc" },
+    orderBy: ACTIVE_CURRICULUM_ORDER as never,
     include: { materials: { orderBy: { weekOrder: "asc" }, select: { id: true, subject: true, topic: true, metadata: true } } },
   });
 

@@ -11,6 +11,7 @@
  */
 import { prisma } from "@/lib/prisma";
 import { getCurrentSchoolWeek } from "@/lib/academic-calendar";
+import { getActiveCurriculumId } from "@/lib/curriculum-active";
 
 const UNPLACED = 999;
 const TOPIC_DONE_THRESHOLD = 70;
@@ -43,15 +44,13 @@ export async function buildProsemContext(student: {
 }): Promise<ProsemBotContext | null> {
   const week = getCurrentSchoolWeek();
 
-  const curricula = await prisma.curriculum.findMany({
-    where: { studentId: student.id },
-    select: {
-      materials: {
-        select: { subject: true, topic: true, subTopic: true, weekOrder: true },
-      },
-    },
+  const curriculumId = await getActiveCurriculumId(student.id);
+  if (!curriculumId) return null;
+
+  const materials = await prisma.material.findMany({
+    where: { curriculumId },
+    select: { subject: true, topic: true, subTopic: true, weekOrder: true },
   });
-  const materials = curricula.flatMap((c) => c.materials);
   if (materials.length === 0) return null;
 
   const masteries = await prisma.topicMastery.findMany({
