@@ -9,6 +9,8 @@
  * @module @/data/curriculum-content
  */
 
+import { SMP7_CONTENT } from "./curriculum-content-smp7";
+
 export interface CurriculumContent {
   subject: string;
   topic: string;
@@ -1251,18 +1253,23 @@ export function getContent(
   topic: string,
   subTopic: string,
 ): string | null {
-  return CONTENT_MAP[contentKey(subject, topic, subTopic)] ?? null;
+  const key = contentKey(subject, topic, subTopic);
+  // SMP_1 entries describe the 15 subjects the school actually teaches, so they
+  // take precedence over the Kurikulum Merdeka integrated entries (IPA / IPS)
+  // they replaced. Those originals stay in CONTENT_MAP untouched as a fallback.
+  return SMP7_CONTENT[key] ?? CONTENT_MAP[key] ?? null;
 }
 
 /**
  * The full content bank as an array of CurriculumContent objects.
  */
-export const CONTENT_BANK: CurriculumContent[] = Object.entries(CONTENT_MAP).map(
-  ([key, content]) => {
-    const [subject, topic, subTopic] = key.split('||');
-    return { subject, topic, subTopic, content };
-  },
-);
+export const CONTENT_BANK: CurriculumContent[] = Object.entries({
+  ...CONTENT_MAP,
+  ...SMP7_CONTENT,
+}).map(([key, content]) => {
+  const [subject, topic, subTopic] = key.split("||");
+  return { subject, topic, subTopic, content };
+});
 
 /**
  * Check if a specific topic entry has content in the bank.
@@ -1272,5 +1279,5 @@ export function hasContent(
   topic: string,
   subTopic: string,
 ): boolean {
-  return contentKey(subject, topic, subTopic) in CONTENT_MAP;
+  return getContent(subject, topic, subTopic) !== null;
 }
