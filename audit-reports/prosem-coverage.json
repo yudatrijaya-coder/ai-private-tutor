@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T05:03:45.778Z",
+  "generatedAt": "2026-09-17T06:57:21.213Z",
   "thresholds": {
     "covered": 0.84,
     "contained": 1,
@@ -127,10 +127,10 @@
       "assessment": 4
     },
     "SHOFI001|XI|Matematika Tingkat Lanjut|ganjil": {
-      "covered": 0,
-      "chapter": 0,
+      "covered": 1,
+      "chapter": 2,
       "near": 0,
-      "missing": 14,
+      "missing": 11,
       "absent": 0,
       "assessment": 5
     },
@@ -808,27 +808,13 @@
       "subject": "Matematika Tingkat Lanjut",
       "semester": "ganjil",
       "topic": "Aljabar",
-      "subtopic": "Polinomial dan Fungsi Polinomial",
-      "weeks": "1",
-      "verdict": "MISSING",
-      "bestScore": 0.145,
-      "bestLabel": "Vektor / Perkalian Titik dan Silang",
-      "containScore": 0,
-      "containLabel": "(tidak ada kandidat)"
-    },
-    {
-      "student": "SHOFI001",
-      "gradeLevel": "SMA_2",
-      "subject": "Matematika Tingkat Lanjut",
-      "semester": "ganjil",
-      "topic": "Aljabar",
       "subtopic": "Operasi Aljabar pada Polinomial",
       "weeks": "2",
-      "verdict": "MISSING",
-      "bestScore": 0.254,
-      "bestLabel": "Matriks / Operasi Matriks",
-      "containScore": 0.5,
-      "containLabel": "Matriks / Operasi Matriks"
+      "verdict": "CHAPTER",
+      "bestScore": 0.765,
+      "bestLabel": "Polinomial / Polinomial dan Fungsi Polinomial",
+      "containScore": 0.667,
+      "containLabel": "Polinomial / Polinomial dan Fungsi Polinomial"
     },
     {
       "student": "SHOFI001",
@@ -866,11 +852,11 @@
       "topic": "Aljabar",
       "subtopic": "Akar-Akar Persamaan Polinomial",
       "weeks": "6,7",
-      "verdict": "MISSING",
-      "bestScore": 0.133,
-      "bestLabel": "Matriks / Operasi Matriks",
-      "containScore": 0,
-      "containLabel": "(tidak ada kandidat)"
+      "verdict": "CHAPTER",
+      "bestScore": 0.765,
+      "bestLabel": "Polinomial / Polinomial dan Fungsi Polinomial",
+      "containScore": 0.667,
+      "containLabel": "Polinomial / Polinomial dan Fungsi Polinomial"
     },
     {
       "student": "SHOFI001",
@@ -923,10 +909,10 @@
       "subtopic": "Fungsi Trigonometri",
       "weeks": "12,13",
       "verdict": "MISSING",
-      "bestScore": 0.133,
-      "bestLabel": "Matriks / Invers Matriks",
-      "containScore": 0,
-      "containLabel": "(tidak ada kandidat)"
+      "bestScore": 0.145,
+      "bestLabel": "Polinomial / Polinomial dan Fungsi Polinomial",
+      "containScore": 0.333,
+      "containLabel": "Polinomial / Polinomial dan Fungsi Polinomial"
     },
     {
       "student": "SHOFI001",
@@ -937,10 +923,10 @@
       "subtopic": "Fungsi Rasional",
       "weeks": "14,15",
       "verdict": "MISSING",
-      "bestScore": 0.13,
-      "bestLabel": "Vektor / Perkalian Titik dan Silang",
-      "containScore": 0,
-      "containLabel": "(tidak ada kandidat)"
+      "bestScore": 0.214,
+      "bestLabel": "Polinomial / Polinomial dan Fungsi Polinomial",
+      "containScore": 0.333,
+      "containLabel": "Polinomial / Polinomial dan Fungsi Polinomial"
     },
     {
       "student": "SHOFI001",
@@ -951,10 +937,10 @@
       "subtopic": "Fungsi Irasional",
       "weeks": "15,16",
       "verdict": "MISSING",
-      "bestScore": 0.13,
-      "bestLabel": "Vektor / Perkalian Titik dan Silang",
-      "containScore": 0,
-      "containLabel": "(tidak ada kandidat)"
+      "bestScore": 0.186,
+      "bestLabel": "Polinomial / Polinomial dan Fungsi Polinomial",
+      "containScore": 0.333,
+      "containLabel": "Polinomial / Polinomial dan Fungsi Polinomial"
     },
     {
       "student": "SHOFI001",
@@ -965,10 +951,10 @@
       "subtopic": "Fungsi Nilai Mutlak",
       "weeks": "16,17",
       "verdict": "MISSING",
-      "bestScore": 0.141,
-      "bestLabel": "Matriks / Invers Matriks",
-      "containScore": 0,
-      "containLabel": "(tidak ada kandidat)"
+      "bestScore": 0.166,
+      "bestLabel": "Polinomial / Polinomial dan Fungsi Polinomial",
+      "containScore": 0.333,
+      "containLabel": "Polinomial / Polinomial dan Fungsi Polinomial"
     },
     {
       "student": "SHOFI001",
@@ -979,10 +965,10 @@
       "subtopic": "Fungsi Tangga",
       "weeks": "17,18",
       "verdict": "MISSING",
-      "bestScore": 0.13,
-      "bestLabel": "Vektor / Perkalian Titik dan Silang",
-      "containScore": 0,
-      "containLabel": "(tidak ada kandidat)"
+      "bestScore": 0.166,
+      "bestLabel": "Polinomial / Polinomial dan Fungsi Polinomial",
+      "containScore": 0.333,
+      "containLabel": "Polinomial / Polinomial dan Fungsi Polinomial"
     },
     {
       "student": "SHOFI001",
@@ -993,10 +979,10 @@
       "subtopic": "Fungsi Piecewise",
       "weeks": "18",
       "verdict": "MISSING",
-      "bestScore": 0.08,
-      "bestLabel": "Matriks / Operasi Matriks",
-      "containScore": 0,
-      "containLabel": "(tidak ada kandidat)"
+      "bestScore": 0.166,
+      "bestLabel": "Polinomial / Polinomial dan Fungsi Polinomial",
+      "containScore": 0.333,
+      "containLabel": "Polinomial / Polinomial dan Fungsi Polinomial"
     },
     {
       "student": "SHOFI001",
@@ -1464,6 +1450,26 @@
       "prosemSession": "Murid memahami keterkaitan struktur organ pada sistem eksresi dan fungsinya dalam merespons stimulus internal dan eksternal / Penyakit-penyakit terkait sistem eksresi",
       "chapter": "Sistem Eksresi",
       "lessonsInChapter": "Mekanisme Pembentukan Urine | Struktur dan Fungsi Kulit | Struktur dan Fungsi Hati | Praktikum Uji Urin | Organ Eksresi | Faktor yang Memengaruhi Urine",
+      "fuzzyScore": 0.765
+    },
+    {
+      "student": "SHOFI001",
+      "subject": "Matematika Tingkat Lanjut",
+      "semester": "ganjil",
+      "weeks": "2",
+      "prosemSession": "Aljabar / Operasi Aljabar pada Polinomial",
+      "chapter": "Polinomial",
+      "lessonsInChapter": "Polinomial dan Fungsi Polinomial",
+      "fuzzyScore": 0.765
+    },
+    {
+      "student": "SHOFI001",
+      "subject": "Matematika Tingkat Lanjut",
+      "semester": "ganjil",
+      "weeks": "6,7",
+      "prosemSession": "Aljabar / Akar-Akar Persamaan Polinomial",
+      "chapter": "Polinomial",
+      "lessonsInChapter": "Polinomial dan Fungsi Polinomial",
       "fuzzyScore": 0.765
     },
     {

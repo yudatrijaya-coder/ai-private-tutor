@@ -60,6 +60,75 @@ export const SUBJECT_ALIASES: Record<string, string[]> = {
   "ilmu pengetahuan sosial": ["ips"],
 };
 
+/**
+ * Curriculum subjects that share a stem but are DIFFERENT courses.
+ *
+ * `sim("Matematika", "Matematika Tingkat Lanjut")` returns 0.850 — the substring
+ * boost (`na.includes(nb) ? 0.85 : 0`) lands one hundredth above SIM_THRESHOLD
+ * (0.84). So any subject-level comparison built on `sim` alone treats the two as
+ * the same course. They are not. SMA XI offers both, each with its own ProSem
+ * file, and a session for one must never be satisfied by material from the other.
+ *
+ * The same trap applies to "Matematika Penalaran" and "Bahasa Inggris Tingkat
+ * Lanjut". Rather than raise SIM_THRESHOLD — which would also break legitimate
+ * label matches like "Gaya ke Atas" / "Gaya ke Atas (Archimedes)" — the
+ * qualifier is compared separately: two names may only be considered the same
+ * subject when both carry a qualifier or neither does.
+ */
+export const SUBJECT_QUALIFIER = /\b(tingkat lanjut|penalaran|lanjutan|advanced)\b/;
+
+/** true when `s` names a course variant rather than the base course. */
+export function isQualifiedSubject(s: string): boolean {
+  return SUBJECT_QUALIFIER.test(s.toLowerCase());
+}
+
+/**
+ * Are two curriculum subject strings the same course?
+ *
+ * Exact match, or a fuzzy match that survives the qualifier boundary. Aliases
+ * are NOT consulted here — callers layer `SUBJECT_ALIASES` on top, because the
+ * alias relation is one-way (ProSem "Biologi" is taught as curriculum "IPA",
+ * but "IPA" is not a session subject).
+ *
+ * Verified 2026-09-17:
+ *   subjectsEquivalent("Matematika", "Matematika")                        = true
+ *   subjectsEquivalent("Matematika", "Matematika Tingkat Lanjut")         = false
+ *   subjectsEquivalent("Matematika Tingkat Lanjut", "Matematika Tingkat Lanjut") = true
+ *   subjectsEquivalent("Biologi", "Biologi")                              = true
+ */
+export function subjectsEquivalent(a: string, b: string): boolean {
+  if (norm(a) === norm(b)) return true;
+  if (isQualifiedSubject(a) !== isQualifiedSubject(b)) return false;
+  return sim(a, b) >= SIM_THRESHOLD;
+}
+
+/**
+ * Every curriculum subject string that may satisfy a ProSem session subject.
+ *
+ * THE POINT OF THIS FUNCTION: `sync-weekorder-prosem.ts` used to test
+ * `m.subject === plan.subject`, exact, while `prosem-coverage.ts` used the alias
+ * union. For a VII student the ProSem says "Biologi"/"Fisika"/"Sejarah" and the
+ * curriculum stores "IPA"/"IPS", so the sync script matched zero rows for three
+ * of the seven subjects — `weekOrder` was never assigned, while the coverage
+ * report happily called those same sessions covered. One rule, two consumers,
+ * no disagreement.
+ *
+ * The qualifier boundary is enforced on the alias side too: "Matematika" must
+ * not expand into "Matematika Tingkat Lanjut".
+ */
+export function acceptableSubjects(prosemSubject: string): string[] {
+  const key = prosemSubject.toLowerCase();
+  const aliases = SUBJECT_ALIASES[key] ?? [];
+  return [key, ...aliases];
+}
+
+/** May a material filed under `materialSubject` satisfy `prosemSubject`? */
+export function subjectSatisfies(prosemSubject: string, materialSubject: string): boolean {
+  if (subjectsEquivalent(prosemSubject, materialSubject)) return true;
+  return acceptableSubjects(prosemSubject).some((a) => norm(a) === norm(materialSubject));
+}
+
+
 /** Beyond this, two labels are the same thing. */
 export const SIM_THRESHOLD = 0.84;
 /** Lower bar used when a material already sits in a real week (1..18). */
