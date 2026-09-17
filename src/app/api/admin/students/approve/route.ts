@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@/generated/prisma/client";
 import bcrypt from "bcryptjs";
 import { escapeMd } from "@/lib/telegram-format";
+import { ACTIVE_CURRICULUM_ORDER } from "@/lib/curriculum-active";
 
 /* ─────────────────────────────────────────────────────────────
    POST /api/admin/students/approve
@@ -52,7 +53,10 @@ async function copyTemplate(studentId: string, gradeLevel: string): Promise<stri
     where: { isTemplate: true, gradeLevel: gradeLevel as any },
     include: {
       curriculums: {
-        orderBy: { createdAt: "desc" },
+        // Highest version wins — same rule as `admission.ts:tryCopyFromTemplate`
+        // and `src/lib/curriculum-active.ts`. `createdAt desc` happens to agree
+        // for today's data but is not the rule, and the two paths must not drift.
+        orderBy: ACTIVE_CURRICULUM_ORDER as never,
         take: 1,
         include: {
           materials: {

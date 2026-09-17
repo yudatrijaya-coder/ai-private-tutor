@@ -6,19 +6,65 @@ Siswa acuan: **RAIHAN001** (SMP_1)
 
 ## Ringkasan
 
-Raihan punya **dua kurikulum penuh**, bukan satu. Regenerasi kurikulum menyisipkan baris
-dengan `version + 1` dan **meninggalkan baris lama di tempatnya**:
+Raihan punya **dua kurikulum penuh**, bukan satu:
 
-| Kurikulum | Dibuat | Material |
-|---|---|---|
-| v1 | 2026-07-12 | 264 |
-| v3 | 2026-07-14 | 228 |
+| Kurikulum | Baris dibuat | `changelog` | Material terisi | Material |
+|---|---|---|---|---|
+| v1 | 2026-07-12 17:32 WIB | `"Initial curriculum from data bank"` | 07-12 … 07-26 | 264 |
+| v3 | 2026-07-14 22:54 WIB | `NULL` | 07-17 … 08-20 | 228 |
 
-129 pelajaran ada di kedua baris.
+129 pelajaran ada di kedua baris. Lihat bagian "Asal-usul" di bawah untuk kenapa ada lompatan
+v1 → v3 tanpa v2.
 
 Keduanya bukan separuh dari satu kurikulum — keduanya **pemetaan minggu yang berbeda**.
 `Bilangan Bulat` adalah minggu 1 di v3 dan **minggu 999** di v1. Menggabungkan keduanya
 karena itu bukan merge, melainkan sampah: `weekOrder` kehilangan makna.
+
+## Asal-usul
+
+Tidak ada satu pun kode di repo yang membuat `version > 1`. Yang diverifikasi:
+
+- `git log --all -S "version: 3"` → **0 commit**. Tidak pernah ada kode berisi itu.
+- `git log --all -S 'SET version'` → **0 commit**. Tak ada yang menaikkan versi baris lama.
+- `git fsck --lost-found` → 4 dangling commit, tak satu pun membuat kurikulum.
+- `prisma/migrations/*` → setiap `curriculum.create` hanya menulis `version: 1`
+  (`admin/curriculum/route.ts:99`, `agents/curriculum/service.ts:61`,
+  `seed.ts`, `approve/route.ts`).
+
+Baris v3 karena itu lahir dari **skrip ad-hoc yang tidak pernah di-commit** — 22:54 WIB
+14 Juli, satu jam sebelum fitur template-copy (`6d9219b`) masuk. Bukti bahwa ia buatan
+tangan, bukan lewat Prisma biasa: `changelog` dan `metadata` keduanya `NULL`, sedangkan v1
+punya changelog.
+
+Kronologi yang direkonstruksi:
+
+| Waktu (WIB) | Kejadian |
+|---|---|
+| 07-12 17:32 | v1 dibuat dari data bank, changelog terisi, 99 material |
+| 07-14 22:54 | baris v3 dibuat — kosong, tanpa changelog, `version: 3` |
+| 07-15 15:54 | `6d9219b` fitur template-copy muncul (satu jam setelahnya) |
+| 07-15 21:15 | `f35f298` *"show all subjects from all curricula"* — mulai union |
+| 07-17 07:13 | material pertama masuk ke v3 (76 baris) |
+| 07-19 08:34 | `1533010` menyebut v3 eksplisit sebagai `Raihan #2` |
+| 07-20 | baik v1 (135) maupun v3 (142) diisi **paralel** |
+| 07-26 | v1 masih ditambah (30 baris, Biologi/Geografi/Sejarah) |
+| 08-20 | v3 masih ditambah (10 baris, PAI) |
+
+Dua kurikulum itu hidup berdampingan selama lima minggu. Commit `1952062` menyebutnya
+apa adanya: **"Raihan #1/#2"** — bukan satu kurikulum yang di-versi-kan, melainkan dua
+kurikulum terpisah yang diperlakukan setara.
+
+Baris v3 sengaja dibuat dengan nomor 3, bukan 2 — tidak ada v2 dan tidak ada jejak v2
+(dicek: 0 material yatim, jadi tidak ada baris yang dibuat lalu dihapus setelah diisi).
+
+### Kenapa bug-nya sempat tidak terlihat
+
+`f35f298^` masih memakai `findFirst({ orderBy: { createdAt: "desc" } })`, jadi yang tampil
+hanya v3 — kurikulum yang lebih baru. Mapel yang cuma ada di v1 (Biologi, Geografi, Sejarah)
+karena itu **menghilang** dari palet. Perbaikan `f35f298` mengambil jalan pintas: gabung
+**semua** kurikulum, bukan pilih yang berlaku. Itu menyembunyikan mapel hilang sekaligus
+memunculkan duplikat — dan bertahan dua bulan sampai aturan di dokumen ini dibuat.
+
 
 Empat belas jalur baca menggabung semua kurikulum milik siswa. Dampak yang terlihat siswa:
 

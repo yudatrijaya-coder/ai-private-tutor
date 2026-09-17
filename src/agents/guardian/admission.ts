@@ -15,6 +15,7 @@ import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@/generated/prisma/client";
 import bcrypt from "bcryptjs";
 import { generateStudentId } from "@/lib/studentId";
+import { ACTIVE_CURRICULUM_ORDER } from "@/lib/curriculum-active";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -73,7 +74,11 @@ export async function tryCopyFromTemplate(
     where: { isTemplate: true, gradeLevel: gradeLevel as any },
     include: {
       curriculums: {
-        orderBy: { createdAt: "desc" },
+        // Highest version wins, same rule as every other read path. Raihan is a
+        // template with TWO curricula (v1 264 materials, v3 228) — `createdAt
+        // desc` happens to agree today but is not the rule. See
+        // `src/lib/curriculum-active.ts`.
+        orderBy: ACTIVE_CURRICULUM_ORDER as never,
         take: 1,
         include: {
           materials: {
