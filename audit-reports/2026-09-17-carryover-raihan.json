@@ -1,0 +1,339 @@
+{
+  "studentId": "RAIHAN001",
+  "curriculumId": "e94cf3dd-3fae-4fae-b28f-e7aa899d11e7",
+  "insertedAt": "2026-09-17T08:59:17.956Z",
+  "rollback": "DELETE FROM \"Quiz\" WHERE \"materialId\" IN (SELECT id FROM \"Material\" WHERE metadata ? '_copiedFrom'); DELETE FROM \"Material\" WHERE metadata ? '_copiedFrom';",
+  "materials": [
+    {
+      "id": "ecb5144b-460d-47a7-b0e0-13d528db9c83",
+      "subject": "Biologi",
+      "topic": "Sel dan Jaringan",
+      "subTopic": "Struktur dan Fungsi Sel",
+      "weekOrder": 1,
+      "copiedFrom": {
+        "materialId": "77789834-511d-49b2-a8fb-042494767ac1",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "9c20823d-c9c6-4b5d-bcf8-86980c1319d8",
+      "subject": "Biologi",
+      "topic": "Klasifikasi Makhluk Hidup",
+      "subTopic": "Ciri-Ciri Makhluk Hidup",
+      "weekOrder": 2,
+      "copiedFrom": {
+        "materialId": "c4cf8c11-358f-4317-a159-349a653d3793",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "716a533f-65c0-407f-910b-1c69a83731c9",
+      "subject": "Biologi",
+      "topic": "Klasifikasi Makhluk Hidup",
+      "subTopic": "Klasifikasi 5 Kingdom",
+      "weekOrder": 3,
+      "copiedFrom": {
+        "materialId": "4252c1f0-fc2a-4a37-8ad3-cbf71d3924ef",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "32c65295-dbe4-479e-8779-c548662c80a4",
+      "subject": "Biologi",
+      "topic": "Sistem Organ",
+      "subTopic": "Sistem Organ pada Manusia dan Hewan",
+      "weekOrder": 4,
+      "copiedFrom": {
+        "materialId": "45547479-8ab3-44f1-af02-e64cbcbff9ec",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "decb06d1-c52e-40d3-b09d-85f718e3c22b",
+      "subject": "Biologi",
+      "topic": "Ekologi",
+      "subTopic": "Komponen Ekosistem dan Interaksi",
+      "weekOrder": 5,
+      "copiedFrom": {
+        "materialId": "f76c10d5-a597-448f-a787-f9a033407eae",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "467df26f-4850-463e-b301-575303ca2d82",
+      "subject": "Biologi",
+      "topic": "Ekologi",
+      "subTopic": "Rantai Makanan dan Jaring-Jaring Makanan",
+      "weekOrder": 6,
+      "copiedFrom": {
+        "materialId": "67c6b367-34ca-49a3-9ce6-67a47eb4922d",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "e703950a-af6b-4112-95cc-68c8f4e99475",
+      "subject": "Biologi",
+      "topic": "Ekologi",
+      "subTopic": "Piramida Ekologi dan Aliran Energi",
+      "weekOrder": 7,
+      "copiedFrom": {
+        "materialId": "3a713540-1cd8-4aec-aa48-145c172e9c71",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "70696612-2cfd-4c8c-bd05-d5e1913a5473",
+      "subject": "Biologi",
+      "topic": "Keanekaragaman Hayati",
+      "subTopic": "Tingkat Keanekaragaman",
+      "weekOrder": 8,
+      "copiedFrom": {
+        "materialId": "2ebf88e3-a4c5-4390-9c43-752dff96512a",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "9f89f02a-9cc2-4992-9a34-106f5428bb9e",
+      "subject": "Biologi",
+      "topic": "Virus dan Bakteri",
+      "subTopic": "Ciri-Ciri Virus dan Bakteri",
+      "weekOrder": 9,
+      "copiedFrom": {
+        "materialId": "dc6946d5-59e0-49d7-9f79-f5871a62c3ff",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "ca880206-132e-4452-9c64-28f593f8b1c4",
+      "subject": "Biologi",
+      "topic": "Protista dan Jamur",
+      "subTopic": "Ciri-Ciri Protista dan Jamur",
+      "weekOrder": 10,
+      "copiedFrom": {
+        "materialId": "d49c1062-28c9-4694-8c15-fed148e1c33a",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "66a5a790-727b-4bfa-a763-70213fcad3e1",
+      "subject": "Geografi",
+      "topic": "Letak dan Geografi Indonesia",
+      "subTopic": "Letak Geografis dan Astronomis Indonesia",
+      "weekOrder": 1,
+      "copiedFrom": {
+        "materialId": "b6c68454-b53c-4092-abe2-bc765b5f73ee",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "0d7b948a-69fc-450d-a082-f43f172c2246",
+      "subject": "Geografi",
+      "topic": "Iklim dan Vegetasi",
+      "subTopic": "Jenis Iklim dan Persebaran Vegetasi",
+      "weekOrder": 2,
+      "copiedFrom": {
+        "materialId": "263c1b00-e386-43f7-9609-9e5584cbbfe8",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "48c4cc53-43df-4800-b8c9-5730ac953965",
+      "subject": "Geografi",
+      "topic": "Bentuk Muka Bumi",
+      "subTopic": "Dataran Tinggi, Rendah, dan Perairan",
+      "weekOrder": 3,
+      "copiedFrom": {
+        "materialId": "ba3859b1-8c3f-450e-b79b-4f3d9930a357",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "9410df7e-728e-4256-b9dc-1aee0d177aae",
+      "subject": "Geografi",
+      "topic": "Sumber Daya Alam",
+      "subTopic": "Potensi dan Persebaran Sumber Daya Alam",
+      "weekOrder": 4,
+      "copiedFrom": {
+        "materialId": "4417f9fb-2d26-40a8-898a-8b62c416c155",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "f6bb7777-bb7b-4075-a79d-9b630e03356b",
+      "subject": "Geografi",
+      "topic": "Mitigasi Bencana",
+      "subTopic": "Jenis Bencana Alam dan Upaya Mitigasi",
+      "weekOrder": 5,
+      "copiedFrom": {
+        "materialId": "324f4c34-303d-44a8-a96e-e56cf786f3b1",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "6f8f36a1-b206-41c3-a0bb-81f07884c6dc",
+      "subject": "Geografi",
+      "topic": "Kepulauan Indonesia",
+      "subTopic": "Wilayah Kepulauan dan Laut Indonesia",
+      "weekOrder": 6,
+      "copiedFrom": {
+        "materialId": "82640bbf-c1bd-4258-9756-c7c214394c04",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "56d4812a-2ffa-4cfe-8236-30e504c61d48",
+      "subject": "Geografi",
+      "topic": "Pemanfaatan Ruang",
+      "subTopic": "Pemanfaatan Ruang dan Lingkungan",
+      "weekOrder": 7,
+      "copiedFrom": {
+        "materialId": "2abcace1-6ee8-480f-9a9e-48d8317d6519",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "94c96487-f7f0-4519-86ef-a0d1877a7972",
+      "subject": "Geografi",
+      "topic": "Transmigrasi",
+      "subTopic": "Perpindahan Penduduk dan Dampaknya",
+      "weekOrder": 8,
+      "copiedFrom": {
+        "materialId": "52894adf-4637-4cfe-89a7-843e90f5c246",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "adb8b5cd-0e8c-495f-98b4-1d8575c99d28",
+      "subject": "Geografi",
+      "topic": "Interaksi Antar Wilayah",
+      "subTopic": "Pergerakan Barang dan Jasa Antar Wilayah",
+      "weekOrder": 9,
+      "copiedFrom": {
+        "materialId": "8a779ad3-965c-41da-acb9-c9b518740233",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "969b7533-fbe6-4bd2-be88-2f5d47e10660",
+      "subject": "Geografi",
+      "topic": "Peta dan Atlas",
+      "subTopic": "Membaca Peta, Atlas, dan Globe",
+      "weekOrder": 10,
+      "copiedFrom": {
+        "materialId": "e56d9030-d612-469c-a9f9-616e8aec5d9a",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "4ef54b9e-9de0-45e1-83ae-a7e198d726fa",
+      "subject": "Sejarah",
+      "topic": "Zaman Praaksara",
+      "subTopic": "Manusia Purba di Indonesia (Australopithecus, Homo Erectus, Homo Sapiens)",
+      "weekOrder": 1,
+      "copiedFrom": {
+        "materialId": "94f092cd-3bf5-4880-aed9-9c6c80b46247",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "9d704346-1b42-427b-b2f3-ab1cb7c28c11",
+      "subject": "Sejarah",
+      "topic": "Zaman Praaksara",
+      "subTopic": "Peninggalan Zaman Praaksara (Sangiran, Ngandong, Situs Megalitik)",
+      "weekOrder": 2,
+      "copiedFrom": {
+        "materialId": "79dfba8a-fa98-45e0-8876-75f5365268fa",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "ebf60dd1-4dfa-4d5b-a17d-0584d914730e",
+      "subject": "Sejarah",
+      "topic": "Keajaan Hindu-Buddha",
+      "subTopic": "Ciri-Ciri dan Peninggalan Kerajaan Hindu-Buddha",
+      "weekOrder": 3,
+      "copiedFrom": {
+        "materialId": "15b0ccc1-3258-458f-8e42-27060995a031",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "0bcf8c7b-cf69-4cae-bd6a-f92281b9d0cf",
+      "subject": "Sejarah",
+      "topic": "Kejaan Hindu-Buddha",
+      "subTopic": "Kerajaan Kutai, Tarumanagara, Sriwijaya, Majapahit",
+      "weekOrder": 4,
+      "copiedFrom": {
+        "materialId": "0d3ed247-8710-44ed-a1ed-b90b64fec467",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "7f58d47f-31d3-41e2-b744-215a483846b2",
+      "subject": "Sejarah",
+      "topic": "Kerajaan Islam",
+      "subTopic": "Masuknya Islam ke Indonesia dan Penyebarannya",
+      "weekOrder": 5,
+      "copiedFrom": {
+        "materialId": "4a5e7190-4aec-4978-b111-ce696e30e1a4",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "cb016620-a953-49a9-8271-93859319cc1d",
+      "subject": "Sejarah",
+      "topic": "Kerajaan Islam",
+      "subTopic": "Peninggalan Kerajaan Islam (Demak, Mataram Islam, Banten)",
+      "weekOrder": 6,
+      "copiedFrom": {
+        "materialId": "8f2ce3db-4bc4-4069-8e70-23d79de1bcb6",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "62ec42f0-ca5f-4bad-9e94-006db4a7f70a",
+      "subject": "Sejarah",
+      "topic": "Perubahan Sosial",
+      "subTopic": "Dampak Kedatangan Eropa pada Masyarakat Indonesia",
+      "weekOrder": 7,
+      "copiedFrom": {
+        "materialId": "aa1ba216-445e-4d50-b559-f444501931e7",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "39bfa3b9-5bfe-4a1e-be09-f5f57b352b62",
+      "subject": "Sejarah",
+      "topic": "Masa Kolonial",
+      "subTopic": "Sistem Tanam Paksa, Reformasi, dan Perlawanan Lokal",
+      "weekOrder": 8,
+      "copiedFrom": {
+        "materialId": "5c587c03-83ef-45f1-9488-99116c8683f6",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "21ced0de-0e9a-49a8-94f2-a17d9bc5ddc5",
+      "subject": "Sejarah",
+      "topic": "Pergerakan Nasional",
+      "subTopic": "Budi Utomo hingga Sumpah Pemuda",
+      "weekOrder": 9,
+      "copiedFrom": {
+        "materialId": "50fabe3f-8b42-49b8-acb7-620525c2583a",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    },
+    {
+      "id": "945b9cce-9eb5-4d1d-8daa-fdf50c9e26ff",
+      "subject": "Sejarah",
+      "topic": "Peristiwa Sekitar Proklamasi",
+      "subTopic": "Pendudukan Jepang, Proklamasi, dan Perjuangan Kemerdekaan",
+      "weekOrder": 10,
+      "copiedFrom": {
+        "materialId": "a5d43619-0239-4d72-9560-f44414bf5221",
+        "curriculumId": "a61bcc63-7c88-41bb-9425-658b5fbf3fa3"
+      }
+    }
+  ],
+  "quizCount": 30
+}
