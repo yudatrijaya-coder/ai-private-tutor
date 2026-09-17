@@ -11,6 +11,7 @@
  * Usage: node scripts/run-ts.mjs scripts/audit-quiz-integrity.ts
  */
 import { prisma } from "@/lib/prisma";
+import { questionRejection } from "@/lib/quiz-grading";
 
 interface Bad {
   quizId: string;
@@ -102,18 +103,7 @@ async function main(): Promise<void> {
 }
 
 function describe(raw: unknown): string | null {
-  if (raw === null) return "null entry";
-  if (typeof raw !== "object") return `non-object (${typeof raw})`;
-  const o = raw as Record<string, unknown>;
-  const question = typeof o.question === "string" ? o.question.trim() : "";
-  if (!question) return "no `question`";
-  const options = Array.isArray(o.options) ? o.options : [];
-  if (options.length < 2) return `options < 2 (got ${options.length})`;
-  const ci = o.correctIndex;
-  if (typeof ci !== "number" || !Number.isInteger(ci) || ci < 0 || ci >= options.length) {
-    return "`correctIndex` outside options";
-  }
-  return null;
+  return questionRejection(raw);
 }
 
 main().catch((e) => {

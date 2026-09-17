@@ -1,7 +1,7 @@
 /**
  * Quiz Bank — SMP Kelas 7, school palette (generated)
  *
- * 217 topics × 1103 questions, lifted from the live curriculum of
+ * 218 topics × 1113 questions, lifted from the live curriculum of
  * RAIHAN001 so `generateCurriculumDraft` can attach a quiz to every material
  * it creates. Consulted by `quiz-bank-*.ts` before its own map.
  *
@@ -234,6 +234,7 @@ export const SMP7_QUIZ_DB: Record<string, QuestionData[]> = {
     {"question":"Struktur teks prosedur terdiri dari...","options":["Orientasi, komplikasi, resolusi","Pendahuluan, langkah-langkah, penutup","Deskripsi, perbandingan, kesimpulan","Pembuka, isi, epilog"],"correctIndex":1,"explanation":"Teks prosedur terdiri dari tiga bagian: pendahuluan (tujuan), langkah-langkah (langkah kerja), dan penutup (penutup atau hasil akhir)."},
     {"question":"Bagian pendahuluan dalam teks prosedur berisi...","options":["Langkah-langkah utama","Penjelasan tujuan atau yang akan dicapai","Kesimpulan umum","Daftar pustaka"],"correctIndex":1,"explanation":"Bagian pendahuluan berisi penjelasan tentang tujuan, yang diperlukan, atau hasil yang akan dicapai."},
     {"question":"Urutan langkah-langkah dalam teks prosedur harus bersifat...","options":["Acak dan bisa dibolak-balik","Sistematis dan sesuai urutan waktu","Hanya berdasarkan preferensi penulis","Tidak memiliki urutan sama sekali"],"correctIndex":1,"explanation":"Langkah-langkah dalam teks prosedur harus tersaji secara sistematis dan sesuai urutan waktu agar hasilnya baik."},
+    {"question":"Contoh kalimat pembuka yang tepat untuk teks prosedur adalah...","options":["'Teks ini akan menjelaskan tentang...'","'Langkah-langkah membuat mie instan adalah sebagai berikut.'","'Buatlah...'","Hanya berupa angka tanpa kalimat pembuka"],"correctIndex":2,"explanation":"Kalimat 'Buatlah...' merupakan kalimat imperatif yang tepat sebagai pembuka langkah-langkah dalam teks prosedur."},
     {"question":"Bagian penutup dalam teks prosedur berisi...","options":["Langkah pertama","Penjelasan tentang materiales lain","Hasil akhir atau harapan menyelesaikan prosedur","Ulasan buku"],"correctIndex":2,"explanation":"Bagian penutup berisi informasi tentang hasil akhir atau harapan setelah menyelesaikan semua langkah prosedur."},
   ],
 
@@ -1322,7 +1323,11 @@ export const SMP7_QUIZ_DB: Record<string, QuestionData[]> = {
   ],
 
   ["Pendidikan Pancasila||sejarah dan fungsi Undang-Undang Dasar Negara Republik Indonesia Tahun 1945||kedudukan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945"]: [
+    {"question":"Kedudukan UUD NRI Tahun 1945 bagi pembuatan peraturan perundang-undangan di Indonesia adalah sebagai...","options":["dasar bagi pembuatan peraturan perundang-undangan","pelengkap peraturan perundang-undangan","peraturan pelaksana undang-undang","bahan pertimbangan lembaga negara"],"correctIndex":0,"explanation":""},
+    {"question":"UUD 1945 berfungsi sebagai alat kontrol, yaitu...","options":["menguji keabsahan peraturan perundang-undangan di bawahnya","menetapkan anggaran pendapatan dan belanja negara","mengangkat presiden dan wakil presiden","membentuk partai politik peserta pemilu"],"correctIndex":0,"explanation":""},
+    {"question":"UUD 1945 disahkan oleh PPKI pada tanggal...","options":["18 Agustus 1945","17 Agustus 1945","1 Juni 1945","10 Juli 1945"],"correctIndex":0,"explanation":""},
     {"question":"Perubahan (amandemen) UUD 1945 dilakukan oleh lembaga...","options":["Presiden","DPR","MPR","Mahkamah Agung"],"correctIndex":2,"explanation":"MPR berwenang melakukan perubahan/amandemen terhadap UUD 1945 sesuai ketentuan Pasal 37 UUD 1945."},
+    {"question":"Selain hukum dasar tertulis, UUD 1945 juga memuat hukum dasar...","options":["tidak tertulis berupa konvensi ketatanegaraan","tidak tertulis berupa traktat internasional","tertulis berupa peraturan pemerintah","tidak tertulis berupa putusan hakim"],"correctIndex":0,"explanation":""},
   ],
 
   ["Pendidikan Pancasila||Norma||Macam-Macam Norma"]: [
@@ -1733,6 +1738,14 @@ export const SMP7_QUIZ_DB: Record<string, QuestionData[]> = {
     {"question":"Kerajaan Mataram Islam mencapai puncak kejayaannya di bawah pemerintahan Sultan... yang berhasil menaklukkan Batavia dan melakukan Giyanti.","options":["Sultan Ageng Tirtayasa","Sultan Maulana Yusuf","Sultan Agung Hanyokrokusumo","Sultan Hadiwijaya"],"correctIndex":2,"difficulty":"medium","explanation":"Sultan Agung Hanyokrokusumo memerintah Kerajaan Mataram Islam sekitar tahun 1613–1645 dan menjadi raja terbesar yang membawa kerajaan ini ke puncak kejayaan."},
     {"question":"Kerajaan Banten mencapai puncak kejayaannya pada abad ke-16 hingga 17. Keunggulan utama Kerajaan Banten terletak pada sektor...?","options":["Pertanian sawah","Pertambangan emas","Perdagangan maritim dan pelabuhan","Industri tekstil"],"correctIndex":2,"difficulty":"medium","explanation":"Kerajaan Banten terletak di pesisir barat Pulau Jawa dengan pelabuhan yang strategis, menjadikan perdagangan maritim sebagai sektor utama kejayaannya."},
     {"question":"Peninggalan budaya Islam yang masih berdiri di Banten hingga saat ini adalah... yang dibangun oleh Sultan Ageng Tirtayasa.","options":["Masjid Jami' Al-Mansur","Masjid Agung Banten","Masjid Katibul Anwar","Masjid Al-Ikhlas"],"correctIndex":2,"difficulty":"medium","explanation":"Masjid Katibul Anwar di Banten merupakan peninggalan bersejarah yang memiliki menara terpisah dari bangunan utama, dibangun pada masa Sultan Ageng Tirtayasa (1651–1682)."},
+  ],
+
+  ["Sejarah||Perubahan Sosial||Dampak Kedatangan Eropa pada Masyarakat Indonesia"]: [
+    {"question":"Bangsa Eropa pertama yang tiba di Nusantara pada 1511 dan menguasai Malaka adalah...","options":["Bangsa Portugis di bawah Afonso de Albuquerque","Bangsa Spanyol di bawah Ferdinand Magellan","Bangsa Belanda di bawah Cornelis de Houtman","Bangsa Inggris di bawah Francis Drake"],"correctIndex":0,"explanation":"Bangsa Portugis adalah bangsa Eropa pertama yang tiba di Nusantara pada tahun 1511, dikepalai oleh Afonso de Albuquerque, dan berhasil menguasai jalur perdagangan rempah-rempah di Malaka."},
+    {"question":"Perubahan struktur sosial masyarakat Indonesia akibat kedatangan bangsa Eropa adalah...","options":["Munculnya stratifikasi sosial baru berdasarkan kedekatan dengan kekuasaan kolonial","Hilangnya seluruh kelas bangsawan dari masyarakat Nusantara","Terbentuknya kesetaraan sosial tanpa perbedaan status di masyarakat","Melemahnya sistem feodal karena rakyat memperoleh tanah kembali"],"correctIndex":0,"explanation":"Kedatangan bangsa Eropa membawa perubahan dalam struktur sosial masyarakat Indonesia, di mana muncul stratifikasi sosial baru berdasarkan kedekatan dengan kekuasaan kolonial."},
+    {"question":"Bentuk perubahan ekonomi yang diperkenalkan bangsa Eropa kepada masyarakat Indonesia adalah...","options":["Sistem tanam paksa untuk memenuhi kebutuhan pangan dalam negeri","Ekonomi subsisten yang menghasilkan barang untuk dipakai sendiri","Sistem ekonomi modern dan perdagangan tanaman ekspor seperti rempah-rempah, kopi, dan teh","Perdagangan bebas tanpa campur tangan pemerintah kolonial"],"correctIndex":2,"explanation":"Bangsa Eropa memperkenalkan sistem ekonomi modern dan menekankan perdagangan tanaman-tanaman export seperti rempah-rempah, kopi, dan teh untuk kepentingan perdagangan internasional."},
+    {"question":"Dampak kedatangan bangsa Eropa terhadap kehidupan budaya dan agama masyarakat Indonesia adalah...","options":["Masuknya agama Kristen dan unsur budaya Barat yang memengaruhi budaya lokal","Hilangnya seluruh kepercayaan asli masyarakat Nusantara tanpa sisa","Terbentuknya kerajaan Islam baru di pesisir utara Jawa","Diterapkannya sistem tanam paksa untuk tanaman ekspor"],"correctIndex":0,"explanation":"Interaksi dengan bangsa Eropa, terutama Portugis dan Belanda, membawa masuknya agama Kristen serta unsur-unsur budaya Barat yang memengaruhi budaya lokal Indonesia."},
+    {"question":"Strategi yang diterapkan Belanda untuk mengendalikan kerajaan-kerajaan di Indonesia adalah...","options":["Politik etis untuk menyejahterakan rakyat pribumi","Politik devide et impera (pecah belah)","Politik pintu terbuka bagi investor asing","Sistem tanam paksa untuk meningkatkan hasil ekspor"],"correctIndex":1,"explanation":"Bangsa Eropa, terutama Belanda, menerapkan politik devide et impera (pecah belah) yang membuat banyak kerajaan di Indonesia dijadikan kerajaan takluk atau bawahan untuk dikendalikan."},
   ],
 
   ["Sejarah||Masa Kolonial||Sistem Tanam Paksa, Reformasi, dan Perlawanan Lokal"]: [

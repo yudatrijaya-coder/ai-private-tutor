@@ -8,7 +8,7 @@
  */
 
 import { prisma } from "@/lib/prisma";
-import { optionTexts, pickCorrectIndex } from "@/lib/quiz-grading";
+import { optionTexts, pickCorrectIndex, questionRejection } from "@/lib/quiz-grading";
 import type { QuestionData, QuizData, LLMQuizResponse, LLMQuestion } from "./types";
 import { AttemptType } from "@/generated/prisma/enums";
 
@@ -362,13 +362,28 @@ async function saveQuiz(
 ): Promise<QuizData> {
   const studentId = material.curriculum?.studentId ?? "unknown";
 
+  // Never store a question the student cannot see. Every grader reads
+  // `correctIndex` alone, so a truncated row — explanation and index but no
+  // question or options — still scores while showing the student nothing. That
+  // is how 23 such rows reached the database; this is the writer that let them
+  // through. Drop them here, where the shape is still known, rather than
+  // discovering them later in an audit.
+  const renderable = questions.filter((q) => {
+    const why = questionRejection(q);
+    if (why) console.warn(`[assessment/generator] dropping unrenderable question (${why}): ${JSON.stringify(q).slice(0, 160)}`);
+    return why === null;
+  });
+  if (renderable.length === 0) {
+    throw new Error(`No renderable questions to save for material ${material.id}`);
+  }
+
   const quiz = await prisma.quiz.create({
     data: {
       materialId: material.id,
       studentId,
       type: type as keyof typeof AttemptType as any,
-      questions: questions as any,
-      maxScore: questions.length,
+      questions: renderable as any,
+      maxScore: renderable.length,
       timeLimit: type === "EXAM" ? 60 : 10,
     },
   });

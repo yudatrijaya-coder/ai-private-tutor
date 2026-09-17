@@ -33,7 +33,9 @@ import { isUsableSlideText, isLlmReasoningDump, MIN_USABLE_SLIDE_LENGTH } from "
  *    `slide_sibi` 3014 chars, zero quizzes). Never had a quiz.
  */
 const KNOWN_QUIZ_GAPS = new Set<string>([
-  "SMP_1||Sejarah||Perubahan Sosial||Dampak Kedatangan Eropa pada Masyarakat Indonesia",
+  // The Sejarah gap is closed: the five questions were unrenderable, so the
+  // emitter dropped the whole topic from the bank, and the topic now emits with
+  // all five. Leaving the entry here would hide a regression.
   "SMA_2||Matematika Tingkat Lanjut||Polinomial||Polinomial dan Fungsi Polinomial",
 ]);
 

@@ -126,6 +126,53 @@ async function main(): Promise<void> {
     await prisma.student.delete({ where: { id: student.id } }).catch(() => {});
   }
 
+  // ── 4. the repaired quizzes must render over the real HTTP API ────────
+  // This is the check that matters for the stub repair: a question that exists
+  // in the database but cannot be turned into a payload is still invisible to
+  // the student.
+  //
+  // Note the route deliberately WITHHOLDS `correctIndex` (the answer key must
+  // not reach the client before submission), so `questionRejection` — which
+  // requires a valid key — cannot be applied to this payload. What is asserted
+  // here is what the student actually needs: a non-empty stem and real options.
+  // Renderability in the full sense is covered by audit-quiz-integrity.ts.
+  {
+    // Ids come in two shapes in this database: uuid and bare 32-hex, so match
+    // on the hex prefix rather than assuming a dash follows it.
+    const prefixes = ["8076ae81", "b26cc302", "a44396af", "79bb5d34", "1f423b30", "f661cc07", "7c95622c"];
+    for (const prefix of prefixes) {
+      const quiz = await prisma.quiz.findFirst({
+        where: { id: { startsWith: prefix } },
+        select: { id: true },
+      });
+      if (!quiz) {
+        problems.push(`repaired quiz ${prefix} not found`);
+        continue;
+      }
+      const r = await fetch(`${BASE}/api/students/quizzes/${quiz.id}`, { headers: { cookie } });
+      const body = await r.text();
+      let rendered = 0;
+      let bad = 0;
+      try {
+        const j = JSON.parse(body) as Record<string, unknown>;
+        const wrap = (j.quiz ?? j) as Record<string, unknown>;
+        const qs = (Array.isArray(wrap.questions) ? wrap.questions : []) as Record<string, unknown>[];
+        rendered = qs.length;
+        bad = qs.filter((q) => {
+          const stem = typeof q.question === "string" ? q.question.trim() : "";
+          const opts = Array.isArray(q.options) ? q.options.filter((o) => typeof o === "string" && o.trim()) : [];
+          return stem.length === 0 || opts.length < 2;
+        }).length;
+      } catch {
+        problems.push(`quiz ${prefix} returned unparseable body`);
+      }
+      console.log(`GET quiz → ${r.status}  ${prefix}  questions=${rendered} unrenderable=${bad}`);
+      if (r.status !== 200) problems.push(`quiz ${prefix} returned ${r.status}`);
+      if (rendered === 0) problems.push(`quiz ${prefix} served zero questions over HTTP`);
+      if (bad > 0) problems.push(`quiz ${prefix} still serves ${bad} question(s) without stem or options`);
+    }
+  }
+
   console.log("");
   if (problems.length) for (const p of problems) console.log(`FAIL ${p}`);
   console.log(problems.length ? "FAIL" : "PASS");

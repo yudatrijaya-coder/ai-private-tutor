@@ -29,7 +29,8 @@ type Grade = (typeof GRADES)[number];
  */
 const KNOWN_QUIZ_GAPS: Record<Grade, string[]> = {
   SD_5: [],
-  SMP_1: ["Sejarah||Perubahan Sosial||Dampak Kedatangan Eropa pada Masyarakat Indonesia"],
+  // Sejarah closed — the topic now emits with all five questions.
+  SMP_1: [],
   SMA_2: ["Matematika Tingkat Lanjut||Polinomial||Polinomial dan Fungsi Polinomial"],
 };
 

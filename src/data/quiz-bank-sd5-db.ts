@@ -1,7 +1,7 @@
 /**
  * Quiz Bank — SD Kelas 5, school palette (generated)
  *
- * 130 topics × 1123 questions, lifted from the live curriculum of
+ * 130 topics × 1127 questions, lifted from the live curriculum of
  * SYIFA001 so `generateCurriculumDraft` can attach a quiz to every material
  * it creates. Consulted by `quiz-bank-*.ts` before its own map.
  *
@@ -876,7 +876,11 @@ export const SD5_QUIZ_DB: Record<string, QuestionData[]> = {
   ],
 
   ["IPAS||Perubahan Fisik||Perubahan Fisik dan Mental"]: [
+    {"question":"Apa contoh perubahan fisik yang terjadi pada masa kanak-kanak menurut materi?","options":["Gigi susu tanggal digantikan gigi tetap","Gigi tetap tanggal digantikan gigi susu","Rambut dan kuku memendek dengan cepat","Berat badan turun drastis setiap tahun"],"correctIndex":0,"explanation":""},
+    {"question":"Menurut materi, contoh perubahan mental pada masa kanak-kanak adalah…","options":["Mulai berpikir lebih logis dan memecahkan masalah sederhana","Gigi susu tanggal digantikan gigi tetap","Tinggi dan berat badan bertambah","Rambut dan kuku terus memanjang"],"correctIndex":0,"explanation":""},
     {"question":"Perubahan hormonal saat pubertas sering menyebabkan anak yang sedang mengalami masa pubertas menjadi…","options":["Selalu merasa bahagia tanpa alasan","Menjadi lebih mudah bergaul","Mudah marah atau menjadi sensitif","Tidak membutuhkan dukungan orang tua"],"correctIndex":2,"difficulty":"medium","explanation":"Perubahan hormon memengaruhi suasana hati, sehingga anak yang sedang pubertas cenderung lebih sensitif dan mudah marah."},
+    {"question":"Menurut materi, saat anak percaya diri karena tubuhnya kuat, ia cenderung…","options":["Lebih berani mencoba hal baru","Mudah marah tanpa alasan","Merasa lelah dan mengantuk","Menjadi pemalu dan ragu"],"correctIndex":0,"explanation":""},
+    {"question":"Menurut materi, apa yang dianjurkan agar tubuh dan pikiran tetap segar?","options":["Istirahat cukup agar tubuh dan pikiran segar","Makan makanan bergizi untuk mendukung pertumbuhan","Bermain sepanjang malam tanpa tidur","Menonton televisi terus-menerus"],"correctIndex":0,"explanation":""},
   ],
 
   ["IPAS||Cahaya||Sifat-Sifat Cahaya"]: [
