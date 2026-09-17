@@ -6,6 +6,7 @@
 //  Source: curriculum-topics-smp7.ts + 9Router LLM (ai_tutor_agent)
 // ═══════════════════════════════════════════════════════════════════
 import type { QuestionData } from '@/agents/assessment/types';
+import { SMP7_QUIZ_DB } from './quiz-bank-smp7-db';
 
 export function quizKey(subject: string, topic: string, subTopic: string): string {
   return `${subject}||${topic}||${subTopic}`;
@@ -939,9 +940,12 @@ const QUIZ_MAP: Record<string, QuestionData[]> = {
 };
 
 export function getQuiz(subject: string, topic: string, subTopic: string): QuestionData[] {
-  return QUIZ_MAP[quizKey(subject, topic, subTopic)] || [];
+  const key = quizKey(subject, topic, subTopic);
+  // SMP_1 entries come from the palette the school actually teaches, so they win
+  // over the Kurikulum Merdeka integrated entries (IPA / IPS) they replaced.
+  return SMP7_QUIZ_DB[key] || QUIZ_MAP[key] || [];
 }
 
 export function getAllQuizzes(): Record<string, QuestionData[]> {
-  return QUIZ_MAP;
+  return { ...QUIZ_MAP, ...SMP7_QUIZ_DB };
 }
