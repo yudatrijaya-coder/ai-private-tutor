@@ -18,6 +18,7 @@ import {
   SKIP_SUBTOPIC,
   SIM_THRESHOLD as THRESHOLD,
   entryMaterialScore,
+  subjectSatisfies,
 } from "../src/lib/prosem-match";
 
 const APPLY = process.argv.includes("--apply");
@@ -53,8 +54,17 @@ async function main() {
 
     for (const plan of plans) {
       const subject = plan.subject;
-      const mats = materials.filter((m) => m.subject === subject);
+      // Same rule as `prosem-coverage.ts`, from the same module. This used to be
+      // an exact `m.subject === subject` test, which matched nothing for a VII
+      // student's Biologi / Fisika / Sejarah sessions — the curriculum stores
+      // those lessons under IPA and IPS, so their `weekOrder` was never assigned
+      // while the coverage report called them covered.
+      const mats = materials.filter((m) => subjectSatisfies(subject, m.subject));
       if (mats.length === 0) continue;
+      const pooledFrom = [...new Set(mats.map((m) => m.subject))];
+      if (pooledFrom.length > 1 || pooledFrom[0].toLowerCase() !== subject.toLowerCase()) {
+        console.log(`  ~ ${subject}: pool = ${pooledFrom.join(" + ")} (${mats.length} material)`);
+      }
 
       // build prosem entries with weeks
       const entries: { e: ProsemEntry; week: number }[] = [];

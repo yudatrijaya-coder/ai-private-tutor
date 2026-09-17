@@ -40,6 +40,7 @@ import {
   chapterScore,
   sessionCoveredByLabel,
   entryMaterialScore,
+  subjectSatisfies,
 } from "../src/lib/prosem-match";
 
 const NEAR_THRESHOLD = 0.6;
@@ -144,8 +145,10 @@ async function main() {
       // the chapter and reported all 11 thermal sessions as gaps, which is the
       // exact false negative this script exists to prevent.
       const aliasSubjects = SUBJECT_ALIASES[plan.subject.toLowerCase()] ?? [];
-      const wanted = new Set([plan.subject.toLowerCase(), ...aliasSubjects]);
-      const pool = materials.filter((m) => wanted.has(m.subject.toLowerCase()));
+      // `subjectSatisfies` also enforces the course-variant boundary, so the
+      // "Matematika" pool can never absorb "Matematika Tingkat Lanjut" rows —
+      // `sim` rates those 0.850, one hundredth above SIM_THRESHOLD.
+      const pool = materials.filter((m) => subjectSatisfies(plan.subject, m.subject));
       const usedAlias = pool.some((m) => m.subject.toLowerCase() !== plan.subject.toLowerCase());
       const entries = (plan.entries as ProsemEntry[]).filter((e) => e.weeks.length > 0);
       const content = entries.filter(
