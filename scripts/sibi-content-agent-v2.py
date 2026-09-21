@@ -28,6 +28,8 @@ PDF_MAP = {
         "Kimia": "moodle-files/sibi-books/Kimia_SMA11_BS.pdf",
         "Matematika Tingkat Lanjut": "moodle-files/sibi-books/Matematika_TL_SMA11_BS.pdf",
         "Pendidikan Pancasila": "moodle-files/sibi-books/Pancasila_SMA11_BS.pdf",
+        # Official Kemenag 2024 textbook downloaded from Moodle course 4584 (PAI XI-4).
+        "Pendidikan Agama Islam": "moodle-files/4584_Kls_XI_Pendidikan_Agama_Islam_dan_Budi_Pekerti.pdf",
         "PJOK": "moodle-files/sibi-books/PJOK_SMA11_BS.pdf",
         "Sejarah": "moodle-files/sibi-books/Sejarah_SMA11_BS.pdf",
         "Sosiologi": "moodle-files/sibi-books/Sosiologi_SMA11_BS.pdf",

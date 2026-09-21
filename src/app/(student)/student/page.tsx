@@ -89,6 +89,7 @@ const PDF_MAP: Record<string, Record<string, string>> = {
     "Bahasa Inggris": "Inggris_SD5_BS.pdf",
     "Bahasa Indonesia": "Indonesia_SD5_BS.pdf",
     "Pendidikan Pancasila": "Pancasila_SD5_BS.pdf",
+    Matematika: "Matematika_SD5_BS.pdf",
   },
   SMP_1: {
     IPA: "IPA_SMP7_BS.pdf",
