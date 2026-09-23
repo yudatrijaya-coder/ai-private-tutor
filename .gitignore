@@ -50,3 +50,6 @@ backups/
 
 # Generated scripts (one-offs, not part of project)
 scripts/inject_subjects.cjs
+
+# backup files
+*.bak-*

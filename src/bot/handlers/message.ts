@@ -222,30 +222,28 @@ export async function onMessage(ctx: Context): Promise<void> {
           return;
         }
 
+        // /speedmath — timed mental math drill (Raihan / math enhancement)
+        if ("text" in msg && /^\/(speedmath|hitungcepat|speed)/i.test(msg.text?.trim() ?? "")) {
+          const { handleSpeedMathStart } = await import("./speedmath");
+          await handleSpeedMathStart(ctx, student);
+          return;
+        }
+
+        // /speedmath_stop — exit early
+        if ("text" in msg && /^\/speedmath_stop/i.test(msg.text?.trim() ?? "")) {
+          const { handleSpeedMathExit } = await import("./speedmath");
+          const stopped = await handleSpeedMathExit(ctx, student);
+          if (stopped) return;
+        }
+
         if ("text" in msg && /^\/start(\s+|@\w+|$)/i.test(msg.text?.trim() ?? "")) {
           await handleStart(ctx, student);
           return;
         }
 
         if ("text" in msg && msg.text?.trim() === "/help") {
-          const { getPersona } = await import("../personas");
-          const persona = getPersona(student.persona);
-          await ctx.reply(
-            `${persona.emoji} *Bantuan Perintah*\n\n` +
-                          `/start — Mulai / daftar ulang\n` +
-                          `/daftar _ID_ — Hubungkan akun Telegram dengan ID siswa\n` +
-                          `/materi — Lihat materi pelajaran\n` +
-                          `/quiz — Kerjakan kuis\n` +
-                          `/drill — Latihan topik lemah\n` +
-                          `/jadwal — Cek jadwal belajar\n` +
-                          `/jadwal_sekolah — Cek jadwal sekolah asli 🏫\n` +
-                          `/web — Buka dashboard di browser\n` +
-                          `/nilai — Lihat nilai dan progres\n` +
-                          `/perpanjang — Perpanjang masa belajar 📅\n` +
-                          `/help — Tampilkan bantuan ini\n\n` +
-                          `Atau cukup tanya aja langsung! 😊`,
-            { parse_mode: "Markdown" },
-          );
+          const { sendHelp } = await import("../commands");
+          await sendHelp(ctx as any, student);
           return;
         }
 

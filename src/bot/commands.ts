@@ -22,6 +22,7 @@ export const COMMAND_MENU = [
   { command: "start", description: "Mulai / daftar ulang" },
   { command: "quiz", description: "Kerjakan kuis" },
   { command: "drill", description: "Latihan topik lemah 🎯" },
+  { command: "speedmath", description: "Latihan hitung cepat ⚡" },
   { command: "review", description: "Ulangi soal yang pernah salah" },
   { command: "materi", description: "Lihat materi pelajaran" },
   { command: "weeklyexam", description: "Weekly exam & jadwal" },
@@ -50,8 +51,11 @@ export async function sendHelp(ctx: Context, student: Student): Promise<void> {
   const persona = getPersona(student.persona);
   await ctx.reply(
     `${persona.emoji} *Bantuan Perintah*\n\n` +
+      `/start — Mulai / daftar ulang\n` +
+      `/daftar _ID_ — Hubungkan akun Telegram dengan ID siswa\n` +
       `/quiz — Kerjakan kuis 🧠\n` +
       `/drill — Latihan topik lemah 🎯\n` +
+      `/speedmath — Latihan hitung cepat ⚡\n` +
       `/review — Ulangi soal yang pernah salah 🔁\n` +
       `/materi — Lihat materi pelajaran 📗\n` +
       `/weeklyexam — Weekly exam & jadwal 📝\n` +
@@ -61,6 +65,7 @@ export async function sendHelp(ctx: Context, student: Student): Promise<void> {
       `/badge — XP, streak & badge 🏆\n` +
       `/nilai — Nilai dan progres 📊\n` +
       `/prosem — Jadwal prosem minggu ini 🗓️\n` +
+      `/perpanjang — Perpanjang masa belajar 📅\n` +
       `/web — Buka dashboard 🌐\n` +
       `/help — Bantuan ini\n\n` +
       `Atau cukup tanya aja langsung! 😊`,

@@ -48,9 +48,18 @@ export async function handleStart(ctx: Context, student: Student): Promise<void>
       `Aku siap bantu kamu belajar! Berikut yang bisa kamu lakukan:\n\n` +
       `📚 /materi — Lihat materi pelajaran\n` +
       `📝 /quiz — Kerjakan kuis\n` +
+      `🎯 /drill — Latihan topik lemah\n` +
+      `⚡ /speedmath — Latihan hitung cepat\n` +
+      `🔁 /review — Ulangi soal yang pernah salah\n` +
+      `📝 /weeklyexam — Weekly exam & jadwal\n` +
       `📅 /jadwal — Cek jadwal belajar\n` +
+      `🏫 /jadwal_sekolah — Jadwal sekolah asli\n` +
+      `📖 /pr — Catat / lihat PR\n` +
+      `🏆 /badge — XP, streak & badge\n` +
       `📊 /nilai — Lihat nilai terakhir\n` +
+      `🗓️ /prosem — Jadwal prosem minggu ini\n` +
       `🌐 /web — Buka dashboard di browser\n` +
+      `📅 /perpanjang — Perpanjang masa belajar\n` +
       `❓ /help — Bantuan perintah\n\n` +
       `Ada yang mau ditanyakan? 😊`,
     { parse_mode: "Markdown" },

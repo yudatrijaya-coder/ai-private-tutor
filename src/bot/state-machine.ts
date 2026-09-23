@@ -36,6 +36,17 @@ export async function routeByState(
     session.currentMode === "quiz_active" ||
     session.currentMode === "waiting_quiz_answer"
   ) {
+    // Speed Math session takes precedence — free-text numeric answer
+    const sm = (session.context as any)?.speedmath;
+    if (sm?.active) {
+      const msgText = "text" in msg ? (msg.text?.trim() ?? "") : "";
+      const smHandled = await (await import("./handlers/speedmath")).handleSpeedMathAnswer(
+        ctx,
+        student,
+        msgText,
+      );
+      if (smHandled) return true;
+    }
     await handleQuizAnswer(ctx, session, student);
     return true;
   }
