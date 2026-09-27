@@ -282,6 +282,19 @@ export async function callLLM(
         }).catch(() => {});
       }
 
+      // An EMPTY completion is not a usable answer. Reasoning models (e.g. the
+      // ai_tutor_agent/hermes combos) emit hidden reasoning tokens first; if the
+      // cap is too small the whole budget goes there and `content` comes back
+      // empty with finish_reason="length". Returning "" here makes callers think
+      // the model answered nothing useful ("kakak nggak bisa jelasin"), when a
+      // retry on the next model would have succeeded. Treat it as a failure.
+      if (content === null || content.trim() === "") {
+        const reason = response.choices[0]?.finish_reason ?? "unknown";
+        throw new Error(
+          `empty completion (finish_reason=${reason}, completion_tokens=${usage?.completion_tokens ?? "?"})`,
+        );
+      }
+
       return content;
     } catch (err) {
       lastError = err instanceof Error ? err : new Error(String(err));

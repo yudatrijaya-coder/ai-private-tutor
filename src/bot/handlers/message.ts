@@ -6,7 +6,13 @@ import { handleMessage } from "../agent/tutor";
 import { handleStart } from "./start";
 import { handleRegister } from "./register";
 import { handleReminderCommand, processPendingReminders } from "../agent/reminder";
-import { handleQuizStart } from "./quiz";
+import {
+  handleQuizStart,
+  isQuizRequest,
+  parseQuizTimerRequest,
+  parseQuizRequest,
+  getStudentSubjects,
+} from "./quiz";
 import { handleSchedule } from "./schedule";
 import { handleSchoolSchedule, handleNextSubject } from "./school-schedule";
 import { handleMaterial } from "./material";
@@ -21,6 +27,7 @@ import { handleOnboardingStart } from "./onboarding";
 import { hasActiveRegistration, cancelRegistration, handleOnboardingMessage } from "./onboarding";
 import { routeCallback } from "../state-machine";
 import { routeCommand, registerCommandMenu } from "../commands";
+import { logChat, mirrorRepliesToChatLog } from "../chat-log";
 import {
   sendTrialExpiredWithButton,
   handleExtensionRequest,
@@ -63,6 +70,27 @@ async function handleParentCommand(
         { parse_mode: "Markdown" },
       );
   }
+}
+
+/**
+ * Run a quiz flow with the exchange recorded in ChatLog.
+ *
+ * Quiz replies come straight from the handler (mapel picker, question with
+ * buttons, result card), bypassing the tutor LLM — which is the only other
+ * ChatLog writer. Without this, a student's quiz requests never appear in the
+ * dashboard history.
+ */
+async function runQuizFlow(
+  ctx: Context,
+  student: { id: string; telegramId?: string | null },
+  studentText: string | null,
+  run: () => Promise<void>,
+): Promise<void> {
+  if (studentText) {
+    logChat(student.id, "user", studentText, "telegram", { intent: "quiz" });
+  }
+  mirrorRepliesToChatLog(ctx, student.id);
+  await run();
 }
 
 /**
@@ -212,7 +240,9 @@ export async function onMessage(ctx: Context): Promise<void> {
         }
 
         if ("text" in msg && /^\/(quiz|kuis)$/i.test(msg.text?.trim() ?? "")) {
-          await handleQuizStart(ctx, student);
+          await runQuizFlow(ctx, student, msg.text ?? "/quiz", () =>
+            handleQuizStart(ctx, student),
+          );
           return;
         }
 
@@ -282,6 +312,35 @@ export async function onMessage(ctx: Context): Promise<void> {
           if (routed) return;
         }
 
+        // ── Deterministic quiz-intent detection ──
+        // The tutor LLM is supposed to append [QUIZ] when the student asks for
+        // one, but in practice it answers in prose ("tulis jawabanmu di bawah")
+        // and the student is left typing answers instead of tapping buttons.
+        // Catch the request here so the button flow always wins; the LLM still
+        // handles everything that is not a quiz request.
+        //
+        // The student's own words are honoured: "quiz IPAS tentang fotosintesis"
+        // starts that topic directly, while a bare "kasih saya quiz" falls back
+        // to the subject picker.
+        if ("text" in msg && isQuizRequest(msg.text ?? "")) {
+          const text = msg.text ?? "";
+          const questionSeconds = parseQuizTimerRequest(text);
+          const subjects = await getStudentSubjects(student.id);
+          const named = parseQuizRequest(text, subjects);
+          console.log(
+            `[quiz] intent from ${student.telegramId ?? student.id}: ` +
+              `subject=${named.subject ?? "-"} topic=${named.topic ?? "-"} timer=${questionSeconds ?? "-"}`,
+          );
+          await runQuizFlow(ctx, student, text, () =>
+            handleQuizStart(ctx, student, {
+              ...(questionSeconds ? { questionSeconds } : {}),
+              ...(named.subject ? { subject: named.subject } : {}),
+              ...(named.topic ? { topic: named.topic } : {}),
+            }),
+          );
+          return;
+        }
+
         // Fall through to LLM-powered tutor
         const response = await handleMessage(ctx, session, student);
 
@@ -295,7 +354,8 @@ export async function onMessage(ctx: Context): Promise<void> {
           }
 
           if (/\[QUIZ\]/i.test(respText)) {
-            await handleQuizStart(ctx, student);
+            const quizAsk = "text" in msg ? (msg.text ?? null) : null;
+            await runQuizFlow(ctx, student, quizAsk, () => handleQuizStart(ctx, student));
             return;
           }
           if (/\[SCHEDULE\]/i.test(respText)) {
