@@ -7,6 +7,7 @@ export const CAPABILITIES = [
     tag: "QUIZ",
     description: "Generate or start a quiz",
     trigger: "student asks for quiz, latihan, or test",
+    note: 'When the student asks for a quiz/latihan/soal (e.g. "kasih saya quiz", "buat soal satu per satu", "ulang lagi", "test aku"), append [QUIZ] at the END of your reply. Do NOT write out quiz questions yourself, and never ask the student to type their answer — the quiz is shown one question at a time with answer buttons. If the student gives a per-question time limit (e.g. "30 detik", "1 menit"), acknowledge it in one short sentence; the system reads the limit from the message.',
   },
   {
     tag: "SCHEDULE",

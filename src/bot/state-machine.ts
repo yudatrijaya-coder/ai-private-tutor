@@ -11,6 +11,8 @@ import {
   QUIZ_EXIT_PREFIX,
   QUIZ_SUBJECT_PREFIX,
   QUIZ_PICK_PREFIX,
+  QUIZ_REDO_PREFIX,
+  QUIZ_EXPLAIN_PREFIX,
 } from "./handlers/quiz";
 import { handlePhoto } from "./handlers/vision";
 import {
@@ -18,6 +20,7 @@ import {
   handleOnboardingCallback,
 } from "./handlers/onboarding";
 import { handleExtensionRequest } from "./handlers/extension";
+import { logChat, mirrorRepliesToChatLog, describeQuizCallback } from "./chat-log";
 
 /**
  * Route an incoming message based on the current session state.
@@ -47,6 +50,15 @@ export async function routeByState(
       );
       if (smHandled) return true;
     }
+
+    // Record the typed answer in the dashboard history. This path answers
+    // without the tutor LLM, so it would otherwise leave no trace.
+    const typed = "text" in msg ? (msg.text?.trim() ?? "") : "";
+    if (typed) {
+      logChat(student.id, "user", typed, "telegram", { intent: "quiz_answer" });
+    }
+    mirrorRepliesToChatLog(ctx, student.id);
+
     await handleQuizAnswer(ctx, session, student);
     return true;
   }
@@ -76,10 +88,27 @@ export async function routeCallback(
 
   const data = ctx.callbackQuery.data;
 
-  // Quiz answer/exit callbacks
+  // Record quiz button presses in the dashboard history. The handlers reply
+  // directly (no LLM), so without this the student's taps leave no trace —
+  // their conversation looked empty even though they were answering.
+  const quizLabel = describeQuizCallback(data);
+  if (quizLabel) {
+    const student = await findStudentByTelegramId(ctx);
+    if (student) {
+      logChat(student.id, "user", quizLabel, "telegram", {
+        intent: "quiz_callback",
+        data,
+      });
+      mirrorRepliesToChatLog(ctx, student.id);
+    }
+  }
+
+  // Quiz answer/exit/redo/explain callbacks
   if (
     data.startsWith(QUIZ_ANS_PREFIX) ||
-    data.startsWith(QUIZ_EXIT_PREFIX)
+    data.startsWith(QUIZ_EXIT_PREFIX) ||
+    data.startsWith(QUIZ_REDO_PREFIX) ||
+    data.startsWith(QUIZ_EXPLAIN_PREFIX)
   ) {
     const student = await findStudentByTelegramId(ctx);
     if (!student) {
