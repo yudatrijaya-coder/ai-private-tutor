@@ -22,7 +22,7 @@ import { AttemptType } from "@/generated/prisma/enums";
  * Tries LLM first; falls back to hardcoded topic-based questions when
  * the LLM call fails or returns unparseable output.
  */
-export async function generateQuiz(materialId: string): Promise<QuizData> {
+export async function generateQuiz(materialId: string, count = 5): Promise<QuizData> {
   const material = await prisma.material.findUnique({
     where: { id: materialId },
     include: { curriculum: true },
@@ -39,30 +39,134 @@ export async function generateQuiz(materialId: string): Promise<QuizData> {
     const { callLLM } = await import("@/llm/client");
     const { SYSTEM_PROMPTS } = await import("@/llm/prompts");
 
-    const questionsText = await callLLM("assessment", [
-      {
-        role: "system",
-        content: SYSTEM_PROMPTS.assessment,
-      },
-      {
-        role: "user",
-        content: `Generate 5 multiple choice quiz questions in Indonesian for this material. Return JSON array with: question, options (4 items), correctIndex (0-3), explanation.\n\n${material.processedContent.slice(0, 3000)}`,
-      },
-    ], { studentId });
+    const questionsText = await callLLM(
+      "assessment",
+      [
+        {
+          role: "system",
+          content: SYSTEM_PROMPTS.assessment,
+        },
+        {
+          role: "user",
+          content: `Generate ${count} multiple choice quiz questions in Indonesian for this material. Return JSON array with: question, options (4 items), correctIndex (0-3), explanation.\n\n${material.processedContent.slice(0, 3000)}`,
+        },
+      ],
+      // Same reasoning-overhead budget as generateQuestionsForTopic: a small
+      // cap makes the model exhaust tokens on reasoning and return nothing.
+      { studentId, maxTokens: Math.min(16384, 4000 + count * 500) },
+    );
 
     if (questionsText) {
       const questions = parseLLMQuestions(questionsText);
       if (questions.length >= 2) {
         return await saveQuiz(material, questions, "QUIZ");
       }
+      console.warn(
+        `[generateQuiz] only ${questions.length} usable question(s) for material ${materialId}; using fallback`,
+      );
+    } else {
+      console.warn(`[generateQuiz] empty LLM response for material ${materialId}; using fallback`);
     }
-  } catch {
-    // fallback below
+  } catch (err) {
+    console.warn(`[generateQuiz] LLM path failed for material ${materialId}:`, err);
   }
 
   // Fallback: generate topic-specific questions
   const questions = hardcodedQuestions(material);
   return await saveQuiz(material, questions, "QUIZ");
+}
+
+/**
+ * Generate exactly `count` fresh multiple-choice questions on a subject/topic.
+ *
+ * Unlike `generateQuiz`, this does NOT persist a quiz — the caller decides what
+ * to do with the questions (the bot merges them with the existing bank and
+ * writes a single assembled quiz). It also accepts an `exclude` list so a
+ * top-up never repeats a question the student is about to see.
+ *
+ * Returns [] on any failure — an empty array is the honest signal that the
+ * caller must fall back to what the bank already holds.
+ */
+export async function generateQuestionsForTopic(opts: {
+  subject: string;
+  topic?: string;
+  count: number;
+  studentId: string;
+  gradeLevel?: string;
+  /** Questions already chosen, which the model must not repeat. */
+  exclude?: string[];
+  /** Source text (processed material content) to ground the questions in. */
+  contextText?: string;
+}): Promise<QuestionData[]> {
+  const { subject, topic, count, studentId, exclude = [], contextText } = opts;
+  if (count < 1) return [];
+
+  const focus = topic ? `topik "${topic}"` : `mata pelajaran ${subject}`;
+  const avoid = exclude.length
+    ? [
+        "",
+        "JANGAN mengulang soal-soal berikut (sudah dipakai):",
+        ...exclude.slice(0, 40).map((q, i) => `${i + 1}. ${q}`),
+      ].join("\n")
+    : "";
+  const source = contextText
+    ? `\nGunakan materi berikut sebagai sumber utama:\n${contextText.slice(0, 4000)}\n`
+    : "";
+
+  const prompt = [
+    `Buat ${count} soal pilihan ganda BARU dalam Bahasa Indonesia tentang ${focus} untuk mata pelajaran ${subject}, jenjang ${opts.gradeLevel ?? "SMP"}.`,
+    source,
+    avoid,
+    "",
+    "Keluarkan HANYA JSON array (tanpa penjelasan di luar JSON). Setiap item:",
+    '{"question": "...", "options": ["...","...","...","..."], "correctIndex": 0, "explanation": "...", "difficulty": "easy|medium|hard"}',
+    `Jumlah item harus tepat ${count}. Setiap soal punya TEPAT SATU jawaban benar (correctIndex 0-3), pengecoh harus masuk akal.`,
+  ].join("\n");
+
+  const { callLLM } = await import("@/llm/client");
+  const { SYSTEM_PROMPTS } = await import("@/llm/prompts");
+
+  // The assessment route runs on the same combo as the tutor, which we have
+  // observed failing intermittently ("Request was aborted"). One retry turns a
+  // transient provider hiccup into a usable quiz instead of an empty result.
+  const attempts = 2;
+  let best: QuestionData[] = [];
+
+  for (let attempt = 1; attempt <= attempts; attempt++) {
+    try {
+      const text = await callLLM(
+        "assessment",
+        [
+          { role: "system", content: SYSTEM_PROMPTS.assessment },
+          { role: "user", content: prompt },
+        ],
+        // Reasoning models spend thousands of tokens on reasoning_content
+        // BEFORE emitting any answer, and each question is ~150 output tokens.
+        // A too-small budget produces `finish_reason=length` with an empty
+        // content — which looks exactly like a provider failure. Budget for the
+        // reasoning overhead as well as the output, not just the output.
+        { studentId, maxTokens: Math.min(16384, 4000 + count * 500) },
+      );
+
+      if (!text) {
+        console.warn(`[generate] empty LLM response for ${focus} (count=${count}, attempt ${attempt})`);
+        continue;
+      }
+      const parsed = parseLLMQuestions(text).filter((q) => questionRejection(q) === null);
+      if (parsed.length > best.length) best = parsed;
+      if (parsed.length >= count) return parsed;
+      console.warn(
+        `[generate] parsed ${parsed.length}/${count} usable questions for ${focus}` +
+          ` (raw len=${text.length}, attempt ${attempt})`,
+      );
+    } catch (err) {
+      // Never swallow silently: an empty array looks identical to "the model had
+      // nothing to say", which made this path impossible to debug in production.
+      console.warn(`[generate] failed for ${focus} (count=${count}, attempt ${attempt}):`, err);
+    }
+  }
+
+  return best;
 }
 
 /* ------------------------------------------------------------------ */

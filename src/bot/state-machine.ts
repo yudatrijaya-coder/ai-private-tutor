@@ -63,12 +63,6 @@ export async function routeByState(
     return true;
   }
 
-  // Vision pending — a photo was just sent, handled by vision handler
-  if (session.currentMode === "vision_pending") {
-    // Clear the pending state and let the main handler process
-    return false;
-  }
-
   // Photo message — route to vision handler
   if ("photo" in msg) {
     await handlePhoto(ctx, student);

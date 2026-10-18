@@ -53,3 +53,5 @@ scripts/inject_subjects.cjs
 
 # backup files
 *.bak-*
+graphify-out/
+.graphifyignore

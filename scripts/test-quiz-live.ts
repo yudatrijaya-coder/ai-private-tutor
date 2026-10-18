@@ -69,6 +69,27 @@ async function main() {
   }
   console.log(`\nMurid: ${student.name} (${student.id})\n`);
 
+  // Pick a REAL subject+topic from this student's bank for the "named
+  // subject/topic" case. Hardcoding "IPAS"/"bunyi" made the test go stale the
+  // moment the account's materials changed — it then failed for reasons that
+  // had nothing to do with the code under test.
+  const recent = await prisma.quiz.findMany({
+    where: { studentId: student.id },
+    orderBy: { createdAt: "desc" },
+    take: 40,
+    select: { materialId: true },
+  });
+  const sampleMaterial = await prisma.material.findFirst({
+    where: {
+      id: { in: recent.map((q) => q.materialId) },
+      topic: { not: "" },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+  const sampleSubject = sampleMaterial?.subject ?? undefined;
+  const sampleTopic = sampleMaterial?.topic ?? undefined;
+  console.log(`Fixture subject/topic: ${sampleSubject ?? "-"} / ${sampleTopic ?? "-"}\n`);
+
   // Snapshot the real session so we can restore it exactly afterwards. The
   // handlers persist quiz state to SessionState, and leaving AYU in
   // `quiz_active` would make her next real message be graded as a quiz answer.
@@ -196,14 +217,15 @@ async function main() {
     // 6a. Subject + topic yang ADA di bank → langsung mulai, tanpa picker
     const calls: Call[] = [];
     const ctx = makeMockCtx(calls);
-    await handleQuizStart(ctx, student, { subject: "IPAS", topic: "bunyi" });
+    await handleQuizStart(ctx, student, { subject: sampleSubject, topic: sampleTopic });
     const hasPicker = calls.some((c) => c.keyboard?.some((r) => r.some((b) => b.callback_data.startsWith("quiz:subject:"))));
     check("TIDAK memunculkan picker mapel", !hasPicker, JSON.stringify(calls.map((c) => c.text?.slice(0, 40))));
     const q = calls.find((c) => /Soal 1 dari/.test(c.text));
     check("langsung menyajikan soal", !!q);
+    const topicWord = (sampleTopic ?? "").split(/\s+/)[0] ?? "";
     check(
       "mengonfirmasi topik yang diminta",
-      calls.some((c) => /bunyi/i.test(c.text)),
+      !topicWord || calls.some((c) => new RegExp(topicWord, "i").test(c.text)),
       JSON.stringify(calls.map((c) => c.text?.slice(0, 50))),
     );
 
@@ -227,7 +249,7 @@ async function main() {
     // 6d. Topic tak dikenal → jatuh ke picker, tidak error
     const calls4: Call[] = [];
     const ctx4 = makeMockCtx(calls4);
-    await handleQuizStart(ctx4, student, { subject: "IPAS", topic: "fotosintesis" });
+    await handleQuizStart(ctx4, student, { subject: sampleSubject, topic: "zzz-topik-tidak-ada" });
     const picker4 = calls4.find((c) => c.keyboard?.some((r) => r.some((b) => b.callback_data.startsWith("quiz:subject:"))));
     const started4 = calls4.some((c) => /Soal 1 dari/.test(c.text));
     check(
