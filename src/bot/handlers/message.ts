@@ -11,6 +11,8 @@ import {
   isQuizRequest,
   parseQuizTimerRequest,
   parseQuizRequest,
+  parseQuizCount,
+  isDemandingQuizRequest,
   getStudentSubjects,
 } from "./quiz";
 import { handleSchedule } from "./schedule";
@@ -327,15 +329,20 @@ export async function onMessage(ctx: Context): Promise<void> {
           const questionSeconds = parseQuizTimerRequest(text);
           const subjects = await getStudentSubjects(student.id);
           const named = parseQuizRequest(text, subjects);
+          const count = parseQuizCount(text);
+          const demanding = isDemandingQuizRequest(text);
           console.log(
             `[quiz] intent from ${student.telegramId ?? student.id}: ` +
-              `subject=${named.subject ?? "-"} topic=${named.topic ?? "-"} timer=${questionSeconds ?? "-"}`,
+              `subject=${named.subject ?? "-"} topic=${named.topic ?? "-"} ` +
+              `timer=${questionSeconds ?? "-"} count=${count ?? "-"} demanding=${demanding}`,
           );
           await runQuizFlow(ctx, student, text, () =>
             handleQuizStart(ctx, student, {
               ...(questionSeconds ? { questionSeconds } : {}),
               ...(named.subject ? { subject: named.subject } : {}),
               ...(named.topic ? { topic: named.topic } : {}),
+              ...(count ? { count } : {}),
+              demanding,
             }),
           );
           return;

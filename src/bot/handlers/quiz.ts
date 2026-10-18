@@ -144,6 +144,54 @@ export function parseQuizTimerRequest(raw: string): number | null {
   return null;
 }
 
+/** Hard ceiling on an assembled quiz, so "buat 1000 soal" cannot melt the bot. */
+export const MAX_QUIZ_QUESTIONS = 30;
+
+/**
+ * Parse how many questions the student asked for.
+ *
+ *   "buat 20 soal"            → 20
+ *   "kasih saya 10 soal ipas" → 10
+ *   "buat 3 soal"             → 3
+ *   "kasih saya quiz"         → null  (no count → the bank decides)
+ *
+ * Only a number immediately attached to a question word counts. A bare "20"
+ * (which is what a student types when they think the bot asked them something)
+ * must NOT be read as a count — that was one of the ways the old flow
+ * mis-answered. Values are clamped to [1, MAX_QUIZ_QUESTIONS].
+ */
+export function parseQuizCount(raw: string): number | null {
+  const t = (raw ?? "").toLowerCase();
+  // number directly before "soal"/"pertanyaan", or before "soal" with the
+  // request verb between ("minta 20 soal", "buat 20 soal pilihan ganda").
+  const m =
+    t.match(/(\d+)\s*(?:soal|pertanyaan|butir)/) ??
+    t.match(/(?:soal|pertanyaan)\s*(\d+)/);
+  if (!m) return null;
+  const n = parseInt(m[1], 10);
+  if (!Number.isFinite(n) || n < 1) return null;
+  return Math.min(n, MAX_QUIZ_QUESTIONS);
+}
+
+/**
+ * Is the student insisting — not just asking once?
+ *
+ * Used to decide whether a shortfall should be filled by GENERATING questions
+ * (the expensive path) or answered honestly with what the bank already holds.
+ * Naming an exact number is itself a demand; so are the words students actually
+ * use when a bot under-delivers ("baca yang benar 6 bukan 20", "pokoknya 20",
+ * "harus 20", "masa cuma segini").
+ */
+export function isDemandingQuizRequest(raw: string): boolean {
+  const t = (raw ?? "").toLowerCase();
+  if (!t.trim()) return false;
+  // An explicit "20 soal" is already a demand for exactly that many.
+  if (parseQuizCount(t) !== null) return true;
+  return /\b(harus|pokoknya|serius|jangan|bukan|masa|kok|bener|benar|sesuai|tepat|persis|ulang|lagi|kurang)\b/.test(
+    t,
+  );
+}
+
 /**
  * Does this message ask for a quiz?
  *
@@ -355,7 +403,15 @@ function questionAt(
 export async function handleQuizStart(
   ctx: Context,
   student: Student,
-  opts?: { questionSeconds?: number; subject?: string; topic?: string },
+  opts?: {
+    questionSeconds?: number;
+    subject?: string;
+    topic?: string;
+    /** How many questions the student asked for, if they named a number. */
+    count?: number;
+    /** Whether the student is insisting (drives the generate-on-demand path). */
+    demanding?: boolean;
+  },
 ): Promise<void> {
   const persona = getPersona(student.persona);
 
@@ -398,6 +454,21 @@ export async function handleQuizStart(
   // "Pilih Mapel" menu — that is the rigid behaviour. Resolve their words to a
   // real quiz and start it directly; only fall back to the picker when their
   // words match nothing.
+  //
+  // When they ALSO named a number of questions ("buat 20 soal …"), assemble a
+  // quiz of that size instead of serving whatever single bank quiz exists —
+  // merging the bank (A) and, if they insist on a specific topic, generating
+  // the shortfall (B), otherwise saying so plainly (C).
+  if (opts?.count && opts.count > 0 && (opts.subject || opts.topic)) {
+    const counted = await tryStartCountedQuiz(ctx, student, quizzes, {
+      subject: opts.subject,
+      topic: opts.topic,
+      count: opts.count,
+      demanding: opts.demanding === true,
+    });
+    if (counted) return;
+  }
+
   if (opts?.subject || opts?.topic) {
     const started = await tryStartNamedQuiz(ctx, student, quizzes, {
       subject: opts.subject,
@@ -470,7 +541,7 @@ export async function handleQuizStart(
 async function tryStartNamedQuiz(
   ctx: Context,
   student: Student,
-  quizzes: ({ id: string; material?: unknown } & Record<string, unknown>)[],
+  quizzes: BankQuiz[],
   want: { subject?: string; topic?: string },
 ): Promise<boolean> {
   const persona = getPersona(student.persona);
@@ -480,7 +551,7 @@ async function tryStartNamedQuiz(
   if (want.subject) {
     const ws = norm(want.subject);
     pool = pool.filter((q) => {
-      const subj = norm(((q.material as any)?.subject as string) ?? "");
+      const subj = norm(q.material?.subject ?? "");
       return subj.includes(ws) || ws.includes(subj);
     });
   }
@@ -490,9 +561,7 @@ async function tryStartNamedQuiz(
     const words = norm(want.topic).split(/\s+/).filter((w) => w.length >= 3);
     const scored = pool
       .map((q) => {
-        const hay = `${norm(((q.material as any)?.topic as string) ?? "")} ${
-          norm(((q.material as any)?.subTopic as string) ?? "")
-        }`;
+        const hay = `${norm(q.material?.topic ?? "")} ${norm(q.material?.subTopic ?? "")}`;
         const hits = words.filter((w) => hay.includes(w)).length;
         return { q, hits };
       })
@@ -501,7 +570,7 @@ async function tryStartNamedQuiz(
 
     if (scored.length > 0) {
       const best = scored[0].q;
-      const topic = ((best.material as any)?.topic as string) ?? want.topic;
+      const topic = best.material?.topic ?? want.topic;
       await ctx.reply(
         `${persona.emoji} Siap! Kuis *${escapeMd(topic)}*${
           want.subject ? ` (${escapeMd(want.subject)})` : ""
@@ -534,6 +603,298 @@ async function tryStartNamedQuiz(
   }
 
   return false;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Count-aware assembly (A: merge bank, B: generate top-up, C: be honest) */
+/* ------------------------------------------------------------------ */
+
+/**
+ * A bank quiz together with the material it was built from. `material` is
+ * nullable because a quiz can outlive its material row; the helpers below treat
+ * a missing material as "matches nothing" rather than throwing.
+ */
+type BankQuiz = {
+  id: string;
+  materialId: string;
+  questions: unknown;
+  material: { subject: string; topic: string; subTopic: string | null } | null;
+};
+
+/** Normalise question text so duplicates across quizzes collapse to one. */
+function questionKey(q: { question?: string }): string {
+  return (q.question ?? "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+/**
+ * Rank the student's quizzes for a named subject/topic.
+ *
+ * Order: topic-word hits (most first), then quizzes with a due review, then
+ * newest. Shared by the plain "start one quiz" path and the count-aware
+ * assembler so both agree on what "most relevant" means.
+ */
+function rankCandidateQuizzes(
+  quizzes: BankQuiz[],
+  want: { subject?: string; topic?: string },
+  dueIds: Set<string>,
+): BankQuiz[] {
+  const norm = (s: string) => (s ?? "").toLowerCase().trim();
+
+  let pool = quizzes;
+  if (want.subject) {
+    const ws = norm(want.subject);
+    const filtered = pool.filter((q) => {
+      const subj = norm(q.material?.subject ?? "");
+      return subj.includes(ws) || ws.includes(subj);
+    });
+    if (filtered.length > 0) pool = filtered;
+  }
+
+  const words = want.topic
+    ? norm(want.topic).split(/\s+/).filter((w) => w.length >= 3)
+    : [];
+
+  return [...pool]
+    .map((q) => {
+      const hay = `${norm(q.material?.topic ?? "")} ${norm(q.material?.subTopic ?? "")}`;
+      const hits = words.filter((w) => hay.includes(w)).length;
+      return { q, hits };
+    })
+    .sort((a, b) => {
+      if (b.hits !== a.hits) return b.hits - a.hits;
+      const ad = dueIds.has(a.q.id) ? 1 : 0;
+      const bd = dueIds.has(b.q.id) ? 1 : 0;
+      if (bd !== ad) return bd - ad;
+      return 0;
+    })
+    .map((s) => s.q);
+}
+
+/**
+ * Start a quiz holding (about) `want.count` questions on the student's named
+ * subject/topic, assembling it from what the bank already holds.
+ *
+ * Strategy, in the order the product owner chose:
+ *   A. Merge questions from every matching bank quiz, de-duplicated, until the
+ *      requested count is met (or the bank runs out).
+ *   C. If the bank cannot reach the count, tell the student the truth and let
+ *      them decide — never silently serve 6 when 20 were asked for.
+ *   B. Only when the student is DEMANDING about a SPECIFIC topic, generate the
+ *      missing questions with the LLM and append them.
+ *
+ * Returns false when nothing matched at all, so the caller falls back to the
+ * subject picker.
+ */
+export async function tryStartCountedQuiz(
+  ctx: Context,
+  student: Student,
+  quizzes: BankQuiz[],
+  want: { subject?: string; topic?: string; count: number; demanding: boolean; rawText?: string },
+): Promise<boolean> {
+  const persona = getPersona(student.persona);
+  const norm = (s: string) => (s ?? "").toLowerCase().trim();
+
+  const dueIds = new Set(
+    (
+      await prisma.reviewQueue.findMany({
+        where: { studentId: student.id, mastered: false },
+        select: { quizId: true },
+      })
+    ).map((r) => r.quizId),
+  );
+
+  const ranked = rankCandidateQuizzes(quizzes, want, dueIds);
+  const topicWords = want.topic
+    ? norm(want.topic).split(/\s+/).filter((w) => w.length >= 3)
+    : [];
+
+  // Score each candidate by how many of the student's topic words its material
+  // title contains, then keep ONLY the best-matching tier.
+  //
+  // This is the fix for a real contamination bug: asking for "20 soal Pemisahan
+  // Campuran" used to pull in the broader "Campuran" material (whose questions
+  // are about molaritas/larutan) because it matched one of the two words. The
+  // student would get a quiz that silently mixed two different topics and the
+  // bot would claim the full count. Restricting to the highest tier keeps the
+  // assembled quiz coherent. When no topic was named, every subject match is
+  // one tier and may be combined.
+  const scoredSources = ranked.map((q) => {
+    const hay = `${norm(q.material?.topic ?? "")} ${norm(q.material?.subTopic ?? "")}`;
+    const hits = topicWords.filter((w) => hay.includes(w)).length;
+    return { q, hits };
+  });
+  const maxHits = topicWords.length ? Math.max(0, ...scoredSources.map((s) => s.hits)) : 0;
+  const sources =
+    topicWords.length === 0
+      ? scoredSources.map((s) => s.q)
+      : scoredSources.filter((s) => s.hits === maxHits && s.hits > 0).map((s) => s.q);
+
+  if (sources.length === 0) return false;
+
+  // ── A. Gather unique questions from the bank ──
+  const gathered: QuizQuestion[] = [];
+  const seen = new Set<string>();
+  let sourceMaterialId: string | null = null;
+  let sourceMaterial: { subject?: string; topic?: string } | null = null;
+  let singleSourceQuizId: string | null = null;
+  let usedOneQuiz = true;
+
+  for (const quiz of sources) {
+    if (gathered.length >= want.count) break;
+    const qs = readQuestions(quiz.questions);
+    if (singleSourceQuizId === null) singleSourceQuizId = quiz.id;
+    else usedOneQuiz = false;
+    if (sourceMaterialId === null) {
+      sourceMaterialId = quiz.materialId ?? null;
+      sourceMaterial = quiz.material ?? null;
+    }
+    for (const q of qs) {
+      if (gathered.length >= want.count) break;
+      const k = questionKey(q);
+      if (!k || seen.has(k)) continue;
+      seen.add(k);
+      gathered.push(q);
+    }
+  }
+
+  // The simplest case: one bank quiz already holds exactly what was asked for.
+  // Start it directly — no new row, no generation, and the student keeps the
+  // quiz's own history/redo/explain buttons.
+  if (usedOneQuiz && singleSourceQuizId && gathered.length === want.count) {
+    await ctx.reply(
+      `${persona.emoji} Siap! Kuis *${escapeMd(
+        (sourceMaterial?.topic as string) ?? want.topic ?? want.subject ?? "ini",
+      )}* — ${gathered.length} soal. Yuk mulai! 🎯`,
+      { parse_mode: "Markdown" },
+    );
+    await handleQuizPick(ctx, student, singleSourceQuizId);
+    return true;
+  }
+
+  // ── B. Top-up by generating the shortfall (demanding + specific topic) ──
+  let generated = 0;
+  let shortfall = want.count - gathered.length;
+  if (shortfall > 0 && want.demanding && topicWords.length > 0) {
+    await ctx.reply(
+      `${persona.emoji} Oke, kakak bikinin ${want.count} soal *${escapeMd(
+        want.topic ?? "",
+      )}* ya. Sebentar… ✍️`,
+    );
+    const { generateQuestionsForTopic } = await import("@/agents/assessment/generator");
+    const fresh = await generateQuestionsForTopic({
+      subject: want.subject ?? (sourceMaterial?.subject as string) ?? "",
+      topic: want.topic,
+      count: shortfall,
+      studentId: student.id,
+      gradeLevel: String(student.gradeLevel ?? "").replace("_", " "),
+      exclude: gathered.map((q) => q.question ?? ""),
+      contextText: await loadTopicContext(student.id, want),
+    });
+    for (const q of fresh) {
+      if (gathered.length >= want.count) break;
+      const k = questionKey(q);
+      if (!k || seen.has(k)) continue;
+      seen.add(k);
+      gathered.push(q);
+      generated++;
+    }
+    shortfall = want.count - gathered.length;
+  }
+
+  // ── C. Honest message when we still cannot reach the count ──
+  if (gathered.length === 0) return false;
+
+  if (gathered.length < want.count) {
+    const topicLabel = want.topic ?? want.subject ?? "topik ini";
+    const canGenerate = topicWords.length > 0;
+    await ctx.reply(
+      `${persona.emoji} Kakak cek dulu ya: untuk *${escapeMd(topicLabel)}* baru ada ` +
+        `*${gathered.length} soal* di bank soal (kamu minta ${want.count}).\n\n` +
+        (generated > 0 ? `${generated} soal baru sudah kakak tambahkan. ` : "") +
+        (canGenerate
+          ? `Mau kakak buatkan sisa *${want.count - gathered.length} soal* lagi dengan AI? ` +
+            `Ketik: *buat ${want.count} soal ${escapeMd(topicLabel)}* — nanti kakak usahakan penuh. 💪`
+          : `Ketik *buat soal ${escapeMd(topicLabel)}* kalau mau kakak coba tambah. 💪`),
+      { parse_mode: "Markdown" },
+    );
+    // Still start with what we honestly have — the student came to practise.
+    if (gathered.length >= 1) {
+      const assembledId = await saveAssembledQuiz(student, sourceMaterialId, gathered);
+      if (assembledId) {
+        await handleQuizPick(ctx, student, assembledId);
+        return true;
+      }
+    }
+    return true;
+  }
+
+  const assembledId = await saveAssembledQuiz(student, sourceMaterialId, gathered);
+  if (!assembledId) return false;
+  await ctx.reply(
+    `${persona.emoji} Siap! Kuis *${escapeMd(
+      want.topic ?? want.subject ?? "ini",
+    )}* — ${gathered.length} soal${generated > 0 ? ` (${generated} baru dari AI)` : ""}. Yuk mulai! 🎯`,
+    { parse_mode: "Markdown" },
+  );
+  await handleQuizPick(ctx, student, assembledId);
+  return true;
+}
+
+/** Persist a merged/generated question set as a real Quiz row the flow can drive. */
+async function saveAssembledQuiz(
+  student: Student,
+  materialId: string | null,
+  questions: QuizQuestion[],
+): Promise<string | null> {
+  if (!materialId || questions.length === 0) return null;
+  try {
+    const quiz = await prisma.quiz.create({
+      data: {
+        materialId,
+        studentId: student.id,
+        type: "QUIZ" as never,
+        questions: questions as never,
+        maxScore: questions.length,
+        timeLimit: 10,
+      },
+      select: { id: true },
+    });
+    return quiz.id;
+  } catch (err) {
+    console.warn("[quiz] saveAssembledQuiz failed:", err);
+    return null;
+  }
+}
+
+/**
+ * Best-effort source text for generation: the processed content of the
+ * student's materials that match the named topic, so generated questions are
+ * grounded in what they actually studied rather than invented.
+ */
+async function loadTopicContext(
+  studentId: string,
+  want: { subject?: string; topic?: string },
+): Promise<string | undefined> {
+  try {
+    const words = (want.topic ?? "").toLowerCase().split(/\s+/).filter((w) => w.length >= 3);
+    const materials = await prisma.material.findMany({
+      where: {
+        ...(want.subject ? { subject: want.subject } : {}),
+        ...(words.length
+          ? { OR: words.map((w) => ({ topic: { contains: w, mode: "insensitive" as const } })) }
+          : {}),
+      },
+      select: { processedContent: true },
+      take: 3,
+    });
+    const text = materials
+      .map((m) => m.processedContent ?? "")
+      .filter((t) => t.trim().length > 0)
+      .join("\n\n");
+    return text.trim() ? text : undefined;
+  } catch {
+    return undefined;
+  }
 }
 
 /**

@@ -291,6 +291,8 @@ export function StudentDetailView({ student }: { student: StudentData }) {
     ["RESOLVED", "DISMISSED"].includes(i.status),
   );
   const [showResolved, setShowResolved] = useState(false);
+  const [triggerLoading, setTriggerLoading] = useState<string | null>(null);
+  const [pipelineRunning, setPipelineRunning] = useState<string | null>(null);
 
   return (
     <div className="space-y-6">
@@ -638,8 +640,6 @@ export function StudentDetailView({ student }: { student: StudentData }) {
         }
 
         // ── Pipeline trigger per material ──
-        const [triggerLoading, setTriggerLoading] = useState<string | null>(null);
-
         async function handleTriggerContent(materialId: string, topic: string) {
           setTriggerLoading(materialId);
           try {
@@ -681,8 +681,6 @@ export function StudentDetailView({ student }: { student: StudentData }) {
         }
 
         // ── Pipeline triggers per stage ──
-        const [pipelineRunning, setPipelineRunning] = useState<string | null>(null);
-
         async function runPipelineStage(stage: string) {
           setPipelineRunning(stage);
           try {

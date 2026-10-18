@@ -68,10 +68,12 @@ export async function processAssessmentGenerate(
   }
 
   if (material) {
-    // Single-material quiz
-    const quiz = await generateQuiz(material.id);
+    // Single-material quiz. `questionCount` is optional in the job payload
+    // (used by exams) — honour it instead of silently generating the default.
+    const quiz = await generateQuiz(material.id, questionCount ?? 5);
     console.log(
-      `[assessment/worker] Generated quiz=${quiz.id} for material=${material.id}`,
+      `[assessment/worker] Generated quiz=${quiz.id} for material=${material.id}` +
+        `${questionCount ? ` (count=${questionCount})` : ""}`,
     );
     job.updateProgress(100);
     return;
