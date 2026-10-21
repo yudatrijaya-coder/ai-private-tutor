@@ -97,8 +97,15 @@ export async function generateQuestionsForTopic(opts: {
   exclude?: string[];
   /** Source text (processed material content) to ground the questions in. */
   contextText?: string;
+  /**
+   * Ketatkan tingkat kesulitan soal yang dihasilkan.
+   * "hard" dipakai oleh mode "ulang, lebih sulit" ketika bank soal sudah
+   * kehabisan soal bertanda hard — tanpa ini murid hanya mendapat soal baru
+   * yang mudah lagi.
+   */
+  difficulty?: "easy" | "medium" | "hard";
 }): Promise<QuestionData[]> {
-  const { subject, topic, count, studentId, exclude = [], contextText } = opts;
+  const { subject, topic, count, studentId, exclude = [], contextText, difficulty } = opts;
   if (count < 1) return [];
 
   const focus = topic ? `topik "${topic}"` : `mata pelajaran ${subject}`;
@@ -113,15 +120,37 @@ export async function generateQuestionsForTopic(opts: {
     ? `\nGunakan materi berikut sebagai sumber utama:\n${contextText.slice(0, 4000)}\n`
     : "";
 
+  // Instruksi kesulitan harus eksplisit: tanpa ini model default ke soal mudah
+  // dan field `difficulty` hanya jadi label kosong.
+  const difficultyDirective =
+    difficulty === "hard"
+      ? [
+          "TINGKAT KESULITAN: SULIT (wajib).",
+          "Semua soal harus benar-benar menantang: butuh analisis multi-langkah,",
+          "penerapan konsep pada situasi baru, atau gabungan dua konsep.",
+          "HINDARI soal hafalan langsung, definisi, atau satu langkah sederhana.",
+          'Set field "difficulty" setiap item menjadi "hard".',
+        ].join("\n")
+      : difficulty === "medium"
+        ? [
+            "TINGKAT KESULITAN: SEDANG.",
+            "Soal butuh penerapan konsep, bukan sekadar hafalan.",
+            'Set field "difficulty" setiap item menjadi "medium".',
+          ].join("\n")
+        : "";
+
   const prompt = [
     `Buat ${count} soal pilihan ganda BARU dalam Bahasa Indonesia tentang ${focus} untuk mata pelajaran ${subject}, jenjang ${opts.gradeLevel ?? "SMP"}.`,
     source,
     avoid,
+    difficultyDirective,
     "",
     "Keluarkan HANYA JSON array (tanpa penjelasan di luar JSON). Setiap item:",
     '{"question": "...", "options": ["...","...","...","..."], "correctIndex": 0, "explanation": "...", "difficulty": "easy|medium|hard"}',
     `Jumlah item harus tepat ${count}. Setiap soal punya TEPAT SATU jawaban benar (correctIndex 0-3), pengecoh harus masuk akal.`,
-  ].join("\n");
+  ]
+    .filter(Boolean)
+    .join("\n");
 
   const { callLLM } = await import("@/llm/client");
   const { SYSTEM_PROMPTS } = await import("@/llm/prompts");
@@ -153,10 +182,16 @@ export async function generateQuestionsForTopic(opts: {
         continue;
       }
       const parsed = parseLLMQuestions(text).filter((q) => questionRejection(q) === null);
-      if (parsed.length > best.length) best = parsed;
-      if (parsed.length >= count) return parsed;
+      // Model sering tetap menulis "easy" walau diminta hard. Karena prompt-nya
+      // sudah memaksa tingkat kesulitan, label ikut diselaraskan agar filter
+      // downstream (mode "lebih sulit") tidak membuang soal yang sebenarnya sah.
+      const normalised = difficulty
+        ? parsed.map((q) => ({ ...q, difficulty }))
+        : parsed;
+      if (normalised.length > best.length) best = normalised;
+      if (normalised.length >= count) return normalised;
       console.warn(
-        `[generate] parsed ${parsed.length}/${count} usable questions for ${focus}` +
+        `[generate] parsed ${normalised.length}/${count} usable questions for ${focus}` +
           ` (raw len=${text.length}, attempt ${attempt})`,
       );
     } catch (err) {

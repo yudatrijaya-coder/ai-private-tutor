@@ -380,6 +380,80 @@ export function hardFirstOrder(questions: { difficulty?: string }[]): number[] {
     .map((x) => x.i);
 }
 
+/**
+ * Kumpulan soal baru untuk mode "ulang, lebih sulit".
+ *
+ * Sebelumnya mode `hard` hanya MENGURUTKAN ULANG soal yang sama, sehingga
+ * murid melihat soal identik lagi (dan bila tidak ada soal bertanda hard,
+ * urutannya pun tidak berubah sama sekali). Helper ini memilih soal yang
+ * BELUM pernah dilihat pada sesi sebelumnya, memprioritaskan `hard`.
+ *
+ * Urutan prioritas:
+ *   1. hard   & belum pernah dilihat
+ *   2. medium & belum pernah dilihat
+ *   3. hard   & sudah pernah dilihat   (fallback terakhir)
+ *   4. easy   & belum pernah dilihat   (hanya bila hard/medium habis)
+ */
+export function pickHarderQuestions(
+  allQuestions: QuizQuestion[],
+  seenKeys: Set<string>,
+  want: number,
+): { picked: QuizQuestion[]; usedFallback: boolean; hardCount: number } {
+  const rankOf = (d?: string): number => {
+    const s = (d ?? "").toLowerCase();
+    if (s === "hard" || s === "sulit" || s === "tinggi") return 0;
+    if (s === "medium" || s === "sedang") return 1;
+    return 2;
+  };
+
+  // Buang duplikat, pertahankan urutan asli.
+  const uniq: QuizQuestion[] = [];
+  const seenHere = new Set<string>();
+  for (const q of allQuestions) {
+    const k = questionKey(q);
+    if (!k || seenHere.has(k)) continue;
+    seenHere.add(k);
+    uniq.push(q);
+  }
+
+  // Bucket: unseen dulu, lalu yang sudah dilihat.
+  const unseen = uniq.filter((q) => !seenKeys.has(questionKey(q)));
+  const seen = uniq.filter((q) => seenKeys.has(questionKey(q)));
+
+  const byRank = (arr: QuizQuestion[]) =>
+    arr
+      .map((q, i) => ({ q, i, r: rankOf(q.difficulty) }))
+      .sort((a, b) => a.r - b.r || a.i - b.i)
+      .map((x) => x.q);
+
+  const picked: QuizQuestion[] = [];
+  const hardFirstUnseen = byRank(unseen).filter((q) => rankOf(q.difficulty) === 0);
+  const restUnseen = byRank(unseen).filter((q) => rankOf(q.difficulty) !== 0);
+
+  for (const q of [...hardFirstUnseen, ...restUnseen]) {
+    if (picked.length >= want) break;
+    picked.push(q);
+  }
+
+  // Fallback: kalau soal BARU tidak cukup, pakai ulang yang sudah dilihat
+  // (hard lebih dulu) supaya quiz tidak kosong.
+  // `usedFallback` harus true bila ada soal lama yang ikut dipakai, walau
+  // `picked` sudah terisi dari unseen — itu inti informasinya ke murid.
+  let usedFallback = false;
+  if (picked.length < want) {
+    usedFallback = true;
+    for (const q of byRank(seen)) {
+      if (picked.length >= want) break;
+      picked.push(q);
+    }
+  }
+  // Tidak ada satu pun soal baru yang tersedia -> seluruh isi dari fallback.
+  if (unseen.length === 0 && picked.length > 0) usedFallback = true;
+
+  const hardCount = picked.filter((q) => rankOf(q.difficulty) === 0).length;
+  return { picked, usedFallback, hardCount };
+}
+
 /** Original question index for a display position, honouring an order map. */
 export function origIndex(order: number[] | undefined, displayIndex: number): number {
   return order?.[displayIndex] ?? displayIndex;
@@ -1031,21 +1105,167 @@ export async function handleQuizPick(
   let questionSeconds =
     typeof pending === "number" && pending > 0 ? pending : DEFAULT_QUESTION_SECONDS;
 
-  // "Lebih sulit" = hardest questions first (the bank tags ~70% of questions
-  // easy/medium/hard) AND a tighter clock. The order map is display-only:
-  // grading still addresses the original question indices, so a reordered quiz
-  // cannot silently mis-grade.
+  // "Lebih sulit" harus memberi soal yang BERBEDA, bukan mengulang soal yang
+  // sama dengan urutan lain. Strategi:
+  //   1. Kumpulkan kandidat soal dari bank (quiz ini + quiz lain milik murid
+  //      dengan materi/topik yang sama).
+  //   2. Buang soal yang sudah pernah dilihat (dari riwayat jawaban quiz ini
+  //      dan quiz-quiz sebelumnya).
+  //   3. Prioritaskan difficulty `hard`.
+  //   4. Simpan hasilnya sebagai Quiz baru supaya riwayat & penilaian bersih.
+  // Kalau soal baru tidak cukup, fallback ke soal lama (hard dulu) dan beri
+  // tahu murid secara jujur.
   const questions = readQuestions(quiz.questions);
-  const order = opts?.hard ? hardFirstOrder(questions) : undefined;
+  let order: number[] | undefined;
+  let sessionQuizId = quiz.id;
+  let harderNotice: string | null = null;
+
   if (opts?.hard) {
     questionSeconds = Math.max(MIN_QUESTION_SECONDS, Math.round(questionSeconds / 2));
+
+    // (a) Kumpulkan soal yang sudah pernah dilihat murid.
+    const seenKeys = new Set<string>();
+    for (const q of questions) {
+      const k = questionKey(q);
+      if (k) seenKeys.add(k);
+    }
+    try {
+      const siblings = await prisma.quiz.findMany({
+        where: {
+          studentId: student.id,
+          ...(quiz.materialId ? { materialId: quiz.materialId } : {}),
+        },
+        select: { questions: true },
+        orderBy: { createdAt: "desc" },
+        take: 12,
+      });
+      for (const sib of siblings) {
+        for (const q of readQuestions(sib.questions)) {
+          const k = questionKey(q);
+          if (k) seenKeys.add(k);
+        }
+      }
+    } catch (err) {
+      console.warn("[quiz] gagal memuat quiz saudara untuk mode hard:", err);
+    }
+
+    // (b) Kandidat: soal quiz ini + soal quiz saudara (bank yang sama).
+    const candidates: QuizQuestion[] = [...questions];
+    try {
+      const siblings = await prisma.quiz.findMany({
+        where: {
+          studentId: student.id,
+          ...(quiz.materialId ? { materialId: quiz.materialId } : {}),
+        },
+        select: { questions: true },
+        orderBy: { createdAt: "desc" },
+        take: 12,
+      });
+      for (const sib of siblings) {
+        candidates.push(...readQuestions(sib.questions));
+      }
+    } catch {
+      // sudah ditangani di atas; kandidat tetap berisi quiz ini saja
+    }
+
+    // (c) Pilih soal baru (hard dulu, yang belum pernah dilihat).
+    const want = Math.max(1, questions.length);
+    const { picked, usedFallback, hardCount } = pickHarderQuestions(
+      candidates,
+      seenKeys,
+      want,
+    );
+
+    // (d) Kalau soal `hard` masih kurang, minta AI membuat soal sulit baru.
+    //     Tanpa langkah ini mode "lebih sulit" selalu kehabisan soal hard
+    //     (bank SMA 11 hanya punya ~4% soal hard).
+    const needHard = want - picked.filter((q) => {
+      const d = (q.difficulty ?? "").toLowerCase();
+      return d === "hard" || d === "sulit" || d === "tinggi";
+    }).length;
+    if (needHard > 0) {
+      try {
+        const { generateQuestionsForTopic } = await import(
+          "@/agents/assessment/generator"
+        );
+        const subject =
+          (quiz.material as { subject?: string } | null)?.subject ??
+          (quiz.material as { topic?: string } | null)?.topic ??
+          "";
+        const topic =
+          (quiz.material as { topic?: string } | null)?.topic ?? undefined;
+        const exclude = [...seenKeys];
+        const fresh = await generateQuestionsForTopic({
+          subject: subject || topic || "umum",
+          topic,
+          count: needHard,
+          studentId: student.id,
+          gradeLevel: String(student.gradeLevel ?? "").replace("_", " "),
+          exclude,
+          difficulty: "hard",
+        });
+        let added = 0;
+        for (const q of fresh) {
+          if (added >= needHard) break;
+          const k = questionKey(q);
+          if (!k || seenKeys.has(k)) continue;
+          seenKeys.add(k);
+          picked.push(q as never);
+          added++;
+        }
+        if (added > 0) {
+          console.log(`[quiz] generated ${added} hard question(s) for mode hard`);
+        }
+      } catch (err) {
+        console.warn("[quiz] gagal generate soal hard:", err);
+      }
+    }
+
+    if (picked.length === 0) {
+      // Tidak ada kandidat sama sekali — tetap pakai soal lama, hard dulu.
+      order = hardFirstOrder(questions);
+      harderNotice =
+        "ℹ️ Belum ada soal baru untuk topik ini, jadi kakak ulang soal sebelumnya dengan urutan tersulit dulu ya.";
+    } else {
+      // Simpan sebagai quiz BARU supaya riwayat jawaban tidak tercampur.
+      try {
+        const fresh = await prisma.quiz.create({
+          data: {
+            materialId: quiz.materialId,
+            studentId: student.id,
+            type: "QUIZ" as never,
+            questions: picked as never,
+            maxScore: picked.length,
+            timeLimit: 10,
+          },
+          select: { id: true },
+        });
+        sessionQuizId = fresh.id;
+      } catch (err) {
+        console.warn("[quiz] gagal menyimpan quiz mode hard, pakai quiz lama:", err);
+        order = hardFirstOrder(questions);
+        sessionQuizId = quiz.id;
+      }
+
+      // Pesan harus JUJUR: kalau tidak ada soal hard tersisa, jangan bilang
+      // "lebih menantang" — beri tahu bahwa yang tersedia adalah soal baru.
+      if (hardCount === 0) {
+        harderNotice = usedFallback
+          ? "ℹ️ Soal baru untuk topik ini sudah habis, jadi kakak ulang soal sebelumnya. Waktunya tetap kakak percepat ya!"
+          : "ℹ️ Soal bertanda sulit untuk topik ini sudah habis. Kakak kasih soal BARU yang belum kamu kerjakan, dengan waktu lebih ketat ya!";
+      } else if (hardCount < picked.length) {
+        harderNotice = `💪 ${hardCount} soal sulit + ${picked.length - hardCount} soal baru penguat. Waktunya juga kakak percepat!`;
+      } else {
+        harderNotice = `💪 ${hardCount} soal sulit, semuanya baru. Waktunya kakak percepat!`;
+      }
+    }
   }
 
   // Start session
   await setSession(student.id, {
     currentMode: "quiz_active",
     context: {
-      quizId: quiz.id,
+      quizId: sessionQuizId,
       currentIndex: 0,
       answers: [],
       startedAt: Date.now(),
@@ -1057,8 +1277,19 @@ export async function handleQuizPick(
   });
 
   await safeAnswerCbQuery(ctx, opts?.hard ? "Mode sulit! ⏱️" : "Mulai! 🎉");
-  await sendQuestion(ctx, quiz, 0, questionSeconds, order);
-  scheduleQuestionTimer(student, quiz, 0, questionSeconds);
+
+  if (harderNotice) {
+    await ctx.reply(harderNotice);
+  }
+
+  // Untuk mode hard dengan quiz baru, soal diambil dari sesi yang baru disimpan.
+  const activeQuiz =
+    sessionQuizId === quiz.id
+      ? quiz
+      : ((await prisma.quiz.findUnique({ where: { id: sessionQuizId } })) ?? quiz);
+
+  await sendQuestion(ctx, activeQuiz, 0, questionSeconds, order);
+  scheduleQuestionTimer(student, activeQuiz, 0, questionSeconds);
   return true;
 }
 
