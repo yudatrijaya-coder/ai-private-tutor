@@ -8,7 +8,42 @@ export * from "./types";
 
 // ─── 9Router Client ────────────────────────────────────────────
 const baseURL = process.env.LLM_BASE_URL || "http://localhost:20128/v1";
-const apiKey = process.env.LLM_API_KEY || "sk-9router";
+
+/**
+ * API key untuk 9Router.
+ *
+ * Dulu ada fallback hardcode `"sk-9router"`. Itu berbahaya: saat `.env` tidak
+ * termuat (mis. menjalankan skrip lewat `tsx` tanpa `source .env`), klien diam
+ * saja memakai key palsu dan 9Router membalas "401 Invalid API key" — pesan
+ * yang tampak seperti kredensial salah, padahal masalahnya konfigurasi tidak
+ * terbaca. Diagnosis jadi menyesatkan.
+ *
+ * Sekarang: kalau tidak ada key, kita gagal keras dengan pesan yang jelas.
+ * Untuk endpoint lokal tanpa auth, set `LLM_ALLOW_NO_KEY=1` secara eksplisit
+ * supaya tetap bisa jalan tanpa key.
+ */
+function resolveApiKey(): string {
+  const fromEnv = (process.env.LLM_API_KEY ?? "").trim();
+  if (fromEnv) return fromEnv;
+
+  if (process.env.LLM_ALLOW_NO_KEY === "1") return "sk-noop";
+
+  throw new Error(
+    [
+      "LLM_API_KEY tidak diset.",
+      "",
+      "Kemungkinan penyebab:",
+      "  • .env belum dimuat (jalankan `set -a; source .env; set +a` sebelum npx tsx), atau",
+      "  • variabel belum ada di environment proses ini.",
+      "",
+      `Endpoint: ${baseURL}`,
+      "Kalau endpoint ini memang tidak butuh key, set LLM_ALLOW_NO_KEY=1.",
+      "",
+      "Tanpa key, 9Router akan menolak permintaan dengan status 401 sehingga",
+      "tampak seperti kredensial salah padahal masalahnya konfigurasi.",
+    ].join("\n"),
+  );
+}
 
 /** True if 9Router is reachable */
 export const isLLMReady = true;
@@ -19,7 +54,7 @@ function getClient(): OpenAI {
   if (!_client) {
     _client = new OpenAI({
       baseURL,
-      apiKey: apiKey || "sk-noop",
+      apiKey: resolveApiKey(),
       defaultHeaders: {
         "HTTP-Referer": process.env.APP_URL || "http://localhost:3001",
         "X-Title": "AI Private Tutor",
