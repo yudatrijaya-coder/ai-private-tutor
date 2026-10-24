@@ -77,6 +77,18 @@ export function dailyNudgeKey(studentId: string, date: Date): string {
   return `daily-nudge:${studentId}:${dayKey(date)}`;
 }
 
+/**
+ * One claim per student per week — the weekly ProgressSnap row set.
+ *
+ * Without this, every call to `/api/cron/progress-snap` inserted a fresh row
+ * per student per subject, so a manual re-run or a retried cron tick silently
+ * duplicated the whole week's history (134 student/subject/week combinations
+ * were already duplicated before this guard existed).
+ */
+export function progressSnapKey(studentId: string, date: Date): string {
+  return `progress-snap:${studentId}:${isoWeekKey(date)}`;
+}
+
 /* ------------------------------------------------------------------ */
 /*  Claim primitives                                                   */
 /* ------------------------------------------------------------------ */

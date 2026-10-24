@@ -14,6 +14,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getActiveCurriculumId } from "@/lib/curriculum-active";
 import { checkCronSecret, logCronRun } from "@/lib/cron/guard";
+import { claimOnce, progressSnapKey } from "@/lib/cron/idempotency";
 
 export async function GET(request: NextRequest) {
   const denied = checkCronSecret(request);
@@ -24,9 +25,22 @@ export async function GET(request: NextRequest) {
     select: { id: true, name: true },
   });
 
+  const now = new Date();
   let created = 0;
+  let skipped = 0;
 
   for (const student of students) {
+    // One snapshot set per student per ISO week. Retried ticks, manual runs and
+    // overlapping deploys all used to append another full set of rows per
+    // subject, quietly corrupting the week's history.
+    const claimed = await claimOnce(progressSnapKey(student.id, now), {
+      studentId: student.id,
+    });
+    if (!claimed) {
+      skipped++;
+      continue;
+    }
+
     // Get materials with subject+topic for this student, active curriculum only.
     // Unioning every curriculum would emit snapshots for subjects the student no
     // longer has (Raihan kept a stale v1 with Biologi / Sejarah / Geografi).
@@ -92,8 +106,13 @@ export async function GET(request: NextRequest) {
     agentType: "SCHEDULER",
     action: "progress-snap",
     status: "COMPLETED",
-    output: { snapsCreated: created, students: students.length },
+    output: { snapsCreated: created, students: students.length, studentsSkipped: skipped },
   });
 
-  return NextResponse.json({ ok: true, snapsCreated: created, students: students.length });
+  return NextResponse.json({
+    ok: true,
+    snapsCreated: created,
+    students: students.length,
+    studentsSkipped: skipped,
+  });
 }
