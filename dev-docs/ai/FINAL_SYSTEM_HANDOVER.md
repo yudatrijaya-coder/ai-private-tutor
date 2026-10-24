@@ -74,7 +74,13 @@ Semua endpoint cron memakai `checkCronSecret()` (`src/lib/cron/guard.ts`):
 - `CRON_SECRET` tidak diset → **503** (fail-closed), bukan diloloskan.
 - Setiap run dicatat ke `AgentLog`.
 
-Pengecualian: `/api/reminders/check` memakai `Authorization: Bearer $CRON_SECRET` langsung, tanpa `checkCronSecret()`.
+Pengecualian: `/api/reminders/check` memakai `Authorization: Bearer $CRON_SECRET` langsung,
+tanpa `checkCronSecret()`. Endpoint ini dijalankan job Hermes `reminders-check` tiap 1 menit
+(script `reminders-check-trigger.sh`).
+
+`processPendingReminders()` mengambil reminder dengan `remindAt` dalam jendela
+**24 jam ke belakang sampai 60 detik ke depan**. Batas ke belakang penting: jendela
+`gte: now` yang lama melewatkan setiap reminder yang jatuh di antara dua tick.
 
 ## Auth
 

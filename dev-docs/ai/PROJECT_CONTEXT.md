@@ -56,7 +56,7 @@ PM2 menjalankan dua proses: `9router` (`/usr/lib/node_modules/9router/cli.js` â€
 | Connection | Value | Catatan |
 |-----------|-------|---------|
 | `DATABASE_URL` | `postgresql://tutor:***@localhost:5432/ai_private_tutor` | Dipakai tooling Prisma |
-| Pool aplikasi | `PGHOST` / `PGPORT` / `PGDATABASE` / `PGUSER` / `PGPASSWORD` | `src/lib/prisma.ts` membuat `pg.Pool` sendiri, tidak membaca `DATABASE_URL` |
+| Pool aplikasi | `PGHOST` / `PGPORT` / `PGDATABASE` / `PGUSER` / `PGPASSWORD` | `src/lib/prisma.ts` membuat `pg.Pool` sendiri, **tidak** membaca `DATABASE_URL`; `PGPASSWORD` wajib (gagal keras bila kosong) |
 | Dev | `prisma/dev.db` (SQLite) | `npm run dev` |
 
 Schema: 33 model + 12 enum di `prisma/schema.prisma` (761 baris). Migrasi: satu baseline `20260810011925_baseline`. Client Prisma di-generate ke `src/generated/prisma/` (gitignored).
@@ -79,7 +79,7 @@ Schema: 33 model + 12 enum di `prisma/schema.prisma` (761 baris). Migrasi: satu 
 | `src/data/` | Bank quiz statis (540/495/615 soal) & topik kurikulum â€” dipakai sebagai **sumber generate**, bukan runtime baca |
 | `src/instrumentation.ts` | Registrasi worker queue saat startup |
 | `ops/` | `build.sh`, `Caddyfile`, `ecosystem.config.cjs`, script cron |
-| `prisma/` | Schema, migrasi, `dev.db` |
+| `prisma/` | Schema, migrasi, `dev.db`. `prisma.config.ts` memakai `DATABASE_URL` bila valid, kalau tidak membangun URL dari `PG*` |
 
 ## LLM Routing
 

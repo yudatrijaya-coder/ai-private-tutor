@@ -79,10 +79,11 @@ Dijadwalkan oleh **Hermes cron** (bukan crontab OS — `crontab -l` kosong), scr
 | `guardian-report-weekly` | `0 18 * * 0` | `POST /api/cron/guardian-report` | ok |
 | `motivation-nudge-monday` | `0 17 * * 1` | `POST /api/cron/motivation-nudge` | ok |
 | `motivation-nudge-friday` | `0 17 * * 5` | `POST /api/cron/motivation-nudge` | ok |
-| `guardian-monthly` | `0 17 1 * *` | `POST /api/cron/guardian-monthly` | **error** (butuh argumen, tidak pernah diberi) |
+| `guardian-monthly` | `0 17 1 * *` | `POST /api/cron/guardian-monthly` | ok |
+| `reminders-check` | every 1m | `GET /api/reminders/check` | ok |
 | `guruai-webhook-sentinel` | `*/10 * * * *` | (sistem lain) | ok |
 
-Ada 7 route di `src/app/api/cron/*`; `daily-nudge` dan `progress-snap` punya route + script trigger tapi **belum terdaftar** di Hermes.
+Ada 7 route di `src/app/api/cron/*`. `daily-nudge` dan `progress-snap` punya route + script trigger tetapi **belum terdaftar** di Hermes. `/api/reminders/check` berada di luar prefix `cron/` dan memakai auth `Authorization: Bearer` (bukan `checkCronSecret()`).
 
 Semua route cron memakai `checkCronSecret()` (`src/lib/cron/guard.ts`) — **fail-closed**: `CRON_SECRET` kosong berarti semua pemanggil ditolak (503), bukan diloloskan.
 
@@ -179,11 +180,9 @@ Mulai dari [`dev-docs/ai/START_HERE.md`](dev-docs/ai/START_HERE.md). Status tiap
 
 | Item | Dampak |
 |---|---|
-| Cron `guardian-monthly` selalu gagal | Script `guardian-monthly-trigger.sh` mewajibkan argumen yang tidak pernah diberikan job |
-| `/api/reminders/check` tidak terjadwal | Reminder personal (`Reminder` table) tidak diproses; jadwal belajar tetap jalan lewat `schedule-sweep` |
-| Password DB hardcode | `prisma.config.ts` dan `src/lib/prisma.ts` memuat fallback `tutor123`; ~10 script juga |
-| 2 commit belum di-push | `0207add`, `51a29c5` sudah ter-build di VPS tapi belum ada di `origin/master` |
 | `CRON_SECRET` lama ada di riwayat git | Sudah dirotasi 2026-10-25 sehingga tidak berbahaya; history perlu dibersihkan bila repo tetap publik |
+| `logs/err.log` noise | Sisa error NextAuth `UnknownAction` dan RSC scanner; dimitigasi middleware, bukan kegagalan fungsional |
+| Disk 73% | `public/` 2,2 GB; `docs-site/` (834 MB) sudah dihapus 2026-10-25 |
 
 ## Catatan: PM2 Menyimpan Snapshot Env
 

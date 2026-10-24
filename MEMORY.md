@@ -28,7 +28,7 @@
 ## Cron
 
 - Penjadwal = **Hermes cron** di `~/.hermes/profiles/opencode/scripts/`, bukan crontab OS
-- 7 job aktif; lihat `dev-docs/ai/CURRENT_STATE.md`
+- 8 job aktif (termasuk `reminders-check` tiap 1 menit); lihat `dev-docs/ai/CURRENT_STATE.md`
 - Semua route `/api/cron/*` memakai `checkCronSecret()` — fail-closed (503 kalau secret kosong)
 
 ## Bot
@@ -41,7 +41,8 @@
 
 - **`GradeLevel` hanya 3 nilai**: `SD_5`, `SMP_1`, `SMA_2` (SD kelas 5, SMP kelas 7, SMA kelas 11)
 - **Satu student bisa punya >1 `Curriculum`** — yang berlaku = `version` tertinggi (`ACTIVE_CURRICULUM_ORDER` di `src/lib/curriculum-active.ts`). Raihan punya v1 + v3.
-- **`src/lib/prisma.ts` memakai pool `pg` (`PG*`), bukan `DATABASE_URL`**
+- **`src/lib/prisma.ts` memakai pool `pg` (`PG*`), bukan `DATABASE_URL`** — `PGPASSWORD` wajib; tidak ada fallback password lagi (dihapus 2026-10-25)
+- **`prisma.config.ts`** menerima `DATABASE_URL` bila password-nya bukan placeholder, kalau tidak membangun URL dari `PG*`
 - **`src/data/quiz-bank-*.ts` = sumber generate**, bank runtime ada di tabel `Quiz`
 
 ## Mindmap (fitur signature)

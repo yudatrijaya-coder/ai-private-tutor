@@ -31,7 +31,7 @@ Dokumen hanya boleh memuat snapshot dengan tanggal.
 | `prod-docs/` | ✅ Aktif | Operasional server; sudah dikoreksi (branch + build) |
 | `ai-rules/` | 🔒 Immutable | Template; dikoreksi 2026-10-25 (branch `master`, `ops/build.sh`) atas persetujuan pemilik |
 | `backup/old-docs/` | 🗄️ Arsip | Jangan dipakai sebagai acuan |
-| `docs-site/` | ❌ Tidak berjalan | Port 3002 tidak listen, subdomain tidak resolve |
+| `docs-site/` | 🗑️ **Dihapus 2026-10-25** | 834 MB, gitignored, konten usang. Diarsipkan di `backup/docs-site-content-20261025/` |
 | `graphify-out/`, `.hermes/plans/` | 🗄️ Artefak tool | Bukan dokumentasi produk |
 
 ## Ketidaksesuaian yang Ditemukan (2026-10-25)
@@ -42,7 +42,7 @@ Dokumen hanya boleh memuat snapshot dengan tanggal.
 | `ai/PROJECT_CONTEXT.md` | "7 AI Agent" | 6 worker di `src/agents/`; tutor jalan inline di webhook, bukan worker |
 | `ai/MODULE_MAP.md` | Quiz → `/api/exam/route.ts` | Quiz → `/api/students/quizzes/*` |
 | `ai/CURRENT_STATE.md` | WhatsApp bot "in progress" | Tidak ada kode WhatsApp sama sekali |
-| `ai/CURRENT_STATE.md` | cron memanggil `/api/reminders/check` | Tidak ada job Hermes untuk endpoint itu |
+| `ai/CURRENT_STATE.md` | cron memanggil `/api/reminders/check` | Diperbaiki 2026-10-25: job `reminders-check` tiap 1 menit |
 | `docs-ai/*` | state 31 Juli 2026 | Sudah bertambah banyak commit sejak itu |
 | `prod-docs/README.md` | "DI LUAR git repo" | Folder ini ter-track di git |
 | `prod-docs/**` | `git pull origin main`, `npm run build` | `origin master`, `bash ops/build.sh` |
@@ -60,8 +60,6 @@ Banner historis ditambahkan ke 7 file `docs-ai/*` dan 8 file `docs/rules/*`.
 
 1. `docs/rules/*` sudah diberi banner historis; pertimbangkan memindahkannya ke
    `backup/old-docs/` agar hanya ada satu salinan (kode aslinya di `src/rules/`).
-2. `docs-site/` dihapus atau dijalankan lagi sebagai PM2 app — jangan dibiarkan setengah hidup.
-3. Riwayat git masih memuat `CRON_SECRET` lama (sudah dirotasi). Bersihkan dengan
-   `git filter-repo` bila repo tetap publik.
-4. Fallback password DB `tutor123` masih ada di `prisma.config.ts`, `src/lib/prisma.ts`,
-   dan ~10 script — pindahkan ke env.
+2. Riwayat git masih memuat `CRON_SECRET` lama (sudah dirotasi, nilainya mati). Bersihkan
+   dengan `git filter-repo` bila repo tetap publik.
+3. Job `daily-nudge` dan `progress-snap` belum terdaftar di Hermes meski route + script ada.

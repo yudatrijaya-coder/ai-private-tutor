@@ -39,11 +39,12 @@ Raihan memegang dua `Curriculum` (v1 dan v3). Yang berlaku v3 — semua pembacaa
 | Job (Hermes) | Jadwal | Endpoint | Status terakhir |
 |---|---|---|---|
 | `schedule-reminder-sweep` | every 3m | `GET /api/cron/schedule-sweep` | ok |
+| `reminders-check` | every 1m | `GET /api/reminders/check` | ok (ditambahkan 2026-10-25) |
 | `exam-scheduler-sweep` | every 30m | `POST /api/cron/exam-scheduler` | ok |
 | `guardian-report-weekly` | `0 18 * * 0` | `POST /api/cron/guardian-report` | ok |
 | `motivation-nudge-monday` | `0 17 * * 1` | `POST /api/cron/motivation-nudge` | ok |
 | `motivation-nudge-friday` | `0 17 * * 5` | `POST /api/cron/motivation-nudge` | ok |
-| `guardian-monthly` | `0 17 1 * *` | `POST /api/cron/guardian-monthly` | **error** (lihat Known Issues) |
+| `guardian-monthly` | `0 17 1 * *` | `POST /api/cron/guardian-monthly` | ok (diperbaiki 2026-10-25) |
 | `guruai-webhook-sentinel` | `*/10 * * * *` | sistem lain | ok |
 
 Cek: `hermes cron list`.
@@ -52,15 +53,15 @@ Cek: `hermes cron list`.
 
 | # | Isu | Dampak | Perbaikan |
 |---|-----|--------|-----------|
-| 1 | `guardian-monthly-trigger.sh` mewajibkan argumen (`TYPE="$1"`, exit 1 kalau kosong), job Hermes tidak pernah memberikannya | Laporan bulanan ke orang tua tidak pernah terkirim | Hapus blok `$1` wajib, atau isi `args` di definisi job |
-| 2 | `/api/reminders/check` (reminder personal dari tabel `Reminder`) tidak terdaftar di Hermes | `Reminder` tidak pernah diproses; jadwal belajar tetap aman karena ditangani `schedule-sweep` | Daftarkan job baru atau lebur ke `schedule-sweep` |
-| 3 | ~~`scripts/schedule-sweep.sh` memuat `CRON_SECRET` produksi plaintext~~ — **diperbaiki 2026-10-25**: secret dirotasi (48 hex), script membaca dari `.env`, token lama kini 401. Sisa: token lama masih ada di riwayat git (`10e47a6`, `0b3131a`, `845b1f6`) | Setelah rotasi tidak lagi berbahaya; history hanya relevan bila ada yang memanen token mati | Opsional: bersihkan history (`git filter-repo`) bila repo tetap publik |
-| 4 | `prisma.config.ts` dan `src/lib/prisma.ts` memuat fallback password DB `tutor123`; ~10 script juga | Kredensial DB ikut ter-commit | Pindahkan ke env, hapus fallback |
-| 5 | 2 commit lokal belum di-push (`0207add`, `51a29c5`) | Build VPS lebih baru dari `origin/master` | `git push origin master` |
-| 6 | `docs-ai/*.md` dan `docs/rules/*` mendokumentasikan state Juli–Agustus 2026 | Menyesatkan kalau dibaca sebagai kondisi sekarang | Arsipkan / jadikan historis (lihat `dev-docs/DOCS-INDEX.md`) |
-| 7 | `docs-site/` (Nextra) tidak berjalan — port 3002 tidak listen, `docs.senangbelajar.web.id` tidak resolve | Dokumentasi web mati | Jalankan sebagai PM2 app atau hapus folder |
-| 8 | `logs/err.log` masih mencatat error NextAuth `UnknownAction` dan RSC scanner spam | Noise, bukan kegagalan fungsional (sudah dimitigasi middleware) | Pantau; abaikan kalau tidak bertambah |
-| 9 | Disk 42/59 GB (75%); `public/` 2,2 GB | Sisa ruang menipis untuk build | Bersihkan aset tak terpakai |
+| 1 | ~~`guardian-monthly-trigger.sh` mewajibkan argumen~~ **DIPERBAIKI 2026-10-25** — argumen kini opsional (label), gagal hanya bila `CRON_SECRET` kosong | — | — |
+| 2 | ~~`/api/reminders/check` tidak terjadwal~~ **DIPERBAIKI 2026-10-25** — job Hermes `reminders-check` tiap 1 menit, script `reminders-check-trigger.sh` (auth `Bearer`) | — | — |
+| 3 | ~~`remindAt` window memakai `gte: now`~~ **DIPERBAIKI 2026-10-25** — reminder yang jatuh di antara tick tidak pernah diambil; sekarang ada grace window 24 jam ke belakang di `processPendingReminders()` | — | — |
+| 4 | ~~`scripts/schedule-sweep.sh` memuat `CRON_SECRET` plaintext~~ **DIPERBAIKI 2026-10-25** — secret dirotasi (48 hex), script membaca `.env`. Token lama kini 401, tetapi masih ada di riwayat git (`10e47a6`, `0b3131a`, `845b1f6`) | Mati, tidak berbahaya | Opsional: `git filter-repo` bila repo tetap publik |
+| 5 | ~~Fallback password DB `tutor123`~~ **DIPERBAIKI 2026-10-25** — `prisma.config.ts`, `src/lib/prisma.ts`, `prisma/seed-characters.ts`, dan 68 script kini membaca `PGPASSWORD` dan gagal keras bila kosong | — | Sisa satu-satunya kemunculan: daftar kandidat di `scripts/check_admin_pass.ts` (disengaja) |
+| 6 | ~~`DATABASE_URL` di `.env` berisi placeholder `***`~~ **DIPERBAIKI 2026-10-25** — nilainya salah sejak lama; Prisma CLI gagal auth. Kini diisi dari `PGPASSWORD`, dan `prisma.config.ts` menolak placeholder | — | — |
+| 7 | ~~`docs-site/` (Nextra) mati~~ **DIHAPUS 2026-10-25** — 834 MB, gitignored, isinya usang. Konten diarsipkan di `backup/docs-site-content-20261025/` | — | Dokumentasi resmi: `dev-docs/` + halaman `/docs` |
+| 8 | `logs/err.log` masih mencatat error NextAuth `UnknownAction` dan RSC scanner spam | Noise, bukan kegagalan fungsional (dimitigasi middleware) | Pantau; abaikan kalau tidak bertambah |
+| 9 | Disk 42/59 GB (73% setelah `docs-site` dihapus); `public/` 2,2 GB | Sisa ruang menipis untuk build | Bersihkan aset tak terpakai |
 
 ## Catatan Operasional: PM2 Menyimpan Snapshot Env
 
@@ -84,4 +85,5 @@ Variabel yang di-snapshot PM2 saat ini: `CRON_SECRET`, `DATABASE_URL`, `LLM_API_
 | Tanggal | Perubahan |
 |---|---|
 | 2026-10-25 | Seluruh `README.md` + `dev-docs/ai/*` ditulis ulang dari kode ter-deploy: branch `master`, cron Hermes, 15 bot command, 73 API route, versi paket aktual, data DB aktual. Known issues diisi dari temuan runtime. |
+| 2026-10-25 (lanjutan) | Tuntas 5 issue: job `reminders-check` tiap 1 menit, grace window `remindAt`, `guardian-monthly` diperbaiki, fallback password DB dihapus (70 file), `DATABASE_URL` placeholder diperbaiki, `docs-site/` dihapus (-834 MB). |
 | 2026-07-31 | Versi sebelumnya (tidak akurat lagi: menyebut 7 agent padahal 6 worker + tutor inline, branch `main`, dan angka material lama) |
