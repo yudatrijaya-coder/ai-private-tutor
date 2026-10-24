@@ -1,62 +1,77 @@
 # Modul: Tutor Agent
 
-> **Path:** `src/bot/agent/tutor.ts`
-> **File Utama:** `tutor.ts`
+> **Path:** `src/bot/agent/`
+> **Verifikasi:** 2026-10-25, commit `0207add`
 
 ---
 
 ## Fungsi
 
-Interface utama antara student dan sistem — chat interaktif via Telegram dengan 3 persona berbeda. LLM-driven, menerima text, quiz interaktif, dan foto soal (vision).
+Otak percakapan bot. Guru maya yang dipersonalisasi per jenjang, dipanggil dari
+`onMessage()` ketika pesan bukan slash command dan bukan intent yang bisa ditangani
+secara deterministik.
 
-## File Structure
+Tutor **bukan** worker queue — ia berjalan inline di dalam request webhook.
+
+## File
 
 | File | Fungsi |
 |------|--------|
-| `src/bot/agent/tutor.ts` | Tutor agent — LLM-driven chat |
-| `src/bot/agent/reminder.ts` | Reminder agent — kirim reminder terjadwal |
-| `src/bot/personas.ts` | Definisi 3 persona (Kak Budi, Kak Dewi, Kak Raka) |
-| `src/bot/state-machine.ts` | State machine routing (onboarding, belajar, quiz) |
-| `src/bot/session.ts` | Session management (DB-backed) |
-| `src/bot/safety.ts` | Content safety filter |
+| `tutor.ts` | `buildSystemPrompt()`, `handleMessage()`, `streamMessage()` |
+| `capabilities.ts` | `CAPABILITIES` + `buildCapabilitiesPrompt()` — satu sumber kebenaran daftar kemampuan |
+| `reminder.ts` | `handleReminderCommand()`, `processPendingReminders()` |
+| `../personas.ts` | Definisi persona |
+| `../safety.ts` | `scanResponse()` — filter keluaran |
+| `../state-machine.ts` | `routeByState()` — routing saat kuis/onboarding berjalan |
+| `../session.ts` | `BotSession`, `getSession()`, `setSession()` |
 
 ## Persona
 
-| Persona | Jenjang | Gaya | Display Name |
-|---------|---------|------|-------------|
-| **KAK_BUDI** | SD | Playful, semangat, pake bahasa anak-anak | Kak Budi 🦁 |
-| **KAK_DEWI** | SMP | Santai, suportif, pake bahasa gaul | Kak Dewi 🌸 |
-| **KAK_RAKA** | SMA | Formal, akademis, pake bahasa baku | Kak Raka 📚 |
+| Enum | Display | Emoji | Gaya |
+|---|---|---|---|
+| `KAK_BUDI` | Kak Budi | 🦉 | Sederhana, sabar, memanggil "adik" |
+| `KAK_DEWI` | Kak Dewi | 🌟 | Santai, hangat, memanggil "kamu" |
+| `KAK_RAKA` | Kak Raka | 🔥 | Energik, memanggil "lu" sesekali |
 
-## Data Flow
+Ketiganya punya instruksi eksplisit agar **menyesuaikan tingkat kesulitan dengan baris
+`Grade:` di konteks**, bukan menebak dari nama persona. Siswa memilih persona sendiri saat
+onboarding (`onboarding.ts`), tersimpan di `Student.persona`.
+
+## Alur
 
 ```
-User kirim pesan ke bot
-    │
-    ▼
-Telegram → POST /api/bot/webhook
-    │
-    ▼
-Telegraf.js router (message.ts)
-    │
-    ├── State = belajar → tutor.ts
-    │   │   ├── Ambil persona → LLM prompt
-    │   │   ├── 9Router call → response
-    │   │   └── Kirim balasan ke Telegram + log ke ChatLog
-    │   │
-    │   ├── State = quiz → quiz.ts
-    │   │
-    │   ├── State = onboarding → onboarding.ts
-    │   │
-    │   └── State = schedule → schedule.ts
-    │
-    └── Vision (foto) → vision.ts → LLM analysis
+Pesan masuk → POST /api/bot/webhook
+    ├── verifikasi secret token + dedupe update_id
+    └── onMessage()  [src/bot/handlers/message.ts]
+         ├── routeByState()  → kuis/onboarding yang sedang berjalan
+         ├── slash command   → handler deterministik
+         ├── isQuizRequest() → kuis (tanpa LLM)
+         └── handleMessage() → tutor.ts
+              ├── buildSystemPrompt(student)
+              │    ├── persona.prompt
+              │    ├── buildCapabilitiesPrompt()  (daftar tag yang boleh dipakai)
+              │    ├── konteks prosem + progres siswa
+              │    └── subscription knowledge
+              ├── callLLM(messages, "tutor")
+              ├── scanResponse()      ← safety sebelum dikirim
+              └── balas + log ke ChatLog
 ```
 
-## Key Logic
+## Tag Intent
 
-- **3 persona** — tone & display name berubah sesuai grade student
-- **State machine** — `session.ts` + `state-machine.ts` untuk routing sesuai konteks
-- **Chat logging** — semua chat disimpan ke ChatLog untuk analytics
-- **Safety filter** — filter konten tidak pantas di `safety.ts`
-- **LLM commands** — Tutor Agent bisa trigger aksi via command format: `[QUIZ]`, `[SCHEDULE]`, `[PASSWORD]`, dll
+Model tidak memanggil fungsi; ia menulis tag di akhir jawaban, lalu `message.ts`
+menangkapnya dan menjalankan handler nyata:
+
+`[QUIZ]` · `[SCHEDULE]` · `[SCHEDULE:WEEK]` · `[SCHEDULE:SET:{json}]` · `[SCHEDULE:ASSIGN]` ·
+`[SCHOOL_SCHEDULE]` · `[SCHOOL_SCHEDULE:NEXT:<mapel>]` · `[MATERIALS]` · `[YOUTUBE:<videoId>]` ·
+`[VIDEOS:<topik>]` · `[DASHBOARD]` · `[REMINDER …]` · `[HOMEWORK …]` · `[PASSWORD …]` ·
+`[EXTENSION:REQUEST]`
+
+Daftar resmi tag ada di `capabilities.ts` — jangan menambah tag hanya di prompt.
+
+## Catatan
+
+- `streamMessage()` menerapkan `scanResponse()` per paragraf sebelum mengirim (buffer-and-scan).
+- Jawaban kuis tidak lewat LLM sama sekali, tetapi tetap dicatat ke `ChatLog` lewat
+  `runQuizFlow()` agar riwayat di dashboard lengkap.
+- Tutor berbagi kuota harian dengan agent lain: `DAILY_TOKEN_CAP` 1.000.000 token/siswa/hari.

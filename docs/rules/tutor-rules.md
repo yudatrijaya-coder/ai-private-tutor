@@ -1,5 +1,7 @@
 # Tutor Agent — Safety Rules & Guardrails
 
+> ⚠️ **HISTORIS** — snapshot per tanggal di judul. Untuk kondisi terkini lihat `dev-docs/ai/CURRENT_STATE.md`.
+
 > **Priority: HIGH** — Langsung berinteraksi dengan anak via chat. Paling rawan.
 
 ## 1. Content Boundaries

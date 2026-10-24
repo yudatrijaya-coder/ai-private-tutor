@@ -1,5 +1,7 @@
 # Assessment Agent — Safety Rules & Guardrails
 
+> ⚠️ **HISTORIS** — snapshot per tanggal di judul. Untuk kondisi terkini lihat `dev-docs/ai/CURRENT_STATE.md`.
+
 > **Priority: MEDIUM** — Evaluasi kemampuan anak. Sensitif secara psikologis.
 
 ## 1. Quiz Safety

@@ -1,5 +1,7 @@
 # Curriculum Agent — Safety Rules & Guardrails
 
+> ⚠️ **HISTORIS** — snapshot per tanggal di judul. Untuk kondisi terkini lihat `dev-docs/ai/CURRENT_STATE.md`.
+
 > **Priority: HIGH** — Menentukan APA yang dipelajari anak. Kalau salah, dampaknya panjang.
 
 ## 1. Source Integrity

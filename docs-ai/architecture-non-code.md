@@ -1,5 +1,8 @@
 # Arsitektur Non-Kode — ai-private-tutor (senangbelajar)
 
+> ⚠️ **HISTORIS** — ditulis 31 Juli 2026. Jangan dibaca sebagai kondisi terkini.
+> Untuk state sekarang lihat `dev-docs/ai/CURRENT_STATE.md` dan `dev-docs/ai/PROJECT_CONTEXT.md`.
+
 > Dokumen sintesis. Sumber file yang TIDAK bisa diparse graphify (`.prisma`,
 > `Caddyfile`, `.conf`, `.toml`, `.css`, `.env.example`) dikonsolidasi di sini
 > supaya konsepnya masuk knowledge graph dan bisa di-query.

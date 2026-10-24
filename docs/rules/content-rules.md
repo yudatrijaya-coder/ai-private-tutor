@@ -1,5 +1,7 @@
 # Content Agent — Safety Rules & Guardrails
 
+> ⚠️ **HISTORIS** — snapshot per tanggal di judul. Untuk kondisi terkini lihat `dev-docs/ai/CURRENT_STATE.md`.
+
 > **Priority: HIGH** — Scraping dari internet. Sumber konten mentah untuk semua agent hilir.
 
 ## 1. Content Filtering

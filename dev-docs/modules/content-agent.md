@@ -1,46 +1,52 @@
 # Modul: Content Agent
 
 > **Path:** `src/agents/content/`
-> **File Utama:** `scrape.ts`, `worker.ts`
+> **Verifikasi:** 2026-10-25, commit `0207add`
 
 ---
 
 ## Fungsi
 
-Scrape materi pembelajaran dari internet, extract teks bersih, dan siapkan untuk quiz generation. Multi-source fallback — kalau satu sumber gagal, coba sumber lain.
+Mengambil materi pembelajaran dari sumber web terkurasi, memfilter konten tidak pantas, lalu menandai materi siap dipakai. Punya allowlist domain dan rate limiter — bukan scraper bebas.
 
-## File Structure
+## File
 
 | File | Fungsi |
 |------|--------|
-| `index.ts` | Barrel exports |
-| `scrape.ts` | Web scraper — extract teks dari HTML/URL |
-| `fallback.ts` | Multi-source fallback logic |
-| `ethics.ts` | Content ethics filter |
-| `worker.ts` | Queue consumer untuk `content-scrape` |
+| `index.ts` | Barrel export |
+| `scrape.ts` | `isAllowedDomain()`, `filterContent()`, `fetchWithCheerio()`, `safeFetchText()` |
+| `ethics.ts` | `ETHICS` (robots.txt, delay 2 s, maks 50 halaman/domain), `truncateToEthicsLimit()` |
+| `fallback.ts` | `resolveSources()`, `emptyFallback()` — urutan sumber cadangan |
+| `worker.ts` | `processScrapeJob()` — consumer queue `content-scrape` |
 
 ## Queue
 
 | Queue | Concurrency | Trigger |
-|-------|-------------|---------|
+|-------|------:|---------|
 | `content-scrape` | 2 | Curriculum selesai generate |
+
+## Kebijakan Sumber
+
+- **Allowlist** (`ALLOWED_DOMAINS`): `kemdikbud.go.id`, `ruangguru.com`, `quipper.com`,
+  `zenius.net`, `academia.edu`, `scholar.google.com`, `wikipedia.org`, `sma*.sch.id`, `smp*.sch.id`.
+- **Blocklist** (`BLOCKED_DOMAIN_FRAGMENTS`): porn, sex, adult, gambling, forum, chat, social-media.
+- **Batas etika**: hormati `robots.txt`, jeda minimal 2 detik antar request per domain,
+  maksimum 50 halaman per domain per sesi, UA pengenal.
 
 ## Data Flow
 
 ```
-Curriculum → trigger content-scrape queue
+content-scrape queue
     │
     ▼
-Content Agent Worker
-    ├── Coba sumber utama → gagal? → fallback.ts
-    ├── Extract teks → clean HTML
-    ├── Ethics filter → scan konten tidak pantas
-    └── Update Material status → trigger curriculum-review
+fetchWithCheerio(url) → ambil HTML
+    ├── isAllowedDomain()  → tolak domain di luar allowlist
+    ├── filterContent()    → buang konten dewasa/kata terlarang
+    ├── truncateToEthicsLimit() → potong sesuai batas
+    └── tulis Material.rawContent → status diproses lanjut
 ```
 
-## Key Logic
+## Catatan
 
-- **Multi-source fallback** — urutan sumber dicoba sampai berhasil
-- **Scrape per priority** — student butuh week_1 dulu, hemat bandwidth
-- **Extract teks** — dari HTML page dan PDF
-- **Ethics filter** — scan konten untuk safety
+`slice` konten yang masuk ke prompt LLM dibatasi agar tidak meledak token; ringkasan dan
+pembersihan akhir terjadi di tahap berikutnya (`curriculum-review`, `assessment-generate`).

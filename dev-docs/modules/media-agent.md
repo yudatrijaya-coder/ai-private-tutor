@@ -1,51 +1,62 @@
 # Modul: Media Agent
 
 > **Path:** `src/agents/media/`
-> **File Utama:** `renderer.ts`, `script.ts`, `youtube.ts`
+> **Verifikasi:** 2026-10-25, commit `0207add`
 
 ---
 
 ## Fungsi
 
-Generate video pembelajaran dengan karakter favorit (Mbappe, Lisa BLACKPINK, dll), text-to-speech, upload ke YouTube.
+Menyusun skrip narasi, membuat audio TTS, merender video pembelajaran, dan menyiapkan
+tautan video. Bila render gagal, modul mencari video YouTube sebagai cadangan.
 
-## File Structure
+## File
 
 | File | Fungsi |
 |------|--------|
-| `index.ts` | Barrel exports |
-| `characters.ts` | Definisi karakter (avatar, voice, style) |
-| `script.ts` | Generate script video dari materi |
-| `renderer.ts` | Render video dari script + karakter |
-| `tts.ts` | Text-to-speech (suara karakter) |
-| `youtube.ts` | Upload video ke YouTube (unlisted) |
-| `worker.ts` | Queue consumer untuk `media-render` dan `media-yt-fallback` |
+| `index.ts` | Barrel export |
+| `characters.ts` | Definisi karakter (nama, emoji, `voiceStyle`, warna) |
+| `script.ts` | Generate skrip video dari materi |
+| `tts.ts` | Narasi via `edge-tts` (Microsoft Edge TTS) — `VOICE_MAP` per karakter |
+| `renderer.ts` | Render video dari skrip + audio |
+| `youtube.ts` | `uploadToYouTube()` + pencarian video cadangan |
+| `worker.ts` | `processMediaRender`, `processMediaYtFallback` |
+
+## Karakter
+
+Tersedia: `mbappe`, `lisa`, `ian`, plus persona `kak-budi`, `kak-dewi`, `kak-raka`
+(`characters.ts`). Tiap karakter punya `voiceStyle` dan dipetakan ke suara `id-ID-*`
+di `VOICE_MAP` (`tts.ts`).
 
 ## Queue
 
 | Queue | Concurrency | Trigger |
-|-------|-------------|---------|
-| `media-render` | 1 | Material siap dengan deliveryType = VIDEO |
-| `media-yt-fallback` | 2 | Render gagal (cari YouTube reference) |
+|-------|------:|---------|
+| `media-render` | 1 | Material `delivery = VIDEO` |
+| `media-yt-fallback` | 2 | Render gagal / butuh video pengganti |
 
 ## Data Flow
 
 ```
-Material dengan deliveryType VIDEO → media-render queue
-    │
-    ▼
-Script Generator → Buat skrip dari konten materi
-    │
-    ▼
-Renderer → Render video dengan karakter
-    │
-    ├── Upload ke YouTube (unlisted) → simpan URL di metadata
-    └── Kalau gagal → media-yt-fallback → cari YouTube reference
+Material (delivery VIDEO) → media-render
+    ├── script.ts  → skrip narasi
+    ├── tts.ts     → audio .mp3 (edge-tts, suara per karakter)
+    ├── renderer.ts→ video
+    └── youtube.ts → uploadToYouTube() → Material.videoUrl
+         │
+         └── gagal → media-yt-fallback → cari video YouTube relevan
 ```
 
-## Key Logic
+## Kondisi Saat Ini (penting)
 
-- **Karakter** — Mbappe, Lisa BLACKPINK, dan karakter lain di `characters.ts`
-- **Tidak simpan video** — langsung upload ke YouTube, tidak simpan file di server
-- **Fallback** — kalau render gagal, cari video YouTube yang relevan sebagai referensi
-- **Video hanya untuk topik visual** — text lebih cepat untuk topik teoritis
+`uploadToYouTube()` di `youtube.ts` **masih placeholder**: ia mencatat niat upload,
+membuat `videoId` palsu (`placeholder_<8 char>`), lalu menulis
+`videoUrl` + `status = READY` ke `Material`. Komentar di source menyebut upload
+YouTube Data API asli sebagai "Phase 4". Jadi:
+
+- Jangan menganggap `Material.videoUrl` selalu video hasil render sendiri.
+- Video yang benar-benar tayang mayoritas berasal dari kurasi YouTube (`src/data/youtube-*.ts`).
+
+## Endpoint Terkait
+
+`POST /api/media/render`, `POST /api/media/tts`, `GET /api/mindmap/screenshot`.

@@ -1,5 +1,7 @@
 # Media Agent — Safety Rules & Guardrails
 
+> ⚠️ **HISTORIS** — snapshot per tanggal di judul. Untuk kondisi terkini lihat `dev-docs/ai/CURRENT_STATE.md`.
+
 > **Priority: MEDIUM** — Visual yang dilihat anak. Karakter & konten video.
 
 ## 1. Character Safety

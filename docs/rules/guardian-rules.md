@@ -1,5 +1,7 @@
 # Guardian Agent — Safety Rules & Guardrails
 
+> ⚠️ **HISTORIS** — snapshot per tanggal di judul. Untuk kondisi terkini lihat `dev-docs/ai/CURRENT_STATE.md`.
+
 > **Priority: HIGH** — Data parent, admission, cross-agent orchestration.
 
 ## 1. Parent Data Privacy

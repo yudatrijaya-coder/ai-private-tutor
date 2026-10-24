@@ -1,62 +1,73 @@
 # Modul: Queue System
 
 > **Path:** `src/queue/`
-> **File Utama:** `definitions.ts`, `runner.ts`
+> **Verifikasi:** 2026-10-25, commit `0207add`
 
 ---
 
 ## Fungsi
 
-Abstraksi queue processing — BullMQ jika Redis tersedia, in-memory fallback jika tidak. Menangani semua komunikasi asynchronous antar agent.
+Abstraksi antrean pekerjaan: BullMQ + Redis bila tersedia, fallback **in-memory** dalam
+proses yang sama bila Redis mati. Semua worker didaftarkan sekali saat startup lewat
+`src/instrumentation.ts`.
 
-## File Structure
+## File
 
 | File | Fungsi |
 |------|--------|
-| `definitions.ts` | Queue names, concurrency, job payload types, helpers |
-| `runner.ts` | BullMQ runner + worker factory |
-| `local.ts` | In-memory fallback (tanpa Redis) |
+| `definitions.ts` | `QUEUES`, `MAX_RETRIES`, tipe payload, `defaultConcurrency()`, `queueNameToAgentType()` |
+| `runner.ts` | `initQueues()` — factory worker BullMQ + logging `AgentLog` |
+| `local.ts` | `registerProcessor()` — fallback in-memory |
+| `redis.ts` | Koneksi ioredis |
+| `worker.ts` | Helper worker |
+| `dlq.ts` | Dead Letter Queue (setelah `MAX_RETRIES` = 3) |
 
-## Queue Definitions (9 queues)
+## Definisi Queue (10)
 
-| Queue Name | Concurrency | Worker | Deskripsi |
-|-----------|-------------|--------|-----------|
-| `content-scrape` | 2 | Content Agent | Scrape materi dari internet |
-| `curriculum-review` | 2 | Curriculum Agent | Review hasil scrape |
-| `media-render` | 1 | Media Agent | Render video pembelajaran |
-| `media-yt-fallback` | 2 | Media Agent | Cari YouTube reference |
-| `assessment-generate` | 3 | Assessment Agent | Generate quiz dari materi |
-| `assessment-evaluate` | 2 | Assessment Agent | Koreksi jawaban siswa |
-| `guardian-report` | 1 | Guardian Agent | Generate weekly report |
-| `scheduler-assign` | 1 | Scheduler Agent | Assign jadwal mingguan |
-| `scheduler-reminder` | 3 | Scheduler Agent | Kirim reminder |
+Dari `QUEUES` di `definitions.ts`:
 
-## Job Payload Types
+| Queue | Concurrency | Agent (`AgentType`) |
+|-------|------:|------|
+| `content-scrape` | 2 | CONTENT |
+| `curriculum-review` | 2 | CURRICULUM |
+| `media-render` | 1 | MEDIA |
+| `media-yt-fallback` | 2 | MEDIA |
+| `assessment-generate` | 3 | ASSESSMENT |
+| `assessment-evaluate` | 2 | ASSESSMENT |
+| `guardian-report` | 1 | GUARDIAN |
+| `scheduler-assign` | 1 | SCHEDULER |
+| `scheduler-reminder` | 3 | SCHEDULER |
+| `improvement-analysis` | 1 | ASSESSMENT |
 
-```typescript
-ScrapeJobPayload         → { materialId, topic, subTopic?, gradeLevel, sources[] }
-CurriculumReviewJobPayload → { materialId, topic, gradeLevel, subTopic? }
-RenderJobPayload          → { materialId, characterPreference, script }
-YtFallbackJobPayload      → { materialId, topic, gradeLevel }
-AssessmentGenerateJobPayload → { studentId, materialId?, topic, gradeLevel, questionCount? }
-AssessmentEvaluateJobPayload → { studentId, assessmentId, answers }
-GuardianReportJobPayload  → { studentId, periodStart, periodEnd }
-SchedulerAssignJobPayload → { studentId, weekStart }
-SchedulerReminderJobPayload → { studentId, sessionId }
+## Payload
+
+| Tipe | Field |
+|---|---|
+| `ScrapeJobPayload` | `materialId, topic, subTopic?, gradeLevel, sources[]` |
+| `CurriculumReviewJobPayload` | `materialId, topic, gradeLevel, subTopic?` |
+| `RenderJobPayload` | `materialId, characterPreference, script` |
+| `YtFallbackJobPayload` | `materialId, topic, gradeLevel` |
+| `AssessmentGenerateJobPayload` | `studentId, materialId?, topic, gradeLevel, questionCount?` |
+| `AssessmentEvaluateJobPayload` | `studentId, assessmentId, answers` |
+| `GuardianReportJobPayload` | `studentId, periodStart, periodEnd` |
+| `SchedulerAssignJobPayload` | `studentId, weekStart` |
+| `SchedulerReminderJobPayload` | `studentId, sessionId` |
+| `ImprovementAnalysisJobPayload` | `attemptId` |
+
+## Bootstrap (`src/instrumentation.ts`)
+
+```
+register()
+    └── initQueues({ ...10 processor })
+         ├── ok    → BullMQ worker aktif, log "[instrumentation] Queues: OK"
+         └── gagal → log "DISABLED" + daftarkan 10 processor ke src/queue/local.ts
 ```
 
-## Worker Factory (`runner.ts`)
+Artinya: Redis mati **bukan** alasan pipeline berhenti — pekerjaan tetap jalan,
+hanya kehilangan persistensi antar restart.
 
-Worker factory pattern:
-1. Daftar queue + handler function
-2. Auto-create BullMQ queue + worker
-3. Kalau Redis tidak tersedia → in-memory fallback
-4. Auto-retry (max 3x) → Dead Letter Queue
-5. Auto-logging ke AgentLog
+## Retry & Observabilitas
 
-## In-Memory Fallback (`local.ts`)
-
-Jika `REDIS_URL` tidak di-set:
-- Queue tetap berfungsi (dalam proses yang sama)
-- Tidak ada persistence antar restart
-- Cocok untuk development
+- `MAX_RETRIES = 3` → job gagal permanen dipindah ke DLQ (`dlq.ts`).
+- Setiap job menulis `AgentLog` (`queueNameToAgentType()` memberi label agent).
+- Status antrean bisa dilihat di `GET /api/queues` (admin).

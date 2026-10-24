@@ -6,6 +6,15 @@
 > **Domain:** `senangbelajar.web.id`
 > **Domain required** — Caddy auto-provisions Let's Encrypt SSL only when a real domain points to your server.
 
+> ⚠️ **Sebagian isi panduan ini sudah tidak sesuai dengan VPS yang berjalan.** Panduan ini
+> ditulis untuk setup awal (Ubuntu 22.04, app di `/opt/ai-tutor`, branch `main`). Server
+> yang aktif sekarang: Ubuntu 24.04, app di `/home/ubuntu/ai-private-tutor`, branch
+> **`master`**, build lewat `bash ops/build.sh`, dan cron dijalankan Hermes (bukan crontab).
+> Untuk prosedur deploy yang benar lihat `prod-docs/docs/operations/deployment.md` dan
+> `dev-docs/ai/FINAL_SYSTEM_HANDOVER.md`. Sisa dokumen ini tetap berguna sebagai referensi
+> instalasi PostgreSQL/Redis/Caddy dari nol.
+
+
 ---
 
 ## Table of Contents

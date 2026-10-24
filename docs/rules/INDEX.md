@@ -1,5 +1,7 @@
 # Agent Safety Rules & Guardrails
 
+> ⚠️ **HISTORIS** — snapshot per tanggal di judul. Untuk kondisi terkini lihat `dev-docs/ai/CURRENT_STATE.md`.
+
 > Berlaku untuk semua agent. Setiap agent punya `rules.ts` yang harus di-load sebelum logic utama jalan.
 > Rules ini adalah **konstitusi** — dilanggar = system alert ke Guardian.
 

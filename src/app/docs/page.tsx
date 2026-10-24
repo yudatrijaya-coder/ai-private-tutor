@@ -153,7 +153,7 @@ export default function DocsPage() {
                 ['ai-rules/', '🔒 IMMUTABLE', 'Template & aturan kerja AI — hanya dibaca, tidak boleh diubah'],
                 ['dev-docs/ai/', '📝 OUTPUT', 'Panduan AI: START_HERE, PROJECT_CONTEXT, MODULE_MAP, CURRENT_STATE, HANDOVER'],
                 ['dev-docs/architecture/', '📝 OUTPUT', 'Arsitektur: api-flow, database, frontend-structure, backend-structure'],
-                ['dev-docs/modules/', '📝 OUTPUT', 'Peta modul detail: 7 agents + bot + API + LLM client (11 file)'],
+                ['dev-docs/modules/', '📝 OUTPUT', 'Peta modul detail: 6 agents + bot handler + API + LLM client + queue'],
                 ['prod-docs/', '🚀 OUTPUT', 'Production server docs: deployment, monitoring, backup, security, troubleshooting'],
                 ['backup/', '📦 OUTPUT', 'Backup dokumentasi legacy sebelum migrasi'],
                 ['src/app/docs/', '🌐 Web', 'Halaman docs online: architecture, mindmap, peta fungsional, getting-started'],
@@ -167,7 +167,7 @@ export default function DocsPage() {
             </tbody>
           </table>
 
-          <h3 className="font-semibold text-slate-800 mt-6 mb-2">📦 dev-docs/modules/ — 11 Modul</h3>
+          <h3 className="font-semibold text-slate-800 mt-6 mb-2">📦 dev-docs/modules/ — 11 modul</h3>
           <p className="mb-3">
             Dokumentasi mendalam untuk setiap modul besar dalam codebase, termasuk arsitektur, data flow, 
             queue definitions, dan file mapping. Cocok untuk onboarding developer baru dan referensi cepat.

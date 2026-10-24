@@ -1,184 +1,164 @@
 # Modul: API Routes
 
 > **Path:** `src/app/api/`
-> **Fungsi:** Semua endpoint HTTP untuk backend.
+> **Status:** DATA FILE — perbarui saat endpoint berubah.
+> **Verifikasi terakhir:** 2026-10-25 terhadap commit `0207add` — 73 `route.ts`.
 
 ---
 
-## Ringkasan
+## Konvensi
 
-Seluruh backend API menggunakan Next.js App Router convention — file-based routing di `src/app/api/`. Setiap folder dengan `route.ts` menjadi endpoint.
+Setiap folder dengan `route.ts` menjadi endpoint (App Router). Ringkasan arsitektur
+dan alur request ada di [`../architecture/api-flow.md`](../architecture/api-flow.md);
+peta modul → endpoint ada di [`../ai/MODULE_MAP.md`](../ai/MODULE_MAP.md).
 
-## Daftar Route Groups
+Auth yang dipakai:
 
-| Prefix | Auth | Fungsi |
-|--------|------|--------|
-| `/api/bot/*` | Secret token | Telegram webhook |
-| `/api/students/*` | Session | Student data & pipeline |
-| `/api/exam/*` | Session | Exam generation |
-| `/api/media/*` | Session | Media rendering |
-| `/api/auth/*` | Varied | Auth (login, me, password) |
-| `/api/admin/*` | Admin | Admin dashboard CRUD |
-| `/api/cron/*` | Cron | Scheduled tasks |
-| `/api/curriculum/*` | Session | Curriculum batch ops |
-| `/api/youtube/*` | Session | YouTube transcript |
-| `/api/reminders/*` | Cron | Reminder system |
-| `/api/mindmap/*` | Session | Mindmap screenshot |
+| Label | Mekanisme |
+|---|---|
+| **Publik** | tanpa auth |
+| **Siswa** | cookie `student_session` (JWT), dicek `src/middleware.ts` |
+| **Admin** | session NextAuth + `isAdmin(scope)` |
+| **Cron** | `checkCronSecret()` — header `x-cron-secret` atau `?token=`, fail-closed |
+| **Bot** | header `x-telegram-bot-api-secret-token` |
+| **Bearer** | `Authorization: Bearer $CRON_SECRET` (khusus `/api/reminders/check`) |
 
-## Detail Routes
+## Jumlah per Prefix
 
-### `/api/bot/webhook/route.ts`
-- **Method:** POST
-- **Auth:** Secret token (header)
-- **Fungsi:** Menerima update dari Telegram, dispatch ke bot handler
-- **Body:** Telegram Update object
+| Prefix | Route | Auth |
+|---|---:|---|
+| `/api/admin/*` | 18 | Admin |
+| `/api/students/*` | 18 | Siswa |
+| `/api/student/*` | 5 | Siswa |
+| `/api/auth/*` | 5 | Publik/Sesi |
+| `/api/cron/*` | 7 | Cron |
+| `/api/exam/*` | 6 | Siswa |
+| `/api/curriculum/*` | 3 | Admin |
+| `/api/bot/*` | 3 | Bot/Admin |
+| `/api/media/*` | 2 | Siswa |
+| `/api/reminders/check`, `/api/mindmap/screenshot` | 2 | Bearer / Siswa |
+| `/api/admission`, `/api/queues`, `/api/study`, `/api/youtube/transcript` | 4 | Campuran |
+| **Total** | **73** | |
 
-### `/api/students/route.ts`
-- **Method:** GET, POST
-- **Auth:** Session (admin/parent)
-- **Fungsi:** GET = list students, POST = pipeline trigger
-- **Body (POST):** `{ action: "trigger", stages: string[], studentIds?: string[] }`
+## Method per Route
 
-### `/api/students/subjects/route.ts`
-- **Method:** GET
-- **Fungsi:** List subject per student
+Dihasilkan dari source; format `path [METHOD,...]`.
 
-### `/api/students/topics/route.ts`
-- **Method:** GET
-- **Fungsi:** List topic per subject
+### Bot, Cron, Reminder, Queue
 
-### `/api/students/quizzes/[id]/route.ts`
-- **Method:** GET
-- **Fungsi:** Detail quiz + kirim jawaban
+```
+/api/bot/webhook                 [POST, GET]   secret token + dedupe update_id
+/api/bot/diag                    [GET]         admin
+/api/bot/diag/prompt             [GET]         admin
+/api/cron/daily-nudge            [GET]         cron
+/api/cron/exam-scheduler         [POST]        cron
+/api/cron/guardian-monthly       [POST]        cron
+/api/cron/guardian-report        [POST]        cron
+/api/cron/motivation-nudge       [POST, GET]   cron
+/api/cron/progress-snap          [GET]         cron
+/api/cron/schedule-sweep         [GET]         cron (?token=)
+/api/reminders/check             [GET]         Bearer CRON_SECRET
+/api/queues                      [GET]         admin
+```
 
-### `/api/students/material/[id]/route.ts`
-- **Method:** GET
-- **Fungsi:** Konten materi
+### Siswa
 
-### `/api/exam/route.ts`
-- **Method:** POST
-- **Fungsi:** Generate exam dari quiz bank
+```
+/api/students                    [GET, POST]           POST {action:"trigger"} = pipeline
+/api/students/[id]               [DELETE]
+/api/students/subjects           [GET]
+/api/students/topics             [GET]
+/api/students/material/[id]      [GET, PATCH]
+/api/students/quizzes            [GET]
+/api/students/quizzes/[id]       [GET]
+/api/students/quizzes/[id]/grade [POST]
+/api/students/activity           [GET, POST]   XP/streak/badge
+/api/students/review             [GET, POST]   antrean SM-2
+/api/students/mastery            [GET]
+/api/students/weak-topics        [GET]
+/api/students/self-compare       [GET]
+/api/students/gamification       [GET]
+/api/students/achievement-extra  [GET]
+/api/students/leaderboard        [GET]
+/api/students/exams              [GET]
+/api/students/exams/[id]         [GET]
+/api/student/me                  [GET]
+/api/student/progress            [GET]
+/api/student/missions            [GET, POST]
+/api/student/guardian-link       [GET]
+/api/student/password            [PUT]
+```
 
-### `/api/exam/template/route.ts`
-- **Method:** POST
-- **Fungsi:** Generate exam dari template (weekly timeline)
+### Exam & Media
 
-### `/api/auth/me/route.ts`
-- **Method:** GET
-- **Fungsi:** Info user saat ini
+```
+/api/exam                        [POST]
+/api/exam/weekly                 [POST]
+/api/exam/template               [POST, GET]
+/api/exam/attempt                [POST]
+/api/exam/analyze                [POST]
+/api/exam/apply-plan             [POST, GET]
+/api/media/render                [POST]
+/api/media/tts                   [POST]
+/api/mindmap/screenshot          [GET]
+/api/youtube/transcript          [POST]
+/api/study                       [POST, GET]
+/api/admission                   [POST]
+```
 
-### `/api/auth/student-login/route.ts`
-- **Method:** POST
-- **Auth:** Public
-- **Fungsi:** Login student (verify bcrypt password)
+### Auth
 
-### `/api/auth/student/set-password/route.ts`
-- **Method:** POST
-- **Auth:** Public
-- **Fungsi:** Set password pertama kali
+```
+/api/auth/[...nextauth]          [POST]   NextAuth (admin/orang tua)
+/api/auth/me                     [GET]
+/api/auth/student-login          [POST]   publik — bcrypt
+/api/auth/student/set-password   [POST]   publik — password pertama
+/api/auth/student/reset-password [POST]   reset
+```
 
-### `/api/auth/student/reset-password/route.ts`
-- **Method:** POST
-- **Auth:** Session
-- **Fungsi:** Reset password
+### Admin
 
-### `/api/admin/students/route.ts`
-- **Method:** GET, POST
-- **Auth:** Admin
-- **Fungsi:** List semua student (GET), create student (POST)
+```
+/api/admin/students                            [GET, POST, DELETE]
+/api/admin/students/[id]                       [PATCH, DELETE]
+/api/admin/students/[id]/set-password          [POST]
+/api/admin/students/[id]/password-reset-link   [GET]
+/api/admin/students/[id]/restore               [POST]
+/api/admin/students/approve                    [POST]
+/api/admin/students/restore                    [POST]
+/api/admin/curriculum                          [GET, POST]
+/api/admin/curriculum/material                 [POST]
+/api/admin/curriculum/material/[id]            [PATCH, DELETE]
+/api/admin/curriculum/material/[id]/reorder    [POST]
+/api/admin/quizzes                             [GET, POST]
+/api/admin/quizzes/[id]                        [PATCH, DELETE]
+/api/admin/pending                             [GET]
+/api/admin/approve                             [POST]
+/api/admin/bot-status                          [GET]
+/api/admin/set-webhook                         [POST]
+/api/admin/system-info                         [GET]
+```
 
-### `/api/admin/students/[id]/route.ts`
-- **Method:** GET, PUT, DELETE
-- **Auth:** Admin
-- **Fungsi:** CRUD student individual
+### Curriculum Batch
 
-### `/api/admin/students/[id]/set-password/route.ts`
-- **Method:** POST
-- **Auth:** Admin
-- **Fungsi:** Set password student oleh admin
+```
+/api/curriculum/batch-generate   [POST, GET]
+/api/curriculum/batch-mindmap    [POST, GET]
+/api/curriculum/regenerate       [POST]
+```
 
-### `/api/admin/students/[id]/password-reset-link/route.ts`
-- **Method:** POST
-- **Auth:** Admin
-- **Fungsi:** Generate link reset password
+---
 
-### `/api/admin/students/[id]/restore/route.ts`
-- **Method:** POST
-- **Auth:** Admin
-- **Fungsi:** Restore student yang diarsipkan
+## Koreksi dari Versi Sebelumnya
 
-### `/api/admin/students/restore/route.ts`
-- **Method:** POST
-- **Auth:** Admin
-- **Fungsi:** Batch restore
-
-### `/api/admin/curriculum/route.ts`
-- **Method:** GET, POST
-- **Auth:** Admin
-- **Fungsi:** Manage curriculum (lihat, create)
-
-### `/api/admin/curriculum/material/route.ts`
-- **Method:** GET, POST
-- **Auth:** Admin
-- **Fungsi:** CRUD material
-
-### `/api/admin/curriculum/material/[id]/route.ts`
-- **Method:** GET, PUT, DELETE
-- **Auth:** Admin
-- **Fungsi:** CRUD material individual
-
-### `/api/admin/curriculum/material/[id]/reorder/route.ts`
-- **Method:** PUT
-- **Auth:** Admin
-- **Fungsi:** Urutkan material (drag & drop)
-
-### `/api/admin/quizzes/route.ts`
-- **Method:** GET, POST, DELETE
-- **Auth:** Admin
-- **Fungsi:** Manage quiz bank
-
-### `/api/admin/quizzes/[id]/route.ts`
-- **Method:** GET, PUT, DELETE
-- **Auth:** Admin
-- **Fungsi:** CRUD quiz individual
-
-### `/api/admin/pending/route.ts`
-- **Method:** GET
-- **Auth:** Admin
-- **Fungsi:** List student pending approval
-
-### `/api/admin/approve/route.ts`
-- **Method:** POST
-- **Auth:** Admin
-- **Fungsi:** Approve student
-
-### `/api/cron/schedule-sweep/route.ts`
-- **Method:** POST
-- **Auth:** Cron (internal)
-- **Fungsi:** Sweep jadwal (H-1, T-30, missed, daily brief, auto-assign)
-
-### `/api/cron/guardian-report/route.ts`
-- **Method:** POST
-- **Auth:** Cron (internal)
-- **Fungsi:** Trigger weekly report generation
-
-### `/api/curriculum/batch-generate/route.ts`
-- **Method:** POST
-- **Fungsi:** Batch generate curriculum dari data statis
-
-### `/api/curriculum/batch-mindmap/route.ts`
-- **Method:** POST
-- **Fungsi:** Batch generate mindmap dari slides
-
-### `/api/youtube/transcript/route.ts`
-- **Method:** POST
-- **Fungsi:** Ambil transcript video YouTube
-
-### `/api/reminders/check/route.ts`
-- **Method:** POST
-- **Auth:** Cron (internal)
-- **Fungsi:** Cek & kirim reminder terjadwal
-
-### `/api/mindmap/screenshot/route.ts`
-- **Method:** POST
-- **Fungsi:** Screenshot mindmap untuk preview
+| Klaim lama | Fakta |
+|---|---|
+| `/api/students` POST = pipeline dengan `stages: string[]`, `studentIds?: string[]` | Body: `{ action: "trigger", studentId: string, stages?: string[] }` — satu siswa per panggilan |
+| `/api/reminders/check` method POST | **GET**, auth `Authorization: Bearer` |
+| `/api/cron/schedule-sweep` method POST | **GET** dengan `?token=` |
+| `/api/mindmap/screenshot` method POST | **GET** |
+| `/api/admin/students/[id]` methods GET/PUT | **PATCH, DELETE** |
+| `/api/admin/curriculum/material` GET/POST | **POST** saja; detail di `[id]` memakai **PATCH/DELETE** |
+| `/api/admin/curriculum/material/[id]/reorder` PUT | **POST** |
+| `/api/admin/quizzes` GET/POST/DELETE | **GET, POST**; hapus lewat `[id]` |
+| `/api/auth/student/reset-password` Auth Session | publik |

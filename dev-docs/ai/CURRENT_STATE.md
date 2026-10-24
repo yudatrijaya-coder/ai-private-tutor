@@ -1,50 +1,87 @@
 # CURRENT_STATE
 
-> **Status:** DATA FILE — AI WAJIB mengupdate setiap akhir task/batch.
-> **Purpose:** Snapshot kondisi terkini development.
+> **Status:** DATA FILE — perbarui setiap akhir task/batch.
+> **Snapshot:** 2026-10-25 06:55 +07, commit `0207add`, PM2 uptime 8h.
 
 ---
 
 ## Feature Maturity
 
-| Feature | Status | Notes |
-|---------|--------|-------|
-| Mindmap Premium | ✅ Production | Radial layout, Lucide icons, CSS animations, 3-level nodes |
-| Quiz Bank | ✅ Production | 1650 soal (SD540, SMP495, SMA615) + exam generator |
-| Curriculum SIBI | ✅ Production | SD5, SMP1, SMA2 dari PDF resmi |
-| Exam Generator | ✅ Production | Template + detail page |
-| Pipeline Trigger | ✅ Production | Dashboard curriculum/content/quiz/jadwal |
-| LLM Integration | ✅ Production | 9Router combo + fallback chain |
-| Telegram Bot | ✅ Production | Webhook mode, 3 persona, homework/reminder/schedule |
-| Student Web Auth | ✅ Production | Login dengan password (bcrypt), ganti password, share link |
-| Student Landing Page | ✅ Production | Quote rotator, recommendation carousel, quick actions, interactive schedule |
-| Template System | ✅ Production | New students copy curriculum from Syifa/Raihan/SHOFI per grade level |
-| Schedule System | ✅ Production | 60/30/10 assignment, H-1/T-30 reminders, daily brief, auto-assign |
-| Admin Dashboard | ✅ Production | Manage students, curriculum, quizzes, set password |
-| WhatsApp Bot | 🟡 In Progress | Next.js webhook + QR auth |
+| Fitur | Status | Bukti |
+|-------|--------|-------|
+| Bot Telegram (webhook) | ✅ Production | webhook aktif, `pending_update_count: 0` |
+| Tutor LLM (3 persona) | ✅ Production | `ai_tutor_agent` + `hermes`, `ApiUsage` 1.475 baris |
+| Quiz + grading | ✅ Production | 1.315 `Quiz`, 416 `Attempt` |
+| Drill & speedmath | ✅ Production | `handlers/quiz.ts`, `handlers/speedmath.ts` |
+| Spaced repetition (SM-2) | ✅ Production | `ReviewQueue` 26 item |
+| Exam generator | ✅ Production | 35 `Exam`, 679 `ExamQuestion` |
+| Kurikulum + prosem | ✅ Production | 5 `Curriculum`, 1.296 `Material` |
+| Mindmap radial | ✅ Production | `src/components/mindmap/` |
+| Slides & video | ✅ Production | `/api/media/render`, `/api/media/tts` |
+| Gamifikasi | ✅ Production | 14 `Badge`, XP/streak di `Student` |
+| Jadwal belajar + reminder H-1/T-30 | ✅ Production | `ScheduleSession` 273, job Hermes `ok` |
+| Guard: auth, CSP, cron fail-closed | ✅ Production | `middleware.ts`, `next.config.ts`, `lib/cron/guard.ts` |
+| WhatsApp Bot | ❌ Tidak ada di kode | Tidak ada handler WhatsApp di `src/` — hapus dari roadmap sampai diimplementasikan |
 
-## What Was Done Recently
+## Kondisi Data (2026-10-25)
 
-- **Docs migration complete**: `dev-docs/modules/` (11 files) + `dev-docs/architecture/` (4 files revised to Indonesian) + web docs updated
-- **Password management**: Student login with bcrypt + set/change password via web + admin
-- **Bot password support**: LLM can set/change password with [PASSWORD] command
-- **Navigation**: Back button in student header (← on non-home pages) + return-to-home on password page
-- **Schedule system**: Full cron pipeline (every 3m) for session reminders (H-1, T-30, missed), daily brief (6-10AM), auto-assignment via 60/30/10
-- **Schedule bot commands**: [SCHEDULE], [SCHEDULE:WEEK], [SCHEDULE:SET], [SCHEDULE:ASSIGN]
-- **Auto-default config**: New students get default schedule config (1x/day 16:00, exclude Sunday)
-- **Student Web improvements**: Quiz page fixed — subject picker when no subject param, no more infinite loading
-- **Landing page revamp**: Motivational quote rotator (auto-roll 8s, 15 tokoh), recommendation carousel (3 cards/page, auto-roll 6s), quick action buttons (Quiz/Exam/Mindmap/Buku), interactive schedule with per-item action buttons
-- **Template system**: Syifa/Raihan/SHOFI marked as template. New student registered at same grade level gets deep-copied curriculum (materials, quizzes, slides, mindmaps) instead of generating from data banks
-- **Default password + credential notification**: New students get auto-generated password (belajar123) and receive Telegram notification with student ID, password, and dashboard link on registration
-- **Backfill credentials**: Exported script `scripts/send-credentials.ts` to send credentials to existing students
+| Student | Grade | Template | Material | Quiz |
+|---|---|:---:|---:|---:|
+| Syifa | SD_5 | ✅ | 130 | 148 |
+| Raihan | SMP_1 | ✅ | 264 (v1) + 239 (v3) | 503 |
+| BAHLIL | SMP_1 | — | 239 (v3) | 239 |
+| SHOFI | SMA_2 | ✅ | 424 | 425 |
 
-## Known Issues / Blockers
+Raihan memegang dua `Curriculum` (v1 dan v3). Yang berlaku v3 — semua pembacaan harus lewat `ACTIVE_CURRICULUM_ORDER`.
 
-- WhatsApp Bot masih dalam pengembangan (QR auth flow)
-- Tidak ada blocker saat ini
+## Cron
 
-## Cron Jobs
+| Job (Hermes) | Jadwal | Endpoint | Status terakhir |
+|---|---|---|---|
+| `schedule-reminder-sweep` | every 3m | `GET /api/cron/schedule-sweep` | ok |
+| `exam-scheduler-sweep` | every 30m | `POST /api/cron/exam-scheduler` | ok |
+| `guardian-report-weekly` | `0 18 * * 0` | `POST /api/cron/guardian-report` | ok |
+| `motivation-nudge-monday` | `0 17 * * 1` | `POST /api/cron/motivation-nudge` | ok |
+| `motivation-nudge-friday` | `0 17 * * 5` | `POST /api/cron/motivation-nudge` | ok |
+| `guardian-monthly` | `0 17 1 * *` | `POST /api/cron/guardian-monthly` | **error** (lihat Known Issues) |
+| `guruai-webhook-sentinel` | `*/10 * * * *` | sistem lain | ok |
 
-| Name | Schedule | Script / Endpoint | Purpose |
-|------|----------|-------------------|---------|
-| Schedule + Reminder Sweep | every 3m | `/api/reminders/check` + `/api/cron/schedule-sweep` | Personal reminders + schedule H-1/T-30/missed + daily brief + auto-assign |
+Cek: `hermes cron list`.
+
+## Known Issues
+
+| # | Isu | Dampak | Perbaikan |
+|---|-----|--------|-----------|
+| 1 | `guardian-monthly-trigger.sh` mewajibkan argumen (`TYPE="$1"`, exit 1 kalau kosong), job Hermes tidak pernah memberikannya | Laporan bulanan ke orang tua tidak pernah terkirim | Hapus blok `$1` wajib, atau isi `args` di definisi job |
+| 2 | `/api/reminders/check` (reminder personal dari tabel `Reminder`) tidak terdaftar di Hermes | `Reminder` tidak pernah diproses; jadwal belajar tetap aman karena ditangani `schedule-sweep` | Daftarkan job baru atau lebur ke `schedule-sweep` |
+| 3 | ~~`scripts/schedule-sweep.sh` memuat `CRON_SECRET` produksi plaintext~~ — **diperbaiki 2026-10-25**: secret dirotasi (48 hex), script membaca dari `.env`, token lama kini 401. Sisa: token lama masih ada di riwayat git (`10e47a6`, `0b3131a`, `845b1f6`) | Setelah rotasi tidak lagi berbahaya; history hanya relevan bila ada yang memanen token mati | Opsional: bersihkan history (`git filter-repo`) bila repo tetap publik |
+| 4 | `prisma.config.ts` dan `src/lib/prisma.ts` memuat fallback password DB `tutor123`; ~10 script juga | Kredensial DB ikut ter-commit | Pindahkan ke env, hapus fallback |
+| 5 | 2 commit lokal belum di-push (`0207add`, `51a29c5`) | Build VPS lebih baru dari `origin/master` | `git push origin master` |
+| 6 | `docs-ai/*.md` dan `docs/rules/*` mendokumentasikan state Juli–Agustus 2026 | Menyesatkan kalau dibaca sebagai kondisi sekarang | Arsipkan / jadikan historis (lihat `dev-docs/DOCS-INDEX.md`) |
+| 7 | `docs-site/` (Nextra) tidak berjalan — port 3002 tidak listen, `docs.senangbelajar.web.id` tidak resolve | Dokumentasi web mati | Jalankan sebagai PM2 app atau hapus folder |
+| 8 | `logs/err.log` masih mencatat error NextAuth `UnknownAction` dan RSC scanner spam | Noise, bukan kegagalan fungsional (sudah dimitigasi middleware) | Pantau; abaikan kalau tidak bertambah |
+| 9 | Disk 42/59 GB (75%); `public/` 2,2 GB | Sisa ruang menipis untuk build | Bersihkan aset tak terpakai |
+
+## Catatan Operasional: PM2 Menyimpan Snapshot Env
+
+`pm2 restart --update-env` **tidak** mengambil ulang isi `.env` bila variabel itu sudah ada
+di environment PM2 — nilai lama menang dan menimpa `.env`. Gejalanya: mengubah
+`CRON_SECRET` di `.env`, restart, tetapi endpoint tetap 401.
+
+```bash
+pm2 env 1 | grep CRON_SECRET          # nilai yang benar-benar dipakai proses
+export CRON_SECRET="$(sed -n 's/^CRON_SECRET=//p' .env | head -1 | tr -d '"')"
+pm2 restart ai-private-tutor --update-env
+pm2 save                              # agar bertahan saat reboot
+```
+
+Variabel yang di-snapshot PM2 saat ini: `CRON_SECRET`, `DATABASE_URL`, `LLM_API_KEY`,
+`NEXTAUTH_SECRET`, `PGPASSWORD`, `STUDENT_JWT_SECRET`, `SUMOPOD_API_KEY`,
+`TELEGRAM_BOT_TOKEN`, `BOT_WEBHOOK_URL`, `NODE_ENV`, `PORT`.
+
+## Riwayat Perubahan Dokumen
+
+| Tanggal | Perubahan |
+|---|---|
+| 2026-10-25 | Seluruh `README.md` + `dev-docs/ai/*` ditulis ulang dari kode ter-deploy: branch `master`, cron Hermes, 15 bot command, 73 API route, versi paket aktual, data DB aktual. Known issues diisi dari temuan runtime. |
+| 2026-07-31 | Versi sebelumnya (tidak akurat lagi: menyebut 7 agent padahal 6 worker + tutor inline, branch `main`, dan angka material lama) |

@@ -1,7 +1,7 @@
 # AI Private Tutor — Production Docs
 
-> **Lokasi:** DI LUAR git repo — safe untuk informasi server aktual.
-> **Target:** VPS SumoPod ubuntu@43.133.151.242
+> **Lokasi:** folder ini ter-track di git (bukan di luar repo, meski judul lama menyebut begitu).
+> **Target:** VPS Tencent Cloud (Jakarta) `ubuntu@43.133.151.242`
 
 ## Dokumen Tersedia
 
@@ -16,15 +16,17 @@
 ## Quick Reference
 
 ```bash
-# Deploy
+# Deploy — branch default repo adalah `master`
 cd ~/ai-private-tutor
-git pull origin main
-npm install
-npm run build
+git pull origin master
+npm ci
+bash ops/build.sh              # WAJIB: aktifkan swap + heap cap; `next build` polos pernah OOM
 pm2 restart ai-private-tutor
+curl -s -o /dev/null -w '%{http_code}\n' http://localhost:3000/
 
 # Monitor
 pm2 logs ai-private-tutor
 pm2 monit
 pm2 status
+hermes cron list               # jadwal nyata (bukan crontab OS)
 ```

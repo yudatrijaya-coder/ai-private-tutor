@@ -1,61 +1,70 @@
 # Modul: Assessment Agent
 
 > **Path:** `src/agents/assessment/`
-> **File Utama:** `generator.ts`, `grader.ts`, `exam.ts`, `worker.ts`
+> **Verifikasi:** 2026-10-25, commit `0207add`
 
 ---
 
 ## Fungsi
 
-Generate quiz & exam otomatis dari materi, koreksi jawaban siswa, tracking mastery level per topik, adaptive difficulty.
+Membuat soal (LLM + bank statis), menilai jawaban, menghitung penguasaan per topik, lalu
+menganalisis kelemahan untuk rencana perbaikan.
 
-## File Structure
+## File
 
 | File | Fungsi |
 |------|--------|
-| `index.ts` | Barrel exports (generateQuiz, gradeAttempt, calculateMastery, dll) |
-| `types.ts` | Type definitions (QuestionData, QuizData, MasteryLevel, dll) |
-| `generator.ts` | Generate quiz dari materi + static quiz bank |
-| `grader.ts` | Koreksi jawaban + hitung mastery |
-| `exam.ts` | Generate composite exam dari multiple topik |
-| `worker.ts` | Queue consumer untuk `assessment-generate` dan `assessment-evaluate` |
+| `index.ts` | Barrel export |
+| `types.ts` | `MASTERY_THRESHOLDS`, `RECENCY_WEIGHTS`, tipe soal |
+| `generator.ts` | Generate soal — **primary path lewat `callLLM`**, bukan hanya bank statis |
+| `grader.ts` | Nilai jawaban + hitung mastery |
+| `exam.ts` | Susun exam gabungan dari beberapa topik |
+| `worker.ts` | `processAssessmentGenerate`, `processAssessmentEvaluate`, `processImprovementAnalysis` |
+| `__tests__/` | Unit test generator/grader |
 
 ## Queue
 
 | Queue | Concurrency | Trigger |
-|-------|-------------|---------|
-| `assessment-generate` | 3 | Content siap (READY) |
-| `assessment-evaluate` | 2 | Student submit jawaban |
+|-------|------:|---------|
+| `assessment-generate` | 3 | Materi siap (READY) |
+| `assessment-evaluate` | 2 | Siswa submit jawaban |
+| `improvement-analysis` | 1 | Setelah attempt dinilai |
+
+## Ambang Penguasaan
+
+Dari `types.ts`:
+
+| Level | Rentang |
+|---|---|
+| `BEGINNER` | 0 – 0.4 |
+| `DEVELOPING` | 0.4 – 0.6 |
+| `PROFICIENT` | 0.6 – 0.8 |
+| `MASTERED` | 0.8 – 1.0 |
+
+`RECENCY_WEIGHTS` memberi bobot lebih besar pada attempt terbaru
+(`newest 0.5`, `recent 0.3`, `older 0.15`, `oldest 0.05`).
 
 ## Data Flow
 
 ```
 Generate:
-Content READY → assessment-generate queue
-    │
-    ▼
-Generator → Ambil quiz dari static bank (per topik)
-    │
-    └── Assign Quiz ke Student
+Material READY → assessment-generate
+    └── generator.ts → callLLM (SYSTEM_PROMPTS.assessment)
+         └── Quiz tersimpan, ditautkan ke Material
 
 Evaluate:
-Student submit jawaban (via bot/dashboard)
-    │
-    ▼
-assessment-evaluate queue → Grader
-    ├── Koreksi jawaban
-    ├── Hitung mastery level
-    └── Update ProgressSnap
+Siswa menjawab (bot / web) → POST /api/students/quizzes/[id]/grade
+    ├── grader.ts → skor per soal
+    ├── Attempt dibuat
+    ├── mastery diperbarui (StudentSubjectMastery / TopicMastery)
+    └── jawaban salah → masuk ReviewQueue (SM-2)
 
-Exam:
-POST /api/exam → generator.ts
-    ├── Ambil quiz dari bank (multi-topik)
-    └── Composite exam dari beberapa materi
+Improvement:
+attemptId → improvement-analysis → ImprovementPlan
 ```
 
-## Key Logic
+## Catatan
 
-- **Quiz dari static bank** — 1650 soal pre-generated (SD 540, SMP 495, SMA 615)
-- **Mastery thresholds** — di `types.ts`: MASTERY_THRESHOLDS, RECENCY_WEIGHTS
-- **Adaptive** — difficulty menyesuaikan performa siswa
-- **Update Guardian** — hasil assessment dikirim ke Guardian Agent untuk weekly report
+Bank statis `src/data/quiz-bank-*.ts` (540 SD / 495 SMP / 615 SMA) adalah **sumber seed
+dan template exam**, bukan satu-satunya sumber soal runtime. Soal runtime hidup di tabel
+`Quiz` (1.315 baris per 2026-10-25).

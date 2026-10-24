@@ -598,9 +598,9 @@ Scheduler ──► reminder & jadwal harian`}
 
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {([
-              ['📂 dev-docs/ai/', 'Panduan AI system', 'START_HERE, PROJECT_CONTEXT, MODULE_MAP, CURRENT_STATE, FINAL_SYSTEM_HANDOVER, DOCS_MIGRATION_REPORT'],
+              ['📂 dev-docs/ai/', 'Panduan AI system', 'START_HERE, PROJECT_CONTEXT, MODULE_MAP, CURRENT_STATE, FINAL_SYSTEM_HANDOVER'],
               ['📂 dev-docs/architecture/', 'Arsitektur detail', 'api-flow.md, database.md, frontend-structure.md, backend-structure.md'],
-              ['📂 dev-docs/modules/', 'Peta modul (11 file)', 'Curriculum, Content, Assessment, Media, Guardian, Tutor, Scheduler, Bot Handlers, API Routes, LLM Client, Queue System'],
+              ['📂 dev-docs/modules/', 'Peta modul (12 file)', 'Curriculum, Content, Assessment, Media, Guardian, Scheduler (6 agent), Bot Handlers, API Routes, LLM Client, Queue System'],
               ['📂 prod-docs/', 'Production docs', 'Deployment, monitoring, backup, security, troubleshooting'],
               ['🔒 ai-rules/', 'IMMUTABLE', 'Template docs-ai — source kebenaran, tidak boleh diubah'],
               ['🌐 src/app/docs/', 'Web docs', 'Halaman ini, mindmap guide, peta fungsional, getting-started'],

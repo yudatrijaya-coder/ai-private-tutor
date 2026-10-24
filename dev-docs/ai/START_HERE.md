@@ -1,7 +1,7 @@
 # START_HERE
 
-> **Status:** GUIDANCE + DATA FILE — AI mengisi data project, tapi TIDAK mengubah instruksi di bawah "---" divider.
-> **Purpose:** Titik masuk pertama untuk AI agent. Dibaca pertama kali saat onboarding.
+> **Status:** Titik masuk untuk manusia maupun AI agent. Ditulis dari kode yang ter-deploy.
+> **Terakhir verifikasi:** 2026-10-25 terhadap commit `0207add` (build `.next` 2026-10-21 21:27 +08).
 
 ---
 
@@ -9,41 +9,42 @@
 
 | Item | Value |
 |------|-------|
-| Repository | `yudatrijaya-coder/ai-private-tutor` |
-| Project Type | Monolith (Next.js 16 App Router) |
-| Git Location | Root (`./`) |
-| Stack | Next.js 16 + Tailwind CSS 4 + Prisma 7 + Telegraf.js |
-| DB | PostgreSQL (prod) / SQLite (dev) |
-| LLM | 9Router combo `ai_tutor_agent` at localhost:20128 |
-| Bot | @senangbelajar_bot (webhook) |
-| Server | SumoPod VPS ubuntu@43.133.151.242 |
-| Domain | senangbelajar.web.id |
-| PM2 App | ai-private-tutor |
-| Branch main | `main` |
-| Branch dev | `feat/*` (PC) / `vps/*` (VPS) |
+| Repository | `yudatrijaya-coder/ai-private-tutor` (public) |
+| Branch default | **`master`** (bukan `main`) |
+| Project Type | Monolith — Next.js 16 App Router |
+| Stack | Next.js 16.3.0 · React 19.2.4 · Tailwind 4.3.2 · Prisma 7.9.1 · Telegraf 4.16.3 · Node 22 |
+| DB | PostgreSQL 16 `ai_private_tutor` (prod) / SQLite `prisma/dev.db` (dev) |
+| LLM | 9Router `http://localhost:20128/v1`, combo `ai_tutor_agent`, fallback `hermes` |
+| Bot | `@senangbelajar_bot`, webhook `https://senangbelajar.web.id/api/bot/webhook` |
+| Server | VPS Tencent Cloud, Jakarta — `ubuntu@43.133.151.242` |
+| Domain | `senangbelajar.web.id` |
+| Process | PM2 `ai-private-tutor` (:3000) + `9router` (:20128), Caddy :80/:443 |
+| Cron | **Hermes cron** (`~/.hermes/profiles/opencode/scripts/`), bukan crontab OS |
 
-## Recommended Reading Order
+## Urutan Membaca
 
-Untuk memahami codebase ini, baca dengan urutan:
+1. `PROJECT_CONTEXT.md` — stack, topologi, struktur sumber
+2. `MODULE_MAP.md` — modul bisnis → file kode
+3. `../architecture/api-flow.md` — alur request
+4. `../architecture/backend-structure.md`
+5. `../architecture/database.md`
+6. `../architecture/frontend-structure.md`
+7. `CURRENT_STATE.md` — kondisi terkini + known issue
+8. `FINAL_SYSTEM_HANDOVER.md` — ringkasan operasional
 
-1. `PROJECT_CONTEXT.md` — Overview sistem dan stack
-2. `MODULE_MAP.md` — Mapping modul ke kode
-3. `../architecture/api-flow.md` — Flow request
-4. `../architecture/backend-structure.md` — Struktur backend
-5. `../architecture/database.md` — Arsitektur database
-6. `../architecture/frontend-structure.md` — Struktur frontend
-7. `CURRENT_STATE.md` — Kondisi terkini development
-8. `FINAL_SYSTEM_HANDOVER.md` — Handover lengkap
+## Tiga Aturan yang Paling Sering Dilanggar
 
-## High-Priority Current Work
+1. **Branch `master`**, bukan `main`. Semua dokumen yang menyebut `main` sudah usang.
+2. **Build lewat `bash ops/build.sh`**, jangan `npm run build`. VPS 3,6 GiB RAM; `next build` polos pernah OOM-killed (lihat header `ops/build.sh`).
+3. **Slash command bot dirutekan manual.** Webhook mode membuat middleware `bot.command()` Telegraf tidak pernah dieksekusi — tambah command berarti menambah cabang di `src/bot/handlers/message.ts` dan/atau `routeCommand()` di `src/bot/commands.ts`, lalu daftarkan di `COMMAND_MENU`.
 
-- **Mindmap** — Premium fitur, radial layout, Lucide icons, CSS animations
-- **Quiz Bank** — 1650 soal dari kurikulum SIBI
-- **Pipeline Trigger** — Agent pipeline dari dashboard
+## Jangan Diubah Tanpa Alasan Kuat
 
-## Safety Notes for Agents
+- **Layout radial mindmap** — fitur signature, jangan diganti pendekatan lain.
+- **`ai-rules/`** — template immutable.
+- **`checkCronSecret()`** — fail-closed dengan sengaja; jangan kembalikan pola `CRON_SECRET || "default"`.
+- **`ACTIVE_CURRICULUM_ORDER`** (`src/lib/curriculum-active.ts`) — satu student bisa punya beberapa `Curriculum`; yang berlaku hanya `version` tertinggi.
 
-1. **JANGAN commit langsung ke `main`** — buat branch `feat/*` dulu
-2. **LLM** — semua call via 9Router `localhost:20128`, jangan OpenAI langsung
-3. **Mindmap** — jangan ganti pendekatan radial layout
-4. **User** — kid-friendly, paper-toned, marker style, premium-first
+## Prioritas Kerja Saat Ini
+
+Lihat `CURRENT_STATE.md` bagian *Known Issues*. Yang paling mendesak: cron `guardian-monthly` selalu gagal, endpoint `/api/reminders/check` tidak terjadwal, dan 2 commit lokal belum di-push.

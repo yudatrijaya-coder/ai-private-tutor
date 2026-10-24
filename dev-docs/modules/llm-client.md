@@ -1,67 +1,78 @@
 # Modul: LLM Client
 
 > **Path:** `src/llm/`
-> **File Utama:** `client.ts`
+> **Verifikasi:** 2026-10-25, commit `0207add`
 
 ---
 
 ## Fungsi
 
-Abstraksi LLM client untuk komunikasi dengan 9Router gateway lokal. OpenAI-compatible, multi-model routing, fallback chain, auto-logging ApiUsage.
+Klien tunggal untuk semua panggilan model. Memakai SDK `openai` menuju **9Router**
+(gateway lokal), dengan routing per-peran, rantai fallback, batas token harian, dan
+pencatatan biaya.
 
-## File Structure
+## File
 
 | File | Fungsi |
 |------|--------|
-| `client.ts` | LLM client — OpenAI-compatible, routing, fallback, retry, logging |
-| `types.ts` | Type definitions (AgentRole, LLMCallOptions, LLMResult, dll) |
-| `prompts.ts` | System prompts untuk setiap agent role |
+| `client.ts` | `callLLM()`, `streamMessage`/stream API, `MODEL_ROUTES`, `FALLBACK_CHAIN`, `VISION_MODELS`, `MODEL_PRICING`, `DAILY_TOKEN_CAP` |
+| `types.ts` | `AgentRole`, `ChatMessage`, `LLMCallOptions`, `LLMResult`, `ModelPricing` |
+| `prompts.ts` | `SYSTEM_PROMPTS` per peran |
+| `__tests__/` | — |
 
 ## Konfigurasi
 
 ```env
-LLM_BASE_URL=http://localhost:20128/v1
-LLM_API_KEY=sk-9router
+LLM_BASE_URL=http://localhost:20128/v1   # default bila tidak diset
+LLM_API_KEY=<wajib>
+LLM_ALLOW_NO_KEY=1                        # hanya untuk endpoint lokal tanpa auth
 ```
 
-## Agent Roles
+`resolveApiKey()` **melempar error** bila `LLM_API_KEY` kosong. Tidak ada lagi fallback
+`"sk-9router"` — dulu key palsu itu membuat 9Router membalas 401 dan diagnosis jadi
+menyesatkan (commit `0207add`).
 
-| Role | Default Model | Fallback Chain |
-|------|--------------|----------------|
-| `tutor` | ai_tutor_agent (combo) | sumopod/deepseek-v4-flash → hermes |
-| `curriculum` | ai_tutor_agent | sumopod → hermes |
-| `content` | ai_tutor_agent | sumopod → hermes |
-| `assessment` | ai_tutor_agent | sumopod → hermes |
-| `guardian` | ai_tutor_agent | sumopod → hermes |
-| `media_script` | ai_tutor_agent | sumopod → hermes |
+## Routing
 
-## Key Functions (`client.ts`)
+| `AgentRole` | Model utama | Fallback |
+|---|---|---|
+| `tutor` | `ai_tutor_agent` | `hermes` |
+| `curriculum` | `ai_tutor_agent` | `hermes` |
+| `content` | `ai_tutor_agent` | `hermes` |
+| `assessment` | `ai_tutor_agent` | `hermes` |
+| `guardian` | `ai_tutor_agent` | `hermes` |
+| `media_script` | `ai_tutor_agent` | `hermes` |
 
-| Function | Deskripsi |
-|----------|-----------|
-| `callLLM(messages, role, options?)` | Main function — call LLM dengan retry + fallback |
-| `callLLMStream(messages, role, options?)` | Streaming version |
-| `estimateCost(model, tokens)` | Estimasi biaya per request |
-| `isLLMReady` | Boolean — true jika 9Router reachable |
+`VISION_MODELS` (untuk `handlers/vision.ts`) mencoba berurutan:
+`ai_tutor_agent` → `sumopod/gpt-4o-mini` → `sumopod/gemini/gemini-2.5-flash-lite` →
+`sumopod/deepseek-v4-flash`.
 
-## Auto-Logging
+## Batas & Biaya
 
-Setiap `callLLM` secara otomatis:
-1. Mencatat token usage ke tabel `ApiUsage`
-2. Menyimpan `AgentLog` untuk tracing
-3. Menghitung estimasi biaya
+- `DAILY_TOKEN_CAP` = **1.000.000 token per siswa per hari**.
+- `MODEL_PRICING` (USD per 1 juta token): `ai_tutor_agent` 0.14/0.28 · `hermes` 0.05/0.10 ·
+  `sumopod/gpt-4o-mini` 0.15/0.60 · `sumopod/gemini/gemini-2.5-flash-lite` 0.10/0.40 ·
+  `sumopod/deepseek-v4-flash` 0.14/0.28.
+- Pemakaian dicatat ke tabel `ApiUsage` (1.475 baris per 2026-10-25); dashboard
+  `(dashboard)/dashboard/settings/api-usage`.
+- Timeout per peran: `ROLE_TIMEOUT_MS` dengan `DEFAULT_TIMEOUT_MS` sebagai cadangan,
+  dan bisa ditimpa lewat `options.timeoutMs`.
 
-## Fallback Chain
+## Alur Fallback
 
 ```
-Primary: ai_tutor_agent (combo model)
-    │ gagal?
+callLLM(messages, role)
+    ├── MODEL_ROUTES[role]  → ai_tutor_agent
+    │     gagal (timeout / 5xx / rate limit)?
     ▼
-Fallback 1: sumopod/deepseek-v4-flash
-    │ gagal?
+    ├── FALLBACK_CHAIN[role][1] → hermes
+    │     gagal juga?
     ▼
-Fallback 2: hermes
-    │ gagal?
-    ▼
-Throw error → masuk Dead Letter Queue
+    └── throw error → ditangkap pemanggil (worker → retry → DLQ)
 ```
+
+## Catatan Operasional
+
+- Jangan memanggil OpenAI/provider langsung — semua trafik harus lewat 9Router agar
+  routing, pricing, dan pencatatan tetap konsisten.
+- 9Router berjalan sebagai PM2 app terpisah (`9router`, port 20128, bind 127.0.0.1).

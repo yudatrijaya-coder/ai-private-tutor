@@ -1,5 +1,7 @@
 # Scheduler Agent — Safety Rules & Guardrails
 
+> ⚠️ **HISTORIS** — snapshot per tanggal di judul. Untuk kondisi terkini lihat `dev-docs/ai/CURRENT_STATE.md`.
+
 > **Priority: LOW** — Logic murni, gak kontak langsung dengan anak/parent. Tapi tetap penting karena ngaruh ke konsistensi belajar.
 
 ## 1. Balance Rules

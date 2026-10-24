@@ -1,62 +1,77 @@
 # Modul: Scheduler Agent
 
 > **Path:** `src/agents/scheduler/`
-> **File Utama:** `assigner.ts`, `reminder.ts`, `motivation.ts`
+> **Verifikasi:** 2026-10-25, commit `0207add`
 
 ---
 
 ## Fungsi
 
-Atur jadwal belajar harian & intensif, kirim reminder otomatis via Telegram, auto-reschedule jika student miss sesi, motivasi mingguan.
+Menentukan topik apa yang dipelajari minggu ini, membuat sesi belajar, mengirim pengingat
+(H-1 dan T-30), menandai sesi terlewat, serta menjadwalkan ulang.
 
-## File Structure
+## File
 
 | File | Fungsi |
 |------|--------|
-| `index.ts` | Barrel exports |
-| `assigner.ts` | Schedule assigner (60/30/10 rule) |
-| `reminder.ts` | Reminder logic (H-1, T-30, missed) |
-| `motivation.ts` | Weekly motivation generator |
-| `reschedule.ts` | Auto-reschedule logic |
-| `worker.ts` | Queue consumer untuk `scheduler-assign` dan `scheduler-reminder` |
+| `index.ts` | Barrel export |
+| `assigner.ts` | `assignWeeklyTopics()`, `selectWeakAreaTopics()`, `computeWeeklySlots()` |
+| `reminder.ts` | `runReminderSweep()` — H-1, T-30, deteksi missed |
+| `reschedule.ts` | `handleReschedule()`, `bulkReschedule()` |
+| `motivation.ts` | `checkMilestones()`, `markMotivationSent()` |
+| `worker.ts` | `processSchedulerAssign`, `processSchedulerReminder` |
 
 ## Queue
 
 | Queue | Concurrency | Trigger |
-|-------|-------------|---------|
-| `scheduler-assign` | 1 | Student baru / minggu baru |
-| `scheduler-reminder` | 3 | Cron (setiap 3 menit) |
+|-------|------:|---------|
+| `scheduler-assign` | 1 | Siswa baru / awal minggu |
+| `scheduler-reminder` | 3 | Cron 3 menit (`schedule-sweep`) |
 
-## Jadwal Types
+## Algoritma 60/30/10
 
-| Type | Durasi | Frekuensi | Tujuan |
-|------|--------|-----------|--------|
-| **Daily** | 15 menit | 1x per hari (default 16:00) | Belajar konsisten |
-| **Intensive** | 3-4 jam | Terjadwal | Persiapan ujian |
+Dari `assigner.ts` (komposisi topik per minggu):
 
-## 60/30/10 Rule
+| Porsi | Isi |
+|---|---|
+| **60%** | Topik kurikulum baru (materi berstatus READY / PROCESSED / VIDEO_READY) |
+| **30%** | Review area lemah (mapel dengan mastery < 50%) |
+| **10%** | Permintaan siswa / acak |
 
-Ketika assign jadwal untuk seminggu:
-- **60%** — topik yang sudah dipelajari (review)
-- **30%** — topik baru (lanjutan)
-- **10%** — topik lemah (remedial)
+Durasi default sesi: 30 menit (`DEFAULT_DURATION`), dapat diubah lewat `scheduleConfig`.
 
-## Cron Pipeline (setiap 3 menit)
+## Jenis Sesi
+
+`enum SessionType` di Prisma: `DAILY` dan `INTENSIVE`. Preferensi jadwal siswa disimpan
+di `Student.scheduleConfig` (JSON) — default 1×/hari pukul 16:00, Minggu dikecualikan.
+
+## Pipeline Cron
+
+Satu-satunya pintu masuk terjadwal adalah `GET /api/cron/schedule-sweep`
+(job Hermes `schedule-reminder-sweep`, setiap 3 menit):
 
 ```
-/api/reminders/check + /api/cron/schedule-sweep
-    │
-    ├── H-1 reminders → Kirim pengingat H-1 sebelum sesi
-    ├── T-30 reminders → Kirim pengingat 30 menit sebelum sesi
-    ├── Missed detection → Deteksi sesi terlewat → reschedule
-    ├── Daily brief → Kirim ringkasan jadwal hari ini (6-10 AM)
-    └── Auto-assign → Assign jadwal mingguan (60/30/10)
+schedule-sweep
+    ├── runReminderSweep()
+    │    ├── H-1 → "Besok ada sesi belajar"
+    │    ├── T-30 → "30 menit lagi"
+    │    └── missed → tandai sesi lewat → reschedule
+    ├── Daily brief (jendela pagi, dedup per hari)
+    └── Auto-assign → assignWeeklyTopics() saat siswa belum punya sesi
 ```
 
-## Bot Commands
+`/api/reminders/check` (reminder personal dari tabel `Reminder`) **tidak** dijadwalkan
+dan bukan bagian dari sweep ini.
 
-Tutor Agent bisa trigger scheduler via command:
-- `[SCHEDULE]` — lihat jadwal hari ini
-- `[SCHEDULE:WEEK]` — lihat jadwal minggu ini
-- `[SCHEDULE:SET]` — atur preferensi jadwal
-- `[SCHEDULE:ASSIGN]` — assign jadwal otomatis
+## Perintah Bot Terkait
+
+Ditangani `src/bot/handlers/schedule.ts` dan `school-schedule.ts`:
+
+| Tag / perintah | Fungsi |
+|---|---|
+| `[SCHEDULE]` | Jadwal hari ini |
+| `[SCHEDULE:WEEK]` | Jadwal minggu ini |
+| `[SCHEDULE:SET:{json}]` | Atur preferensi jadwal |
+| `[SCHEDULE:ASSIGN]` | Assign jadwal otomatis |
+| `[SCHOOL_SCHEDULE]`, `[SCHOOL_SCHEDULE:NEXT:<mapel>]` | Jadwal sekolah asli (SIKumbang) |
+| `/jadwal`, `/jadwal_sekolah` | Versi slash command |

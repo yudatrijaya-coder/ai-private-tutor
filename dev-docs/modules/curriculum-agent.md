@@ -1,50 +1,50 @@
 # Modul: Curriculum Agent
 
 > **Path:** `src/agents/curriculum/`
-> **File Utama:** `service.ts`, `worker.ts`
+> **Verifikasi:** 2026-10-25, commit `0207add`
 
 ---
 
 ## Fungsi
 
-Generate dan manage kurikulum untuk setiap student berdasarkan data statis dari SIBI. Tidak menggunakan LLM untuk generate — semua data berasal dari static data banks.
+Membangun kurikulum seorang siswa dari bank data statis (SIBI/Kurikulum Merdeka), lalu memverifikasi hasil scrape materi. **Tidak memakai LLM** — seluruh isi berasal dari `src/data/curriculum-topics.ts` dan `src/data/curriculum-content.ts`.
 
-## File Structure
+## File
 
 | File | Fungsi |
 |------|--------|
-| `index.ts` | Barrel exports |
-| `service.ts` | Service utama — generate curriculum dari `curriculum-topics.ts` dan `curriculum-content.ts` |
-| `worker.ts` | Queue consumer untuk `curriculum-review` |
+| `index.ts` | Barrel export |
+| `service.ts` | `generateCurriculumDraft()`, `replaceCurriculumForStudent()` |
+| `worker.ts` | `processCurriculumReviewJob()` — consumer queue `curriculum-review` |
 
 ## Queue
 
-| Queue | Concurrency | Trigger |
-|-------|-------------|---------|
-| `curriculum-review` | 2 | Content selesai scrape |
+| Queue | Concurrency (definitions.ts) | Trigger |
+|-------|------:|---------|
+| `curriculum-review` | 2 | Worker memanggil setelah content selesai |
 
 ## Data Flow
 
 ```
-Pipeline Trigger (dashboard)
+POST /api/students {action:"trigger", studentId, stages:["curriculum"]}
     │
     ▼
-Curriculum Service → Baca curriculum-topics.ts → Match dengan grade student
-    │
-    ├── Buat Curriculum record di DB
-    ├── Buat Material records (topik per minggu)
-    └── Trigger content-scrape queue
+generateCurriculumDraft(studentId, gradeLevel)
+    ├── GRADE_TOPICS[grade]  → daftar topik per minggu
+    ├── getContent(topic)    → isi materi
+    ├── Quiz dari bank statis (SD5 / SMP7 / SMA11)
+    └── replaceCurriculumForStudent() → tulis Curriculum + Material
+         (versi baru = version + 1; versi lama tetap ada di DB)
 ```
 
-## Key Logic (`service.ts`)
+## Aturan Penting
 
-- `generateCurriculum(studentId, gradeLevel)` — Generate full curriculum dari data statis
-- `reviewMaterial(materialId)` — Verifikasi hasil scrape, set status material
-- Data sumber: `src/data/curriculum-topics.ts`, `src/data/curriculum-content.ts`
-- Tidak menggunakan LLM sama sekali (semua dari data statis pre-generated)
+Satu siswa dapat memiliki beberapa `Curriculum` (v1, v3, …). Yang berlaku hanya versi tertinggi —
+selalu baca lewat `ACTIVE_CURRICULUM_ORDER` di `src/lib/curriculum-active.ts`, jangan
+menggabungkan semua kurikulum milik siswa (akan menduplikasi materi dan merusak `weekOrder`).
 
 ## Dependencies
 
-- **Prisma** — CRUD curriculum & material
-- **Queue** — Trigger content-scrape setelah curriculum jadi
-- **Static Data** — `src/data/curriculum-topics.ts`, `src/data/curriculum-content.ts`
+- **Prisma** — `Curriculum`, `Material`, `Quiz`
+- **Static data** — `src/data/curriculum-topics.ts`, `curriculum-content.ts`, `quiz-bank-*.ts`
+- **Queue** — `content-scrape` dipicu setelah materi dibuat

@@ -1,5 +1,8 @@
 # Slide Sync from rawContent to metadata
 
+> ⚠️ **HISTORIS** — ditulis 31 Juli 2026. Jangan dibaca sebagai kondisi terkini.
+> Untuk state sekarang lihat `dev-docs/ai/CURRENT_STATE.md` dan `dev-docs/ai/PROJECT_CONTEXT.md`.
+
 > Terakhir update: 31 Juli 2026
 
 ## Problem

@@ -1,101 +1,134 @@
-# FINAL_SYSTEM_HANDOVER.md — Handover Dokumentasi
+# FINAL_SYSTEM_HANDOVER
 
-> **Status:** PRODUCTION — Reference untuk engineer/AI agent baru.
-> **Purpose:** Handover lengkap system AI Private Tutor.
+> **Status:** Referensi operasional. Ditulis ulang dari kode & runtime ter-deploy.
+> **Verifikasi:** 2026-10-25, commit `0207add`.
 
 ---
 
 ## System Overview
 
-AI Private Tutor adalah platform belajar pintar berbasis 7 AI Agent untuk siswa SD/SMP/SMA. Interface utama via Telegram bot (@senangbelajar_bot) dengan 3 persona sesuai jenjang. Web dashboard untuk monitoring orang tua dan admin.
+Monolith Next.js 16 untuk siswa SD_5, SMP_1, SMA_2. Bot Telegram sebagai kanal utama (3 persona), web untuk siswa/admin/orang tua. 6 worker queue (`curriculum`, `content`, `assessment`, `media`, `guardian`, `scheduler`) plus tutor LLM yang jalan inline di dalam request webhook (bukan worker).
 
-### Key Contacts / Access
+## Akses & Kredensial
 
 | Resource | Value |
 |----------|-------|
 | VPS | `ssh ubuntu@43.133.151.242` |
-| PM2 App | `ai-private-tutor` |
+| PM2 apps | `ai-private-tutor` (:3000), `9router` (:20128) |
 | Domain | `senangbelajar.web.id` |
 | Bot | `@senangbelajar_bot` |
-| LLM Gateway | `http://localhost:20128` (9Router combo `ai_tutor_agent`) |
-| DB Prod | PostgreSQL `localhost:5432` db=`ai_private_tutor` user=`tutor` |
+| LLM Gateway | `http://localhost:20128/v1`, combo `ai_tutor_agent` |
+| DB | PostgreSQL 16, `localhost:5432`, db `ai_private_tutor`, user `tutor` |
+| Redis | `localhost:6379` |
+| Caddy | `/etc/caddy/Caddyfile` (aktif), `ops/Caddyfile` (salinan repo) |
+| Cron | Hermes: `~/.hermes/profiles/opencode/scripts/` |
 
-### Architecture Highlights
+## Deploy
 
-- **Monolith Next.js 16** — App Router dengan server components + API routes
-- **7 AI Agents** — Tutor, Curriculum, Content, Assessment, Media, Guardian, Scheduler
-- **9Router LLM** — Combo `ai_tutor_agent` dengan fallback chain
-- **BullMQ Queue** — Redis-backed dengan in-memory fallback
-- **Telegraf.js** — Webhook mode untuk Telegram bot
-- **Caddy** — Reverse proxy + auto-SSL
-
-### Mindmap Premium
-
-Fitur flagship dengan radial quadrant layout, Lucide icons per node, per-icon CSS animations, 3-level visual hierarchy, dan SD/SMP/SMA theme system.
-
-### Quiz Bank
-
-1650 soal pre-generated (SD108=540Q, SMP99=495Q, SMA123=615Q) dengan exam auto-generator dari weekly timeline.
-
-### File Structure
-
-```
-ai-private-tutor/
-├── ai-rules/           ← IMMUTABLE templates (docs-ai format)
-├── dev-docs/           ← Device documentation output
-├── prod-docs/          ← Production server documentation
-├── backup/             ← Backup old docs
-├── src/                ← Source code
-│   ├── app/            ← Next.js App Router pages & API
-│   ├── components/     ← UI & mindmap components
-│   ├── lib/            ← Utilities
-│   ├── llm/            ← LLM client / fallback chain
-│   ├── bot/            ← Telegram bot handlers & agents
-│   ├── agents/         ← 7 Agent workers
-│   ├── queue/          ← BullMQ definitions & runners
-│   └── data/           ← Static data (quiz, curriculum)
-├── prisma/             ← Schema, migrations, config
-├── ops/                ← Caddy, PM2 configs
-└── docs/               ← Legacy docs (still present, pending removal)
+```bash
+cd ~/ai-private-tutor
+git pull origin master          # branch default = master
+bash ops/build.sh               # WAJIB — mengaktifkan swap + heap cap 2 GB
+pm2 restart ai-private-tutor
+curl -s -o /dev/null -w '%{http_code}\n' http://localhost:3000/
 ```
 
-## Environment Variables Required
+Jangan pakai `npm run build` langsung: VPS 3,6 GiB RAM, `next build` polos pernah OOM-killed.
 
-| Variable | Purpose |
-|----------|---------|
-| `DATABASE_URL` | PostgreSQL connection string (prod) or SQLite path (dev) |
-| `TELEGRAM_BOT_TOKEN` | Bot token dari BotFather |
-| `LLM_BASE_URL` | 9Router base URL (default: http://localhost:20128/v1) |
-| `LLM_API_KEY` | 9Router API key (default: sk-9router) |
-| `SUMOPOD_API_KEY` | SumoPod fallback API key |
-| `NEXTAUTH_SECRET` | NextAuth.js secret |
-| `NEXTAUTH_URL` | App URL |
-| `REDIS_URL` | Redis URL (opsional, fallback in-memory) |
+Rollback:
 
-## Password Auth (Student Web)
+```bash
+git log --oneline -5
+git reset --hard <hash>
+bash ops/build.sh
+pm2 restart ai-private-tutor
+```
 
-Students authenticate with `studentId` + bcrypt password on `https://senangbelajar.web.id/login/student`.
-- Admin can set/reset passwords from Dashboard → 👥 Siswa → 🔑 button
-- Students can change password via web (`/student/password`) or via bot (`[PASSWORD]` command)
-- Backward compatible: login works without password until one is set
+## Bot: Cara Kerja
 
-## Schedule System (Auto-Reminder)
+`POST /api/bot/webhook` → verifikasi header `x-telegram-bot-api-secret-token` → dedupe `update_id` (TTL 1 jam) → `onMessage()`.
 
-Cron job runs every 3 minutes, calling two endpoints:
-1. `/api/reminders/check` — personal reminders (homework deadlines, events)
-2. `/api/cron/schedule-sweep` — study schedule pipeline:
-   - Default config: 1x/day 16:00, exclude Sunday
-   - H-1 reminder: "Besok ada sesi belajar!" (via `agents/scheduler/reminder.ts`)
-   - T-30 reminder: "30 menit lagi!" 
-   - Missed detection: marks no-show sessions
-   - Daily brief (6-10AM): "Hari ini ada 2 sesi belajar"
-   - Auto-assign: 60/30/10 algorithm when student has no sessions
-- Bot commands: `[SCHEDULE]`, `[SCHEDULE:WEEK]`, `[SCHEDULE:SET:{json}]`, `[SCHEDULE:ASSIGN]`
-- Student can set preferences via chat: "Atur jadwal jam 4 sore"
+Urutan routing di `src/bot/handlers/message.ts`:
 
-## Safety Notes
+1. Deep-link `/start trial`
+2. `/daftar`, `/parent_daftar`
+3. Command orang tua (`/progres`, `/laporan`, `/peringatan`)
+4. Student terdaftar:
+   - `/extend` / `/perpanjang`
+   - `routeByState()` (state machine — kuis yang sedang berjalan)
+   - `/quiz`, `/drill`, `/speedmath`, `/speedmath_stop`, `/start`, `/help`, `/web`, `/weeklyexam`
+   - `routeCommand()` → `/badge`, `/review`, `/nilai`, `/prosem`, `/pr`
+   - Intent quiz deterministik (`isQuizRequest`)
+   - Fallback:  `handleMessage()` → LLM, lalu tag intent di respons (`[QUIZ]`, `[SCHEDULE]`, `[SCHOOL_SCHEDULE]`, `[MATERIALS]`, `[YOUTUBE:id]`, `[VIDEOS:…]`, `[DASHBOARD]`, `[REMINDER]`, `[HOMEWORK]`, `[PASSWORD]`, `[EXTENSION:REQUEST]`)
+5. Belum terdaftar → instruksi `/daftar`
 
-- **DO NOT** commit secrets to git — `.env` is in `.gitignore`
-- **DO NOT** push directly to `main` — use `feat/*` or `vps/*` branches
-- **DO NOT** refactor mindmap radial layout — it's the signature feature
-- **ALWAYS** use 9Router for LLM calls, not OpenAI directly
+Karena webhook mode, `bot.command(...)` Telegraf tidak pernah dieksekusi. Command baru = tambah cabang di `message.ts` / `routeCommand()` **dan** entri di `COMMAND_MENU`.
+
+## Cron
+
+Dijadwalkan **Hermes cron**, bukan crontab OS (`crontab -l` kosong). Lihat tabel lengkap di `CURRENT_STATE.md`.
+
+Semua endpoint cron memakai `checkCronSecret()` (`src/lib/cron/guard.ts`):
+
+- Secret dibaca dari header `x-cron-secret` atau query `?token=`.
+- `CRON_SECRET` tidak diset → **503** (fail-closed), bukan diloloskan.
+- Setiap run dicatat ke `AgentLog`.
+
+Pengecualian: `/api/reminders/check` memakai `Authorization: Bearer $CRON_SECRET` langsung, tanpa `checkCronSecret()`.
+
+## Auth
+
+| Permukaan | Mekanisme |
+|---|---|
+| Admin/parent | NextAuth v5 (`/api/auth/[...nextauth]`), kredensial dari `ADMIN_EMAIL` + `ADMIN_PASSWORD_HASH` (bcrypt) |
+| Siswa | Cookie `student_session` (JWT via `STUDENT_JWT_SECRET`), diverifikasi di `src/middleware.ts` beserta cek status ACTIVE/TRIAL |
+| Webhook bot | Header `x-telegram-bot-api-secret-token` |
+| Cron | `checkCronSecret()` |
+| API admin | Session admin + `isAdmin(scope)` (`src/lib/auth/scope.ts`) |
+
+Middleware juga membuang request dengan header `next-action` yang bukan digest heksadesimal 32–64 karakter (anti RSC scanner).
+
+## LLM
+
+- `ai_tutor_agent` (9Router combo) → fallback `hermes`.
+- `DAILY_TOKEN_CAP` 1.000.000 token/siswa/hari, tercatat di `ApiUsage`.
+- `LLM_API_KEY` kosong = error keras. Set `LLM_ALLOW_NO_KEY=1` hanya untuk endpoint lokal tanpa auth.
+- Pricing per model ada di `MODEL_PRICING` (`src/llm/client.ts`).
+
+## Environment Variables
+
+Lihat `README.md` bagian *Environment* dan `.env.example`. Yang mudah terlewat:
+
+- `PGPASSWORD` wajib — `src/lib/prisma.ts` memakai pool `pg`, tidak membaca `DATABASE_URL`.
+- `CRON_SECRET` jangan diberi quote (quote ikut jadi bagian token).
+- `ADMIN_PASSWORD_HASH` harus meng-escape `$` sebagai `\$` (dotenv melakukan ekspansi variabel).
+- `STUDENT_JWT_SECRET` wajib untuk login siswa.
+
+**PM2 menyimpan snapshot env.** `pm2 restart --update-env` tidak mengambil ulang `.env`
+bila variabel sudah ada di environment PM2 — nilai lama menang. Setelah mengubah `.env`:
+
+```bash
+export CRON_SECRET="$(sed -n 's/^CRON_SECRET=//p' .env | head -1 | tr -d '"')"
+pm2 restart ai-private-tutor --update-env
+pm2 save
+pm2 env 1 | grep CRON_SECRET
+```
+
+Secret cron sudah dirotasi 2026-10-25; token lama ditolak (401). Nilai lama masih ada di
+riwayat git dan tidak berbahaya selama repo publik ini tidak memakai token itu lagi.
+
+## Backup & Pemulihan
+
+- DB: `ops/backup-db.sh`
+- Ada backup SQLite 9Router di home: `9router-db-backup-*.sqlite`
+- `backups/` dan `backup/` di repo gitignored karena memuat data siswa nyata.
+
+## Pitfalls
+
+1. **Jangan baca semua `Curriculum` milik satu student.** Raihan punya v1 dan v3; pakai `ACTIVE_CURRICULUM_ORDER`.
+2. **Jangan kembalikan default `CRON_SECRET || "…"`.** Itu regresi keamanan yang sudah diperbaiki (ledger A-14).
+3. **Jangan ganti pendekatan layout mindmap** — radial, tanpa dagre.
+4. **Data di `src/data/quiz-bank-*.ts` adalah sumber generate**, bukan bank runtime. Runtime membaca `Quiz` di DB.
+5. **`src/generated/` gitignored** — jalankan `npx prisma generate` setelah clone.
+6. **Jangan taruh secret di script yang di-commit.** `scripts/schedule-sweep.sh` dulu memuat
+   `CRON_SECRET` produksi; sekarang membaca `$ENV_FILE` (default `/home/ubuntu/ai-private-tutor/.env`).

@@ -41,33 +41,33 @@ git pull --rebase
 ## Branch Strategy
 
 ```
-main                ← Production-ready (hanya dari PR/merge)
+master              ← Production-ready, branch default repo (hanya dari PR/merge)
 ├── feat/*          ← PC Agent — fitur baru
 └── vps/*           ← VPS Agent — maintenance, bugfix, deploy
 ```
 
 ### Aturan Branch
 
-1. **TIDAK PERNAH** commit langsung ke `main`
-2. **PC Agent:** `feat/nama-fitur` → PR ke `main`
-3. **VPS Agent:** `vps/nama-task` → PR ke `main`
-4. **Sync cepat:** `git pull origin main` (tanpa branch baru)
+1. **TIDAK PERNAH** commit langsung ke `master`
+2. **PC Agent:** `feat/nama-fitur` → PR ke `master`
+3. **VPS Agent:** `vps/nama-task` → PR ke `master`
+4. **Sync cepat:** `git pull origin master` (tanpa branch baru)
 
 ### Cara Kerja PC Agent
 
 ```bash
-git checkout main && git pull
+git checkout master && git pull
 git checkout -b feat/nama-fitur
 # ... coding ...
 git add . && git commit -m "feat: deskripsi"
 git push origin feat/nama-fitur
-# → Buka GitHub, bikin Pull Request ke main
+# → Buka GitHub, bikin Pull Request ke master
 ```
 
 ### Cara Kerja VPS Agent
 
 ```bash
-git checkout main && git pull
+git checkout master && git pull
 git checkout -b vps/nama-task
 # ... fix/deploy ...
 git add . && git commit -m "fix: deskripsi"
@@ -80,7 +80,7 @@ git push origin vps/nama-task
 1. **Jangan edit file yang sama** dalam waktu bersamaan
 2. **Pulling**: `git pull --rebase`
 3. **Kalau bentrok:** resolve → `git add . && git commit -m "merge: resolve conflict"`
-4. **Sebelum push**, pastikan sudah pull main dulu
+4. **Sebelum push**, pastikan sudah pull `master` dulu
 
 ---
 
@@ -97,7 +97,7 @@ git push origin vps/nama-task
 
 ## Aturan Keras (Non-Negotiable)
 
-1. **DILARANG** commit/push ke `main`
+1. **DILARANG** commit/push ke `master`
 2. **DILARANG** `git push --force`
 3. **DILARANG** ubah `.env` tanpa izin eksplisit
 4. **DILARANG** refactor besar tanpa rencana
@@ -112,7 +112,7 @@ git push origin vps/nama-task
 
 ```bash
 git status                    # Working tree bersih?
-git branch --show-current     # Bukan main?
+git branch --show-current     # Bukan master?
 git pull --rebase             # Sync
 ```
 
@@ -121,11 +121,16 @@ git pull --rebase             # Sync
 ## Deploy ke VPS
 
 ```bash
-git pull origin main
-npm install
-npm run build
+cd ~/ai-private-tutor
+git pull origin master
+npm ci
+bash ops/build.sh             # WAJIB — swap + heap cap; `next build` polos pernah OOM-killed
 pm2 restart ai-private-tutor
+curl -s -o /dev/null -w '%{http_code}\n' http://localhost:3000/
 ```
+
+Jangan memakai `npm run build` langsung di VPS ini (2 vCPU / 3,6 GiB RAM):
+kernel pernah membunuh `next build` karena kehabisan memori.
 
 ---
 
@@ -133,7 +138,7 @@ pm2 restart ai-private-tutor
 
 ```bash
 npx tsc --noEmit              # TypeScript check
-npm run build                 # Build check (wajib sebelum push)
+bash ops/build.sh             # Build check (wajib sebelum push; jangan `npm run build`)
 pm2 restart ai-private-tutor  # Live deploy (VPS only)
 ```
 

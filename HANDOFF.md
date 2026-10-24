@@ -1,74 +1,58 @@
 # Handoff — AI Private Tutor
 
-> Terakhir update: 31 Juli 2026
+> **Dokumen ini bukan lagi sumber kondisi terkini.**
+> Kondisi aktual ada di [`dev-docs/ai/CURRENT_STATE.md`](dev-docs/ai/CURRENT_STATE.md).
+> Ditulis ulang 2026-10-25 terhadap commit `0207add`.
 
 ---
 
-## Template ↔ Student Model
+## Kondisi Runtime (2026-10-25)
 
-Setiap level punya 1 **template** (`isTemplate=true`). Student baru WAJIB copy dari template, bukan regenerate.
+| Item | Nilai |
+|---|---|
+| Commit ter-build | `0207add` (`.next` dibangun 2026-10-21 21:27 +08) |
+| Commit di `origin/master` | `acf99ba` — **2 commit lokal belum di-push** (`0207add`, `51a29c5`) |
+| PM2 `ai-private-tutor` | online, uptime 8h, 6× restart |
+| Health | `localhost:3000` → 200, `https://senangbelajar.web.id` → 200 |
+| Bot webhook | aktif, `pending_update_count: 0` |
+| DB | PostgreSQL 16, 4 student, 1.296 material, 1.315 quiz |
+| Disk | 42/59 GB (75%) |
 
-| Grade | Template | Student |
-|-------|----------|---------|
-| SD_5 | **Syifa** (`d4c8f21a...`) ✅ 130/130 | Anton (`04e06244...`) ✅ copy from Syifa |
-| SMP_1 | **Raihan** (`a61bcc63...`) ✅ 482/482 | — |
-| SMA_2 | **SHOFI** (`98f0274e...`) ✅ 402/402 | — |
+## Yang Perlu Dikerjakan Dulu
 
-## Current State (31 Jul 2026)
+1. **Push 2 commit lokal** — build produksi lebih baru daripada `origin/master`.
+2. **Cron `guardian-monthly` selalu error** — `guardian-monthly-trigger.sh` mewajibkan argumen yang tidak pernah dikirim job.
+3. **`/api/reminders/check` tidak terjadwal** — reminder personal tidak diproses.
+4. **`scripts/schedule-sweep.sh` di repo memuat `CRON_SECRET` produksi secara plaintext** — rotate secret dan hapus dari repo.
+5. **Password DB `tutor123` hardcoded** di `prisma.config.ts`, `src/lib/prisma.ts`, dan ~10 script.
 
-All gaps resolved. Full coverage across all students.
+Detail lengkap + dampak: `dev-docs/ai/CURRENT_STATE.md` bagian *Known Issues*.
 
-| Student | Grade | Total | Slide | Video | Quiz |
-|---------|-------|:-----:|:-----:|:-----:|:----:|
-| **Syifa** ✅ template SD_5 | 130 | 130 | 130 | 130 |
-| **Anton** ✅ copy from Syifa | 130 | 130 | 130 | 130 |
-| **Raihan** ✅ template SMP_1 | 482 | 482 | 482 | 482 |
-| **SHOFI** ✅ template SMA_2 | 402 | 402 | 402 | 402 |
+## Model Template ↔ Student
 
-### What was done (31 Jul 2026)
-- **Slide sync:** 30 Raihan material — `rawContent` → `metadata.slide` via SQL
-- **Quiz generation:** 59 missing quizzes created across Anton (15), SHOFI (43), Syifa (1)
-  - 3-pass pipeline via 9Router (`gen-quizzes-missing.js` → `-retry` → `-final`)
-  - All 59/59 success, 1,180 total quizzes in DB
-- **Docs:** `docs-ai/quiz-generation.md`, `docs-ai/slide-sync.md`
-- **Gamification:** XP, streak, badge engine (14 badges seeded via `scripts/seed-badges.ts`)
-  - `src/lib/gamification.ts` — `handleActivity()`, `awardXp()`, `updateStreak()`, `checkBadges()`
-  - Wired to `POST /api/students/activity`
-- **Spaced repetition:** SM-2 algorithm on wrong answers
-  - `src/lib/spaced-repetition.ts` — `computeSM2()`, `addToReviewQueue()`, `gradeReviewItem()`, `getDueReviews()`
-  - Wrong answers auto-added to queue from `activity/route.ts` at attempt creation
-- **ProgressSnap weekly cron:** 7 snaps created per student per subject
-  - `GET /api/cron/progress-snap` — weekly snapshot per student (ACTIVE only)
-- **Daily nudge + parent digest:**
-  - `GET /api/cron/daily-nudge` — Telegram reminder if gap >= 2 days
-  - `GET /api/cron/guardian-report` — enhanced parent weekly digest with XP/streak/badge
-- **Bot:** 6 new commands (`/badge`, `/review`, `/nilai`, `/pr`, `/help` + aliases)
-  - Prompt refactored to single source of truth (`src/bot/agent/capabilities.ts`)
-  - Safety fix: buffer-and-scan per paragraph in `streamMessage()`
-  - Command routing in webhook mode via `routeCommand()` from `message.ts`
-- **New files:**
-  - `src/lib/gamification.ts`
-  - `src/lib/spaced-repetition.ts`
-  - `src/bot/agent/capabilities.ts`
-  - `src/bot/commands.ts`
-  - `src/app/api/cron/progress-snap/route.ts`
-  - `src/app/api/cron/daily-nudge/route.ts`
-  - `scripts/seed-badges.ts`
-  - `docs-ai/gamification-engine.md`
-  - `docs-ai/spaced-repetition.md`
-  - `docs-ai/bot-enhancements.md`
-  - `docs-ai/cron-endpoints.md`
+Setiap jenjang punya 1 template (`isTemplate=true`). Student baru **menyalin** kurikulum template sejenjang, tidak generate ulang.
 
-## SIBI Content Pipeline
+| Grade | Template | Student lain |
+|---|---|---|
+| SD_5 | Syifa (130 material) | — |
+| SMP_1 | Raihan (v3: 239 material) | BAHLIL (copy v3) |
+| SMA_2 | SHOFI (424 material) | — |
 
-- `scripts/sibi-match-and-generate.py` — ONLY utk template student
-- `scripts/video_pipeline.py` — ONLY utk template student
-- Student → copy persis dari template via `UPDATE ... FROM`
-- SIBI books: 22 PDF Kurikulum Merdeka di `public/moodle-files/`
+Pipeline SIBI (`scripts/sibi-match-and-generate.py`, `scripts/video_pipeline.py`) hanya untuk student template; student lain menyalin lewat `UPDATE ... FROM`.
 
-## Deployment
+## Deploy
 
-- VPS: ubuntu@43.133.151.242
-- PM2: `ai-private-tutor` (port 3000, Caddy)
-- DB: PostgreSQL 16, localhost:5432, `ai_private_tutor`
-- Bot: @senangbelajar_bot (webhook)
+```bash
+cd ~/ai-private-tutor
+git pull origin master
+bash ops/build.sh
+pm2 restart ai-private-tutor
+```
+
+Detail operasional: `dev-docs/ai/FINAL_SYSTEM_HANDOVER.md`.
+
+---
+
+## Arsip: State 31 Juli 2026
+
+Versi sebelumnya dokumen ini menyatakan "all gaps resolved" dengan 130/482/402 material dan 1.180 quiz. Angka itu sudah tidak berlaku: bank materi dan quiz bertambah lewat beberapa pass setelahnya (lihat `git log --oneline` untuk commit `bda4584`, `bdd74db`, `2496cd8`, `e138e97`). Angka terkini selalu diambil dari DB, bukan dari dokumen.
