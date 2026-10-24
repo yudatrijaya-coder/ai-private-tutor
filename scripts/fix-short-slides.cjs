@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 
 const API_KEY = 'sk-we2LhWNDMBvNSi4RZHM0sg';
 const MODEL = 'deepseek-v4-flash';
-const pool = new Pool({ host: 'localhost', port: 5432, database: 'ai_private_tutor', user: 'tutor', password: 'tutor123' });
+const pool = new Pool({ host: 'localhost', port: 5432, database: 'ai_private_tutor', user: 'tutor', password: process.env.PGPASSWORD });
 
 function callLLM(messages) {
   return new Promise((resolve, reject) => {

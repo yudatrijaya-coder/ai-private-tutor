@@ -26,7 +26,7 @@ const pool = new Pool({
   port: 5432,
   database: 'ai_private_tutor',
   user: 'tutor',
-  password: 'tutor123',
+  password: process.env.PGPASSWORD,
 });
 
 // ── Call SumoPod LLM via HTTPS

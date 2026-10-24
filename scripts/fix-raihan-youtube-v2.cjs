@@ -19,7 +19,7 @@ const fs = require('fs');
 const DB_CONFIG = {
   host: 'localhost',
   user: 'tutor',
-  password: 'tutor123',
+  password: process.env.PGPASSWORD,
   database: 'ai_private_tutor',
 };
 

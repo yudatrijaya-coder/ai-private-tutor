@@ -13,7 +13,7 @@ const pool = new pg.Pool({
   port: 5432,
   database: "ai_private_tutor",
   user: "tutor",
-  password: "tutor123",
+  password: process.env.PGPASSWORD,
 });
 const adapter = new PrismaPg(pool);
 const db = new PrismaClient({ adapter });

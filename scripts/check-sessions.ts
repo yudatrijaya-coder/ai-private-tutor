@@ -8,7 +8,7 @@ async function main() {
     port: parseInt(process.env.POSTGRES_PORT || "5432"),
     database: process.env.POSTGRES_DB || "ai_private_tutor",
     user: process.env.POSTGRES_USER || "tutor",
-    password: process.env.POSTGRES_PASSWORD || "tutor123",
+    password: process.env.PGPASSWORD,
   });
   const adapter = new PrismaPg(pool);
   const p = new PrismaClient({ adapter });

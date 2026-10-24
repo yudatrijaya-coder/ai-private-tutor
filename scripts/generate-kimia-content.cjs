@@ -13,7 +13,7 @@ const CURRICULUM_ID = '98f0274e-4e39-45f5-9c79-3632c5717b27';
 const DB_CONFIG = {
   host: 'localhost',
   user: 'tutor',
-  password: 'tutor123',
+  password: process.env.PGPASSWORD,
   database: 'ai_private_tutor',
 };
 

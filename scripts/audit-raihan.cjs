@@ -3,7 +3,7 @@ const crypto = require("crypto");
 
 const pool = new Pool({
   host: "localhost", port: 5432, database: "ai_private_tutor",
-  user: "tutor", password: "tutor123",
+  user: "tutor", password: process.env.PGPASSWORD,
 });
 
 async function main() {

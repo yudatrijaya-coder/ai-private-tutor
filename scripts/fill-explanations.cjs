@@ -32,7 +32,7 @@ function generateExplanation(question, options, correctIdx) {
 
 function db(sql) {
   return execSync(
-    `PGPASSWORD=tutor123 psql -h localhost -U tutor -d ai_private_tutor -t -A -c "${sql.replace(/"/g, '\\"')}"`,
+    `PGPASSWORD=${process.env.PGPASSWORD} psql -h localhost -U tutor -d ai_private_tutor -t -A -c "${sql.replace(/"/g, '\\"')}"`,
     { encoding: "utf8", maxBuffer: 50 * 1024 * 1024 }
   ).trim();
 }
@@ -90,7 +90,7 @@ async function main() {
       const tmpFile = `/tmp/fill_explanations_${s.id}.sql`;
       fs.writeFileSync(tmpFile, queries.join("\n"));
       const result = execSync(
-        `PGPASSWORD=tutor123 psql -h localhost -U tutor -d ai_private_tutor -f "${tmpFile}"`,
+        `PGPASSWORD=${process.env.PGPASSWORD} psql -h localhost -U tutor -d ai_private_tutor -f "${tmpFile}"`,
         { encoding: "utf8" }
       ).trim();
       console.log(`${s.name} (${s.studentId}): fixed ${fixed} quizzes`);

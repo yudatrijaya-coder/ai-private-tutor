@@ -307,7 +307,7 @@ def psql(sql: str) -> str:
         ["psql", "-h", "localhost", "-U", "tutor", "-d", "ai_private_tutor",
          "-t", "-A", "-F", "|", "-c", sql],
         capture_output=True, text=True,
-        env={"PGPASSWORD": "tutor123", "PATH": "/usr/bin:/bin"},
+        env={"PGPASSWORD": os.environ.get("PGPASSWORD", ""), "PATH": "/usr/bin:/bin"},
     )
     if r.returncode != 0:
         raise RuntimeError(r.stderr.strip())

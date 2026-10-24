@@ -18,7 +18,7 @@ const PG = {
   port: parseInt(process.env.PGPORT || "5432"),
   database: process.env.PGDATABASE || "ai_private_tutor",
   user: process.env.PGUSER || "tutor",
-  password: process.env.PGPASSWORD || "tutor123",
+  password: process.env.PGPASSWORD,
 };
 
 const prisma = new PrismaClient({ adapter: new PrismaPg(new pg.Pool(PG)) });

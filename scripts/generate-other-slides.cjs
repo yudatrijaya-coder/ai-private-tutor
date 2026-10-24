@@ -13,7 +13,7 @@ const pool = new Pool({
   port: 5432,
   database: 'ai_private_tutor',
   user: 'tutor',
-  password: 'tutor123',
+  password: process.env.PGPASSWORD,
 });
 
 // Excluded curricula (SHOFI SMA_2 and Raihan SMP_1)

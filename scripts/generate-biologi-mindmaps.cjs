@@ -7,7 +7,7 @@
  * 4. Updates metadata->>'mindmap' and videoUrl in the database
  * 
  * YouTube Data API key: AIzaSyDoLUc4CO2oeRTR-fd2iu_0Elb11htyx0Q
- * DB: localhost / tutor / tutor123 / ai_private_tutor
+ * DB: localhost / tutor / $PGPASSWORD / ai_private_tutor
  */
 
 const https = require('https');
@@ -15,7 +15,7 @@ const https = require('https');
 const DB_CONFIG = {
   host: 'localhost',
   user: 'tutor',
-  password: 'tutor123',
+  password: process.env.PGPASSWORD,
   database: 'ai_private_tutor',
 };
 

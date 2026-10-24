@@ -5,7 +5,7 @@
  * groups by (subject, topic), searches YouTube API v3,
  * verifies via oEmbed, and updates videoUrl.
  * 
- * DB: PostgreSQL localhost, user=tutor, password=tutor123, database=ai_private_tutor
+ * DB: PostgreSQL localhost, user=tutor, password=$PGPASSWORD, database=ai_private_tutor
  * YouTube API: AIzaSyDoLUc4CO2oeRTR-fd2iu_0Elb11htyx0Q
  * oEmbed: https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v={id}&format=json
  */
@@ -18,7 +18,7 @@ const DB_CONFIG = {
   host: 'localhost',
   port: 5432,
   user: 'tutor',
-  password: 'tutor123',
+  password: process.env.PGPASSWORD,
   database: 'ai_private_tutor'
 };
 

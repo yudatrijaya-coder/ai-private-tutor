@@ -90,7 +90,7 @@ def psql(sql: str, fetch: bool = False) -> str:
         args += ["-t", "-A"]
     r = subprocess.run(
         args + ["-c", sql], capture_output=True, text=True,
-        env={"PGPASSWORD": os.environ.get("PGPASSWORD", "tutor123"),
+        env={"PGPASSWORD": os.environ.get("PGPASSWORD", ""),
              "PATH": "/usr/bin:/bin"},
     )
     if r.returncode != 0:

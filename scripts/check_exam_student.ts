@@ -7,7 +7,7 @@ const pool = new pg.Pool({
   port: parseInt(process.env.PGPORT || '5432'),
   database: process.env.PGDATABASE || 'ai_private_tutor',
   user: process.env.PGUSER || 'tutor',
-  password: process.env.PGPASSWORD || 'tutor123',
+  password: process.env.PGPASSWORD,
 });
 const adapter = new PrismaPg(pool);
 const p = new PrismaClient({ adapter });

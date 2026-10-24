@@ -76,5 +76,5 @@ const sqlFile = "/tmp/gen-quiz.sql";
 fs.writeFileSync(sqlFile, sqlLines.join("\n"), "utf8");
 console.log(`Wrote ${sqlLines.length} INSERTs to ${sqlFile}`);
 
-execSync(`PGPASSWORD=tutor123 psql -h localhost -U tutor -d ai_private_tutor -f ${sqlFile}`, { stdio: "inherit" });
+execSync(`PGPASSWORD=${process.env.PGPASSWORD} psql -h localhost -U tutor -d ai_private_tutor -f ${sqlFile}`, { stdio: "inherit" });
 console.log("Done!");

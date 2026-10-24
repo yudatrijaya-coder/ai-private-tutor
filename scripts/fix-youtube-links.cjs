@@ -2,7 +2,7 @@
  * Fix YouTube URLs for ALL materials that have broken search-links
  * Instead of real watch URLs (youtube.com/results?search_query=...)
  * 
- * DB: PostgreSQL at localhost:5432, user=tutor, password=tutor123, database=ai_private_tutor
+ * DB: PostgreSQL at localhost:5432, user=tutor, password=$PGPASSWORD, database=ai_private_tutor
  * YouTube API: AIzaSyDoLUc4CO2oeRTR-fd2iu_0Elb11htyx0Q
  */
 
@@ -14,7 +14,7 @@ const DB_CONFIG = {
   host: 'localhost',
   port: 5432,
   user: 'tutor',
-  password: 'tutor123',
+  password: process.env.PGPASSWORD,
   database: 'ai_private_tutor'
 };
 

@@ -45,7 +45,7 @@ def main() -> None:
         q = f'''INSERT INTO "Material" (id, "curriculumId", topic, "subTopic", subject, "gradeLevel", "weekOrder", priority, status, "rawContent", "sourceUrls", metadata, "createdAt", "updatedAt")
 SELECT '{uuid.uuid4()}', '{CID}', '{sql(title)}', '{sql(title)}', '{SUBJECT}', 'SMA_2', {index}, 8, 'RAW', '{sql(source_text)}', '["{SOURCE}"]'::jsonb, '{sql(metadata)}'::jsonb, NOW(), NOW()
 WHERE NOT EXISTS (SELECT 1 FROM "Material" WHERE "curriculumId"='{CID}' AND subject='{SUBJECT}' AND topic='{sql(title)}' AND "subTopic"='{sql(title)}');'''
-        res = subprocess.run(['psql','-U','tutor','-d','ai_private_tutor','-h','localhost','-c',q], capture_output=True, text=True, env={'PGPASSWORD':'tutor123'})
+        res = subprocess.run(['psql','-U','tutor','-d','ai_private_tutor','-h','localhost','-c',q], capture_output=True, text=True, env={**os.environ, 'PGPASSWORD': os.environ.get('PGPASSWORD','')})
         if res.returncode:
             raise SystemExit(res.stderr)
         print(f'{index:02d}: {title}: {res.stdout.strip()}')

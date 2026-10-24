@@ -24,7 +24,7 @@ loadEnv();
 
 const pool = new Pool({
   host: "localhost", port: 5432, user: "tutor",
-  password: process.env.PGPASSWORD || "tutor123", database: "ai_private_tutor",
+  password: process.env.PGPASSWORD, database: "ai_private_tutor",
 });
 
 const GENERIC_PATTERNS = [

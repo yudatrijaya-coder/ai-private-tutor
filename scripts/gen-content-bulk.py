@@ -21,7 +21,7 @@ DB_CONFIG = {
     "port": int(os.environ.get("PGPORT", "5432")),
     "dbname": os.environ.get("PGDATABASE", "ai_private_tutor"),
     "user": os.environ.get("PGUSER", "tutor"),
-    "password": os.environ.get("PGPASSWORD", "tutor123"),
+    "password": os.environ.get("PGPASSWORD", ""),
 }
 
 # ─── Student mapping ──────────────────────────────────────────

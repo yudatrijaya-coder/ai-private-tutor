@@ -2,7 +2,7 @@ const { Pool } = require("pg");
 
 const pool = new Pool({
   host: "localhost", port: 5432, database: "ai_private_tutor",
-  user: "tutor", password: "tutor123",
+  user: "tutor", password: process.env.PGPASSWORD,
 });
 
 /** Bersihin nama: HURUF BESAR, max 6 huruf, minimal 3 */

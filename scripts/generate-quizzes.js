@@ -13,7 +13,7 @@ const client = new Client({
   host: 'localhost',
   port: 5432,
   user: 'tutor',
-  password: 'tutor123',
+  password: process.env.PGPASSWORD,
   database: 'ai_private_tutor'
 });
 

@@ -3,7 +3,7 @@
  * Finds materials where videoUrl IS NULL OR videoUrl NOT LIKE '%watch%'
  * Groups by (subject, topic) to minimize YouTube API calls
  * 
- * DB: PostgreSQL at localhost:5432, user=tutor, password=tutor123, database=ai_private_tutor
+ * DB: PostgreSQL at localhost:5432, user=tutor, password=$PGPASSWORD, database=ai_private_tutor
  * YouTube API: AIzaSyDoLUc4CO2oeRTR-fd2iu_0Elb11htyx0Q
  * oEmbed: https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v={id}&format=json
  * Curriculum: 98f0274e-4e39-45f5-9c79-3632c5717b27 (SHOFI SMA)
@@ -18,7 +18,7 @@ const DB_CONFIG = {
   host: 'localhost',
   port: 5432,
   user: 'tutor',
-  password: 'tutor123',
+  password: process.env.PGPASSWORD,
   database: 'ai_private_tutor'
 };
 
