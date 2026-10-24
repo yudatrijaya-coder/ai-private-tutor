@@ -3,12 +3,17 @@ import { PrismaClient } from "../src/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import pg from "pg";
 
+const password = process.env.PGPASSWORD;
+if (!password) {
+  throw new Error("PGPASSWORD tidak diset — jalankan `set -a; source .env; set +a`");
+}
+
 const pool = new pg.Pool({
-  host: "localhost",
-  port: 5432,
-  database: "ai_private_tutor",
-  user: "tutor",
-  password: "tutor123",
+  host: process.env.PGHOST ?? "localhost",
+  port: parseInt(process.env.PGPORT ?? "5432"),
+  database: process.env.PGDATABASE ?? "ai_private_tutor",
+  user: process.env.PGUSER ?? "tutor",
+  password,
 });
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });

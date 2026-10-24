@@ -223,12 +223,21 @@ export async function processPendingReminders(): Promise<void> {
   const now = new Date();
   const windowEnd = new Date(now.getTime() + 60_000); // 1 menit ke depan
 
+  // Grace window ke belakang. Versi lama memakai `gte: now`, yang berarti
+  // reminder hanya terkirim kalau `remindAt` kebetulan jatuh di dalam jendela
+  // 60 detik pada saat tick berjalan. Reminder yang dijadwalkan di antara dua
+  // tick (atau saat proses sedang restart) tidak pernah diambil dan tertinggal
+  // `pending` selamanya. Dengan batas bawah 24 jam, reminder yang terlewat
+  // tetap terkirim, sementara tumpukan lama tidak dibanjiri sekaligus.
+  const graceStart = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+
   const reminders = await prisma.reminder.findMany({
     where: {
       status: "pending",
-      remindAt: { gte: now, lte: windowEnd },
+      remindAt: { gte: graceStart, lte: windowEnd },
     },
     include: { student: true },
+    orderBy: { remindAt: "asc" },
   });
 
   for (const reminder of reminders) {
