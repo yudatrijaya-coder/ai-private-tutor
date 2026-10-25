@@ -184,7 +184,9 @@ Mulai dari [`dev-docs/ai/START_HERE.md`](dev-docs/ai/START_HERE.md). Status tiap
 |---|---|
 | `CRON_SECRET` lama | Sudah dirotasi **dan** dihapus dari seluruh riwayat git 2026-10-25 (`git filter-repo`). Hash commit lama berubah — clone lama perlu di-fetch ulang |
 | `logs/err.log` noise | Sisa error NextAuth `UnknownAction` dan RSC scanner; dimitigasi middleware, bukan kegagalan fungsional |
-| Disk 73% | `public/` 2,2 GB; `docs-site/` (834 MB) sudah dihapus 2026-10-25 |
+| Disk 71% | Setelah pembersihan 2026-10-25. `public/` 2,2 GB dipertahankan (PDF kurikulum dipakai app) |
+| `/var/log` butuh root | `journal` 2,5 GB + `btmp` 324 MB (~880 ribu login gagal). `sudo` diblokir di VM ini — bersihkan sebagai root |
+| SSH belum hardened | `PasswordAuthentication yes`, `PermitRootLogin yes`, fail2ban mati. Tidak ada bukti kompromi, tapi sebaiknya ditutup |
 
 ## Catatan: PM2 Menyimpan Snapshot Env
 
