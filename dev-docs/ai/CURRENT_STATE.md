@@ -45,6 +45,8 @@ Raihan memegang dua `Curriculum` (v1 dan v3). Yang berlaku v3 — semua pembacaa
 | `motivation-nudge-monday` | `0 17 * * 1` | `POST /api/cron/motivation-nudge` | ok |
 | `motivation-nudge-friday` | `0 17 * * 5` | `POST /api/cron/motivation-nudge` | ok |
 | `guardian-monthly` | `0 17 1 * *` | `POST /api/cron/guardian-monthly` | ok (diperbaiki 2026-10-25) |
+| `daily-nudge` | `0 8 * * *` | `GET /api/cron/daily-nudge` | ok (ditambahkan 2026-10-25) |
+| `progress-snap-weekly` | `0 23 * * 0` | `GET /api/cron/progress-snap` | ok (ditambahkan 2026-10-25) |
 | `guruai-webhook-sentinel` | `*/10 * * * *` | sistem lain | ok |
 
 Cek: `hermes cron list`.
@@ -56,12 +58,12 @@ Cek: `hermes cron list`.
 | 1 | ~~`guardian-monthly-trigger.sh` mewajibkan argumen~~ **DIPERBAIKI 2026-10-25** — argumen kini opsional (label), gagal hanya bila `CRON_SECRET` kosong | — | — |
 | 2 | ~~`/api/reminders/check` tidak terjadwal~~ **DIPERBAIKI 2026-10-25** — job Hermes `reminders-check` tiap 1 menit, script `reminders-check-trigger.sh` (auth `Bearer`) | — | — |
 | 3 | ~~`remindAt` window memakai `gte: now`~~ **DIPERBAIKI 2026-10-25** — reminder yang jatuh di antara tick tidak pernah diambil; sekarang ada grace window 24 jam ke belakang di `processPendingReminders()` | — | — |
-| 4 | ~~`scripts/schedule-sweep.sh` memuat `CRON_SECRET` plaintext~~ **DIPERBAIKI 2026-10-25** — secret dirotasi (48 hex), script membaca `.env`. Token lama kini 401, tetapi masih ada di riwayat git (`10e47a6`, `0b3131a`, `845b1f6`) | Mati, tidak berbahaya | Opsional: `git filter-repo` bila repo tetap publik |
+| 4 | ~~`scripts/schedule-sweep.sh` memuat `CRON_SECRET` plaintext~~ **DIPERBAIKI 2026-10-25** — secret dirotasi (48 hex), script membaca `.env`, dan token lama **dihapus dari seluruh riwayat git** (`git filter-repo`, 308 commit ditulis ulang). Clone lama berhash beda | — | — |
 | 5 | ~~Fallback password DB `tutor123`~~ **DIPERBAIKI 2026-10-25** — `prisma.config.ts`, `src/lib/prisma.ts`, `prisma/seed-characters.ts`, dan 68 script kini membaca `PGPASSWORD` dan gagal keras bila kosong | — | Sisa satu-satunya kemunculan: daftar kandidat di `scripts/check_admin_pass.ts` (disengaja) |
 | 6 | ~~`DATABASE_URL` di `.env` berisi placeholder `***`~~ **DIPERBAIKI 2026-10-25** — nilainya salah sejak lama; Prisma CLI gagal auth. Kini diisi dari `PGPASSWORD`, dan `prisma.config.ts` menolak placeholder | — | — |
 | 7 | ~~`docs-site/` (Nextra) mati~~ **DIHAPUS 2026-10-25** — 834 MB, gitignored, isinya usang. Konten diarsipkan di `backup/docs-site-content-20261025/` | — | Dokumentasi resmi: `dev-docs/` + halaman `/docs` |
 | 8 | `logs/err.log` masih mencatat error NextAuth `UnknownAction` dan RSC scanner spam | Noise, bukan kegagalan fungsional (dimitigasi middleware) | Pantau; abaikan kalau tidak bertambah |
-| 9 | Disk 42/59 GB (73% setelah `docs-site` dihapus); `public/` 2,2 GB | Sisa ruang menipis untuk build | Bersihkan aset tak terpakai |
+| 9 | Disk 42/59 GB (73%); `public/` 2,2 GB, termasuk PDF 65 MB yang memicu peringatan GitHub | Sisa ruang menipis untuk build | Bersihkan aset tak terpakai / pindahkan ke storage eksternal |
 
 ## Catatan Operasional: PM2 Menyimpan Snapshot Env
 
@@ -85,5 +87,6 @@ Variabel yang di-snapshot PM2 saat ini: `CRON_SECRET`, `DATABASE_URL`, `LLM_API_
 | Tanggal | Perubahan |
 |---|---|
 | 2026-10-25 | Seluruh `README.md` + `dev-docs/ai/*` ditulis ulang dari kode ter-deploy: branch `master`, cron Hermes, 15 bot command, 73 API route, versi paket aktual, data DB aktual. Known issues diisi dari temuan runtime. |
+| 2026-10-25 (lanjutan 2) | Job `daily-nudge` (08:00) & `progress-snap-weekly` (Minggu 23:00) didaftarkan; `progress-snap` dibuat idempoten per `CronClaim` mingguan; riwayat git dibersihkan dengan `git filter-repo`. |
 | 2026-10-25 (lanjutan) | Tuntas 5 issue: job `reminders-check` tiap 1 menit, grace window `remindAt`, `guardian-monthly` diperbaiki, fallback password DB dihapus (70 file), `DATABASE_URL` placeholder diperbaiki, `docs-site/` dihapus (-834 MB). |
 | 2026-07-31 | Versi sebelumnya (tidak akurat lagi: menyebut 7 agent padahal 6 worker + tutor inline, branch `main`, dan angka material lama) |

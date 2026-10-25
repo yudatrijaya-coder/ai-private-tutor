@@ -31,7 +31,7 @@ Dokumen hanya boleh memuat snapshot dengan tanggal.
 | `prod-docs/` | ✅ Aktif | Operasional server; sudah dikoreksi (branch + build) |
 | `ai-rules/` | 🔒 Immutable | Template; dikoreksi 2026-10-25 (branch `master`, `ops/build.sh`) atas persetujuan pemilik |
 | `backup/old-docs/` | 🗄️ Arsip | Jangan dipakai sebagai acuan |
-| `docs-site/` | 🗑️ **Dihapus 2026-10-25** | 834 MB, gitignored, konten usang. Diarsipkan di `backup/docs-site-content-20261025/` |
+| `docs-site/` | 🗑️ **Dihapus 2026-10-25** | 834 MB, gitignored, konten usang. Diarsipkan di `/home/ubuntu/docs-site-archive/` (di luar repo) |
 | `graphify-out/`, `.hermes/plans/` | 🗄️ Artefak tool | Bukan dokumentasi produk |
 
 ## Ketidaksesuaian yang Ditemukan (2026-10-25)
@@ -60,6 +60,5 @@ Banner historis ditambahkan ke 7 file `docs-ai/*` dan 8 file `docs/rules/*`.
 
 1. `docs/rules/*` sudah diberi banner historis; pertimbangkan memindahkannya ke
    `backup/old-docs/` agar hanya ada satu salinan (kode aslinya di `src/rules/`).
-2. Riwayat git masih memuat `CRON_SECRET` lama (sudah dirotasi, nilainya mati). Bersihkan
-   dengan `git filter-repo` bila repo tetap publik.
-3. Job `daily-nudge` dan `progress-snap` belum terdaftar di Hermes meski route + script ada.
+2. Repo memuat `public/` 2,2 GB, termasuk PDF 65 MB yang memicu peringatan ukuran file
+   GitHub. Pertimbangkan Git LFS atau storage eksternal.

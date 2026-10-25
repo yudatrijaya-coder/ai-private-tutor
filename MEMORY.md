@@ -1,9 +1,11 @@
 # Memory — AI Private Tutor
 
 > **Fakta durable untuk AI agent.** Detail lengkap ada di `dev-docs/ai/` — mulai dari `START_HERE.md`.
-> **Verifikasi terakhir:** 2026-10-25, commit `0207add`.
+> **Verifikasi terakhir:** 2026-10-25 (riwayat git ditulis ulang, HEAD `3fad45a`).
 
 ## Repository
+
+> **Riwayat git ditulis ulang 2026-10-25** (`git filter-repo`) untuk membuang `CRON_SECRET` lama. Hash semua commit berubah; clone lama harus `git fetch --all && git reset --hard origin/master`.
 
 - GitHub: `yudatrijaya-coder/ai-private-tutor` (**public**)
 - Branch default: **`master`** — dokumen lama yang menyebut `main` sudah usang
@@ -28,7 +30,7 @@
 ## Cron
 
 - Penjadwal = **Hermes cron** di `~/.hermes/profiles/opencode/scripts/`, bukan crontab OS
-- 8 job aktif (termasuk `reminders-check` tiap 1 menit); lihat `dev-docs/ai/CURRENT_STATE.md`
+- 10 job aktif (termasuk `reminders-check` tiap 1 menit, `daily-nudge` 08:00, `progress-snap-weekly` Minggu 23:00); lihat `dev-docs/ai/CURRENT_STATE.md`
 - Semua route `/api/cron/*` memakai `checkCronSecret()` — fail-closed (503 kalau secret kosong)
 
 ## Bot
