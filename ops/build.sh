@@ -21,12 +21,36 @@
 #
 # Usage: bash ops/build.sh
 #
+# Pre-build tests
+# ---------------
+# The label regression test runs BEFORE the old build is deleted. That order
+# matters: with `set -e`, a failing test aborts the script, and if `rm -rf
+# .next` had already run the server would be left with no build to serve.
+# Cheap gate first, destructive step second.
+#
+#   SKIP_TESTS=1  — bypass the gate (use only when the tests are known-flaky
+#                   and you need a build out; say so in the commit message).
+#
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
 SWAP_BUILD=/swap-build.img
 HEAP_MB="${BUILD_HEAP_MB:-2048}"
+
+echo "==> tests"
+if [ "${SKIP_TESTS:-0}" = "1" ]; then
+  echo "    SKIP_TESTS=1 — melewati tes pra-build"
+else
+  # Node's native type stripping (22.6+) needs no framework or extra deps.
+  node --experimental-strip-types --test src/lib/__tests__/grade-label.test.ts \
+    || {
+      echo ""
+      echo "    GAGAL: tes pra-build tidak lulus — build dibatalkan."
+      echo "    Build lama di .next TIDAK disentuh; server tetap menyajikan versi sebelumnya."
+      exit 1
+    }
+fi
 
 echo "==> swap status"
 if ! swapon --show=NAME --noheadings | grep -qx "$SWAP_BUILD"; then
