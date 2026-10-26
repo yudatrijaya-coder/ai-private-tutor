@@ -20,7 +20,7 @@ import { prisma } from "@/lib/prisma";
 import { tryCopyFromTemplate } from "@/agents/guardian/admission";
 import { createInitialSchedule } from "@/agents/guardian/admission";
 import { generateStudentId } from "@/lib/studentId";
-import { gradeLabel } from "@/lib/grade-label";
+import { ENROLLED_GRADES, gradeLabel } from "@/lib/grade-label";
 import { bot } from "../bot";
 import bcrypt from "bcryptjs";
 
@@ -78,12 +78,6 @@ function getPendingRegistration(studentId: string): (RegistrationData & { messag
 
 // ─── Options ──────────────────────────────────────────────────
 
-const GRADE_OPTIONS = [
-  { key: "SD_5", label: "SD Kelas 5", emoji: "🎒" },
-  { key: "SMP_1", label: "SMP Kelas 7", emoji: "📚" },
-  { key: "SMA_2", label: "SMA Kelas 11", emoji: "🎓" },
-] as const;
-
 const CHARACTER_OPTIONS = [
   { key: "KAK_BUDI", label: "Kak Budi", emoji: "🦉", desc: "Seru & sabar — cocok buat SD" },
   { key: "KAK_DEWI", label: "Kak Dewi", emoji: "🌟", desc: "Asyik & santai — cocok buat SMP" },
@@ -96,8 +90,8 @@ const DAYS = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"] as
 
 function gradeKeyboard() {
   return Markup.inlineKeyboard(
-    GRADE_OPTIONS.map((g) =>
-      Markup.button.callback(g.label, `onboard_grade:${g.key}`),
+    ENROLLED_GRADES.map((grade) =>
+      Markup.button.callback(gradeLabel(grade), `onboard_grade:${grade}`),
     ),
   );
 }

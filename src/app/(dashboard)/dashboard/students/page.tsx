@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { gradeShort } from "@/lib/grade-label";
+import { gradeOptions, gradeShort } from "@/lib/grade-label";
 
 /* ── Types ── */
 
@@ -72,12 +72,6 @@ const STATUS_TABS = [
   { key: "PENDING", label: "Pending" },
   { key: "PAUSED", label: "Paused" },
   { key: "ARCHIVED", label: "Archived" },
-];
-
-const GRADE_OPTIONS = [
-  { value: "SD_5", label: "SD Kelas 5" },
-  { value: "SMP_1", label: "SMP Kelas 7" },
-  { value: "SMA_2", label: "SMA Kelas 11" },
 ];
 
 const PERSONA_OPTIONS = [
@@ -332,7 +326,7 @@ function AddStudentModal({
                 color: "var(--su-text)",
               }}
             >
-              {GRADE_OPTIONS.map((o) => (
+              {gradeOptions().map((o) => (
                 <option key={o.value} value={o.value}>
                   {o.label}
                 </option>
@@ -1310,7 +1304,7 @@ export default function StudentsPage() {
                           {isEditing && editingCell?.field === "gradeLevel" ? (
                             <InlineEditCell
                               value={s.gradeLevel}
-                              options={GRADE_OPTIONS}
+                              options={gradeOptions()}
                               onSave={(val) =>
                                 handleInlineSave(s.id, "gradeLevel", val)
                               }

@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { gradeOptions } from "@/lib/grade-label";
 
 export default function NewStudentPage() {
   const router = useRouter();
@@ -18,12 +19,6 @@ export default function NewStudentPage() {
     sessionCount: number;
     copiedFromTemplate?: string;
   } | null>(null);
-
-  const gradeOptions = [
-    { value: "SD_5", label: "SD Kelas 5" },
-    { value: "SMP_1", label: "SMP Kelas 7" },
-    { value: "SMA_2", label: "SMA Kelas 11" },
-  ];
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -169,7 +164,7 @@ export default function NewStudentPage() {
                 color: "var(--su-text)",
               }}
             >
-              {gradeOptions.map((o) => (
+              {gradeOptions().map((o) => (
                 <option key={o.value} value={o.value}>
                   {o.label}
                 </option>
