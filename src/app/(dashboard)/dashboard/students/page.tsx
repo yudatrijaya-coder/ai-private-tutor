@@ -45,8 +45,8 @@ type SortDir = "asc" | "desc";
 
 const GRADE_LABELS: Record<string, string> = {
   SD_5: "SD 5",
-  SMP_1: "SMP 1",
-  SMA_2: "SMA 2",
+  SMP_1: "SMP 7",
+  SMA_2: "SMA 11",
 };
 
 const STATUS_CONFIG: Record<
@@ -81,8 +81,8 @@ const STATUS_TABS = [
 
 const GRADE_OPTIONS = [
   { value: "SD_5", label: "SD Kelas 5" },
-  { value: "SMP_1", label: "SMP Kelas 1" },
-  { value: "SMA_2", label: "SMA Kelas 2" },
+  { value: "SMP_1", label: "SMP Kelas 7" },
+  { value: "SMA_2", label: "SMA Kelas 11" },
 ];
 
 const PERSONA_OPTIONS = [

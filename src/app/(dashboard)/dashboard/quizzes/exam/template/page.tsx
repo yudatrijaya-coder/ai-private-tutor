@@ -44,7 +44,7 @@ export default function ExamTemplatePage() {
     setGenerating(false);
   };
 
-  const gradeLabels: Record<string, string> = { SD_5: "SD Kelas 5", SMP_1: "SMP Kelas 1", SMA_2: "SMA Kelas 2" };
+  const gradeLabels: Record<string, string> = { SD_5: "SD Kelas 5", SMP_1: "SMP Kelas 7", SMA_2: "SMA Kelas 11" };
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">

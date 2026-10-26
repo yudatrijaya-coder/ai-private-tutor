@@ -10,6 +10,7 @@ import { scanResponse } from "../safety";
 import { setSession } from "../session";
 import { buildCapabilitiesPrompt } from "./capabilities";
 import { buildSubscriptionKnowledge } from "@/data/subscription";
+import { gradeLabel as getGradeLabel } from "@/lib/grade-label";
 import {
   getStudentTimezone,
   getTimezoneLabel,
@@ -18,16 +19,6 @@ import {
   partOfDay,
   isOffHours,
 } from "@/lib/student-time";
-
-const GRADE_LABELS: Record<string, string> = {
-  SD_5: "SD Kelas 5",
-  SMP_1: "SMP Kelas 1",
-  SMA_2: "SMA Kelas 2",
-};
-
-function getGradeLabel(grade?: string | null): string {
-  return GRADE_LABELS[grade ?? ""] ?? grade ?? "SD Kelas 5";
-}
 
 /** Timeout wrapper — rejects if the promise doesn't resolve in `ms` ms */
 function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {

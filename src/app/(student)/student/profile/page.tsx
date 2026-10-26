@@ -27,7 +27,7 @@ const CHARACTERS = [
   },
 ];
 
-const CLASS_OPTIONS = ["SD Kelas 5", "SMP Kelas 1", "SMA Kelas 2"];
+const CLASS_OPTIONS = ["SD Kelas 5", "SMP Kelas 7", "SMA Kelas 11"];
 const WEEKDAYS = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
 
 function loadStr(key: string, fallback: string): string {

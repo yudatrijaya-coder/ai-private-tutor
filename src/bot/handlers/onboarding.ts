@@ -79,14 +79,14 @@ function getPendingRegistration(studentId: string): (RegistrationData & { messag
 
 const GRADE_OPTIONS = [
   { key: "SD_5", label: "SD Kelas 5", emoji: "🎒" },
-  { key: "SMP_1", label: "SMP Kelas 1", emoji: "📚" },
-  { key: "SMA_2", label: "SMA Kelas 2", emoji: "🎓" },
+  { key: "SMP_1", label: "SMP Kelas 7", emoji: "📚" },
+  { key: "SMA_2", label: "SMA Kelas 11", emoji: "🎓" },
 ] as const;
 
 const GRADE_LABELS: Record<string, string> = {
   SD_5: "SD Kelas 5",
-  SMP_1: "SMP Kelas 1",
-  SMA_2: "SMA Kelas 2",
+  SMP_1: "SMP Kelas 7",
+  SMA_2: "SMA Kelas 11",
 };
 
 const CHARACTER_OPTIONS = [

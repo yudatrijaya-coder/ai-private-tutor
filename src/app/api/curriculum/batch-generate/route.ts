@@ -37,8 +37,8 @@ export async function POST(request: NextRequest) {
   if (!student) return NextResponse.json({ error: "Student not found" }, { status: 404 });
 
   const gradeLabel = student.gradeLevel === "SD_5" ? "SD Kelas 5"
-    : student.gradeLevel === "SMP_1" ? "SMP Kelas 1"
-    : "SMA Kelas 2";
+    : student.gradeLevel === "SMP_1" ? "SMP Kelas 7"
+    : "SMA Kelas 11";
 
   const curriculum = await prisma.curriculum.findFirst({
     where: { studentId },

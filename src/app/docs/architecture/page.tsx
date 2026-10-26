@@ -514,8 +514,8 @@ Scheduler ──► reminder & jadwal harian`}
             <tbody>
               {([
                 ["SD Kelas 5", "78 video", "youtube.ts"],
-                ["SMP Kelas 1", "163 video", "youtube-smp7.ts"],
-                ["SMA Kelas 2", "201 video", "youtube-sma11.ts"],
+                ["SMP Kelas 7", "163 video", "youtube-smp7.ts"],
+                ["SMA Kelas 11", "201 video", "youtube-sma11.ts"],
               ] as const).map(([jenjang, count, file]) => (
                 <tr key={jenjang}>
                   <td className="p-2 border font-medium">{jenjang}</td>

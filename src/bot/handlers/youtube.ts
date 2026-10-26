@@ -20,7 +20,7 @@ import { escapeMd } from "@/lib/telegram-format";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://senangbelajar.web.id";
 
 function getGradeName(grade?: string | null): string {
-  const map: Record<string, string> = { SD_5: "SD Kelas 5", SMP_1: "SMP Kelas 1 (Kurikulum Merdeka)", SMA_2: "SMA Kelas 2 (Kurikulum Merdeka)" };
+  const map: Record<string, string> = { SD_5: "SD Kelas 5", SMP_1: "SMP Kelas 7 (Kurikulum Merdeka)", SMA_2: "SMA Kelas 11 (Kurikulum Merdeka)" };
   return map[grade ?? ""] ?? grade ?? "SD Kelas 5";
 }
 

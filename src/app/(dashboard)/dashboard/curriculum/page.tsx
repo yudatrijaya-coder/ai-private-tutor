@@ -42,8 +42,8 @@ const MATERIAL_TYPE_STYLES: Record<string, { bg: string; fg: string }> = {
 
 const GRADE_LABELS: Record<string, string> = {
   SD_5: "SD Kelas 5",
-  SMP_1: "SMP Kelas 1",
-  SMA_2: "SMA Kelas 2",
+  SMP_1: "SMP Kelas 7",
+  SMA_2: "SMA Kelas 11",
 };
 
 /* ── Material Form (used for both add & edit) ── */

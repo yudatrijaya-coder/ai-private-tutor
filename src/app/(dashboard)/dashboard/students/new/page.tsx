@@ -21,8 +21,8 @@ export default function NewStudentPage() {
 
   const gradeOptions = [
     { value: "SD_5", label: "SD Kelas 5" },
-    { value: "SMP_1", label: "SMP Kelas 1" },
-    { value: "SMA_2", label: "SMA Kelas 2" },
+    { value: "SMP_1", label: "SMP Kelas 7" },
+    { value: "SMA_2", label: "SMA Kelas 11" },
   ];
 
   async function handleSubmit(e: FormEvent) {
