@@ -65,7 +65,7 @@ Cek: `hermes cron list`.
 | 8 | `logs/err.log` masih mencatat error NextAuth `UnknownAction` dan RSC scanner spam | Noise, bukan kegagalan fungsional (dimitigasi middleware) | Pantau; abaikan kalau tidak bertambah |
 | 9 | Disk 40/59 GB (71%) setelah pembersihan 2026-10-25; `public/` tetap 2,2 GB (PDF kurikulum dipakai app, video dipertahankan atas keputusan pemilik) | Masih ada ruang untuk build | — |
 | 10 | `/var/log/journal` 2,5 GB dan `btmp`+`btmp.1` 324 MB (**501.470 + 381.284 login gagal**) hanya bisa dibersihkan sebagai root; `sudo` diblokir oleh flag `no new privileges` di VM ini | Disk tidak bisa turun lebih jauh dari sesi user | Jalankan sebagai root: `journalctl --vacuum-size=200M`, `truncate -s0 /var/log/btmp*`, lalu set `SystemMaxUse=200M` di `/etc/systemd/journald.conf` |
-| 11 | SSH masih `PasswordAuthentication yes` dan `PermitRootLogin yes`, fail2ban tidak aktif (ufw aktif) — konsisten dengan ~880 ribu login gagal di btmp | Botnet SSH terus mencoba; belum berhasil (tidak ada bukti kompromi) | Nonaktifkan login password, aktifkan fail2ban, batasi SSH ke tailscale |
+| 11 | SSH masih `PasswordAuthentication yes` dan `PermitRootLogin yes`, fail2ban tidak aktif — konsisten dengan ~900 ribu login gagal di btmp (~8.000/hari). Tidak ada bukti kompromi: 70 login sukses dalam 15 hari, semuanya dari 2 IP milik pemilik (Telkom Jakarta & Tencent Jakarta), tidak ada login `root`, user/unit/cron tidak berubah | Botnet SSH terus mencoba | **Skrip siap: `scripts/harden-vps.sh`** — dijalankan sebagai root, dengan backup, verifikasi, dan rollback otomatis |
 
 ## Catatan Operasional: PM2 Menyimpan Snapshot Env
 
