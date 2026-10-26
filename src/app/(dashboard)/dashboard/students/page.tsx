@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { gradeShort } from "@/lib/grade-label";
 
 /* ── Types ── */
 
@@ -42,12 +43,6 @@ type SortField = "name" | "gradeLevel" | "status" | "createdAt" | "studentId";
 type SortDir = "asc" | "desc";
 
 /* ── Constants ── */
-
-const GRADE_LABELS: Record<string, string> = {
-  SD_5: "SD 5",
-  SMP_1: "SMP 7",
-  SMA_2: "SMA 11",
-};
 
 const STATUS_CONFIG: Record<
   string,
@@ -1333,7 +1328,7 @@ export default function StudentsPage() {
                               style={{ color: "var(--su-text-dim)" }}
                               title="Click to edit"
                             >
-                              {GRADE_LABELS[s.gradeLevel] ?? s.gradeLevel}
+                              {gradeShort(s.gradeLevel)}
                             </button>
                           )}
                         </td>

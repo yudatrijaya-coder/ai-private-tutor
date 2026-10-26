@@ -3,6 +3,7 @@ import { escapeMd } from "@/lib/telegram-format";
 import type { Student } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { generateCurriculumDraft } from "@/agents/curriculum";
+import { gradeLabel } from "@/lib/grade-label";
 
 /**
  * /daftar <studentId> — link Telegram account to an existing student record.
@@ -102,15 +103,9 @@ export async function handleRegister(
   }
 
   // 6. Welcome
-  const gradeLabels: Record<string, string> = {
-    SD_5: "SD Kelas 5",
-    SMP_1: "SMP Kelas 7",
-    SMA_2: "SMA Kelas 11",
-  };
-
   await ctx.reply(
     `🎉 *Halo ${escapeMd(student.name)}!* Selamat datang di AI Private Tutor!\n\n` +
-      `📖 Kelas: ${gradeLabels[student.gradeLevel] ?? student.gradeLevel}\n` +
+      `📖 Kelas: ${gradeLabel(student.gradeLevel)}\n` +
       `🆔 ID Siswa: ${escapeMd(student.studentId)}\n\n` +
       `Yang bisa kamu lakukan:\n` +
       `📚 /materi — Lihat materi pelajaran\n` +

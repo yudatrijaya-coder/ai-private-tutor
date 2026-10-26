@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
+import { gradeOptions } from "@/lib/grade-label";
 
 const CHARACTERS = [
   {
@@ -27,7 +28,7 @@ const CHARACTERS = [
   },
 ];
 
-const CLASS_OPTIONS = ["SD Kelas 5", "SMP Kelas 7", "SMA Kelas 11"];
+const CLASS_OPTIONS = gradeOptions();
 const WEEKDAYS = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
 
 function loadStr(key: string, fallback: string): string {
@@ -107,8 +108,8 @@ function ProfileContent() {
           style={{ color: "var(--st-text-dim)", borderColor: "#e5e7eb" }}
         >
           {CLASS_OPTIONS.map((c) => (
-            <option key={c} value={c}>
-              {c}
+            <option key={c.value} value={c.value}>
+              {c.label}
             </option>
           ))}
         </select>

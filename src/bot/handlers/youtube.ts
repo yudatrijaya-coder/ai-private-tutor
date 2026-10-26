@@ -16,13 +16,9 @@ import { getPersona } from "../personas";
 import { prisma } from "@/lib/prisma";
 import { getYouTubeForTopic } from "@/data/youtube";
 import { escapeMd } from "@/lib/telegram-format";
+import { gradeLabelWith } from "@/lib/grade-label";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://senangbelajar.web.id";
-
-function getGradeName(grade?: string | null): string {
-  const map: Record<string, string> = { SD_5: "SD Kelas 5", SMP_1: "SMP Kelas 7 (Kurikulum Merdeka)", SMA_2: "SMA Kelas 11 (Kurikulum Merdeka)" };
-  return map[grade ?? ""] ?? grade ?? "SD Kelas 5";
-}
 
 /**
  * Extract video ID from various YouTube URL formats.
@@ -91,7 +87,7 @@ export async function handleVideoRecommendation(
   const lines = allVideos.slice(0, 3).map((v, i) =>
     `${i + 1}. *${escapeMd(v.title)}*\n   🔗 ${v.url}\n   📺 ${escapeMd(v.channel)}`
   );
-  const gradeLabel = getGradeName(student.gradeLevel);
+  const gradeLabel = gradeLabelWith(student.gradeLevel, " (Kurikulum Merdeka)");
 
   // Try to auto-fetch transcript for the FIRST video
   const firstVideo = allVideos[0];

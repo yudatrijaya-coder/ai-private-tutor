@@ -6,6 +6,7 @@ import { GRADE_TOPICS } from "@/data/curriculum-topics";
 import { normalizeVideoUrl } from "@/lib/video-url";
 import { resolveScope, isAdmin } from "@/lib/auth/scope";
 import { ACTIVE_CURRICULUM_ORDER } from "@/lib/curriculum-active";
+import { gradeLabel as gradeLabelFor } from "@/lib/grade-label";
 
 /**
  * POST /api/curriculum/batch-generate
@@ -36,9 +37,7 @@ export async function POST(request: NextRequest) {
   const student = await prisma.student.findUnique({ where: { id: studentId } });
   if (!student) return NextResponse.json({ error: "Student not found" }, { status: 404 });
 
-  const gradeLabel = student.gradeLevel === "SD_5" ? "SD Kelas 5"
-    : student.gradeLevel === "SMP_1" ? "SMP Kelas 7"
-    : "SMA Kelas 11";
+  const gradeLabel = gradeLabelFor(student.gradeLevel);
 
   const curriculum = await prisma.curriculum.findFirst({
     where: { studentId },

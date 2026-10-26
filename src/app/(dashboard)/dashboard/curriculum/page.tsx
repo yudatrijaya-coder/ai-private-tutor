@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { gradeLabel } from "@/lib/grade-label";
 
 /* ── Types ── */
 
@@ -38,12 +39,6 @@ const MATERIAL_TYPE_STYLES: Record<string, { bg: string; fg: string }> = {
   materi: { bg: "rgba(59,130,246,0.12)", fg: "#60a5fa" },
   video: { bg: "rgba(239,68,68,0.12)", fg: "#f87171" },
   latihan: { bg: "rgba(34,197,94,0.12)", fg: "#4ade80" },
-};
-
-const GRADE_LABELS: Record<string, string> = {
-  SD_5: "SD Kelas 5",
-  SMP_1: "SMP Kelas 7",
-  SMA_2: "SMA Kelas 11",
 };
 
 /* ── Material Form (used for both add & edit) ── */
@@ -418,7 +413,7 @@ export default function CurriculumEditorPage() {
                   color: "var(--su-info)",
                 }}
               >
-                {selectedStudent ? (GRADE_LABELS[selectedStudent.gradeLevel] ?? selectedStudent.gradeLevel) : ""}
+                {selectedStudent ? (gradeLabel(selectedStudent.gradeLevel)) : ""}
               </span>
             </div>
             <div className="flex items-center gap-2">
@@ -506,7 +501,7 @@ export default function CurriculumEditorPage() {
                       color: "var(--su-info)",
                     }}
                   >
-                    {GRADE_LABELS[s.gradeLevel] ?? s.gradeLevel}
+                    {gradeLabel(s.gradeLevel)}
                   </span>
                 </div>
                 <span className="text-sm" style={{ color: "var(--su-text-dim)" }}>

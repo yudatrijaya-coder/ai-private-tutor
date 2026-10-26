@@ -4,6 +4,7 @@ import type { Prisma } from "@/generated/prisma/client";
 import bcrypt from "bcryptjs";
 import { escapeMd } from "@/lib/telegram-format";
 import { ACTIVE_CURRICULUM_ORDER } from "@/lib/curriculum-active";
+import { gradeLabel } from "@/lib/grade-label";
 
 /* ─────────────────────────────────────────────────────────────
    POST /api/admin/students/approve
@@ -134,12 +135,7 @@ async function sendWelcomeMessage(student: {
   const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
   if (!BOT_TOKEN) return;
 
-  const gradeLabels: Record<string, string> = {
-    SD_5: "SD Kelas 5",
-    SMP_1: "SMP Kelas 7",
-    SMA_2: "SMA Kelas 11",
-  };
-  const label = gradeLabels[student.gradeLevel] ?? student.gradeLevel;
+  const label = gradeLabel(student.gradeLevel);
   const msg = [
     `🌟 *Pendaftaran Disetujui! 🎉*`,
     ``,

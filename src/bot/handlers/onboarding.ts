@@ -20,6 +20,7 @@ import { prisma } from "@/lib/prisma";
 import { tryCopyFromTemplate } from "@/agents/guardian/admission";
 import { createInitialSchedule } from "@/agents/guardian/admission";
 import { generateStudentId } from "@/lib/studentId";
+import { gradeLabel } from "@/lib/grade-label";
 import { bot } from "../bot";
 import bcrypt from "bcryptjs";
 
@@ -82,12 +83,6 @@ const GRADE_OPTIONS = [
   { key: "SMP_1", label: "SMP Kelas 7", emoji: "📚" },
   { key: "SMA_2", label: "SMA Kelas 11", emoji: "🎓" },
 ] as const;
-
-const GRADE_LABELS: Record<string, string> = {
-  SD_5: "SD Kelas 5",
-  SMP_1: "SMP Kelas 7",
-  SMA_2: "SMA Kelas 11",
-};
 
 const CHARACTER_OPTIONS = [
   { key: "KAK_BUDI", label: "Kak Budi", emoji: "🦉", desc: "Seru & sabar — cocok buat SD" },
@@ -174,7 +169,7 @@ async function stepConfirm(ctx: Context, data: RegistrationData): Promise<void> 
   await ctx.reply(
     `*Konfirmasi Pendaftaran* 📋\n\n` +
     `👤 Nama: *${escapeMd(data.name)}*\n` +
-    `📖 Kelas: *${GRADE_LABELS[data.grade] ?? data.grade}*\n` +
+    `📖 Kelas: *${gradeLabel(data.grade)}*\n` +
     `🎯 Karakter: *${data.character.replace("KAK_", "Kak ")}*\n` +
     `📅 Hari belajar: ${daysText}\n` +
     `${data.isTrial ? "\n🎁 *Aktifkan trial 7 hari*\n" : ""}` +
@@ -216,7 +211,7 @@ async function notifyAdmin(ctx: Context, data: RegistrationData): Promise<void> 
       adminId,
       `🆕 *Pendaftaran Baru!*\n\n` +
       `👤 Nama: *${escapeMd(data.name)}*\n` +
-      `📖 Kelas: *${GRADE_LABELS[data.grade] ?? data.grade}*\n` +
+      `📖 Kelas: *${gradeLabel(data.grade)}*\n` +
       `🎯 Karakter: *${data.character.replace("KAK_", "Kak ")}*\n` +
       `📅 Hari belajar: ${daysText}\n` +
       `🆔 ID siswa: *${newStudentId}*\n` +
@@ -268,7 +263,7 @@ async function approveStudent(ctx: Context, data: RegistrationData): Promise<voi
 
   await ctx.reply(
     `🎉 *Selamat datang, ${escapeMd(data.name)}!* Akun kamu sudah aktif!\n\n` +
-    `📖 Kelas: *${GRADE_LABELS[data.grade] ?? data.grade}*\n` +
+    `📖 Kelas: *${gradeLabel(data.grade)}*\n` +
     `🎯 Tutor: *${data.character.replace("KAK_", "Kak ")}*\n\n` +
     `🔑 *Kredensial Login Dashboard Kamu:*\n` +
     `🆔 ID Siswa: \`${newStudentId}\`\n` +
@@ -319,7 +314,7 @@ async function approveTrialStudent(ctx: Context, data: RegistrationData): Promis
 
   await ctx.reply(
     `🎉 *Selamat datang, ${escapeMd(data.name)}!* Akun trial 7 hari kamu sudah aktif! 📚\n\n` +
-    `📖 Kelas: *${GRADE_LABELS[data.grade] ?? data.grade}*\n` +
+    `📖 Kelas: *${gradeLabel(data.grade)}*\n` +
     `🎯 Tutor: *${data.character.replace("KAK_", "Kak ")}*\n` +
     `⏰ Trial aktif sampai: *${trialEndsAt.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}*\n\n` +
     `🔑 *Kredensial Login Dashboard Kamu:*\n` +
@@ -345,7 +340,7 @@ async function approveTrialStudent(ctx: Context, data: RegistrationData): Promis
       adminId,
       `🆕 *Trial Baru Terdaftar!*\n\n` +
       `👤 Nama: *${data.name}*\n` +
-      `📖 Kelas: *${GRADE_LABELS[data.grade] ?? data.grade}*\n` +
+      `📖 Kelas: *${gradeLabel(data.grade)}*\n` +
       `🆔 ID Siswa: \`${newStudentId}\`\n` +
       `⏰ Trial s/d: *${trialEndsAt.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}*\n\n` +
       `Siswa sudah langsung aktif — tidak perlu approval.`,
@@ -616,7 +611,7 @@ async function handleAdminApprove(ctx: Context, studentId: string): Promise<void
     });
 
     await ctx.editMessageText(
-      `✅ *Pendaftaran Disetujui!*\n\n👤 ${escapeMd(student.name)}\n📖 ${GRADE_LABELS[regData.grade] ?? regData.grade}\n🎯 ${regData.character.replace("KAK_", "Kak ")}`,
+      `✅ *Pendaftaran Disetujui!*\n\n👤 ${escapeMd(student.name)}\n📖 ${gradeLabel(regData.grade)}\n🎯 ${regData.character.replace("KAK_", "Kak ")}`,
       { parse_mode: "Markdown" },
     );
 

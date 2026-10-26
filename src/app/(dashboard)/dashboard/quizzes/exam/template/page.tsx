@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { gradeLabel } from "@/lib/grade-label";
 
 interface Student { studentId: string; name: string; gradeLevel: string; }
 interface Period { period: number; weekRange: string; weeks: number; totalMaterials: number; subjects: string[]; }
@@ -44,8 +45,6 @@ export default function ExamTemplatePage() {
     setGenerating(false);
   };
 
-  const gradeLabels: Record<string, string> = { SD_5: "SD Kelas 5", SMP_1: "SMP Kelas 7", SMA_2: "SMA Kelas 11" };
-
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <div>
@@ -70,7 +69,7 @@ export default function ExamTemplatePage() {
           >
             <option value="">— Pilih —</option>
             {students.map(s => (
-              <option key={s.studentId} value={s.studentId}>{s.name} ({gradeLabels[s.gradeLevel as keyof typeof gradeLabels] || s.gradeLevel})</option>
+              <option key={s.studentId} value={s.studentId}>{s.name} ({gradeLabel(s.gradeLevel)})</option>
             ))}
           </select>
         </div>

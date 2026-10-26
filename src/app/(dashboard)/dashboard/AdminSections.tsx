@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { getAdminOverview } from "@/lib/admin-insights";
+import { gradeLabel } from "@/lib/grade-label";
 
 /**
  * Admin dashboard sections — server components rendering the data assembled by
@@ -390,24 +391,13 @@ export async function GradeBreakdownSection() {
     gradeStats.set(g, cur);
   }
 
-  const GRADE_LABEL: Record<string, string> = {
-    SD_5: "SD Kelas 5",
-    SD_6: "SD Kelas 6",
-    SMP_1: "SMP Kelas 7",
-    SMP_2: "SMP Kelas 8",
-    SMP_3: "SMP Kelas 9",
-    SMA_1: "SMA Kelas 10",
-    SMA_2: "SMA Kelas 11",
-    SMA_3: "SMA Kelas 12",
-  };
-
   const rows = Array.from(byGrade.entries())
     .map(([grade, count]) => {
       const st = gradeStats.get(grade) ?? { completed: 0, missed: 0, scheduled: 0 };
       const graded = st.completed + st.missed;
       return {
         grade,
-        label: GRADE_LABEL[grade] ?? grade,
+        label: gradeLabel(grade),
         count,
         ...st,
         rate: graded ? Math.round((st.completed / graded) * 100) : 0,

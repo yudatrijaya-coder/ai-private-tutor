@@ -4,16 +4,11 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
 import { PaginatedTable } from "../../curriculum/PaginatedTable";
+import { gradeLabel } from "@/lib/grade-label";
 
 /* ------------------------------------------------------------------ */
 /*  Labels                                                             */
 /* ------------------------------------------------------------------ */
-
-const gradeLabels: Record<string, string> = {
-  SD_5: "SD Kelas 5",
-  SMP_1: "SMP Kelas 7",
-  SMA_2: "SMA Kelas 11",
-};
 
 /* ------------------------------------------------------------------ */
 /*  Status / severity colour maps                                      */
@@ -358,7 +353,7 @@ export function StudentDetailView({ student }: { student: StudentData }) {
               className="text-sm mt-1"
               style={{ color: "var(--su-text-dim)" }}
             >
-              {gradeLabels[student.gradeLevel]} · Karakter:{" "}
+              {gradeLabel(student.gradeLevel)} · Karakter:{" "}
               {student.characterPreference || "Default"} · Bergabung{" "}
               {format(new Date(student.createdAt), "d MMMM yyyy", {
                 locale: id,

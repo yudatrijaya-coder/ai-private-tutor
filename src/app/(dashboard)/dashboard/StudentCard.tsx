@@ -1,5 +1,7 @@
 "use client";
 
+import { gradeLabel } from "@/lib/grade-label";
+
 export function StudentCard({
   student,
 }: {
@@ -18,12 +20,6 @@ export function StudentCard({
     }>;
   };
 }) {
-  const gradeLabels: Record<string, string> = {
-    SD_5: "SD Kelas 5",
-    SMP_1: "SMP Kelas 7",
-    SMA_2: "SMA Kelas 11",
-  };
-
   const statusColor =
     student.status === "ACTIVE"
       ? "var(--su-success)"
@@ -56,7 +52,7 @@ export function StudentCard({
               {student.name}
             </div>
             <div className="text-xs" style={{ color: "var(--su-text-dim)" }}>
-              {gradeLabels[student.gradeLevel] || student.gradeLevel}
+              {gradeLabel(student.gradeLevel)}
             </div>
           </div>
         </div>
