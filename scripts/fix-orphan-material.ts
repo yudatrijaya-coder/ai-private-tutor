@@ -117,7 +117,7 @@ async function main(): Promise<void> {
   const md = (material.metadata ?? {}) as Record<string, unknown>;
   const sibi = typeof md.slide_sibi === "string" ? md.slide_sibi : "";
   const raw = material.rawContent ?? "";
-  const gradeLabel = material.gradeLevel === "SMA_2" ? "SMA Kelas 2" : material.gradeLevel;
+  const gradeLabel = material.gradeLevel === "SMA_2" ? "SMA Kelas 11" : material.gradeLevel;
 
   console.log(`MODE: ${APPLY ? "apply (rows will be written)" : "dry run"}`);
   console.log(`\n${material.id}`);

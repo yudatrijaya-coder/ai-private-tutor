@@ -18,13 +18,13 @@ const testimonials = [
     quote:
       "Laporan mingguan di Telegram bikin saya tahu bagian mana yang perlu dibantu di rumah.",
     author: "Hendra Wijaya",
-    detail: "Ayah dari siswa SMP Kelas 1",
+    detail: "Ayah dari siswa SMP Kelas 7",
   },
   {
     quote:
       "Soal yang salah diulang sampai bisa, jadi tidak sekadar selesai lalu lupa.",
     author: "Sari Puspitasari",
-    detail: "Ibu dari siswa SMA Kelas 2",
+    detail: "Ibu dari siswa SMA Kelas 11",
   },
 ];
 

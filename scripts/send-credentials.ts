@@ -32,8 +32,8 @@ async function main() {
 
   const gradeLabels: Record<string, string> = {
     SD_5: "SD Kelas 5",
-    SMP_1: "SMP Kelas 1",
-    SMA_2: "SMA Kelas 2",
+    SMP_1: "SMP Kelas 7",
+    SMA_2: "SMA Kelas 11",
   };
 
   for (const s of students) {

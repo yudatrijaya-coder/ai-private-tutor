@@ -398,8 +398,8 @@ Scheduler ──► reminder & jadwal harian`}
             <tbody>
               {([
                 ['SD Kelas 5', '108', '~540', 'src/data/quiz-bank-sd5.ts'],
-                ['SMP Kelas 1', '99', '~495', 'src/data/quiz-bank-smp7.ts'],
-                ['SMA Kelas 2', '123', '~615', 'src/data/quiz-bank-sma11.ts'],
+                ['SMP Kelas 7', '99', '~495', 'src/data/quiz-bank-smp7.ts'],
+                ['SMA Kelas 11', '123', '~615', 'src/data/quiz-bank-sma11.ts'],
               ] as const).map(([jenjang, entries, total, file]) => (
                 <tr key={jenjang}>
                   <td className="p-2 border font-medium">{jenjang}</td>
@@ -445,8 +445,8 @@ Scheduler ──► reminder & jadwal harian`}
             <tbody>
               {([
                 ['SD Kelas 5', '~30 topics', 'PDF resmi Kemendikdasmen'],
-                ['SMP Kelas 1', '~30 topics', 'SIBI Kemendikdasmen'],
-                ['SMA Kelas 2', '~35 topics', 'SIBI Kemendikdasmen'],
+                ['SMP Kelas 7', '~30 topics', 'SIBI Kemendikdasmen'],
+                ['SMA Kelas 11', '~35 topics', 'SIBI Kemendikdasmen'],
               ] as const).map(([jenjang, topics, source]) => (
                 <tr key={jenjang}>
                   <td className="p-2 border font-medium">{jenjang}</td>

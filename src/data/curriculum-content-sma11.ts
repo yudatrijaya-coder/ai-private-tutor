@@ -6103,7 +6103,7 @@ Aktivitas 4.1 dan 4.2 mengajak membandingkan perubahan laju napas, produksi keri
 
   // ── Biologi › Sistem Gerak ──
   ["Biologi||Sistem Gerak||Macam-macam Tulang"]: `# Sistem Gerak: Macam-macam Tulang
-### Biologi SMA Kelas 2
+### Biologi SMA Kelas 11
 
 ---
 
@@ -6297,7 +6297,7 @@ Hasil uji urin dapat menunjukkan kondisi kesehatan ginjal dan sistem ekskresi. A
 
   // ── Biologi › Sistem Eksresi ──
   ["Biologi||Sistem Eksresi||Struktur dan Fungsi Hati"]: `# Sistem Ekskresi - Struktur dan Fungsi Hati
-## Biologi SMA Kelas 2
+## Biologi SMA Kelas 11
 - Hati merupakan organ ekskresi terbesar dalam tubuh
 - Berperan dalam detoksifikasi, pembentukan urea, dan pemecahan hemoglobin
 
@@ -23855,7 +23855,7 @@ Energi ikatan adalah energi yang diperlukan untuk memutuskan 1 mol ikatan kimia 
 
   // ── Kimia › Termokimia ──
   ["Kimia||Termokimia||Reaksi Eksoterm dan Reaksi Endoterm"]: `# Termokimia - Reaksi Eksoterm dan Reaksi Endoterm
-## Kimia SMA Kelas 2
+## Kimia SMA Kelas 11
 
 ---
 
@@ -25195,7 +25195,7 @@ b. Penambahan katalis akan **menurunkan energi aktivasi** (Ea baru lebih rendah 
 
   // ── Kimia › Laju Reaksi ──
   ["Kimia||Laju Reaksi||Laju Reaksi dan Faktor Penentu Laju Reaksi"]: `# Laju Reaksi dan Faktor Penentu Laju Reaksi
-### Kimia SMA Kelas 2
+### Kimia SMA Kelas 11
 
 ---
 
@@ -26467,7 +26467,7 @@ Limbah industri, pertanian, dan domestik dapat mengubah pH air. Contoh: air asam
 Pengukuran pH dilakukan secara rutin pada air hujan, sungai, dan danau menggunakan pH meter atau indikator universal. Data ini membantu mengidentifikasi sumber polusi dan merancang tindakan mitigasi.`,
 
   // ── Kimia › Kekhasan Atom Karbon ──
-  ["Kimia||Kekhasan Atom Karbon||Dampak Negatif Hasil Pembakaran Bagi Lingkungan dan Kesehatan"]: `[{"id":1,"type":"text","title":"Pendahuluan","content":"Materi Kimia SMA Kelas 2 tentang Keunikan Atom Karbon dan Dampak Negatif Hasil Pembakarannya bagi Lingkungan dan Kesehatan."},{"id":2,"type":"definition","title":"Kekhasan Atom Karbon","content":"Konfigurasi elektron: 1s² 2s² 2p². Elektron valensi: 4. Kemampuan membentuk ikatan yang sangat bervariasi, sehingga terdapat lebih dari 10 juta senyawa karbon."},{"id":3,"type":"definition","title":"Atom Karbon Tetravalen","content":"Membutuhkan 4 elektron untuk mencapai kaidah oktet. Membentuk 4 ikatan kovalen. Contoh paling sederhana: CH₄ (metana)."},{"id":4,"type":"definition","title":"Katenasi (Catenation)","content":"Kemampuan atom karbon berikatan dengan atom karbon lainnya, membentuk rantai lurus, bercabang, atau melingkar. Satu-satunya unsur dengan katenasi yang sangat stabil."},{"id":5,"type":"text","title":"Ikatan Rangkap dan Kepolaran","content":"Atom karbon dapat membentuk ikatan tunggal (C-C), rangkap dua (C=C), dan rangkap tiga (C≡C). Sebagian besar senyawa karbon bersifat nonpolar."},{"id":6,"type":"summary","title":"Ringkasan Kekhasan Atom Karbon","content":"1. Tetravalen (4 ikatan kovalen).\\n2. Katenasi (rantai karbon panjang).\\n3. Ikatan Rangkap (tunggal, ganda, tripel).\\n4. Senyawa umumnya nonpolar."},{"id":7,"type":"text","title":"Dampak Negatif Hasil Pembakaran","content":"Pembakaran bahan bakar fosil (bensin, solar, batu bara) menghasilkan polutan. Pembakaran sempurna menghasilkan CO₂ dan H₂O. Pembakaran tidak sempurna menghasilkan CO, C (jelaga), dan hidrokarbon."},{"id":8,"type":"definition","title":"Karbon Monoksida (CO)","content":"Gas tidak berbau, tidak berwarna, sangat beracun. Afinitas terhadap hemoglobin 200x lebih kuat dari O₂, menyebabkan hipoksia. Sumber: asap kendaraan, pembakaran tidak sempurna."},{"id":9,"type":"text","title":"Karbon Dioksida & Efek Rumah Kaca","content":"Gas rumah kaca utama. Penumpukan CO₂ di atmosfer menjebak panas matahari, menyebabkan pemanasan global. Dampak: perubahan iklim ekstrem, mencairnya es kutub, kenaikan air laut."},{"id":10,"type":"definition","title":"Oksida Nitrogen & Sulfur (NOx, SOx)","content":"Hujan Asam: NOx dan SOx bereaksi dengan air di atmosfer membentuk HNO₃ dan H₂SO₄. pH air hujan turun (<5.6). Dampak: kerusakan hutan, pengasaman danau, korosi bangunan."},{"id":11,"type":"text","title":"Partikulat & Hidrokarbon","content":"PM2.5/PM10: partikel halus terhirup masuk ke paru-paru dan aliran darah. VOC & PAH: bersifat karsinogenik (penyebab kanker)."},{"id":12,"type":"text","title":"Dampak Kesehatan","content":"ISPA, asma, bronkitis, kanker paru-paru, iritasi mata/tenggorokan, gangguan sistem saraf akibat keracunan CO."},{"id":13,"type":"question","title":"Pertanyaan Evaluasi","content":"**Pertanyaan Diskusi:**\\n1. Sebutkan tiga kekhasan atom karbon!\\n2. Jelaskan perbedaan dampak CO dan CO₂ bagi kesehatan!\\n3. Bagaimana upaya mengurangi dampak negatif pembakaran?"},{"id":14,"type":"activity","title":"Aktivitas","content":"Bentuk kelompok (3-4 orang). Cari informasi Indeks Standar Pencemar Udara (ISPU) di kotamu. Analisis polutan utama, sumbernya, dampaknya, dan solusi yang diterapkan. Buat poster digital hasil analisis."},{"id":15,"type":"summary","title":"Kesimpulan","content":"Atom karbon unik karena tetravalen, katenasi, dan ikatan rangkap. Pembakarannya menghasilkan polutan (CO, CO₂, NOx, SOx, PM) yang merusak lingkungan (hujan asam, pemanasan global) dan kesehatan (kanker, ISPA, keracunan). Diperlukan mitigasi polusi dan energi alternatif."}]`,
+  ["Kimia||Kekhasan Atom Karbon||Dampak Negatif Hasil Pembakaran Bagi Lingkungan dan Kesehatan"]: `[{"id":1,"type":"text","title":"Pendahuluan","content":"Materi Kimia SMA Kelas 11 tentang Keunikan Atom Karbon dan Dampak Negatif Hasil Pembakarannya bagi Lingkungan dan Kesehatan."},{"id":2,"type":"definition","title":"Kekhasan Atom Karbon","content":"Konfigurasi elektron: 1s² 2s² 2p². Elektron valensi: 4. Kemampuan membentuk ikatan yang sangat bervariasi, sehingga terdapat lebih dari 10 juta senyawa karbon."},{"id":3,"type":"definition","title":"Atom Karbon Tetravalen","content":"Membutuhkan 4 elektron untuk mencapai kaidah oktet. Membentuk 4 ikatan kovalen. Contoh paling sederhana: CH₄ (metana)."},{"id":4,"type":"definition","title":"Katenasi (Catenation)","content":"Kemampuan atom karbon berikatan dengan atom karbon lainnya, membentuk rantai lurus, bercabang, atau melingkar. Satu-satunya unsur dengan katenasi yang sangat stabil."},{"id":5,"type":"text","title":"Ikatan Rangkap dan Kepolaran","content":"Atom karbon dapat membentuk ikatan tunggal (C-C), rangkap dua (C=C), dan rangkap tiga (C≡C). Sebagian besar senyawa karbon bersifat nonpolar."},{"id":6,"type":"summary","title":"Ringkasan Kekhasan Atom Karbon","content":"1. Tetravalen (4 ikatan kovalen).\\n2. Katenasi (rantai karbon panjang).\\n3. Ikatan Rangkap (tunggal, ganda, tripel).\\n4. Senyawa umumnya nonpolar."},{"id":7,"type":"text","title":"Dampak Negatif Hasil Pembakaran","content":"Pembakaran bahan bakar fosil (bensin, solar, batu bara) menghasilkan polutan. Pembakaran sempurna menghasilkan CO₂ dan H₂O. Pembakaran tidak sempurna menghasilkan CO, C (jelaga), dan hidrokarbon."},{"id":8,"type":"definition","title":"Karbon Monoksida (CO)","content":"Gas tidak berbau, tidak berwarna, sangat beracun. Afinitas terhadap hemoglobin 200x lebih kuat dari O₂, menyebabkan hipoksia. Sumber: asap kendaraan, pembakaran tidak sempurna."},{"id":9,"type":"text","title":"Karbon Dioksida & Efek Rumah Kaca","content":"Gas rumah kaca utama. Penumpukan CO₂ di atmosfer menjebak panas matahari, menyebabkan pemanasan global. Dampak: perubahan iklim ekstrem, mencairnya es kutub, kenaikan air laut."},{"id":10,"type":"definition","title":"Oksida Nitrogen & Sulfur (NOx, SOx)","content":"Hujan Asam: NOx dan SOx bereaksi dengan air di atmosfer membentuk HNO₃ dan H₂SO₄. pH air hujan turun (<5.6). Dampak: kerusakan hutan, pengasaman danau, korosi bangunan."},{"id":11,"type":"text","title":"Partikulat & Hidrokarbon","content":"PM2.5/PM10: partikel halus terhirup masuk ke paru-paru dan aliran darah. VOC & PAH: bersifat karsinogenik (penyebab kanker)."},{"id":12,"type":"text","title":"Dampak Kesehatan","content":"ISPA, asma, bronkitis, kanker paru-paru, iritasi mata/tenggorokan, gangguan sistem saraf akibat keracunan CO."},{"id":13,"type":"question","title":"Pertanyaan Evaluasi","content":"**Pertanyaan Diskusi:**\\n1. Sebutkan tiga kekhasan atom karbon!\\n2. Jelaskan perbedaan dampak CO dan CO₂ bagi kesehatan!\\n3. Bagaimana upaya mengurangi dampak negatif pembakaran?"},{"id":14,"type":"activity","title":"Aktivitas","content":"Bentuk kelompok (3-4 orang). Cari informasi Indeks Standar Pencemar Udara (ISPU) di kotamu. Analisis polutan utama, sumbernya, dampaknya, dan solusi yang diterapkan. Buat poster digital hasil analisis."},{"id":15,"type":"summary","title":"Kesimpulan","content":"Atom karbon unik karena tetravalen, katenasi, dan ikatan rangkap. Pembakarannya menghasilkan polutan (CO, CO₂, NOx, SOx, PM) yang merusak lingkungan (hujan asam, pemanasan global) dan kesehatan (kanker, ISPA, keracunan). Diperlukan mitigasi polusi dan energi alternatif."}]`,
 
   // ── Kimia › Larutan Penyangga ──
   ["Kimia||Larutan Penyangga||Fungsi larutan Penyangga"]: `## Fungsi Larutan Penyangga
@@ -29951,7 +29951,7 @@ Jadi, agar luas maksimum, panjang dan lebar harus sama, yaitu 25 cm`,
   // ── Matematika › Fungsi Komposisi dan Invers ──
   ["Matematika||Fungsi Komposisi dan Invers||Sifat Fungsi Komposisi"]: `## Sifat-Sifat Fungsi Komposisi
 
-Matematika SMA Kelas 2
+Matematika SMA Kelas 11
 
 ---
 
@@ -32989,7 +32989,7 @@ Jika tidak sama, limit tidak ada.`,
   // ── Matematika › Turunan Fungsi ──
   ["Matematika||Turunan Fungsi||Konsep Turunan"]: `Slide 1
 ## Turunan Fungsi – Konsep Turunan
-### Matematika SMA Kelas 2
+### Matematika SMA Kelas 11
 
 ---
 

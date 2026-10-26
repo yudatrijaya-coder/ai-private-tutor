@@ -31,7 +31,7 @@ const systemPrompt = [
   "",
   "Student name: Tiumu",
   "Student ID: TIUMU001",
-  "Grade: SMA Kelas 2",
+  "Grade: SMA Kelas 11",
   "",
   buildCapabilitiesPrompt(knowledge),
   "",

@@ -44,8 +44,8 @@ interface MaterialItem {
 
 // ─── Students ─────────────────────────────────────────────────
 const STUDENTS = [
-  { name: "Raihan", studentId: "STU_MRHLH4LX", persona: "Kak Dewi", grade: "SMP Kelas 1", gradeLabel: "SMP" },
-  { name: "SHOFI", studentId: "STU_MRHQL6KX", persona: "Kak Raka", grade: "SMA Kelas 2", gradeLabel: "SMA" },
+  { name: "Raihan", studentId: "STU_MRHLH4LX", persona: "Kak Dewi", grade: "SMP Kelas 7", gradeLabel: "SMP" },
+  { name: "SHOFI", studentId: "STU_MRHQL6KX", persona: "Kak Raka", grade: "SMA Kelas 11", gradeLabel: "SMA" },
   { name: "Syifa", studentId: "STU_MRHL5FYL", persona: "Kak Budi", grade: "SD Kelas 5", gradeLabel: "SD" },
 ];
 

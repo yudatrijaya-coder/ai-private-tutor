@@ -196,7 +196,7 @@ def generate_batch(batch):
         for i, m in enumerate(batch)
     ])
     
-    grade = "SD Kelas 5" if "SD" in str(batch) else "SMP Kelas 1" if "SMP" in str(batch) else "SMA Kelas 2"
+    grade = "SD Kelas 5" if "SD" in str(batch) else "SMP Kelas 7" if "SMP" in str(batch) else "SMA Kelas 11"
     persona = "Kak Budi (SD)" if "SD" in str(batch) else "Kak Dewi (SMP)" if "SMP" in str(batch) else "Kak Raka (SMA)"
     
     user_prompt = f"""Buat konten slide untuk topik-topik {subject} ({grade}) berikut.

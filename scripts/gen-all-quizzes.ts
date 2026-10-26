@@ -51,8 +51,8 @@ HANYA output JSON, tanpa teks lain. Soal harus AKURAT secara ilmiah.`;
 async function main() {
   const grades = [
     { key: "SD_5", label: "SD Kelas 5" },
-    { key: "SMP_1", label: "SMP Kelas 1" },
-    { key: "SMA_2", label: "SMA Kelas 2" },
+    { key: "SMP_1", label: "SMP Kelas 7" },
+    { key: "SMA_2", label: "SMA Kelas 11" },
   ];
 
   for (const grade of grades) {

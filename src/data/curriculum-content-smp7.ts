@@ -3436,7 +3436,7 @@ Makhluk hidup eukariotik yang tidak memiliki klorofil
 ### Produksi, Distribusi, dan Konsumsi
 
 - **Mata Pelajaran:** IPS
-- **Kelas:** SMP Kelas 1
+- **Kelas:** SMP Kelas 7
 
 ---
 
@@ -5200,7 +5200,7 @@ mas`,
 
   // ── Geografi › Transmigrasi ──
   ["Geografi||Transmigrasi||Perpindahan Penduduk dan Dampaknya"]: `# Transmigrasi - Perpindahan Penduduk dan Dampaknya
-## Geografi SMP Kelas 1
+## Geografi SMP Kelas 7
 
 **Definisi singkat:** Program perpindahan penduduk dari daerah padat (Jawa, Madura, Bali) ke daerah jarang penduduk (Sumatera, Kalimantan, Sulawesi, Papua).
 
@@ -5534,7 +5534,7 @@ Dosen FIS UNY (2003-sekarang)
   // ── Informatika › Hardware ──
   ["Informatika||Hardware||Pengenalan Perangkat Keras Komputer"]: `# Slide 1: Judul
 ## Hardware - Pengenalan Perangkat Keras Komputer
-**Informatika SMP Kelas 1**
+**Informatika SMP Kelas 7**
 
 ---
 
@@ -5986,7 +5986,7 @@ Berdasarkan medium:
 
   // ── Informatika › Keamanan ──
   ["Informatika||Keamanan||Keamanan Data dan Privasi"]: `# Keamanan Data dan Privasi
-## Informatika - SMP Kelas 1
+## Informatika - SMP Kelas 7
 
 Tujuan pembelajaran:
 - Memahami pengertian data pribadi dan privasi.
@@ -8119,7 +8119,7 @@ Menggabungkan **dan** meringkas dua salat sekaligus saat bepergian.
   // ── Pendidikan Agama Islam › Sejarah Peradaban Islam ──
   ["Pendidikan Agama Islam||Sejarah Peradaban Islam||Sejarah Nabi Muhammad SAW Periode Madinah"]: `# Sejarah Nabi Muhammad SAW Periode Madinah
 
-## Pendidikan Agama Islam — SMP Kelas 1
+## Pendidikan Agama Islam — SMP Kelas 7
 
 ---
 
@@ -10070,7 +10070,7 @@ Senam lantai (*floor exercise*) adalah gerakan senam yang dilakukan di atas matr
 
   // ── PJOK › Hidup Sehat ──
   ["PJOK||Hidup Sehat||Gizi Seimbang"]: `# Hidup Sehat - Gizi Seimbang
-## PJOK SMP Kelas 1
+## PJOK SMP Kelas 7
 
 ---
 
@@ -10682,7 +10682,7 @@ Menghasilkan gerakan dan gaya yang diperlukan; sering peralihan dari horizontal 
   // ── Sejarah › Kejaan Hindu-Buddha ──
   ["Sejarah||Kejaan Hindu-Buddha||Kerajaan Kutai, Tarumanagara, Sriwijaya, Majapahit"]: `## Kerajaan Hindu-Buddha di Indonesia: Kutai, Tarumanagara, Sriwijaya, Majapahit  
 
-**Sejarah – SMP Kelas 1**
+**Sejarah – SMP Kelas 7**
 
 ---
 
@@ -10979,7 +10979,7 @@ Kerajaan Banten didirikan oleh Hasanuddin (Sultan Banten I), putera Sunan Gunung
 
   // ── Sejarah › Perubahan Sosial ──
   ["Sejarah||Perubahan Sosial||Dampak Kedatangan Eropa pada Masyarakat Indonesia"]: `# Perubahan Sosial: Dampak Kedatangan Eropa pada Masyarakat Indonesia  
-*Materi Sejarah SMP Kelas 1*
+*Materi Sejarah SMP Kelas 7*
 
 ---
 
@@ -11104,7 +11104,7 @@ Bersifat kedaerahan, sporadis, dan belum terkoordinasi secara nasional. Dipicu o
 
 ---
 
-**Sejarah - SMP Kelas 1**
+**Sejarah - SMP Kelas 7**
 
 ---
 
