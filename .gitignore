@@ -57,3 +57,5 @@ scripts/inject_subjects.cjs
 *.bak-*
 graphify-out/
 .graphifyignore
+# symlink node_modules (Cezar worktree hook) — tanpa trailing slash
+node_modules
