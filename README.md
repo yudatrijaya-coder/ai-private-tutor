@@ -186,7 +186,7 @@ Mulai dari [`dev-docs/ai/START_HERE.md`](dev-docs/ai/START_HERE.md). Status tiap
 | `logs/err.log` noise | Sisa error NextAuth `UnknownAction` dan RSC scanner; dimitigasi middleware, bukan kegagalan fungsional |
 | Disk 71% | Setelah pembersihan 2026-10-25. `public/` 2,2 GB dipertahankan (PDF kurikulum dipakai app) |
 | `/var/log` butuh root | `journal` 2,5 GB + `btmp` 324 MB (~880 ribu login gagal). `sudo` diblokir di VM ini — bersihkan sebagai root |
-| SSH belum hardened | `PasswordAuthentication yes`, `PermitRootLogin yes`, fail2ban mati. Tidak ada bukti kompromi, tapi sebaiknya ditutup |
+| SSH belum hardened | `PasswordAuthentication yes`, `PermitRootLogin yes`, fail2ban mati; ~900 ribu percobaan login gagal. Belum ada kompromi. Jalankan `sudo bash scripts/harden-vps.sh` |
 
 ## Catatan: PM2 Menyimpan Snapshot Env
 
