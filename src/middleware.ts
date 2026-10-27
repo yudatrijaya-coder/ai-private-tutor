@@ -4,6 +4,7 @@ import { jwtVerify } from "jose";
 import { auth } from "@/lib/auth/edge";
 import { readStudentSecret } from "@/lib/auth/student-secret";
 import { evaluateStudentAccess } from "@/lib/auth/access";
+import { verifyPanelToken, SYSTEM_COOKIE } from "@/lib/system/session";
 
 const STUDENT_COOKIE = "student_session";
 
@@ -162,6 +163,31 @@ export async function middleware(request: NextRequest) {
     if (await hasStudentSession(request)) return NextResponse.next();
     if (await hasAdminSession()) return NextResponse.next();
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  // ---- System control panel ----
+  //
+  // `/system` and `/api/system/*` deliberately do NOT accept the admin
+  // dashboard session or a student session. The panel can restart processes,
+  // so it runs on its own credential (`system_session`) that cannot be obtained
+  // from any student-facing surface. The page itself renders a login form when
+  // the cookie is absent; the API answers 401. `/api/system/auth` is the only
+  // unauthenticated route in the family — it is the login endpoint.
+  //
+  // Enforcement also happens in each route handler (`hasPanelSession()`), so a
+  // middleware bypass would not be sufficient to call an action.
+  if (pathname === "/system" || pathname.startsWith("/system/")) {
+    // The page renders its own login form when the cookie is absent, so a
+    // bookmarked URL recovers after one password entry instead of bouncing.
+    return NextResponse.next();
+  }
+
+  if (pathname.startsWith("/api/system/") && pathname !== "/api/system/auth") {
+    const panelToken = request.cookies.get(SYSTEM_COOKIE)?.value;
+    if (!(await verifyPanelToken(panelToken))) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    return NextResponse.next();
   }
 
   // ---- Admin-only API routes ----

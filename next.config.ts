@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Build ditulis ke direktori sementara supaya build yang gagal tidak
+  // menghapus build yang sedang disajikan. `ops/build.sh` menukarnya ke
+  // `.next` setelah build terbukti lengkap; `next start` tetap memakai default.
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   turbopack: {
     root: __dirname,
   },

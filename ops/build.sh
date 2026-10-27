@@ -43,7 +43,10 @@ if [ "${SKIP_TESTS:-0}" = "1" ]; then
   echo "    SKIP_TESTS=1 — melewati tes pra-build"
 else
   # Node's native type stripping (22.6+) needs no framework or extra deps.
-  node --experimental-strip-types --test src/lib/__tests__/grade-label.test.ts \
+  # Semua file *.test.ts dijalankan, bukan satu file saja: tes yang tidak
+  # dijalankan sama saja dengan tidak ada, dan gerbang ini yang terakhir
+  # sebelum build menimpa versi yang disajikan.
+  node --experimental-strip-types --test src/lib/__tests__/*.test.ts \
     || {
       echo ""
       echo "    GAGAL: tes pra-build tidak lulus — build dibatalkan."
@@ -68,10 +71,30 @@ if ! grep -q "$SWAP_BUILD" /etc/fstab; then
   echo "          survive a reboot. Add:  $SWAP_BUILD none swap sw 0 0"
 fi
 
-echo "==> clean previous build"
-rm -rf .next
+# Build ditulis ke direktori sementara, lalu ditukar setelah sukses.
+#
+# Sebelumnya `rm -rf .next` dijalankan lebih dulu. Kalau build gagal atau
+# terbunuh di tengah (OOM 2026-10-27), host ditinggal tanpa build sama sekali
+# dan `next start` gagal — situs 502 sampai build ulang berhasil. Dengan
+# menukar di akhir, `.next` lama tetap disajikan sampai build baru terbukti
+# lengkap (BUILD_ID ada).
+echo "==> next build ke .next-build (NODE_OPTIONS=--max-old-space-size=$HEAP_MB)"
+rm -rf .next-build
+# distDir dibaca dari env oleh next.config.ts — tanpa ini `next build` menulis
+# ke .next dan menghapus build yang sedang disajikan.
+NEXT_DIST_DIR=.next-build NODE_OPTIONS="--max-old-space-size=$HEAP_MB" npx next build
 
-echo "==> next build (NODE_OPTIONS=--max-old-space-size=$HEAP_MB)"
-NODE_OPTIONS="--max-old-space-size=$HEAP_MB" npx next build
+if [ ! -f .next-build/BUILD_ID ]; then
+  echo ""
+  echo "    GAGAL: build tidak menghasilkan BUILD_ID — .next lama TIDAK ditukar."
+  echo "    Server tetap menyajikan versi sebelumnya."
+  exit 1
+fi
+
+echo "==> tukar build"
+rm -rf .next-old
+if [ -d .next ]; then mv .next .next-old; fi
+mv .next-build .next
+rm -rf .next-old
 
 echo "==> build complete"

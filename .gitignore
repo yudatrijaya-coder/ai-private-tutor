@@ -3,6 +3,8 @@ scripts/youtube-progress.json
 
 # Next.js
 .next/
+.next-build/
+.next-old/
 next-env.d.ts
 tsconfig.tsbuildinfo
 
