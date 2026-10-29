@@ -4,7 +4,7 @@
 >
 > **Baca file ini SAMPAI HABIS sebelum tindakan pertama.** Repo ini melayani siswa sungguhan. Kesalahan kecil bisa sampai ke anak-anak.
 
-**Terakhir diperbarui:** 2026-10-29 11:50 +07
+**Terakhir diperbarui:** 2026-10-29 12:15 +07 — penambahan temuan §3.1–3.5: alur rantai agent, pemicu, dan status pemakaian pipeline
 **Diverifikasi terhadap:** commit `f12322c` (branch `master`), DB produksi live
 **Diperbarui oleh:** sesi DSH — semua angka di bawah dicek langsung ke DB/OS, bukan disalin dari dokumen lama
 
@@ -89,17 +89,81 @@ Ini sering salah dipahami. Repo **sudah punya** orkestrasi agent berbasis BullMQ
 | Log & audit | model `AgentLog` (status, input, output, error, traceId) |
 | Dashboard | `/dashboard/agents` (`AgentPipelineView`, `QueueMonitor`) |
 
-**Status AgentLog (live):**
+### 3.1 Alur rantai agent (dirakit di kode, bukan konfigurasi)
 
-| agentType | status | n | terakhir |
-|---|---|---|---|
-| SCHEDULER | COMPLETED | 33.239 | 2026-10-29 04:48 |
-| ASSESSMENT | FAILED | 5.281 | 2026-09-03 |
-| GUARDIAN | COMPLETED | 76 | 2026-10-29 00:00 |
+```
+POST /api/students  {action:"trigger", studentId, stages}
+        │  (src/app/api/students/route.ts:60)
+        ▼
+   [content-scrape]      agent CONTENT
+        │  content/worker.ts:111
+        ▼
+   [curriculum-review]   agent CURRICULUM (pakai LLM)
+        │
+        ├── ✅ approved → status=PROCESSED
+        │        ├──► [assessment-generate]  curriculum/worker.ts:172
+        │        └──► [media-render]         curriculum/worker.ts:188
+        │
+        └── ❌ rejected → [content-scrape] ulang, sumber lain
+                 (maks 2×, lalu tandai manual)  curriculum/worker.ts:231
+```
 
-**Catatan soal 5.281 `ASSESSMENT` FAILED:** ~5.250 di antaranya berasal dari 2026-07-08/09 dengan error `"stale: attempt never reached a terminal state"` dan `"stale: retries exhausted ... (lifecycle bug, fixed)"`. Ini **artefak historis, bukan masalah aktif.** Jangan panik dan jangan "perbaiki" ulang.
+**Pemicu satu-satunya:** `POST /api/students` dengan body `{action:"trigger", studentId, stages?}`.
+`stages` default `"all"` → `["curriculum","content","assessment","guardian","schedule"]`.
 
-Karena runtime agent sudah ada, tugas seperti *audit kurikulum* / *ingest Moodle baru* sebaiknya jadi **lapisan dev-time** (mis. Cezar + worktree), bukan menambah queue runtime.
+Hanya dua tempat di UI yang memicunya:
+- `/dashboard/agents` → `PipelineTrigger.tsx:40`
+- `/dashboard/students/[id]` → `StudentDetailView.tsx:645, 686`
+
+Tidak ada cron yang memicu rantai konten. Tidak ada endpoint lain.
+
+### 3.2 Status AgentLog — dan nuansa yang mudah salah dibaca
+
+| agentType | action | status | n | periode |
+|---|---|---|---|---|
+| SCHEDULER | `schedule-sweep` | COMPLETED | 33.239 | masih aktif (29 Okt 05:04) |
+| ASSESSMENT | `assessment-generate` | FAILED | 5.250 | **hanya 8–9 Jul** |
+| ASSESSMENT | `assessment-generate` | COMPLETED | 24 | 8–9 Jul |
+| GUARDIAN | `guardian-report` | COMPLETED | 76 | masih aktif (29 Okt 00:00) |
+| CURRICULUM | `curriculum-review` | FAILED | 6 | **hanya 9 Jul** |
+
+Aktivitas 7 hari terakhir: **hanya `SCHEDULER` dan `GUARDIAN`** — keduanya **tidak memakai LLM**.
+
+### 3.3 ⚠️ Rantai konten praktis belum pernah dipakai serius
+
+Ini temuan penting, jangan disalahartikan sebagai "sistem rusak":
+
+| action | total | periode |
+|---|---|---|
+| `assessment-generate` | 5.274 | **hanya 8–9 Jul** |
+| `curriculum-review` | **6** | hanya 9 Jul |
+| `content-scrape` | **0** | **tidak pernah** |
+| `media-render` | **0** | **tidak pernah** |
+| `media-yt-fallback` | **0** | **tidak pernah** |
+| `assessment-evaluate` | **0** | **tidak pernah** |
+
+Tambahan: **seluruh 1.296 `Material` berstatus `READY`** — tidak ada satu pun `RAW`/`DRAFT` yang menunggu diproses pipeline.
+
+**Interpretasi:** mesinnya lengkap dan menyala (`[instrumentation] Queues: OK`, 10 queue terinisialisasi, 48 key `bull:*` di Redis), tetapi **cincin rantai kontennya belum pernah dipakai masif sejak Juli**. Ini cocok dengan hanya adanya 1 siswa nyata — siswa baru adalah satu-satunya pemicu.
+
+**Belum dipastikan:** apakah ini memang disengaja (pipeline hanya untuk siswa baru), atau ada usaha massal Juli yang berhenti tanpa disadari. Butuh konfirmasi pemilik produk.
+
+**Catatan soal 5.250 `ASSESSMENT` FAILED:** error-nya `"stale: attempt never reached a terminal state"` dan `"stale: retries exhausted with no terminal record (lifecycle bug, fixed)"`. Ini **artefak historis** dari bug lifecycle yang sudah diperbaiki — bukan masalah aktif. Jangan "perbaiki" ulang, dan jangan menganggapnya sebagai tanda sistem sedang rusak.
+
+### 3.4 Mekanisme ketahanan yang sudah ada
+
+| Mekanisme | Lokasi |
+|---|---|
+| Retry 3× + exponential backoff (2 dtk) | `runner.ts` `defaultJobOptions` |
+| Dead Letter Queue | `dlq.ts` — `shouldDeadLetter()`, `effectiveAttempts()` |
+| Resume, bukan duplikat (fix bug 2.703 baris ACTIVE) | `worker.ts:57-74` — `findFirst` status transien |
+| Fallback in-memory tanpa Redis | `queue/local.ts`, dipakai `instrumentation.ts` |
+
+### 3.5 Konsekuensi untuk perencanaan
+
+Karena runtime agent sudah ada, tugas seperti *audit kurikulum massal* / *ingest Moodle baru* sebaiknya jadi **lapisan dev-time** (mis. Cezar + worktree), bukan menambah queue runtime. Setelah alurnya stabil dan rutin, baru dipindahkan ke queue agar jalan otomatis.
+
+Jangan bangun ulang: queue baru, tabel log baru, atau dashboard agent baru.
 
 ---
 
@@ -227,6 +291,9 @@ Hook worktree: `~/.local/bin/cezar-worktree-setup.sh` (symlink `node_modules`, h
 | Prisma `grade_level` vs `"gradeLevel"` | Query gagal | camelCase ber-quote |
 | Restart PM2 saat build berjalan | `Cannot find module .next/...` | Build dulu sampai `BUILD_EXIT=0` |
 | Commit `-A` dengan `.ai/` kotor | State agent ikut ter-commit | Cek `git status` per file |
+| Menyimpulkan "agent tidak jalan" dari `AgentLog` mentah | 5.281 FAILED terlihat seperti sistem rusak, padahal artefak Juli | Lihat §3.2–3.3; cek periode & action, bukan hanya status |
+| Menyimpulkan "pipeline aktif" dari `Queues: OK` | Queue menyala ≠ rantai dipakai | Cek `action` di `AgentLog` + status `Material` |
+| Mengira ada cron yang memicu rantai konten | Hanya `POST /api/students {action:"trigger"}` (§3.1) | Baca pemicunya, jangan berasumsi |
 
 ---
 
