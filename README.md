@@ -170,7 +170,11 @@ docs-ai/            # catatan fitur (historis, sebagian usang)
 
 ## Dokumentasi
 
-Mulai dari [`dev-docs/ai/START_HERE.md`](dev-docs/ai/START_HERE.md). Status tiap folder dokumentasi ada di [`dev-docs/DOCS-INDEX.md`](dev-docs/DOCS-INDEX.md).
+**AI agent: baca [`ai-state.md`](ai-state.md) lebih dulu** — kondisi terkini yang sudah diverifikasi, aturan wajib, dan jebakan yang sudah memakan korban.
+
+Selanjutnya mulai dari [`dev-docs/ai/START_HERE.md`](dev-docs/ai/START_HERE.md). Status tiap folder dokumentasi ada di [`dev-docs/DOCS-INDEX.md`](dev-docs/DOCS-INDEX.md).
+
+> Catatan: `dev-docs/ai/` adalah dokumentasi kanonik, tetapi beberapa klaim di sana sudah usang (jumlah siswa, sumber cron, visibilitas repo). `ai-state.md` memuat koreksinya.
 
 ## Live
 

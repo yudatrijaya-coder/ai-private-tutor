@@ -1,0 +1,18 @@
+---
+description: Wajib baca ai-state.md sebelum menyentuh repo ini
+alwaysApply: true
+---
+
+# Baca `ai-state.md` lebih dulu
+
+Sebelum tindakan pertama apa pun di repo ini, baca **`ai-state.md`** sampai habis.
+File itu adalah sumber kebenaran untuk kondisi terkini (terverifikasi, dengan tanggal).
+
+Aturan inti:
+- Verifikasi ke sistem (query DB, `pm2 ls`, `ss -tlnp`) — jangan percaya dokumen basi
+- Build wajib `bash ops/build.sh`, bukan `npx next build` (pernah OOM-killed)
+- Jalankan `npm test` sebelum commit (tes penjaga label jenjang)
+- Jangan commit secret — repo ini PUBLIC
+- Branch `master`, bukan `main`
+- Sistem multi-agent sudah ada (BullMQ + AgentLog) — jangan bangun ulang
+- Verifikasi dari output tersaji (`curl` domain live), bukan asumsi source
