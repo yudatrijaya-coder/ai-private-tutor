@@ -51,6 +51,16 @@ interface ServiceStatus {
   memoryBytes?: number;
   cpuPercent?: number;
 }
+interface HeavyProcess {
+  pid: number;
+  memoryBytes: number;
+  cpuPercent: number;
+  ageSeconds: number;
+  user: string;
+  command: string;
+  killable: boolean;
+  protectedReason?: string;
+}
 
 const REFRESH_MS = 5000;
 
@@ -136,6 +146,19 @@ function parseServices(raw: unknown): ServiceStatus[] | null {
   });
 }
 
+function parseProcesses(raw: unknown): HeavyProcess[] | null {
+  if (!isRecord(raw) || !Array.isArray(raw.processes)) return null;
+  return raw.processes.filter((p): p is HeavyProcess => {
+    if (!isRecord(p)) return false;
+    return (
+      typeof p.pid === "number" &&
+      typeof p.memoryBytes === "number" &&
+      typeof p.command === "string" &&
+      typeof p.killable === "boolean"
+    );
+  });
+}
+
 function parseActionResult(raw: unknown): { ok: boolean; text: string } {
   if (!isRecord(raw)) return { ok: false, text: "" };
   const ok = raw.ok === true;
@@ -175,8 +198,10 @@ export function SystemPanel() {
   const router = useRouter();
   const [metrics, setMetrics] = useState<HostMetrics | null>(null);
   const [services, setServices] = useState<ServiceStatus[]>([]);
+  const [processes, setProcesses] = useState<HeavyProcess[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
+  const [busyPid, setBusyPid] = useState<number | null>(null);
   const [notice, setNotice] = useState<{ ok: boolean; text: string } | null>(null);
   const [rebootOpen, setRebootOpen] = useState(false);
   const [rebootConfirm, setRebootConfirm] = useState("");
@@ -192,9 +217,10 @@ export function SystemPanel() {
     if (inFlight.current) return;
     inFlight.current = true;
     try {
-      const [mRes, sRes] = await Promise.all([
+      const [mRes, sRes, pRes] = await Promise.all([
         fetch("/api/system/metrics", { cache: "no-store" }),
         fetch("/api/system/services", { cache: "no-store" }),
+        fetch("/api/system/processes", { cache: "no-store" }),
       ]);
 
       if (mRes.status === 401 || sRes.status === 401) {
@@ -204,6 +230,9 @@ export function SystemPanel() {
       if (!mRes.ok || !sRes.ok) throw new Error("Gagal memuat data.");
 
       const [rawMetrics, rawServices] = await Promise.all([mRes.json(), sRes.json()]);
+      // The process list is an enhancement: a failure here must not blank out
+      // the metrics and services that did load.
+      const rawProcesses: unknown = pRes.ok ? await pRes.json().catch(() => null) : null;
       if (!alive.current) return;
 
       const nextMetrics = parseMetrics(rawMetrics);
@@ -213,6 +242,7 @@ export function SystemPanel() {
       }
       setMetrics(nextMetrics);
       setServices(nextServices);
+      setProcesses(parseProcesses(rawProcesses) ?? []);
       setError(null);
     } catch (e) {
       if (alive.current) setError(e instanceof Error ? e.message : "Gagal memuat data.");
@@ -259,6 +289,29 @@ export function SystemPanel() {
       setNotice({ ok: false, text: "Tidak dapat menghubungi server." });
     } finally {
       setBusyId(null);
+    }
+  }
+
+  async function signalPid(pid: number, action: "term" | "kill") {
+    setBusyPid(pid);
+    setNotice(null);
+    try {
+      const res = await fetch("/api/system/processes/action", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ pid, action }),
+      });
+      const raw: unknown = await res.json().catch(() => null);
+      const outcome = parseActionResult(raw);
+      setNotice({
+        ok: outcome.ok,
+        text: outcome.text || (res.ok ? "Selesai." : "Gagal."),
+      });
+      setTimeout(() => void load(), 1200);
+    } catch {
+      setNotice({ ok: false, text: "Tidak dapat menghubungi server." });
+    } finally {
+      setBusyPid(null);
     }
   }
 
@@ -429,6 +482,7 @@ export function SystemPanel() {
                   {s.restarts ? ` · restart ${s.restarts}×` : ""}
                   {s.uptimeSeconds !== undefined ? ` · up ${duration(s.uptimeSeconds)}` : ""}
                   {s.memoryBytes ? ` · ${bytes(s.memoryBytes)}` : ""}
+                  {s.cpuPercent ? ` · CPU ${s.cpuPercent}%` : ""}
                 </p>
                 {!s.controllable && s.blockedReason && (
                   <p className="mt-1 text-xs text-amber-700">{s.blockedReason}</p>
@@ -457,6 +511,66 @@ export function SystemPanel() {
           ))}
         </ul>
       </Card>
+
+      <div className="mt-6">
+        <Card title="Instance agent (proses besar)">
+          <p className="mb-4 text-xs text-slate-500">
+            Proses CLI agent yang berjalan di luar PM2/systemd — biasanya sisa task
+            yang dibatalkan. Mematikan proses <strong>tidak</strong> menghentikan
+            servicenya; untuk itu gunakan tombol di kartu Service. Tidak ada
+            &ldquo;resume&rdquo;: setelah proses mati, jalankan ulang task-nya.
+          </p>
+          {processes.length === 0 ? (
+            <p className="text-sm text-slate-500">
+              Tidak ada instance agent di atas 50 MB. Kondisi normal.
+            </p>
+          ) : (
+            <ul className="divide-y divide-slate-100">
+              {processes.map((p) => (
+                <li key={p.pid} className="flex flex-wrap items-center gap-3 py-3">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono text-xs text-slate-500">PID {p.pid}</span>
+                      <span className="font-semibold text-slate-900">{bytes(p.memoryBytes)}</span>
+                      <span className="text-xs text-slate-500">CPU {p.cpuPercent}%</span>
+                      <span className="text-xs text-slate-400">umur {duration(p.ageSeconds)}</span>
+                      {!p.killable && (
+                        <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-800">
+                          dilindungi
+                        </span>
+                      )}
+                    </div>
+                    <p className="truncate font-mono text-xs text-slate-600">{p.command}</p>
+                    {p.protectedReason && (
+                      <p className="mt-1 text-xs text-amber-700">{p.protectedReason}</p>
+                    )}
+                  </div>
+                  <div className="flex shrink-0 gap-2">
+                    <button
+                      disabled={!p.killable || busyPid === p.pid}
+                      onClick={() => signalPid(p.pid, "term")}
+                      className="rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-medium
+                                 text-slate-700 transition hover:bg-slate-50
+                                 disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      {busyPid === p.pid ? "…" : "Hentikan"}
+                    </button>
+                    <button
+                      disabled={!p.killable || busyPid === p.pid}
+                      onClick={() => signalPid(p.pid, "kill")}
+                      className="rounded-lg border border-red-200 px-3 py-1.5 text-xs font-medium
+                                 text-red-700 transition hover:bg-red-50
+                                 disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      Force kill
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </Card>
+      </div>
 
       <div className="mt-6">
         <Card title="Host">

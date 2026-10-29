@@ -113,6 +113,30 @@ export const SERVICES: ServiceTarget[] = [
     unit: "herdr.service",
     controllable: true,
   },
+  {
+    id: "cezar",
+    label: "Cezar",
+    description: "Cockpit agent orchestrator (systemd --user, port 4321)",
+    kind: "user-unit",
+    unit: "cezar.service",
+    controllable: true,
+  },
+  {
+    id: "poster",
+    label: "Poster Server",
+    description: "Server poster/gambar (systemd)",
+    kind: "root-unit",
+    unit: "poster-server.service",
+    controllable: true,
+  },
+  {
+    id: "pm2-daemon",
+    label: "PM2 Daemon",
+    description: "Proses induk yang menjalankan semua aplikasi PM2",
+    kind: "root-unit",
+    unit: "pm2-ubuntu.service",
+    controllable: true,
+  },
 ];
 
 export function findService(id: string): ServiceTarget | undefined {
@@ -219,8 +243,10 @@ async function pm2Status(target: ServiceTarget): Promise<ServiceStatus> {
       detail: `PM2: ${status}`,
       restarts: app.pm2_env?.restart_time,
       uptimeSeconds: uptime,
-      memoryBytes: (app.monit?.memory ?? 0) || undefined,
-      cpuPercent: (app.monit?.cpu ?? 0) || undefined,
+      // `|| undefined` turned a genuine 0 MB / 0 % into "—". Use nullish
+      // checks so a real zero is still reported.
+      memoryBytes: app.monit?.memory ?? undefined,
+      cpuPercent: app.monit?.cpu ?? undefined,
     };
   } catch {
     return { ...base, detail: "output PM2 tidak bisa dibaca" };
@@ -292,7 +318,11 @@ async function systemdStatus(target: ServiceTarget): Promise<ServiceStatus> {
     ...base,
     state,
     detail: `systemd: ${active}${sub ? ` (${sub})` : ""}`,
-    restarts: Number(kv.get("NRestarts") ?? 0) || undefined,
+    // `|| undefined` was wrong here: a unit that has never restarted reports
+    // 0, which is a real value worth showing as "restart 0×" vs an unknown.
+    restarts: Number.isFinite(Number(kv.get("NRestarts")))
+      ? Number(kv.get("NRestarts"))
+      : undefined,
     uptimeSeconds,
     memoryBytes,
   };
